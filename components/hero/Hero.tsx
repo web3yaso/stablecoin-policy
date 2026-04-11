@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import GlobeHero from "./GlobeHero";
 import type { Region } from "@/types";
 
@@ -14,6 +15,39 @@ type Props = {
 export default function Hero({ progress, onRegionClick }: Props) {
   const headlineOpacity = clamp(1 - progress / 0.2, 0, 1);
   const headlineY = -progress * 40;
+  // Scroll hint stays visible through most of the scroll since the map
+  // transition itself doesn't begin until ~0.55. Fades out by ~0.6 once
+  // the globe is clearly zooming into the map.
+  const hintOpacity = clamp(1 - (progress - 0.45) / 0.15, 0, 1);
+  // Fill the progress bar up to 100% by the time the map transition starts.
+  const hintProgress = Math.min(100, (progress / 0.55) * 100);
+
+  // Page bounce — if the visitor hasn't scrolled after ~2.5s, we smoothly
+  // scroll down ~15vh then bounce back to 0. Acts as a physical demo that
+  // the page is scrollable. Any real user scroll cancels the bounce.
+  useEffect(() => {
+    let userScrolled = false;
+    let bouncing = false;
+    const onScroll = () => {
+      if (!bouncing) userScrolled = true;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const startTimer = window.setTimeout(() => {
+      if (userScrolled) return;
+      bouncing = true;
+      window.scrollTo({
+        top: Math.round(window.innerHeight * 0.15),
+        behavior: "smooth",
+      });
+      window.setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 750);
+    }, 2500);
+    return () => {
+      window.clearTimeout(startTimer);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   const lockProgress = clamp((progress - 0.18) / 0.35, 0, 1);
   const phi = -15 - lockProgress * 25;
@@ -80,6 +114,43 @@ export default function Hero({ progress, onRegionClick }: Props) {
             phi={phi}
             lockLambda={lockLambda}
             onRegionClick={onRegionClick}
+          />
+        </div>
+      </div>
+
+      {/* Scroll prompt — label + animated chevron + progress bar so users
+          know there's more below AND how far they have to go. Fades out
+          once the map transition is visibly under way. */}
+      <div
+        className="absolute inset-x-0 bottom-[5.5vh] z-20 flex flex-col items-center gap-2.5 pointer-events-none"
+        style={{ opacity: hintOpacity }}
+        aria-hidden
+      >
+        <div className="flex items-center gap-1.5">
+          <span className="text-xs font-medium text-ink tracking-tight">
+            Scroll to reveal the map
+          </span>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+            className="text-ink"
+            style={{ animation: "scroll-hint 1.8s ease-in-out infinite" }}
+          >
+            <path
+              d="M3 4.5l3 3 3-3"
+              stroke="currentColor"
+              strokeWidth="1.75"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+        <div className="relative w-40 h-[2px] rounded-full bg-ink/10 overflow-hidden">
+          <div
+            className="absolute inset-y-0 left-0 rounded-full bg-ink"
+            style={{ width: `${hintProgress}%` }}
           />
         </div>
       </div>

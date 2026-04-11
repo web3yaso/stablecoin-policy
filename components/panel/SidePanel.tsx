@@ -20,7 +20,6 @@ interface SidePanelProps {
   breadcrumbItems: BreadcrumbItem[];
   showViewStatesButton?: boolean;
   onViewStates?: () => void;
-  onClose?: () => void;
   visibility?: number;
   size: "min" | "md";
   onSizeChange: (s: "min" | "md") => void;
@@ -101,7 +100,6 @@ export default function SidePanel({
   breadcrumbItems,
   showViewStatesButton = false,
   onViewStates,
-  onClose,
   visibility = 1,
   size,
   onSizeChange,
@@ -300,9 +298,9 @@ export default function SidePanel({
         <div className="flex-1 flex justify-center">
           <div className="w-9 h-1 rounded-full bg-black/15" />
         </div>
-        {/* Desktop-only minimize / close cluster. Mobile uses drag-down. */}
-        <div className="w-14 flex items-center justify-end gap-0.5 flex-shrink-0">
-          <div className="hidden lg:flex items-center gap-0.5">
+        {/* Desktop-only minimize button. Mobile uses drag-down. */}
+        <div className="w-14 flex items-center justify-end flex-shrink-0">
+          <div className="hidden lg:flex">
             <ToolbarButton
               onClick={() => setSize("min")}
               ariaLabel="Minimize panel"
@@ -316,18 +314,6 @@ export default function SidePanel({
                 />
               </svg>
             </ToolbarButton>
-            {onClose && (
-              <ToolbarButton onClick={onClose} ariaLabel="Close panel">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path
-                    d="M3 3l6 6M9 3l-6 6"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </ToolbarButton>
-            )}
           </div>
         </div>
       </div>

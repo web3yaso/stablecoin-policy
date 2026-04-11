@@ -307,9 +307,6 @@ export default function MapShell({
         breadcrumbItems={breadcrumbItems}
         showViewStatesButton={showViewStatesButton}
         onViewStates={handleViewStates}
-        onClose={() =>
-          navigateTo({ ...current, selectedGeoId: null })
-        }
         visibility={chromeOpacity}
         size={panelSize}
         onSizeChange={setExplicitPanelSize}
