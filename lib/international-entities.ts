@@ -66,16 +66,34 @@ export const INTERNATIONAL_ENTITIES: Entity[] = [
     news: [
       {
         id: "eu-news-1",
-        headline: "EU AI Office issues first guidance on general-purpose models",
+        headline:
+          "EU AI Office issues first guidance on general-purpose models",
         source: "Politico EU",
-        date: "2026-03-12",
+        date: "2026-04-08",
         url: "#",
       },
       {
         id: "eu-news-2",
-        headline: "Member states diverge on data center reporting deadlines",
+        headline:
+          "Member states diverge on data center reporting deadlines under EnEfG",
         source: "Euractiv",
-        date: "2026-02-28",
+        date: "2026-04-03",
+        url: "#",
+      },
+      {
+        id: "eu-news-3",
+        headline:
+          "Commission opens consultation on AI Act enforcement at member-state level",
+        source: "Reuters",
+        date: "2026-03-30",
+        url: "#",
+      },
+      {
+        id: "eu-news-4",
+        headline:
+          "European Court rules against opaque algorithmic hiring under GDPR Article 22",
+        source: "Financial Times",
+        date: "2026-03-26",
         url: "#",
       },
     ],
@@ -145,16 +163,25 @@ export const INTERNATIONAL_ENTITIES: Entity[] = [
     news: [
       {
         id: "de-news-1",
-        headline: "Frankfurt operators warn EnEfG renewables deadline is unworkable",
+        headline:
+          "Frankfurt operators warn EnEfG renewables deadline is unworkable",
         source: "Handelsblatt",
-        date: "2026-03-27",
+        date: "2026-04-09",
         url: "#",
       },
       {
         id: "de-news-2",
         headline: "Bundestag committee advances AI co-determination bill",
         source: "Süddeutsche Zeitung",
-        date: "2026-03-10",
+        date: "2026-04-04",
+        url: "#",
+      },
+      {
+        id: "de-news-3",
+        headline:
+          "BNetzA approves first Frankfurt waste-heat reuse pilot for 50MW data center",
+        source: "Heise Online",
+        date: "2026-03-28",
         url: "#",
       },
     ],
@@ -226,14 +253,23 @@ export const INTERNATIONAL_ENTITIES: Entity[] = [
         id: "fr-news-1",
         headline: "Marseille tech hub sees pushback over freshwater cooling",
         source: "Le Monde",
-        date: "2026-03-22",
+        date: "2026-04-10",
         url: "#",
       },
       {
         id: "fr-news-2",
-        headline: "France earmarks €2.5B for sovereign AI compute under France 2030",
+        headline:
+          "France earmarks €2.5B for sovereign AI compute under France 2030",
         source: "Les Echos",
-        date: "2026-03-05",
+        date: "2026-04-06",
+        url: "#",
+      },
+      {
+        id: "fr-news-3",
+        headline:
+          "CNIL fines two cloud providers under expanded water-disclosure order",
+        source: "Reuters",
+        date: "2026-04-01",
         url: "#",
       },
     ],
@@ -306,14 +342,22 @@ export const INTERNATIONAL_ENTITIES: Entity[] = [
         id: "uk-news-1",
         headline: "DSIT publishes pre-deployment evaluation framework",
         source: "Financial Times",
-        date: "2026-03-28",
+        date: "2026-04-09",
         url: "#",
       },
       {
         id: "uk-news-2",
         headline: "West London council blocks 200 MW data center expansion",
         source: "BBC News",
-        date: "2026-03-13",
+        date: "2026-04-05",
+        url: "#",
+      },
+      {
+        id: "uk-news-3",
+        headline:
+          "Ofgem opens DC connection queue review after Slough congestion event",
+        source: "The Guardian",
+        date: "2026-03-30",
         url: "#",
       },
     ],
@@ -363,16 +407,26 @@ export const INTERNATIONAL_ENTITIES: Entity[] = [
     news: [
       {
         id: "asia-news-1",
-        headline: "Japan METI updates voluntary AI guidelines for foundation models",
+        headline:
+          "Japan METI updates voluntary AI guidelines for foundation models",
         source: "Nikkei Asia",
-        date: "2026-03-22",
+        date: "2026-04-09",
         url: "#",
       },
       {
         id: "asia-news-2",
-        headline: "Singapore IMDA opens consultation on data center water use",
+        headline:
+          "Singapore IMDA opens consultation on data center water use",
         source: "The Straits Times",
-        date: "2026-03-04",
+        date: "2026-04-05",
+        url: "#",
+      },
+      {
+        id: "asia-news-3",
+        headline:
+          "ASEAN Digital Ministers approve framework for cross-border AI safety review",
+        source: "The Straits Times",
+        date: "2026-03-31",
         url: "#",
       },
     ],
@@ -442,14 +496,23 @@ export const INTERNATIONAL_ENTITIES: Entity[] = [
         id: "jp-news-1",
         headline: "Hokkaido data center cluster wins GX designation",
         source: "Nikkei Asia",
-        date: "2026-03-26",
+        date: "2026-04-08",
         url: "#",
       },
       {
         id: "jp-news-2",
-        headline: "JEITA publishes interoperability assessment for AI Act compliance",
+        headline:
+          "JEITA publishes interoperability assessment for AI Act compliance",
         source: "The Japan Times",
-        date: "2026-03-14",
+        date: "2026-04-04",
+        url: "#",
+      },
+      {
+        id: "jp-news-3",
+        headline:
+          "TEPCO confirms 600 MW of new data center load contracts for FY2027",
+        source: "Reuters",
+        date: "2026-03-29",
         url: "#",
       },
     ],
@@ -517,16 +580,25 @@ export const INTERNATIONAL_ENTITIES: Entity[] = [
     news: [
       {
         id: "cn-news-1",
-        headline: "CAC publishes second batch of approved generative AI services",
+        headline:
+          "CAC publishes second batch of approved generative AI services",
         source: "Caixin",
-        date: "2026-03-29",
+        date: "2026-04-09",
         url: "#",
       },
       {
         id: "cn-news-2",
         headline: "Inner Mongolia surpasses Beijing in installed AI compute",
         source: "South China Morning Post",
-        date: "2026-03-08",
+        date: "2026-04-04",
+        url: "#",
+      },
+      {
+        id: "cn-news-3",
+        headline:
+          "NDRC tightens PUE caps for eastern data centers under EDWC Phase II",
+        source: "Bloomberg",
+        date: "2026-03-30",
         url: "#",
       },
     ],
@@ -594,16 +666,26 @@ export const INTERNATIONAL_ENTITIES: Entity[] = [
     news: [
       {
         id: "kr-news-1",
-        headline: "Korea AI Safety Institute publishes evaluation methodology",
+        headline:
+          "Korea AI Safety Institute publishes evaluation methodology",
         source: "The Korea Herald",
-        date: "2026-03-25",
+        date: "2026-04-08",
         url: "#",
       },
       {
         id: "kr-news-2",
-        headline: "Naver, Kakao announce joint compliance roadmap for AI Basic Act",
+        headline:
+          "Naver, Kakao announce joint compliance roadmap for AI Basic Act",
         source: "Yonhap News Agency",
-        date: "2026-03-11",
+        date: "2026-04-04",
+        url: "#",
+      },
+      {
+        id: "kr-news-3",
+        headline:
+          "MOTIE moves Hyperscale DC Grid Integration Act out of committee",
+        source: "Korea JoongAng Daily",
+        date: "2026-03-30",
         url: "#",
       },
     ],

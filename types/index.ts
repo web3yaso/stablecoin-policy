@@ -72,10 +72,34 @@ export type LegislationCategory =
 
 export type Dimension =
   | "overall"
+  // Data Center lens
   | "environmental"
   | "energy"
   | "community"
-  | "land-use";
+  | "land-use"
+  // AI Regulation lens
+  | "ai-governance-dim"
+  | "ai-consumer"
+  | "ai-workforce"
+  | "ai-public"
+  | "ai-synthetic";
+
+export type DimensionLens = "datacenter" | "ai";
+
+export const DATACENTER_DIMENSIONS: Dimension[] = [
+  "environmental",
+  "energy",
+  "community",
+  "land-use",
+];
+
+export const AI_DIMENSIONS: Dimension[] = [
+  "ai-governance-dim",
+  "ai-consumer",
+  "ai-workforce",
+  "ai-public",
+  "ai-synthetic",
+];
 
 export const IMPACT_TAG_LABEL: Record<ImpactTag, string> = {
   "water-consumption": "Water Consumption",
@@ -120,10 +144,17 @@ export const CATEGORY_LABEL: Record<LegislationCategory, string> = {
 
 export const DIMENSION_LABEL: Record<Dimension, string> = {
   overall: "Overall stance",
+  // Data Center lens
   environmental: "Environmental impact",
   energy: "Energy & grid",
   community: "Community impact",
   "land-use": "Land use",
+  // AI Regulation lens
+  "ai-governance-dim": "Governance",
+  "ai-consumer": "Consumer protection",
+  "ai-workforce": "Workforce & employment",
+  "ai-public": "Public services",
+  "ai-synthetic": "Synthetic media",
 };
 
 export interface Legislation {
@@ -132,6 +163,8 @@ export interface Legislation {
   title: string;
   summary: string;
   stage: Stage;
+  /** Per-bill stance, primarily from Claude semantic classification. */
+  stance?: StanceType;
   impactTags: ImpactTag[];
   category: LegislationCategory;
   updatedDate: string;

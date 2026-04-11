@@ -38,7 +38,7 @@
     "state": "LA",
     "chamber": "house",
     "committees": [],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Constitutional lawyer who rose quickly to Speaker through institutional loyalty",
     "techRegScore": 0.75,
     "lobbying": {
@@ -65,7 +65,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -88,7 +88,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Survivor of 2017 congressional baseball shooting who became a unifying figure",
     "techRegScore": 0.68,
     "lobbying": {
@@ -194,7 +194,7 @@
       "Homeland Security",
       "Oversight and Accountability"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.22,
     "lobbying": {
       "topIndustries": [],

@@ -67,7 +67,7 @@
       "Judiciary",
       "Joint Economic"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Former Attorney General known for fighting Big Tech and federal overreach",
     "techRegScore": 0.75,
     "lobbying": {
@@ -95,7 +95,7 @@
     "committees": [
       "Ways and Means"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Tax policy expertise and fiscal conservative leadership",
     "techRegScore": 0.74,
     "lobbying": {
@@ -146,7 +146,7 @@
     "committees": [
       "Transportation"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Bipartisan infrastructure dealmaking and aviation expertise",
     "techRegScore": 0.69,
     "lobbying": {
@@ -245,7 +245,7 @@
       "Judiciary",
       "Oversight and Accountability"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.18,
     "lobbying": {
       "topIndustries": [],

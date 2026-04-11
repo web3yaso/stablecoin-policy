@@ -34,7 +34,7 @@
       "Judiciary",
       "Ethics"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -206,7 +206,7 @@
       "Banking",
       "Judiciary"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "First-term senator focused on criminal justice reform and economic development",
     "techRegScore": 0.3,
     "lobbying": {
@@ -235,7 +235,7 @@
       "Judiciary",
       "Oversight"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Constitutional scholar and articulate defender of democracy",
     "techRegScore": 0.3,
     "lobbying": {

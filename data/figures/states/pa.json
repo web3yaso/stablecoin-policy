@@ -38,7 +38,7 @@
       "Appropriations",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -85,7 +85,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.7,
     "lobbying": {
       "topIndustries": [],
@@ -364,7 +364,7 @@
       "Financial Services",
       "Judiciary"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.3,
     "lobbying": {
       "topIndustries": [],
@@ -437,7 +437,7 @@
       "Judiciary",
       "Transportation and Infrastructure"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],
@@ -461,7 +461,7 @@
       "Oversight and Accountability",
       "Space, Science, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.2,
     "lobbying": {
       "topIndustries": [],

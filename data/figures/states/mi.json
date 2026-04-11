@@ -10,7 +10,7 @@
       "Education and Workforce",
       "Energy and Commerce"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.73,
     "lobbying": {
       "topIndustries": [],
@@ -81,7 +81,7 @@
       "Armed Services",
       "Homeland Security"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.68,
     "lobbying": {
       "topIndustries": [],
@@ -127,7 +127,7 @@
     "committees": [
       "Ways and Means"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Business executive turned politician who emphasizes economic messaging",
     "techRegScore": 0.62,
     "lobbying": {
@@ -214,7 +214,7 @@
       "Armed Services",
       "Homeland Security"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.38,
     "lobbying": {
       "topIndustries": [],
@@ -238,7 +238,7 @@
       "Science and Technology",
       "Education and Workforce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.29,
     "lobbying": {
       "topIndustries": [],
@@ -286,7 +286,7 @@
       "Armed Services",
       "Judiciary"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.27,
     "lobbying": {
       "topIndustries": [],
@@ -310,7 +310,7 @@
       "Energy and Commerce",
       "Natural Resources"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.26,
     "lobbying": {
       "topIndustries": [],
@@ -334,7 +334,7 @@
       "Homeland Security",
       "Small Business"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.24,
     "lobbying": {
       "topIndustries": [],

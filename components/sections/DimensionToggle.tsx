@@ -1,6 +1,13 @@
 "use client";
 
-import { DIMENSION_LABEL, type Dimension } from "@/types";
+import { useMemo, useState } from "react";
+import {
+  AI_DIMENSIONS,
+  DATACENTER_DIMENSIONS,
+  DIMENSION_LABEL,
+  type Dimension,
+  type DimensionLens,
+} from "@/types";
 import { DIMENSION_COLOR, DIMENSION_TEXT } from "@/lib/dimensions";
 
 interface DimensionToggleProps {
@@ -8,25 +15,69 @@ interface DimensionToggleProps {
   onChange: (d: Dimension) => void;
 }
 
-const DIMENSIONS: Dimension[] = [
-  "overall",
-  "environmental",
-  "energy",
-  "community",
-  "land-use",
-];
+const LENS_LABEL: Record<DimensionLens, string> = {
+  datacenter: "Data Centers",
+  ai: "AI Regulation",
+};
+
+function inferLens(d: Dimension): DimensionLens {
+  if (AI_DIMENSIONS.includes(d)) return "ai";
+  return "datacenter";
+}
 
 export default function DimensionToggle({
   dimension,
   onChange,
 }: DimensionToggleProps) {
+  // Lens is local — it decides which dimension chips to show. When the user
+  // switches lens, if the current dimension is not in the new lens, we
+  // reset to "overall" (which is valid under either lens).
+  const [lens, setLens] = useState<DimensionLens>(() => inferLens(dimension));
+
+  const lensDimensions = useMemo<Dimension[]>(() => {
+    return lens === "datacenter" ? DATACENTER_DIMENSIONS : AI_DIMENSIONS;
+  }, [lens]);
+
+  const handleLensChange = (next: DimensionLens) => {
+    setLens(next);
+    const valid: Dimension[] = next === "datacenter" ? DATACENTER_DIMENSIONS : AI_DIMENSIONS;
+    if (dimension !== "overall" && !valid.includes(dimension)) {
+      onChange("overall");
+    }
+  };
+
   return (
     <div>
+      {/* Lens toggle — Data Centers vs AI Regulation */}
+      <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
+        Lens
+      </div>
+      <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/[.04] mb-5">
+        {(Object.keys(LENS_LABEL) as DimensionLens[]).map((l) => {
+          const active = l === lens;
+          return (
+            <button
+              key={l}
+              type="button"
+              onClick={() => handleLensChange(l)}
+              className={`text-xs font-medium px-4 py-1.5 rounded-full transition-all ${
+                active
+                  ? "bg-white text-ink shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+                  : "text-muted hover:text-ink"
+              }`}
+            >
+              {LENS_LABEL[l]}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Dimension chips — Overall + current lens */}
       <div className="text-[13px] font-medium text-muted tracking-tight mb-3">
         Color map by
       </div>
       <div className="flex flex-wrap gap-2">
-        {DIMENSIONS.map((d) => {
+        {(["overall", ...lensDimensions] as Dimension[]).map((d) => {
           const active = d === dimension;
           let activeStyle: React.CSSProperties | undefined;
           if (active) {

@@ -10,7 +10,7 @@
       "Judiciary",
       "Homeland Security"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.65,
     "lobbying": {
       "topIndustries": [],
@@ -156,7 +156,7 @@
       "Small Business",
       "Environment"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Charismatic progressive advocate focused on criminal justice reform and social equity",
     "techRegScore": 0.35,
     "lobbying": {
@@ -237,7 +237,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.3,
     "lobbying": {
       "topIndustries": [],
@@ -261,7 +261,7 @@
       "Homeland Security",
       "Transportation and Infrastructure"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],
@@ -285,7 +285,7 @@
       "Ways and Means",
       "Judiciary"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],
@@ -309,7 +309,7 @@
       "Homeland Security",
       "Transportation and Infrastructure"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],
@@ -333,7 +333,7 @@
       "Homeland Security",
       "Appropriations"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.2,
     "lobbying": {
       "topIndustries": [],

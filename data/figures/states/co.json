@@ -86,7 +86,7 @@
       "Energy and Natural Resources",
       "Health Education Labor and Pensions"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Former governor, pro-business Democrat, craft beer entrepreneur",
     "techRegScore": 0.35,
     "lobbying": {
@@ -111,7 +111,7 @@
       "Armed Services",
       "Intelligence"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.32,
     "lobbying": {
       "topIndustries": [],
@@ -136,7 +136,7 @@
       "Agriculture",
       "Intelligence"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Pragmatic dealmaker who focuses on fiscal responsibility within Democratic ranks",
     "techRegScore": 0.3,
     "lobbying": {
@@ -165,7 +165,7 @@
       "Judiciary",
       "Natural Resources"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.28,
     "lobbying": {
       "topIndustries": [],
@@ -213,7 +213,7 @@
       "Energy and Commerce",
       "Natural Resources"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],
@@ -237,7 +237,7 @@
       "Education and Labor",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],

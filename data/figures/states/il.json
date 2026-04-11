@@ -58,7 +58,7 @@
       "Ways and Means",
       "Intelligence"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.69,
     "lobbying": {
       "topIndustries": [],
@@ -108,7 +108,7 @@
       "Environment",
       "Small Business"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Disabled Army veteran who lost both legs in Iraq and first senator to give birth while in office",
     "techRegScore": 0.35,
     "lobbying": {
@@ -161,7 +161,7 @@
       "Agriculture",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.31,
     "lobbying": {
       "topIndustries": [],
@@ -209,7 +209,7 @@
       "Judiciary",
       "Appropriations"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Veteran legislator focused on immigration reform and criminal justice",
     "techRegScore": 0.3,
     "lobbying": {
@@ -238,7 +238,7 @@
       "Appropriations",
       "Intelligence"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.29,
     "lobbying": {
       "topIndustries": [],
@@ -286,7 +286,7 @@
       "Financial Services",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.28,
     "lobbying": {
       "topIndustries": [],
@@ -310,7 +310,7 @@
       "Financial Services",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.26,
     "lobbying": {
       "topIndustries": [],
@@ -334,7 +334,7 @@
       "Oversight and Reform",
       "Intelligence"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],
@@ -358,7 +358,7 @@
       "Energy and Commerce",
       "Oversight and Reform"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.23,
     "lobbying": {
       "topIndustries": [],
@@ -405,7 +405,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.19,
     "lobbying": {
       "topIndustries": [],
@@ -453,7 +453,7 @@
       "Energy and Commerce",
       "Budget"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.16,
     "lobbying": {
       "topIndustries": [],

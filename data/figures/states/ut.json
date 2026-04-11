@@ -41,7 +41,7 @@
       "Education and Labor",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -90,7 +90,7 @@
       "Commerce",
       "Foreign Relations"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Business-minded Republican who breaks with party on climate issues",
     "techRegScore": 0.71,
     "lobbying": {
@@ -143,7 +143,7 @@
       "Energy and Commerce",
       "Foreign Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.62,
     "lobbying": {
       "topIndustries": [],

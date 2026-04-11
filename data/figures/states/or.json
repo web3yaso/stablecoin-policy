@@ -10,7 +10,7 @@
       "Natural Resources",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.7,
     "lobbying": {
       "topIndustries": [],
@@ -60,7 +60,7 @@
       "Budget",
       "Energy"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Privacy advocate and tax policy wonk who champions civil liberties and internet freedom",
     "techRegScore": 0.35,
     "lobbying": {
@@ -168,7 +168,7 @@
       "Education and Labor",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],

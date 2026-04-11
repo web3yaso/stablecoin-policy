@@ -9,7 +9,7 @@
     "committees": [
       "Oversight"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Aggressive oversight investigations targeting Biden administration",
     "techRegScore": 0.72,
     "lobbying": {
@@ -36,7 +36,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -158,7 +158,7 @@
       "Rules",
       "Judiciary"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Principled libertarian who votes against leadership on foreign interventions",
     "techRegScore": 0.35,
     "lobbying": {
@@ -188,7 +188,7 @@
       "Homeland Security",
       "Small Business"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Libertarian purist who opposes government overreach from all directions",
     "techRegScore": 0.25,
     "lobbying": {

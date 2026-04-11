@@ -93,7 +93,7 @@
     "committees": [
       "Armed Services"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Defense spending advocacy and military readiness focus",
     "techRegScore": 0.68,
     "lobbying": {
@@ -168,7 +168,7 @@
       "Armed Services",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.3,
     "lobbying": {
       "topIndustries": [],
@@ -215,7 +215,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],

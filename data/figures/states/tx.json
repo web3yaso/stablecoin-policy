@@ -353,7 +353,7 @@
       "Homeland Security",
       "Small Business"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -377,7 +377,7 @@
       "Energy and Commerce",
       "Rules"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -518,7 +518,7 @@
     "committees": [
       "Foreign Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "National security expertise and hawkish foreign policy stance",
     "techRegScore": 0.71,
     "lobbying": {
@@ -547,7 +547,7 @@
       "Finance",
       "Intelligence"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Institutional Republican who focuses on judiciary and business interests",
     "techRegScore": 0.68,
     "lobbying": {
@@ -576,7 +576,7 @@
       "Armed Services",
       "Intelligence"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "West Point veteran bringing military perspective to national security",
     "techRegScore": 0.68,
     "lobbying": {
@@ -604,7 +604,7 @@
       "Judiciary",
       "Rules"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Leading House Freedom Caucus hardliner who blocks leadership deals",
     "techRegScore": 0.65,
     "lobbying": {
@@ -632,7 +632,7 @@
       "Energy and Commerce",
       "Intelligence"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Navy SEAL veteran focused on national security with mainstream conservative views",
     "techRegScore": 0.65,
     "lobbying": {
@@ -660,7 +660,7 @@
       "Appropriations",
       "Homeland Security"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.65,
     "lobbying": {
       "topIndustries": [],
@@ -759,7 +759,7 @@
       "Energy and Commerce",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.31,
     "lobbying": {
       "topIndustries": [],
@@ -783,7 +783,7 @@
       "Energy and Commerce",
       "Armed Services"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],
@@ -807,7 +807,7 @@
       "Foreign Affairs",
       "Intelligence"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.23,
     "lobbying": {
       "topIndustries": [],
@@ -831,7 +831,7 @@
       "Judiciary",
       "Financial Services"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.22,
     "lobbying": {
       "topIndustries": [],
@@ -855,7 +855,7 @@
       "Armed Services",
       "Judiciary"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.21,
     "lobbying": {
       "topIndustries": [],
@@ -903,7 +903,7 @@
       "Financial Services",
       "Homeland Security"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.18,
     "lobbying": {
       "topIndustries": [],
@@ -951,7 +951,7 @@
       "Judiciary",
       "Homeland Security"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.15,
     "lobbying": {
       "topIndustries": [],

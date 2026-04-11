@@ -11,7 +11,7 @@
       "Health Education Labor and Pensions",
       "Indian Affairs"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Digital divide and broadband access advocacy",
     "techRegScore": 0.32,
     "lobbying": {
@@ -38,7 +38,7 @@
       "Energy",
       "Intelligence"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Pragmatic environmentalist who balances New Mexico's energy interests with climate goals",
     "techRegScore": 0.3,
     "lobbying": {
@@ -67,7 +67,7 @@
       "Natural Resources",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.28,
     "lobbying": {
       "topIndustries": [],
@@ -115,7 +115,7 @@
       "Agriculture",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],

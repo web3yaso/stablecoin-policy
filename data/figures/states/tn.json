@@ -12,7 +12,7 @@
       "Armed Services",
       "Veterans Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Conservative firebrand who rose from Tennessee state legislature to become Trump ally",
     "techRegScore": 0.75,
     "lobbying": {
@@ -164,7 +164,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.35,
     "lobbying": {
       "topIndustries": [],
@@ -211,7 +211,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.28,
     "lobbying": {
       "topIndustries": [],

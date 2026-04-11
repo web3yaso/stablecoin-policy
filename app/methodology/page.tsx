@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import NuanceLegend from "@/components/sections/NuanceLegend";
 
 export const metadata: Metadata = {
   title: "Methodology · Track Policy",
@@ -33,16 +34,16 @@ export default function MethodologyPage() {
           <p>
             Each bill is coded against a set of{" "}
             <strong className="text-ink font-semibold">impact tags</strong> —
-            grid strain, water use, emissions, local control, and so on —
-            drawn from its summary, committee testimony, and bill text.
-            Tags are assigned by hand; we don&rsquo;t use automated sentiment
-            analysis because policy nuance doesn&rsquo;t survive it.
+            grid capacity, water consumption, carbon emissions, local control,
+            and so on — drawn from its summary, committee testimony, and bill
+            text. Tags are assigned by hand; we don&rsquo;t use automated
+            sentiment analysis because policy nuance doesn&rsquo;t survive it.
           </p>
           <p>
             The{" "}
             <strong className="text-ink font-semibold">stance</strong> of a
-            jurisdiction — restrictive, concerning, under review, favorable,
-            or no action — is a judgment call based on the direction and
+            jurisdiction — restricting, cautionary, under review, encouraging,
+            or no activity — is a judgment call based on the direction and
             weight of its active legislation, not a score. A state with one
             enacted moratorium weighs more than a state with five filed
             study bills.
@@ -51,12 +52,26 @@ export default function MethodologyPage() {
             When a bill has no clear impact, we leave the tag list empty
             rather than forcing it into a bucket. When a jurisdiction has
             contradictory bills — one moratorium and one incentive — we
-            flag it as <em>concerning</em> rather than picking a side.
+            flag it as <em>cautionary</em> rather than picking a side.
           </p>
           <p className="text-muted italic">
             This is placeholder content while we build out the full site.
           </p>
         </div>
+
+        <div className="mt-16 mb-3 text-[13px] font-medium text-muted tracking-tight">
+          Impact tags by dimension
+        </div>
+        <h2 className="text-2xl md:text-3xl font-semibold text-ink tracking-tight leading-[1.1] mb-6">
+          The full tag taxonomy
+        </h2>
+        <p className="text-base text-ink/80 leading-relaxed mb-8">
+          Tags are grouped into two lenses — Data Centers and AI Regulation —
+          each with its own set of dimensions. The map&rsquo;s{" "}
+          <em>Color map by</em> toggle uses these groupings to recolor
+          jurisdictions by tag density.
+        </p>
+        <NuanceLegend />
       </div>
     </main>
   );

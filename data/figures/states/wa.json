@@ -9,7 +9,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.7,
     "lobbying": {
       "topIndustries": [],
@@ -84,7 +84,7 @@
       "Agriculture",
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.38,
     "lobbying": {
       "topIndustries": [],
@@ -185,7 +185,7 @@
       "Indian Affairs",
       "Small Business"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Tech industry veteran focused on commerce and energy policy",
     "techRegScore": 0.3,
     "lobbying": {
@@ -264,7 +264,7 @@
       "Veterans Affairs",
       "Budget"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Pragmatic deal-maker who focuses on women's health and education funding",
     "techRegScore": 0.25,
     "lobbying": {
@@ -293,7 +293,7 @@
       "Judiciary",
       "Budget"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Strategic progressive leader who builds coalitions",
     "techRegScore": 0.2,
     "lobbying": {

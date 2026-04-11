@@ -82,7 +82,7 @@
       "HELP",
       "Small Business"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Business-minded conservative focused on fiscal responsibility and gun rights",
     "techRegScore": 0.7,
     "lobbying": {
@@ -110,7 +110,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.68,
     "lobbying": {
       "topIndustries": [],
@@ -133,7 +133,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.67,
     "lobbying": {
       "topIndustries": [],
@@ -283,7 +283,7 @@
     "committees": [
       "Education"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Fierce opposition to student loan forgiveness and progressive education policies",
     "techRegScore": 0.3,
     "lobbying": {
@@ -311,7 +311,7 @@
       "Science, Space, and Technology",
       "Judiciary"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.26,
     "lobbying": {
       "topIndustries": [],
@@ -359,7 +359,7 @@
       "Agriculture",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.2,
     "lobbying": {
       "topIndustries": [],

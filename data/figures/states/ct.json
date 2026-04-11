@@ -40,7 +40,7 @@
       "Financial Services",
       "Intelligence"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.35,
     "lobbying": {
       "topIndustries": [],
@@ -87,7 +87,7 @@
     "committees": [
       "Appropriations"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Fierce advocate for food safety and women's health with distinctive purple hair",
     "techRegScore": 0.25,
     "lobbying": {
@@ -164,7 +164,7 @@
       "Commerce",
       "Veterans Affairs"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Aggressive questioner in hearings and consumer protection advocate",
     "techRegScore": 0.2,
     "lobbying": {

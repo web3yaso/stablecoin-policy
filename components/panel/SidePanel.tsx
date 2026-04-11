@@ -67,10 +67,12 @@ function ShowAllLink({
       </Link>
     );
   }
+  // No destination yet — render a muted "+N more" hint instead of a dead
+  // <a href="#"> which scrolled the page back to the top on click.
   return (
-    <a href="#" className={className}>
-      {content}
-    </a>
+    <span className="inline-block text-xs text-muted mt-3">
+      +{total - shown} more {label}
+    </span>
   );
 }
 

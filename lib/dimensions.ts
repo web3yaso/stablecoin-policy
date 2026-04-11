@@ -7,6 +7,7 @@ import { STANCE_HEX } from "./map-utils";
  */
 export const DIMENSION_TAGS: Record<Exclude<Dimension, "overall">, ImpactTag[]> =
   {
+    // ─── Data Center lens ────────────────────────────────────────────
     environmental: [
       "water-consumption",
       "carbon-emissions",
@@ -28,6 +29,12 @@ export const DIMENSION_TAGS: Record<Exclude<Dimension, "overall">, ImpactTag[]> 
       "residential-proximity",
       "property-values",
     ],
+    // ─── AI Regulation lens ──────────────────────────────────────────
+    "ai-governance-dim": ["algorithmic-transparency", "ai-safety"],
+    "ai-consumer": ["data-privacy", "child-safety"],
+    "ai-workforce": ["ai-in-employment"],
+    "ai-public": ["ai-in-healthcare", "ai-in-education"],
+    "ai-synthetic": ["deepfake-regulation"],
   };
 
 /**
@@ -38,10 +45,17 @@ export const DIMENSION_COLOR: Record<
   Exclude<Dimension, "overall">,
   string
 > = {
+  // Data Center lens
   environmental: "#4F8B58",
   energy: "#E8C57E",
   community: "#7090C8",
   "land-use": "#C8534A",
+  // AI Regulation lens
+  "ai-governance-dim": "#9B6BC5",
+  "ai-consumer": "#D67AA4",
+  "ai-workforce": "#C89554",
+  "ai-public": "#5AA5A5",
+  "ai-synthetic": "#D65AA8",
 };
 
 /**
@@ -56,6 +70,11 @@ export const DIMENSION_TEXT: Record<
   energy: "#1D1D1F",
   community: "#FFFFFF",
   "land-use": "#FFFFFF",
+  "ai-governance-dim": "#FFFFFF",
+  "ai-consumer": "#FFFFFF",
+  "ai-workforce": "#1D1D1F",
+  "ai-public": "#FFFFFF",
+  "ai-synthetic": "#FFFFFF",
 };
 
 /**
@@ -67,14 +86,17 @@ export const DIMENSION_GRADIENT: Record<
   Exclude<Dimension, "overall">,
   { from: string; to: string }
 > = {
-  // good (dark green) → bad (warm brown)
+  // Data Center lens — same gradients as before
   environmental: { from: "#3D7849", to: "#7A4F2A" },
-  // creamy banana yellow → muted orange
   energy: { from: "#F5DC8A", to: "#D9893E" },
-  // calm blue → deeper purple
   community: { from: "#5A8FD9", to: "#7B5EA5" },
-  // saturated red → soft peach
   "land-use": { from: "#C84A3F", to: "#F4C9A0" },
+  // AI Regulation lens
+  "ai-governance-dim": { from: "#C4A8E0", to: "#5A3F7A" },
+  "ai-consumer": { from: "#E8B7CE", to: "#A04866" },
+  "ai-workforce": { from: "#F0D5A0", to: "#8A5A2A" },
+  "ai-public": { from: "#A8D0D0", to: "#2E6565" },
+  "ai-synthetic": { from: "#E8A5CE", to: "#8B3A6E" },
 };
 
 /**

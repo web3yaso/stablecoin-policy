@@ -26,7 +26,7 @@
  */
 
 import "../env.js";
-import { readFileSync, writeFileSync, readdirSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import type {
@@ -40,8 +40,23 @@ import type {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
 const RAW_BILLS_DIR = join(ROOT, "data/raw/legiscan/bills");
+const CLAUDE_CACHE_PATH = join(ROOT, "data/raw/claude/classifications.json");
 const OUT_DIR = join(ROOT, "data/legislation");
 const OUT_STATES_DIR = join(OUT_DIR, "states");
+
+interface ClaudeClassification {
+  category: LegislationCategory;
+  impactTags: ImpactTag[];
+  stance: StanceType;
+  summary: string;
+  classifiedAt: string;
+}
+
+const claudeCache: Record<string, ClaudeClassification> = existsSync(
+  CLAUDE_CACHE_PATH,
+)
+  ? JSON.parse(readFileSync(CLAUDE_CACHE_PATH, "utf8"))
+  : {};
 
 interface RawBill {
   bill_id: number;
@@ -206,22 +221,33 @@ function stateStance(bills: Legislation[]): StanceType {
     favorable: 0,
     none: 0,
   };
+  // Prefer the per-bill stance (Claude-derived when available) over the
+  // old keyword heuristic. Bills whose Claude stance is "none" are
+  // genuinely irrelevant (e.g. a buoy-outage resolution that matched on
+  // "AI" keyword) and we exclude them from the tally.
   for (const b of bills) {
-    // map bill stance to a proxy of the state's posture
-    const stance: StanceType =
-      /\bmoratorium|prohibit|ban\b/i.test(b.title) && b.stage === "Enacted"
+    const s: StanceType =
+      b.stance ??
+      (/\bmoratorium|prohibit|ban\b/i.test(b.title) && b.stage === "Enacted"
         ? "restrictive"
         : /\bmoratorium|prohibit|ban\b/i.test(b.title)
           ? "concerning"
           : /\bincentive|exempt|credit\b/i.test(b.title)
             ? "favorable"
-            : "review";
-    tally[stance] += 1;
+            : "review");
+    tally[s] += 1;
   }
-  if (tally.restrictive > 0) return "restrictive";
-  if (tally.concerning > 0) return "concerning";
-  if (tally.favorable > tally.review) return "favorable";
-  if (tally.review > 0) return "review";
+  // Any enacted restrictive bill dominates
+  if (tally.restrictive >= 1) return "restrictive";
+  // Multiple concerning bills → concerning
+  if (tally.concerning >= 2) return "concerning";
+  // More incentives than anything else → favorable
+  if (
+    tally.favorable > tally.concerning &&
+    tally.favorable >= tally.review
+  )
+    return "favorable";
+  if (tally.concerning >= 1 || tally.review >= 1) return "review";
   return "none";
 }
 
@@ -249,19 +275,37 @@ function officialSourceUrl(bill: RawBill): string | undefined {
 
 function toLegislation(bill: RawBill): Legislation {
   const text = `${bill.title} ${bill.description ?? ""}`;
-  const category = classifyCategory(text);
-  const tags = classifyTags(text);
   const stage = mapStage(bill);
-  return {
-    id: `${bill.state}-${bill.bill_number}`.toLowerCase().replace(/[^a-z0-9-]/g, "-"),
-    billCode: bill.bill_number,
-    title: bill.title,
-    summary: bill.description
+
+  // Prefer Claude's semantic classification if we have it; fall back to
+  // the keyword heuristics for bills that Claude hasn't been run on
+  // (or that failed JSON parsing).
+  const claude = claudeCache[String(bill.bill_id)];
+  const category = claude?.category ?? classifyCategory(text);
+  const tags = claude?.impactTags ?? classifyTags(text);
+  const summary =
+    claude?.summary ??
+    (bill.description
       ? bill.description.length > 280
         ? bill.description.slice(0, 277) + "..."
         : bill.description
-      : bill.title,
+      : bill.title);
+
+  // Claude returns its own stance. Trust it when present; otherwise use
+  // the heuristic `deriveStance` which considers stage, category, and
+  // moratorium/incentive cues.
+  const stance: StanceType =
+    claude?.stance ?? deriveStance(bill, stage, category, tags);
+
+  return {
+    id: `${bill.state}-${bill.bill_number}`
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "-"),
+    billCode: bill.bill_number,
+    title: bill.title,
+    summary,
     stage,
+    stance,
     impactTags: tags,
     category,
     updatedDate: lastActionDate(bill),
@@ -273,28 +317,53 @@ function toLegislation(bill: RawBill): Legislation {
   };
 }
 
-function writeContextBlurb(state: string, bills: Legislation[]): string {
-  const name = STATE_NAMES[state] ?? state;
-  const count = bills.length;
+function writeContextBlurb(
+  state: string,
+  stateFull: string,
+  bills: Legislation[],
+): string {
+  const name = state === "US" ? "The US federal government" : stateFull;
+  // Exclude bills Claude flagged as unrelated (stance === "none")
+  const relevant = bills.filter((b) => b.stance !== "none");
+  const count = relevant.length;
   if (count === 0) {
-    return `${name} has no AI or data-center legislation currently tracked.`;
+    return `${name} has no AI or data-center legislation currently tracked in 2025–2026.`;
   }
-  const enacted = bills.filter((b) => b.stage === "Enacted").length;
-  const moratoriums = bills.filter((b) => /moratorium|prohibit|ban/i.test(b.title)).length;
-  const incentives = bills.filter((b) => /incentive|exempt|credit/i.test(b.title)).length;
+  const enacted = relevant.filter((b) => b.stage === "Enacted").length;
+  const restrictive = relevant.filter((b) => b.stance === "restrictive").length;
+  const concerning = relevant.filter((b) => b.stance === "concerning").length;
+  const favorable = relevant.filter((b) => b.stance === "favorable").length;
+  const dataCenter = relevant.filter(
+    (b) => b.category === "data-center-siting" || b.category === "data-center-energy",
+  ).length;
+  const ai = relevant.length - dataCenter;
+
   const parts: string[] = [];
   parts.push(
-    `${name} has ${count} bill${count === 1 ? "" : "s"} tracked in 2025–2026.`,
+    `${name} has ${count} relevant bill${count === 1 ? "" : "s"} tracked in 2025–2026` +
+      (dataCenter > 0 && ai > 0
+        ? ` — ${dataCenter} on data-center policy and ${ai} on AI regulation.`
+        : dataCenter > 0
+          ? ` on data-center policy.`
+          : ai > 0
+            ? ` on AI regulation.`
+            : `.`),
   );
   if (enacted)
-    parts.push(`${enacted} ${enacted === 1 ? "is" : "are"} already enacted.`);
-  if (moratoriums)
     parts.push(
-      `${moratoriums} relate${moratoriums === 1 ? "s" : ""} to moratoriums or prohibitions.`,
+      `${enacted} ${enacted === 1 ? "has" : "have"} been enacted into law.`,
     );
-  if (incentives)
+  if (restrictive)
     parts.push(
-      `${incentives} offer${incentives === 1 ? "s" : ""} incentives or exemptions.`,
+      `${restrictive} ${restrictive === 1 ? "imposes" : "impose"} active bans or moratoriums.`,
+    );
+  if (concerning && !restrictive)
+    parts.push(
+      `${concerning} ${concerning === 1 ? "advances" : "advance"} stricter regulation.`,
+    );
+  if (favorable)
+    parts.push(
+      `${favorable} ${favorable === 1 ? "offers" : "offer"} incentives or deregulation.`,
     );
   return parts.join(" ");
 }
@@ -318,7 +387,7 @@ function main() {
       region: "na",
       stance: stateStance(legislation),
       lastUpdated: new Date().toISOString().slice(0, 10),
-      contextBlurb: writeContextBlurb(state, legislation),
+      contextBlurb: writeContextBlurb(state, stateFull, legislation),
       legislation,
     };
 

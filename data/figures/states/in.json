@@ -87,7 +87,7 @@
       "Energy and Commerce",
       "Transportation and Infrastructure"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.71,
     "lobbying": {
       "topIndustries": [],
@@ -135,7 +135,7 @@
       "Judiciary",
       "Ways and Means"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.69,
     "lobbying": {
       "topIndustries": [],
@@ -158,7 +158,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.68,
     "lobbying": {
       "topIndustries": [],
@@ -261,7 +261,7 @@
       "Intelligence",
       "Transportation and Infrastructure"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],

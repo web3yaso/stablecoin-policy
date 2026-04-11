@@ -91,6 +91,45 @@ const RELEVANT_COMMITTEES = [
   "Homeland Security",
 ];
 
+/**
+ * Hand-curated "must include" list. These names are always placed at the
+ * front of the federal output regardless of their algorithmic relevance
+ * score, so the US entity surfaces a deliberately diverse cross-section
+ * of figures actively shaping AI / data-center policy, not just whichever
+ * members score highest on tech_regulation. Names that aren't found in
+ * the source data are silently skipped.
+ */
+const MUST_INCLUDE_NAMES = [
+  // Senate leadership + AI-relevant chairs / ranking members
+  "Chuck Schumer",
+  "Mitch McConnell",
+  "John Thune",
+  "Maria Cantwell",
+  "Ted Cruz",
+  "Mark Warner",
+  "Amy Klobuchar",
+  "Josh Hawley",
+  "Cory Booker",
+  "Todd Young",
+  "Marsha Blackburn",
+  "Bernie Sanders",
+  "Elizabeth Warren",
+  "Lisa Murkowski",
+  // House leadership + notable AI / tech voices
+  "Hakeem Jeffries",
+  "Mike Johnson",
+  "Steve Scalise",
+  "Elise Stefanik",
+  "Jim Jordan",
+  "Pramila Jayapal",
+  "Ro Khanna",
+  "Ted Lieu",
+  "Alexandria Ocasio-Cortez",
+  "Don Beyer",
+  "Yvette Clarke",
+  "Ritchie Torres",
+];
+
 function slugify(s: string): string {
   return s
     .toLowerCase()
@@ -114,19 +153,23 @@ function deriveStance(m: SimMember): StanceType {
   const party = (m.party ?? "").toUpperCase();
   const isR = party.startsWith("R");
   const isD = party.startsWith("D");
+  const hasLeadership = !!m.leadership;
+  const hasRelevantCommittee = hasAnyRelevantCommittee(m.committees);
 
-  // Strong tech-regulation + R → lean favorable (pro-industry deregulation)
-  // Strong tech-regulation + D → lean concerning / restrictive
+  // Strong tech-regulation engagement drives the most decisive stances.
   if (techReg > 0.75) {
     if (isR) return "favorable";
     if (isD) return techReg > 0.85 ? "restrictive" : "concerning";
   }
-  // Bipartisan moderates → review
+  // Leadership OR relevant committee membership → at least "review".
+  // Keeps known figures (Schumer, Cantwell, Cruz, etc.) from defaulting
+  // to "No Activity" just because tech_regulation isn't their top score.
+  if (hasLeadership || hasRelevantCommittee) return "review";
+  // Bipartisan moderates
   if (bipartisan > 0.55) return "review";
-  // Low/mid tech engagement → none or review
+  // Low/mid tech engagement without committee signal
   if (techReg < 0.4) return "none";
   if (techReg < 0.6) return "review";
-  // Default
   return isR ? "favorable" : "concerning";
 }
 
@@ -199,17 +242,44 @@ function main() {
   const senate = data.senate ?? [];
   const house = data.house ?? [];
 
-  // Federal list — pick top N most relevant across senate + house
+  // Federal list — curated must-include names FIRST (deliberately diverse),
+  // then the algorithmic top-by-relevance backfill for the remaining slots.
   const allMembers: { m: SimMember; chamber: Chamber }[] = [
     ...senate.map((m) => ({ m, chamber: "senate" as const })),
     ...house.map((m) => ({ m, chamber: "house" as const })),
   ];
 
-  const relevant = allMembers
+  const byLowerName = new Map<string, { m: SimMember; chamber: Chamber }>();
+  for (const entry of allMembers) {
+    byLowerName.set(entry.m.name.toLowerCase(), entry);
+  }
+
+  const curated: { m: SimMember; chamber: Chamber }[] = [];
+  const usedNames = new Set<string>();
+  const missingNames: string[] = [];
+  for (const name of MUST_INCLUDE_NAMES) {
+    const hit = byLowerName.get(name.toLowerCase());
+    if (hit) {
+      curated.push(hit);
+      usedNames.add(hit.m.name);
+    } else {
+      missingNames.push(name);
+    }
+  }
+
+  if (missingNames.length) {
+    console.log(
+      `[extract-figures] must-include names not found in source (skipped): ${missingNames.join(", ")}`,
+    );
+  }
+
+  const algorithmic = allMembers
+    .filter(({ m }) => !usedNames.has(m.name))
     .filter(({ m }) => relevanceScore(m) > 0.55)
     .sort((a, b) => relevanceScore(b.m) - relevanceScore(a.m));
 
-  const federalFigures = relevant.slice(0, 80).map(({ m, chamber }) =>
+  const combined = [...curated, ...algorithmic].slice(0, 80);
+  const federalFigures = combined.map(({ m, chamber }) =>
     buildFigure(m, chamber),
   );
 

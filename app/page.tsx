@@ -7,8 +7,8 @@ import MapShell from "@/components/map/MapShell";
 import SummaryBar from "@/components/sections/SummaryBar";
 import DimensionToggle from "@/components/sections/DimensionToggle";
 import AIOverview from "@/components/sections/AIOverview";
-import NuanceLegend from "@/components/sections/NuanceLegend";
 import LegislationTable from "@/components/sections/LegislationTable";
+import LiveNews from "@/components/sections/LiveNews";
 import { useScrollProgress } from "@/lib/use-scroll-progress";
 import type { Dimension, Region, ViewTarget } from "@/types";
 
@@ -90,24 +90,11 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Section 3 — Impact tag legend */}
+      {/* Section 3 — Full legislation table */}
       <section className="relative z-10 bg-white border-t border-black/[.06]">
-        <div className="max-w-5xl mx-auto px-8 py-20">
-          <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
-            03 · How we categorize
-          </div>
-          <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight leading-[1.1] mb-10">
-            Impact tags by dimension
-          </h2>
-          <NuanceLegend />
-        </div>
-      </section>
-
-      {/* Section 4 — Full legislation table */}
-      <section className="relative z-10 bg-bg border-t border-black/[.06]">
         <div className="max-w-5xl mx-auto px-8 pt-20 pb-24">
           <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
-            04 · The full record
+            03 · The full record
           </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight leading-[1.1] mb-10">
             Every bill we&rsquo;re tracking
@@ -116,6 +103,19 @@ export default function Page() {
             dimension={dimension}
             onNavigateToEntity={handleNavigateToEntity}
           />
+        </div>
+      </section>
+
+      {/* Section 4 — Live news feed */}
+      <section className="relative z-10 bg-bg border-t border-black/[.06]">
+        <div className="max-w-5xl mx-auto px-8 pt-20 pb-24">
+          <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
+            04 · From the wire
+          </div>
+          <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight leading-[1.1] mb-10">
+            Live news
+          </h2>
+          <LiveNews />
         </div>
       </section>
 

@@ -2,18 +2,21 @@
   "state": "Illinois",
   "stateCode": "IL",
   "region": "na",
-  "stance": "review",
+  "stance": "restrictive",
   "lastUpdated": "2026-04-11",
-  "contextBlurb": "Illinois has 12 bills tracked in 2025–2026.",
+  "contextBlurb": "Illinois has 12 relevant bills tracked in 2025–2026 on AI regulation. 2 impose active bans or moratoriums.",
   "legislation": [
     {
       "id": "il-hb3312",
       "billCode": "HB3312",
       "title": "UTILITY DATA ACCESS ACT",
-      "summary": "Reinserts the provisions of the introduced bill with the following changes. In provisions concerning utility data access, provides that the Illinois Commerce Commission shall enact procedures whereby a qualified utility shall retain, for a period of not less than 7 years, mont...",
+      "summary": "This bill sets rules for how Illinois utilities must store and share customer energy usage data, requiring them to keep billing records for 7-15 years and provide secure online access to that data. It establishes processes for account holders and authorized recipients to request and correct utility consumption data.",
       "stage": "Committee",
-      "impactTags": [],
-      "category": "ai-governance",
+      "stance": "concerning",
+      "impactTags": [
+        "data-privacy"
+      ],
+      "category": "data-privacy",
       "updatedDate": "2025-04-10",
       "partyOrigin": "D",
       "sourceUrl": "https://www.ilga.gov/Legislation/BillStatus?DocNum=3312&GAID=18&DocTypeID=HB&SessionID=114&GA=104",
@@ -30,10 +33,14 @@
       "id": "il-sb3263",
       "billCode": "SB3263",
       "title": "AI PROVENANCE DATA ACT",
-      "summary": "Creates the Artificial Intelligence Provenance Data Act. Provides that a covered artificial intelligence tool provider shall make available, at no cost to a person, a provenance label reading tool. Provides that a covered artificial intelligence tool provider shall include a p...",
+      "summary": "This Illinois bill requires AI companies to embed provenance labels in all AI-generated images, video, and audio content, and to provide free tools for people to read those labels. It also places compliance obligations on online platforms, device manufacturers, and hosting services, with civil penalties for violations.",
       "stage": "Committee",
-      "impactTags": [],
-      "category": "ai-governance",
+      "stance": "concerning",
+      "impactTags": [
+        "algorithmic-transparency",
+        "deepfake-regulation"
+      ],
+      "category": "synthetic-media",
       "updatedDate": "2026-02-03",
       "partyOrigin": "D",
       "sourceUrl": "https://www.ilga.gov/Legislation/BillStatus?DocNum=3263&GAID=18&DocTypeID=SB&SessionID=114&GA=104",
@@ -48,10 +55,13 @@
       "id": "il-hb1860",
       "billCode": "HB1860",
       "title": "ELEC CD-DECEPTIVE MATERIAL",
-      "summary": "Amends the Election Code. Provides that a person shall not distribute, or enter into an agreement with another person to distribute, materially deceptive media if: (1) the person knows the media falsely represents a depicted individual; (2) the distribution occurs within 90 da...",
+      "summary": "This Illinois bill bans distributing deceptive AI-generated or manipulated media about candidates within 90 days of an election when the intent is to deceive voters or harm a candidate's electoral prospects. Violators face penalties, though exceptions are included for certain types of content.",
       "stage": "Committee",
-      "impactTags": [],
-      "category": "ai-governance",
+      "stance": "restrictive",
+      "impactTags": [
+        "deepfake-regulation"
+      ],
+      "category": "synthetic-media",
       "updatedDate": "2025-01-29",
       "partyOrigin": "D",
       "sourceUrl": "https://www.ilga.gov/Legislation/BillStatus?DocNum=1860&GAID=18&DocTypeID=HB&SessionID=114&GA=104",
@@ -65,10 +75,14 @@
       "id": "il-hb3303",
       "billCode": "HB3303",
       "title": "ELEC CD-DECEPTIVE MATERIAL",
-      "summary": "Amends the Election Code. Provides that a person shall not distribute, or enter into an agreement with another person to distribute, materially deceptive media if: (1) the person knows the media falsely represents a depicted individual; (2) the distribution occurs within 90 da...",
+      "summary": "This Illinois bill bans distributing deceptive AI-generated or manipulated media about candidates within 90 days of an election if it's intended to damage their reputation or mislead voters. Violators face penalties, with exceptions for satire and clearly labeled content.",
       "stage": "Committee",
-      "impactTags": [],
-      "category": "ai-governance",
+      "stance": "restrictive",
+      "impactTags": [
+        "deepfake-regulation",
+        "algorithmic-transparency"
+      ],
+      "category": "synthetic-media",
       "updatedDate": "2025-02-06",
       "partyOrigin": "D",
       "sourceUrl": "https://www.ilga.gov/Legislation/BillStatus?DocNum=3303&GAID=18&DocTypeID=HB&SessionID=114&GA=104",
@@ -82,10 +96,13 @@
       "id": "il-sb3564",
       "billCode": "SB3564",
       "title": "POLICE-FACIAL RECOGNITION ACT",
-      "summary": "Creates the Facial Recognition Technology in Law Enforcement Act. Provides that a law enforcement agency that uses facial recognition technology shall conduct a compliance audit regarding implementation of the policies established under the Act. Requires the Illinois State Pol...",
+      "summary": "This Illinois bill sets rules for how police can use facial recognition technology, banning its use for real-time surveillance, politically motivated monitoring, or profiling based on race or protected characteristics. It also requires compliance audits, state reporting on accuracy, and standardized training for law enforcement agencies.",
       "stage": "Committee",
+      "stance": "concerning",
       "impactTags": [
-        "property-values"
+        "algorithmic-transparency",
+        "ai-safety",
+        "data-privacy"
       ],
       "category": "ai-criminal-justice",
       "updatedDate": "2026-02-05",
@@ -101,10 +118,14 @@
       "id": "il-sb2478",
       "billCode": "SB2478",
       "title": "UTILITY DATA ACCESS ACT",
-      "summary": "Creates the Utility Data Access Act. Requires the Illinois Commerce Commission to enact the following procedures: (1) a utility shall retain all consumption data for a period of not less than 2 years; (2) a qualified utility shall retain monthly consumption data used for billi...",
+      "summary": "This bill requires Illinois utilities to store customer energy usage data for extended periods and share it securely with account holders or their designated third parties upon request. It establishes rules for how and when this data must be delivered, and includes protections for utilities against liability when data is misused after proper sharing.",
       "stage": "Committee",
-      "impactTags": [],
-      "category": "ai-governance",
+      "stance": "review",
+      "impactTags": [
+        "data-privacy",
+        "algorithmic-transparency"
+      ],
+      "category": "data-privacy",
       "updatedDate": "2025-02-07",
       "partyOrigin": "D",
       "sourceUrl": "https://www.ilga.gov/Legislation/BillStatus?DocNum=2478&GAID=18&DocTypeID=SB&SessionID=114&GA=104",
@@ -118,10 +139,12 @@
       "id": "il-sb3890",
       "billCode": "SB3890",
       "title": "CONSUMER DATA PRIVACY",
-      "summary": "Creates the Illinois Data Privacy Protection Act. Applies to legal entities that conduct business in Illinois or produce products or services that are targeted to Illinois residents and that satisfy one or more of the following thresholds: during a calendar year, controls or p...",
+      "summary": "This bill would require companies that handle large amounts of Illinois residents' personal data to give consumers rights to access, correct, and delete their information, and to know who their data has been shared with. It also requires data brokers to register with the state and creates a portal for consumers to request deletion of their data across all registered brokers.",
       "stage": "Committee",
+      "stance": "concerning",
       "impactTags": [
-        "data-privacy"
+        "data-privacy",
+        "algorithmic-transparency"
       ],
       "category": "data-privacy",
       "updatedDate": "2026-02-06",
@@ -137,12 +160,13 @@
       "id": "il-hb3041",
       "billCode": "HB3041",
       "title": "DATA PRIVACY AND PROTECTION",
-      "summary": "Creates the Illinois Data Privacy and Protection Act. Provides that a covered entity (any entity or any person, other than an individual acting in a non-commercial context, that alone or jointly with others determines the purposes and means of collecting, processing, or transf...",
+      "summary": "This bill would create a comprehensive Illinois data privacy law requiring businesses to limit how they collect and use personal data, give individuals rights over their information, and apply special protections for children. Companies would need clear policies and face enforcement for violations.",
       "stage": "Committee",
+      "stance": "concerning",
       "impactTags": [
-        "nda-transparency",
+        "data-privacy",
         "child-safety",
-        "data-privacy"
+        "algorithmic-transparency"
       ],
       "category": "data-privacy",
       "updatedDate": "2025-02-06",
@@ -158,10 +182,12 @@
       "id": "il-sb2875",
       "billCode": "SB2875",
       "title": "CONSUMER DATA PRIVACY",
-      "summary": "Creates the Illinois Consumer Data Privacy Act. Applies to legal entities that conduct business in Illinois or produce products or services that are targeted to Illinois residents and that satisfy one or more of the following thresholds: during a calendar year, controls or pro...",
+      "summary": "This bill would create a comprehensive data privacy law in Illinois, giving consumers rights to access, correct, and understand how their personal data is used by businesses. It applies to companies handling data of 100,000 or more Illinois residents or those that earn significant revenue from selling personal data, with enforcement by the Attorney General.",
       "stage": "Committee",
+      "stance": "concerning",
       "impactTags": [
-        "data-privacy"
+        "data-privacy",
+        "algorithmic-transparency"
       ],
       "category": "data-privacy",
       "updatedDate": "2026-01-16",
@@ -177,10 +203,12 @@
       "id": "il-hb3494",
       "billCode": "HB3494",
       "title": "HEALTH DATA PRIVACY ACT",
-      "summary": "Creates the Protect Health Data Privacy Act. Provides that a regulated entity shall disclose and maintain a health data privacy policy that clearly and conspicuously discloses specified information. Sets forth provisions concerning health data privacy policies. Provides that a...",
+      "summary": "This Illinois bill requires companies that handle personal health data to clearly disclose their privacy practices, get explicit consent before collecting or selling health data, and give individuals the right to delete their data or withdraw consent. It also bans discriminatory treatment of people who refuse to share their health data and restricts location-based targeting near health facilities.",
       "stage": "Committee",
+      "stance": "concerning",
       "impactTags": [
-        "data-privacy"
+        "data-privacy",
+        "ai-in-healthcare"
       ],
       "category": "data-privacy",
       "updatedDate": "2025-02-07",
@@ -199,10 +227,12 @@
       "id": "il-sb2273",
       "billCode": "SB2273",
       "title": "HEALTH DATA PRIVACY ACT",
-      "summary": "Creates the Protect Health Data Privacy Act. Provides that a regulated entity shall disclose and maintain a health data privacy policy that clearly and conspicuously discloses specified information. Sets forth provisions concerning health data privacy policies. Provides that a...",
+      "summary": "This Illinois bill requires companies that handle personal health data to disclose their privacy practices, get explicit consent before collecting or selling health information, and give individuals the right to delete their data. It also bans discriminatory practices against people who refuse to share their health data and places strict rules on geofencing near health facilities.",
       "stage": "Committee",
+      "stance": "concerning",
       "impactTags": [
-        "data-privacy"
+        "data-privacy",
+        "ai-in-healthcare"
       ],
       "category": "data-privacy",
       "updatedDate": "2025-02-07",
@@ -218,11 +248,12 @@
       "id": "il-hb5221",
       "billCode": "HB5221",
       "title": "CONSUMER DATA PRIVACY ACT",
-      "summary": "Creates the Consumer Data Privacy Act. Sets forth provisions concerning agreements between personal data processors and controllers. Provides for consumer personal data rights, including the right to opt out of the processing of personal data concerning the consumer for purpos...",
+      "summary": "This Illinois bill creates a comprehensive consumer data privacy law giving residents the right to opt out of targeted advertising, data sales, and automated profiling that affects their lives. It establishes rules for businesses handling personal data and imposes civil penalties for violations, taking effect in 2027.",
       "stage": "Committee",
+      "stance": "concerning",
       "impactTags": [
-        "algorithmic-transparency",
-        "data-privacy"
+        "data-privacy",
+        "algorithmic-transparency"
       ],
       "category": "data-privacy",
       "updatedDate": "2026-02-05",

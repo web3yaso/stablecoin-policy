@@ -158,7 +158,7 @@
       "House Administration",
       "Science, Space, and Technology"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.74,
     "lobbying": {
       "topIndustries": [],
@@ -182,7 +182,7 @@
       "Energy and Commerce",
       "Budget"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.73,
     "lobbying": {
       "topIndustries": [],
@@ -232,7 +232,7 @@
       "Commerce",
       "Joint Economic"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Baptist preacher, civil rights advocate, Martin Luther King Jr.'s former pulpit",
     "techRegScore": 0.35,
     "lobbying": {
@@ -287,7 +287,7 @@
       "Homeland Security",
       "Rules"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Youngest senator, investigative journalism background, anti-corruption focus",
     "techRegScore": 0.3,
     "lobbying": {
@@ -340,7 +340,7 @@
       "Judiciary",
       "Education and Labor"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.24,
     "lobbying": {
       "topIndustries": [],
@@ -364,7 +364,7 @@
       "Judiciary",
       "Transportation and Infrastructure"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.18,
     "lobbying": {
       "topIndustries": [],

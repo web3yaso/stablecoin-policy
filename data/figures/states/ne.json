@@ -12,7 +12,7 @@
       "Environment",
       "Foreign Relations"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Wealthy former governor who brings business background to conservative politics",
     "techRegScore": 0.73,
     "lobbying": {
@@ -42,7 +42,7 @@
       "Commerce",
       "Agriculture"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Rancher-turned-senator focused on agriculture and rural issues",
     "techRegScore": 0.73,
     "lobbying": {
@@ -94,7 +94,7 @@
       "Judiciary",
       "Agriculture"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.69,
     "lobbying": {
       "topIndustries": [],

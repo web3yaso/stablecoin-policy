@@ -5,13 +5,32 @@ import {
 } from "@/types";
 import { DIMENSION_COLOR, DIMENSION_TAGS } from "@/lib/dimensions";
 
-const DIMENSION_GROUPS: { dimension: Exclude<Dimension, "overall">; label: string }[] =
-  [
-    { dimension: "environmental", label: "Environmental" },
-    { dimension: "energy", label: "Energy & grid" },
-    { dimension: "community", label: "Community" },
-    { dimension: "land-use", label: "Land use" },
-  ];
+interface LensSection {
+  title: string;
+  groups: { dimension: Exclude<Dimension, "overall">; label: string }[];
+}
+
+const SECTIONS: LensSection[] = [
+  {
+    title: "Data Centers",
+    groups: [
+      { dimension: "environmental", label: "Environmental" },
+      { dimension: "energy", label: "Energy & grid" },
+      { dimension: "community", label: "Community" },
+      { dimension: "land-use", label: "Land use" },
+    ],
+  },
+  {
+    title: "AI Regulation",
+    groups: [
+      { dimension: "ai-governance-dim", label: "Governance" },
+      { dimension: "ai-consumer", label: "Consumer protection" },
+      { dimension: "ai-workforce", label: "Workforce & employment" },
+      { dimension: "ai-public", label: "Public services" },
+      { dimension: "ai-synthetic", label: "Synthetic media" },
+    ],
+  },
+];
 
 function uniq(tags: ImpactTag[]): ImpactTag[] {
   const seen = new Set<ImpactTag>();
@@ -31,36 +50,45 @@ export default function NuanceLegend() {
       <h3 className="text-sm font-semibold text-ink tracking-tight mb-1">
         Impact tags
       </h3>
-      <p className="text-xs text-muted mb-5">
-        Tags grouped by dimension. Use the toggle above to recolor the map by
-        any of these.
+      <p className="text-xs text-muted mb-6">
+        Tags grouped by lens and dimension. Use the toggle above to recolor
+        the map by any of these.
       </p>
-      <div className="flex flex-col gap-5">
-        {DIMENSION_GROUPS.map(({ dimension, label }) => {
-          const tags = uniq(DIMENSION_TAGS[dimension]);
-          const dotColor = DIMENSION_COLOR[dimension];
-          return (
-            <div key={dimension}>
-              <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
-                {label}
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[11px] bg-black/[.04] text-muted px-2 py-0.5 rounded-full inline-flex items-center gap-1.5"
-                  >
-                    <span
-                      className="w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: dotColor }}
-                    />
-                    {IMPACT_TAG_LABEL[tag]}
-                  </span>
-                ))}
-              </div>
+      <div className="flex flex-col gap-8">
+        {SECTIONS.map((section) => (
+          <div key={section.title}>
+            <div className="text-sm font-semibold text-ink tracking-tight mb-4">
+              {section.title}
             </div>
-          );
-        })}
+            <div className="flex flex-col gap-5">
+              {section.groups.map(({ dimension, label }) => {
+                const tags = uniq(DIMENSION_TAGS[dimension]);
+                const dotColor = DIMENSION_COLOR[dimension];
+                return (
+                  <div key={dimension}>
+                    <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
+                      {label}
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[11px] bg-black/[.04] text-muted px-2 py-0.5 rounded-full inline-flex items-center gap-1.5"
+                        >
+                          <span
+                            className="w-1.5 h-1.5 rounded-full"
+                            style={{ backgroundColor: dotColor }}
+                          />
+                          {IMPACT_TAG_LABEL[tag]}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

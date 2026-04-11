@@ -51,6 +51,35 @@ const SORT_OPTIONS: { key: SortKey; label: string }[] = [
   { key: "state", label: "State" },
 ];
 
+type JurisdictionFilter = "all" | "us-federal" | "us-states" | "international";
+
+const JURISDICTION_OPTIONS: { key: JurisdictionFilter; label: string }[] = [
+  { key: "all", label: "All" },
+  { key: "us-federal", label: "US Federal" },
+  { key: "us-states", label: "US States" },
+  { key: "international", label: "International" },
+];
+
+function matchesJurisdiction(entity: Entity, j: JurisdictionFilter): boolean {
+  if (j === "all") return true;
+  if (j === "us-federal") {
+    return (
+      entity.region === "na" &&
+      entity.level === "federal" &&
+      entity.geoId === "840"
+    );
+  }
+  if (j === "us-states") {
+    return entity.region === "na" && entity.level === "state";
+  }
+  // international: anything that isn't US federal or a US state
+  return !(
+    entity.region === "na" &&
+    (entity.level === "state" ||
+      (entity.level === "federal" && entity.geoId === "840"))
+  );
+}
+
 const STAGE_ORDER: Record<Stage, number> = {
   Enacted: 5,
   Floor: 4,
@@ -59,6 +88,35 @@ const STAGE_ORDER: Record<Stage, number> = {
   "Carried Over": 1,
   Dead: 0,
 };
+
+type StatusFilter = "all" | "proposed" | "voting" | "passed" | "dead";
+
+const STATUS_OPTIONS: { key: StatusFilter; label: string }[] = [
+  { key: "all", label: "All" },
+  { key: "proposed", label: "Proposed" },
+  { key: "voting", label: "About to vote" },
+  { key: "passed", label: "Passed into law" },
+  { key: "dead", label: "Dead or stalled" },
+];
+
+function matchesStatus(stage: Stage, s: StatusFilter): boolean {
+  if (s === "all") return true;
+  if (s === "proposed") return stage === "Filed" || stage === "Committee";
+  if (s === "voting") return stage === "Floor";
+  if (s === "passed") return stage === "Enacted";
+  return stage === "Dead" || stage === "Carried Over";
+}
+
+function rowMatchesQuery(row: BillRow, q: string): boolean {
+  if (!q) return true;
+  const needle = q.toLowerCase();
+  return (
+    row.bill.billCode.toLowerCase().includes(needle) ||
+    row.bill.title.toLowerCase().includes(needle) ||
+    row.bill.summary.toLowerCase().includes(needle) ||
+    row.entity.name.toLowerCase().includes(needle)
+  );
+}
 
 const PREVIEW_COUNT = 10;
 
@@ -101,6 +159,10 @@ export default function LegislationTable({
   onNavigateToEntity,
 }: LegislationTableProps) {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
+  const [activeJurisdiction, setActiveJurisdiction] =
+    useState<JurisdictionFilter>("all");
+  const [activeStatus, setActiveStatus] = useState<StatusFilter>("all");
+  const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("recent");
   const [expanded, setExpanded] = useState(false);
 
@@ -109,8 +171,18 @@ export default function LegislationTable({
   const filtered = useMemo(() => {
     let rows = allRows;
 
+    if (activeJurisdiction !== "all") {
+      rows = rows.filter((r) =>
+        matchesJurisdiction(r.entity, activeJurisdiction),
+      );
+    }
+
     if (activeCategory !== "all") {
       rows = rows.filter((r) => r.bill.category === activeCategory);
+    }
+
+    if (activeStatus !== "all") {
+      rows = rows.filter((r) => matchesStatus(r.bill.stage, activeStatus));
     }
 
     if (dimension !== "overall") {
@@ -120,8 +192,48 @@ export default function LegislationTable({
       );
     }
 
+    const trimmedQuery = query.trim();
+    if (trimmedQuery) {
+      rows = rows.filter((r) => rowMatchesQuery(r, trimmedQuery));
+    }
+
     return [...rows].sort((a, b) => compareRows(a, b, sortKey));
-  }, [allRows, activeCategory, dimension, sortKey]);
+  }, [
+    allRows,
+    activeCategory,
+    activeJurisdiction,
+    activeStatus,
+    dimension,
+    sortKey,
+    query,
+  ]);
+
+  // Pre-compute counts per jurisdiction (under the current category +
+  // dimension filters) so the chip badges are live.
+  const jurisdictionCounts = useMemo(() => {
+    let rows = allRows;
+    if (activeCategory !== "all") {
+      rows = rows.filter((r) => r.bill.category === activeCategory);
+    }
+    if (dimension !== "overall") {
+      const dimensionTags = new Set(DIMENSION_TAGS[dimension]);
+      rows = rows.filter((r) =>
+        r.bill.impactTags.some((t) => dimensionTags.has(t)),
+      );
+    }
+    const counts: Record<JurisdictionFilter, number> = {
+      all: rows.length,
+      "us-federal": 0,
+      "us-states": 0,
+      international: 0,
+    };
+    for (const r of rows) {
+      if (matchesJurisdiction(r.entity, "us-federal")) counts["us-federal"] += 1;
+      else if (matchesJurisdiction(r.entity, "us-states")) counts["us-states"] += 1;
+      else counts.international += 1;
+    }
+    return counts;
+  }, [allRows, activeCategory, dimension]);
 
   const billCount = filtered.length;
   const entityCount = new Set(filtered.map((r) => r.entity.id)).size;
@@ -148,36 +260,151 @@ export default function LegislationTable({
 
   return (
     <div>
-      {/* Filter chips + counts */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+      {/* Search input */}
+      <div className="mb-6">
+        <div className="max-w-md flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-white border border-black/[.06] focus-within:border-black/20 transition-colors">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            className="text-muted flex-shrink-0"
+          >
+            <circle
+              cx="6"
+              cy="6"
+              r="4.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M9.5 9.5L12.5 12.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+          </svg>
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search by bill code, title, summary, or state…"
+            className="flex-1 bg-transparent text-sm text-ink placeholder:text-muted focus:outline-none min-w-0"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              aria-label="Clear search"
+              className="text-muted hover:text-ink flex-shrink-0"
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path
+                  d="M3 3L9 9M9 3L3 9"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Jurisdiction row — US Federal / US States / International */}
+      <div className="mb-4">
+        <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
+          Scope
+        </div>
         <div className="flex flex-wrap gap-2">
-          {visibleCategories.map((c) => {
-            const active = c === activeCategory;
+          {JURISDICTION_OPTIONS.map((opt) => {
+            const active = opt.key === activeJurisdiction;
+            const count = jurisdictionCounts[opt.key];
             return (
               <button
-                key={c}
+                key={opt.key}
                 type="button"
-                onClick={() => setActiveCategory(c)}
+                onClick={() => setActiveJurisdiction(opt.key)}
+                className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                  active
+                    ? "bg-ink text-white"
+                    : "border border-black/[.06] text-muted hover:text-ink"
+                }`}
+              >
+                <span>{opt.label}</span>
+                <span
+                  className={`text-[10px] ${active ? "text-white/70" : "text-muted"}`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Topic row */}
+      <div className="mb-4">
+        <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
+          Topic
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap gap-2">
+            {visibleCategories.map((c) => {
+              const active = c === activeCategory;
+              return (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setActiveCategory(c)}
+                  className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                    active
+                      ? "bg-ink text-white"
+                      : "border border-black/[.06] text-muted hover:text-ink"
+                  }`}
+                >
+                  {c === "all" ? "All" : CATEGORY_LABEL[c]}
+                </button>
+              );
+            })}
+          </div>
+          <div className="text-xs text-muted whitespace-nowrap">
+            <span className="font-semibold text-ink">{billCount}</span> bills ·{" "}
+            <span className="font-semibold text-ink">{entityCount}</span>{" "}
+            entities
+          </div>
+        </div>
+      </div>
+
+      {/* Status row */}
+      <div className="mb-4">
+        <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
+          Status
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {STATUS_OPTIONS.map((opt) => {
+            const active = opt.key === activeStatus;
+            return (
+              <button
+                key={opt.key}
+                type="button"
+                onClick={() => setActiveStatus(opt.key)}
                 className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
                   active
                     ? "bg-ink text-white"
                     : "border border-black/[.06] text-muted hover:text-ink"
                 }`}
               >
-                {c === "all" ? "All" : CATEGORY_LABEL[c]}
+                {opt.label}
               </button>
             );
           })}
-        </div>
-        <div className="text-xs text-muted whitespace-nowrap">
-          <span className="font-semibold text-ink">{billCount}</span> bills ·{" "}
-          <span className="font-semibold text-ink">{entityCount}</span> entities
         </div>
       </div>
 
       {/* Sort row */}
       <div className="flex flex-wrap items-center gap-2 mb-6">
-        <span className="text-[11px] uppercase tracking-widest text-muted mr-1">
+        <span className="text-[13px] font-medium text-muted tracking-tight mr-1">
           Sort
         </span>
         {SORT_OPTIONS.map((opt) => {

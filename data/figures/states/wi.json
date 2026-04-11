@@ -60,7 +60,7 @@
       "Commerce",
       "Foreign Relations"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Controversial statements and conspiracy theory promotion, fierce government spending critic",
     "techRegScore": 0.75,
     "lobbying": {
@@ -89,7 +89,7 @@
       "Education and Workforce",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.74,
     "lobbying": {
       "topIndustries": [],
@@ -186,7 +186,7 @@
       "Commerce",
       "HELP"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "First openly gay senator and champion of Medicare for All",
     "techRegScore": 0.25,
     "lobbying": {
@@ -215,7 +215,7 @@
       "Financial Services",
       "Science and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.19,
     "lobbying": {
       "topIndustries": [],

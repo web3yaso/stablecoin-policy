@@ -40,7 +40,7 @@
       "Armed Services",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -88,7 +88,7 @@
       "Financial Services",
       "Science, Space, and Technology"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -112,7 +112,7 @@
       "Judiciary",
       "Foreign Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -136,7 +136,7 @@
       "Agriculture",
       "Homeland Security"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -162,7 +162,7 @@
       "Budget",
       "Homeland Security"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Wealthy former governor focused on fiscal conservatism and business-friendly policies",
     "techRegScore": 0.71,
     "lobbying": {
@@ -216,7 +216,7 @@
       "Foreign Affairs",
       "Intelligence"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.7,
     "lobbying": {
       "topIndustries": [],
@@ -311,7 +311,7 @@
       "Judiciary",
       "House Administration"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.68,
     "lobbying": {
       "topIndustries": [],
@@ -335,7 +335,7 @@
       "Science, Space, and Technology",
       "Veterans' Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.65,
     "lobbying": {
       "topIndustries": [],
@@ -358,7 +358,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.65,
     "lobbying": {
       "topIndustries": [],
@@ -406,7 +406,7 @@
       "Homeland Security",
       "Transportation and Infrastructure"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.62,
     "lobbying": {
       "topIndustries": [],
@@ -556,7 +556,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.38,
     "lobbying": {
       "topIndustries": [],
@@ -606,7 +606,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.3,
     "lobbying": {
       "topIndustries": [],
@@ -725,7 +725,7 @@
       "Oversight and Accountability",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.15,
     "lobbying": {
       "topIndustries": [],

@@ -7,7 +7,7 @@
     "state": "MA",
     "chamber": "house",
     "committees": [],
-    "stance": "concerning",
+    "stance": "review",
     "quote": "Tech policy expert and fierce advocate for working families",
     "techRegScore": 0.75,
     "lobbying": {
@@ -83,7 +83,7 @@
       "Transportation and Infrastructure",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.3,
     "lobbying": {
       "topIndustries": [],
@@ -156,7 +156,7 @@
       "Environment",
       "Small Business"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Progressive climate warrior and tech regulation advocate, co-author of Green New Deal",
     "techRegScore": 0.2,
     "lobbying": {
@@ -184,7 +184,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.18,
     "lobbying": {
       "topIndustries": [],

@@ -12,7 +12,7 @@
       "Finance",
       "Indian Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Former tech executive who champions Montana's outdoor recreation economy and energy independence",
     "techRegScore": 0.72,
     "lobbying": {
@@ -41,7 +41,7 @@
       "Science, Space, and Technology",
       "Veterans' Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -67,7 +67,7 @@
       "Indian Affairs",
       "Veterans Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Navy SEAL turned businessman who defeated Jon Tester with strong Trump support",
     "techRegScore": 0.69,
     "lobbying": {

@@ -58,7 +58,7 @@
       "Education and Workforce",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.7,
     "lobbying": {
       "topIndustries": [],
@@ -82,7 +82,7 @@
       "Natural Resources",
       "Science, Space, and Technology"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.65,
     "lobbying": {
       "topIndustries": [],
@@ -106,7 +106,7 @@
       "Foreign Affairs",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.65,
     "lobbying": {
       "topIndustries": [],
@@ -157,7 +157,7 @@
     "committees": [
       "Appropriations"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "quote": "Bridge-building Latino leader focused on infrastructure and economic development",
     "techRegScore": 0.6,
     "lobbying": {
@@ -574,7 +574,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.35,
     "lobbying": {
       "topIndustries": [],
@@ -598,7 +598,7 @@
       "Judiciary",
       "Intelligence"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.35,
     "lobbying": {
       "topIndustries": [],
@@ -622,7 +622,7 @@
       "Homeland Security",
       "Veterans' Affairs"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.35,
     "lobbying": {
       "topIndustries": [],
@@ -694,7 +694,7 @@
       "Energy and Commerce",
       "Veterans' Affairs"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.32,
     "lobbying": {
       "topIndustries": [],
@@ -718,7 +718,7 @@
       "Judiciary",
       "Science and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.32,
     "lobbying": {
       "topIndustries": [],
@@ -837,7 +837,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.3,
     "lobbying": {
       "topIndustries": [],
@@ -909,7 +909,7 @@
       "Homeland Security",
       "Science, Space, and Technology"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.3,
     "lobbying": {
       "topIndustries": [],
@@ -1007,7 +1007,7 @@
       "Budget",
       "Homeland Security"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Immigration advocate, Latino representation, climate champion",
     "techRegScore": 0.25,
     "lobbying": {
@@ -1036,7 +1036,7 @@
       "Judiciary",
       "Intelligence"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Leading Trump impeachment efforts and Intelligence Committee work",
     "techRegScore": 0.25,
     "lobbying": {
@@ -1086,7 +1086,7 @@
       "Judiciary",
       "Transportation and Infrastructure"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],
@@ -1110,7 +1110,7 @@
       "Judiciary",
       "Homeland Security"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.25,
     "lobbying": {
       "topIndustries": [],
@@ -1254,7 +1254,7 @@
       "Judiciary",
       "House Administration"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.18,
     "lobbying": {
       "topIndustries": [],
@@ -1277,7 +1277,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.15,
     "lobbying": {
       "topIndustries": [],
@@ -1300,7 +1300,7 @@
     "committees": [
       "Financial Services"
     ],
-    "stance": "none",
+    "stance": "review",
     "quote": "Fearless confrontation of Wall Street and Trump administration",
     "techRegScore": 0.1,
     "lobbying": {

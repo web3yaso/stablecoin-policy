@@ -34,7 +34,7 @@
       "Education and Workforce",
       "Judiciary"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -81,7 +81,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -105,7 +105,7 @@
       "Science, Space, and Technology",
       "Transportation and Infrastructure"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -129,7 +129,7 @@
       "Foreign Affairs",
       "Science, Space, and Technology"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.68,
     "lobbying": {
       "topIndustries": [],
@@ -287,7 +287,7 @@
       "Judiciary",
       "Budget"
     ],
-    "stance": "none",
+    "stance": "review",
     "techRegScore": 0.35,
     "lobbying": {
       "topIndustries": [],

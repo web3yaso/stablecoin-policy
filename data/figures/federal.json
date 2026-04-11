@@ -1,5 +1,534 @@
 [
   {
+    "id": "chuck-schumer",
+    "name": "Chuck Schumer",
+    "role": "Senator · Senate Minority Leader",
+    "party": "D-NY",
+    "state": "NY",
+    "chamber": "senate",
+    "committees": [
+      "Rules"
+    ],
+    "stance": "review",
+    "quote": "Master tactician and media-savvy Democratic leader who loves the spotlight",
+    "techRegScore": 0.35,
+    "lobbying": {
+      "topIndustries": [
+        "Securities & Investment: $2.1M",
+        "Real Estate: $1.8M",
+        "Commercial Banks: $1.2M"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 74,
+      "education": "Harvard College (AB), Harvard Law School (JD)",
+      "careerBeforePolitics": "Attorney, served in New York Assembly and U.S. House"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "mitch-mcconnell",
+    "name": "Mitch McConnell",
+    "role": "Senator",
+    "party": "R-KY",
+    "state": "KY",
+    "chamber": "senate",
+    "committees": [
+      "Appropriations",
+      "Rules"
+    ],
+    "stance": "favorable",
+    "quote": "Master tactician and institutional conservative focused on judicial appointments",
+    "techRegScore": 0.63,
+    "lobbying": {
+      "topIndustries": [
+        "Securities & Investment: $2.1M",
+        "Insurance: $1.4M",
+        "Health Products: $891K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 82,
+      "education": "BA University of Louisville, JD University of Kentucky",
+      "careerBeforePolitics": "Attorney, legislative aide, Jefferson County Judge/Executive"
+    },
+    "seatSafety": "lean"
+  },
+  {
+    "id": "john-thune",
+    "name": "John Thune",
+    "role": "Senator · Majority Leader",
+    "party": "R-SD",
+    "state": "SD",
+    "chamber": "senate",
+    "committees": [
+      "Finance",
+      "Commerce",
+      "Agriculture"
+    ],
+    "stance": "review",
+    "quote": "Pragmatic conservative leader who can work across the aisle when needed",
+    "techRegScore": 0.68,
+    "lobbying": {
+      "topIndustries": [
+        "Securities & Investment: $892K",
+        "Insurance: $654K",
+        "Agriculture: $543K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 63,
+      "education": "BA Biola University, MBA University of South Dakota",
+      "careerBeforePolitics": "Congressional aide, small business owner in sports marketing"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "maria-cantwell",
+    "name": "Maria Cantwell",
+    "role": "Senator · Commerce",
+    "party": "D-WA",
+    "state": "WA",
+    "chamber": "senate",
+    "committees": [
+      "Commerce",
+      "Finance",
+      "Indian Affairs",
+      "Small Business"
+    ],
+    "stance": "review",
+    "quote": "Tech industry veteran focused on commerce and energy policy",
+    "techRegScore": 0.3,
+    "lobbying": {
+      "topIndustries": [
+        "Tech/Electronics $1.1M",
+        "Energy/Natural Resources $780K",
+        "Transportation $650K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 66,
+      "education": "BA Miami University (Ohio)",
+      "careerBeforePolitics": "Tech executive at RealNetworks, House member, state legislator"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "ted-cruz",
+    "name": "Ted Cruz",
+    "role": "Senator · Judiciary",
+    "party": "R-TX",
+    "state": "TX",
+    "chamber": "senate",
+    "committees": [
+      "Judiciary",
+      "Commerce",
+      "Foreign Relations",
+      "Rules"
+    ],
+    "stance": "favorable",
+    "quote": "Fiery conservative rhetoric, presidential ambitions, and contentious relationships with colleagues",
+    "techRegScore": 0.8,
+    "lobbying": {
+      "topIndustries": [
+        "Oil & Gas $2.1M",
+        "Securities & Investment $1.5M",
+        "Lawyers/Law firms $980K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 54,
+      "education": "Princeton University (AB), Harvard Law School (JD)",
+      "careerBeforePolitics": "Supreme Court clerk, Solicitor General of Texas, private practice attorney"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "mark-warner",
+    "name": "Mark Warner",
+    "role": "Senator · Intelligence",
+    "party": "D-VA",
+    "state": "VA",
+    "chamber": "senate",
+    "committees": [
+      "Intelligence",
+      "Banking",
+      "Finance",
+      "Budget",
+      "Rules"
+    ],
+    "stance": "review",
+    "quote": "Tech-savvy dealmaker who bridges Democrats and business community",
+    "techRegScore": 0.45,
+    "lobbying": {
+      "topIndustries": [
+        "Securities & Investment: $850K",
+        "Telecommunications: $620K",
+        "Technology: $580K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 70,
+      "education": "BA George Washington University, JD Harvard Law School",
+      "careerBeforePolitics": "Founded cell phone company Nextel, venture capitalist, Virginia Governor 2002-2006"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "amy-klobuchar",
+    "name": "Amy Klobuchar",
+    "role": "Senator · Judiciary",
+    "party": "D-MN",
+    "state": "MN",
+    "chamber": "senate",
+    "committees": [
+      "Judiciary",
+      "Commerce",
+      "Rules",
+      "Agriculture"
+    ],
+    "stance": "review",
+    "quote": "Practical Midwestern moderate known for bipartisan dealmaking and anti-monopoly work",
+    "techRegScore": 0.2,
+    "lobbying": {
+      "topIndustries": [
+        "Agribusiness $890K",
+        "Legal/Lobbying $670K",
+        "Finance/Insurance $580K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 64,
+      "education": "BA Yale University, JD University of Chicago",
+      "careerBeforePolitics": "Prosecutor, attorney, state legislator"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "josh-hawley",
+    "name": "Josh Hawley",
+    "role": "Senator · Judiciary",
+    "party": "R-MO",
+    "state": "MO",
+    "chamber": "senate",
+    "committees": [
+      "Judiciary",
+      "Commerce",
+      "Homeland Security",
+      "Small Business"
+    ],
+    "stance": "favorable",
+    "quote": "National conservative star who challenges Big Tech while championing working-class populism",
+    "techRegScore": 0.82,
+    "lobbying": {
+      "topIndustries": [
+        "Securities & Investment $680K",
+        "Real Estate $520K",
+        "Health Professionals $490K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 45,
+      "education": "BA Stanford University, JD Yale Law School",
+      "careerBeforePolitics": "Law professor, Missouri Attorney General, Supreme Court clerk"
+    },
+    "seatSafety": "lean"
+  },
+  {
+    "id": "cory-booker",
+    "name": "Cory Booker",
+    "role": "Senator · Judiciary",
+    "party": "D-NJ",
+    "state": "NJ",
+    "chamber": "senate",
+    "committees": [
+      "Judiciary",
+      "Foreign Relations",
+      "Small Business",
+      "Environment"
+    ],
+    "stance": "review",
+    "quote": "Charismatic progressive advocate focused on criminal justice reform and social equity",
+    "techRegScore": 0.35,
+    "lobbying": {
+      "topIndustries": [
+        "Securities & Investment: $445K",
+        "Pharmaceuticals: $315K",
+        "Lawyers/Law Firms: $285K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 55,
+      "education": "BA Stanford University, Rhodes Scholar Oxford University, JD Yale Law School",
+      "careerBeforePolitics": "Lawyer, Newark City Councilman, Mayor of Newark (2006-2013)"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "todd-young",
+    "name": "Todd Young",
+    "role": "Senator · Commerce",
+    "party": "R-IN",
+    "state": "IN",
+    "chamber": "senate",
+    "committees": [
+      "Finance",
+      "Commerce",
+      "Foreign Relations",
+      "Small Business"
+    ],
+    "stance": "review",
+    "quote": "Foreign policy hawk and innovation advocate who emphasizes America's technological competitiveness with China",
+    "techRegScore": 0.55,
+    "lobbying": {
+      "topIndustries": [
+        "Defense $685K",
+        "Manufacturing $545K",
+        "Pharmaceuticals $485K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 52,
+      "education": "Naval Academy (B.S.), University of London (M.A. American Politics), Indiana University (J.D.)",
+      "careerBeforePolitics": "U.S. Navy officer, attorney, business consultant, House of Representatives (2011-2017)"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "marsha-blackburn",
+    "name": "Marsha Blackburn",
+    "role": "Senator · Judiciary",
+    "party": "R-TN",
+    "state": "TN",
+    "chamber": "senate",
+    "committees": [
+      "Judiciary",
+      "Commerce",
+      "Armed Services",
+      "Veterans Affairs"
+    ],
+    "stance": "review",
+    "quote": "Conservative firebrand who rose from Tennessee state legislature to become Trump ally",
+    "techRegScore": 0.75,
+    "lobbying": {
+      "topIndustries": [
+        "Telecommunications $890K",
+        "Securities & Investment $650K",
+        "Health Professionals $580K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 72,
+      "education": "BA Mississippi State University",
+      "careerBeforePolitics": "Marketing executive and retail business owner"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "bernie-sanders",
+    "name": "Bernie Sanders",
+    "role": "Senator · Energy",
+    "party": "I-VT",
+    "state": "VT",
+    "chamber": "senate",
+    "committees": [
+      "HELP",
+      "Budget",
+      "Energy",
+      "Veterans Affairs"
+    ],
+    "stance": "review",
+    "quote": "Democratic socialist focused on economic inequality and Medicare for All",
+    "techRegScore": 0.15,
+    "lobbying": {
+      "topIndustries": [
+        "Labor Unions: $180K",
+        "Healthcare: $85K",
+        "Environment: $75K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 83,
+      "education": "BA University of Chicago",
+      "careerBeforePolitics": "Carpenter, writer, filmmaker, mayor of Burlington 1981-1989, House Rep 1991-2007"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "elizabeth-warren",
+    "name": "Elizabeth Warren",
+    "role": "Senator",
+    "party": "D-MA",
+    "state": "MA",
+    "chamber": "senate",
+    "committees": [
+      "Banking",
+      "Finance",
+      "Armed Services"
+    ],
+    "stance": "none",
+    "quote": "Aggressive questioning of bank CEOs and corporate accountability crusade",
+    "techRegScore": 0.15,
+    "lobbying": {
+      "topIndustries": [
+        "Securities & Investment $1.1M",
+        "Lawyers/Law firms $980K",
+        "Education $750K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 75,
+      "education": "University of Houston (BS), Rutgers Law School (JD), Harvard Law School (professor)",
+      "careerBeforePolitics": "Harvard Law professor, bankruptcy law expert, created Consumer Financial Protection Bureau"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "lisa-murkowski",
+    "name": "Lisa Murkowski",
+    "role": "Senator · Energy",
+    "party": "R-AK",
+    "state": "AK",
+    "chamber": "senate",
+    "committees": [
+      "Appropriations",
+      "Energy",
+      "Indian Affairs",
+      "HELP"
+    ],
+    "stance": "review",
+    "quote": "Most independent Republican willing to break from party on key votes",
+    "techRegScore": 0.58,
+    "lobbying": {
+      "topIndustries": [
+        "Oil & Gas: $1.8M",
+        "Mining: $890K",
+        "Healthcare: $650K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 67,
+      "education": "Georgetown University (BA Economics), Willamette University College of Law (JD)",
+      "careerBeforePolitics": "Attorney in private practice, Anchorage District Court clerk"
+    },
+    "seatSafety": "lean"
+  },
+  {
+    "id": "hakeem-jeffries",
+    "name": "Hakeem Jeffries",
+    "role": "Representative · House Minority Leader",
+    "party": "D-NY",
+    "state": "NY",
+    "chamber": "house",
+    "committees": [],
+    "stance": "review",
+    "quote": "Eloquent speaker leading House Democrats with prosecutorial precision",
+    "techRegScore": 0.65,
+    "lobbying": {
+      "topIndustries": [
+        "Legal services $425K",
+        "Real estate $380K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 54,
+      "education": "BA SUNY Binghamton, JD NYU",
+      "careerBeforePolitics": "Corporate lawyer, NY Assembly member"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "mike-johnson",
+    "name": "Mike Johnson",
+    "role": "Representative · Speaker of the House",
+    "party": "R-LA",
+    "state": "LA",
+    "chamber": "house",
+    "committees": [],
+    "stance": "review",
+    "quote": "Constitutional lawyer who rose quickly to Speaker through institutional loyalty",
+    "techRegScore": 0.75,
+    "lobbying": {
+      "topIndustries": [
+        "oil_gas with $145,000",
+        "agriculture with $98,000"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 52,
+      "education": "B.A. Louisiana State University, J.D. Paul M. Hebert Law Center",
+      "careerBeforePolitics": "Constitutional law attorney, radio host, founded law firm"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "steve-scalise",
+    "name": "Steve Scalise",
+    "role": "Representative · Majority Leader",
+    "party": "R-LA",
+    "state": "LA",
+    "chamber": "house",
+    "committees": [
+      "Energy and Commerce"
+    ],
+    "stance": "review",
+    "quote": "Survivor of 2017 congressional baseball shooting who became a unifying figure",
+    "techRegScore": 0.68,
+    "lobbying": {
+      "topIndustries": [
+        "oil_gas with $298,000",
+        "healthcare with $187,000"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 59,
+      "education": "B.S. Louisiana State University",
+      "careerBeforePolitics": "Computer systems engineer, Louisiana Legislature"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "elise-stefanik",
+    "name": "Elise Stefanik",
+    "role": "Representative · Intelligence",
+    "party": "R-NY",
+    "state": "NY",
+    "chamber": "house",
+    "committees": [
+      "Armed Services",
+      "Intelligence"
+    ],
+    "stance": "review",
+    "techRegScore": 0.68,
+    "lobbying": {
+      "topIndustries": [],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 0,
+      "education": "",
+      "careerBeforePolitics": ""
+    },
+    "seatSafety": "safe"
+  },
+  {
     "id": "jim-jordan",
     "name": "Jim Jordan",
     "role": "Representative · Judiciary Committee Chair",
@@ -23,6 +552,186 @@
       "age": 60,
       "education": "B.A. University of Wisconsin, M.A. Ohio State University, J.D. Capital University Law School",
       "careerBeforePolitics": "Wrestling coach, Ohio General Assembly"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "pramila-jayapal",
+    "name": "Pramila Jayapal",
+    "role": "Representative · Congressional Progressive Caucus Chair",
+    "party": "D-WA",
+    "state": "WA",
+    "chamber": "house",
+    "committees": [
+      "Judiciary",
+      "Budget"
+    ],
+    "stance": "review",
+    "quote": "Strategic progressive leader who builds coalitions",
+    "techRegScore": 0.2,
+    "lobbying": {
+      "topIndustries": [
+        "Healthcare $220K",
+        "Technology $185K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 59,
+      "education": "BA Georgetown, MBA Northwestern",
+      "careerBeforePolitics": "Civil rights advocate, nonprofit executive"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "ro-khanna",
+    "name": "Ro Khanna",
+    "role": "Representative",
+    "party": "D-CA",
+    "state": "CA",
+    "chamber": "house",
+    "committees": [
+      "Armed Services",
+      "Oversight"
+    ],
+    "stance": "none",
+    "quote": "Tech-savvy progressive who bridges Silicon Valley and populism",
+    "techRegScore": 0.35,
+    "lobbying": {
+      "topIndustries": [
+        "Technology $340K",
+        "Securities & Investment $285K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 48,
+      "education": "BA University of Chicago, JD Yale Law",
+      "careerBeforePolitics": "Technology lawyer, Obama administration official"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "ted-lieu",
+    "name": "Ted Lieu",
+    "role": "Representative · Judiciary",
+    "party": "D-CA",
+    "state": "CA",
+    "chamber": "house",
+    "committees": [
+      "Judiciary",
+      "Science and Technology"
+    ],
+    "stance": "review",
+    "techRegScore": 0.32,
+    "lobbying": {
+      "topIndustries": [],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 0,
+      "education": "",
+      "careerBeforePolitics": ""
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "alexandria-ocasio-cortez",
+    "name": "Alexandria Ocasio-Cortez",
+    "role": "Representative",
+    "party": "D-NY",
+    "state": "NY",
+    "chamber": "house",
+    "committees": [
+      "Oversight and Accountability",
+      "Financial Services"
+    ],
+    "stance": "concerning",
+    "quote": "Social media-savvy democratic socialist championing Green New Deal",
+    "techRegScore": 0.85,
+    "lobbying": {
+      "topIndustries": [
+        "Labor unions $185K",
+        "Environmental groups $95K"
+      ],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 35,
+      "education": "BA Boston University (Economics, International Relations)",
+      "careerBeforePolitics": "Bartender, waitress, community organizer"
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "don-beyer",
+    "name": "Don Beyer",
+    "role": "Representative · Science, Space, and Technology",
+    "party": "D-VA",
+    "state": "VA",
+    "chamber": "house",
+    "committees": [
+      "Ways and Means",
+      "Science, Space, and Technology"
+    ],
+    "stance": "concerning",
+    "techRegScore": 0.78,
+    "lobbying": {
+      "topIndustries": [],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 0,
+      "education": "",
+      "careerBeforePolitics": ""
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "yvette-clarke",
+    "name": "Yvette Clarke",
+    "role": "Representative · Energy and Commerce",
+    "party": "D-NY",
+    "state": "NY",
+    "chamber": "house",
+    "committees": [
+      "Energy and Commerce",
+      "Homeland Security"
+    ],
+    "stance": "review",
+    "techRegScore": 0.35,
+    "lobbying": {
+      "topIndustries": [],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 0,
+      "education": "",
+      "careerBeforePolitics": ""
+    },
+    "seatSafety": "safe"
+  },
+  {
+    "id": "ritchie-torres",
+    "name": "Ritchie Torres",
+    "role": "Representative · Homeland Security",
+    "party": "D-NY",
+    "state": "NY",
+    "chamber": "house",
+    "committees": [
+      "Financial Services",
+      "Homeland Security"
+    ],
+    "stance": "concerning",
+    "techRegScore": 0.78,
+    "lobbying": {
+      "topIndustries": [],
+      "totalRaised": ""
+    },
+    "biography": {
+      "age": 0,
+      "education": "",
+      "careerBeforePolitics": ""
     },
     "seatSafety": "safe"
   },
@@ -63,7 +772,7 @@
       "Agriculture",
       "Budget"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Folksy Iowa farmer who asks tough questions and champions government oversight",
     "techRegScore": 0.72,
     "lobbying": {
@@ -93,7 +802,7 @@
       "Foreign Relations",
       "Indian Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Fierce defender of fossil fuel industry and opponent of climate regulations",
     "techRegScore": 0.71,
     "lobbying": {
@@ -136,63 +845,6 @@
     "seatSafety": "safe"
   },
   {
-    "id": "john-thune",
-    "name": "John Thune",
-    "role": "Senator · Majority Leader",
-    "party": "R-SD",
-    "state": "SD",
-    "chamber": "senate",
-    "committees": [
-      "Finance",
-      "Commerce",
-      "Agriculture"
-    ],
-    "stance": "favorable",
-    "quote": "Pragmatic conservative leader who can work across the aisle when needed",
-    "techRegScore": 0.68,
-    "lobbying": {
-      "topIndustries": [
-        "Securities & Investment: $892K",
-        "Insurance: $654K",
-        "Agriculture: $543K"
-      ],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 63,
-      "education": "BA Biola University, MBA University of South Dakota",
-      "careerBeforePolitics": "Congressional aide, small business owner in sports marketing"
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "steve-scalise",
-    "name": "Steve Scalise",
-    "role": "Representative · Majority Leader",
-    "party": "R-LA",
-    "state": "LA",
-    "chamber": "house",
-    "committees": [
-      "Energy and Commerce"
-    ],
-    "stance": "favorable",
-    "quote": "Survivor of 2017 congressional baseball shooting who became a unifying figure",
-    "techRegScore": 0.68,
-    "lobbying": {
-      "topIndustries": [
-        "oil_gas with $298,000",
-        "healthcare with $187,000"
-      ],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 59,
-      "education": "B.S. Louisiana State University",
-      "careerBeforePolitics": "Computer systems engineer, Louisiana Legislature"
-    },
-    "seatSafety": "safe"
-  },
-  {
     "id": "brian-babin",
     "name": "Brian Babin",
     "role": "Representative · Science, Space, and Technology",
@@ -215,37 +867,6 @@
       "careerBeforePolitics": ""
     },
     "seatSafety": "safe"
-  },
-  {
-    "id": "josh-hawley",
-    "name": "Josh Hawley",
-    "role": "Senator · Judiciary",
-    "party": "R-MO",
-    "state": "MO",
-    "chamber": "senate",
-    "committees": [
-      "Judiciary",
-      "Commerce",
-      "Homeland Security",
-      "Small Business"
-    ],
-    "stance": "favorable",
-    "quote": "National conservative star who challenges Big Tech while championing working-class populism",
-    "techRegScore": 0.82,
-    "lobbying": {
-      "topIndustries": [
-        "Securities & Investment $680K",
-        "Real Estate $520K",
-        "Health Professionals $490K"
-      ],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 45,
-      "education": "BA Stanford University, JD Yale Law School",
-      "careerBeforePolitics": "Law professor, Missouri Attorney General, Supreme Court clerk"
-    },
-    "seatSafety": "lean"
   },
   {
     "id": "morgan-luttrell",
@@ -316,37 +937,6 @@
       "age": 0,
       "education": "",
       "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "ted-cruz",
-    "name": "Ted Cruz",
-    "role": "Senator · Judiciary",
-    "party": "R-TX",
-    "state": "TX",
-    "chamber": "senate",
-    "committees": [
-      "Judiciary",
-      "Commerce",
-      "Foreign Relations",
-      "Rules"
-    ],
-    "stance": "favorable",
-    "quote": "Fiery conservative rhetoric, presidential ambitions, and contentious relationships with colleagues",
-    "techRegScore": 0.8,
-    "lobbying": {
-      "topIndustries": [
-        "Oil & Gas $2.1M",
-        "Securities & Investment $1.5M",
-        "Lawyers/Law firms $980K"
-      ],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 54,
-      "education": "Princeton University (AB), Harvard Law School (JD)",
-      "careerBeforePolitics": "Supreme Court clerk, Solicitor General of Texas, private practice attorney"
     },
     "seatSafety": "safe"
   },
@@ -608,54 +1198,6 @@
     "seatSafety": "safe"
   },
   {
-    "id": "ritchie-torres",
-    "name": "Ritchie Torres",
-    "role": "Representative · Homeland Security",
-    "party": "D-NY",
-    "state": "NY",
-    "chamber": "house",
-    "committees": [
-      "Financial Services",
-      "Homeland Security"
-    ],
-    "stance": "concerning",
-    "techRegScore": 0.78,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "don-beyer",
-    "name": "Don Beyer",
-    "role": "Representative · Science, Space, and Technology",
-    "party": "D-VA",
-    "state": "VA",
-    "chamber": "house",
-    "committees": [
-      "Ways and Means",
-      "Science, Space, and Technology"
-    ],
-    "stance": "concerning",
-    "techRegScore": 0.78,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
     "id": "john-sarbanes",
     "name": "John Sarbanes",
     "role": "Representative · Energy and Commerce",
@@ -775,7 +1317,7 @@
       "Appropriations",
       "Budget"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Foreign policy hawk who loves media attention and dramatic statements",
     "techRegScore": 0.75,
     "lobbying": {
@@ -806,7 +1348,7 @@
       "Commerce",
       "Foreign Relations"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Controversial statements and conspiracy theory promotion, fierce government spending critic",
     "techRegScore": 0.75,
     "lobbying": {
@@ -825,37 +1367,6 @@
     "seatSafety": "lean"
   },
   {
-    "id": "marsha-blackburn",
-    "name": "Marsha Blackburn",
-    "role": "Senator · Judiciary",
-    "party": "R-TN",
-    "state": "TN",
-    "chamber": "senate",
-    "committees": [
-      "Judiciary",
-      "Commerce",
-      "Armed Services",
-      "Veterans Affairs"
-    ],
-    "stance": "favorable",
-    "quote": "Conservative firebrand who rose from Tennessee state legislature to become Trump ally",
-    "techRegScore": 0.75,
-    "lobbying": {
-      "topIndustries": [
-        "Telecommunications $890K",
-        "Securities & Investment $650K",
-        "Health Professionals $580K"
-      ],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 72,
-      "education": "BA Mississippi State University",
-      "careerBeforePolitics": "Marketing executive and retail business owner"
-    },
-    "seatSafety": "safe"
-  },
-  {
     "id": "eric-schmitt",
     "name": "Eric Schmitt",
     "role": "Senator · Commerce",
@@ -868,7 +1379,7 @@
       "Judiciary",
       "Joint Economic"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Former Attorney General known for fighting Big Tech and federal overreach",
     "techRegScore": 0.75,
     "lobbying": {
@@ -896,7 +1407,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -920,7 +1431,7 @@
       "Homeland Security",
       "Small Business"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -944,7 +1455,7 @@
       "Energy and Commerce",
       "Rules"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -968,7 +1479,7 @@
       "Education and Labor",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -991,7 +1502,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -1015,7 +1526,7 @@
       "Appropriations",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -1039,7 +1550,7 @@
       "Armed Services",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -1063,7 +1574,7 @@
       "Financial Services",
       "Science, Space, and Technology"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -1087,7 +1598,7 @@
       "Judiciary",
       "Foreign Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -1111,7 +1622,7 @@
       "Energy and Commerce",
       "Foreign Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -1135,7 +1646,7 @@
       "Education and Workforce",
       "Judiciary"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -1159,7 +1670,7 @@
       "Judiciary",
       "Ethics"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.75,
     "lobbying": {
       "topIndustries": [],
@@ -1183,7 +1694,7 @@
       "House Administration",
       "Science, Space, and Technology"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.74,
     "lobbying": {
       "topIndustries": [],
@@ -1207,7 +1718,7 @@
       "Education and Workforce",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.74,
     "lobbying": {
       "topIndustries": [],
@@ -1233,7 +1744,7 @@
       "Environment",
       "Foreign Relations"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Wealthy former governor who brings business background to conservative politics",
     "techRegScore": 0.73,
     "lobbying": {
@@ -1263,7 +1774,7 @@
       "Commerce",
       "Agriculture"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Rancher-turned-senator focused on agriculture and rural issues",
     "techRegScore": 0.73,
     "lobbying": {
@@ -1292,7 +1803,7 @@
       "Energy and Commerce",
       "Budget"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.73,
     "lobbying": {
       "topIndustries": [],
@@ -1316,7 +1827,7 @@
       "Education and Workforce",
       "Energy and Commerce"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.73,
     "lobbying": {
       "topIndustries": [],
@@ -1341,7 +1852,7 @@
       "Intelligence",
       "Judiciary"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "The most hawkish foreign policy voice in the Senate",
     "techRegScore": 0.72,
     "lobbying": {
@@ -1372,7 +1883,7 @@
       "Finance",
       "Indian Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Former tech executive who champions Montana's outdoor recreation economy and energy independence",
     "techRegScore": 0.72,
     "lobbying": {
@@ -1403,7 +1914,7 @@
       "Judiciary",
       "Budget"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Senior Finance Committee member focused on tax policy and financial regulation",
     "techRegScore": 0.72,
     "lobbying": {
@@ -1431,7 +1942,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -1455,7 +1966,7 @@
       "Energy and Commerce",
       "Rules"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -1479,7 +1990,7 @@
       "Science, Space, and Technology",
       "Veterans' Affairs"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -1503,7 +2014,7 @@
       "Agriculture",
       "Homeland Security"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -1526,7 +2037,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -1550,7 +2061,7 @@
       "Science, Space, and Technology",
       "Transportation and Infrastructure"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -1573,7 +2084,7 @@
     "committees": [
       "Energy and Commerce"
     ],
-    "stance": "concerning",
+    "stance": "review",
     "techRegScore": 0.72,
     "lobbying": {
       "topIndustries": [],
@@ -1599,7 +2110,7 @@
       "Budget",
       "Homeland Security"
     ],
-    "stance": "favorable",
+    "stance": "review",
     "quote": "Wealthy former governor focused on fiscal conservatism and business-friendly policies",
     "techRegScore": 0.71,
     "lobbying": {
@@ -1614,476 +2125,6 @@
       "age": 72,
       "education": "BS University of Missouri-Kansas City, JD Southern Methodist University",
       "careerBeforePolitics": "Healthcare CEO (HCA, Columbia), venture capitalist, Florida Governor"
-    },
-    "seatSafety": "lean"
-  },
-  {
-    "id": "roger-wicker",
-    "name": "Roger Wicker",
-    "role": "Senator · Commerce",
-    "party": "R-MS",
-    "state": "MS",
-    "chamber": "senate",
-    "committees": [
-      "Armed Services",
-      "Commerce",
-      "Environment",
-      "Rules"
-    ],
-    "stance": "favorable",
-    "quote": "Senior Armed Services hawk who champions defense spending and shipbuilding",
-    "techRegScore": 0.71,
-    "lobbying": {
-      "topIndustries": [
-        "Defense contractors $850K",
-        "Transportation $420K",
-        "Energy utilities $380K"
-      ],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 73,
-      "education": "BA University of Mississippi, JD University of Mississippi Law School",
-      "careerBeforePolitics": "Lawyer in private practice, U.S. House member 1995-2007"
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "bernie-moreno",
-    "name": "Bernie Moreno",
-    "role": "Senator · Commerce",
-    "party": "R-OH",
-    "state": "OH",
-    "chamber": "senate",
-    "committees": [
-      "Banking",
-      "Commerce",
-      "Homeland Security"
-    ],
-    "stance": "favorable",
-    "quote": "Colombian immigrant turned luxury car dealer who embraces Trump-style politics",
-    "techRegScore": 0.71,
-    "lobbying": {
-      "topIndustries": [
-        "Automotive: $1.8M",
-        "Technology: $1.1M",
-        "Cryptocurrency: $892K"
-      ],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 57,
-      "education": "University of Michigan (business degree)",
-      "careerBeforePolitics": "Built luxury car dealership empire, founded blockchain technology companies"
-    },
-    "seatSafety": "lean"
-  },
-  {
-    "id": "john-curtis",
-    "name": "John Curtis",
-    "role": "Senator · Energy",
-    "party": "R-UT",
-    "state": "UT",
-    "chamber": "senate",
-    "committees": [
-      "Energy",
-      "Commerce",
-      "Foreign Relations"
-    ],
-    "stance": "favorable",
-    "quote": "Business-minded Republican who breaks with party on climate issues",
-    "techRegScore": 0.71,
-    "lobbying": {
-      "topIndustries": [
-        "Technology $520K",
-        "Energy $480K",
-        "Real Estate $390K"
-      ],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 64,
-      "education": "Brigham Young University (B.S. Business Management)",
-      "careerBeforePolitics": "Software company CEO, Provo mayor for 8 years"
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "stephanie-bice",
-    "name": "Stephanie Bice",
-    "role": "Representative · Science, Space, and Technology",
-    "party": "R-OK",
-    "state": "OK",
-    "chamber": "house",
-    "committees": [
-      "Science, Space, and Technology",
-      "Transportation and Infrastructure"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.71,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "lean"
-  },
-  {
-    "id": "greg-pence",
-    "name": "Greg Pence",
-    "role": "Representative · Energy and Commerce",
-    "party": "R-IN",
-    "state": "IN",
-    "chamber": "house",
-    "committees": [
-      "Energy and Commerce",
-      "Transportation and Infrastructure"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.71,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "shelley-moore-capito",
-    "name": "Shelley Moore Capito",
-    "role": "Senator · Commerce",
-    "party": "R-WV",
-    "state": "WV",
-    "chamber": "senate",
-    "committees": [
-      "Appropriations",
-      "Commerce",
-      "Environment",
-      "Rules"
-    ],
-    "stance": "favorable",
-    "quote": "Defending coal industry and West Virginia economic interests, pragmatic conservative",
-    "techRegScore": 0.7,
-    "lobbying": {
-      "topIndustries": [
-        "Oil & Gas $1.4M",
-        "Electric utilities $890K",
-        "Coal mining $650K"
-      ],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 71,
-      "education": "Duke University (AB), University of Virginia (MEd)",
-      "careerBeforePolitics": "Teacher, educational consultant, served in WV House of Delegates and US House"
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "ted-budd",
-    "name": "Ted Budd",
-    "role": "Senator · Commerce",
-    "party": "R-NC",
-    "state": "NC",
-    "chamber": "senate",
-    "committees": [
-      "Armed Services",
-      "Commerce",
-      "HELP",
-      "Small Business"
-    ],
-    "stance": "favorable",
-    "quote": "Business-minded conservative focused on fiscal responsibility and gun rights",
-    "techRegScore": 0.7,
-    "lobbying": {
-      "topIndustries": [
-        "Securities & Investment $195,000",
-        "Real Estate $165,000",
-        "Commercial Banks $145,000"
-      ],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 53,
-      "education": "Appalachian State University (B.S.), Wake Forest University (MBA)",
-      "careerBeforePolitics": "Investment advisor, gun store owner, served in House 2017-2023"
-    },
-    "seatSafety": "lean"
-  },
-  {
-    "id": "john-joyce",
-    "name": "John Joyce",
-    "role": "Representative · Energy and Commerce",
-    "party": "R-PA",
-    "state": "PA",
-    "chamber": "house",
-    "committees": [
-      "Energy and Commerce"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.7,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "michael-waltz",
-    "name": "Michael Waltz",
-    "role": "Representative · Intelligence",
-    "party": "R-FL",
-    "state": "FL",
-    "chamber": "house",
-    "committees": [
-      "Armed Services",
-      "Foreign Affairs",
-      "Intelligence"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.7,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "bob-latta",
-    "name": "Bob Latta",
-    "role": "Representative · Energy and Commerce",
-    "party": "R-OH",
-    "state": "OH",
-    "chamber": "house",
-    "committees": [
-      "Energy and Commerce"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.7,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "max-miller",
-    "name": "Max Miller",
-    "role": "Representative · Science, Space, and Technology",
-    "party": "R-OH",
-    "state": "OH",
-    "chamber": "house",
-    "committees": [
-      "Agriculture",
-      "Science, Space, and Technology"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.7,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "cliff-bentz",
-    "name": "Cliff Bentz",
-    "role": "Representative · Judiciary",
-    "party": "R-OR",
-    "state": "OR",
-    "chamber": "house",
-    "committees": [
-      "Natural Resources",
-      "Judiciary"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.7,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "cathy-mcmorris-rodgers",
-    "name": "Cathy McMorris Rodgers",
-    "role": "Representative · Energy and Commerce",
-    "party": "R-WA",
-    "state": "WA",
-    "chamber": "house",
-    "committees": [
-      "Energy and Commerce"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.7,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "kevin-kiley",
-    "name": "Kevin Kiley",
-    "role": "Representative · Judiciary",
-    "party": "R-CA",
-    "state": "CA",
-    "chamber": "house",
-    "committees": [
-      "Education and Workforce",
-      "Judiciary"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.7,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "lean"
-  },
-  {
-    "id": "tim-sheehy",
-    "name": "Tim Sheehy",
-    "role": "Senator · Commerce",
-    "party": "R-MT",
-    "state": "MT",
-    "chamber": "senate",
-    "committees": [
-      "Armed Services",
-      "Commerce",
-      "Indian Affairs",
-      "Veterans Affairs"
-    ],
-    "stance": "favorable",
-    "quote": "Navy SEAL turned businessman who defeated Jon Tester with strong Trump support",
-    "techRegScore": 0.69,
-    "lobbying": {
-      "topIndustries": [
-        "Oil & Gas: $1.2M",
-        "Defense Aerospace: $678K",
-        "Agriculture: $445K"
-      ],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 38,
-      "education": "BA from U.S. Naval Academy, MBA from University of Chicago Booth School",
-      "careerBeforePolitics": "Navy SEAL officer, founded Bridger Aerospace (aerial firefighting company)"
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "mike-flood",
-    "name": "Mike Flood",
-    "role": "Representative · Judiciary",
-    "party": "R-NE",
-    "state": "NE",
-    "chamber": "house",
-    "committees": [
-      "Judiciary",
-      "Agriculture"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.69,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "darin-lahood",
-    "name": "Darin LaHood",
-    "role": "Representative · Intelligence",
-    "party": "R-IL",
-    "state": "IL",
-    "chamber": "house",
-    "committees": [
-      "Ways and Means",
-      "Intelligence"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.69,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
-    },
-    "seatSafety": "safe"
-  },
-  {
-    "id": "victoria-spartz",
-    "name": "Victoria Spartz",
-    "role": "Representative · Judiciary",
-    "party": "R-IN",
-    "state": "IN",
-    "chamber": "house",
-    "committees": [
-      "Judiciary",
-      "Ways and Means"
-    ],
-    "stance": "favorable",
-    "techRegScore": 0.69,
-    "lobbying": {
-      "topIndustries": [],
-      "totalRaised": ""
-    },
-    "biography": {
-      "age": 0,
-      "education": "",
-      "careerBeforePolitics": ""
     },
     "seatSafety": "lean"
   }
