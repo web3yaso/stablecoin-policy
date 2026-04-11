@@ -8,17 +8,16 @@ import {
 } from "react-simple-maps";
 import { naProjection } from "@/lib/projections";
 import { getEntity } from "@/lib/placeholder-data";
-import {
-  NEUTRAL_STROKE,
-  STANCE_HEX,
-  type SetTooltip,
-} from "@/lib/map-utils";
+import { getEntityColorForDimension } from "@/lib/dimensions";
+import { NEUTRAL_STROKE, type SetTooltip } from "@/lib/map-utils";
+import type { Dimension } from "@/types";
 
 interface NorthAmericaMapProps {
   onSelectEntity: (geoId: string) => void;
   onDoubleClickEntity?: (geoId: string) => void;
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
+  dimension?: Dimension;
 }
 
 const naProj = naProjection as unknown as ProjectionFunction;
@@ -33,6 +32,7 @@ export default function NorthAmericaMap({
   onDoubleClickEntity,
   selectedGeoId,
   setTooltip,
+  dimension = "overall",
 }: NorthAmericaMapProps) {
   return (
     <div
@@ -67,7 +67,7 @@ export default function NorthAmericaMap({
               const isSelected = selectedGeoId === id;
               const name = id === "840" ? "United States" : "Canada";
 
-              const fill = STANCE_HEX[ent.stance];
+              const fill = getEntityColorForDimension(ent, dimension);
               const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
               const strokeWidth = isSelected ? 4 : 1.5;
 

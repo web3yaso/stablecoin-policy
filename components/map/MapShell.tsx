@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type MutableRefObject } from "react";
 import {
   REGION_LABEL,
   REGION_ORDER,
+  type Dimension,
   type Region,
   type ViewTarget,
 } from "@/types";
@@ -37,9 +38,15 @@ function viewsEqual(a: ViewState, b: ViewState): boolean {
 
 interface MapShellProps {
   revealProgress?: number;
+  dimension?: Dimension;
+  navigateRef?: MutableRefObject<((target: ViewTarget) => void) | null>;
 }
 
-export default function MapShell({ revealProgress = 1 }: MapShellProps) {
+export default function MapShell({
+  revealProgress = 1,
+  dimension = "overall",
+  navigateRef,
+}: MapShellProps) {
   const [history, setHistory] = useState<ViewState[]>([INITIAL_VIEW]);
   const [historyIdx, setHistoryIdx] = useState(0);
   const [tooltip, setTooltip] = useState<TooltipState | null>(null);
@@ -61,6 +68,10 @@ export default function MapShell({ revealProgress = 1 }: MapShellProps) {
     setHistory(newHistory);
     setHistoryIdx(newHistory.length - 1);
   };
+
+  // Expose navigateTo to the parent (page.tsx) so the legislation table
+  // can drive map navigation when the user clicks a row.
+  if (navigateRef) navigateRef.current = navigateTo;
 
   const handleSelectEntity = (geoId: string) =>
     navigateTo({ ...current, selectedGeoId: geoId });
@@ -158,6 +169,7 @@ export default function MapShell({ revealProgress = 1 }: MapShellProps) {
                 onDoubleClickEntity={handleDoubleClickEntity}
                 selectedGeoId={selectedGeoId}
                 setTooltip={setTooltip}
+                dimension={dimension}
               />
             )}
             {r === "na" && naView === "states" && (
@@ -165,6 +177,7 @@ export default function MapShell({ revealProgress = 1 }: MapShellProps) {
                 onSelectEntity={handleSelectEntity}
                 selectedGeoId={selectedGeoId}
                 setTooltip={setTooltip}
+                dimension={dimension}
               />
             )}
             {r === "eu" && (
@@ -172,6 +185,7 @@ export default function MapShell({ revealProgress = 1 }: MapShellProps) {
                 onSelectEntity={handleSelectEntity}
                 selectedGeoId={r === region ? selectedGeoId : null}
                 setTooltip={setTooltip}
+                dimension={dimension}
               />
             )}
             {r === "asia" && (
@@ -179,6 +193,7 @@ export default function MapShell({ revealProgress = 1 }: MapShellProps) {
                 onSelectEntity={handleSelectEntity}
                 selectedGeoId={r === region ? selectedGeoId : null}
                 setTooltip={setTooltip}
+                dimension={dimension}
               />
             )}
           </div>
@@ -186,9 +201,9 @@ export default function MapShell({ revealProgress = 1 }: MapShellProps) {
         </div>
       </div>
 
-      {/* Floating side panel overlay */}
+      {/* Floating side panel overlay — bottom sheet on small screens, left sidebar on lg+ */}
       <div
-        className="absolute top-6 left-6 z-30 max-h-[calc(100vh-96px)]"
+        className="absolute z-30 inset-x-4 bottom-24 lg:inset-x-auto lg:bottom-auto lg:top-6 lg:left-6 lg:max-h-[calc(100vh-96px)]"
         style={{ opacity: chromeOpacity, pointerEvents: chromeOpacity < 0.5 ? "none" : "auto" }}
       >
         <SidePanel

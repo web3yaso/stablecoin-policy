@@ -8,17 +8,19 @@ import {
 } from "react-simple-maps";
 import { usProjection } from "@/lib/projections";
 import { getEntity } from "@/lib/placeholder-data";
+import { getEntityColorForDimension } from "@/lib/dimensions";
 import {
   NEUTRAL_FILL,
   NEUTRAL_STROKE,
-  STANCE_HEX,
   type SetTooltip,
 } from "@/lib/map-utils";
+import type { Dimension } from "@/types";
 
 interface USStatesMapProps {
   onSelectEntity: (geoId: string) => void;
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
+  dimension?: Dimension;
 }
 
 const usProj = usProjection as unknown as ProjectionFunction;
@@ -38,6 +40,7 @@ export default function USStatesMap({
   onSelectEntity,
   selectedGeoId,
   setTooltip,
+  dimension = "overall",
 }: USStatesMapProps) {
   return (
     <div
@@ -85,7 +88,7 @@ export default function USStatesMap({
                 );
               }
 
-              const fill = STANCE_HEX[ent.stance];
+              const fill = getEntityColorForDimension(ent, dimension);
               const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
               const strokeWidth = isSelected ? 4 : 1.5;
 

@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AI Policy Tracker",
+  title: "Track Policy",
   description:
     "Interactive atlas of AI and data center policy across world, regional, and state governments.",
 };

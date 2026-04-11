@@ -8,17 +8,19 @@ import {
 } from "react-simple-maps";
 import { euProjection } from "@/lib/projections";
 import { getEntity } from "@/lib/placeholder-data";
+import { getEntityColorForDimension } from "@/lib/dimensions";
 import {
   NEUTRAL_FILL,
   NEUTRAL_STROKE,
-  STANCE_HEX,
   type SetTooltip,
 } from "@/lib/map-utils";
+import type { Dimension } from "@/types";
 
 interface EuropeMapProps {
   onSelectEntity: (geoId: string) => void;
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
+  dimension?: Dimension;
 }
 
 const euProj = euProjection as unknown as ProjectionFunction;
@@ -45,6 +47,7 @@ export default function EuropeMap({
   onSelectEntity,
   selectedGeoId,
   setTooltip,
+  dimension = "overall",
 }: EuropeMapProps) {
   return (
     <div
@@ -93,7 +96,7 @@ export default function EuropeMap({
                   );
                 }
 
-                const fill = STANCE_HEX[ent.stance];
+                const fill = getEntityColorForDimension(ent, dimension);
                 const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
                 const strokeWidth = isSelected ? 4 : 1.5;
 

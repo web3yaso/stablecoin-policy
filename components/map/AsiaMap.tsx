@@ -8,17 +8,19 @@ import {
 } from "react-simple-maps";
 import { asiaProjection } from "@/lib/projections";
 import { getEntity } from "@/lib/placeholder-data";
+import { getEntityColorForDimension } from "@/lib/dimensions";
 import {
   NEUTRAL_FILL,
   NEUTRAL_STROKE,
-  STANCE_HEX,
   type SetTooltip,
 } from "@/lib/map-utils";
+import type { Dimension } from "@/types";
 
 interface AsiaMapProps {
   onSelectEntity: (geoId: string) => void;
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
+  dimension?: Dimension;
 }
 
 const asiaProj = asiaProjection as unknown as ProjectionFunction;
@@ -45,6 +47,7 @@ export default function AsiaMap({
   onSelectEntity,
   selectedGeoId,
   setTooltip,
+  dimension = "overall",
 }: AsiaMapProps) {
   return (
     <div
@@ -93,7 +96,7 @@ export default function AsiaMap({
                   );
                 }
 
-                const fill = STANCE_HEX[ent.stance];
+                const fill = getEntityColorForDimension(ent, dimension);
                 const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
                 const strokeWidth = isSelected ? 4 : 1.5;
 

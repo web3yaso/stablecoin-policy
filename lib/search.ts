@@ -65,7 +65,7 @@ function buildIndex(): SearchItem[] {
         sublabel: `${bill.billCode} · ${entity.name}`,
         target,
         haystack:
-          `${bill.billCode} ${bill.title} ${bill.summary} ${bill.tags.join(" ")} ${entity.name}`.toLowerCase(),
+          `${bill.billCode} ${bill.title} ${bill.summary} ${bill.impactTags.join(" ")} ${bill.category} ${entity.name}`.toLowerCase(),
       });
     }
   }

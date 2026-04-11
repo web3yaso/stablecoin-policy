@@ -26,13 +26,83 @@ export type StanceType =
 
 export type GovLevel = "federal" | "state" | "bloc";
 
+export type ImpactTag =
+  | "grid-strain"
+  | "rate-hikes"
+  | "water"
+  | "national-park"
+  | "noise"
+  | "emissions"
+  | "renewable-mandate"
+  | "local-control"
+  | "agricultural-land"
+  | "job-creation"
+  | "tax-exemption"
+  | "zoning"
+  | "environmental-study";
+
+export type LegislationCategory =
+  | "data-centers"
+  | "ai-regulation"
+  | "deepfakes"
+  | "healthcare"
+  | "govt-ai"
+  | "employment"
+  | "education"
+  | "privacy";
+
+export type Dimension =
+  | "overall"
+  | "environmental"
+  | "energy"
+  | "community"
+  | "land-use";
+
+export const IMPACT_TAG_LABEL: Record<ImpactTag, string> = {
+  "grid-strain": "Grid Strain",
+  "rate-hikes": "Rate Hikes",
+  water: "Water Use",
+  "national-park": "National Park",
+  noise: "Noise",
+  emissions: "Emissions",
+  "renewable-mandate": "Renewable Mandate",
+  "local-control": "Local Control",
+  "agricultural-land": "Agricultural Land",
+  "job-creation": "Job Creation",
+  "tax-exemption": "Tax Exemption",
+  zoning: "Zoning",
+  "environmental-study": "Environmental Study",
+};
+
+export const CATEGORY_LABEL: Record<LegislationCategory, string> = {
+  "data-centers": "Data Centers",
+  "ai-regulation": "AI Regulation",
+  deepfakes: "Deepfakes",
+  healthcare: "Healthcare",
+  "govt-ai": "Gov't AI",
+  employment: "Employment",
+  education: "Education",
+  privacy: "Privacy",
+};
+
+export const DIMENSION_LABEL: Record<Dimension, string> = {
+  overall: "Overall stance",
+  environmental: "Environmental impact",
+  energy: "Energy & grid",
+  community: "Community impact",
+  "land-use": "Land use",
+};
+
 export interface Legislation {
   id: string;
   billCode: string;
   title: string;
   summary: string;
   stage: Stage;
-  tags: string[];
+  impactTags: ImpactTag[];
+  category: LegislationCategory;
+  updatedDate: string;
+  partyOrigin?: "R" | "D" | "B";
   sourceUrl?: string;
 }
 
