@@ -164,12 +164,19 @@ export default function SearchPill({ onNavigate }: SearchPillProps) {
       </button>
 
       {/* Small screens: centered modal (Apple Spotlight-style) */}
-      {open && (
-        <div className="lg:hidden fixed inset-0 z-40 flex items-start justify-center pt-[16vh] px-4 bg-black/25 backdrop-blur-md">
-          <div
-            ref={smallModalRef}
-            className="w-full max-w-[26rem] flex flex-col gap-2"
-          >
+      <div
+        className={`lg:hidden fixed inset-0 z-40 flex items-start justify-center pt-[14vh] px-4 bg-white/55 backdrop-blur-2xl transition-[opacity,backdrop-filter] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          ref={smallModalRef}
+          className={`w-full max-w-[26rem] flex flex-col gap-2 transition-[transform,opacity] duration-[350ms] ease-[cubic-bezier(0.32,0.72,0,1)] ${
+            open
+              ? "opacity-100 scale-100 translate-y-0"
+              : "opacity-0 scale-95 -translate-y-3"
+          }`}
+        >
             <div className="flex items-center gap-2.5 px-4 py-3 rounded-full bg-white/95 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.15),0_2px_8px_rgba(0,0,0,0.06)] border border-black/[.04]">
               <SearchIcon />
               <input
@@ -196,7 +203,6 @@ export default function SearchPill({ onNavigate }: SearchPillProps) {
             {results.length > 0 && resultList}
           </div>
         </div>
-      )}
 
       {/* Large screens: inline pill at bottom-right */}
       <div

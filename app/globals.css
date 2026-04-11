@@ -16,13 +16,14 @@
   --color-map-neutral: #ECECEC;
   --color-map-stroke: #D2D2D2;
 
-  /* Stance — pastel palette (Light Gold / Icy Blue / Soft Periwinkle
-     / Bubblegum Fizz / Light Green). */
-  --color-stance-restrictive: #FF5CC9;
-  --color-stance-review: #FEF19A;
-  --color-stance-favorable: #C1FF9B;
-  --color-stance-concerning: #AB87FF;
-  --color-stance-none: #B4E1FF;
+  /* Stance — muted diverging palette: rose → amber → gold → neutral → mint.
+     Ordered from most restrictive to most favorable. Shared across map fills,
+     badges, and summary bar segments. */
+  --color-stance-restrictive: #D98080;
+  --color-stance-concerning: #D9A766;
+  --color-stance-review: #D9C980;
+  --color-stance-none: #C9CBD1;
+  --color-stance-favorable: #7EBC8E;
 }
 
 html,

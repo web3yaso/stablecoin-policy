@@ -7,26 +7,45 @@ import type { Entity, StanceType } from "@/types";
 interface Bucket {
   key: StanceType;
   label: string;
-  pillClass: string;
+  color: string;
+  textColor: string;
 }
 
 const BUCKETS: Bucket[] = [
-  { key: "restrictive", label: "Active bans", pillClass: "bg-stance-restrictive" },
-  { key: "concerning", label: "Advancing", pillClass: "bg-stance-concerning" },
-  { key: "review", label: "Under discussion", pillClass: "bg-stance-review" },
-  { key: "none", label: "No action", pillClass: "bg-stance-none" },
-  { key: "favorable", label: "Incentives", pillClass: "bg-stance-favorable" },
+  {
+    key: "restrictive",
+    label: "Active Bans / Moratoriums",
+    color: "var(--color-stance-restrictive)",
+    textColor: "#1D1D1F",
+  },
+  {
+    key: "concerning",
+    label: "Legislation Advancing",
+    color: "var(--color-stance-concerning)",
+    textColor: "#1D1D1F",
+  },
+  {
+    key: "review",
+    label: "Under Discussion",
+    color: "var(--color-stance-review)",
+    textColor: "#1D1D1F",
+  },
+  {
+    key: "none",
+    label: "No Action",
+    color: "var(--color-stance-none)",
+    textColor: "#1D1D1F",
+  },
+  {
+    key: "favorable",
+    label: "Favorable / Incentives",
+    color: "var(--color-stance-favorable)",
+    textColor: "#1D1D1F",
+  },
 ];
 
-interface TooltipState {
-  x: number;
-  y: number;
-  bucket: Bucket;
-  states: Entity[];
-}
-
 export default function SummaryBar() {
-  const [tooltip, setTooltip] = useState<TooltipState | null>(null);
+  const [hovered, setHovered] = useState<StanceType | null>(null);
 
   const states = ENTITIES.filter(
     (e) => e.region === "na" && e.level === "state",
@@ -42,65 +61,72 @@ export default function SummaryBar() {
   for (const s of states) grouped[s.stance].push(s);
 
   const restrictingCount =
-    grouped.restrictive.length +
-    grouped.concerning.length +
-    grouped.review.length;
+    grouped.restrictive.length + grouped.concerning.length;
   const incentivesCount = grouped.favorable.length;
   const totalStates = 50;
 
+  const activeBucket = hovered
+    ? (BUCKETS.find((b) => b.key === hovered) ?? null)
+    : null;
+  const activeStates = hovered ? grouped[hovered] : [];
+
   return (
     <div className="relative">
-      {/* Stats line */}
-      <div className="flex items-end justify-between mb-6">
+      {/* Legend row */}
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-8">
+        {BUCKETS.map((b) => {
+          const count = grouped[b.key].length;
+          return (
+            <div key={b.key} className="flex items-center gap-2">
+              <span
+                className="w-3 h-3 rounded-[4px] flex-shrink-0"
+                style={{ backgroundColor: b.color }}
+              />
+              <span className="text-sm font-medium text-ink tracking-tight">
+                {b.label}
+              </span>
+              <span className="text-sm text-muted">({count})</span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Stats */}
+      <div className="flex items-baseline justify-between mb-4 text-base">
         <div>
-          <div className="text-4xl font-semibold text-ink tracking-tight leading-none">
-            {restrictingCount}
-            <span className="text-muted text-2xl font-medium ml-1">
-              of {totalStates} states
-            </span>
-          </div>
-          <div className="text-sm text-muted mt-2">
-            restricting or considering restrictions
-          </div>
+          <span className="font-semibold text-ink">{restrictingCount}</span>
+          <span className="text-muted">
+            {" "}
+            of {totalStates} states restricting or considering restrictions
+          </span>
         </div>
-        <div className="text-right">
-          <div className="text-4xl font-semibold text-ink tracking-tight leading-none">
-            {incentivesCount}
-            <span className="text-muted text-2xl font-medium ml-1">states</span>
-          </div>
-          <div className="text-sm text-muted mt-2">with incentives</div>
+        <div className="text-muted">
+          <span className="font-semibold text-ink">{incentivesCount}</span>{" "}
+          states with incentives
         </div>
       </div>
 
       {/* Segmented bar */}
       <div
-        className="flex h-12 rounded-full overflow-hidden gap-1"
-        onMouseLeave={() => setTooltip(null)}
+        className="flex h-8 rounded-full overflow-hidden"
+        onMouseLeave={() => setHovered(null)}
       >
         {BUCKETS.map((bucket) => {
-          const items = grouped[bucket.key];
-          const count = items.length;
+          const count = grouped[bucket.key].length;
           if (count === 0) return null;
+          const isDimmed = hovered !== null && hovered !== bucket.key;
           return (
             <div
               key={bucket.key}
-              className={`${bucket.pillClass} flex items-center justify-center text-sm font-semibold text-ink/80 cursor-default transition-[flex-grow] duration-300`}
-              style={{ flexGrow: count, flexBasis: 0 }}
-              onMouseEnter={(e) =>
-                setTooltip({
-                  x: e.clientX,
-                  y: e.clientY,
-                  bucket,
-                  states: items,
-                })
-              }
-              onMouseMove={(e) =>
-                setTooltip((current) =>
-                  current
-                    ? { ...current, x: e.clientX, y: e.clientY }
-                    : current,
-                )
-              }
+              onMouseEnter={() => setHovered(bucket.key)}
+              className="flex items-center justify-center text-sm font-semibold cursor-default transition-opacity duration-200"
+              style={{
+                flexGrow: count,
+                flexBasis: 0,
+                backgroundColor: bucket.color,
+                color: bucket.textColor,
+                opacity: isDimmed ? 0.35 : 1,
+              }}
             >
               {count}
             </div>
@@ -108,38 +134,26 @@ export default function SummaryBar() {
         })}
       </div>
 
-      <p className="text-xs text-muted mt-3">
-        Hover over a segment to see which states fall into each category.
-      </p>
-
-      {tooltip && (
-        <div
-          className="fixed z-50 bg-white/90 backdrop-blur-2xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.1),0_2px_8px_rgba(0,0,0,0.04)] border border-black/[.04] p-4 max-w-xs pointer-events-none"
-          style={{ left: tooltip.x + 14, top: tooltip.y + 14 }}
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <span
-              className={`w-2 h-2 rounded-full ${tooltip.bucket.pillClass}`}
-            />
-            <span className="text-xs font-semibold text-ink tracking-tight">
-              {tooltip.bucket.label}
-            </span>
-            <span className="text-xs text-muted ml-auto">
-              {tooltip.states.length}
-            </span>
+      {/* Below the bar — help text OR active bucket detail */}
+      <div className="mt-4 min-h-[3.5rem]">
+        {activeBucket ? (
+          <div>
+            <div
+              className="text-sm font-semibold tracking-tight mb-1"
+              style={{ color: activeBucket.color }}
+            >
+              {activeBucket.label} — {activeStates.length} states
+            </div>
+            <div className="text-xs text-muted leading-relaxed">
+              {activeStates.map((s) => s.name).join(", ")}
+            </div>
           </div>
-          <div className="flex flex-wrap gap-1.5">
-            {tooltip.states.map((s) => (
-              <span
-                key={s.id}
-                className="text-[11px] bg-black/[.04] text-ink px-2 py-0.5 rounded-full"
-              >
-                {s.name}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
+        ) : (
+          <p className="text-xs text-muted">
+            Hover over a segment to see which states fall into each category.
+          </p>
+        )}
+      </div>
     </div>
   );
 }

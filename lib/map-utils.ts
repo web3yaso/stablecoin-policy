@@ -2,11 +2,11 @@ import type { Dispatch, SetStateAction } from "react";
 import type { StanceType } from "@/types";
 
 export const STANCE_HEX: Record<StanceType, string> = {
-  restrictive: "#BD8369",
-  review: "#C5A468",
-  favorable: "#80A589",
-  concerning: "#AA655B",
-  none: "#B8B5AC",
+  restrictive: "#D98080",
+  concerning: "#D9A766",
+  review: "#D9C980",
+  none: "#C9CBD1",
+  favorable: "#7EBC8E",
 };
 
 export const NEUTRAL_FILL = "#EFEDE8";

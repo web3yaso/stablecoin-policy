@@ -60,6 +60,16 @@ export default function Page() {
               <span>Contact</span>
             </div>
             <span>
+              Inspired by{" "}
+              <a
+                href="https://datacenterbans.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-ink transition-colors"
+              >
+                datacenterbans.com
+              </a>
+              <span aria-hidden> · </span>
               Icons by{" "}
               <a
                 href="https://streamlinehq.com"

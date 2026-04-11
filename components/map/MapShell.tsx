@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type MutableRefObject } from "react";
+import { useMemo, useRef, useState, type MutableRefObject } from "react";
 import {
   REGION_LABEL,
   REGION_ORDER,
@@ -142,6 +142,51 @@ export default function MapShell({
   const mapScale = 0.88 + zoomT * 0.12;
   const chromeOpacity = Math.max(0, Math.min(1, (revealProgress - 0.85) / 0.12));
 
+  // Touch swipe between regions (mobile only)
+  const swipeRef = useRef<{
+    x: number;
+    y: number;
+    time: number;
+    swiped: boolean;
+  } | null>(null);
+
+  const onMapPointerDown = (e: React.PointerEvent) => {
+    if (e.pointerType !== "touch") return;
+    swipeRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      time: Date.now(),
+      swiped: false,
+    };
+  };
+
+  const onMapPointerUp = (e: React.PointerEvent) => {
+    const start = swipeRef.current;
+    if (!start || e.pointerType !== "touch") return;
+    const dx = e.clientX - start.x;
+    const dy = e.clientY - start.y;
+    const dt = Date.now() - start.time;
+    if (Math.abs(dx) > 60 && Math.abs(dy) < 50 && dt < 600) {
+      const currentIdx = REGION_ORDER.indexOf(region);
+      const nextIdx =
+        dx < 0
+          ? Math.min(REGION_ORDER.length - 1, currentIdx + 1)
+          : Math.max(0, currentIdx - 1);
+      if (nextIdx !== currentIdx) {
+        handleRegionChange(REGION_ORDER[nextIdx]);
+        start.swiped = true;
+      }
+    }
+  };
+
+  const onMapClickCapture = (e: React.MouseEvent) => {
+    if (swipeRef.current?.swiped) {
+      e.stopPropagation();
+      e.preventDefault();
+      swipeRef.current = null;
+    }
+  };
+
   return (
     <div className="fixed inset-0 bg-white overflow-hidden z-0">
       {/* Scaled zoom wrapper — the rail zooms from ~0.78 to 1.0 during the hero blend. */}
@@ -151,7 +196,12 @@ export default function MapShell({
           transform: `scale(${mapScale})`,
           transformOrigin: "center center",
           willChange: "transform",
+          touchAction: "pan-y",
         }}
+        onPointerDown={onMapPointerDown}
+        onPointerUp={onMapPointerUp}
+        onPointerCancel={() => (swipeRef.current = null)}
+        onClickCapture={onMapClickCapture}
       >
         {/* Sliding region rail — all three regions rendered side-by-side. */}
         <div
@@ -161,7 +211,7 @@ export default function MapShell({
           {REGION_ORDER.map((r) => (
           <div
             key={r}
-            className="w-full h-full flex-shrink-0 flex items-center justify-center"
+            className="w-full h-full flex-shrink-0 flex items-center justify-center pb-[28vh] lg:pb-0"
           >
             {r === "na" && naView === "countries" && (
               <NorthAmericaMap
@@ -203,7 +253,7 @@ export default function MapShell({
 
       {/* Floating side panel overlay — bottom sheet on small screens, left sidebar on lg+ */}
       <div
-        className="absolute z-30 inset-x-4 bottom-24 lg:inset-x-auto lg:bottom-auto lg:top-6 lg:left-6 lg:max-h-[calc(100vh-96px)]"
+        className="absolute z-30 inset-x-4 bottom-32 lg:inset-x-auto lg:bottom-auto lg:top-6 lg:left-6 lg:max-h-[calc(100vh-96px)]"
         style={{ opacity: chromeOpacity, pointerEvents: chromeOpacity < 0.5 ? "none" : "auto" }}
       >
         <SidePanel

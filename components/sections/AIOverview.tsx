@@ -1,7 +1,17 @@
 export default function AIOverview() {
   return (
     <div className="bg-black/[.02] rounded-3xl p-8">
-      <div className="text-[13px] font-medium text-muted tracking-tight">
+      <div className="text-[13px] font-medium text-muted tracking-tight flex items-center gap-1.5">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="#F5C518"
+          aria-hidden
+          className="flex-shrink-0"
+        >
+          <path d="M7 0L8.27 5.73L14 7L8.27 8.27L7 14L5.73 8.27L0 7L5.73 5.73Z" />
+        </svg>
         AI overview · Updated 2 hours ago
       </div>
       <p className="text-sm text-ink/80 leading-relaxed mt-4 max-w-3xl">

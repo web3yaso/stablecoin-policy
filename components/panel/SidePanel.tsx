@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import type { Entity, GovLevel } from "@/types";
 import StanceBadge from "@/components/ui/StanceBadge";
 import Breadcrumb, { type BreadcrumbItem } from "@/components/ui/Breadcrumb";
@@ -24,7 +25,7 @@ const LEVEL_LABEL: Record<GovLevel, string | null> = {
 
 type Layer = "legislation" | "figures" | "news";
 
-const LEGISLATION_PREVIEW = 3;
+const LEGISLATION_PREVIEW = 5;
 const FIGURES_PREVIEW = 3;
 const NEWS_PREVIEW = 3;
 
@@ -32,18 +33,27 @@ function ShowAllLink({
   total,
   shown,
   label,
+  href,
 }: {
   total: number;
   shown: number;
   label: string;
+  href?: string;
 }) {
   if (total <= shown) return null;
+  const className =
+    "inline-block text-xs text-muted hover:text-ink transition-colors mt-3";
+  const content = `Show all ${total} ${label} →`;
+  if (href) {
+    return (
+      <Link href={href} className={className}>
+        {content}
+      </Link>
+    );
+  }
   return (
-    <a
-      href="#"
-      className="inline-block text-xs text-muted hover:text-ink transition-colors mt-3"
-    >
-      Show all {total} {label} →
+    <a href="#" className={className}>
+      {content}
     </a>
   );
 }
@@ -155,6 +165,7 @@ export default function SidePanel({
                       total={entity.legislation.length}
                       shown={LEGISLATION_PREVIEW}
                       label="bills"
+                      href={`/legislation/${encodeURIComponent(entity.id)}`}
                     />
                   </section>
                 )}
