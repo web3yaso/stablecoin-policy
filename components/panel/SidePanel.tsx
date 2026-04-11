@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { Entity, GovLevel } from "@/types";
 import StanceBadge from "@/components/ui/StanceBadge";
 import Breadcrumb, { type BreadcrumbItem } from "@/components/ui/Breadcrumb";
@@ -66,14 +66,12 @@ export default function SidePanel({
     return layers;
   }, [hasLegislation, hasFigures, hasNews]);
 
-  const [activeLayer, setActiveLayer] = useState<Layer>("legislation");
+  const [preferredLayer, setPreferredLayer] = useState<Layer>("legislation");
 
-  useEffect(() => {
-    if (availableLayers.length === 0) return;
-    if (!availableLayers.includes(activeLayer)) {
-      setActiveLayer(availableLayers[0]);
-    }
-  }, [availableLayers, activeLayer]);
+  const activeLayer: Layer =
+    availableLayers.length > 0 && !availableLayers.includes(preferredLayer)
+      ? availableLayers[0]
+      : preferredLayer;
 
   return (
     <aside className="w-full lg:w-96 max-h-[45vh] lg:max-h-[calc(100vh-96px)] bg-white/90 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] flex flex-col overflow-hidden border border-black/[.04]">
@@ -132,7 +130,7 @@ export default function SidePanel({
                       <button
                         key={layer}
                         type="button"
-                        onClick={() => setActiveLayer(layer)}
+                        onClick={() => setPreferredLayer(layer)}
                         className={`text-xs font-medium px-3 py-1.5 rounded-full transition-all ${
                           active
                             ? "bg-white text-ink shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
