@@ -102,6 +102,27 @@ export type Stage =
   | "Carried Over"
   | "Dead";
 
+/**
+ * Where a jurisdiction stands on AI / data center DEVELOPMENT (not on
+ * regulation). The semantic axis runs from "actively trying to slow
+ * development" (restrictive) to "actively encouraging development"
+ * (favorable). Intuition checks:
+ *
+ *  - restrictive  — Active moratoriums or hard caps on data centers / AI.
+ *                   Maine LD 307, Oregon HB 2816, EU AI Act on services.
+ *  - concerning   — Real legislation moving with regulatory teeth, but
+ *                   not an outright stop. China (heavy on AI services
+ *                   but pro-infrastructure), Texas (incentives + grid
+ *                   strain pushback), Germany (strict EnEfG energy law).
+ *  - review       — Studying, hearings, non-binding frameworks, bills
+ *                   filed but stalled. South Korea AI Basic Act, Canada
+ *                   post-AIDA, most US states with study bills.
+ *  - favorable    — Innovation-friendly: light-touch, preemption-pushing,
+ *                   incentive-heavy. US federal (Trump WH framework),
+ *                   UK (principles-based), France (sovereign AI push),
+ *                   Japan (voluntary framework), Tennessee, etc.
+ *  - none         — No major activity tracked.
+ */
 export type StanceType =
   | "restrictive"
   | "review"
@@ -228,16 +249,16 @@ export const IMPACT_TAG_LABEL: Record<ImpactTag, string> = {
 };
 
 export const CATEGORY_LABEL: Record<LegislationCategory, string> = {
-  "data-center-siting": "Data Center Siting",
-  "data-center-energy": "Data Center Energy",
-  "ai-governance": "AI Governance",
-  "synthetic-media": "Synthetic Media",
-  "ai-healthcare": "AI in Healthcare",
-  "ai-workforce": "AI in Workforce",
-  "ai-education": "AI in Education",
-  "ai-government": "AI in Government",
-  "data-privacy": "Data Privacy",
-  "ai-criminal-justice": "AI in Criminal Justice",
+  "data-center-siting": "Data Centers",
+  "data-center-energy": "Data Centers",
+  "ai-governance": "Governance",
+  "synthetic-media": "Deepfakes",
+  "ai-healthcare": "Healthcare",
+  "ai-workforce": "Workforce",
+  "ai-education": "Education",
+  "ai-government": "Government",
+  "data-privacy": "Privacy",
+  "ai-criminal-justice": "Criminal Justice",
 };
 
 export const DIMENSION_LABEL: Record<Dimension, string> = {

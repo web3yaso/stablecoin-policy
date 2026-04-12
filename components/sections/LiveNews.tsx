@@ -49,6 +49,19 @@ function buildNewsRows(): NewsRow[] {
   return rows.sort((a, b) => b.item.date.localeCompare(a.item.date));
 }
 
+const LAST_UPDATED_FMT = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+
+function formatLastUpdated(iso: string | undefined): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  return LAST_UPDATED_FMT.format(d);
+}
+
 function rowMatchesQuery(row: NewsRow, q: string): boolean {
   if (!q) return true;
   const needle = q.toLowerCase();
@@ -65,6 +78,10 @@ export default function LiveNews() {
   const [activeScope, setActiveScope] = useState<ScopeFilter>("all");
 
   const allRows = useMemo(() => buildNewsRows(), []);
+  const lastUpdated = useMemo(
+    () => formatLastUpdated(allRows[0]?.item.date),
+    [allRows],
+  );
 
   // Pre-compute counts per scope so the chip badges are live, ignoring the
   // search query so the user can always see how much content is in each
@@ -101,6 +118,12 @@ export default function LiveNews() {
 
   return (
     <div>
+      {lastUpdated && (
+        <p className="text-xs text-muted -mt-6 mb-8">
+          Last updated {lastUpdated}
+        </p>
+      )}
+
       {/* Search input */}
       <div className="mb-6">
         <div className="max-w-md flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-white border border-black/[.06] focus-within:border-black/20 transition-colors">
@@ -184,27 +207,17 @@ export default function LiveNews() {
         </div>
       </div>
 
-      {/* Live indicator + count */}
-      <div className="flex items-center gap-2 mb-6">
-        <span className="relative flex w-2 h-2">
-          <span className="absolute inset-0 rounded-full bg-stance-restrictive opacity-60 animate-ping" />
-          <span className="relative w-2 h-2 rounded-full bg-stance-restrictive" />
-        </span>
-        <span className="text-xs uppercase tracking-widest text-muted">
-          Live · Updated continuously
-        </span>
-        <span className="text-xs text-muted ml-auto">
-          {filtered.length} {filtered.length === 1 ? "story" : "stories"}
-        </span>
-      </div>
-
       {filtered.length === 0 ? (
         <div className="py-16 text-center text-sm text-muted">
           No stories match this search.
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {/* CSS columns let each card take its natural height — short
+              headlines pack tight, long ones stretch. The browser
+              re-flows automatically on resize. `break-inside-avoid`
+              keeps a card from being split between columns. */}
+          <div className="columns-1 md:columns-2 gap-3 [column-fill:balance]">
             {visible.map(({ item, entity }) => (
               <a
                 key={item.id}
@@ -215,7 +228,7 @@ export default function LiveNews() {
                     ? "noopener noreferrer"
                     : undefined
                 }
-                className="block bg-white border border-black/[.06] hover:border-black/20 rounded-2xl p-5 transition-colors"
+                className="block break-inside-avoid mb-3 bg-white border border-black/[.06] hover:border-black/20 rounded-2xl p-5 transition-colors"
               >
                 <div className="text-sm font-medium text-ink tracking-tight leading-snug">
                   {item.headline}

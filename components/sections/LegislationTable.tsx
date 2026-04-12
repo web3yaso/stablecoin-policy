@@ -27,12 +27,20 @@ interface BillRow {
   target: ViewTarget;
 }
 
-type CategoryFilter = LegislationCategory | "all";
+// "data-center" is a virtual filter that merges siting + energy bills
+// into one chip (the underlying categories stay distinct in the data
+// for dimension scoring; this is purely a UI grouping).
+type CategoryFilter =
+  | "all"
+  | "data-center"
+  | Exclude<
+      LegislationCategory,
+      "data-center-siting" | "data-center-energy"
+    >;
 
 const CATEGORY_FILTERS: CategoryFilter[] = [
   "all",
-  "data-center-siting",
-  "data-center-energy",
+  "data-center",
   "ai-governance",
   "synthetic-media",
   "ai-healthcare",
@@ -42,6 +50,30 @@ const CATEGORY_FILTERS: CategoryFilter[] = [
   "data-privacy",
   "ai-criminal-justice",
 ];
+
+const CATEGORY_FILTER_LABEL: Record<CategoryFilter, string> = {
+  all: "All",
+  "data-center": "Data Centers",
+  "ai-governance": CATEGORY_LABEL["ai-governance"],
+  "synthetic-media": CATEGORY_LABEL["synthetic-media"],
+  "ai-healthcare": CATEGORY_LABEL["ai-healthcare"],
+  "ai-workforce": CATEGORY_LABEL["ai-workforce"],
+  "ai-education": CATEGORY_LABEL["ai-education"],
+  "ai-government": CATEGORY_LABEL["ai-government"],
+  "data-privacy": CATEGORY_LABEL["data-privacy"],
+  "ai-criminal-justice": CATEGORY_LABEL["ai-criminal-justice"],
+};
+
+function billMatchesCategoryFilter(
+  category: LegislationCategory,
+  filter: CategoryFilter,
+): boolean {
+  if (filter === "all") return true;
+  if (filter === "data-center") {
+    return category === "data-center-siting" || category === "data-center-energy";
+  }
+  return category === filter;
+}
 
 type SortKey = "recent" | "oldest" | "stage" | "state";
 
@@ -180,7 +212,9 @@ export default function LegislationTable({
     }
 
     if (activeCategory !== "all") {
-      rows = rows.filter((r) => r.bill.category === activeCategory);
+      rows = rows.filter((r) =>
+        billMatchesCategoryFilter(r.bill.category, activeCategory),
+      );
     }
 
     if (activeStatus !== "all") {
@@ -215,7 +249,9 @@ export default function LegislationTable({
   const jurisdictionCounts = useMemo(() => {
     let rows = allRows;
     if (activeCategory !== "all") {
-      rows = rows.filter((r) => r.bill.category === activeCategory);
+      rows = rows.filter((r) =>
+        billMatchesCategoryFilter(r.bill.category, activeCategory),
+      );
     }
     if (dimension !== "overall") {
       const dimensionTags = new Set(DIMENSION_TAGS[dimension]);
@@ -253,7 +289,9 @@ export default function LegislationTable({
   const visibleCategories = useMemo(() => {
     return CATEGORY_FILTERS.filter((c) => {
       if (c === "all") return true;
-      return dimensionFilteredRows.some((r) => r.bill.category === c);
+      return dimensionFilteredRows.some((r) =>
+        billMatchesCategoryFilter(r.bill.category, c),
+      );
     });
   }, [dimensionFilteredRows]);
 
@@ -365,7 +403,7 @@ export default function LegislationTable({
                       : "border border-black/[.06] text-muted hover:text-ink"
                   }`}
                 >
-                  {c === "all" ? "All" : CATEGORY_LABEL[c]}
+                  {CATEGORY_FILTER_LABEL[c]}
                 </button>
               );
             })}
@@ -448,66 +486,59 @@ export default function LegislationTable({
                   key={rowId}
                   className="bg-bg/60 hover:bg-bg rounded-2xl p-5 transition-colors"
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setOpenRowId(isOpen ? null : rowId)}
-                      className="flex-1 min-w-0 text-left"
-                    >
-                      <div className="flex items-baseline gap-3">
-                        <span className="text-xs text-muted">
-                          {bill.billCode}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onNavigateToEntity(target);
-                          }}
-                          className="text-xs text-muted hover:text-ink ml-auto"
-                        >
-                          {entity.name} →
-                        </button>
-                      </div>
-                      <div className="text-sm font-medium text-ink tracking-tight mt-1">
-                        {bill.title}
-                      </div>
-                      <p className="text-xs text-muted mt-1.5 leading-relaxed line-clamp-2">
-                        {bill.summary}
-                      </p>
-                      <BillTimeline stage={bill.stage} />
-                    </button>
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                      className={`flex-shrink-0 mt-1 text-muted transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
-                      aria-hidden
-                    >
-                      <path
-                        d="M3 4.5l3 3 3-3"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    aria-expanded={isOpen}
+                    onClick={() => setOpenRowId(isOpen ? null : rowId)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setOpenRowId(isOpen ? null : rowId);
+                      }
+                    }}
+                    className="w-full text-left cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ink/20 rounded-lg"
+                  >
+                    <div className="flex items-baseline gap-2 text-xs text-muted">
+                      <span>{bill.billCode}</span>
+                      <span aria-hidden>·</span>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onNavigateToEntity(target);
+                        }}
+                        className="underline underline-offset-2 decoration-muted/40 hover:decoration-ink hover:text-ink transition-colors"
+                      >
+                        {entity.name}
+                      </button>
+                    </div>
+                    <div className="text-sm font-medium text-ink tracking-tight mt-1">
+                      {bill.title}
+                    </div>
+                    <p className="text-xs text-muted mt-1.5 leading-relaxed line-clamp-2">
+                      {bill.summary}
+                    </p>
+                    <BillTimeline stage={bill.stage} />
                   </div>
 
-                  {/* Smooth expand */}
+                  {/* Expand/collapse — animates height (grid-template-rows
+                      0fr ↔ 1fr trick) plus opacity + a tiny lift so the
+                      content feels like it slides in from the card body
+                      instead of popping. BillExpanded stays mounted in
+                      both states so the close direction has something
+                      to animate from. */}
                   <div
-                    className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
+                    className="grid transition-[grid-template-rows,opacity,transform] duration-[420ms] ease-[cubic-bezier(0.32,0.72,0,1)]"
                     style={{
                       gridTemplateRows: isOpen ? "1fr" : "0fr",
+                      opacity: isOpen ? 1 : 0,
+                      transform: isOpen ? "translateY(0)" : "translateY(-4px)",
                     }}
+                    aria-hidden={!isOpen}
                   >
-                    <div className="overflow-hidden">
-                      {isOpen && (
-                        <BillExpanded bill={bill} stateCode={stateCode} />
-                      )}
+                    <div className="overflow-hidden min-h-0">
+                      <BillExpanded bill={bill} stateCode={stateCode} />
                     </div>
                   </div>
                 </div>

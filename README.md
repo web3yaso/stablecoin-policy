@@ -1,22 +1,12 @@
-# AI Policy Tracker
+# Track Policy
 
-Interactive atlas of AI and data center policy across world, regional, and US state governments. Built with Next.js 16, TypeScript, Tailwind CSS v4, `react-simple-maps`, and `d3-geo`.
+A live map of where AI and data center policy is actually happening — across the US (federal + every state), the EU and major member states, and key Asia-Pacific jurisdictions.
 
-The map has three drill-down layers:
+The goal is simple: make it easy to see, at a glance, which governments are restricting AI, which are courting it, which are still studying it, and which are doing nothing. Click into any jurisdiction to read the bills currently moving, the politicians driving them, and the latest news.
 
-1. **World** — click NA / EU / Asia regions to drill or open the bloc panel
-2. **North America** — click Canada, US, or Mexico to see federal info; the US drills further
-3. **US States** — click any state to see state-level legislation and key figures
+## Tech stack
 
-All data is hardcoded placeholder content (`lib/placeholder-data.ts`); there is no database.
-
-## Quickstart
-
-```bash
-npm install --legacy-peer-deps
-npm run dev
-```
-
-Then open http://localhost:3000.
-
-`--legacy-peer-deps` is required because `react-simple-maps` declares React 18 as its peer dependency, while Next 16 ships React 19. The library works correctly with React 19 — only the peer-dep metadata is stale.
+- **Next.js 16** + **React 19** + **TypeScript**
+- **Tailwind CSS v4** for styling
+- **react-simple-maps** + **d3-geo** + **topojson-client** for the interactive maps
+- Legislation data sourced from **LegiScan**, news enriched via the **Anthropic API** with web search
