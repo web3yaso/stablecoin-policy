@@ -7,23 +7,25 @@ import {
   type ReactNode,
 } from "react";
 import Link from "next/link";
-import type { Entity, GovLevel } from "@/types";
+import type { DataCenter, Entity, GovLevel } from "@/types";
 import StanceBadge from "@/components/ui/StanceBadge";
-import Breadcrumb, { type BreadcrumbItem } from "@/components/ui/Breadcrumb";
 import ContextBlurb from "./ContextBlurb";
 import LegislationList from "./LegislationList";
 import KeyFigures from "./KeyFigures";
 import NewsSection from "./NewsSection";
+import FacilityDetail from "./FacilityDetail";
 
 interface SidePanelProps {
   entity: Entity | null;
-  breadcrumbItems: BreadcrumbItem[];
   showViewStatesButton?: boolean;
   onViewStates?: () => void;
   visibility?: number;
   size: "min" | "md";
   onSizeChange: (s: "min" | "md") => void;
   isMobileViewport: boolean;
+  /** When set, the panel renders facility detail instead of entity content. */
+  facility?: DataCenter | null;
+  onCloseFacility?: () => void;
 }
 
 const LEVEL_LABEL: Record<GovLevel, string | null> = {
@@ -99,13 +101,14 @@ function ToolbarButton({
 
 export default function SidePanel({
   entity,
-  breadcrumbItems,
   showViewStatesButton = false,
   onViewStates,
   visibility = 1,
   size,
   onSizeChange,
   isMobileViewport,
+  facility = null,
+  onCloseFacility,
 }: SidePanelProps) {
   // Mobile defaults to the bottom-anchored card; desktop to top-left.
   // Derived state (not initial useState) so it actually tracks the
@@ -124,6 +127,8 @@ export default function SidePanel({
   );
   const dragStartRef = useRef<{ x: number; y: number } | null>(null);
 
+  // A pinned facility takes over the panel content while it's set.
+  const facilityMode = !!facility;
   const hasLegislation = !!entity && entity.legislation.length > 0;
   const hasFigures = !!entity && entity.keyFigures.length > 0;
   const hasNews = !!entity && entity.news.length > 0;
@@ -239,10 +244,18 @@ export default function SidePanel({
     setDragOffset(null);
     dragStartRef.current = null;
 
-    // Tap (no significant movement) — toggle minimized → expanded.
-    // 12px threshold is forgiving enough for touch micro-movement.
+    // Tap (no significant movement). 12px threshold is forgiving enough
+    // for touch micro-movement. The handle is the only minimize/dismiss
+    // affordance — if a facility is pinned we close it, otherwise we
+    // toggle between Dynamic Island and the full panel.
     if (totalDist < 12) {
-      if (size === "min") setSize("md");
+      if (size === "min") {
+        setSize("md");
+      } else if (facilityMode && onCloseFacility) {
+        onCloseFacility();
+      } else {
+        setSize("min");
+      }
       return;
     }
 
@@ -280,7 +293,9 @@ export default function SidePanel({
         isDragging ? "cursor-grabbing" : "cursor-pointer"
       }`}
     >
-      {entity?.name ?? "Select a region"}
+      {facility
+        ? (facility.operator.replace(/\s*#\w+/g, "").trim() || "Data center")
+        : (entity?.name ?? "Select a region")}
     </div>
   );
 
@@ -291,40 +306,16 @@ export default function SidePanel({
         onPointerMove={onDragPointerMove}
         onPointerUp={onDragPointerUp}
         onPointerCancel={onDragPointerUp}
-        className={`flex items-center px-3 pt-2 pb-1 flex-shrink-0 select-none touch-none ${
+        className={`flex items-center justify-center px-3 pt-2 pb-1 flex-shrink-0 select-none touch-none ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
       >
-        {/* Left spacer — same width as right cluster so the handle stays centered */}
-        <div className="w-14 flex-shrink-0" />
-        <div className="flex-1 flex justify-center">
-          <div className="w-9 h-1 rounded-full bg-black/15" />
-        </div>
-        {/* Desktop-only minimize button. Mobile uses drag-down. */}
-        <div className="w-14 flex items-center justify-end flex-shrink-0">
-          <div className="hidden lg:flex">
-            <ToolbarButton
-              onClick={() => setSize("min")}
-              ariaLabel="Minimize panel"
-            >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path
-                  d="M3 6h6"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </ToolbarButton>
-          </div>
-        </div>
+        <div className="w-9 h-1 rounded-full bg-black/15" />
       </div>
 
-      <div className="px-6 pt-1 pb-3 flex-shrink-0">
-        <Breadcrumb items={breadcrumbItems} />
-      </div>
-
-      {!entity ? (
+      {facilityMode && facility ? (
+        <FacilityDetail facility={facility} />
+      ) : !entity ? (
         <div className="flex-1 flex items-center justify-center px-8 py-12 min-h-[160px]">
           <p className="text-xs text-muted text-center">
             Select a country or region to explore legislation

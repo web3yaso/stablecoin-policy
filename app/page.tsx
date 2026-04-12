@@ -10,45 +10,61 @@ import AIOverview from "@/components/sections/AIOverview";
 import LegislationTable from "@/components/sections/LegislationTable";
 import LiveNews from "@/components/sections/LiveNews";
 import { useScrollProgress } from "@/lib/use-scroll-progress";
-import type { Dimension, Region, ViewTarget } from "@/types";
+import type {
+  Dimension,
+  DimensionLens,
+  Region,
+  ViewTarget,
+} from "@/types";
+
+// Ease-out quart: strong, smooth deceleration — used for any RAF-driven
+// scroll that needs to land past the hero reveal.
+function smoothScrollToMap(duration = 1200) {
+  if (typeof window === "undefined") return;
+  // `useScrollProgress(2)` treats 2 viewport heights as a full reveal, so
+  // scrolling to 2.2vh lands the user safely past the reveal with chrome
+  // visible. Stay put if we're already past that point — no need to yank
+  // the page around on every table click.
+  const targetY = window.innerHeight * 2.2;
+  const startY = window.scrollY;
+  if (startY >= targetY - 1) return;
+  const distance = targetY - startY;
+  const startTime = performance.now();
+  const ease = (t: number) => 1 - Math.pow(1 - t, 4);
+  const step = (now: number) => {
+    const elapsed = now - startTime;
+    const t = Math.min(1, elapsed / duration);
+    window.scrollTo(0, startY + distance * ease(t));
+    if (t < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
 
 export default function Page() {
   const progress = useScrollProgress();
   const [dimension, setDimension] = useState<Dimension>("overall");
+  const [lens, setLens] = useState<DimensionLens>("datacenter");
   const navigateRef = useRef<((t: ViewTarget) => void) | null>(null);
 
   const handleNavigateToEntity = (t: ViewTarget) => {
     navigateRef.current?.(t);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Land the user on the revealed map, not back at the hero. The old
+    // `scrollTo({top: 0})` dumped people onto the homepage every time they
+    // clicked a bill row.
+    smoothScrollToMap();
   };
 
   const handleGlobeRegionClick = (region: Region) => {
     // Update the map state first — the map is already mounted under the hero,
     // so by the time the user scrolls into view it's already on the right
     // region. Then run a custom RAF-driven scroll so the reveal animation
-    // plays slowly and smoothly, with an ease-out curve instead of the
-    // browser's default (which is both too fast and not tunable).
+    // plays slowly and smoothly.
     navigateRef.current?.({
       region,
       naView: "countries",
       selectedGeoId: null,
     });
-    if (typeof window === "undefined") return;
-    const targetY = window.innerHeight * 2.2;
-    const startY = window.scrollY;
-    const distance = targetY - startY;
-    if (Math.abs(distance) < 1) return;
-    const duration = 1800;
-    const startTime = performance.now();
-    // ease-out quart — strong, smooth deceleration
-    const ease = (t: number) => 1 - Math.pow(1 - t, 4);
-    const step = (now: number) => {
-      const elapsed = now - startTime;
-      const t = Math.min(1, elapsed / duration);
-      window.scrollTo(0, startY + distance * ease(t));
-      if (t < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
+    smoothScrollToMap(1800);
   };
 
   return (
@@ -56,6 +72,7 @@ export default function Page() {
       <MapShell
         revealProgress={progress}
         dimension={dimension}
+        lens={lens}
         navigateRef={navigateRef}
       />
       <Hero progress={progress} onRegionClick={handleGlobeRegionClick} />
@@ -68,11 +85,16 @@ export default function Page() {
             01 · At a glance
           </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight leading-[1.1] mb-10">
-            State of AI data center policy
+            State of global AI policy
           </h2>
           <SummaryBar />
           <div className="mt-12">
-            <DimensionToggle dimension={dimension} onChange={setDimension} />
+            <DimensionToggle
+              dimension={dimension}
+              onChange={setDimension}
+              lens={lens}
+              onLensChange={setLens}
+            />
           </div>
         </div>
       </section>
