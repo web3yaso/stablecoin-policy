@@ -551,7 +551,7 @@ export default function LegislationTable({
                     delay,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="bg-bg/60 hover:bg-bg rounded-2xl p-5 transition-colors"
+                  className="bg-bg/60 hover:bg-bg hover:shadow-[0_10px_28px_rgba(0,0,0,0.06),0_2px_6px_rgba(0,0,0,0.03)] rounded-2xl p-5 transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
                 >
                   <div
                     role="button"

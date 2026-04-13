@@ -120,6 +120,49 @@ body {
   animation: fade-rise 380ms cubic-bezier(0.32, 0.72, 0, 1) both;
 }
 
+/* "Live" indicator — an emerald core with a slow outward breath.
+   Two layers so the pulse is a halo around a solid center (otherwise
+   the whole dot dims and reads as "broken" instead of "alive"). */
+@keyframes live-dot-breath {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.live-dot {
+  position: relative;
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 9999px;
+  background: oklch(0.72 0.18 150);
+  box-shadow: 0 0 0 2px oklch(0.72 0.18 150 / 0.18);
+  vertical-align: middle;
+}
+.live-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: oklch(0.72 0.18 150);
+  animation: live-dot-breath 2s cubic-bezier(0.32, 0.72, 0, 1) infinite;
+  transform-origin: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dot::before {
+    animation: none;
+    opacity: 0.25;
+  }
+}
+
 /* Popup entrance with subtle overshoot — ported from agentation's
    annotation popup. Scale + translateY feel physical without being
    cartoonish; the cubic-bezier ends at 1.56 for a gentle settle. */
