@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -9,6 +10,9 @@ import {
   type MutableRefObject,
 } from "react";
 import {
+  DATACENTER_DIMENSIONS,
+  AI_DIMENSIONS,
+  DIMENSION_LABEL,
   REGION_LABEL,
   REGION_ORDER,
   type Dimension,
@@ -18,11 +22,15 @@ import {
   type ViewTarget,
 } from "@/types";
 import { getEntity, getOverviewEntity } from "@/lib/placeholder-data";
-import type { TooltipState } from "@/lib/map-utils";
+import { STANCE_HEX, type SetTooltip, type TooltipState } from "@/lib/map-utils";
+import {
+  DIMENSION_TAGS,
+} from "@/lib/dimensions";
+import { ALL_FACILITIES } from "@/lib/datacenters";
+import { STANCE_LABEL, STATE_FIPS } from "@/types";
 import SidePanel from "@/components/panel/SidePanel";
 import DepthStepper from "@/components/ui/DepthStepper";
-import RegionNav from "@/components/ui/RegionNav";
-import SearchPill from "@/components/ui/SearchPill";
+import TopToolbar from "@/components/ui/TopToolbar";
 import MobileLegend from "@/components/map/MobileLegend";
 import type { BreadcrumbItem } from "@/components/ui/Breadcrumb";
 import NorthAmericaMap from "./NorthAmericaMap";
@@ -92,18 +100,96 @@ function actionToLegislation(a: MunicipalAction, idx: number): Legislation {
 }
 
 function municipalityToEntity(m: MunicipalEntity): Entity {
+  const dcStance = countyStance(m.actions);
   return {
     id: `muni-${m.id}`,
     geoId: m.fips,
     name: `${m.name}, ${m.stateCode}`,
     region: "na",
     level: "state",
-    stance: countyStance(m.actions),
+    // County actions are all data-center siting decisions; AI stance isn't
+    // meaningful at this level, so mirror the DC stance for consistency.
+    stanceDatacenter: dcStance,
+    stanceAI: dcStance,
     contextBlurb: m.contextBlurb,
     legislation: m.actions.map(actionToLegislation),
     keyFigures: [],
     news: [],
   };
+}
+
+// Pre-computed DC count by state name and country name so the tooltip
+// can show it without filtering on every hover.
+const DC_COUNT_BY_NAME: Record<string, number> = {};
+for (const f of ALL_FACILITIES) {
+  if (f.state) {
+    DC_COUNT_BY_NAME[f.state] = (DC_COUNT_BY_NAME[f.state] ?? 0) + 1;
+  }
+  if (f.country) {
+    DC_COUNT_BY_NAME[f.country] = (DC_COUNT_BY_NAME[f.country] ?? 0) + 1;
+  }
+}
+
+/**
+ * Tooltip-only stance phrasing — capitalized, short, reads as a label
+ * (not a sentence fragment like "under review"). Paired with a colored
+ * dot in the tooltip rows.
+ */
+const STANCE_READOUT: Record<StanceType, string> = {
+  restrictive: "Restrictive",
+  concerning: "Concerning",
+  review: "Under review",
+  favorable: "Favorable",
+  none: "No action",
+};
+
+/**
+ * Tooltip-only dimension labels — trimmed to single words where possible
+ * so rows read as a chart, not a sentence. The long-form labels stay in
+ * `DIMENSION_LABEL` for other surfaces.
+ */
+const SHORT_DIMENSION_LABEL: Record<Exclude<Dimension, "overall">, string> = {
+  environmental: "Environmental",
+  energy: "Energy",
+  community: "Community",
+  "land-use": "Land use",
+  "ai-governance-dim": "Governance",
+  "ai-consumer": "Consumer",
+  "ai-workforce": "Workforce",
+  "ai-public": "Public services",
+  "ai-synthetic": "Synthetic media",
+};
+
+const STANCE_SEVERITY: Record<StanceType, number> = {
+  restrictive: 4,
+  concerning: 3,
+  review: 2,
+  favorable: 1,
+  none: 0,
+};
+
+function aggregateStance(
+  stances: (StanceType | undefined)[],
+  fallback: StanceType,
+): StanceType {
+  const counts = new Map<StanceType, number>();
+  for (const s of stances) {
+    if (!s) continue;
+    counts.set(s, (counts.get(s) ?? 0) + 1);
+  }
+  if (counts.size === 0) return fallback;
+  let winner: StanceType = fallback;
+  let best = -1;
+  for (const [s, n] of counts) {
+    if (
+      n > best ||
+      (n === best && STANCE_SEVERITY[s] > STANCE_SEVERITY[winner])
+    ) {
+      winner = s;
+      best = n;
+    }
+  }
+  return winner;
 }
 
 const INITIAL_VIEW: ViewState = {
@@ -135,7 +221,7 @@ export default function MapShell({
 }: MapShellProps) {
   const [history, setHistory] = useState<ViewState[]>([INITIAL_VIEW]);
   const [historyIdx, setHistoryIdx] = useState(0);
-  const [tooltip, setTooltip] = useState<TooltipState | null>(null);
+  const [tooltip, setTooltipInternal] = useState<TooltipState | null>(null);
   const [hoveredFacility, setHoveredFacility] = useState<{
     dc: DataCenter;
     x: number;
@@ -145,17 +231,51 @@ export default function MapShell({
   const [selectedFacility, setSelectedFacility] = useState<DataCenter | null>(
     null,
   );
+
+  // Forward-declared so the hover gates below can read it. Filled in
+  // further down where the swipe gesture state actually lives.
+  const isDraggingRef = useRef(false);
+
+  // Hover updates fire dozens of times per second as the pointer crosses
+  // map cells. During a region drag-swipe that thrashes React state and
+  // re-renders all three mounted maps, which is the swipe-lag people
+  // were feeling. Gate every hover-driven state setter behind the drag
+  // flag so the gesture stays in the compositor.
+  const setTooltip = useCallback<SetTooltip>((next) => {
+    if (isDraggingRef.current) return;
+    setTooltipInternal(next);
+  }, []);
+
   // Data center dot visibility is driven by the lens: when the user is
   // looking at the "Data Centers" lens, show the dots; otherwise hide them.
   const showDataCenters = lens === "datacenter";
-  const handleHoverFacility = (
-    dc: DataCenter,
-    x: number,
-    y: number,
-    clusterSize: number,
-  ) => setHoveredFacility({ dc, x, y, clusterSize });
-  const handleLeaveFacility = () => setHoveredFacility(null);
+  const handleHoverFacility = useCallback(
+    (dc: DataCenter, x: number, y: number, clusterSize: number) => {
+      if (isDraggingRef.current) return;
+      setHoveredFacility({ dc, x, y, clusterSize });
+    },
+    [],
+  );
+  const handleLeaveFacility = useCallback(() => setHoveredFacility(null), []);
   const handleSelectFacility = (dc: DataCenter) => {
+    // Drill into the state when clicking a US facility from the NA
+    // continent view — otherwise the user is reading "California data
+    // center" while the map still shows the whole continent. Skip the
+    // drill if already scoped (avoids redundant history entries) or if
+    // the facility isn't in a recognized US state.
+    const shouldDrill =
+      region === "na" &&
+      naView === "countries" &&
+      dc.country === "United States" &&
+      !!dc.state &&
+      !!STATE_FIPS[dc.state];
+    if (shouldDrill) {
+      navigateTo({
+        region: "na",
+        naView: "states",
+        selectedGeoId: dc.state!,
+      });
+    }
     setSelectedFacility(dc);
     setHoveredFacility(null);
     if (panelSize === "min") setExplicitPanelSize("md");
@@ -238,6 +358,12 @@ export default function MapShell({
 
   const navigateTo = (next: ViewState) => {
     if (viewsEqual(current, next)) return;
+    // Any navigation invalidates the current hover state — the geography
+    // the tooltip was anchored to may no longer be on screen, so the
+    // tooltip would otherwise stick in place until the user happens to
+    // mouse over a fresh path.
+    setTooltipInternal(null);
+    setHoveredFacility(null);
     const newHistory = [...history.slice(0, historyIdx + 1), next];
     setHistory(newHistory);
     setHistoryIdx(newHistory.length - 1);
@@ -355,6 +481,108 @@ export default function MapShell({
 
   const handleSearchNavigate = (target: ViewTarget) => navigateTo(target);
 
+  // ─── Keyboard navigation ───────────────────────────────────────────
+  // The map is discrete-view (NA / EU / Asia + drill levels), not a
+  // continuous pan, so WASD / arrows step between views rather than
+  // panning pixels. Mapping:
+  //   A / ←  → previous region          D / →  → next region
+  //   1 / 2 / 3                          jump to NA / EU / Asia
+  //   W / ↑                              drill out (browser-back, follows the rich stack)
+  //   S / ↓                              drill into the currently-selected country / state
+  //   Esc                                close facility card or reset selection
+  // Listener bound to window because the SVG <Map> isn't focusable on its own.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    function onKeyDown(e: KeyboardEvent) {
+      // Don't hijack typing in inputs, textareas, contenteditable surfaces,
+      // or while a modifier is held (so ⌘← back gestures still work).
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target as HTMLElement | null;
+      if (t) {
+        const tag = t.tagName;
+        if (
+          tag === "INPUT" ||
+          tag === "TEXTAREA" ||
+          tag === "SELECT" ||
+          t.isContentEditable
+        ) {
+          return;
+        }
+      }
+
+      const key = e.key.toLowerCase();
+      const idx = REGION_ORDER.indexOf(region);
+      switch (key) {
+        case "a":
+        case "arrowleft": {
+          const prev = REGION_ORDER[(idx - 1 + REGION_ORDER.length) % REGION_ORDER.length];
+          handleRegionChange(prev);
+          e.preventDefault();
+          return;
+        }
+        case "d":
+        case "arrowright": {
+          const next = REGION_ORDER[(idx + 1) % REGION_ORDER.length];
+          handleRegionChange(next);
+          e.preventDefault();
+          return;
+        }
+        case "1":
+          handleRegionChange("na");
+          e.preventDefault();
+          return;
+        case "2":
+          handleRegionChange("eu");
+          e.preventDefault();
+          return;
+        case "3":
+          handleRegionChange("asia");
+          e.preventDefault();
+          return;
+        case "w":
+        case "arrowup": {
+          // Drill out follows the same stack the browser back button walks,
+          // so the cue stays consistent across keyboard / swipe / chrome.
+          if (history.length > 1 && historyIdx > 0) {
+            window.history.back();
+            e.preventDefault();
+          }
+          return;
+        }
+        case "s":
+        case "arrowdown": {
+          // Drill in: continental US selected → states map; state selected
+          // with municipal data → counties; otherwise no-op.
+          if (region === "na" && naView === "countries" && selectedGeoId === "840") {
+            handleViewStates();
+            e.preventDefault();
+          } else if (
+            region === "na" &&
+            naView === "states" &&
+            selectedGeoId &&
+            getMunicipalitiesByState(selectedGeoId).length > 0
+          ) {
+            handleViewCounties(selectedGeoId);
+            e.preventDefault();
+          }
+          return;
+        }
+        case "escape": {
+          if (selectedFacility) {
+            handleCloseFacility();
+            e.preventDefault();
+          } else if (selectedGeoId) {
+            handleResetRegion();
+            e.preventDefault();
+          }
+          return;
+        }
+      }
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [region, naView, selectedGeoId, selectedFacility, history.length, historyIdx]);
+
   const breadcrumbItems: BreadcrumbItem[] = useMemo(() => {
     const items: BreadcrumbItem[] = [
       {
@@ -460,53 +688,232 @@ export default function MapShell({
   const panelExtraZoom =
     panelSize === "min" ? (isMobileViewport ? 1.12 : 1.55) : 1.0;
 
-  // Touch swipe between regions (mobile only)
-  const swipeRef = useRef<{
-    x: number;
-    y: number;
-    time: number;
-    swiped: boolean;
-  } | null>(null);
+  const mapRootRef = useRef<HTMLDivElement>(null);
 
-  // Pointer-based swipe between regions. Works for touch AND mouse on
-  // desktop — a click-and-drag horizontally over the map is equivalent
-  // to a touch swipe. Pen pointers are accepted too. We require the
-  // gesture to start on the map background (not on chrome / interactive
-  // elements) to avoid eating clicks.
+  // ─── Interactive drag-swipe between regions ──────────────────────
+  //
+  // The rail follows the pointer in real time (finger-tracking), with
+  // rubber-band resistance at the terminal regions, and commits on
+  // release via either distance OR velocity — so a quick flick switches
+  // regions even if the absolute displacement is small. This is what
+  // makes the gesture feel native instead of "tap to switch".
+  //
+  // We keep the rail's transform as `translate3d(pxOffset, 0, 0)` on
+  // top of the index-based `translateX(-N * 100%)` so the drag state
+  // stays in the compositor (no React re-render per pointer move for
+  // the map subtree — only the thin rail div updates).
+  const swipeRef = useRef<{
+    startX: number;
+    startY: number;
+    time: number;
+    lastX: number;
+    lastT: number;
+    velocity: number;
+    active: boolean;
+    axisLocked: "x" | "y" | null;
+    swiped: boolean;
+    pointerId: number;
+  } | null>(null);
+  // The drag runs entirely in the DOM layer — no React state updates
+  // from pointerdown through pointerup, so the D3 map subtrees (which
+  // aren't memoized) don't re-render during the gesture. We only let
+  // React take over when a drag COMMITS to a new region, at which point
+  // `handleRegionChange` triggers the one needed render.
+  const railRef = useRef<HTMLDivElement>(null);
+  const dragPxRef = useRef(0);
+
+  const SNAP_TRANSITION = "transform 520ms cubic-bezier(0.22, 1, 0.36, 1)";
+
+  const writeRailTransform = (offsetPx: number) => {
+    const el = railRef.current;
+    if (!el) return;
+    const idx = REGION_ORDER.indexOf(region);
+    el.style.transform = `translate3d(calc(${-idx * 100}% + ${offsetPx}px), 0, 0)`;
+  };
+
+  const AXIS_LOCK_THRESHOLD = 8;
+  const COMMIT_DISTANCE_RATIO = 0.22; // 22% of viewport width
+  const COMMIT_VELOCITY = 0.5; // px/ms — flick threshold
+  const RUBBER_BAND = 0.38;
+
+  const applyRubberBand = (dx: number, atEdge: boolean) => {
+    if (!atEdge) return dx;
+    const sign = Math.sign(dx);
+    const mag = Math.abs(dx);
+    // Diminishing-returns resistance à la iOS scrollview.
+    return sign * mag * RUBBER_BAND;
+  };
+
   const onMapPointerDown = (e: React.PointerEvent) => {
+    // Only drag from primary mouse button / touch / pen. Right-click
+    // and middle-click shouldn't start a gesture.
+    if (e.pointerType === "mouse" && e.button !== 0) return;
     swipeRef.current = {
-      x: e.clientX,
-      y: e.clientY,
-      time: Date.now(),
+      startX: e.clientX,
+      startY: e.clientY,
+      time: performance.now(),
+      lastX: e.clientX,
+      lastT: performance.now(),
+      velocity: 0,
+      active: false,
+      axisLocked: null,
       swiped: false,
+      pointerId: e.pointerId,
     };
   };
 
-  const onMapPointerUp = (e: React.PointerEvent) => {
-    const start = swipeRef.current;
-    if (!start) return;
-    const dx = e.clientX - start.x;
-    const dy = e.clientY - start.y;
-    const dt = Date.now() - start.time;
-    const maxDt = e.pointerType === "touch" ? 600 : 800;
-    if (Math.abs(dx) > 60 && Math.abs(dy) < 50 && dt < maxDt) {
-      const len = REGION_ORDER.length;
-      const currentIdx = REGION_ORDER.indexOf(region);
-      const nextIdx = dx < 0
-        ? (currentIdx + 1) % len
-        : (currentIdx - 1 + len) % len;
-      if (nextIdx !== currentIdx) {
-        handleRegionChange(REGION_ORDER[nextIdx]);
-        start.swiped = true;
+  const onMapPointerMove = (e: React.PointerEvent) => {
+    const s = swipeRef.current;
+    if (!s || e.pointerId !== s.pointerId) return;
+    const dx = e.clientX - s.startX;
+    const dy = e.clientY - s.startY;
+
+    // Axis lock — once the finger has moved ~8px in either axis, we
+    // commit to that axis for the rest of the gesture. Horizontal →
+    // we own it and drive the rail; vertical → bail so the page can
+    // scroll (mobile) without hijacking.
+    if (!s.axisLocked) {
+      if (Math.abs(dx) > AXIS_LOCK_THRESHOLD || Math.abs(dy) > AXIS_LOCK_THRESHOLD) {
+        s.axisLocked = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+        if (s.axisLocked === "x") {
+          s.active = true;
+          isDraggingRef.current = true;
+          // Clear any stale tooltip / hover card on drag start so the
+          // chrome doesn't track a stationary pointer.
+          setTooltipInternal(null);
+          setHoveredFacility(null);
+          // Kill the transition so the rail tracks 1:1 with the finger.
+          // Restored on release via `finishDrag`.
+          if (railRef.current) railRef.current.style.transition = "none";
+          // Capture further pointer events so we keep tracking even if
+          // the finger leaves the map bounds. Bind to currentTarget so
+          // unmounting SVG paths mid-drag can't drop the capture.
+          (e.currentTarget as Element).setPointerCapture?.(e.pointerId);
+        }
       }
+    }
+    if (s.axisLocked !== "x") return;
+    e.preventDefault();
+
+    // Velocity tracking — exponential smoothing keeps it responsive
+    // without jittering on a single noisy sample.
+    const now = performance.now();
+    const dt = Math.max(1, now - s.lastT);
+    const instV = (e.clientX - s.lastX) / dt;
+    s.velocity = s.velocity * 0.6 + instV * 0.4;
+    s.lastX = e.clientX;
+    s.lastT = now;
+
+    const idx = REGION_ORDER.indexOf(region);
+    const atLeftEdge = idx === 0 && dx > 0;
+    const atRightEdge = idx === REGION_ORDER.length - 1 && dx < 0;
+    const offset = applyRubberBand(dx, atLeftEdge || atRightEdge);
+    dragPxRef.current = offset;
+    writeRailTransform(offset);
+  };
+
+  const endDrag = (commitIdx: number | null) => {
+    const s = swipeRef.current;
+    dragPxRef.current = 0;
+    isDraggingRef.current = false;
+    const idx = REGION_ORDER.indexOf(region);
+    const committing = s && commitIdx != null && commitIdx !== idx;
+    const el = railRef.current;
+
+    if (committing) {
+      // Let React drive the snap: handleRegionChange updates `region`,
+      // which re-renders the rail with transition restored and the
+      // new `-commitIdx * 100%` transform — the browser interpolates
+      // from the current dragged position (which we leave in place on
+      // the element; React's style-prop diff will overwrite it to the
+      // new canonical value so the transition runs from "here" → target).
+      if (el) el.style.transition = SNAP_TRANSITION;
+      s!.swiped = true;
+      handleRegionChange(REGION_ORDER[commitIdx!]);
+    } else if (el) {
+      // Snap back to the current region without touching React state —
+      // no re-render, no map repaint, just a GPU-composited transition.
+      el.style.transition = SNAP_TRANSITION;
+      el.style.transform = `translate3d(${-idx * 100}%, 0, 0)`;
     }
   };
 
+  const onMapPointerUp = (e: React.PointerEvent) => {
+    const s = swipeRef.current;
+    if (!s || e.pointerId !== s.pointerId) return;
+    if (!s.active) {
+      swipeRef.current = null;
+      return;
+    }
+    const width = mapRootRef.current?.clientWidth ?? window.innerWidth;
+    const dx = e.clientX - s.startX;
+    const idx = REGION_ORDER.indexOf(region);
+    const len = REGION_ORDER.length;
+
+    // Commit on distance OR flick velocity. Velocity wins first because
+    // a quick flick should always switch even if distance is tiny.
+    let commitIdx = idx;
+    if (s.velocity <= -COMMIT_VELOCITY && idx < len - 1) {
+      commitIdx = idx + 1;
+    } else if (s.velocity >= COMMIT_VELOCITY && idx > 0) {
+      commitIdx = idx - 1;
+    } else if (Math.abs(dx) > width * COMMIT_DISTANCE_RATIO) {
+      if (dx < 0 && idx < len - 1) commitIdx = idx + 1;
+      else if (dx > 0 && idx > 0) commitIdx = idx - 1;
+    }
+    endDrag(commitIdx);
+  };
+
+  const onMapPointerCancel = (e: React.PointerEvent) => {
+    const s = swipeRef.current;
+    if (!s || e.pointerId !== s.pointerId) return;
+    endDrag(null);
+    swipeRef.current = null;
+  };
+
   const onMapClickCapture = (e: React.MouseEvent) => {
-    if (swipeRef.current?.swiped) {
+    if (swipeRef.current?.swiped || swipeRef.current?.active) {
       e.stopPropagation();
       e.preventDefault();
       swipeRef.current = null;
+    }
+  };
+
+  // Click on empty map area = "step out of detail." Cascades:
+  //   pinned facility  →  clear facility
+  //   any selection    →  clear selection (back to region / counties overview)
+  //   no selection     →  pop one drill level (counties → states → countries)
+  // We detect "empty" by checking the click target — geography paths and
+  // data-center circles are the only real interactive primitives. Clicks
+  // on those bubble up here too, so we ignore the event when the target
+  // sits inside one.
+  const onMapBackgroundClick = (e: React.MouseEvent) => {
+    if (isDraggingRef.current || swipeRef.current?.swiped) return;
+    const target = e.target as Element | null;
+    if (target?.closest?.("path, circle, text")) return;
+
+    if (selectedFacility) {
+      setSelectedFacility(null);
+      return;
+    }
+    if (region === "na" && naView === "counties" && selectedCountyFips) {
+      handleResetCounties();
+      return;
+    }
+    if (selectedGeoId) {
+      navigateTo({
+        ...current,
+        selectedGeoId: null,
+      });
+      return;
+    }
+    if (region === "na" && naView === "counties") {
+      handleViewStates();
+      return;
+    }
+    if (region === "na" && naView === "states") {
+      handleResetRegion();
+      return;
     }
   };
 
@@ -524,8 +931,6 @@ export default function MapShell({
   // gestures over the chrome (depth pill, panel, search) don't trigger
   // these. We gate on `chromeOpacity` so we don't hijack scroll during
   // the hero reveal phase.
-  const mapRootRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const el = mapRootRef.current;
     if (!el) return;
@@ -700,9 +1105,11 @@ export default function MapShell({
           transition: "transform 500ms cubic-bezier(0.5, 1.55, 0.4, 1)",
         }}
         onPointerDown={onMapPointerDown}
+        onPointerMove={onMapPointerMove}
         onPointerUp={onMapPointerUp}
-        onPointerCancel={() => (swipeRef.current = null)}
+        onPointerCancel={onMapPointerCancel}
         onClickCapture={onMapClickCapture}
+        onClick={onMapBackgroundClick}
       >
       <div
         className="absolute inset-0"
@@ -712,10 +1119,19 @@ export default function MapShell({
           willChange: "transform",
         }}
       >
-        {/* Sliding region rail — all three regions rendered side-by-side. */}
+        {/* Sliding region rail — all three regions rendered side-by-side.
+            During a finger-drag we disable the CSS transition and drive
+            the rail with a pixel offset so it tracks the pointer 1:1.
+            On release the transition snaps into a spring-ish curve that
+            settles past the target for a subtle "stuck the landing" cue. */}
         <div
-          className="absolute inset-0 flex transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]"
-          style={{ transform: `translateX(-${regionIdx * 100}%)` }}
+          ref={railRef}
+          className="absolute inset-0 flex"
+          style={{
+            transform: `translate3d(${-regionIdx * 100}%, 0, 0)`,
+            transition: SNAP_TRANSITION,
+            willChange: "transform",
+          }}
         >
           {REGION_ORDER.map((r) => (
           <div
@@ -735,7 +1151,7 @@ export default function MapShell({
                     onDoubleClickUsState={handleDoubleClickUsState}
                     selectedGeoId={selectedGeoId}
                     setTooltip={setTooltip}
-                    dimension={dimension}
+                    dimension={dimension} lens={lens}
                     showDataCenters={showDataCenters}
                     onHoverFacility={handleHoverFacility}
                     onLeaveFacility={handleLeaveFacility}
@@ -748,7 +1164,7 @@ export default function MapShell({
                     onDoubleClickEntity={handleDoubleClickEntity}
                     selectedGeoId={selectedGeoId}
                     setTooltip={setTooltip}
-                    dimension={dimension}
+                    dimension={dimension} lens={lens}
                     showDataCenters={showDataCenters}
                     onHoverFacility={handleHoverFacility}
                     onLeaveFacility={handleLeaveFacility}
@@ -774,7 +1190,7 @@ export default function MapShell({
                 onSelectEntity={handleSelectEntity}
                 selectedGeoId={r === region ? selectedGeoId : null}
                 setTooltip={setTooltip}
-                dimension={dimension}
+                dimension={dimension} lens={lens}
                 showDataCenters={showDataCenters}
                 onHoverFacility={handleHoverFacility}
                 onLeaveFacility={handleLeaveFacility}
@@ -786,7 +1202,7 @@ export default function MapShell({
                 onSelectEntity={handleSelectEntity}
                 selectedGeoId={r === region ? selectedGeoId : null}
                 setTooltip={setTooltip}
-                dimension={dimension}
+                dimension={dimension} lens={lens}
                 showDataCenters={showDataCenters}
                 onHoverFacility={handleHoverFacility}
                 onLeaveFacility={handleLeaveFacility}
@@ -810,19 +1226,25 @@ export default function MapShell({
         isMobileViewport={isMobileViewport}
         facility={selectedFacility}
         onCloseFacility={handleCloseFacility}
+        onSelectFacility={handleSelectFacility}
+        lens={lens}
       />
 
-      {/* Top-right region nav — pan between NA / EU / Asia. Browser
-          back / swipe-back covers drill history, so this slot is freed
-          up for a more useful "move around" affordance. */}
+      {/* Top toolbar — region tabs + search trigger + ?  shortcut help.
+          Replaces the old separate top-right RegionNav and floating
+          SearchPill so the chrome reads as one intentional bar. */}
       <div
         style={{ opacity: chromeOpacity, pointerEvents: chromeOpacity < 0.5 ? "none" : "auto" }}
       >
-        <RegionNav region={region} onChange={handleRegionChange} />
+        <TopToolbar
+          region={region}
+          onRegionChange={handleRegionChange}
+          onSearchNavigate={handleSearchNavigate}
+        />
       </div>
 
-      {/* Bottom-center depth stepper — region picker + drill breadcrumb.
-          Visible in every drill state; grows with depth. */}
+      {/* Bottom-center depth stepper — drill breadcrumb. Visible in
+          every drill state; grows with depth. */}
       <div
         style={{ opacity: chromeOpacity, pointerEvents: chromeOpacity < 0.5 ? "none" : "auto" }}
       >
@@ -831,13 +1253,6 @@ export default function MapShell({
           onRegionChange={handleRegionChange}
           segments={stepperBreadcrumb}
         />
-      </div>
-
-      {/* Bottom-right search pill */}
-      <div
-        style={{ opacity: chromeOpacity, pointerEvents: chromeOpacity < 0.5 ? "none" : "auto" }}
-      >
-        <SearchPill onNavigate={handleSearchNavigate} />
       </div>
 
       {/* Comprehensive mobile legend — only shown when the side panel
@@ -863,8 +1278,6 @@ export default function MapShell({
           style={{
             opacity: chromeOpacity,
             pointerEvents: "none",
-            fontFamily:
-              "-apple-system, 'SF Pro Text', system-ui, sans-serif",
           }}
         >
           <div
@@ -875,33 +1288,28 @@ export default function MapShell({
             }}
           >
             <div className="px-4 pt-3 pb-3">
-              <div className="text-[10px] font-semibold text-muted uppercase tracking-[0.07em] mb-2.5">
+              <div className="text-[11px] font-semibold text-muted tracking-tight mb-2.5">
                 Data centers
               </div>
-              <div className="flex flex-col gap-2">
-                <LegendRow
-                  color="#0A84FF"
-                  label="Operational"
-                  sublabel="Running today"
-                />
-                <LegendRow
-                  color="#FF9500"
-                  label="Under construction"
-                  sublabel="Breaking ground"
-                />
-                <LegendRow
-                  color="#5856D6"
-                  label="Proposed"
-                  sublabel="Planned or announced"
-                  hollow
-                />
+              <div className="flex flex-col gap-1.5">
+                <LegendRow color="#0A84FF" label="Operational" />
+                <LegendRow color="#FF9500" label="Under construction" />
+                <LegendRow color="#5856D6" label="Proposed" hollow />
               </div>
               <div className="mt-3 pt-2.5 border-t border-black/[.05]">
-                <p className="text-[10px] text-muted leading-[1.45]">
-                  Dot size scales with power capacity. A number inside a dot
-                  means several facilities sit nearby.
+                {/* Size-band key — dot size scales with cluster total MW,
+                    mirroring the three buckets in DataCenterDots. Stacked
+                    vertically so it reads alongside the status rows above. */}
+                <div className="flex flex-col gap-1.5 mb-2.5">
+                  <SizeBandSwatch r={4} label="< 100 MW" />
+                  <SizeBandSwatch r={7} label="100–500 MW" />
+                  <SizeBandSwatch r={11} label="500+ MW" />
+                </div>
+                <p className="text-[11px] text-muted tracking-tight leading-[1.45]">
+                  A number inside a dot means several facilities sit
+                  nearby.
                 </p>
-                <p className="text-[9px] text-muted/70 tracking-tight mt-1.5">
+                <p className="mt-1.5 text-[11px] text-muted/70 tracking-tight">
                   Epoch AI (CC-BY) · research
                 </p>
               </div>
@@ -912,14 +1320,187 @@ export default function MapShell({
 
       {/* Tooltip rendered OUTSIDE the slide rail so its position:fixed
           is relative to the viewport, not the transformed rail. */}
-      {tooltip && !hoveredFacility && (
-        <div
-          className="fixed bg-white/85 backdrop-blur-md text-ink text-xs px-3 py-1.5 rounded-full pointer-events-none z-50 shadow-[0_2px_8px_rgba(0,0,0,0.08)] tracking-tight"
-          style={{ left: tooltip.x + 12, top: tooltip.y + 12 }}
-        >
-          {tooltip.label}
-        </div>
-      )}
+      {tooltip && !hoveredFacility && (() => {
+        const ent = tooltip.geoId && tooltip.region
+          ? getEntity(tooltip.geoId, tooltip.region)
+          : null;
+        const lensEntStance: StanceType = ent
+          ? lens === "ai"
+            ? ent.stanceAI
+            : ent.stanceDatacenter
+          : "none";
+        const dcCount = DC_COUNT_BY_NAME[tooltip.label] ?? 0;
+        const bills = ent?.legislation ?? [];
+        const billCount = bills.length;
+        const activeCount = bills.filter(
+          (b) => b.stage !== "Dead" && b.stage !== "Enacted",
+        ).length;
+        const enactedCount = bills.filter((b) => b.stage === "Enacted").length;
+        // Per-dimension aggregation — a bill counts toward a dimension
+        // if EITHER its `impactTags` overlap the dimension's tag set OR
+        // it carries an explicit `dimensionStances[dim]` override. The
+        // stance we show per row is the majority of per-dimension
+        // overrides first, falling back to each bill's own `stance`
+        // (NOT the entity-level stance, which would smear a single
+        // overall color across every row).
+        //
+        // Lens preference: we compute rows for the ACTIVE lens first so
+        // the tooltip mirrors what the map is showing. If the entity has
+        // no coverage in that lens (e.g. Texas — all AI bills, no DC
+        // tags — hovered while on the DC lens), we fall back to the
+        // other lens's dimensions so the user still sees something
+        // actionable instead of an empty card.
+        const computeDimRows = (
+          dims: Exclude<Dimension, "overall">[],
+        ): { dim: Exclude<Dimension, "overall">; count: number; stance: StanceType }[] => {
+          if (!ent) return [];
+          const rows: { dim: Exclude<Dimension, "overall">; count: number; stance: StanceType }[] = [];
+          for (const dim of dims) {
+            const tags = DIMENSION_TAGS[dim];
+            const perBillStances: (StanceType | undefined)[] = [];
+            let count = 0;
+            for (const b of bills) {
+              const tagMatch = (b.impactTags ?? []).some((t) =>
+                tags.includes(t),
+              );
+              const override = b.dimensionStances?.[dim];
+              if (!tagMatch && !override) continue;
+              count += 1;
+              perBillStances.push(override ?? b.stance);
+            }
+            if (count === 0) continue;
+            rows.push({
+              dim,
+              count,
+              stance: aggregateStance(perBillStances, lensEntStance),
+            });
+          }
+          return rows.sort((a, b) => b.count - a.count);
+        };
+        const activeLensDims = (
+          lens === "ai" ? AI_DIMENSIONS : DATACENTER_DIMENSIONS
+        ) as Exclude<Dimension, "overall">[];
+        const fallbackLensDims = (
+          lens === "ai" ? DATACENTER_DIMENSIONS : AI_DIMENSIONS
+        ) as Exclude<Dimension, "overall">[];
+        let dimRows = computeDimRows(activeLensDims);
+        if (dimRows.length === 0) dimRows = computeDimRows(fallbackLensDims);
+        const visibleRows = dimRows.slice(0, 3);
+        const hiddenRows = dimRows.length - visibleRows.length;
+        const isRich = ent || dcCount > 0;
+
+        if (!isRich) {
+          return (
+            <div
+              className="fixed bg-white/90 text-ink text-[11px] font-medium px-2.5 py-1 rounded-md pointer-events-none z-50 shadow-[0_2px_8px_rgba(0,0,0,0.08)] border border-black/[.04] tracking-tight"
+              style={{ left: tooltip.x + 12, top: tooltip.y + 12 }}
+            >
+              {tooltip.label}
+            </div>
+          );
+        }
+
+        return (
+          <div
+            className="fixed pointer-events-none z-50 w-[18rem]"
+            style={{ left: tooltip.x + 14, top: tooltip.y + 14 }}
+          >
+            <div
+              className="rounded-xl bg-white/92 backdrop-blur-2xl border border-black/[.04] px-4 py-3"
+              style={{
+                boxShadow: "0 6px 24px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.05)",
+              }}
+            >
+              {/* Type scale (shared with DataCenterCard):
+                    13/600 ink     — title (entity name)
+                    12/400 ink     — body (blurb, dim labels)
+                    11/400 muted   — caption (stance, footer, +N more)
+                    11/500 ink     — emphasis inline (counts)
+                  Tracking-tight on everything for Inter; spacing — not
+                  rules — carries section separation. */}
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="text-[13px] font-semibold text-ink tracking-tight truncate">
+                  {tooltip.label}
+                </span>
+                {ent && (
+                  <span className="text-[11px] text-muted tracking-tight whitespace-nowrap">
+                    {STANCE_LABEL[lensEntStance]}
+                  </span>
+                )}
+              </div>
+
+              {ent?.contextBlurb && (() => {
+                const b = ent.contextBlurb.trim();
+                const firstSentence = b.match(/^[^.!?]+[.!?]/);
+                let clip = (firstSentence?.[0] ?? b).trim();
+                if (clip.length > 120) {
+                  clip = `${clip.slice(0, 117).trimEnd()}…`;
+                }
+                return (
+                  <p className="mt-1.5 text-[12px] text-ink/70 tracking-tight leading-[1.45]">
+                    {clip}
+                  </p>
+                );
+              })()}
+
+              {visibleRows.length > 0 && (
+                <div className="mt-2.5 flex flex-col gap-1.5">
+                  {visibleRows.map((row) => (
+                    <div
+                      key={row.dim}
+                      className="flex items-center justify-between gap-3 text-[12px] tracking-tight"
+                    >
+                      <span className="text-ink truncate">
+                        {SHORT_DIMENSION_LABEL[row.dim]}
+                      </span>
+                      <span className="flex items-center gap-1.5 flex-shrink-0">
+                        <span
+                          className="w-1.5 h-1.5 rounded-full"
+                          style={{ backgroundColor: STANCE_HEX[row.stance] }}
+                        />
+                        <span className="text-[11px] text-muted">
+                          {STANCE_READOUT[row.stance]}
+                        </span>
+                      </span>
+                    </div>
+                  ))}
+                  {hiddenRows > 0 && (
+                    <div className="text-[11px] text-muted tracking-tight mt-0.5">
+                      +{hiddenRows} more
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {(billCount > 0 || dcCount > 0) && (
+                <div className="mt-2.5 text-[11px] text-muted tracking-tight flex items-center gap-1.5 flex-wrap">
+                  {billCount > 0 && (
+                    <span>
+                      <span className="font-medium text-ink">{billCount}</span>{" "}
+                      {billCount === 1 ? "bill" : "bills"}
+                      {activeCount > 0 && (
+                        <span>, {activeCount} active</span>
+                      )}
+                      {enactedCount > 0 && (
+                        <span>, {enactedCount} enacted</span>
+                      )}
+                    </span>
+                  )}
+                  {billCount > 0 && dcCount > 0 && (
+                    <span aria-hidden>·</span>
+                  )}
+                  {dcCount > 0 && (
+                    <span>
+                      <span className="font-medium text-ink">{dcCount}</span>{" "}
+                      {dcCount === 1 ? "facility" : "facilities"}
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Rich facility detail card — overrides the plain tooltip when
           a data center dot is being hovered. Hidden while a facility is
@@ -936,15 +1517,41 @@ export default function MapShell({
   );
 }
 
+/**
+ * One band in the data-center size key — a dot at the map's actual
+ * pixel radius paired with the MW bucket label. The three bands mirror
+ * `SIZE_BANDS` in DataCenterDots so the map key and the visual dots on
+ * the map stay in lock-step.
+ */
+function SizeBandSwatch({ r, label }: { r: number; label: string }) {
+  const d = r * 2;
+  // Fixed-width dot column = the largest dot's diameter, so the three
+  // labels line up on the same x regardless of circle size.
+  return (
+    <div className="flex items-center gap-2">
+      <span
+        className="flex items-center justify-center flex-shrink-0"
+        style={{ width: 22 }}
+      >
+        <span
+          className="inline-block rounded-full bg-muted/30"
+          style={{ width: d, height: d }}
+        />
+      </span>
+      <span className="text-[11px] text-muted tracking-tight whitespace-nowrap">
+        {label}
+      </span>
+    </div>
+  );
+}
+
 function LegendRow({
   color,
   label,
-  sublabel,
   hollow = false,
 }: {
   color: string;
   label: string;
-  sublabel: string;
   hollow?: boolean;
 }) {
   return (
@@ -962,12 +1569,9 @@ function LegendRow({
           }}
         />
       </span>
-      <div className="flex flex-col leading-tight">
-        <span className="text-[11px] text-ink font-medium tracking-tight">
-          {label}
-        </span>
-        <span className="text-[9.5px] text-muted">{sublabel}</span>
-      </div>
+      <span className="text-[12px] text-ink font-medium tracking-tight">
+        {label}
+      </span>
     </div>
   );
 }
