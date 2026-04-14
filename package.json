@@ -4,12 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "cp data/news/summaries.json public/news-summaries.json",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "blurbs:refresh": "tsx scripts/cleanup/refresh-blurbs.ts",
+    "blurbs:refresh-all": "for s in $(ls data/legislation/states/*.json | xargs -n1 basename | sed 's/\\.json$//'); do tsx scripts/cleanup/refresh-blurbs.ts $s; done && tsx scripts/build-placeholder.ts",
+    "data:rebuild": "tsx scripts/build-placeholder.ts",
+    "news:poll": "tsx scripts/sync/news-rss.ts",
+    "news:regen": "tsx scripts/sync/news-regen.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.88.0",
     "@number-flow/react": "^0.6.0",
     "@vercel/analytics": "^2.0.1",
     "cobe": "^2.0.1",
@@ -24,6 +29,7 @@
     "topojson-client": "^3.1.0"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.88.0",
     "@tailwindcss/postcss": "^4",
     "@types/d3-geo": "^3.1.0",
     "@types/node": "^20",

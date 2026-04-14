@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useMemo, useState } from "react";
 import { ALL_POLITICIANS } from "@/lib/politicians-data";
 import type { Legislator } from "@/types";
+import FadeInOnView from "@/components/ui/FadeInOnView";
 
 function initialsFor(name: string): string {
   return name
@@ -152,13 +153,14 @@ function PersonTileGrid({ rows }: { rows: Legislator[] }) {
   return (
     <div className="flex flex-col gap-3">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {rows.map((p) => (
-          <PersonTile
-            key={p.id}
-            p={p}
-            isActive={p.id === activeId}
-            onToggle={() => setActiveId((id) => (id === p.id ? null : p.id))}
-          />
+        {rows.map((p, i) => (
+          <FadeInOnView key={p.id} delay={Math.min(i * 40, 320)}>
+            <PersonTile
+              p={p}
+              isActive={p.id === activeId}
+              onToggle={() => setActiveId((id) => (id === p.id ? null : p.id))}
+            />
+          </FadeInOnView>
         ))}
       </div>
       <PersonDetail politician={active} onClose={() => setActiveId(null)} />
@@ -305,8 +307,9 @@ function Avatar({ p }: { p: Legislator }) {
         alt=""
         width={40}
         height={40}
+        sizes="40px"
+        loading="lazy"
         className="w-10 h-10 rounded-full object-cover flex-shrink-0 bg-black/[.04]"
-        unoptimized
         onError={() => setErrored(true)}
       />
     );

@@ -35,47 +35,58 @@ export default function PoliticianCard({ politician: p, defaultOpen }: Props) {
       onClick={() => setOpen((o) => !o)}
       aria-expanded={isOpen}
       aria-controls={`pol-${p.id}`}
+      // content-visibility:auto lets the browser skip layout + paint for
+      // cards scrolled off-screen. The intrinsic-size hint (~140px when
+      // collapsed) keeps the scrollbar stable. Big win for the 515-card
+      // /politicians page where most rows are off-screen at any moment.
+      style={{
+        contentVisibility: "auto",
+        containIntrinsicSize: "auto 140px",
+      }}
       className={`w-full text-left rounded-2xl transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
         isOpen
-          ? "bg-white shadow-[0_6px_20px_rgba(0,0,0,0.04),0_1px_4px_rgba(0,0,0,0.03)]"
-          : "bg-bg/60 hover:bg-white hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.04),0_1px_4px_rgba(0,0,0,0.03)]"
+          ? "bg-white shadow-[0_8px_24px_rgba(0,0,0,0.06),0_1px_4px_rgba(0,0,0,0.03)] ring-1 ring-black/[.04]"
+          : "bg-bg/60 hover:bg-white hover:shadow-[0_6px_20px_rgba(0,0,0,0.05),0_1px_4px_rgba(0,0,0,0.03)]"
       }`}
     >
-      {/* Header — always visible */}
-      <div className="flex items-start gap-4 p-5">
+      {/* Header — always visible. Tight on mobile, roomy on desktop. */}
+      <div className="flex items-start gap-3.5 p-4 sm:p-5">
         <Avatar name={p.name} photoUrl={p.photoUrl} />
         <div className="flex-1 min-w-0">
-          <div className="text-[15px] font-medium text-ink tracking-tight leading-tight">
+          <div className="text-[15px] font-semibold text-ink tracking-tight leading-[1.25]">
             {p.name}
           </div>
-          <div className="text-xs text-muted mt-1 leading-snug">
+          <div className="text-[12.5px] text-muted mt-0.5 leading-snug tracking-tight">
             {formatHeaderMeta(p)}
           </div>
-          <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1.5">
-            {aiRole ? (
-              <StanceTag story={story} label={aiRole} tone="stated" />
-            ) : stance !== "none" ? (
-              // No concrete role to pin to — render the dot alone with
-              // a tooltip carrying the meaning. Better silent than vague.
-              <span
-                className="inline-block w-1.5 h-1.5 rounded-full"
-                title={`${story.chip} — ${story.line}`}
-                aria-label={story.chip}
-                style={{ background: `var(--color-stance-${stance})` }}
-              />
-            ) : null}
-            {inferred &&
+          {(aiRole ||
+            stance !== "none" ||
+            (inferred &&
               inferred.stance !== stance &&
-              inferred.stance !== "review" &&
-              inferred.stance !== "none" && (
+              inferred.stance !== "review")) && (
+            <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+              {aiRole ? (
+                <StanceTag story={story} label={aiRole} tone="stated" />
+              ) : stance !== "none" ? (
                 <StanceTag
-                  story={STANCE_STORY[inferred.stance]}
-                  label={STANCE_STORY[inferred.stance].chip}
-                  tone="inferred"
-                  hint={`from ${inferred.count} sponsored bills`}
+                  story={story}
+                  label={story.chip}
+                  tone="stated"
                 />
-              )}
-          </div>
+              ) : null}
+              {inferred &&
+                inferred.stance !== stance &&
+                inferred.stance !== "review" &&
+                inferred.stance !== "none" && (
+                  <StanceTag
+                    story={STANCE_STORY[inferred.stance]}
+                    label={STANCE_STORY[inferred.stance].chip}
+                    tone="inferred"
+                    hint={`${inferred.count} bills`}
+                  />
+                )}
+            </div>
+          )}
         </div>
         <Chevron open={isOpen} />
       </div>
@@ -113,15 +124,19 @@ function formatHeaderMeta(p: Legislator): React.ReactNode {
 
 function Avatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
   const [errored, setErrored] = useState(false);
+  // Soft hairline ring — reads as a photo container, not a floating
+  // circle. Matches Apple's treatment of avatars in Contacts / Mail.
+  const ring = "ring-1 ring-black/[.06]";
   if (photoUrl && !errored) {
     return (
       <Image
         src={photoUrl}
         alt=""
-        width={44}
-        height={44}
-        className="w-11 h-11 rounded-full object-cover flex-shrink-0 bg-black/[.04]"
-        unoptimized
+        width={48}
+        height={48}
+        sizes="48px"
+        loading="lazy"
+        className={`w-12 h-12 rounded-full object-cover flex-shrink-0 bg-black/[.04] ${ring}`}
         onError={() => setErrored(true)}
       />
     );
@@ -133,7 +148,9 @@ function Avatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
     .join("")
     .toUpperCase();
   return (
-    <div className="w-11 h-11 rounded-full bg-black/[.04] flex items-center justify-center text-[13px] font-medium text-muted flex-shrink-0">
+    <div
+      className={`w-12 h-12 rounded-full bg-black/[.04] flex items-center justify-center text-[13px] font-semibold text-muted flex-shrink-0 ${ring}`}
+    >
       {initials}
     </div>
   );
@@ -141,22 +158,26 @@ function Avatar({ name, photoUrl }: { name: string; photoUrl?: string }) {
 
 function Chevron({ open }: { open: boolean }) {
   return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
+    <span
       aria-hidden
-      className={`flex-shrink-0 mt-2 text-muted transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+      className={`flex-shrink-0 mt-1 w-6 h-6 rounded-full flex items-center justify-center text-muted transition-colors ${open ? "bg-black/[.05]" : ""}`}
     >
-      <path
-        d="M3 4.5l3 3 3-3"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+      <svg
+        width="11"
+        height="11"
+        viewBox="0 0 12 12"
+        fill="none"
+        className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+      >
+        <path
+          d="M3 4.5l3 3 3-3"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
   );
 }
 
@@ -173,15 +194,21 @@ function StanceTag({
   tone: "stated" | "inferred";
   hint?: string;
 }) {
+  // Pill treatment — matches the impact-tag / stance-row chips used
+  // elsewhere in the sidebar so politician tags feel like one design
+  // system, not a bespoke rendering. Soft grey ground + stance-colored
+  // dot so the color reads as informational rather than decorative.
+  const inferredSuffix =
+    tone === "inferred" ? (hint ? ` · ${hint}` : " · inferred") : "";
   return (
-    <span className="inline-flex items-center gap-1.5">
-      <span className={`w-1.5 h-1.5 rounded-full ${story.dot}`} aria-hidden />
-      <span className="text-[11px] text-ink">{label}</span>
-      {tone === "inferred" && (
-        <span className="text-[11px] text-muted">
-          · inferred{hint ? ` ${hint}` : ""}
-        </span>
-      )}
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-black/[.04] px-2 py-0.5 max-w-full">
+      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${story.dot}`} aria-hidden />
+      <span className="text-[11px] text-ink/85 tracking-tight truncate">
+        {label}
+        {tone === "inferred" && (
+          <span className="text-muted">{inferredSuffix}</span>
+        )}
+      </span>
     </span>
   );
 }

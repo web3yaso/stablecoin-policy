@@ -1,7 +1,19 @@
 "use client";
 
-import { useMemo, useState, Fragment } from "react";
-import newsSummaries from "@/data/news/summaries.json";
+import { useEffect, useMemo, useState, Fragment } from "react";
+
+// Fetched at runtime from /news-summaries.json (copied from
+// data/news/summaries.json by the `prebuild` script). Static-importing
+// this file used to inline ~298 KB of JSON into the homepage bundle for
+// every visitor. Runtime fetch lets the browser cache it separately and
+// keeps the JS chunk lean.
+interface NewsSummariesShape {
+  generatedAt?: string;
+  regional?: Record<
+    string,
+    { summary?: string; highlights?: Highlight[]; generatedAt?: string }
+  >;
+}
 
 type RegionKey = "na" | "eu" | "asia";
 
@@ -178,6 +190,22 @@ interface RegionalSummary {
 
 export default function AIOverview() {
   const [activeTab, setActiveTab] = useState<RegionKey>("na");
+  const [newsSummaries, setNewsSummaries] = useState<NewsSummariesShape>({});
+
+  // One-shot fetch on mount. Errors are silent — the section already has
+  // an empty-state path when no regional summaries are present.
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/news-summaries.json", { cache: "force-cache" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!cancelled && data) setNewsSummaries(data as NewsSummariesShape);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const regional = (newsSummaries.regional ?? {}) as Record<
     string,
