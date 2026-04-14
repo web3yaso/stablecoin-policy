@@ -30,6 +30,23 @@ html,
 body {
   background-color: var(--color-bg);
   color: var(--color-ink);
+  /* Pin the whole app to Inter explicitly so we never silently fall
+     through to `system-ui` (SF Pro on macOS). */
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Mobile Safari (iOS) auto-zooms into any form field whose computed
+   font-size is < 16px on focus, then leaves the viewport zoomed —
+   which breaks the rest of the layout (toolbars overflow, the map
+   re-projects, the side panel jumps). The fix is to force every input
+   to ≥16px on touch viewports; design-side font-size on small screens
+   stays controlled by Tailwind classes everywhere else. */
+@media (max-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
 }
 
 @keyframes scroll-hint {

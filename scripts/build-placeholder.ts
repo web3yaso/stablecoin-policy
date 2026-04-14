@@ -53,7 +53,6 @@ interface JsonFigure {
   role: string;
   party: string;
   stance: string;
-  quote?: string;
 }
 
 function readJson<T>(path: string): T {
@@ -70,7 +69,6 @@ function toLegislator(f: JsonFigure): {
   role: string;
   party: string;
   stance: string;
-  quote?: string;
 } {
   return {
     id: f.id,
@@ -78,7 +76,6 @@ function toLegislator(f: JsonFigure): {
     role: f.role,
     party: f.party,
     stance: f.stance,
-    ...(f.quote ? { quote: f.quote } : {}),
   };
 }
 

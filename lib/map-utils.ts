@@ -20,6 +20,12 @@ export interface TooltipState {
   /** Set for entity hovers so MapShell can show a rich tooltip. */
   geoId?: string;
   region?: Region;
+  /** True for US states that have county-level municipal data. Surfaced
+   *  in the tooltip so users know they can double-click to drill in. */
+  drillable?: boolean;
+  /** 5-digit county FIPS — set on county hovers in CountyMap so MapShell
+   *  can render a rich municipality tooltip (actions, context, etc.). */
+  countyFips?: string;
 }
 
 export type SetTooltip = Dispatch<SetStateAction<TooltipState | null>>;
