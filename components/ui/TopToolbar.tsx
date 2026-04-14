@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { REGION_LABEL, REGION_ORDER, type Region, type ViewTarget } from "@/types";
 import SearchPill from "./SearchPill";
 import ShortcutsHelp from "./ShortcutsHelp";
@@ -78,8 +79,10 @@ export default function TopToolbar({
         aria-label="Map controls"
         className="fixed top-6 left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-1 p-1 rounded-full bg-white/85 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] border border-black/[.04] max-w-[calc(100vw-2rem)]"
       >
-        {/* Region tabs */}
-        <div role="tablist" aria-label="Region" className="flex items-center gap-0.5">
+        {/* Region tabs — the ink pill SLIDES between regions via
+            framer-motion `layoutId`. Squishy spring: lower damping so it
+            overshoots a touch, higher mass so it settles with weight. */}
+        <div role="tablist" aria-label="Region" className="relative flex items-center gap-0.5">
           {REGION_ORDER.map((r) => {
             const active = r === region;
             return (
@@ -92,13 +95,27 @@ export default function TopToolbar({
                 onClick={() => {
                   if (!active) onRegionChange(r);
                 }}
-                className={`px-3 h-7 inline-flex items-center justify-center rounded-full text-[11px] font-medium tracking-tight whitespace-nowrap transition-colors ${
+                className={`relative px-3 h-7 inline-flex items-center justify-center rounded-full text-[11px] font-medium tracking-tight whitespace-nowrap transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.94] ${
                   active
-                    ? "bg-ink text-white shadow-[0_1px_2px_rgba(0,0,0,0.12)]"
+                    ? "text-white"
                     : "text-muted hover:text-ink hover:bg-black/[.04]"
                 }`}
+                style={{ transitionProperty: "color, transform, background-color" }}
               >
-                {SHORT_LABEL[r]}
+                {active && (
+                  <motion.span
+                    layoutId="toolbar-region-indicator"
+                    className="absolute inset-0 rounded-full bg-ink"
+                    style={{ boxShadow: "0 1px 2px rgba(0,0,0,0.12)" }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 36,
+                      mass: 0.7,
+                    }}
+                  />
+                )}
+                <span className="relative z-10">{SHORT_LABEL[r]}</span>
               </button>
             );
           })}
@@ -107,11 +124,13 @@ export default function TopToolbar({
         <div className="w-px h-4 bg-black/[.08] mx-1" aria-hidden />
 
         {/* Search trigger — chip on lg, icon-only on small to save width */}
-        <button
+        <motion.button
           type="button"
           onClick={() => setSearchOpen(true)}
           aria-label="Open search"
-          className="h-7 inline-flex items-center gap-2 px-2 sm:px-2.5 rounded-full text-muted hover:text-ink hover:bg-black/[.04] transition-colors"
+          whileTap={{ scale: 0.94 }}
+          transition={{ type: "spring", stiffness: 400, damping: 30, mass: 0.6 }}
+          className="h-7 inline-flex items-center gap-2 px-2 sm:px-2.5 rounded-full text-muted hover:text-ink hover:bg-black/[.04] transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
         >
           <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
             <circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5" />
@@ -129,22 +148,24 @@ export default function TopToolbar({
             <kbd className="font-sans">{mac ? "⌘" : "Ctrl"}</kbd>
             <kbd className="font-sans">K</kbd>
           </span>
-        </button>
+        </motion.button>
 
-        {/* Help toggle */}
-        <button
+        {/* Help toggle — same squishy tap feedback, filled state when open */}
+        <motion.button
           type="button"
           onClick={() => setHelpOpen((v) => !v)}
           aria-label="Keyboard shortcuts"
           aria-pressed={helpOpen}
-          className={`w-7 h-7 inline-flex items-center justify-center rounded-full text-[11px] font-medium transition-colors ${
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 400, damping: 30, mass: 0.6 }}
+          className={`w-7 h-7 inline-flex items-center justify-center rounded-full text-[11px] font-medium transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
             helpOpen
               ? "bg-ink text-white"
               : "text-muted hover:text-ink hover:bg-black/[.04]"
           }`}
         >
           ?
-        </button>
+        </motion.button>
       </div>
 
       <SearchPill

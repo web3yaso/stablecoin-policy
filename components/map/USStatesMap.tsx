@@ -15,6 +15,7 @@ import {
   type SetTooltip,
 } from "@/lib/map-utils";
 import { US_FACILITIES } from "@/lib/datacenters";
+import { getMunicipalitiesByState } from "@/lib/municipal-data";
 import type { DataCenter, Dimension, DimensionLens } from "@/types";
 import DataCenterDots from "./DataCenterDots";
 
@@ -26,6 +27,10 @@ interface USStatesMapProps {
   dimension?: Dimension;
   lens?: DimensionLens;
   showDataCenters?: boolean;
+  /** When set, that state visually "lifts" (scales up + drop-shadow) and
+   *  the rest fade — staged before MapShell flips to CountyMap so the
+   *  drill reads as a focus, not a hard cut. */
+  drillingTo?: string | null;
   onHoverFacility?: (
     dc: DataCenter,
     x: number,
@@ -57,6 +62,7 @@ export default function USStatesMap({
   dimension = "overall",
   lens = "datacenter",
   showDataCenters = false,
+  drillingTo = null,
   onHoverFacility,
   onLeaveFacility,
   onSelectFacility,
@@ -80,12 +86,16 @@ export default function USStatesMap({
         <Geographies geography={STATES_URL}>
           {({ geographies }) =>
             // Render selected last so its stroke sits on top of neighbours.
+            // Drilling target ranks even higher so the "lift" sits above
+            // every other state during the drill animation.
             geographies
               .slice()
               .sort((a, b) => {
-                const aSel = (a.properties.name as string) === selectedGeoId;
-                const bSel = (b.properties.name as string) === selectedGeoId;
-                return aSel === bSel ? 0 : aSel ? 1 : -1;
+                const an = a.properties.name as string;
+                const bn = b.properties.name as string;
+                const rank = (n: string) =>
+                  n === drillingTo ? 2 : n === selectedGeoId ? 1 : 0;
+                return rank(an) - rank(bn);
               })
               .map((geo) => {
               const name = geo.properties.name as string;
@@ -110,19 +120,32 @@ export default function USStatesMap({
               const fill = getEntityColorForDimension(ent, dimension, lens);
               const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
               const strokeWidth = isSelected ? 4 : 1.5;
+              const drillable = getMunicipalitiesByState(name).length > 0;
+              const isDrillTarget = drillingTo === name;
+              const isDrillOther = drillingTo !== null && !isDrillTarget;
 
               const base = {
                 fill,
-                stroke,
-                strokeWidth,
+                stroke: isDrillTarget ? "#FFFFFF" : stroke,
+                strokeWidth: isDrillTarget ? 5 : strokeWidth,
                 strokeLinejoin: "round" as const,
                 strokeLinecap: "round" as const,
                 outline: "none",
-                cursor: "pointer",
-                transition: "stroke 200ms, stroke-width 200ms, filter 200ms",
-                filter: isSelected
-                  ? "drop-shadow(0 4px 12px rgba(0,0,0,0.15))"
-                  : undefined,
+                // Only states with municipal data can be drilled into via
+                // double-click. Surface that affordance via the cursor so
+                // the gesture is discoverable.
+                cursor: drillable ? "zoom-in" : "pointer",
+                transition:
+                  "stroke 200ms, stroke-width 200ms, filter 380ms cubic-bezier(0.32,0.72,0,1), opacity 380ms ease, transform 380ms cubic-bezier(0.32,0.72,0,1)",
+                transformBox: "fill-box" as const,
+                transformOrigin: "center" as const,
+                opacity: isDrillOther ? 0.12 : 1,
+                transform: isDrillTarget ? "scale(1.45)" : undefined,
+                filter: isDrillTarget
+                  ? "drop-shadow(0 22px 40px rgba(0,0,0,0.35)) drop-shadow(0 6px 14px rgba(0,0,0,0.18)) brightness(1.06)"
+                  : isSelected
+                    ? "drop-shadow(0 4px 12px rgba(0,0,0,0.15))"
+                    : undefined,
               };
 
               return (
@@ -130,7 +153,14 @@ export default function USStatesMap({
                   key={geo.rsmKey}
                   geography={geo}
                   onMouseEnter={(e) =>
-                    setTooltip({ x: e.clientX, y: e.clientY, label: name, geoId: name, region: "na" })
+                    setTooltip({
+                      x: e.clientX,
+                      y: e.clientY,
+                      label: name,
+                      geoId: name,
+                      region: "na",
+                      drillable,
+                    })
                   }
                   onMouseLeave={() => setTooltip(null)}
                   onClick={() => onSelectEntity(name)}

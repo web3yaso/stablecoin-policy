@@ -89,10 +89,17 @@ interface HighlightSpan {
   topic: Topic;
 }
 
-function findHighlights(text: string, regionKey: string): HighlightSpan[] {
-  const highlights = CURATED[regionKey] ?? [];
+function findHighlights(
+  text: string,
+  regionKey: string,
+  dynamic?: Highlight[],
+): HighlightSpan[] {
+  // Prefer dynamically-generated highlights (from the news pipeline) so
+  // the underlines track regenerated prose. Fall back to the hand-curated
+  // list only when no dynamic ones are present AND none of them matched.
+  const source = dynamic && dynamic.length > 0 ? dynamic : (CURATED[regionKey] ?? []);
   const spans: HighlightSpan[] = [];
-  for (const h of highlights) {
+  for (const h of source) {
     const idx = text.indexOf(h.text);
     if (idx >= 0) {
       spans.push({ start: idx, end: idx + h.text.length, topic: h.topic });
@@ -106,8 +113,9 @@ function renderHighlighted(
   text: string,
   regionKey: string,
   keyPrefix: string,
+  dynamic?: Highlight[],
 ) {
-  const spans = findHighlights(text, regionKey);
+  const spans = findHighlights(text, regionKey, dynamic);
   if (spans.length === 0) return text;
   const out: React.ReactNode[] = [];
   let cursor = 0;
@@ -164,6 +172,8 @@ interface RegionalSummary {
   key: RegionKey;
   label: string;
   sentences: string[];
+  highlights?: Highlight[];
+  generatedAt?: string;
 }
 
 export default function AIOverview() {
@@ -171,21 +181,36 @@ export default function AIOverview() {
 
   const regional = (newsSummaries.regional ?? {}) as Record<
     string,
-    { summary?: string } | undefined
+    {
+      summary?: string;
+      highlights?: Highlight[];
+      generatedAt?: string;
+    } | undefined
   >;
-  const updated = formatRelative(newsSummaries.generatedAt);
 
   const allRegions: RegionalSummary[] = useMemo(() => {
-    return TAB_ORDER.map((k) => {
-      const summary = regional[k]?.summary;
-      if (!summary) return null;
-      return {
+    const out: RegionalSummary[] = [];
+    for (const k of TAB_ORDER) {
+      const block = regional[k];
+      const summary = block?.summary;
+      if (!summary) continue;
+      out.push({
         key: k,
         label: REGION_LABEL[k],
         sentences: splitSentences(summary),
-      };
-    }).filter((r): r is RegionalSummary => r !== null);
+        highlights: block?.highlights,
+        generatedAt: block?.generatedAt,
+      });
+    }
+    return out;
   }, [regional]);
+
+  // Prefer the ACTIVE region's regeneration timestamp so the label tracks
+  // the thing being read; fall back to the file-level generatedAt.
+  const activeGeneratedAt =
+    allRegions.find((r) => r.key === activeTab)?.generatedAt ??
+    newsSummaries.generatedAt;
+  const updated = formatRelative(activeGeneratedAt);
 
   const visibleRegion = allRegions.find((r) => r.key === activeTab);
 
@@ -214,7 +239,7 @@ export default function AIOverview() {
                 key={k}
                 type="button"
                 onClick={() => setActiveTab(k)}
-                className={`text-xs font-medium px-4 py-1.5 rounded-full transition-all ${
+                className={`text-xs font-medium px-3.5 py-1.5 rounded-full transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
                   active
                     ? "bg-white text-ink shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
                     : "text-muted hover:text-ink"
@@ -243,6 +268,7 @@ export default function AIOverview() {
                   s,
                   visibleRegion.key,
                   `${visibleRegion.key}-${i}`,
+                  visibleRegion.highlights,
                 )}
               </p>
             ))}

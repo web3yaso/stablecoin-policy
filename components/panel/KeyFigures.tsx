@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { STANCE_LABEL, type Legislation, type Legislator } from "@/types";
-import StanceBadge from "@/components/ui/StanceBadge";
 
 interface KeyFiguresProps {
   figures: Legislator[];
@@ -10,13 +9,6 @@ interface KeyFiguresProps {
    *  has sponsored inside the expanded card. Optional; nothing renders
    *  when omitted. */
   legislation?: Legislation[];
-}
-
-function getInitials(name: string): string {
-  const parts = name.trim().split(/\s+/);
-  const first = parts[0]?.[0] ?? "";
-  const last = parts.length > 1 ? parts[parts.length - 1][0] : "";
-  return `${first}${last}`.toUpperCase();
 }
 
 // Loose name match: a sponsor string from a bill matches a figure if the
@@ -44,127 +36,134 @@ export default function KeyFigures({ figures, legislation }: KeyFiguresProps) {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-3">
       {figures.map((figure) => {
         const isOpen = openId === figure.id;
         const sponsored = legislation ? findSponsoredBills(figure, legislation) : [];
 
         return (
-          <div key={figure.id} className="flex flex-col">
-            <button
-              type="button"
-              onClick={() => setOpenId(isOpen ? null : figure.id)}
-              aria-expanded={isOpen}
-              aria-controls={`figure-card-${figure.id}`}
-              className={`flex items-start gap-3 -mx-2 px-2 py-2 rounded-xl text-left transition-colors ${
-                isOpen ? "bg-bg/70" : "hover:bg-bg/60"
-              }`}
-            >
-              <div className="w-9 h-9 rounded-full bg-black/[.04] flex-shrink-0 flex items-center justify-center text-xs font-medium text-muted">
-                {getInitials(figure.name)}
-              </div>
+          <button
+            key={figure.id}
+            type="button"
+            onClick={() => setOpenId(isOpen ? null : figure.id)}
+            aria-expanded={isOpen}
+            aria-controls={`figure-card-${figure.id}`}
+            className={`w-full text-left rounded-2xl p-4 transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+              isOpen
+                ? "bg-bg shadow-[0_6px_18px_rgba(0,0,0,0.05),0_1px_4px_rgba(0,0,0,0.03)]"
+                : "bg-bg/60 hover:bg-bg hover:shadow-[0_8px_22px_rgba(0,0,0,0.06),0_2px_6px_rgba(0,0,0,0.03)] hover:-translate-y-0.5"
+            }`}
+          >
+            <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium text-ink tracking-tight">
                   {figure.name}
                 </div>
-                <div className="text-xs text-muted">
-                  {figure.role} · {figure.party}
-                </div>
-                <div className="mt-1.5">
-                  <StanceBadge stance={figure.stance} size="sm" />
+                <div className="text-xs text-muted mt-1 leading-snug">
+                  {figure.role}
+                  {figure.party && figure.party.trim() !== "" && figure.party.trim() !== "—" && (
+                    <>
+                      <span aria-hidden> · </span>
+                      {figure.party}
+                    </>
+                  )}
                 </div>
               </div>
               <svg
-                width="10"
-                height="10"
-                viewBox="0 0 10 10"
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
                 fill="none"
                 aria-hidden
-                className={`mt-3 text-muted/60 transition-transform ${
+                className={`flex-shrink-0 mt-1.5 text-muted transition-transform duration-300 ${
                   isOpen ? "rotate-180" : ""
                 }`}
               >
                 <path
-                  d="M2.5 4L5 6.5L7.5 4"
+                  d="M3 4.5l3 3 3-3"
                   stroke="currentColor"
-                  strokeWidth="1.25"
+                  strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
               </svg>
-            </button>
+            </div>
 
-            {isOpen && (
-              <div
-                id={`figure-card-${figure.id}`}
-                className="-mx-2 mt-1 mb-2 px-3 py-3 rounded-xl bg-white border border-black/[.05] shadow-[0_4px_16px_rgba(0,0,0,0.04)] animate-fade-rise"
-              >
-                <div className="text-[11px] font-medium text-muted tracking-tight mb-1">
-                  Position
-                </div>
-                <div className="text-sm text-ink leading-snug">
-                  {STANCE_LABEL[figure.stance]} on AI &amp; data center policy.
-                </div>
-
-                {figure.quote && (
-                  <>
-                    <div className="text-[11px] font-medium text-muted tracking-tight mt-3 mb-1">
-                      In their words
-                    </div>
-                    <p className="text-sm italic text-ink/80 leading-snug">
-                      &ldquo;{figure.quote}&rdquo;
+            {/* Smooth expand — grid-template-rows 0fr → 1fr */}
+            <div
+              id={`figure-card-${figure.id}`}
+              className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
+              style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+            >
+              <div className="overflow-hidden">
+                {isOpen && (
+                  <div className="pt-4 mt-4 border-t border-black/[.06] flex flex-col gap-3">
+                    <p className="text-sm text-ink/85 leading-snug">
+                      {`${STANCE_LABEL[figure.stance]} on AI & data-center policy.`}
                     </p>
-                  </>
-                )}
 
-                {sponsored.length > 0 && (
-                  <>
-                    <div className="text-[11px] font-medium text-muted tracking-tight mt-3 mb-1.5">
-                      Sponsored bills
-                    </div>
-                    <ul className="flex flex-col gap-1.5">
-                      {sponsored.map((bill) => {
-                        const inner = (
-                          <>
-                            <span className="font-medium text-ink shrink-0">
-                              {bill.billCode}
-                            </span>
-                            <span className="text-muted truncate">
-                              {bill.title}
-                            </span>
-                          </>
-                        );
-                        return (
-                          <li key={bill.id} className="flex items-baseline gap-2 text-xs">
-                            {bill.sourceUrl ? (
-                              <a
-                                href={bill.sourceUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-baseline gap-2 min-w-0 hover:text-ink"
+                    {sponsored.length > 0 && (
+                      <div>
+                        <div className="text-[11px] font-medium text-muted tracking-tight mb-2">
+                          Sponsored bills
+                        </div>
+                        <ul className="flex flex-col gap-1.5">
+                          {sponsored.map((bill) => {
+                            const inner = (
+                              <>
+                                <span className="font-medium text-ink shrink-0">
+                                  {bill.billCode}
+                                </span>
+                                <span className="text-muted truncate">
+                                  {bill.title}
+                                </span>
+                              </>
+                            );
+                            return (
+                              <li
+                                key={bill.id}
+                                className="flex items-baseline gap-2 text-xs"
                               >
-                                {inner}
-                              </a>
-                            ) : (
-                              <span className="flex items-baseline gap-2 min-w-0">
-                                {inner}
-                              </span>
-                            )}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </>
-                )}
+                                {bill.sourceUrl ? (
+                                  <a
+                                    href={bill.sourceUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="flex items-baseline gap-2 min-w-0 hover:text-ink"
+                                  >
+                                    {inner}
+                                  </a>
+                                ) : (
+                                  <span className="flex items-baseline gap-2 min-w-0">
+                                    {inner}
+                                  </span>
+                                )}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    )}
 
-                {!figure.quote && sponsored.length === 0 && (
-                  <p className="text-xs text-muted mt-2">
-                    No sponsored bills on file in the current scope.
-                  </p>
+                    {sponsored.length === 0 && (
+                      <p className="text-xs text-muted">
+                        No sponsored bills on file in the current scope.
+                      </p>
+                    )}
+
+                    <a
+                      href={`/politicians?id=${encodeURIComponent(figure.id)}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="self-start inline-flex items-center gap-1 text-[11px] text-ink hover:underline"
+                    >
+                      View full profile →
+                    </a>
+                  </div>
                 )}
               </div>
-            )}
-          </div>
+            </div>
+          </button>
         );
       })}
     </div>

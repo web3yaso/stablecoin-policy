@@ -103,7 +103,7 @@ export default function DimensionToggle({
               role="tab"
               aria-selected={active}
               onClick={() => handleLensChange(l)}
-              className={`relative text-xs font-medium px-4 py-1.5 rounded-full transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
+              className={`relative text-xs font-medium px-3.5 py-1.5 rounded-full transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
                 active ? "text-ink" : "text-muted hover:text-ink"
               }`}
               style={{ transitionProperty: "color, transform" }}

@@ -45,6 +45,12 @@ export interface MapLayer {
    * user zooms in, no drill remount.
    */
   zoomFadeIn?: number;
+  /**
+   * When true, the layer is rendered three times (offset by ±worldWidth)
+   * so panning past the antimeridian wraps seamlessly. Only makes sense
+   * for world-spanning context layers.
+   */
+  wrapWorld?: boolean;
 }
 
 export interface MapConfig {
@@ -81,6 +87,7 @@ const WORLD_BASE_LAYER: MapLayer = {
   entityRegion: "na", // irrelevant for context role
   role: "context",
   strokeWidth: 0.5,
+  wrapWorld: true,
 };
 
 // Wide clamp — lets the user pan anywhere on the globe from any starting

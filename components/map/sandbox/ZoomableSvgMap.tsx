@@ -79,6 +79,12 @@ export default function ZoomableSvgMap({
   const strokeScale = (base: number, selected = false) =>
     (selected ? 3 * base : base) / zoom;
 
+  // Pixel width of one world copy in the inner (pre-zoom) coordinate
+  // system. For a Mercator-family projection, that's 2π × scale.
+  const projScale =
+    (config.projection as unknown as { scale?: () => number }).scale?.() ?? 150;
+  const worldWidth = 2 * Math.PI * projScale;
+
   const resolvedGeography = (layer: MapLayer) => {
     if (
       highDetail &&
@@ -132,6 +138,12 @@ export default function ZoomableSvgMap({
                 : zoom >= fade
                   ? 1
                   : Math.max(0, (zoom - (fade - 0.5)) / 0.5);
+            // World-wrapping context layers render 3 copies at ±worldWidth
+            // so the user can pan through the antimeridian without seeing
+            // a void on the other side.
+            const offsets = layer.wrapWorld
+              ? [-worldWidth, 0, worldWidth]
+              : [0];
             return (
               <g
                 key={layer.id}
@@ -140,7 +152,9 @@ export default function ZoomableSvgMap({
                   transition: "opacity 200ms ease-out",
                 }}
               >
-            <Geographies key={layer.id} geography={resolvedGeography(layer)}>
+                {offsets.map((dx) => (
+                  <g key={dx} transform={`translate(${dx} 0)`}>
+            <Geographies geography={resolvedGeography(layer)}>
               {({ geographies }) => {
                 const filtered = layer.filter
                   ? geographies.filter(layer.filter)
@@ -235,6 +249,8 @@ export default function ZoomableSvgMap({
                   });
               }}
             </Geographies>
+                  </g>
+                ))}
               </g>
             );
           })}

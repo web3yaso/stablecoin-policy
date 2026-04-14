@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { geoAlbersUsa, geoPath } from "d3-geo";
+import { geoAlbersUsa, geoPath, type GeoProjection } from "d3-geo";
 import type { Feature, FeatureCollection, Geometry } from "geojson";
 import { feature } from "topojson-client";
 import type { Topology, GeometryCollection } from "topojson-specification";
@@ -10,9 +10,20 @@ import {
   getMunicipalitiesByState,
   getMunicipalityByFips,
 } from "@/lib/municipal-data";
-import { STATE_FIPS, type DataCenter, type MunicipalActionStatus } from "@/types";
+import { STATE_FIPS, type DataCenter, type MunicipalActionStatus, type PowerPlant } from "@/types";
 import { US_FACILITIES } from "@/lib/datacenters";
-import { DcDot, SIZE_BANDS } from "./DataCenterDots";
+import { plantsInState, plantsNearby } from "@/lib/energy-data";
+import { FUEL_COLOR, plantRadius } from "@/lib/energy-colors";
+import { DcIcon, SIZE_BANDS } from "./DataCenterDots";
+import waterDataRaw from "@/data/energy/us-water.json";
+
+void getMunicipalitiesByState;
+
+interface WaterFile {
+  rivers: FeatureCollection;
+  lakes: FeatureCollection;
+}
+const WATER = waterDataRaw as unknown as WaterFile;
 
 function bandRadius(mw: number | undefined): number {
   const v = mw ?? 0;
@@ -108,6 +119,34 @@ const VIEWBOX_H = 600;
 // Inset so the state doesn't touch the edges.
 const INSET = 56;
 
+/** Approximate pixel radius of a mileage distance at a given lat/lng
+ *  under the supplied projection. Uses a small lat offset (miles / 69°). */
+function milesToScreenRadius(
+  projection: GeoProjection,
+  lat: number,
+  lng: number,
+  miles: number,
+): number {
+  const degOffset = miles / 69;
+  const center = projection([lng, lat]);
+  const offset = projection([lng, lat + degOffset]);
+  if (!center || !offset) return 0;
+  return Math.abs(offset[1] - center[1]);
+}
+
+/** Feature-bbox overlap check for filtering water features to a state. */
+function bboxOverlap(
+  a: [[number, number], [number, number]],
+  b: [[number, number], [number, number]],
+): boolean {
+  return !(
+    a[1][0] < b[0][0] ||
+    a[0][0] > b[1][0] ||
+    a[1][1] < b[0][1] ||
+    a[0][1] > b[1][1]
+  );
+}
+
 export default function CountyMap({
   stateName,
   onSelectCounty,
@@ -121,6 +160,12 @@ export default function CountyMap({
   const statePrefix = STATE_FIPS[stateName];
   const [counties, setCounties] = useState<CountyCollection | null>(null);
   const [states, setStates] = useState<CountyCollection | null>(null);
+  const [hoveredDc, setHoveredDc] = useState<{
+    lat: number;
+    lng: number;
+    x: number;
+    y: number;
+  } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -135,25 +180,9 @@ export default function CountyMap({
     };
   }, []);
 
-  // Derive the state's county features + a per-state zoomed projection.
-  // Same base projection as usProjection so the US-wide → state zoom lines up.
-  const {
-    stateFeatures,
-    stateOutline,
-    zoomedPaths,
-    countryPaths,
-    countyScreen,
-    bbox,
-  } = useMemo(() => {
+  const computed = useMemo(() => {
     if (!counties || !statePrefix) {
-      return {
-        stateFeatures: [] as CountyFeature[],
-        stateOutline: null as Feature | null,
-        zoomedPaths: [] as string[],
-        countryPaths: [] as string[],
-        countyScreen: [] as Array<{ fips: string; name: string; cx: number; cy: number }>,
-        bbox: null as [[number, number], [number, number]] | null,
-      };
+      return null;
     }
     const filtered = counties.features.filter((f) =>
       String(f.id).startsWith(statePrefix),
@@ -161,7 +190,6 @@ export default function CountyMap({
     const stateFeatureEl =
       states?.features.find((f) => String(f.id) === statePrefix) ?? null;
 
-    // Fresh projection per state so we can fitExtent cleanly.
     const projection = geoAlbersUsa();
     const collection: FeatureCollection = {
       type: "FeatureCollection",
@@ -176,85 +204,126 @@ export default function CountyMap({
     );
     const path = geoPath(projection);
     const paths = filtered.map((f) => path(f) ?? "");
-
     const nationalPaths = stateFeatureEl ? [path(stateFeatureEl) ?? ""] : [];
 
-    // Centroids for click-target expansion
-    const screen = filtered.map((f) => {
-      const [cx, cy] = path.centroid(f);
-      return {
-        fips: String(f.id).padStart(5, "0"),
-        name: (f.properties as { name?: string })?.name ?? "",
-        cx,
-        cy,
-      };
-    });
+    // Compute geographic bbox of this state for water-feature filtering.
+    const geoPathWGS = geoPath();
+    const stateGeoBounds = stateFeatureEl
+      ? (geoPathWGS.bounds(stateFeatureEl) as [[number, number], [number, number]])
+      : null;
 
-    // Also compute the state's bbox in US-wide projection space
-    // for the zoom-in animation starting point.
+    // Filter + project water features that overlap the state bbox.
+    const lakes = stateGeoBounds
+      ? WATER.lakes.features
+          .filter((f) => {
+            const b = geoPathWGS.bounds(f) as [[number, number], [number, number]];
+            return bboxOverlap(b, stateGeoBounds);
+          })
+          .map((f) => ({
+            d: path(f) ?? "",
+            area: path.area(f),
+            name: (f.properties?.name ?? null) as string | null,
+          }))
+          .filter((l) => l.d)
+      : [];
+
+    const rivers = stateGeoBounds
+      ? WATER.rivers.features
+          .filter((f) => {
+            const b = geoPathWGS.bounds(f) as [[number, number], [number, number]];
+            return bboxOverlap(b, stateGeoBounds);
+          })
+          .map((f) => ({
+            d: path(f) ?? "",
+            weight: Math.min(
+              2.5,
+              Math.max(0.5, Number(f.properties?.strokeweig ?? 1) * 0.8),
+            ),
+            name: (f.properties?.name ?? null) as string | null,
+          }))
+          .filter((r) => r.d)
+      : [];
+
+    // Project power plants in the state.
+    const plants = plantsInState(stateName)
+      .map((p) => {
+        const xy = projection([p.lng, p.lat]);
+        return xy ? { plant: p, x: xy[0], y: xy[1] } : null;
+      })
+      .filter((p): p is { plant: PowerPlant; x: number; y: number } => Boolean(p));
+
+    // Project data centers in the state.
+    const facilities = US_FACILITIES.filter((f) => f.state === stateName);
+    const dcs = facilities
+      .map((dc) => {
+        const xy = projection([dc.lng, dc.lat]);
+        return xy ? { dc, x: xy[0], y: xy[1] } : null;
+      })
+      .filter((p): p is { dc: DataCenter; x: number; y: number } => Boolean(p));
+
+    // US-wide bbox for the zoom-in animation starting point.
     const usProj = geoAlbersUsa().scale(900).translate([480, 300]);
     const usPath = geoPath(usProj);
-    const b =
-      stateFeatureEl !== null
-        ? (usPath.bounds(stateFeatureEl) as [[number, number], [number, number]])
-        : null;
+    const b = stateFeatureEl
+      ? (usPath.bounds(stateFeatureEl) as [[number, number], [number, number]])
+      : null;
 
     return {
+      projection,
       stateFeatures: filtered,
-      stateOutline: stateFeatureEl as Feature | null,
       zoomedPaths: paths,
       countryPaths: nationalPaths,
-      countyScreen: screen,
+      lakes,
+      rivers,
+      plants,
+      dcs,
       bbox: b,
     };
-  }, [counties, states, statePrefix]);
+  }, [counties, states, statePrefix, stateName]);
 
-  void stateFeatures;
-  void stateOutline;
-  void countyScreen;
+  // Proximity-highlighted plants (within 50mi of the hovered DC). Stats
+  // feed the info chip that pops next to the hovered data center.
+  const hoveredStats = useMemo(() => {
+    if (!hoveredDc) return null;
+    const nearby = plantsNearby(hoveredDc.lat, hoveredDc.lng, 50);
+    const ids = new Set(nearby.map((p) => p.id));
+    const totalMW = nearby.reduce((s, p) => s + p.capacityMW, 0);
+    return { ids, count: nearby.length, totalMW };
+  }, [hoveredDc]);
+  const highlightedPlantIds = hoveredStats?.ids ?? new Set<string>();
 
   // Transform-based zoom animation.
-  // At mount: start from the small "US-wide" rect the state would occupy,
-  // then slide to identity (which, because our projection is already
-  // fit-to-state, means "full viewbox").
   const [animateReady, setAnimateReady] = useState(false);
   const firstMountRef = useRef(true);
 
   useEffect(() => {
-    if (zoomedPaths.length === 0) return;
+    if (!computed || computed.zoomedPaths.length === 0) return;
     setAnimateReady(false);
-    // Defer one frame so the initial (un-zoomed) transform paints first,
-    // then the class change triggers the CSS transition.
     const id = requestAnimationFrame(() => {
       requestAnimationFrame(() => setAnimateReady(true));
     });
     return () => cancelAnimationFrame(id);
-  }, [stateName, zoomedPaths.length]);
+  }, [stateName, computed]);
 
   useEffect(() => {
     firstMountRef.current = false;
   }, []);
 
-  // Compute the "from" transform: scale + translate to move the viewbox
-  // so the state's US-wide bbox maps onto the same screen rect that the
-  // fitted projection now covers. We zoom from there → identity.
   const fromTransform = useMemo(() => {
+    const bbox = computed?.bbox ?? null;
     if (!bbox) return "translate(480 300) scale(0.3) translate(-480 -300)";
     const [[x0, y0], [x1, y1]] = bbox;
     const bw = x1 - x0;
     const bh = y1 - y0;
     if (bw <= 0 || bh <= 0)
       return "translate(480 300) scale(0.3) translate(-480 -300)";
-    // The state's bbox in US-wide pixels → the fitted viewport rect [INSET, VIEWBOX-INSET].
-    // We want an initial transform T such that applying T to the fitted features
-    // visually places them where they would be in US-wide space.
     const scale = Math.min(bw / (VIEWBOX_W - 2 * INSET), bh / (VIEWBOX_H - 2 * INSET));
     const cx = (x0 + x1) / 2;
     const cy = (y0 + y1) / 2;
     const tx = cx - (VIEWBOX_W / 2) * scale;
     const ty = cy - (VIEWBOX_H / 2) * scale;
     return `translate(${tx} ${ty}) scale(${scale})`;
-  }, [bbox]);
+  }, [computed]);
 
   if (!statePrefix) {
     return (
@@ -264,13 +333,36 @@ export default function CountyMap({
     );
   }
 
-  if (!counties) {
+  if (!counties || !computed) {
     return (
       <div className="w-full h-full flex items-center justify-center text-sm text-muted">
         Loading counties…
       </div>
     );
   }
+
+  const {
+    projection,
+    stateFeatures,
+    zoomedPaths,
+    countryPaths,
+    lakes,
+    rivers,
+    plants,
+    dcs,
+  } = computed;
+
+  // Thresholds for "large lake" gradient treatment. Area is in projected
+  // pixel² so it scales with the fitted viewport automatically.
+  const LARGE_LAKE_AREA = 400;
+
+  // Proximity ring pixel radii, if a DC is hovered.
+  const ringRadii = hoveredDc
+    ? [25, 50].map((m) => ({
+        miles: m,
+        r: milesToScreenRadius(projection, hoveredDc.lat, hoveredDc.lng, m),
+      }))
+    : [];
 
   return (
     <div
@@ -287,6 +379,53 @@ export default function CountyMap({
         preserveAspectRatio="xMidYMid meet"
         style={{ width: "100%", height: "100%" }}
       >
+        <defs>
+          <filter id="water-blur" x="-2%" y="-2%" width="104%" height="104%">
+            <feGaussianBlur stdDeviation="0.4" />
+          </filter>
+          <radialGradient id="lake-gradient" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stopColor="#AFD2E2" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="#6BA3C4" stopOpacity="0.85" />
+          </radialGradient>
+          <filter id="dc-shadow" x="-30%" y="-20%" width="160%" height="160%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" />
+            <feOffset dy="1" />
+            <feComponentTransfer>
+              <feFuncA type="linear" slope="0.15" />
+            </feComponentTransfer>
+            <feMerge>
+              <feMergeNode />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          {/* DC proximity halo — soft radial glow that fades to transparent,
+              replacing the old dashed radar ring. */}
+          <radialGradient id="dc-halo">
+            <stop offset="0%" stopColor="#0A84FF" stopOpacity="0.16" />
+            <stop offset="55%" stopColor="#0A84FF" stopOpacity="0.07" />
+            <stop offset="100%" stopColor="#0A84FF" stopOpacity="0" />
+          </radialGradient>
+          {/* App-icon body gradients — top 12% lighter so the icon reads
+              as a lit surface, not a flat chip. */}
+          <linearGradient id="dc-grad-operational" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#3AA0FF" />
+            <stop offset="100%" stopColor="#0A84FF" />
+          </linearGradient>
+          <linearGradient id="dc-grad-construction" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FFB547" />
+            <stop offset="100%" stopColor="#FF9500" />
+          </linearGradient>
+          <linearGradient id="dc-grad-mixed" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#3AA0FF" />
+            <stop offset="100%" stopColor="#0A84FF" />
+          </linearGradient>
+          {/* Sheen overlay for the top half of the icon body. */}
+          <linearGradient id="dc-sheen" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+
         <g
           style={{
             transform: animateReady ? "none" : fromTransform,
@@ -296,7 +435,7 @@ export default function CountyMap({
             opacity: animateReady ? 1 : 0.85,
           }}
         >
-          {/* State silhouette underlay — gives the outer edge a clean cut */}
+          {/* State silhouette underlay */}
           {countryPaths.map((d, i) => (
             <path
               key={`outline-${i}`}
@@ -307,6 +446,52 @@ export default function CountyMap({
             />
           ))}
 
+          {/* Water fills — lakes */}
+          {lakes.map((lake, i) => {
+            const isLarge = lake.area > LARGE_LAKE_AREA;
+            return (
+              <path
+                key={`lake-${i}`}
+                d={lake.d}
+                fill={isLarge ? "url(#lake-gradient)" : "#9BC4D9"}
+                fillOpacity={isLarge ? 1 : 0.85}
+                stroke="#5B93B0"
+                strokeWidth={0.6}
+                strokeOpacity={0.6}
+                style={{ pointerEvents: "none" }}
+              />
+            );
+          })}
+
+          {/* Water strokes — rivers. A soft white casing underneath makes the
+              line read on any terrain color without resorting to a heavy blur. */}
+          {rivers.map((river, i) => {
+            const w = Math.max(river.weight, 1.8);
+            return (
+              <g key={`river-${i}`} style={{ pointerEvents: "none" }}>
+                <path
+                  d={river.d}
+                  fill="none"
+                  stroke="#FFFFFF"
+                  strokeWidth={w + 1.6}
+                  strokeOpacity={0.85}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d={river.d}
+                  fill="none"
+                  stroke="#4A8BAE"
+                  strokeWidth={w}
+                  strokeOpacity={0.95}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </g>
+            );
+          })}
+
+          {/* Counties (choropleth) */}
           {zoomedPaths.map((d, i) => {
             const f = stateFeatures[i];
             const fips = String(f.id).padStart(5, "0");
@@ -326,6 +511,7 @@ export default function CountyMap({
                 key={fips}
                 d={d}
                 fill={fill}
+                fillOpacity={hasData ? 0.92 : 0.78}
                 stroke={stroke}
                 strokeWidth={strokeWidth}
                 strokeLinejoin="round"
@@ -342,11 +528,8 @@ export default function CountyMap({
                   setTooltip({
                     x: e.clientX,
                     y: e.clientY,
-                    label: hasData
-                      ? `${countyName} — ${municipality!.actions.length} local action${
-                          municipality!.actions.length === 1 ? "" : "s"
-                        }`
-                      : countyName,
+                    label: countyName,
+                    countyFips: hasData ? fips : undefined,
                   })
                 }
                 onMouseLeave={() => setTooltip(null)}
@@ -355,92 +538,133 @@ export default function CountyMap({
             );
           })}
 
-          {showDataCenters && onHoverFacility && onLeaveFacility && (
-            <DataCenterDotsZoomed
-              facilities={US_FACILITIES.filter(
-                (f) => f.state === stateName,
-              )}
-              onHoverFacility={onHoverFacility}
-              onLeaveFacility={onLeaveFacility}
-              onSelectFacility={onSelectFacility}
-              projectionFeatures={counties}
-              statePrefix={statePrefix}
+          {/* DC proximity halo — sits below the plants so highlighted plants
+              read as "lit" from within the halo. Fade on in/out via opacity. */}
+          {hoveredDc && ringRadii.length > 0 && (
+            <circle
+              cx={hoveredDc.x}
+              cy={hoveredDc.y}
+              r={ringRadii[ringRadii.length - 1].r}
+              fill="url(#dc-halo)"
+              style={{
+                pointerEvents: "none",
+                transition: "opacity 220ms ease",
+              }}
             />
+          )}
+
+          {/* Power plants — terrain layer, small muted dots. Highlighted
+              plants (inside the halo) get a fuel-tinted drop-shadow glow
+              instead of a scale pop, so the animation feels like a light
+              turning on rather than a mechanical resize. */}
+          {plants.map(({ plant, x, y }) => {
+            const r = plantRadius(plant.capacityMW);
+            const color = FUEL_COLOR[plant.fuelType] ?? FUEL_COLOR.other;
+            const highlighted = highlightedPlantIds.has(plant.id);
+            return (
+              <circle
+                key={plant.id}
+                cx={x}
+                cy={y}
+                r={r}
+                fill={color}
+                fillOpacity={highlighted ? 1 : 0.45}
+                stroke="#FFFFFF"
+                strokeWidth={highlighted ? 0.8 : 0.5}
+                strokeOpacity={highlighted ? 0.9 : 0.3}
+                style={{
+                  cursor: "default",
+                  transition:
+                    "fill-opacity 260ms ease, stroke-opacity 260ms ease, filter 260ms ease",
+                  filter: highlighted
+                    ? `drop-shadow(0 0 3px ${color}) drop-shadow(0 0 6px ${color}aa)`
+                    : undefined,
+                }}
+                onMouseEnter={(e) =>
+                  setTooltip({
+                    x: e.clientX,
+                    y: e.clientY,
+                    label: `${plant.name} · ${Math.round(plant.capacityMW)} MW · ${plant.fuelType}`,
+                  })
+                }
+                onMouseLeave={() => setTooltip(null)}
+              />
+            );
+          })}
+
+          {/* Data center icons — rounded-rect rack shape (county view only) */}
+          {showDataCenters && onHoverFacility && onLeaveFacility && (
+            <g>
+              {dcs.map(({ dc, x, y }) => {
+                const size = bandRadius(dc.capacityMW);
+                return (
+                  <DcIcon
+                    key={dc.id}
+                    x={x}
+                    y={y}
+                    size={size}
+                    status={dc.status}
+                    onMouseEnter={(e) => {
+                      onHoverFacility(dc, e.clientX, e.clientY, 1);
+                      setHoveredDc({ lat: dc.lat, lng: dc.lng, x, y });
+                    }}
+                    onMouseMove={(e) => onHoverFacility(dc, e.clientX, e.clientY, 1)}
+                    onMouseLeave={() => {
+                      onLeaveFacility();
+                      setHoveredDc(null);
+                    }}
+                    onClick={
+                      onSelectFacility ? () => onSelectFacility(dc) : undefined
+                    }
+                    interactive={!!onSelectFacility}
+                  />
+                );
+              })}
+            </g>
+          )}
+
+          {/* Info chip — drawn last so it floats above both plants and
+              nearby DC icons. foreignObject lets us use real HTML for
+              auto-sized type + backdrop-blur. */}
+          {hoveredDc && hoveredStats && hoveredStats.count > 0 && (
+            <foreignObject
+              x={hoveredDc.x - 100}
+              y={hoveredDc.y - 58}
+              width={200}
+              height={28}
+              style={{ overflow: "visible", pointerEvents: "none" }}
+            >
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div
+                  style={{
+                    fontFamily: "inherit",
+                    fontSize: 10.5,
+                    fontWeight: 600,
+                    letterSpacing: "-0.01em",
+                    color: "#1D1D1F",
+                    background: "rgba(255,255,255,0.92)",
+                    backdropFilter: "blur(10px)",
+                    WebkitBackdropFilter: "blur(10px)",
+                    padding: "4px 9px",
+                    borderRadius: 999,
+                    border: "1px solid rgba(0,0,0,0.06)",
+                    boxShadow:
+                      "0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04)",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {hoveredStats.count} plant
+                  {hoveredStats.count === 1 ? "" : "s"} ·{" "}
+                  {hoveredStats.totalMW >= 1000
+                    ? `${(hoveredStats.totalMW / 1000).toFixed(1)} GW`
+                    : `${Math.round(hoveredStats.totalMW)} MW`}{" "}
+                  within 50 mi
+                </div>
+              </div>
+            </foreignObject>
           )}
         </g>
       </svg>
     </div>
-  );
-}
-
-/**
- * Data center dots that share the CountyMap's fitted projection.
- * We recompute a projection locally so the dots align with the counties.
- */
-function DataCenterDotsZoomed({
-  facilities,
-  onHoverFacility,
-  onLeaveFacility,
-  onSelectFacility,
-  projectionFeatures,
-  statePrefix,
-}: {
-  facilities: DataCenter[];
-  onHoverFacility: (
-    dc: DataCenter,
-    x: number,
-    y: number,
-    clusterSize: number,
-  ) => void;
-  onLeaveFacility: () => void;
-  onSelectFacility?: (dc: DataCenter) => void;
-  projectionFeatures: CountyCollection;
-  statePrefix: string;
-}) {
-  const points = useMemo(() => {
-    const filtered = projectionFeatures.features.filter((f) =>
-      String(f.id).startsWith(statePrefix),
-    );
-    const projection = geoAlbersUsa();
-    projection.fitExtent(
-      [
-        [INSET, INSET],
-        [VIEWBOX_W - INSET, VIEWBOX_H - INSET],
-      ],
-      { type: "FeatureCollection", features: filtered } as FeatureCollection,
-    );
-    return facilities
-      .map((f) => {
-        const p = projection([f.lng, f.lat]);
-        return p ? { dc: f, x: p[0], y: p[1] } : null;
-      })
-      .filter(
-        (p): p is { dc: DataCenter; x: number; y: number } => Boolean(p),
-      );
-  }, [facilities, projectionFeatures, statePrefix]);
-
-  return (
-    <g>
-      {points.map(({ dc, x, y }) => {
-        const r = bandRadius(dc.capacityMW);
-        return (
-          <g key={dc.id}>
-            <DcDot
-              x={x}
-              y={y}
-              r={r}
-              status={dc.status}
-              onMouseEnter={(e) => onHoverFacility(dc, e.clientX, e.clientY, 1)}
-              onMouseMove={(e) => onHoverFacility(dc, e.clientX, e.clientY, 1)}
-              onMouseLeave={() => onLeaveFacility()}
-              onClick={
-                onSelectFacility ? () => onSelectFacility(dc) : undefined
-              }
-              interactive={!!onSelectFacility}
-            />
-          </g>
-        );
-      })}
-    </g>
   );
 }

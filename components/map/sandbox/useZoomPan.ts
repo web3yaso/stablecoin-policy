@@ -20,10 +20,15 @@ export function useZoomPan({
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const clampC = useCallback(
-    ([lng, lat]: [number, number]): [number, number] => [
-      Math.max(clamp[0][0], Math.min(clamp[1][0], lng)),
-      Math.max(clamp[0][1], Math.min(clamp[1][1], lat)),
-    ],
+    ([lng, lat]: [number, number]): [number, number] => {
+      // Wrap longitude into [-180, 180] so east/west panning loops. Combined
+      // with the world-base layer's triple-render in ZoomableSvgMap, this
+      // feels like a seamless spin.
+      let wrappedLng = ((lng + 180) % 360 + 360) % 360 - 180;
+      // Latitude still clamps — no north/south wrap.
+      const clampedLat = Math.max(clamp[0][1], Math.min(clamp[1][1], lat));
+      return [wrappedLng, clampedLat];
+    },
     [clamp],
   );
 

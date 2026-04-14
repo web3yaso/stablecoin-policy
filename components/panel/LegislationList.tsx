@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Legislation } from "@/types";
+import type { DataCenter, Legislation } from "@/types";
 import BillTimeline from "@/components/ui/BillTimeline";
 import BillExpanded from "./BillExpanded";
 
@@ -9,11 +9,15 @@ interface LegislationListProps {
   legislation: Legislation[];
   /** Two-letter state code ("US", "VA", ...) for donor lookup. */
   stateCode?: string;
+  /** Forwarded to BillExpanded — enables clickable "Related facilities"
+   *  chips that open the facility detail panel. */
+  onSelectFacility?: (f: DataCenter) => void;
 }
 
 export default function LegislationList({
   legislation,
   stateCode,
+  onSelectFacility,
 }: LegislationListProps) {
   const [openId, setOpenId] = useState<string | null>(null);
 
@@ -26,8 +30,10 @@ export default function LegislationList({
             key={bill.id}
             type="button"
             onClick={() => setOpenId(isOpen ? null : bill.id)}
-            className={`w-full text-left rounded-2xl p-4 transition-colors ${
-              isOpen ? "bg-bg" : "bg-bg/60 hover:bg-bg"
+            className={`w-full text-left rounded-2xl p-4 transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+              isOpen
+                ? "bg-bg shadow-[0_6px_18px_rgba(0,0,0,0.05),0_1px_4px_rgba(0,0,0,0.03)]"
+                : "bg-bg/60 hover:bg-bg hover:shadow-[0_8px_22px_rgba(0,0,0,0.06),0_2px_6px_rgba(0,0,0,0.03)] hover:-translate-y-0.5"
             }`}
           >
             <div className="flex items-start justify-between gap-3">
@@ -68,7 +74,11 @@ export default function LegislationList({
             >
               <div className="overflow-hidden">
                 {isOpen && (
-                  <BillExpanded bill={bill} stateCode={stateCode} />
+                  <BillExpanded
+                    bill={bill}
+                    stateCode={stateCode}
+                    onSelectFacility={onSelectFacility}
+                  />
                 )}
               </div>
             </div>

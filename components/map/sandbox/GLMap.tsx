@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import mapboxgl, {
+import maplibregl, {
   type GeoJSONSource,
   type Map as MBMap,
-  type MapMouseEvent,
-} from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+  type MapLayerMouseEvent,
+} from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
 import { feature } from "topojson-client";
 import type {
   Feature,
@@ -45,13 +45,26 @@ interface Props {
   onSelectFacility?: (dc: DataCenter) => void;
 }
 
-// Mapbox style. Requires NEXT_PUBLIC_MAPBOX_TOKEN. Swap to any other
-// mapbox://styles/mapbox/* URL to test looks.
-const MAPBOX_STYLE = "mapbox://styles/mapbox/light-v11";
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
-if (MAPBOX_TOKEN) {
-  mapboxgl.accessToken = MAPBOX_TOKEN;
-}
+// CartoDB Positron raster tiles — free, no API key, no account. Gives us
+// the clean flat-light basemap we wanted without Mapbox's credit-card
+// requirement.
+const BASEMAP_STYLE: maplibregl.StyleSpecification = {
+  version: 8,
+  sources: {
+    carto: {
+      type: "raster",
+      tiles: [
+        "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+        "https://b.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+        "https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+      ],
+      tileSize: 256,
+      attribution:
+        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>',
+    },
+  },
+  layers: [{ id: "carto", type: "raster", source: "carto" }],
+};
 
 // One fetch per URL, cached for the session.
 const topoCache = new Map<string, Promise<unknown>>();
@@ -156,9 +169,9 @@ export default function GLMap({
   // Init map once.
   useEffect(() => {
     if (!containerRef.current) return;
-    const map = new mapboxgl.Map({
+    const map = new maplibregl.Map({
       container: containerRef.current,
-      style: MAPBOX_STYLE,
+      style: BASEMAP_STYLE,
       center: config.initialCenter,
       zoom: mercatorZoomFor(config.initialZoom ?? 1),
       minZoom: 1,
@@ -167,12 +180,15 @@ export default function GLMap({
       dragRotate: false,
       pitchWithRotate: false,
       keyboard: true,
-      projection: "mercator",
     });
     map.touchZoomRotate.disableRotation();
     map.addControl(
-      new mapboxgl.NavigationControl({ showCompass: false }),
+      new maplibregl.NavigationControl({ showCompass: false }),
       "top-right",
+    );
+    map.addControl(
+      new maplibregl.AttributionControl({ compact: true }),
+      "bottom-right",
     );
     mapRef.current = map;
 
@@ -250,17 +266,7 @@ export default function GLMap({
     lastSelectedRef.current = selectedGeoId;
   }, [selectedGeoId, ready]);
 
-  return (
-    <div ref={containerRef} className="relative w-full h-full">
-      {!MAPBOX_TOKEN && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white/95 text-sm text-neutral-600 px-6 text-center">
-          Set <code className="px-1 bg-neutral-100 rounded">NEXT_PUBLIC_MAPBOX_TOKEN</code>{" "}
-          in <code className="px-1 bg-neutral-100 rounded">.env.local</code> to
-          render this panel.
-        </div>
-      )}
-    </div>
-  );
+  return <div ref={containerRef} className="relative w-full h-full" />;
 }
 
 // Rough conversion from d3 "zoom factor" to MapLibre zoom level so the
@@ -499,7 +505,7 @@ function attachInteractions(map: MBMap, h: InteractionHandlers) {
   });
 
   // DC interactions.
-  map.on("mousemove", "dc-points", (e: MapMouseEvent) => {
+  map.on("mousemove", "dc-points", (e: MapLayerMouseEvent) => {
     const f = e.features?.[0];
     if (!f) return;
     const id = (f.properties as { id?: string }).id;
@@ -511,7 +517,7 @@ function attachInteractions(map: MBMap, h: InteractionHandlers) {
   map.on("mouseleave", "dc-points", () => {
     h.onLeaveFac();
   });
-  map.on("click", "dc-points", (e: MapMouseEvent) => {
+  map.on("click", "dc-points", (e: MapLayerMouseEvent) => {
     const f = e.features?.[0];
     if (!f) return;
     const id = (f.properties as { id?: string }).id;
@@ -519,15 +525,13 @@ function attachInteractions(map: MBMap, h: InteractionHandlers) {
     if (dc) h.onSelectFac(dc);
   });
 
-  map.on("click", "dc-clusters", (e) => {
+  map.on("click", "dc-clusters", async (e: MapLayerMouseEvent) => {
     const f = e.features?.[0];
     if (!f) return;
     const clusterId = (f.properties as { cluster_id: number }).cluster_id;
     const src = map.getSource("dcs") as GeoJSONSource;
-    src.getClusterExpansionZoom(clusterId, (err, zoom) => {
-      if (err || zoom == null) return;
-      const geom = f.geometry as { coordinates?: [number, number] };
-      if (geom.coordinates) map.easeTo({ center: geom.coordinates, zoom });
-    });
+    const zoom = await src.getClusterExpansionZoom(clusterId);
+    const geom = f.geometry as { coordinates?: [number, number] };
+    if (geom.coordinates) map.easeTo({ center: geom.coordinates, zoom });
   });
 }

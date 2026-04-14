@@ -2,13 +2,20 @@
 
 import Link from "next/link";
 import {
+  useEffect,
   useRef,
   useState,
   type CSSProperties,
   type ReactNode,
 } from "react";
 import { motion, MotionConfig } from "framer-motion";
-import type { DataCenter, DimensionLens, Entity, GovLevel } from "@/types";
+import type {
+  DataCenter,
+  DimensionLens,
+  Entity,
+  GovLevel,
+  Legislation,
+} from "@/types";
 import StanceBadge from "@/components/ui/StanceBadge";
 import ContextBlurb from "./ContextBlurb";
 import LegislationList from "./LegislationList";
@@ -16,12 +23,18 @@ import KeyFigures from "./KeyFigures";
 import NewsSection from "./NewsSection";
 import FacilityDetail from "./FacilityDetail";
 import DataCentersList from "./DataCentersList";
+import EnergySection from "./EnergySection";
 import { facilitiesForEntity } from "@/lib/datacenters";
+import { getStateProfile, plantsInState } from "@/lib/energy-data";
 
 interface SidePanelProps {
   entity: Entity | null;
   showViewStatesButton?: boolean;
   onViewStates?: () => void;
+  /** When set, the selected state entity has county-level municipal data
+   *  and a "View local actions →" button appears below the blurb. */
+  showViewCountiesButton?: boolean;
+  onViewCounties?: () => void;
   visibility?: number;
   size: "min" | "md";
   onSizeChange: (s: "min" | "md") => void;
@@ -32,6 +45,10 @@ interface SidePanelProps {
   /** Pins a facility from the Data Centers tab. */
   onSelectFacility?: (dc: DataCenter) => void;
   lens?: DimensionLens;
+  /** When set, adds a "Local" tab with county-level actions. Each entry
+   *  is a Legislation-shaped row (adapter applied upstream) so it
+   *  reuses LegislationList's rendering. */
+  localActions?: Legislation[];
 }
 
 const LEVEL_LABEL: Record<GovLevel, string | null> = {
@@ -40,7 +57,13 @@ const LEVEL_LABEL: Record<GovLevel, string | null> = {
   bloc: null,
 };
 
-type Layer = "legislation" | "figures" | "news" | "datacenters";
+type Layer =
+  | "legislation"
+  | "figures"
+  | "news"
+  | "datacenters"
+  | "local"
+  | "energy";
 type Position = "left" | "right" | "bottom";
 type Size = "min" | "md";
 
@@ -126,6 +149,8 @@ export default function SidePanel({
   entity,
   showViewStatesButton = false,
   onViewStates,
+  showViewCountiesButton = false,
+  onViewCounties,
   visibility = 1,
   size,
   onSizeChange,
@@ -134,6 +159,7 @@ export default function SidePanel({
   onCloseFacility,
   onSelectFacility,
   lens = "datacenter",
+  localActions,
 }: SidePanelProps) {
   // Mobile defaults to the bottom-anchored card; desktop to top-left.
   // Derived state (not initial useState) so it actually tracks the
@@ -146,6 +172,7 @@ export default function SidePanel({
     explicitPosition ?? (isMobileViewport ? "bottom" : "left");
   const setPosition = (p: Position) => setExplicitPosition(p);
   const [preferredLayer, setPreferredLayer] = useState<Layer>("legislation");
+  const tabRefs = useRef<Partial<Record<Layer, HTMLButtonElement | null>>>({});
   const [expandedSections, setExpandedSections] = useState<Set<Layer>>(new Set());
   const toggleExpand = (layer: Layer) =>
     setExpandedSections((prev) => {
@@ -171,12 +198,31 @@ export default function SidePanel({
     ? facilitiesForEntity(entity).facilities
     : [];
   const hasDatacenters = scopedFacilities.length > 0;
+  const hasLocal = (localActions?.length ?? 0) > 0;
+
+  // Energy tab — US states only. Data is keyed off state name, so check
+  // that a profile or plants exist for this state before offering the tab.
+  const isUsState =
+    !!entity && entity.level === "state" && entity.region === "na";
+  const hasEnergy =
+    isUsState &&
+    (!!getStateProfile(entity.name) || plantsInState(entity.name).length > 0);
+
+  // Active tab scrolls into view when the layer changes — covers the case
+  // where adding the Energy tab pushes the pill wider than the panel and
+  // the active one would otherwise clip off the edge.
+  useEffect(() => {
+    const btn = tabRefs.current[preferredLayer];
+    if (btn) btn.scrollIntoView({ inline: "center", block: "nearest" });
+  }, [preferredLayer]);
 
   const availableLayers: Layer[] = [];
   if (hasLegislation) availableLayers.push("legislation");
+  if (hasLocal) availableLayers.push("local");
   if (hasFigures) availableLayers.push("figures");
   if (hasNews) availableLayers.push("news");
   if (hasDatacenters) availableLayers.push("datacenters");
+  if (hasEnergy) availableLayers.push("energy");
   const activeLayer: Layer =
     availableLayers.length > 0 && !availableLayers.includes(preferredLayer)
       ? availableLayers[0]
@@ -213,8 +259,11 @@ export default function SidePanel({
         bottom: "auto",
       };
     }
+    // Bottom anchor: on mobile, tuck closer to the depth stepper so the
+    // panel can grow taller (the reading surface is the scarce resource).
+    // On desktop, keep more breathing room from the chrome.
     return {
-      bottom: "8rem",
+      bottom: isMobileViewport ? "5.25rem" : "8rem",
       left: "50%",
       right: "auto",
       top: "auto",
@@ -244,8 +293,20 @@ export default function SidePanel({
       };
     }
     if (position === "bottom") {
-      // Compact square-ish card on bottom-anchor positions, including
-      // mobile. Sized so the map has plenty of room above it.
+      // Mobile bottom card needs to be a usable reading surface — the
+      // earlier 20rem × 22rem cap was leaving most of the panel as
+      // chrome with very little content visible. Now: near full-bleed
+      // width (1rem margins each side), and ~60vh tall capped at 30rem
+      // so there's still real map showing. Desktop bottom-anchor stays
+      // compact since the user has chosen to dock it there explicitly.
+      if (isMobileViewport) {
+        return {
+          width: "calc(100vw - 1.5rem)",
+          maxWidth: "26rem",
+          minHeight: "0px",
+          maxHeight: "min(30rem, 60vh)",
+        };
+      }
       return {
         width: "min(20rem, calc(100vw - 2rem))",
         minHeight: "0px",
@@ -417,6 +478,16 @@ export default function SidePanel({
               </button>
             )}
 
+            {showViewCountiesButton && onViewCounties && (
+              <button
+                type="button"
+                onClick={onViewCounties}
+                className="self-start rounded-full bg-ink text-white text-xs font-medium px-4 py-2 hover:bg-ink/90 transition-colors"
+              >
+                View local actions →
+              </button>
+            )}
+
             {availableLayers.length > 0 && (
               <MotionConfig
                 transition={{
@@ -427,29 +498,45 @@ export default function SidePanel({
                 }}
               >
                 <div
-                  className="sticky top-0 z-10 -mx-6 -mt-2 px-6 pt-2 pb-2 bg-white/90 backdrop-blur-md flex"
+                  className="-mt-2 pt-2 pb-2 flex"
                   role="tablist"
                   aria-label="Sidebar sections"
                 >
-                  <div className="relative inline-flex items-center gap-1 p-1 rounded-full bg-black/[.04]">
+                  <div className="relative flex w-full items-center gap-0.5 p-1 rounded-full bg-black/[.04]">
                   {availableLayers.map((layer) => {
                     const active = layer === activeLayer;
                     const label =
                       layer === "legislation"
-                        ? "Legislation"
-                        : layer === "figures"
-                          ? "Key Figures"
-                          : layer === "news"
-                            ? "News"
-                            : "Data Centers";
+                        ? "Bills"
+                        : layer === "local"
+                          ? "Local"
+                          : layer === "figures"
+                            ? "Figures"
+                            : layer === "news"
+                              ? "News"
+                              : layer === "datacenters"
+                                ? "Centers"
+                                : "Energy";
                     return (
                       <button
                         key={layer}
+                        ref={(el) => {
+                          tabRefs.current[layer] = el;
+                        }}
                         type="button"
                         role="tab"
                         aria-selected={active}
+                        title={
+                          layer === "legislation"
+                            ? "Legislation"
+                            : layer === "figures"
+                              ? "Key Figures"
+                              : layer === "datacenters"
+                                ? "Data Centers"
+                                : label
+                        }
                         onClick={() => setPreferredLayer(layer)}
-                        className={`relative text-xs font-medium px-3.5 py-1.5 rounded-full transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
+                        className={`relative flex-1 min-w-0 text-xs font-medium px-2 py-1.5 rounded-full transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] truncate ${
                           active ? "text-ink" : "text-muted hover:text-ink"
                         }`}
                         style={{ transitionProperty: "color, transform" }}
@@ -493,6 +580,21 @@ export default function SidePanel({
                       label="bills"
                       href={`/legislation/${encodeURIComponent(entity.id)}`}
                     />
+                  </motion.section>
+                )}
+
+                {activeLayer === "local" && hasLocal && localActions && (
+                  <motion.section layout>
+                    <LegislationList
+                      legislation={localActions.slice(0, LEGISLATION_PREVIEW)}
+                      onSelectFacility={onSelectFacility}
+                    />
+                    {localActions.length > LEGISLATION_PREVIEW && (
+                      <div className="text-[11px] text-muted tracking-tight mt-3">
+                        {localActions.length - LEGISLATION_PREVIEW} more · drill
+                        into the map to see county-by-county
+                      </div>
+                    )}
                   </motion.section>
                 )}
 
@@ -541,6 +643,12 @@ export default function SidePanel({
                       label="data centers"
                       href={`/datacenters/${encodeURIComponent(entity.id)}`}
                     />
+                  </motion.section>
+                )}
+
+                {activeLayer === "energy" && hasEnergy && (
+                  <motion.section layout>
+                    <EnergySection stateName={entity.name} />
                   </motion.section>
                 )}
               </MotionConfig>

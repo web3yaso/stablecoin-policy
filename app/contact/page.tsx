@@ -38,7 +38,7 @@ export default function ContactPage() {
 
         <div className="mt-12 pt-10 border-t border-black/[.06] space-y-5">
           <div>
-            <div className="text-[11px] uppercase tracking-[0.06em] text-muted mb-1.5">
+            <div className="text-[11px] font-medium tracking-tight text-muted mb-1.5">
               Email
             </div>
             <a
@@ -50,7 +50,7 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <div className="text-[11px] uppercase tracking-[0.06em] text-muted mb-1.5">
+            <div className="text-[11px] font-medium tracking-tight text-muted mb-1.5">
               Twitter / X
             </div>
             <a
@@ -67,7 +67,7 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <div className="text-[11px] uppercase tracking-[0.06em] text-muted mb-1.5">
+            <div className="text-[11px] font-medium tracking-tight text-muted mb-1.5">
               GitHub
             </div>
             <a
@@ -84,7 +84,7 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <div className="text-[11px] uppercase tracking-[0.06em] text-muted mb-1.5">
+            <div className="text-[11px] font-medium tracking-tight text-muted mb-1.5">
               Personal site
             </div>
             <a
