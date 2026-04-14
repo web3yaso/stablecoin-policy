@@ -35,6 +35,7 @@ import { IMPACT_TAG_LABEL, STANCE_LABEL, STATE_FIPS } from "@/types";
 import SidePanel from "@/components/panel/SidePanel";
 import DepthStepper from "@/components/ui/DepthStepper";
 import TopToolbar from "@/components/ui/TopToolbar";
+import VisitorsWidget from "@/components/ui/VisitorsWidget";
 import MobileLegend from "@/components/map/MobileLegend";
 import type { BreadcrumbItem } from "@/components/ui/Breadcrumb";
 import NorthAmericaMap from "./NorthAmericaMap";
@@ -1348,6 +1349,20 @@ export default function MapShell({
           onRegionChange={handleRegionChange}
           onSearchNavigate={handleSearchNavigate}
         />
+      </div>
+
+      {/* Visitors widget — top-right of the map, desktop only. Matches
+          the toolbar's fixed-chrome pattern: gated on chromeOpacity so
+          it fades in with the rest of the map UI once the hero reveal
+          is complete. */}
+      <div
+        className="hidden md:block fixed top-6 right-6 z-30"
+        style={{
+          opacity: chromeOpacity,
+          pointerEvents: chromeOpacity < 0.5 ? "none" : "auto",
+        }}
+      >
+        <VisitorsWidget />
       </div>
 
       {/* Bottom-center depth stepper — drill breadcrumb. Visible in

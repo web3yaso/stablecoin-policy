@@ -11,7 +11,6 @@ import LegislationTable from "@/components/sections/LegislationTable";
 import DataCentersOverview from "@/components/sections/DataCentersOverview";
 import PoliticiansOverview from "@/components/sections/PoliticiansOverview";
 import LiveNews from "@/components/sections/LiveNews";
-import VisitorsWidget from "@/components/ui/VisitorsWidget";
 import { useScrollProgress } from "@/lib/use-scroll-progress";
 import type {
   Dimension,
@@ -202,9 +201,6 @@ export default function Page() {
 
       {/* Footer */}
       <section className="relative z-10 bg-white border-t border-black/[.06]">
-        <div className="max-w-5xl mx-auto px-8 pt-8 pb-2 flex justify-center">
-          <VisitorsWidget />
-        </div>
         <div className="max-w-5xl mx-auto px-8 py-10 flex flex-wrap items-center justify-between gap-4 text-xs text-muted">
           <span>Track Policy</span>
           <div className="flex gap-6">
