@@ -5,7 +5,7 @@
   "stanceDatacenter": "none",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Connecticut is advancing regulation on AI, with no data-center legislation currently tracked. On AI: SB00092 (in committee) — Establishes additional protections for warehouse workers, likely including rules around automated monitoring and work-quota systems driven by algorithms.",
+  "contextBlurb": "Connecticut is debating a sweeping AI framework that would create a state AI Policy Office, regulate frontier-model developers, and rein in automated hiring tools. A parallel bill would eliminate the state's existing data-center tax incentives outright.",
   "legislation": [
     {
       "id": "ct-sb00092",
@@ -88,67 +88,6 @@
       ]
     },
     {
-      "id": "ct-sb00220",
-      "billCode": "SB00220",
-      "title": "An Act Concerning Student Literacy.",
-      "summary": "This bill focuses on improving reading instruction and support for students in grades 4-9 who are below proficient in reading. It has no connection to AI policy or data-center regulation.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2026-02-18",
-      "partyOrigin": "D",
-      "sourceUrl": "https://www.cga.ct.gov/asp/cgabillstatus/cgabillstatus.asp?selBillType=Bill&bill_num=SB00220&which_year=2026",
-      "legiscanUrl": "https://legiscan.com/CT/bill/SB00220/2026",
-      "legiscanId": 2118338,
-      "sponsors": [
-        "Education Committee",
-        "Antonio Felipe",
-        "Geraldo Reyes",
-        "Anthony Nolan"
-      ]
-    },
-    {
-      "id": "ct-sb00289",
-      "billCode": "SB00289",
-      "title": "An Act Concerning Funding Of The Quality Metrics Program For Nursing Homes.",
-      "summary": "This bill is about funding a quality metrics program for nursing homes in Connecticut. It is not related to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2026-02-19",
-      "partyOrigin": "B",
-      "sourceUrl": "https://www.cga.ct.gov/asp/cgabillstatus/cgabillstatus.asp?selBillType=Bill&bill_num=SB00289&which_year=2026",
-      "legiscanUrl": "https://legiscan.com/CT/bill/SB00289/2026",
-      "legiscanId": 2120218,
-      "sponsors": [
-        "Aging Committee",
-        "Jane Garibay",
-        "Mary Fortier",
-        "Jan Hochadel"
-      ]
-    },
-    {
-      "id": "ct-sb00307",
-      "billCode": "SB00307",
-      "title": "An Act Concerning The Department Of Economic And Community Development's Recommendations For Revisions To The Commerce Statutes.",
-      "summary": "This bill makes administrative updates to Connecticut's commerce and economic development statutes, such as renaming programs and updating board memberships. It has no relevance to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-02-26",
-      "partyOrigin": "D",
-      "sourceUrl": "https://www.cga.ct.gov/asp/cgabillstatus/cgabillstatus.asp?selBillType=Bill&bill_num=SB00307&which_year=2026",
-      "legiscanUrl": "https://legiscan.com/CT/bill/SB00307/2026",
-      "legiscanId": 2124435,
-      "sponsors": [
-        "Commerce Committee",
-        "Savet Constantine"
-      ]
-    },
-    {
       "id": "ct-sb00245",
       "billCode": "SB00245",
       "title": "An Act Eliminating Certain Tax Incentives For Data Centers.",
@@ -193,26 +132,6 @@
         "Commerce Committee",
         "Kerry Szeps Wood",
         "Savet Constantine"
-      ]
-    },
-    {
-      "id": "ct-hb05514",
-      "billCode": "HB05514",
-      "title": "An Act Concerning Various Revisions To The Public Health Statutes.",
-      "summary": "This bill makes general updates and revisions to Connecticut's public health laws. It does not appear to specifically address AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2026-03-05",
-      "partyOrigin": "D",
-      "sourceUrl": "https://www.cga.ct.gov/asp/cgabillstatus/cgabillstatus.asp?selBillType=Bill&bill_num=HB05514&which_year=2026",
-      "legiscanUrl": "https://legiscan.com/CT/bill/HB05514/2026",
-      "legiscanId": 2129223,
-      "sponsors": [
-        "Public Health Committee",
-        "Nick Menapace",
-        "Julie Kushner"
       ]
     },
     {

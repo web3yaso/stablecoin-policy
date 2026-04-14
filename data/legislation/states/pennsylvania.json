@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Pennsylvania is advancing regulation across both data centers and AI. On data centers: HB1834 (in committee) — Requires commercial data centers to meet clean energy standards, file contracts with state regulators, and follow rules on backup generation and grid management. On AI: HB1942 (in committee) — Bans 'surveillance pricing,' where businesses use personal data and algorithms to charge individual customers different prices based on their behavior or characteristics.",
+  "contextBlurb": "Pennsylvania has no enacted AI or data-center law. Pending bills pull in opposite directions: one would repeal the state's data-center equipment tax break, while another would create a fast-track regulatory sandbox for self-powered data centers. A separate measure would ban algorithmic surveillance pricing.",
   "legislation": [
     {
       "id": "pa-hb2198",
@@ -117,27 +117,6 @@
         "Kyle Mullins",
         "Benjamin Waxman",
         "James Prokopiak"
-      ]
-    },
-    {
-      "id": "pa-sb411",
-      "billCode": "SB411",
-      "title": "Further providing for definitions; providing for Statewide stroke registry; and making an editorial change .",
-      "summary": "This bill updates Pennsylvania's Stroke System of Care Act to revise definitions and establish a statewide stroke registry. It is not related to AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2025-06-30",
-      "partyOrigin": "B",
-      "sourceUrl": "https://www.palegis.us/legislation/bills/2025/sb411",
-      "legiscanUrl": "https://legiscan.com/PA/bill/SB411/2025",
-      "legiscanId": 1996588,
-      "sponsors": [
-        "Elder Vogel",
-        "Camera Bartolotta",
-        "John Kane",
-        "Vincent Hughes"
       ]
     },
     {

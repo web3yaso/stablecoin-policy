@@ -5,7 +5,7 @@
   "stanceDatacenter": "none",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Michigan is advancing regulation on AI, with no data-center legislation currently tracked. On AI: HB5769 (in committee) — Creates a new law in Michigan specifically protecting the privacy of consumers' reproductive health data.",
+  "contextBlurb": "Michigan has no enacted AI law. Pending bills would ban companion chatbots for minors, create a comprehensive consumer-data privacy regime, carve out special protections for reproductive-health data, and establish a Kids Code Act regulating how platforms serve content to children.",
   "legislation": [
     {
       "id": "mi-sb0198",
@@ -60,27 +60,6 @@
       ]
     },
     {
-      "id": "mi-hb4261",
-      "billCode": "HB4261",
-      "title": "State management: funds; public safety and violence prevention fund; create. Amends title & sec. 2 of 2000 PA 489 (MCL 12.252) & adds secs. 11a & 11b. TIE BAR WITH: HB 4260'25",
-      "summary": "This bill creates a public safety and violence prevention fund in Michigan's state management system. It does not address AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2025-04-22",
-      "partyOrigin": "B",
-      "sourceUrl": "https://legislature.mi.gov/Bills/Bill?ObjectName=2025-HB-4261",
-      "legiscanUrl": "https://legiscan.com/MI/bill/HB4261/2025",
-      "legiscanId": 2010318,
-      "sponsors": [
-        "Alabas Farhat",
-        "Stephanie Young",
-        "Angela Witwer",
-        "Jason Hoskins"
-      ]
-    },
-    {
       "id": "mi-sb0359",
       "billCode": "SB0359",
       "title": "Consumer protection: privacy; personal data privacy act; create. Creates new act.",
@@ -129,42 +108,6 @@
         "Morgan Foreman",
         "Reggie Miller",
         "Sharon MacDonell"
-      ]
-    },
-    {
-      "id": "mi-sb0645",
-      "billCode": "SB0645",
-      "title": "Economic development: other; use tax act; amend to reflect elimination of the Michigan strategic fund. Amends sec. 4cc of 1937 PA 94 (MCL 205.94cc). TIE BAR WITH: SB 0631'25",
-      "summary": "This bill amends Michigan's use tax law to reflect the elimination of the Michigan Strategic Fund, a state economic development agency. It does not substantively address AI policy or data-center regulation.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "data-center-energy",
-      "updatedDate": "2025-10-30",
-      "partyOrigin": "R",
-      "sourceUrl": "https://legislature.mi.gov/Bills/Bill?ObjectName=2025-SB-0645",
-      "legiscanUrl": "https://legiscan.com/MI/bill/SB0645/2025",
-      "legiscanId": 2051212,
-      "sponsors": [
-        "Thomas Albert"
-      ]
-    },
-    {
-      "id": "mi-sb0643",
-      "billCode": "SB0643",
-      "title": "Economic development: other; general sales tax act; amend to reflect elimination of the Michigan strategic fund. Amends sec. 4ee of 1933 PA 167 (MCL 205.54ee). TIE BAR WITH: SB 0631'25",
-      "summary": "This bill amends Michigan's General Sales Tax Act to reflect the elimination of the Michigan Strategic Fund, a state economic development agency. It does not address AI regulation or data-center policy in any substantive way.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "data-center-siting",
-      "updatedDate": "2025-10-30",
-      "partyOrigin": "R",
-      "sourceUrl": "https://legislature.mi.gov/Bills/Bill?ObjectName=2025-SB-0643",
-      "legiscanUrl": "https://legiscan.com/MI/bill/SB0643/2025",
-      "legiscanId": 2051181,
-      "sponsors": [
-        "Thomas Albert"
       ]
     },
     {

@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Vermont is under discussion on data centers and advancing regulation on AI. On data centers: S0205 (in committee) — Would temporarily ban the construction of new AI data centers in Vermont while the state studies their impacts. On AI: H0816 (in committee) — Sets rules for how artificial intelligence can be used when providing mental health services to patients.",
+  "contextBlurb": "Vermont has no enacted AI or data-center law. Pending bills would impose a moratorium on new AI data-center construction while the state studies impacts, set sustainability standards for facilities that do proceed, regulate AI in mental health services, and establish rights over neurological data.",
   "legislation": [
     {
       "id": "vt-h0727",
@@ -288,25 +288,6 @@
         "Elizabeth Burrows",
         "Ela Chapin",
         "Esme Cole"
-      ]
-    },
-    {
-      "id": "vt-h0027",
-      "billCode": "H0027",
-      "title": "An act relating to the Domestic Violence Fatality Review Commission",
-      "summary": "This bill relates to a commission that reviews deaths caused by domestic violence. It has no relevance to AI regulation or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2025-05-20",
-      "partyOrigin": "D",
-      "sourceUrl": "https://legislature.vermont.gov/bill/status/2026/H.27",
-      "legiscanUrl": "https://legiscan.com/VT/bill/H0027/2025",
-      "legiscanId": 1908400,
-      "sponsors": [
-        "Martin LaLonde",
-        "Kate Nugent"
       ]
     },
     {

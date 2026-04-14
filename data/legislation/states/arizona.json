@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Arizona is under discussion on data centers and advancing regulation on AI. On data centers: HB2738 (filed) — Establishes rules for cost responsibility agreements specifically for data centers, likely requiring data centers to pay for or share the costs of grid upgrades and infrastructure needed… On AI: HB2592 (in committee) — Sets rules for how Arizona state agencies can use artificial intelligence, likely requiring oversight, transparency, or accountability measures.",
+  "contextBlurb": "Arizona has no enacted AI or data-center law. Pending bills would set rules for state-agency AI use, require data centers to pay their own share of grid upgrades, and create a consumer-style privacy regime obligating companies to disclose how they collect and handle personal data.",
   "legislation": [
     {
       "id": "az-sb1815",
@@ -51,27 +51,6 @@
       "legiscanId": 2082269,
       "sponsors": [
         "Justin Wilmeth"
-      ]
-    },
-    {
-      "id": "az-hb2957",
-      "billCode": "HB2957",
-      "title": "Driver license; enhanced; mobile; prohibition",
-      "summary": "This bill relates to driver's license rules, specifically around enhanced and mobile license formats. It does not address AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "data-privacy",
-      "updatedDate": "2026-02-26",
-      "partyOrigin": "R",
-      "sourceUrl": "https://apps.azleg.gov/BillStatus/BillOverview/85125",
-      "legiscanUrl": "https://legiscan.com/AZ/bill/HB2957/2026",
-      "legiscanId": 2097528,
-      "sponsors": [
-        "Lisa Fink",
-        "Walter Blackman",
-        "Rachel Keshel",
-        "Michele Pena"
       ]
     },
     {
@@ -170,24 +149,6 @@
       ]
     },
     {
-      "id": "az-sb1471",
-      "billCode": "SB1471",
-      "title": "School mapping data; requirements; accessibility",
-      "summary": "This bill sets requirements for how school mapping data must be maintained and made accessible. It does not relate to AI regulation or data-center policy.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2026-03-03",
-      "partyOrigin": "R",
-      "sourceUrl": "https://apps.azleg.gov/BillStatus/BillOverview/85062",
-      "legiscanUrl": "https://legiscan.com/AZ/bill/SB1471/2026",
-      "legiscanId": 2094675,
-      "sponsors": [
-        "Javan Mesnard"
-      ]
-    },
-    {
       "id": "az-hb2737",
       "billCode": "HB2737",
       "title": "Chatbot regulations; personal data; requirements",
@@ -213,42 +174,6 @@
         "Cesar Aguilar",
         "Sarah Liguori",
         "Christopher Mathis"
-      ]
-    },
-    {
-      "id": "az-hb2033",
-      "billCode": "HB2033",
-      "title": "Statewide assessment; written form; requirements",
-      "summary": "This bill appears to address requirements for statewide assessments in written form, likely related to standardized testing. It does not appear to be substantively about AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2026-02-26",
-      "partyOrigin": "R",
-      "sourceUrl": "https://apps.azleg.gov/BillStatus/BillOverview/83574",
-      "legiscanUrl": "https://legiscan.com/AZ/bill/HB2033/2026",
-      "legiscanId": 2056025,
-      "sponsors": [
-        "Lisa Fink"
-      ]
-    },
-    {
-      "id": "az-hb2032",
-      "billCode": "HB2032",
-      "title": "Statewide assessment; testing window; revisions",
-      "summary": "This bill makes revisions to the statewide student assessment testing window. It does not address AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2026-02-24",
-      "partyOrigin": "R",
-      "sourceUrl": "https://apps.azleg.gov/BillStatus/BillOverview/83573",
-      "legiscanUrl": "https://legiscan.com/AZ/bill/HB2032/2026",
-      "legiscanId": 2056078,
-      "sponsors": [
-        "Lisa Fink"
       ]
     },
     {

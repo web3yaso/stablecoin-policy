@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Alabama is under discussion on data centers and advancing regulation on AI. On data centers: SB270 (on the floor) — Requires Alabama's Public Service Commission to review contracts between electric utilities and large data centers that draw significant amounts of power. On AI: SB63 (on the floor) — Sets rules for how health insurance companies can use artificial intelligence when deciding whether to approve or deny medical coverage.",
+  "contextBlurb": "Alabama is weighing whether its Public Service Commission should vet the electricity contracts utilities sign with large data centers, and a parallel bill would extend the state's data-center tax breaks with a tighter sunset. On the AI side, lawmakers advanced rules on how health insurers can use AI to approve or deny coverage.",
   "legislation": [
     {
       "id": "al-sb270",
@@ -52,24 +52,6 @@
       "legiscanId": 2124313,
       "sponsors": [
         "Chris Elliott"
-      ]
-    },
-    {
-      "id": "al-hb426",
-      "billCode": "HB426",
-      "title": "Real property; creation of the Alabama Property Protection Act of 2026, title fraud prevention",
-      "summary": "This bill creates protections against real estate title fraud in Alabama. It is not related to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "data-privacy",
-      "updatedDate": "2026-03-17",
-      "partyOrigin": "R",
-      "sourceUrl": "https://alison.legislature.state.al.us/bill-search",
-      "legiscanUrl": "https://legiscan.com/AL/bill/HB426/2026",
-      "legiscanId": 2115310,
-      "sponsors": [
-        "Paul Lee"
       ]
     },
     {

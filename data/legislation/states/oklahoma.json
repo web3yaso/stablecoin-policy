@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "review",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Oklahoma is under discussion across both data centers and AI. On data centers: HB2992 (in committee) — Creates consumer protection rules for data centers under Oklahoma's Corporation Commission, likely addressing how data centers interact with the energy grid and utility customers. On AI: SB1734 (in committee) — Requires the development of guidance for how artificial intelligence and other emerging technologies should be used in schools.",
+  "contextBlurb": "Oklahoma has no enacted AI law. Pending bills would require data centers to post financial assurance for decommissioning, stand up a state directory of hyperscalers tracked by the Corporation Commission, and develop guidance for AI use in schools.",
   "legislation": [
     {
       "id": "ok-hb4194",
@@ -103,66 +103,6 @@
       ]
     },
     {
-      "id": "ok-hb1863",
-      "billCode": "HB1863",
-      "title": "Children; Children's Code; multidisciplinary child abuse team; review; functions; secure database; protocol; Commission on Children and Youth; requirements; rules; codification; effective date.",
-      "summary": "This bill updates Oklahoma's Children's Code to establish requirements for multidisciplinary child abuse teams, including a secure database and protocols for reviewing cases. It does not address AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [
-        "child-safety"
-      ],
-      "category": "ai-governance",
-      "updatedDate": "2025-05-27",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.oklegislature.gov/BillInfo.aspx?Bill=hb1863&Session=2600",
-      "legiscanUrl": "https://legiscan.com/OK/bill/HB1863/2026",
-      "legiscanId": 2048079,
-      "sponsors": [
-        "Eric Roberts",
-        "Dave Rader"
-      ]
-    },
-    {
-      "id": "ok-hb3711",
-      "billCode": "HB3711",
-      "title": "Schools; School District Transparency Act; instructional expenditure disclosures on district website; bond proposals, and bond guarantee applications; effective date; emergency.",
-      "summary": "This bill requires school districts to publicly disclose how they spend instructional funds and to post information about bond proposals on their websites. It has no substantive connection to AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2026-03-25",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.oklegislature.gov/BillInfo.aspx?Bill=hb3711&Session=2600",
-      "legiscanUrl": "https://legiscan.com/OK/bill/HB3711/2026",
-      "legiscanId": 2080580,
-      "sponsors": [
-        "Chad Caldwell",
-        "Adam Pugh",
-        "Mark Lepak"
-      ]
-    },
-    {
-      "id": "ok-sb675",
-      "billCode": "SB675",
-      "title": "Oklahoma Law Enforcement Telecommunication Systems Division; authorizing the Department of Public Safety to provide certain information to Oklahoma Turnpike Authority. Effective date.",
-      "summary": "This bill allows the Department of Public Safety to share information with the Oklahoma Turnpike Authority through the law enforcement telecommunications system. It is an administrative data-sharing measure unrelated to AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-criminal-justice",
-      "updatedDate": "2025-03-26",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.oklegislature.gov/BillInfo.aspx?Bill=sb675&Session=2600",
-      "legiscanUrl": "https://legiscan.com/OK/bill/SB675/2026",
-      "legiscanId": 2049438,
-      "sponsors": [
-        "Darcy Jech",
-        "Carl Newton"
-      ]
-    },
-    {
       "id": "ok-hb2992",
       "billCode": "HB2992",
       "title": "Corporation Commission; creating the Data Center Customer Protection Act of 2026; effective date; emergency.",
@@ -248,24 +188,6 @@
       "sponsors": [
         "Warren Hamilton",
         "Jim Olsen"
-      ]
-    },
-    {
-      "id": "ok-sb1350",
-      "billCode": "SB1350",
-      "title": "Oklahoma Department of Commerce; making an appropriation; identifying source of funds. Emergency.",
-      "summary": "This bill makes a funding appropriation to the Oklahoma Department of Commerce and identifies the source of those funds. It does not appear to be related to AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-02-02",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.oklegislature.gov/BillInfo.aspx?Bill=sb1350&Session=2600",
-      "legiscanUrl": "https://legiscan.com/OK/bill/SB1350/2026",
-      "legiscanId": 2061327,
-      "sponsors": [
-        "Bill Coleman"
       ]
     }
   ]

@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Maryland is advancing regulation across both data centers and AI. On data centers: HB120 (in committee) — Places a statewide ban on new data center construction, preventing both private builders and government bodies from proceeding with new projects. On AI: HB293 (on the floor) — Allows Maryland's student and workforce data system to share data with third-party data centers for multistate reporting, subject to written agreements and compliance requirements.",
+  "contextBlurb": "Maryland is weighing a floor bill that would let the state's student and workforce data system share records with third-party data centers, plus legislation requiring large data-center operators to file disclosures and adopt formal siting rules by 2027. Another bill would expand police facial recognition inside homes.",
   "legislation": [
     {
       "id": "md-hb293",
@@ -263,24 +263,6 @@
       "sponsors": [
         "Kevin Hornberger",
         "Julie Palakovich Carr"
-      ]
-    },
-    {
-      "id": "md-hb326",
-      "billCode": "HB326",
-      "title": "Education - Maryland Center for School Safety - Anonymous Reporting System",
-      "summary": "This bill requires Maryland's Center for School Safety to create an anonymous tip reporting system for school safety concerns. It is not related to AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2026-03-23",
-      "partyOrigin": "D",
-      "sourceUrl": "https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/HB0326?ys=2026RS",
-      "legiscanUrl": "https://legiscan.com/MD/bill/HB326/2026",
-      "legiscanId": 2083581,
-      "sponsors": [
-        "Eric Ebersole"
       ]
     },
     {

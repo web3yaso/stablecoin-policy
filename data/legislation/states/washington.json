@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "review",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Washington is under discussion across both data centers and AI. On data centers: HB2515 (in committee) — Establishes rules for large energy-consuming facilities, such as data centers, addressing how they connect to and impact the electrical grid. On AI: SB5395 (enacted) — Strengthens transparency and accountability requirements for the prior authorization process used by health insurers to approve or deny medical treatments.",
+  "contextBlurb": "Washington has no enacted AI or data-center law. Pending bills would strip several existing data-center tax exemptions, including one for equipment replacement, while a competing measure would offer new sales-tax breaks for a specific eastern county. A separate bill would establish AI consumer protections.",
   "legislation": [
     {
       "id": "wa-sb6231",
@@ -56,47 +56,6 @@
         "Matt Boehnke",
         "Sharon Shewmake",
         "Paul Harris"
-      ]
-    },
-    {
-      "id": "wa-sb5637",
-      "billCode": "SB5637",
-      "title": "Promoting student access to information about media literacy and civic education.",
-      "summary": "This bill promotes student access to information about media literacy and civic education in Washington schools. It focuses on helping students better understand and evaluate media, which may include digital and AI-generated content.",
-      "stage": "Committee",
-      "stance": "review",
-      "impactTags": [
-        "ai-in-education"
-      ],
-      "category": "ai-education",
-      "updatedDate": "2025-03-12",
-      "partyOrigin": "R",
-      "sourceUrl": "https://app.leg.wa.gov/billsummary?BillNumber=5637&Year=2025&Initiative=false",
-      "legiscanUrl": "https://legiscan.com/WA/bill/SB5637/2025",
-      "legiscanId": 1950935,
-      "sponsors": [
-        "Phil Fortunato"
-      ]
-    },
-    {
-      "id": "wa-sb5431",
-      "billCode": "SB5431",
-      "title": "Modifying tax and revenue laws in a manner that is not estimated to affect state or local tax collections.",
-      "summary": "This bill makes technical modifications to tax and revenue laws that are not expected to change how much money the state or local governments collect. It does not appear to relate to AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2025-05-20",
-      "partyOrigin": "B",
-      "sourceUrl": "https://app.leg.wa.gov/billsummary?BillNumber=5431&Year=2025&Initiative=false",
-      "legiscanUrl": "https://legiscan.com/WA/bill/SB5431/2025",
-      "legiscanId": 1932136,
-      "sponsors": [
-        "Mark Schoesler",
-        "June Robinson",
-        "Perry Dozier",
-        "T'wina Nobles"
       ]
     },
     {
@@ -206,45 +165,6 @@
       ]
     },
     {
-      "id": "wa-hb1476",
-      "billCode": "HB1476",
-      "title": "Delaying the rebasing of the nursing home payment rates to 2028.",
-      "summary": "This bill delays the scheduled update of nursing home payment rates until 2028. It has no connection to AI policy or data-center regulation.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2025-01-21",
-      "partyOrigin": "D",
-      "sourceUrl": "https://app.leg.wa.gov/billsummary?BillNumber=1476&Year=2025&Initiative=false",
-      "legiscanUrl": "https://legiscan.com/WA/bill/HB1476/2025",
-      "legiscanId": 1930240,
-      "sponsors": [
-        "Timm Ormsby"
-      ]
-    },
-    {
-      "id": "wa-sb6184",
-      "billCode": "SB6184",
-      "title": "Updating the office of homeless youth program provisions.",
-      "summary": "This bill updates program provisions for the Washington State Office of Homeless Youth. It has no relevance to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-02-10",
-      "partyOrigin": "D",
-      "sourceUrl": "https://app.leg.wa.gov/billsummary?BillNumber=6184&Year=2025&Initiative=false",
-      "legiscanUrl": "https://legiscan.com/WA/bill/SB6184/2025",
-      "legiscanId": 2083092,
-      "sponsors": [
-        "Claire Wilson",
-        "T'wina Nobles",
-        "Rebecca Saldana",
-        "Yasmin Trudeau"
-      ]
-    },
-    {
       "id": "wa-sb5395",
       "billCode": "SB5395",
       "title": "Making improvements to transparency and accountability in the prior authorization determination process.",
@@ -270,27 +190,6 @@
         "Ron Muzzall",
         "Robert Hasegawa",
         "Liz Lovelett"
-      ]
-    },
-    {
-      "id": "wa-sb5810",
-      "billCode": "SB5810",
-      "title": "Making 2025-2027 fiscal biennium operating appropriations and 2023-2025 fiscal biennium second supplemental operating appropriations.",
-      "summary": "This bill is Washington State's general operating budget appropriations for the 2025-2027 fiscal period. It is a broad spending bill and not specifically focused on AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2025-04-15",
-      "partyOrigin": "R",
-      "sourceUrl": "https://app.leg.wa.gov/billsummary?BillNumber=5810&Year=2025&Initiative=false",
-      "legiscanUrl": "https://legiscan.com/WA/bill/SB5810/2025",
-      "legiscanId": 2023840,
-      "sponsors": [
-        "Chris Gildon",
-        "Nikki Torres",
-        "Matt Boehnke",
-        "Leonard Christian"
       ]
     }
   ]

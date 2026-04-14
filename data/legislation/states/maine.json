@@ -5,7 +5,7 @@
   "stanceDatacenter": "restrictive",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Maine is leaning restrictive on data centers and advancing regulation on AI. On data centers: LD912 (enacted) — Caps the amount of electricity that can be supplied to data centers on commercial or industrial sites in Maine. On AI: LD1727 (enacted) — Requires businesses to be upfront with consumers when they are interacting with or being affected by artificial intelligence in commercial transactions.",
+  "contextBlurb": "Maine enacted a cap on how much electricity can be supplied to data centers at commercial and industrial sites this session, one of the hardest limits in the country. It also passed a law requiring businesses to disclose when consumers are dealing with AI, and a pending bill would restrict minors' access to AI chatbots and companion apps.",
   "legislation": [
     {
       "id": "me-ld912",
@@ -61,63 +61,6 @@
         "Donna Bailey",
         "Michael Brennan",
         "Ryan Fecteau"
-      ]
-    },
-    {
-      "id": "me-ld1374",
-      "billCode": "LD1374",
-      "title": "An Act to Establish Additional Requirements for Dentists to Administer Botulinum Toxin and Dermal Fillers",
-      "summary": "This bill sets requirements for dentists who administer Botox and dermal fillers. It has no connection to AI or data-center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2025-05-06",
-      "partyOrigin": "D",
-      "sourceUrl": "https://legislature.maine.gov/legis/bills/display_ps.asp?LD=1374&snum=132",
-      "legiscanUrl": "https://legiscan.com/ME/bill/LD1374/2025",
-      "legiscanId": 2016570,
-      "sponsors": [
-        "Joseph Baldacci"
-      ]
-    },
-    {
-      "id": "me-ld1923",
-      "billCode": "LD1923",
-      "title": "An Act to Update Juvenile Justice System Reporting Requirements and to Direct the Department of Corrections and the Department of Health and Human Services to Study Modifying the Long Creek Youth Development Center",
-      "summary": "This bill updates reporting requirements for Maine's juvenile justice system and directs state agencies to study changes to the Long Creek Youth Development Center. It has no connection to AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-criminal-justice",
-      "updatedDate": "2026-03-25",
-      "partyOrigin": "D",
-      "sourceUrl": "https://legislature.maine.gov/legis/bills/display_ps.asp?LD=1923&snum=132",
-      "legiscanUrl": "https://legiscan.com/ME/bill/LD1923/2025",
-      "legiscanId": 2028521,
-      "sponsors": [
-        "Michael Brennan",
-        "Andrew Gattine",
-        "Kelly Murphy",
-        "Teresa Pierce"
-      ]
-    },
-    {
-      "id": "me-ld977",
-      "billCode": "LD977",
-      "title": "Resolve, Requiring the Maine Health Data Organization to Develop a Plan for Measuring Gaps in Home and Community-based Services",
-      "summary": "This bill directs a Maine health data organization to create a plan for measuring gaps in home and community-based services. It is not related to AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2025-06-25",
-      "partyOrigin": "D",
-      "sourceUrl": "https://legislature.maine.gov/legis/bills/display_ps.asp?LD=977&snum=132",
-      "legiscanUrl": "https://legiscan.com/ME/bill/LD977/2025",
-      "legiscanId": 1994860,
-      "sponsors": [
-        "Sally Cluchey"
       ]
     },
     {
@@ -248,24 +191,6 @@
         "Poppy Arford",
         "Donna Bailey",
         "Sally Cluchey"
-      ]
-    },
-    {
-      "id": "me-ld1157",
-      "billCode": "LD1157",
-      "title": "An Act to Amend the Laws Relating to the State's Background Check Center",
-      "summary": "This bill makes amendments to Maine's Background Check Center, which handles criminal history and background screening. It does not appear to relate to AI regulation or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-criminal-justice",
-      "updatedDate": "2025-06-03",
-      "partyOrigin": "D",
-      "sourceUrl": "https://legislature.maine.gov/legis/bills/display_ps.asp?LD=1157&snum=132",
-      "legiscanUrl": "https://legiscan.com/ME/bill/LD1157/2025",
-      "legiscanId": 2010928,
-      "sponsors": [
-        "Daniel Shagoury"
       ]
     },
     {

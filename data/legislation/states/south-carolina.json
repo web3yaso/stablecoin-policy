@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "South Carolina is advancing regulation across both data centers and AI. On data centers: H5484 (in committee) — This South Carolina bill sets new rules for commercial data centers, including requirements to report water usage, file decommissioning plans, and meet specific electric service terms, while also r… On AI: H3431 (enacted) — This South Carolina bill requires social media platforms to use reasonable care with minors' personal data, limits how much personal information can be collected from children, and mandates parenta…",
+  "contextBlurb": "South Carolina is weighing one of the more detailed data-center oversight frameworks in the country, requiring siting permits, environmental-impact reviews, water-use reporting, and PSC certificates before new facilities can operate. A separate bill would ban algorithmic discrimination in high-risk AI systems.",
   "legislation": [
     {
       "id": "sc-s0867",
@@ -64,24 +64,6 @@
       "legiscanId": 2125203,
       "sponsors": [
         "Matthew Leber"
-      ]
-    },
-    {
-      "id": "sc-h3064",
-      "billCode": "H3064",
-      "title": "Autopsy photographs",
-      "summary": "This bill updates the rules about who can view or share autopsy photographs and videos in South Carolina. It has no connection to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2025-01-14",
-      "partyOrigin": "D",
-      "sourceUrl": "https://www.scstatehouse.gov/billsearch.php?billnumbers=3064&session=126&summary=B",
-      "legiscanUrl": "https://legiscan.com/SC/bill/H3064/2025",
-      "legiscanId": 1895376,
-      "sponsors": [
-        "Todd Rutherford"
       ]
     },
     {
@@ -198,27 +180,6 @@
       "legiscanId": 2140456,
       "sponsors": [
         "Jermaine Johnson"
-      ]
-    },
-    {
-      "id": "sc-h5179",
-      "billCode": "H5179",
-      "title": "School Mapping Data Program",
-      "summary": "This bill creates a school mapping data program within the State Law Enforcement Division to help emergency responders navigate college campuses more efficiently. It is not related to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-government",
-      "updatedDate": "2026-03-04",
-      "partyOrigin": "B",
-      "sourceUrl": "https://www.scstatehouse.gov/billsearch.php?billnumbers=5179&session=126&summary=B",
-      "legiscanUrl": "https://legiscan.com/SC/bill/H5179/2025",
-      "legiscanId": 2115107,
-      "sponsors": [
-        "Shannon Erickson",
-        "Timothy McGinnis",
-        "Kambrell Garvin",
-        "Hamilton Grant"
       ]
     },
     {

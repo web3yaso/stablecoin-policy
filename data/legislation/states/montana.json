@@ -5,26 +5,8 @@
   "stanceDatacenter": "review",
   "stanceAI": "restrictive",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Montana is leaning restrictive on AI, with no data-center legislation currently tracked. On AI: HB178 (enacted) — Places limits on how Montana state government agencies can use artificial intelligence systems.",
+  "contextBlurb": "Montana enacted one of the most distinctive AI packages in the country this session: a Right to Compute Act, a kill-switch requirement for AI systems running critical infrastructure, new limits on state-agency AI use, and disclosure rules for AI-generated political content. It also cut data-center property taxes.",
   "legislation": [
-    {
-      "id": "mt-hb388",
-      "billCode": "HB388",
-      "title": "Create pregnancy center autonomy and rights of expression act",
-      "summary": "This bill relates to pregnancy centers and their rights of expression, and has no connection to AI regulation or data-center policy. It is not relevant to the topics tracked by this policy tracker.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2025-05-01",
-      "partyOrigin": "R",
-      "sourceUrl": "https://bills.legmt.gov/#/laws/bill/2/LC2052",
-      "legiscanUrl": "https://legiscan.com/MT/bill/HB388/2025",
-      "legiscanId": 1955314,
-      "sponsors": [
-        "Amy Regier"
-      ]
-    },
     {
       "id": "mt-hb178",
       "billCode": "HB178",
@@ -208,24 +190,6 @@
       ]
     },
     {
-      "id": "mt-hb532",
-      "billCode": "HB532",
-      "title": "Generally revise laws related to abuse, neglect, and exploitation of incapacitated persons and vulnerable adults",
-      "summary": "This bill revises Montana laws related to the abuse, neglect, and exploitation of vulnerable adults and incapacitated persons. It does not address AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2025-05-08",
-      "partyOrigin": "R",
-      "sourceUrl": "https://bills.legmt.gov/#/laws/bill/2/LC3437",
-      "legiscanUrl": "https://legiscan.com/MT/bill/HB532/2025",
-      "legiscanId": 1973244,
-      "sponsors": [
-        "Bill Mercer"
-      ]
-    },
-    {
       "id": "mt-hb10",
       "billCode": "HB10",
       "title": "Long-range information technology appropriations",
@@ -241,24 +205,6 @@
       "legiscanId": 1896111,
       "sponsors": [
         "John Fitzpatrick"
-      ]
-    },
-    {
-      "id": "mt-hb173",
-      "billCode": "HB173",
-      "title": "Revise definition of victim in youth court act",
-      "summary": "This bill revises the legal definition of 'victim' in Montana's Youth Court Act. It has no substantive connection to AI regulation or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-criminal-justice",
-      "updatedDate": "2025-04-17",
-      "partyOrigin": "R",
-      "sourceUrl": "https://bills.legmt.gov/#/laws/bill/2/LC1502",
-      "legiscanUrl": "https://legiscan.com/MT/bill/HB173/2025",
-      "legiscanId": 1911657,
-      "sponsors": [
-        "Neil Duram"
       ]
     }
   ]

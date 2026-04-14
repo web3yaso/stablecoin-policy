@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Louisiana is under discussion on data centers and advancing regulation on AI. On data centers: HB1206 (in committee) — Requires data centers to obtain permits and report on how much water they use. On AI: HB119 (in committee) — Makes it illegal to create or share AI-generated images of real people without their consent.",
+  "contextBlurb": "Louisiana enacted a law banning AI-generated deepfakes targeting K-12 students and is weighing bills to require water-use permits for data centers and oversee insurer use of AI in claims decisions. A broader AI consumer-rights bill is also in committee.",
   "legislation": [
     {
       "id": "la-hb1206",
@@ -106,42 +106,6 @@
       "sponsors": [
         "Rodney Schamerhorn",
         "Wilford Carter"
-      ]
-    },
-    {
-      "id": "la-sb274",
-      "billCode": "SB274",
-      "title": "Provides for lead hazard risk assessments for certain child care facilities and prekindergarten programs. (8/1/26) (RE INCREASE SG EX See Note)",
-      "summary": "This bill requires lead hazard risk assessments in child care facilities and prekindergarten programs. It has no connection to AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2026-02-27",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.legis.la.gov/legis/BillInfo.aspx?s=26rs&b=SB274&sbi=y",
-      "legiscanUrl": "https://legiscan.com/LA/bill/SB274/2026",
-      "legiscanId": 2126289,
-      "sponsors": [
-        "Rick Edmonds"
-      ]
-    },
-    {
-      "id": "la-hb821",
-      "billCode": "HB821",
-      "title": "Provides for the establishment of the Louisiana Center for Safe Schools within the Louisiana Commission on Law Enforcement and Administration of Criminal Justice (EG +$250,000 GF EX See Note)",
-      "summary": "This bill establishes a Center for Safe Schools within Louisiana's law enforcement commission. It does not address AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-government",
-      "updatedDate": "2026-02-27",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.legis.la.gov/legis/BillInfo.aspx?s=26rs&b=HB821&sbi=y",
-      "legiscanUrl": "https://legiscan.com/LA/bill/HB821/2026",
-      "legiscanId": 2126564,
-      "sponsors": [
-        "Jack McFarland"
       ]
     },
     {

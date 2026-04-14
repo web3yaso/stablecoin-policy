@@ -5,26 +5,8 @@
   "stanceDatacenter": "review",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Missouri is under discussion on data centers and advancing regulation on AI. On data centers: HB3390 (filed) — Establishes new rules governing where and how data centers can be built in the state. On AI: HB2032 (in committee) — Requires age verification for companion chatbot services to prevent minors from accessing them.",
+  "contextBlurb": "Missouri has no enacted AI law. Pending bills would require age verification for companion chatbots, create a private right of action for undisclosed AI-generated content, and establish new siting rules for data centers.",
   "legislation": [
-    {
-      "id": "mo-hb1810",
-      "billCode": "HB1810",
-      "title": "Specifies that the department of health and senior services shall not deny trauma center status to a hospital based on its distance from another trauma center",
-      "summary": "This bill changes rules about how hospitals qualify as trauma centers in Missouri, removing distance-based restrictions. It has no connection to AI or data-center policy.",
-      "stage": "Filed",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2026-01-07",
-      "partyOrigin": "D",
-      "sourceUrl": "https://house.mo.gov/Bill.aspx?bill=HB1810&year=2026&code=R",
-      "legiscanUrl": "https://legiscan.com/MO/bill/HB1810/2026",
-      "legiscanId": 2054727,
-      "sponsors": [
-        "Pattie Mansur"
-      ]
-    },
     {
       "id": "mo-sb1455",
       "billCode": "SB1455",
@@ -52,60 +34,6 @@
       ]
     },
     {
-      "id": "mo-hb1805",
-      "billCode": "HB1805",
-      "title": "Specifies that the department of health and senior services shall not deny trauma center status to a hospital based on its distance from another trauma center",
-      "summary": "This bill requires Missouri's health department to stop using distance from other trauma centers as a reason to deny a hospital trauma center status. It is not related to AI or data-center policy.",
-      "stage": "Filed",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2026-01-07",
-      "partyOrigin": "D",
-      "sourceUrl": "https://house.mo.gov/Bill.aspx?bill=HB1805&year=2026&code=R",
-      "legiscanUrl": "https://legiscan.com/MO/bill/HB1805/2026",
-      "legiscanId": 2054948,
-      "sponsors": [
-        "Mark Sharp"
-      ]
-    },
-    {
-      "id": "mo-sb1527",
-      "billCode": "SB1527",
-      "title": "Repeals provisions relating to the Infection Control Advisory Panel",
-      "summary": "This bill repeals rules about an Infection Control Advisory Panel, which is a healthcare regulatory body. It has no relevance to AI policy or data-center regulation.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-01-08",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.senate.mo.gov/BillTracking/Bills/Billinformation?year=2026&billid=216214",
-      "legiscanUrl": "https://legiscan.com/MO/bill/SB1527/2026",
-      "legiscanId": 2068840,
-      "sponsors": [
-        "Jamie Burger"
-      ]
-    },
-    {
-      "id": "mo-hb2670",
-      "billCode": "HB2670",
-      "title": "Modifies provisions relating to public health programs",
-      "summary": "This bill modifies public health program provisions in Missouri. It does not appear to substantively address AI or data-center policy.",
-      "stage": "Filed",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2026-01-07",
-      "partyOrigin": "R",
-      "sourceUrl": "https://house.mo.gov/Bill.aspx?bill=HB2670&year=2026&code=R",
-      "legiscanUrl": "https://legiscan.com/MO/bill/HB2670/2026",
-      "legiscanId": 2065280,
-      "sponsors": [
-        "Tara Peters"
-      ]
-    },
-    {
       "id": "mo-hb3390",
       "billCode": "HB3390",
       "title": "Creates new provisions related to the construction of data centers",
@@ -130,24 +58,6 @@
       "legiscanId": 2122818,
       "sponsors": [
         "Scott Cupps"
-      ]
-    },
-    {
-      "id": "mo-sb1692",
-      "billCode": "SB1692",
-      "title": "Modifies provisions relating to abortion",
-      "summary": "This bill modifies provisions related to abortion law in Missouri. It is not related to AI regulation or data-center policy.",
-      "stage": "Filed",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-02-19",
-      "partyOrigin": "D",
-      "sourceUrl": "https://www.senate.mo.gov/BillTracking/Bills/Billinformation?year=2026&billid=5552596",
-      "legiscanUrl": "https://legiscan.com/MO/bill/SB1692/2026",
-      "legiscanId": 2120035,
-      "sponsors": [
-        "Patty Lewis"
       ]
     },
     {

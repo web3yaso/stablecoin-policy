@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Colorado is under discussion on data centers and advancing regulation on AI. On data centers: SB102 (in committee) — Establishes accountability measures for large-scale data centers in Colorado, likely including requirements around energy use, grid impact, and reporting. On AI: HB1113 (in committee) — Modifies Colorado election laws, likely including rules around the use of AI-generated or synthetic media in political campaigns.",
+  "contextBlurb": "Colorado is pushing a full slate of pending AI bills, including restrictions on AI in psychotherapy, transparency rules for companion chatbots, and limits on police surveillance tech. Separate legislation would require large data centers to meet clean-energy and grid-impact standards.",
   "legislation": [
     {
       "id": "co-sb102",
@@ -220,90 +220,6 @@
         "Jenny Willford",
         "Katie Wallace",
         "Michael Weissman"
-      ]
-    },
-    {
-      "id": "co-hb1039",
-      "billCode": "HB1039",
-      "title": "Adding Municipal Jails to County Jail Oversight Requirements",
-      "summary": "This bill extends existing oversight requirements for county jails to also cover municipal jails. It has no connection to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-government",
-      "updatedDate": "2026-03-10",
-      "partyOrigin": "B",
-      "sourceUrl": "https://leg.colorado.gov/bills/HB26-1039",
-      "legiscanUrl": "https://legiscan.com/CO/bill/HB1039/2026",
-      "legiscanId": 2079981,
-      "sponsors": [
-        "Michael Carter",
-        "Naquetta Ricks",
-        "Iman Jodeh",
-        "Michael Weissman"
-      ]
-    },
-    {
-      "id": "co-hb1265",
-      "billCode": "HB1265",
-      "title": "Law Enforcement National Electronic Tracing System & Share Program",
-      "summary": "This bill deals with law enforcement agencies using the federal ATF's gun tracing system to track firearms. It is not related to AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-criminal-justice",
-      "updatedDate": "2026-03-12",
-      "partyOrigin": "D",
-      "sourceUrl": "https://leg.colorado.gov/bills/HB26-1265",
-      "legiscanUrl": "https://legiscan.com/CO/bill/HB1265/2026",
-      "legiscanId": 2121082,
-      "sponsors": [
-        "Chad Clifford",
-        "Manny Rutinel",
-        "William Lindstedt",
-        "Katie Wallace"
-      ]
-    },
-    {
-      "id": "co-hb1136",
-      "billCode": "HB1136",
-      "title": "Create Department of Personnel Program Pathways to Public Service",
-      "summary": "This bill creates a public service pathways program within Colorado's Department of Personnel. It is not related to AI or data-center policy.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-government",
-      "updatedDate": "2026-04-02",
-      "partyOrigin": "D",
-      "sourceUrl": "https://leg.colorado.gov/bills/HB26-1136",
-      "legiscanUrl": "https://legiscan.com/CO/bill/HB1136/2026",
-      "legiscanId": 2108134,
-      "sponsors": [
-        "Meghan Lukens",
-        "Matthew Martinez",
-        "William Lindstedt",
-        "Katie Wallace"
-      ]
-    },
-    {
-      "id": "co-hb1173",
-      "billCode": "HB1173",
-      "title": "Capital Construction Information Technology",
-      "summary": "This bill deals with funding and appropriations for government capital construction information technology projects. It is a budget/appropriations measure and is not substantively about AI regulation or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-government",
-      "updatedDate": "2026-03-26",
-      "partyOrigin": "B",
-      "sourceUrl": "https://leg.colorado.gov/bills/HB26-1173",
-      "legiscanUrl": "https://legiscan.com/CO/bill/HB1173/2026",
-      "legiscanId": 2111270,
-      "sponsors": [
-        "Emily Sirota",
-        "Jeff Bridges",
-        "Kyle Brown",
-        "Rick Taggart"
       ]
     }
   ]

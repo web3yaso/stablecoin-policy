@@ -5,28 +5,8 @@
   "stanceDatacenter": "none",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "",
+  "contextBlurb": "Mississippi has no significant AI or data-center legislation on the books.",
   "legislation": [
-    {
-      "id": "ms-hb534",
-      "billCode": "HB534",
-      "title": "Mississippi Health Information Exchange; create.",
-      "summary": "This bill creates a statewide system for hospitals, doctors, and insurers in Mississippi to securely share patient health information electronically in real time. It does not involve AI or data-center policy specifically, but establishes rules for who can access patient data and how the system is funded and administered.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [
-        "data-privacy"
-      ],
-      "category": "ai-healthcare",
-      "updatedDate": "2026-03-03",
-      "partyOrigin": "R",
-      "sourceUrl": "https://billstatus.ls.state.ms.us/2026/pdf/history/HB/HB0534.xml",
-      "legiscanUrl": "https://legiscan.com/MS/bill/HB534/2026",
-      "legiscanId": 2071640,
-      "sponsors": [
-        "Sam Creekmore"
-      ]
-    },
     {
       "id": "ms-sb2050",
       "billCode": "SB2050",
@@ -53,45 +33,6 @@
         "Albert Butler",
         "Sollie Norwood",
         "Derrick Simmons"
-      ]
-    },
-    {
-      "id": "ms-sb2673",
-      "billCode": "SB2673",
-      "title": "Occupational Licensure Boards Consolidation Study Committee; create.",
-      "summary": "This bill creates a committee to study consolidating Mississippi's occupational licensing boards into a single department. It has no relevance to AI regulation or data-center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-03-03",
-      "partyOrigin": "R",
-      "sourceUrl": "https://billstatus.ls.state.ms.us/2026/pdf/history/SB/SB2673.xml",
-      "legiscanUrl": "https://legiscan.com/MS/bill/SB2673/2026",
-      "legiscanId": 2090638,
-      "sponsors": [
-        "Tyler McCaughn"
-      ]
-    },
-    {
-      "id": "ms-hb999",
-      "billCode": "HB999",
-      "title": "Parkinson's Disease Research Registry; establish within State Department of Health.",
-      "summary": "This bill creates a Parkinson's disease patient registry in Mississippi to track the incidence and prevalence of the disease for research purposes. It is not related to AI regulation or data-center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "data-privacy",
-      "updatedDate": "2026-03-03",
-      "partyOrigin": "B",
-      "sourceUrl": "https://billstatus.ls.state.ms.us/2026/pdf/history/HB/HB0999.xml",
-      "legiscanUrl": "https://legiscan.com/MS/bill/HB999/2026",
-      "legiscanId": 2084357,
-      "sponsors": [
-        "Andy Boyd",
-        "Shane Aguirre",
-        "Elliot Burch",
-        "Billy Calvert"
       ]
     },
     {
@@ -193,27 +134,6 @@
       "sponsors": [
         "Jill Ford",
         "Henry Zuber"
-      ]
-    },
-    {
-      "id": "ms-sb2409",
-      "billCode": "SB2409",
-      "title": "Mississippi Department of Insurance; establish comprehensive mitigation program for retrofitting insurable homes.",
-      "summary": "This bill creates a home retrofitting grant program in Mississippi to help homeowners strengthen their homes against hurricanes, tornadoes, and other windstorms. It has no connection to AI or data-center policy.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-04-06",
-      "partyOrigin": "R",
-      "sourceUrl": "https://billstatus.ls.state.ms.us/2026/pdf/history/SB/SB2409.xml",
-      "legiscanUrl": "https://legiscan.com/MS/bill/SB2409/2026",
-      "legiscanId": 2086179,
-      "sponsors": [
-        "Walter Michel",
-        "Dean Kirby",
-        "Scott DeLano",
-        "Joseph Seymour"
       ]
     },
     {

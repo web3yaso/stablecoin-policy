@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "restrictive",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Indiana is advancing regulation on data centers and leaning restrictive on AI. On data centers: HB1333 (in committee) — Sets new rules for data centers in Indiana, requiring them to contribute at least 1% of their tax savings to local governments before receiving sales tax exemptions on equipment purchases. On AI: HB1271 (enacted) — Regulates how hospitals and insurers handle health insurance claims, including a ban on using automated systems to submit claims without human review by the provider.",
+  "contextBlurb": "Indiana is reconsidering the sales-tax exemption it granted data centers and is weighing a bill that would require a state water-consumption permit before any data center can operate. Other pending legislation would force social-media companies to get parental consent for users under 14.",
   "legislation": [
     {
       "id": "in-sb0083",
@@ -109,27 +109,6 @@
       ]
     },
     {
-      "id": "in-hb1358",
-      "billCode": "HB1358",
-      "title": "Indiana department of health.",
-      "summary": "This bill makes various updates to Indiana's public health laws, including changes to smoking cessation orders, hospital reporting, infectious waste handling, and child fatality review processes. It has no relevance to AI regulation or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2026-03-04",
-      "partyOrigin": "B",
-      "sourceUrl": "https://iga.in.gov/legislative/2026/bills/house/1358/details",
-      "legiscanUrl": "https://legiscan.com/IN/bill/HB1358/2026",
-      "legiscanId": 2066964,
-      "sponsors": [
-        "Bradford Barrett",
-        "Joanna King",
-        "Lori Goss-Reaves",
-        "Gregory Porter"
-      ]
-    },
-    {
       "id": "in-hb1043",
       "billCode": "HB1043",
       "title": "Data center water regulation.",
@@ -187,87 +166,6 @@
       "sponsors": [
         "J.D. Ford",
         "Spencer Deery"
-      ]
-    },
-    {
-      "id": "in-hb1106",
-      "billCode": "HB1106",
-      "title": "Various family matters.",
-      "summary": "This bill deals with child care licensing, child welfare procedures, and family court matters. It has no connection to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-01-05",
-      "partyOrigin": "R",
-      "sourceUrl": "https://iga.in.gov/legislative/2026/bills/house/1106/details",
-      "legiscanUrl": "https://legiscan.com/IN/bill/HB1106/2026",
-      "legiscanId": 2061478,
-      "sponsors": [
-        "Ethan Manning"
-      ]
-    },
-    {
-      "id": "in-sb0004",
-      "billCode": "SB0004",
-      "title": "Various fiscal matters.",
-      "summary": "This bill covers a range of Indiana fiscal and administrative matters, including fiscal impact analysis of executive orders, rulemaking cost thresholds, mental health center funding, and child care vouchers. It has no substantive connection to AI regulation or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-03-05",
-      "partyOrigin": "B",
-      "sourceUrl": "https://iga.in.gov/legislative/2026/bills/senate/4/details",
-      "legiscanUrl": "https://legiscan.com/IN/bill/SB0004/2026",
-      "legiscanId": 2068520,
-      "sponsors": [
-        "Ryan Mishler",
-        "Chris Garten",
-        "Gary Byrne",
-        "Lonnie Randolph"
-      ]
-    },
-    {
-      "id": "in-sb0236",
-      "billCode": "SB0236",
-      "title": "Abortion inducing drugs and abortion reports.",
-      "summary": "This bill deals with abortion-related drug regulations, reporting requirements, and liability rules. It has no relevance to AI policy or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-01-28",
-      "partyOrigin": "R",
-      "sourceUrl": "https://iga.in.gov/legislative/2026/bills/senate/236/details",
-      "legiscanUrl": "https://legiscan.com/IN/bill/SB0236/2026",
-      "legiscanId": 2068855,
-      "sponsors": [
-        "Tyler Johnson",
-        "Elizabeth Brown",
-        "Blake Doriot",
-        "Stacey Donato"
-      ]
-    },
-    {
-      "id": "in-hb1004",
-      "billCode": "HB1004",
-      "title": "Various education matters.",
-      "summary": "This bill makes a wide variety of administrative and procedural changes to Indiana's education laws, covering topics like school accounting, teacher contracts, graduation requirements, and school safety. It does not substantively address AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2026-03-04",
-      "partyOrigin": "R",
-      "sourceUrl": "https://iga.in.gov/legislative/2026/bills/house/1004/details",
-      "legiscanUrl": "https://legiscan.com/IN/bill/HB1004/2026",
-      "legiscanId": 2068176,
-      "sponsors": [
-        "Robert Behning",
-        "Julie McGuire",
-        "Hunter Smith",
-        "Tyler Johnson"
       ]
     },
     {

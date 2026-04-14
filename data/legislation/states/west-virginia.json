@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "West Virginia is advancing regulation across both data centers and AI. On data centers: HB4948 (in committee) — Requires data centers in West Virginia to be built at least 500 feet away from any home, school, or house of worship. On AI: HB5034 (in committee) — Creates a West Virginia law protecting genetic and biometric data by requiring companies to tell consumers how their genetic information is collected and used, and banning the sale or tra…",
+  "contextBlurb": "West Virginia is weighing an unusually hard-line package: banning all state and local subsidies to data centers, requiring a 500-foot setback from homes and schools, and letting regulators restrict data-center water withdrawals when harm is detected. A separate bill would limit AI use in mental-health care.",
   "legislation": [
     {
       "id": "wv-hb4832",
@@ -91,27 +91,6 @@
       ]
     },
     {
-      "id": "wv-hb5551",
-      "billCode": "HB5551",
-      "title": "Protecting State Licensing and ID Act",
-      "summary": "This bill is about protecting state-issued IDs that do not comply with federal REAL ID standards. It is not related to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-government",
-      "updatedDate": "2026-02-16",
-      "partyOrigin": "R",
-      "sourceUrl": "http://www.wvlegislature.gov/Bill_Status/Bills_history.cfm?input=5551&year=2026&sessiontype=RS&btype=bill",
-      "legiscanUrl": "https://legiscan.com/WV/bill/HB5551/2026",
-      "legiscanId": 2117278,
-      "sponsors": [
-        "Laura Kimble",
-        "Chris Anders",
-        "Tresa Howell",
-        "Margitta Mazzocchi"
-      ]
-    },
-    {
       "id": "wv-hb4854",
       "billCode": "HB4854",
       "title": "Prohibiting the state or any political subdivision from subsidizing any data center in West Virginia",
@@ -188,67 +167,6 @@
         "Chris Anders",
         "Bill Ridenour",
         "Margitta Mazzocchi"
-      ]
-    },
-    {
-      "id": "wv-hb4592",
-      "billCode": "HB4592",
-      "title": "Relating to college campus safety",
-      "summary": "This bill updates school safety mapping requirements to include colleges and universities alongside K-12 schools. It is not related to AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-government",
-      "updatedDate": "2026-03-14",
-      "partyOrigin": "R",
-      "sourceUrl": "http://www.wvlegislature.gov/Bill_Status/Bills_history.cfm?input=4592&year=2026&sessiontype=RS&btype=bill",
-      "legiscanUrl": "https://legiscan.com/WV/bill/HB4592/2026",
-      "legiscanId": 2086363,
-      "sponsors": [
-        "Michael Hornby",
-        "Josh Holstein",
-        "Jarred Cannon",
-        "Kathie Crouse"
-      ]
-    },
-    {
-      "id": "wv-hb4598",
-      "billCode": "HB4598",
-      "title": "Change Audit Log for annual subscription with Secretary of State",
-      "summary": "This bill updates voter list information provided through the Secretary of State's subscription service to include change audit data. It is not related to AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-01-20",
-      "partyOrigin": "R",
-      "sourceUrl": "http://www.wvlegislature.gov/Bill_Status/Bills_history.cfm?input=4598&year=2026&sessiontype=RS&btype=bill",
-      "legiscanUrl": "https://legiscan.com/WV/bill/HB4598/2026",
-      "legiscanId": 2086506,
-      "sponsors": [
-        "Tresa Howell",
-        "Roland Jennings",
-        "Rick Hillenbrand",
-        "Dana Ferrell"
-      ]
-    },
-    {
-      "id": "wv-sb88",
-      "billCode": "SB88",
-      "title": "Relating to community air monitoring programs",
-      "summary": "This bill establishes community air monitoring programs in West Virginia and defines how the collected air quality data will be used. It is not related to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "data-center-energy",
-      "updatedDate": "2026-01-14",
-      "partyOrigin": "R",
-      "sourceUrl": "http://www.wvlegislature.gov/Bill_Status/Bills_history.cfm?input=88&year=2026&sessiontype=RS&btype=bill",
-      "legiscanUrl": "https://legiscan.com/WV/bill/SB88/2026",
-      "legiscanId": 2079537,
-      "sponsors": [
-        "Eric Tarr",
-        "Darren Thorne"
       ]
     },
     {

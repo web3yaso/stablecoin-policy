@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "favorable",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Iowa is advancing regulation on data centers and leaning innovation-friendly on AI. On data centers: HF2447 (in committee) — Requires data centers in Iowa to report on their water and energy usage and establishes specific tariff rules related to those resources. On AI: HSB294 (in committee) — Regulates the use of AI to create election-related content, such as deepfakes or synthetic media that could mislead voters.",
+  "contextBlurb": "Iowa is debating bills that would require data centers to report water and energy use and adopt water-efficient cooling, while a parallel measure would adjust investment thresholds for the state's data-center sales-tax break. Pending AI legislation would regulate election-related synthetic media.",
   "legislation": [
     {
       "id": "ia-hf2447",
@@ -58,42 +58,6 @@
       "legiscanId": 1990915,
       "sponsors": [
         "Economic Growth And Technology"
-      ]
-    },
-    {
-      "id": "ia-sf2052",
-      "billCode": "SF2052",
-      "title": "A bill for an act relating to the issuance of driver's licenses and nonoperator's identification cards, including physical forms of such identification and noncompliance with federal requirements.",
-      "summary": "This bill deals with driver's licenses and state ID cards, including their physical format and federal compliance requirements. It is not related to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "data-privacy",
-      "updatedDate": "2026-01-14",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.legis.iowa.gov/legislation/BillBook?ga=91&ba=SF2052",
-      "legiscanUrl": "https://legiscan.com/IA/bill/SF2052/2025",
-      "legiscanId": 2079898,
-      "sponsors": [
-        "Dennis Guth"
-      ]
-    },
-    {
-      "id": "ia-hf2110",
-      "billCode": "HF2110",
-      "title": "A bill for an act relating to the issuance of driver's licenses and nonoperator's identification cards, including physical forms of such identification and noncompliance with federal requirements.",
-      "summary": "This bill deals with driver's licenses and state ID cards, including rules about physical identification and federal compliance. It has no relevance to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-01-16",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.legis.iowa.gov/legislation/BillBook?ga=91&ba=HF2110",
-      "legiscanUrl": "https://legiscan.com/IA/bill/HF2110/2025",
-      "legiscanId": 2083932,
-      "sponsors": [
-        "Jeff Shipley"
       ]
     },
     {

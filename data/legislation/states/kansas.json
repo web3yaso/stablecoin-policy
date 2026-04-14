@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "restrictive",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Kansas is advancing regulation on data centers and leaning restrictive on AI. On data centers: SB531 (in committee) — Would ban the construction or operation of new large data centers in Kansas counties that have experienced a drought emergency in the past three years. On AI: HB2183 (enacted) — Updates Kansas criminal law to ban the creation and distribution of AI-generated or digitally altered sexual images of children, even when no real child was directly involved in making them.",
+  "contextBlurb": "Kansas is moving a package that would ban new large data centers in counties under recent drought emergencies, require closed-loop cooling, and confine tax-exempt data centers to industrial-zoned land. Pending AI legislation would bar systems from simulating emotional relationships or posing as healthcare professionals.",
   "legislation": [
     {
       "id": "ks-sb526",
@@ -121,23 +121,6 @@
       ]
     },
     {
-      "id": "ks-hb2329",
-      "billCode": "HB2329",
-      "title": "Changing the name of juvenile crisis intervention centers to juvenile stabilization centers, modifying the intake criteria for such centers, prohibiting certain rules and regulations for such centers, modifying the treatment and services provided by such centers, increasing the cumulative detention limit for juvenile offenders and criminal penalties for juvenile offenders who use a firearm in the commission of an offense or who are repeat offenders, providing for increased placement of offenders in non-foster home beds in youth residential facilities, requiring the secretary of corrections to pay for the costs associated with such placements, authorizing the secretary to make expenditures from the evidence-based programs account of the state general fund moneys to contract for such beds and transferring moneys from such account of the state general fund to the department for children and families to provide juvenile stabilization services.",
-      "summary": "This bill renames juvenile crisis intervention centers, changes how juveniles are processed and detained, and adjusts criminal penalties for juvenile offenders. It has no relevance to AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-criminal-justice",
-      "updatedDate": "2026-04-09",
-      "sourceUrl": "https://kslegislature.gov/li/b2025_26/measures/hb2329/",
-      "legiscanUrl": "https://legiscan.com/KS/bill/HB2329/2025",
-      "legiscanId": 1962315,
-      "sponsors": [
-        "Corrections and Juvenile Justice"
-      ]
-    },
-    {
       "id": "ks-sb400",
       "billCode": "SB400",
       "title": "Requiring data centers to use closed-loop cooling systems to mitigate water consumption.",
@@ -237,40 +220,6 @@
         "David Buehler",
         "Timothy Johnson",
         "Pat Proctor"
-      ]
-    },
-    {
-      "id": "ks-hb2475",
-      "billCode": "HB2475",
-      "title": "Providing a sales tax exemption for purchases made by radical life inc.",
-      "summary": "This bill provides a sales tax exemption for purchases made by a specific organization called Radical Life Inc. It has no substantive connection to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-01-20",
-      "sourceUrl": "https://kslegislature.gov/li/b2025_26/measures/hb2475/",
-      "legiscanUrl": "https://legiscan.com/KS/bill/HB2475/2025",
-      "legiscanId": 2087018,
-      "sponsors": [
-        "Taxation"
-      ]
-    },
-    {
-      "id": "ks-hb2366",
-      "billCode": "HB2366",
-      "title": "Expanding the scope of practice of naturopathic doctors, specifying continuing education requirements, increasing the required amount of professional liability insurance and modifying certain provisions relating to the licensure and regulations of naturopathic doctors.",
-      "summary": "This bill updates the rules and requirements for naturopathic doctors in Kansas, including their scope of practice and insurance requirements. It has no connection to AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2025-02-07",
-      "sourceUrl": "https://kslegislature.gov/li/b2025_26/measures/hb2366/",
-      "legiscanUrl": "https://legiscan.com/KS/bill/HB2366/2025",
-      "legiscanId": 1962573,
-      "sponsors": [
-        "Health and Human Services"
       ]
     }
   ]

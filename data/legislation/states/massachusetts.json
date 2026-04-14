@@ -5,28 +5,8 @@
   "stanceDatacenter": "review",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Massachusetts is under discussion on data centers and advancing regulation on AI. On data centers: H495 (in committee) — Aims to reduce the greenhouse gas emissions produced by artificial intelligence systems and data centers in Massachusetts. On AI: H4640 (in committee) — Puts into law the recommendations made by a special commission studying facial recognition technology, likely establishing rules and restrictions on how it can be used.",
+  "contextBlurb": "Massachusetts has no enacted AI or data-center law, but the legislature is considering a broad slate: emissions-reduction rules for AI and data centers, oversight of AI in healthcare decisions, codification of its facial-recognition commission recommendations, and general AI consumer protections.",
   "legislation": [
-    {
-      "id": "ma-s50",
-      "billCode": "S50",
-      "title": "Establishing a career-to-education data center",
-      "summary": "This bill proposes creating a data repository that links career and education information within a state technology office. It is not related to AI regulation or data-center infrastructure policy — 'data center' here refers to a data collection system, not a computing facility.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [
-        "ai-in-education"
-      ],
-      "category": "ai-education",
-      "updatedDate": "2025-02-27",
-      "partyOrigin": "D",
-      "sourceUrl": "https://malegislature.gov/Bills/194/S50",
-      "legiscanUrl": "https://legiscan.com/MA/bill/S50/2025",
-      "legiscanId": 1997265,
-      "sponsors": [
-        "Pavel Payano"
-      ]
-    },
     {
       "id": "ma-h97",
       "billCode": "H97",
@@ -77,82 +57,6 @@
       "legiscanId": 2047297,
       "sponsors": [
         "Joint Committee on the Judiciary"
-      ]
-    },
-    {
-      "id": "ma-h630",
-      "billCode": "H630",
-      "title": "Establishing an education-to-career data center",
-      "summary": "This bill proposes creating a data repository to track students' educational and career outcomes in Massachusetts. It is focused on workforce and education data infrastructure, not AI regulation or data-center technology policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [
-        "ai-in-education"
-      ],
-      "category": "ai-education",
-      "updatedDate": "2025-02-27",
-      "partyOrigin": "D",
-      "sourceUrl": "https://malegislature.gov/Bills/194/H630",
-      "legiscanUrl": "https://legiscan.com/MA/bill/H630/2025",
-      "legiscanId": 2001692,
-      "sponsors": [
-        "Kate Lipper-Garabedian",
-        "Manny Cruz"
-      ]
-    },
-    {
-      "id": "ma-h1356",
-      "billCode": "H1356",
-      "title": "Relative to transparency of hospital and health system finances",
-      "summary": "This bill deals with financial transparency requirements for hospitals and health systems in Massachusetts. It does not address AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2025-02-27",
-      "partyOrigin": "D",
-      "sourceUrl": "https://malegislature.gov/Bills/194/H1356",
-      "legiscanUrl": "https://legiscan.com/MA/bill/H1356/2025",
-      "legiscanId": 2003180,
-      "sponsors": [
-        "Mark Cusack"
-      ]
-    },
-    {
-      "id": "ma-s909",
-      "billCode": "S909",
-      "title": "Empowering patients and entrepreneurs with real transparency on cost",
-      "summary": "This bill focuses on healthcare cost transparency for patients and entrepreneurs, not AI or data-center policy. It does not appear to regulate or incentivize AI or data infrastructure in any substantive way.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [
-        "data-privacy"
-      ],
-      "category": "ai-healthcare",
-      "updatedDate": "2025-02-27",
-      "partyOrigin": "R",
-      "sourceUrl": "https://malegislature.gov/Bills/194/S909",
-      "legiscanUrl": "https://legiscan.com/MA/bill/S909/2025",
-      "legiscanId": 1997098,
-      "sponsors": [
-        "Bruce Tarr"
-      ]
-    },
-    {
-      "id": "ma-h4530",
-      "billCode": "H4530",
-      "title": "Making appropriations for fiscal year 2025 to provide for supplementing certain existing appropriations and for certain other activities and projects",
-      "summary": "This bill is a general state budget supplemental appropriations measure for fiscal year 2025. It does not appear to be specifically focused on AI regulation or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2025-09-22",
-      "sourceUrl": "https://malegislature.gov/Bills/194/H4530",
-      "legiscanUrl": "https://legiscan.com/MA/bill/H4530/2025",
-      "legiscanId": 2044124,
-      "sponsors": [
-        "House Committee on Ways and Means"
       ]
     },
     {

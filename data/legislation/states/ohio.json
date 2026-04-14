@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Ohio is advancing regulation across both data centers and AI. On data centers: HB646 (on the floor) — Creates a commission to study data centers in Ohio and their impacts. On AI: HB807 (filed) — Bans government agencies and private companies from selling sensitive personal data to data brokers or other private entities for profit.",
+  "contextBlurb": "Ohio has no enacted AI or data-center law. A filed package would freeze new data-center sales-tax exemptions, license independent AI risk-verification organizations, and ban the sale of sensitive personal data to data brokers. A study commission on data centers is also advancing.",
   "legislation": [
     {
       "id": "oh-sb374",
@@ -133,48 +133,6 @@
         "Kellie Deeter",
         "Munira Abdullahi",
         "Tim Barhorst"
-      ]
-    },
-    {
-      "id": "oh-sb19",
-      "billCode": "SB19",
-      "title": "Regards academic intervention, math improvement and intervention",
-      "summary": "This bill deals with academic intervention services and math improvement plans in Ohio public schools. It has no relevance to AI regulation or data-center policy.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2025-11-19",
-      "partyOrigin": "B",
-      "sourceUrl": "https://www.legislature.ohio.gov/legislation/136/sb19",
-      "legiscanUrl": "https://legiscan.com/OH/bill/SB19/2025",
-      "legiscanId": 1937109,
-      "sponsors": [
-        "Andrew Brenner",
-        "Brian Chavez",
-        "Jerry Cirino",
-        "Theresa Gavarone"
-      ]
-    },
-    {
-      "id": "oh-hb455",
-      "billCode": "HB455",
-      "title": "Regards the operation of public schools and the DEW",
-      "summary": "This bill makes broad amendments to Ohio's public school operations and the Department of Education and Workforce, covering topics like school funding, staffing, and curriculum standards. It does not substantively address AI regulation or data-center policy.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2025-11-19",
-      "partyOrigin": "B",
-      "sourceUrl": "https://www.legislature.ohio.gov/legislation/136/hb455",
-      "legiscanUrl": "https://legiscan.com/OH/bill/HB455/2025",
-      "legiscanId": 2044413,
-      "sponsors": [
-        "Gayle Manning",
-        "Adam Bird",
-        "Sean Brennan",
-        "Gary Click"
       ]
     },
     {

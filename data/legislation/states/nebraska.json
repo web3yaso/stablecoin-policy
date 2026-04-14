@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Nebraska is under discussion on data centers and advancing regulation on AI. On data centers: LB1010 (enacted) — Establishes new rules for large electricity customers like data centers and crypto miners, addressing how they connect to and impact the power grid. On AI: LB525 (enacted) — Establishes privacy protections for agricultural data and sets safety requirements for conversational AI systems in Nebraska.",
+  "contextBlurb": "Nebraska has no enacted AI or data-center law. Pending bills would require data centers to file annual load reports with the state Power Review Board, establish consumer protections and risk-management standards for AI, and create biometric-data consent rules.",
   "legislation": [
     {
       "id": "ne-lb1111",
@@ -82,23 +82,6 @@
       ]
     },
     {
-      "id": "ne-lb48",
-      "billCode": "LB48",
-      "title": "Establish a Family Resource and Juvenile Assessment Center Pilot Program",
-      "summary": "This bill establishes a pilot program for family resource and juvenile assessment centers in Nebraska. It is not related to AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-government",
-      "updatedDate": "2025-06-06",
-      "sourceUrl": "https://nebraskalegislature.gov/bills/view_bill.php?DocumentID=59016",
-      "legiscanUrl": "https://legiscan.com/NE/bill/LB48/2025",
-      "legiscanId": 1909354,
-      "sponsors": [
-        "Terrell McKinney"
-      ]
-    },
-    {
       "id": "ne-lb1010",
       "billCode": "LB1010",
       "title": "Adopt the Large Load Customer Regulation Act, provide for eminent domain relating to energy storage and regulation and taxation of energy storage resources, and change provisions relating to cryptocurrency mining operations and data centers",
@@ -123,23 +106,6 @@
       "legiscanId": 2072357,
       "sponsors": [
         "Tom Brandt"
-      ]
-    },
-    {
-      "id": "ne-lb613",
-      "billCode": "LB613",
-      "title": "Change provisions relating to the disclosure of tax information to municipalities",
-      "summary": "Change provisions relating to the disclosure of tax information to municipalities",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2025-06-06",
-      "sourceUrl": "https://nebraskalegislature.gov/bills/view_bill.php?DocumentID=59758",
-      "legiscanUrl": "https://legiscan.com/NE/bill/LB613/2025",
-      "legiscanId": 1934223,
-      "sponsors": [
-        "Bob Andersen"
       ]
     },
     {
@@ -239,42 +205,6 @@
       "legiscanId": 1917326,
       "sponsors": [
         "Kathleen Kauth"
-      ]
-    },
-    {
-      "id": "ne-lb376",
-      "billCode": "LB376",
-      "title": "Change and eliminate programs and services administered by the Department of Health and Human Services, eliminate various reporting requirements, and change and eliminate powers and duties of the Board of Emergency Medical Services, the Division of Children and Family Services, the Nebraska State Patrol, and the Director of Motor Vehicles",
-      "summary": "This bill makes administrative changes to Nebraska's Department of Health and Human Services and related agencies, eliminating various programs, reporting requirements, and agency duties. It does not address AI regulation or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-government",
-      "updatedDate": "2025-06-06",
-      "sourceUrl": "https://nebraskalegislature.gov/bills/view_bill.php?DocumentID=59307",
-      "legiscanUrl": "https://legiscan.com/NE/bill/LB376/2025",
-      "legiscanId": 1923721,
-      "sponsors": [
-        "Health and Human Services Committee"
-      ]
-    },
-    {
-      "id": "ne-lb210",
-      "billCode": "LB210",
-      "title": "Provide for fees and assessments for participation and use of the prescription drug monitoring program and the designated health information exchange",
-      "summary": "This bill establishes fees for participating in Nebraska's prescription drug monitoring program and health information exchange. It is not related to AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [
-        "data-privacy"
-      ],
-      "category": "ai-healthcare",
-      "updatedDate": "2025-01-14",
-      "sourceUrl": "https://nebraskalegislature.gov/bills/view_bill.php?DocumentID=59490",
-      "legiscanUrl": "https://legiscan.com/NE/bill/LB210/2025",
-      "legiscanId": 1917366,
-      "sponsors": [
-        "Merv Riepe"
       ]
     }
   ]

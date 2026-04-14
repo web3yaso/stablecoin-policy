@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Kentucky is advancing regulation across both data centers and AI. On data centers: HB593 (in committee) — Requires data centers to obtain electricity only through special contracts that protect other utility customers from bearing the costs of new infrastructure built to serve data c… On AI: HB676 (on the floor) — Creates a statewide health data system in Kentucky that collects and shares health information from various participants, governed by a board and operated by a consortium of public health…",
+  "contextBlurb": "Kentucky is pushing multiple bills to keep data-center power costs off ordinary ratepayers, including requiring PSC approval for any facility over 100 megawatts and mandating decommissioning bonds for data centers built on farmland. A separate bill would sharply restrict AI use in therapy sessions.",
   "legislation": [
     {
       "id": "ky-hb593",
@@ -153,27 +153,6 @@
       ]
     },
     {
-      "id": "ky-hb652",
-      "billCode": "HB652",
-      "title": "AN ACT relating to critical facility mapping and declaring an emergency.",
-      "summary": "This bill moves a school mapping data program to the Kentucky 911 Services Board and clarifies who is responsible for keeping that mapping data accurate. It is not related to AI or data-center policy.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-government",
-      "updatedDate": "2026-04-01",
-      "partyOrigin": "B",
-      "sourceUrl": "https://apps.legislature.ky.gov/record/26RS/hb652.html",
-      "legiscanUrl": "https://legiscan.com/KY/bill/HB652/2026",
-      "legiscanId": 2118359,
-      "sponsors": [
-        "Steve Bratcher",
-        "Daniel Grossberg",
-        "Tony Hampton",
-        "Mark Hart"
-      ]
-    },
-    {
       "id": "ky-hb856",
       "billCode": "HB856",
       "title": "AN ACT relating to data centers.",
@@ -275,25 +254,6 @@
       "legiscanId": 2113553,
       "sponsors": [
         "Stephen Meredith"
-      ]
-    },
-    {
-      "id": "ky-hb774",
-      "billCode": "HB774",
-      "title": "AN ACT relating to the reporting of costs, fines, and fees.",
-      "summary": "This bill requires Kentucky government agencies to report data on fines and fees they collect to a state statistics office, with annual legislative summaries. It has no connection to AI or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-03-11",
-      "partyOrigin": "R",
-      "sourceUrl": "https://apps.legislature.ky.gov/record/26RS/hb774.html",
-      "legiscanUrl": "https://legiscan.com/KY/bill/HB774/2026",
-      "legiscanId": 2125895,
-      "sponsors": [
-        "Jennifer Henson Decker",
-        "Mary Imes"
       ]
     },
     {

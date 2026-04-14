@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "restrictive",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Nevada is leaning restrictive on AI, with no data-center legislation currently tracked. On AI: AB406 (enacted) — Bans certain uses of AI in public schools, restricts how AI can be used in mental and behavioral health care, and prohibits AI systems from falsely presenting themselves as qualifi…",
+  "contextBlurb": "Nevada enacted a restrictive AI package this session that bans AI from making final calls on emergency-response decisions, restricts AI in mental and behavioral health care, and bars AI systems from posing as licensed providers. It also stood up a state Security Operations Center to handle cybersecurity.",
   "legislation": [
     {
       "id": "nv-ab226",
@@ -70,27 +70,6 @@
       ]
     },
     {
-      "id": "nv-sb403",
-      "billCode": "SB403",
-      "title": "Revises provisions relating to education. (BDR 34-611)",
-      "summary": "This bill makes changes to Nevada's education system, including competency-based learning, school scheduling, and career exploration programs. It does not address artificial intelligence or data center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2025-06-03",
-      "partyOrigin": "D",
-      "sourceUrl": "https://www.leg.state.nv.us/App/NELIS/REL/83rd2025/Bill/12720/Overview",
-      "legiscanUrl": "https://legiscan.com/NV/bill/SB403/2025",
-      "legiscanId": 2009422,
-      "sponsors": [
-        "Marilyn Dondero Loop",
-        "Nicole Cannizzaro",
-        "Michelee Cruz-Crawford",
-        "Fabian Donate"
-      ]
-    },
-    {
       "id": "nv-ab1",
       "billCode": "AB1",
       "title": "Revises provisions relating to governmental administration. (BDR 19-22)",
@@ -132,76 +111,6 @@
       "legiscanId": 2006511,
       "sponsors": [
         "Thaddeus Yurek"
-      ]
-    },
-    {
-      "id": "nv-sb119",
-      "billCode": "SB119",
-      "title": "Revises provisions relating to the NV Grow Program. (BDR S-81)",
-      "summary": "This bill revises the NV Grow Program, a small business development initiative, by updating oversight responsibilities and participation requirements. It is not related to AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2025-06-11",
-      "partyOrigin": "D",
-      "sourceUrl": "https://www.leg.state.nv.us/App/NELIS/REL/83rd2025/Bill/12032/Overview",
-      "legiscanUrl": "https://legiscan.com/NV/bill/SB119/2025",
-      "legiscanId": 1942130,
-      "sponsors": [
-        "Dina Neal"
-      ]
-    },
-    {
-      "id": "nv-ab389",
-      "billCode": "AB389",
-      "title": "Revises provisions relating to education. (BDR 34-1056)",
-      "summary": "This bill updates Nevada's education data reporting and accountability systems, including how student performance metrics are collected and published. It does not address artificial intelligence or data center policy in any substantive way.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2025-06-03",
-      "partyOrigin": "D",
-      "sourceUrl": "https://www.leg.state.nv.us/App/NELIS/REL/83rd2025/Bill/12554/Overview",
-      "legiscanUrl": "https://legiscan.com/NV/bill/AB389/2025",
-      "legiscanId": 1999895,
-      "sponsors": [
-        "Selena Torres-Fossett"
-      ]
-    },
-    {
-      "id": "nv-sb495",
-      "billCode": "SB495",
-      "title": "Revises provisions relating to health care. (BDR 40-1037)",
-      "summary": "This bill makes broad updates to Nevada healthcare laws, covering topics like health information exchange, insurance prior authorization, Medicaid, and provider licensing. It does not address artificial intelligence or data center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2025-06-03",
-      "sourceUrl": "https://www.leg.state.nv.us/App/NELIS/REL/83rd2025/Bill/12939/Overview",
-      "legiscanUrl": "https://legiscan.com/NV/bill/SB495/2025",
-      "legiscanId": 2031601,
-      "sponsors": [
-        "Health and Human Services"
-      ]
-    },
-    {
-      "id": "nv-ab339",
-      "billCode": "AB339",
-      "title": "Creates the Office of Children's Mental and Behavioral Health within the Office of the Director of the Department of Health and Human Services. (BDR 39-358)",
-      "summary": "This bill creates a new state office focused on children's mental and behavioral health services in Nevada. It has no connection to AI regulation or data-center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2025-06-03",
-      "sourceUrl": "https://www.leg.state.nv.us/App/NELIS/REL/83rd2025/Bill/12431/Overview",
-      "legiscanUrl": "https://legiscan.com/NV/bill/AB339/2025",
-      "legiscanId": 1989916,
-      "sponsors": [
-        "Health and Human Services"
       ]
     },
     {

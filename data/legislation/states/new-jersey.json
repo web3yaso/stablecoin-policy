@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "New Jersey is advancing regulation across both data centers and AI. On data centers: S3379 (in committee) — Would require data center owners and operators in New Jersey to report their water and energy usage to the Board of Public Utilities twice a year. On AI: A4163 (in committee) — Imposes civil fines on political campaigns that use AI-generated deepfakes to misrepresent candidates in advertisements.",
+  "contextBlurb": "New Jersey has no enacted AI law. Pending bills would require data centers to report water and energy use twice a year to the Board of Public Utilities, fine political campaigns using deceptive deepfakes, and create an AI apprenticeship program with tax credits for participating employers.",
   "legislation": [
     {
       "id": "nj-s3379",
@@ -156,46 +156,6 @@
       "legiscanId": 2075900,
       "sponsors": [
         "Raj Mukherji"
-      ]
-    },
-    {
-      "id": "nj-s2305",
-      "billCode": "S2305",
-      "title": "Requires vehicle manufacturers to provide real-time access to motor vehicle data to vehicle owners and representatives.",
-      "summary": "This bill requires car manufacturers to give vehicle owners real-time access to their vehicle's data. While it involves data rights, it is not substantively related to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [
-        "data-privacy"
-      ],
-      "category": "data-privacy",
-      "updatedDate": "2026-01-13",
-      "partyOrigin": "D",
-      "sourceUrl": "https://www.njleg.state.nj.us/bill-search/2026/S2305",
-      "legiscanUrl": "https://legiscan.com/NJ/bill/S2305/2026",
-      "legiscanId": 2077395,
-      "sponsors": [
-        "John McKeon"
-      ]
-    },
-    {
-      "id": "nj-a2531",
-      "billCode": "A2531",
-      "title": "Requires vehicle manufacturers to provide real-time access to motor vehicle data to vehicle owners and representatives.",
-      "summary": "This bill requires car manufacturers to give vehicle owners real-time access to their vehicle's data. It is not related to AI regulation or data-center policy.",
-      "stage": "Committee",
-      "stance": "none",
-      "impactTags": [
-        "data-privacy"
-      ],
-      "category": "data-privacy",
-      "updatedDate": "2026-01-13",
-      "partyOrigin": "D",
-      "sourceUrl": "https://www.njleg.state.nj.us/bill-search/2026/A2531",
-      "legiscanUrl": "https://legiscan.com/NJ/bill/A2531/2026",
-      "legiscanId": 2098648,
-      "sponsors": [
-        "Rosy Bagolie"
       ]
     },
     {

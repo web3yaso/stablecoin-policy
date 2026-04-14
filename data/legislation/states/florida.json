@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Florida is advancing regulation across both data centers and AI. On data centers: S0484 (on the floor) — Gives local governments control over zoning and land-use rules for large data centers, sets utility service requirements for big power customers, and blocks water-use permits for… On AI: S0480 (in committee) — Reorganizes Florida's state technology operations by moving the Florida Digital Service into a new division called DIGIT within the Governor's office.",
+  "contextBlurb": "Florida is moving aggressively to hand data-center siting back to local governments, with a floor bill that would block water permits for large projects and require grid-impact studies before construction. A separate measure would shield site-selection details from public records.",
   "legislation": [
     {
       "id": "fl-h1007",
@@ -215,59 +215,6 @@
       "sponsors": [
         "Community Affairs",
         "Bryan Avila"
-      ]
-    },
-    {
-      "id": "fl-s2500",
-      "billCode": "S2500",
-      "title": "Appropriations",
-      "summary": "This is Florida's general state budget bill covering government salaries and expenses for the 2026-2027 fiscal year. It is not specifically about AI or data-center policy.",
-      "stage": "Filed",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-02-18",
-      "sourceUrl": "https://www.flsenate.gov/Session/Bill/2026/2500",
-      "legiscanUrl": "https://legiscan.com/FL/bill/S2500/2026",
-      "legiscanId": 2117014,
-      "sponsors": [
-        "Appropriations"
-      ]
-    },
-    {
-      "id": "fl-h5001",
-      "billCode": "H5001",
-      "title": "General Appropriations Act",
-      "summary": "This is Florida's general state budget bill covering government salaries, expenses, and capital projects for the 2026-2027 fiscal year. It is not specifically focused on AI or data-center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-03-13",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.flsenate.gov/Session/Bill/2026/5001",
-      "legiscanUrl": "https://legiscan.com/FL/bill/H5001/2026",
-      "legiscanId": 2117701,
-      "sponsors": [
-        "House Budget Committee",
-        "Lawrence McClure"
-      ]
-    },
-    {
-      "id": "fl-s2516",
-      "billCode": "S2516",
-      "title": "Higher Education",
-      "summary": "This bill makes administrative changes to Florida's nursing education programs, including fee waivers and grant reporting requirements. It has no connection to AI regulation or data-center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-03-13",
-      "sourceUrl": "https://www.flsenate.gov/Session/Bill/2026/2516",
-      "legiscanUrl": "https://legiscan.com/FL/bill/S2516/2026",
-      "legiscanId": 2116904,
-      "sponsors": [
-        "Appropriations"
       ]
     },
     {

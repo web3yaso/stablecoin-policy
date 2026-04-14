@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "South Dakota is advancing regulation across both data centers and AI. On data centers: SB135 (enacted) — Aims to protect South Dakota residents from higher utility bills and power shortages that could result from data center electricity demand. On AI: SB168 (in committee) — Sets rules on how chatbots can be used by minors in South Dakota.",
+  "contextBlurb": "South Dakota has no enacted AI or data-center law. Pending bills pull hard in opposite directions: one would temporarily ban new data-center construction to protect the grid, while another would exempt data-center equipment from sales and use tax. A separate bill would regulate insurer use of AI in coverage decisions.",
   "legislation": [
     {
       "id": "sd-sb135",
@@ -117,24 +117,6 @@
       "sourceUrl": "https://sdlegislature.gov/#/Session/Bill/27290",
       "legiscanUrl": "https://legiscan.com/SD/bill/SB235/2026",
       "legiscanId": 2107807,
-      "sponsors": [
-        "Casey Crabtree"
-      ]
-    },
-    {
-      "id": "sd-sb234",
-      "billCode": "SB234",
-      "title": "Modify provisions pertaining to the purchasing of goods and services related to data center operations.",
-      "summary": "Modify provisions pertaining to the purchasing of goods and services related to data center operations.",
-      "stage": "Committee",
-      "stance": "review",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-02-04",
-      "partyOrigin": "R",
-      "sourceUrl": "https://sdlegislature.gov/#/Session/Bill/27289",
-      "legiscanUrl": "https://legiscan.com/SD/bill/SB234/2026",
-      "legiscanId": 2107582,
       "sponsors": [
         "Casey Crabtree"
       ]

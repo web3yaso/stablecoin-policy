@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "review",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Virginia is under discussion across both data centers and AI. On data centers: HB897 (in committee) — Ties Virginia's existing data center sales tax exemption to new clean energy requirements, including phased bans on carbon-emitting generators and mandates to source energy from clean res… On AI: HB797 (enacted) — Directs a Virginia legislative commission to study whether the state should create a framework for independent organizations that verify AI systems meet safety standards.",
+  "contextBlurb": "Virginia enacted a legislative study of whether to create an AI safety verification framework, with recommendations due in November 2026. Pending bills would tie the state's data-center sales-tax exemption to new clean-energy and carbon standards, and require large platforms to support AI and social-graph data portability.",
   "legislation": [
     {
       "id": "va-sb85",
@@ -55,45 +55,6 @@
       ]
     },
     {
-      "id": "va-sb352",
-      "billCode": "SB352",
-      "title": "Law-enforcement officers; restrictions on wearing of facial coverings, exceptions, penalty.",
-      "summary": "This bill regulates when law enforcement officers can wear physical face coverings (like masks) while on duty, with limited exceptions. It has no connection to AI policy, facial recognition technology, or data-center regulation.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-criminal-justice",
-      "updatedDate": "2026-03-30",
-      "partyOrigin": "D",
-      "sourceUrl": "https://lis.virginia.gov/bill-details/20261/SB352",
-      "legiscanUrl": "https://legiscan.com/VA/bill/SB352/2026",
-      "legiscanId": 2085455,
-      "sponsors": [
-        "Saddam Salim",
-        "Jennifer Boysko",
-        "Creigh Deeds",
-        "Adam Ebbin"
-      ]
-    },
-    {
-      "id": "va-hb603",
-      "billCode": "HB603",
-      "title": "Virginia All-Payer Claims Database; disclosure of information, limitation.",
-      "summary": "This bill limits what health insurance payment data can be shared from Virginia's statewide medical claims database. It is not related to AI or data-center policy.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "data-privacy",
-      "updatedDate": "2026-03-06",
-      "partyOrigin": "D",
-      "sourceUrl": "https://lis.virginia.gov/bill-details/20261/HB603",
-      "legiscanUrl": "https://legiscan.com/VA/bill/HB603/2026",
-      "legiscanId": 2072995,
-      "sponsors": [
-        "Rodney Willett"
-      ]
-    },
-    {
       "id": "va-hb897",
       "billCode": "HB897",
       "title": "Retail Sales and Use Tax; exemption for data centers, delayed effective date.",
@@ -139,45 +100,6 @@
       ]
     },
     {
-      "id": "va-sb524",
-      "billCode": "SB524",
-      "title": "Mental health & substance abuse disorders; network adequacy standards, comparative analyses, report.",
-      "summary": "This bill updates Virginia's mental health and substance abuse insurance coverage rules, including network adequacy standards and federal parity law compliance requirements. It has no connection to AI policy or data-center regulation.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2026-03-30",
-      "partyOrigin": "D",
-      "sourceUrl": "https://lis.virginia.gov/bill-details/20261/SB524",
-      "legiscanUrl": "https://legiscan.com/VA/bill/SB524/2026",
-      "legiscanId": 2085730,
-      "sponsors": [
-        "Creigh Deeds"
-      ]
-    },
-    {
-      "id": "va-hb656",
-      "billCode": "HB656",
-      "title": "Mental health & substance abuse disorders; network adequacy standards, comparative analyses, report.",
-      "summary": "This bill sets network adequacy standards for mental health and substance abuse treatment coverage under health insurance plans in Virginia. It is not related to AI or data-center policy.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2026-03-30",
-      "partyOrigin": "B",
-      "sourceUrl": "https://lis.virginia.gov/bill-details/20261/HB656",
-      "legiscanUrl": "https://legiscan.com/VA/bill/HB656/2026",
-      "legiscanId": 2073032,
-      "sponsors": [
-        "Rodney Willett",
-        "Bonita Anthony",
-        "Nadarius Clark",
-        "Nicole Cole"
-      ]
-    },
-    {
       "id": "va-sb480",
       "billCode": "SB480",
       "title": "Adults charged with criminal offenses punishable by incarceration; Va. longitudinal Data System.",
@@ -215,46 +137,6 @@
       "legiscanId": 2079139,
       "sponsors": [
         "Phil Hernandez"
-      ]
-    },
-    {
-      "id": "va-hb483",
-      "billCode": "HB483",
-      "title": "Prescription Drug Affordability Board; established.",
-      "summary": "This bill establishes a Prescription Drug Affordability Advisory Panel to study and recommend policies on drug pricing, and caps certain drug prices at federally set maximum fair prices. It has no relevance to AI regulation or data-center policy.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-03-30",
-      "partyOrigin": "B",
-      "sourceUrl": "https://lis.virginia.gov/bill-details/20261/HB483",
-      "legiscanUrl": "https://legiscan.com/VA/bill/HB483/2026",
-      "legiscanId": 2072063,
-      "sponsors": [
-        "Karrie Delaney",
-        "Nadarius Clark",
-        "Ellen McLaughlin",
-        "Joshua Thomas"
-      ]
-    },
-    {
-      "id": "va-sb271",
-      "billCode": "SB271",
-      "title": "Prescription Drug Affordability Board; established.",
-      "summary": "This bill creates a board to study and limit prescription drug prices in Virginia, requiring price transparency from drug manufacturers and pharmacy benefit managers. It has no connection to AI or data-center policy.",
-      "stage": "Floor",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2026-03-30",
-      "partyOrigin": "D",
-      "sourceUrl": "https://lis.virginia.gov/bill-details/20261/SB271",
-      "legiscanUrl": "https://legiscan.com/VA/bill/SB271/2026",
-      "legiscanId": 2077494,
-      "sponsors": [
-        "Creigh Deeds",
-        "Jennifer Carroll Foy"
       ]
     }
   ]

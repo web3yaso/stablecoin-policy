@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Utah is under discussion on data centers and advancing regulation on AI. On data centers: HB0076 (enacted) — Requires data centers in Utah to report on their water usage, increasing transparency around how much water these facilities consume. On AI: HB0273 (enacted) — Proposes changes to how technology is used in Utah classrooms, likely setting rules or restrictions around student use of devices and digital tools.",
+  "contextBlurb": "Utah enacted a package of water-use reporting for data centers, changes to critical-infrastructure rules, tighter privacy and cybersecurity requirements, and restrictions on student technology use in schools. It is one of the few states to pass binding data-center water disclosure this session.",
   "legislation": [
     {
       "id": "ut-hb0076",
@@ -37,34 +37,6 @@
       ]
     },
     {
-      "id": "ut-hb0273",
-      "billCode": "HB0273",
-      "title": "Classroom Technology Amendments",
-      "summary": "This bill proposes changes to how technology is used in Utah classrooms, likely setting rules or restrictions around student use of devices and digital tools. It may address concerns about protecting children from harmful content or inappropriate technology use in schools.",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "dimensionStances": {
-        "ai-consumer": "concerning",
-        "ai-public": "concerning"
-      },
-      "impactTags": [
-        "ai-in-education",
-        "child-safety"
-      ],
-      "category": "ai-education",
-      "updatedDate": "2026-03-18",
-      "partyOrigin": "B",
-      "sourceUrl": "https://le.utah.gov/~2026/bills/static/HB0273.html",
-      "legiscanUrl": "https://legiscan.com/UT/bill/HB0273/2026",
-      "legiscanId": 2084286,
-      "sponsors": [
-        "Ariel Defay",
-        "Chris Wilson",
-        "Cheryl Acton",
-        "Carl Albrecht"
-      ]
-    },
-    {
       "id": "ut-hb0042",
       "billCode": "HB0042",
       "title": "School Cybersecurity Amendments",
@@ -84,28 +56,6 @@
       "sponsors": [
         "Ryan Wilcox",
         "Ann Millner"
-      ]
-    },
-    {
-      "id": "ut-sb0195",
-      "billCode": "SB0195",
-      "title": "Workforce Development",
-      "summary": "This bill appears to address general workforce development in Utah, not specifically AI or data-center policy. Without specific AI or data-center provisions, it falls outside the scope of AI regulation or data-center policy tracking.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [
-        "job-creation",
-        "economic-development"
-      ],
-      "category": "ai-workforce",
-      "updatedDate": "2026-03-24",
-      "partyOrigin": "R",
-      "sourceUrl": "https://le.utah.gov/~2026/bills/static/SB0195.html",
-      "legiscanUrl": "https://legiscan.com/UT/bill/SB0195/2026",
-      "legiscanId": 2093392,
-      "sponsors": [
-        "Ann Millner",
-        "Karen Peterson"
       ]
     },
     {
@@ -135,25 +85,6 @@
       ]
     },
     {
-      "id": "ut-sb0085",
-      "billCode": "SB0085",
-      "title": "Excellence in Education and Leadership Supplement Modifications",
-      "summary": "This bill modifies teacher or educational leadership pay supplements in Utah and is not related to AI or data-center policy. It does not address artificial intelligence, data centers, or related technology topics.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2026-03-06",
-      "partyOrigin": "R",
-      "sourceUrl": "https://le.utah.gov/~2026/bills/static/SB0085.html",
-      "legiscanUrl": "https://legiscan.com/UT/bill/SB0085/2026",
-      "legiscanId": 2066119,
-      "sponsors": [
-        "Lincoln Fillmore",
-        "Mark Strong"
-      ]
-    },
-    {
       "id": "ut-hb0165",
       "billCode": "HB0165",
       "title": "Critical Infrastructure Amendments",
@@ -179,86 +110,6 @@
       "sponsors": [
         "Walt Brooks",
         "Keven Stratton"
-      ]
-    },
-    {
-      "id": "ut-hb0008",
-      "billCode": "HB0008",
-      "title": "State Agency Fees and Internal Service Fund Authorization and Appropriations",
-      "summary": "This bill deals with state agency fees and internal service fund appropriations, which is standard government budgeting and finance. It has no substantive connection to AI regulation or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-03-26",
-      "partyOrigin": "R",
-      "sourceUrl": "https://le.utah.gov/~2026/bills/static/HB0008.html",
-      "legiscanUrl": "https://legiscan.com/UT/bill/HB0008/2026",
-      "legiscanId": 2085515,
-      "sponsors": [
-        "Walt Brooks",
-        "Scott Sandall"
-      ]
-    },
-    {
-      "id": "ut-sb0034",
-      "billCode": "SB0034",
-      "title": "Public Education Revisions",
-      "summary": "This bill appears to address general public education policy in Utah. Without specific AI or data-center provisions, it does not substantively relate to AI regulation or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [
-        "ai-in-education"
-      ],
-      "category": "ai-education",
-      "updatedDate": "2026-03-19",
-      "partyOrigin": "R",
-      "sourceUrl": "https://le.utah.gov/~2026/bills/static/SB0034.html",
-      "legiscanUrl": "https://legiscan.com/UT/bill/SB0034/2026",
-      "legiscanId": 2060476,
-      "sponsors": [
-        "John Johnson",
-        "Neil Walter"
-      ]
-    },
-    {
-      "id": "ut-sb0051",
-      "billCode": "SB0051",
-      "title": "School Safety Modifications",
-      "summary": "This bill appears to address school safety measures in Utah. It does not seem to be substantively related to AI regulation or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [
-        "child-safety"
-      ],
-      "category": "ai-education",
-      "updatedDate": "2026-03-19",
-      "partyOrigin": "R",
-      "sourceUrl": "https://le.utah.gov/~2026/bills/static/SB0051.html",
-      "legiscanUrl": "https://legiscan.com/UT/bill/SB0051/2026",
-      "legiscanId": 2061182,
-      "sponsors": [
-        "Derrin Owens",
-        "Ryan Wilcox"
-      ]
-    },
-    {
-      "id": "ut-hb0044",
-      "billCode": "HB0044",
-      "title": "School Security Personnel Standards",
-      "summary": "This bill sets standards for school security personnel in Utah schools. It is not related to AI or data-center policy.",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-education",
-      "updatedDate": "2026-03-19",
-      "partyOrigin": "R",
-      "sourceUrl": "https://le.utah.gov/~2026/bills/static/HB0044.html",
-      "legiscanUrl": "https://legiscan.com/UT/bill/HB0044/2026",
-      "legiscanId": 2060251,
-      "sponsors": [
-        "Ryan Wilcox",
-        "Ann Millner"
       ]
     },
     {

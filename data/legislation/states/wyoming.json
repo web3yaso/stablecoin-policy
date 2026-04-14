@@ -5,26 +5,8 @@
   "stanceDatacenter": "review",
   "stanceAI": "restrictive",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Wyoming is leaning restrictive on AI, with no data-center legislation currently tracked. On AI: HB0102 (enacted) — Makes it a crime to use AI or synthetic media to create sexual content involving children, promote self-harm, or censor political speech.",
+  "contextBlurb": "Wyoming enacted a narrow AI law this session criminalizing the use of AI or synthetic media to create child sexual content, promote self-harm, or censor political speech, while clarifying that AI cannot be invoked as a legal defense for a crime. No data-center legislation is being tracked.",
   "legislation": [
-    {
-      "id": "wy-hb0185",
-      "billCode": "HB0185",
-      "title": "Kratom-prohibition.",
-      "summary": "This bill bans the manufacture, sale, and possession of kratom, a plant-based substance, in Wyoming. It has no connection to AI regulation or data-center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-02-13",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.wyoleg.gov/Legislation/2026/HB0185",
-      "legiscanUrl": "https://legiscan.com/WY/bill/HB0185/2026",
-      "legiscanId": 2114345,
-      "sponsors": [
-        "Pepper Ottman"
-      ]
-    },
     {
       "id": "wy-hb0102",
       "billCode": "HB0102",
@@ -84,44 +66,6 @@
       ]
     },
     {
-      "id": "wy-hb0179",
-      "billCode": "HB0179",
-      "title": "Hospital pricing transparency.",
-      "summary": "This bill requires Wyoming hospitals to publicly list prices for medical items and services and includes transparency rules for prescription drug pricing. It is not related to AI or data-center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-healthcare",
-      "updatedDate": "2026-02-13",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.wyoleg.gov/Legislation/2026/HB0179",
-      "legiscanUrl": "https://legiscan.com/WY/bill/HB0179/2026",
-      "legiscanId": 2114273,
-      "sponsors": [
-        "Daniel Singh",
-        "Rachel Rodriguez-Williams",
-        "Jacob Wasserburger",
-        "Dennis Biteman"
-      ]
-    },
-    {
-      "id": "wy-sf0065",
-      "billCode": "SF0065",
-      "title": "Wyoming business council-repeal.",
-      "summary": "This bill repeals the Wyoming Business Council and transfers its economic development functions to other state agencies. It has no substantive connection to AI regulation or data-center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-02-09",
-      "sourceUrl": "https://www.wyoleg.gov/Legislation/2026/SF0065",
-      "legiscanUrl": "https://legiscan.com/WY/bill/SF0065/2026",
-      "legiscanId": 2106832,
-      "sponsors": [
-        "Appropriations"
-      ]
-    },
-    {
       "id": "wy-hb0091",
       "billCode": "HB0091",
       "title": "Ban on government social scoring with AI.",
@@ -175,27 +119,6 @@
         "Bill Allemand",
         "Dalton Banks",
         "Kevin Campbell"
-      ]
-    },
-    {
-      "id": "wy-hb0070",
-      "billCode": "HB0070",
-      "title": "Wyoming GRANITE Act.",
-      "summary": "This Wyoming bill creates a legal cause of action against foreign governments and international organizations that impose censorship laws conflicting with U.S. constitutional rights. It is not related to AI regulation or data-center policy.",
-      "stage": "Dead",
-      "stance": "none",
-      "impactTags": [],
-      "category": "ai-governance",
-      "updatedDate": "2026-03-03",
-      "partyOrigin": "R",
-      "sourceUrl": "https://www.wyoleg.gov/Legislation/2026/HB0070",
-      "legiscanUrl": "https://legiscan.com/WY/bill/HB0070/2026",
-      "legiscanId": 2102374,
-      "sponsors": [
-        "Daniel Singh",
-        "Joel Guggenmos",
-        "Scott Heiner",
-        "Robert Wharff"
       ]
     }
   ]
