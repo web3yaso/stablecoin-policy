@@ -180,7 +180,15 @@ export default function VisitorsWidget() {
           stable across digit changes. */}
       <span
         className="text-ink font-semibold tabular-nums relative inline-block overflow-hidden align-middle"
-        style={{ height: "1em", lineHeight: 1, minWidth: "2ch", textAlign: "right" }}
+        style={{
+          // 1.25em so the line-box has room for descenders (tabular
+          // nums don't descend, but keeping count + label slot heights
+          // identical avoids a tiny vertical mismatch).
+          height: "1.25em",
+          lineHeight: 1.25,
+          minWidth: "2ch",
+          textAlign: "right",
+        }}
       >
         <AnimatePresence mode="sync" initial={false}>
           <motion.span
@@ -190,7 +198,7 @@ export default function VisitorsWidget() {
             exit={{ y: "-60%", opacity: 0 }}
             transition={{ duration: 0.32, ease: [0.32, 0.72, 0, 1] }}
             className="absolute inset-0 block whitespace-nowrap text-right"
-            style={{ font: "inherit", lineHeight: 1, willChange: "transform, opacity" }}
+            style={{ font: "inherit", lineHeight: 1.25, willChange: "transform, opacity" }}
           >
             {count.toLocaleString()}
           </motion.span>
@@ -204,7 +212,13 @@ export default function VisitorsWidget() {
           ~1em tall surface. */}
       <span
         className="text-muted relative inline-block overflow-hidden align-middle"
-        style={{ height: "1em", lineHeight: 1 }}
+        style={{
+          // Taller than 1em so descenders on "p", "g", "y" don't get
+          // clipped by the overflow-hidden track. 1.25em matches the
+          // count slot so they align on the same baseline.
+          height: "1.25em",
+          lineHeight: 1.25,
+        }}
       >
         {/* Invisible width-setter — sizes the slot to the widest label
             in proportional units (Inter) so the pill width never
@@ -227,7 +241,7 @@ export default function VisitorsWidget() {
             className="absolute inset-0 block whitespace-nowrap"
             style={{
               font: "inherit",
-              lineHeight: 1,
+              lineHeight: 1.25,
               willChange: "transform, opacity",
             }}
           >
