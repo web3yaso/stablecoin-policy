@@ -438,8 +438,11 @@ export default function DataCentersOverview({
               // border-separate. We clear it on the active row AND the
               // row right after it (via group-hover on next-sibling) so
               // the pill's rounded corners aren't cut by a hairline.
+              // Transition border-radius too so the parent row's corner
+               // switch (rounded-l-xl → rounded-tl-xl) animates in sync
+               // with the expansion panel opening.
               const cellBase =
-                "py-3.5 px-2 border-t border-black/[.05] transition-colors duration-200 ease-[cubic-bezier(0.32,0.72,0,1)]";
+                "py-3.5 px-2 border-t border-black/[.05] transition-[background-color,border-color,border-top-left-radius,border-top-right-radius,border-bottom-left-radius,border-bottom-right-radius] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]";
               const rowBg = isExpanded
                 ? "bg-black/[.05]"
                 : "group-hover:bg-black/[.05]";
@@ -508,7 +511,7 @@ export default function DataCentersOverview({
                       {location}
                     </td>
                     <td className={`${cellBase} ${clearTopBorder} ${rowBg} ${roundRight}`}>
-                      <span className="inline-flex items-center gap-1.5 text-[12px] text-ink">
+                      <span className="inline-flex items-center gap-1.5 text-[12px] text-ink whitespace-nowrap">
                         <span
                           className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
                           style={{
@@ -521,36 +524,55 @@ export default function DataCentersOverview({
                     </td>
                   </tr>
 
-                  {/* Expanded detail — same grey wash, rounded-b so it
-                      feels like one continuous pill. Typography mirrors
-                      FacilityDetail: notes first as a plain body blurb,
-                      concerns as the same muted pill chips. No label
-                      headers — the visual separation from the row header
-                      carries enough context. */}
-                  {isExpanded && hasExpandedContent && (
+                  {/* Expanded detail — fractionally lighter wash than the
+                      row header so the disclosure reads as nested content
+                      (Apple grouped-table / iOS disclosure pattern), while
+                      still fusing into one continuous pill via the flat
+                      inner edges. Concerns chips get a matching bump to
+                      stay visible against the lighter surface. */}
+                  {hasExpandedContent && (
                     <tr>
-                      <td
-                        colSpan={7}
-                        className="bg-black/[.05] rounded-b-xl px-4 pt-1 pb-4"
-                      >
-                        <div className="flex flex-col gap-3 max-w-prose">
-                          {notes && (
-                            <p className="text-[13px] text-muted leading-relaxed">
-                              {notes}
-                            </p>
-                          )}
-                          {concerns.length > 0 && (
-                            <ul className="flex flex-wrap gap-1.5">
-                              {concerns.map((c) => (
-                                <li
-                                  key={c}
-                                  className="text-[11.5px] px-2 py-1 rounded-full bg-white/60 text-ink/80 tracking-tight"
-                                >
-                                  {prettyConcern(c)}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
+                      <td colSpan={7} className="p-0">
+                        {/* Accordion animation via the grid-template-rows
+                            0fr ↔ 1fr trick — collapses to zero height with
+                            no measurement needed. Bg + corner fade in step
+                            with the height so the panel reads as growing
+                            out of the row above. */}
+                        <div
+                          className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                          style={{
+                            gridTemplateRows: isExpanded ? "1fr" : "0fr",
+                          }}
+                        >
+                          <div className="min-h-0 overflow-hidden">
+                            <div
+                              className={`transition-[opacity,background-color,border-radius] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] px-2 pt-3 pb-4 ${
+                                isExpanded
+                                  ? "opacity-100 bg-black/[.025] rounded-b-xl"
+                                  : "opacity-0 bg-transparent"
+                              }`}
+                            >
+                              <div className="flex flex-col gap-3 max-w-prose pl-4">
+                                {notes && (
+                                  <p className="text-[12px] text-muted leading-relaxed">
+                                    {notes}
+                                  </p>
+                                )}
+                                {concerns.length > 0 && (
+                                  <ul className="flex flex-wrap gap-1.5">
+                                    {concerns.map((c) => (
+                                      <li
+                                        key={c}
+                                        className="text-[11px] px-2 py-[3px] rounded-full border border-black/[.08] bg-white/70 text-ink/75 tracking-tight"
+                                      >
+                                        {prettyConcern(c)}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </td>
                     </tr>
