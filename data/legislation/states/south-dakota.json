@@ -5,7 +5,7 @@
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "South Dakota has no enacted AI or data-center law. Pending bills pull hard in opposite directions: one would temporarily ban new data-center construction to protect the grid, while another would exempt data-center equipment from sales and use tax. A separate bill would regulate insurer use of AI in coverage decisions.",
+  "contextBlurb": "South Dakota has taken notable action to protect residents from data center strain on the grid, with SB135 and HB1038 both enacted to give regulators authority over data center energy costs and allow utilities to pass actual infrastructure costs back to large customers. Beyond those enacted measures, lawmakers are actively debating a broad range of additional proposals, including a one-year moratorium on hyperscale data center construction (SB232), sales tax incentives for data centers (HB1005), and restrictions on AI use in healthcare and therapy settings. The state's legislative activity is notably weighted toward consumer protection and grid stability rather than unfettered industry growth, making it one of the more cautious energy-focused environments for data center development in the region.",
   "legislation": [
     {
       "id": "sd-sb135",

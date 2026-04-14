@@ -94,8 +94,8 @@ ${JSON.stringify(bills, null, 2)}`;
   });
   const msg = await stream.finalMessage();
   const text = msg.content
-    .filter((b): b is { type: "text"; text: string } => b.type === "text")
-    .map((b) => b.text)
+    .filter((b) => b.type === "text")
+    .map((b) => (b as { text: string }).text)
     .join("\n");
   const data = parseJsonBlock(text) as { flagged?: FlaggedFile["flagged"] };
   return data.flagged ?? [];

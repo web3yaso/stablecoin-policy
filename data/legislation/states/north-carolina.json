@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "restrictive",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "North Carolina has no enacted AI or data-center law. Pending bills would protect ratepayers from the cost of serving hyperscalers, ban deceptive AI-generated ads, stand up a state AI innovation trust fund, and direct schools to study how to teach AI.",
+  "contextBlurb": "North Carolina has enacted H805, targeting AI-generated sexual exploitation of women and minors, making deepfake-related child safety one of its clearest legislative priorities. Beyond that, the state's activity spans a notably broad range of emerging concerns — from grid strain caused by data center growth (H1002, H638) to AI governance frameworks and an innovation trust fund — though most of these efforts remain in committee. This wide but largely unsettled docket reflects a state actively scoping its AI and energy policy agenda without yet committing to a unified regulatory direction.",
   "legislation": [
     {
       "id": "nc-s747",

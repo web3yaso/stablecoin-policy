@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 /**
  * Small "live visitors" pill — pulsing green dot, tabular count, rotating
@@ -96,8 +97,33 @@ export default function VisitorsWidget() {
       <span className="text-ink font-semibold tabular-nums">
         {count.toLocaleString()}
       </span>
-      <span className="text-muted">
-        {count === 1 ? "person" : "people"} {LABELS[labelIdx]}
+      <span className="text-muted flex items-center">
+        {count === 1 ? "person" : "people"}
+        {/* Slot-machine flip: old label slides up out of frame, new one
+            slides in from below. overflow-hidden clips the transitions so
+            it reads as a mechanical roll rather than a crossfade. */}
+        <span
+          className="relative inline-block overflow-hidden ml-1"
+          style={{ height: "1.15em" }}
+        >
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.span
+              key={labelIdx}
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: "0%", opacity: 1 }}
+              exit={{ y: "-110%", opacity: 0 }}
+              transition={{
+                type: "spring",
+                stiffness: 420,
+                damping: 30,
+                mass: 0.6,
+              }}
+              className="inline-block whitespace-nowrap"
+            >
+              {LABELS[labelIdx]}
+            </motion.span>
+          </AnimatePresence>
+        </span>
       </span>
     </div>
   );

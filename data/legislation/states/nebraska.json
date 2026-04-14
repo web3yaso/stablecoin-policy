@@ -5,7 +5,7 @@
   "stanceDatacenter": "review",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Nebraska has no enacted AI or data-center law. Pending bills would require data centers to file annual load reports with the state Power Review Board, establish consumer protections and risk-management standards for AI, and create biometric-data consent rules.",
+  "contextBlurb": "Nebraska has enacted two notable laws: LB1010 establishes a framework for regulating large electricity customers including data centers and cryptocurrency mining operations, addressing grid capacity and taxation, while LB525 combines agricultural data privacy protections with conversational AI safety requirements. Several additional bills in committee would extend AI governance further, covering algorithmic transparency, biometric data, and risk management disclosures. The state's distinctive combination of public power infrastructure oversight and agricultural data privacy reflects Nebraska's unique economic priorities.",
   "legislation": [
     {
       "id": "ne-lb1111",

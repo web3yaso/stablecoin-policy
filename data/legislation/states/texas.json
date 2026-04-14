@@ -5,7 +5,7 @@
   "stanceDatacenter": "none",
   "stanceAI": "concerning",
   "lastUpdated": "2026-04-13",
-  "contextBlurb": "Texas has no enacted AI or data-center law this session, which is notable given how much hyperscale buildout is happening in the state. Pending bills would create sales-tax exemptions for data-center equipment, exempt their energy infrastructure from property tax, and set modest transparency rules for synthetic media.",
+  "contextBlurb": "Texas has enacted data broker regulations (SB1343, SB2121) requiring registration and transparency, alongside a child-focused integrated data system (HB3963), establishing a baseline of data privacy protections. The state is also actively considering significant economic incentives for data center development, including sales tax exemptions and property tax relief tied to energy use. Pending measures on license plate readers, deepfake provenance, and expanded child data systems suggest Texas is expanding its AI and data policy footprint across public safety, media integrity, and education.",
   "legislation": [
     {
       "id": "tx-sb1343",
