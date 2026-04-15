@@ -8,9 +8,11 @@ name: news-rss
 
 on:
   schedule:
-    # Every 15 minutes. GitHub may delay scheduled runs under load — this
-    # is best-effort, not real-time, but typical lag is well under a minute.
-    - cron: "*/15 * * * *"
+    # Three times a day in UTC: ~5am ET (morning newsroom drop), ~11am ET
+    # (midday wave), ~7pm ET (after-market / late filings). News is steady
+    # but not minute-by-minute, so this catches the meaningful waves
+    # without burning CI on empty polls.
+    - cron: "0 9,15,23 * * *"
   workflow_dispatch: # manual trigger from the Actions tab
     inputs:
       restart:

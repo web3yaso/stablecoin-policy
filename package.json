@@ -8,8 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "blurbs:refresh": "tsx scripts/cleanup/refresh-blurbs.ts",
-    "blurbs:refresh-all": "for s in $(ls data/legislation/states/*.json | xargs -n1 basename | sed 's/\\.json$//'); do tsx scripts/cleanup/refresh-blurbs.ts $s; done && tsx scripts/build-placeholder.ts",
+    "blurbs:refresh": "tsx scripts/cleanup/refresh-blurbs.ts --force",
     "data:rebuild": "tsx scripts/build-placeholder.ts",
     "news:poll": "tsx scripts/sync/news-rss.ts",
     "news:regen": "tsx scripts/sync/news-regen.ts"

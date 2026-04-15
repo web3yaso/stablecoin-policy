@@ -1,15 +1,16 @@
 /**
  * Targeted blurb refresher: regenerate the contextBlurb for the named
  * state files (slugs matching their JSON filenames), grounded in the
- * current legislation list. Use this when a blurb has gone stale
- * relative to the bills it's supposed to summarize.
+ * current legislation list.
+ *
+ * Overwrites hand-written prose, so it's --force-only. Run when a
+ * blurb has gone clearly stale relative to the bills it's supposed to
+ * summarize and you've decided the regenerated version is better.
  *
  * Run:
- *   npx tsx scripts/cleanup/refresh-blurbs.ts south-dakota texas washington
+ *   npx tsx scripts/cleanup/refresh-blurbs.ts --force south-dakota texas
  *
- * Prints the diff per state. Bypasses the formulaic-prefix gate that
- * scripts/cleanup/rewrite-blurbs.ts uses, since stale blurbs are
- * already in editorial form.
+ * Prints a diff per state.
  */
 
 import "../env.js";
@@ -89,9 +90,18 @@ async function refresh(slug: string) {
 }
 
 async function main() {
-  const slugs = process.argv.slice(2);
+  const args = process.argv.slice(2);
+  const force = args.includes("--force");
+  const slugs = args.filter((a) => !a.startsWith("--"));
+  if (!force) {
+    console.error(
+      "refresh-blurbs overwrites hand-written prose. Re-run with --force if you're sure.\n" +
+        "  usage: tsx scripts/cleanup/refresh-blurbs.ts --force <slug> [<slug>...]",
+    );
+    process.exit(1);
+  }
   if (slugs.length === 0) {
-    console.error("usage: tsx scripts/cleanup/refresh-blurbs.ts <slug> [<slug>...]");
+    console.error("usage: tsx scripts/cleanup/refresh-blurbs.ts --force <slug> [<slug>...]");
     process.exit(1);
   }
   for (const slug of slugs) {
