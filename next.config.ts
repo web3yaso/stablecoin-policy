@@ -19,12 +19,18 @@ const nextConfig: NextConfig = {
       "@number-flow/react",
       "topojson-client",
     ],
+    // Turbopack: persist compiler artifacts on disk between `next dev`
+    // restarts. Free cold-start speedup.
+    turbopackFileSystemCacheForDev: true,
   },
 
   // Allow next/image to optimize politician portraits and any other
   // remote portraits referenced via `photoUrl`. Any host added here is
   // explicitly trusted — keep the list tight.
   images: {
+    // Prefer AVIF — ~20% smaller than WebP for photographic content
+    // (politician portraits). Falls back to WebP for unsupported clients.
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       // unitedstates.github.io serves the Congressional bioguide portraits
       // used for every US politician's photoUrl in data/politicians/*.json.

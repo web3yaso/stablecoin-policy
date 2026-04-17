@@ -1,18 +1,23 @@
 "use client";
 
 import { useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Hero from "@/components/hero/Hero";
 import MapShell from "@/components/map/MapShell";
 import SummaryBar from "@/components/sections/SummaryBar";
 import DimensionToggle from "@/components/sections/DimensionToggle";
-import AIOverview from "@/components/sections/AIOverview";
-import LegislationTable from "@/components/sections/LegislationTable";
-import DataCentersOverview from "@/components/sections/DataCentersOverview";
-import PoliticiansOverview from "@/components/sections/PoliticiansOverview";
-import LiveNews from "@/components/sections/LiveNews";
 import FadeInOnView from "@/components/ui/FadeInOnView";
 import { useScrollProgress } from "@/lib/use-scroll-progress";
+
+// Below-fold sections — lazy-loaded so the initial JS bundle only
+// includes Hero + MapShell + Section 1. Each dynamic import creates a
+// separate chunk that loads on demand as the user scrolls.
+const AIOverview = dynamic(() => import("@/components/sections/AIOverview"));
+const LegislationTable = dynamic(() => import("@/components/sections/LegislationTable"));
+const DataCentersOverview = dynamic(() => import("@/components/sections/DataCentersOverview"));
+const PoliticiansOverview = dynamic(() => import("@/components/sections/PoliticiansOverview"));
+const LiveNews = dynamic(() => import("@/components/sections/LiveNews"));
 import type {
   Dimension,
   DimensionLens,

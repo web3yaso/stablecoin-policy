@@ -37,12 +37,19 @@ import DepthStepper from "@/components/ui/DepthStepper";
 import TopToolbar from "@/components/ui/TopToolbar";
 import VisitorsWidget from "@/components/ui/VisitorsWidget";
 import type { BreadcrumbItem } from "@/components/ui/Breadcrumb";
-import NorthAmericaMap from "./NorthAmericaMap";
-import USStatesMap from "./USStatesMap";
-import CountyMap from "./CountyMap";
-import EuropeMap from "./EuropeMap";
-import AsiaMap from "./AsiaMap";
+import dynamic from "next/dynamic";
 import DataCenterCard from "./DataCenterCard";
+
+// Code-split each region map — only the active region's JS + d3
+// projection data loads. Saves ~200–400 KB off the initial bundle
+// since only one of five is visible at a time. ssr:false because
+// these render into an SVG inside a fixed-position overlay; nothing
+// meaningful to prerender.
+const NorthAmericaMap = dynamic(() => import("./NorthAmericaMap"), { ssr: false });
+const USStatesMap = dynamic(() => import("./USStatesMap"), { ssr: false });
+const CountyMap = dynamic(() => import("./CountyMap"), { ssr: false });
+const EuropeMap = dynamic(() => import("./EuropeMap"), { ssr: false });
+const AsiaMap = dynamic(() => import("./AsiaMap"), { ssr: false });
 import {
   getMunicipalitiesByState,
   getMunicipalityByFips,
