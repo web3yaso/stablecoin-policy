@@ -103,9 +103,9 @@ export default function Hero({ progress, onRegionClick }: Props) {
           />
         </svg>
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-ink leading-[1.1] md:leading-[1.05]">
-          Tracking AI policies
+          Tracking stablecoin
           <br />
-          in your hometown
+          policy worldwide
         </h1>
       </div>
 

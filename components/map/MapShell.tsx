@@ -38,7 +38,6 @@ import TopToolbar from "@/components/ui/TopToolbar";
 import VisitorsWidget from "@/components/ui/VisitorsWidget";
 import type { BreadcrumbItem } from "@/components/ui/Breadcrumb";
 import dynamic from "next/dynamic";
-import DataCenterCard from "./DataCenterCard";
 
 // Code-split each region map — only the active region's JS + d3
 // projection data loads. Saves ~200–400 KB off the initial bundle
@@ -280,7 +279,7 @@ export default function MapShell({
 
   // Data center dot visibility is driven by the lens: when the user is
   // looking at the "Data Centers" lens, show the dots; otherwise hide them.
-  const showDataCenters = lens === "datacenter";
+  const showDataCenters = false;
   const handleHoverFacility = useCallback(
     (dc: DataCenter, x: number, y: number, clusterSize: number) => {
       if (isDraggingRef.current) return;
@@ -616,16 +615,8 @@ export default function MapShell({
       selectedCountyFips: null,
     });
 
-  const handleDoubleClickEntity = (geoId: string) => {
-    if (geoId === "840") handleViewStates();
-    // Double-clicking a US state drills into counties (for states with data)
-    if (
-      region === "na" &&
-      naView === "states" &&
-      getMunicipalitiesByState(geoId).length > 0
-    ) {
-      stageCountyDrill(geoId);
-    }
+  const handleDoubleClickEntity = (_geoId: string) => {
+    // State/county drill-down disabled for stablecoin policy view
   };
 
   const handleSearchNavigate = (target: ViewTarget) => navigateTo(target);
@@ -702,18 +693,7 @@ export default function MapShell({
         case "arrowdown": {
           // Drill in: continental US selected → states map; state selected
           // with municipal data → counties; otherwise no-op.
-          if (region === "na" && naView === "countries" && selectedGeoId === "840") {
-            handleViewStates();
-            e.preventDefault();
-          } else if (
-            region === "na" &&
-            naView === "states" &&
-            selectedGeoId &&
-            getMunicipalitiesByState(selectedGeoId).length > 0
-          ) {
-            handleViewCounties(selectedGeoId);
-            e.preventDefault();
-          }
+          // State/county drill-down disabled
           return;
         }
         case "escape": {
@@ -796,10 +776,7 @@ export default function MapShell({
     historyIdx,
   ]);
 
-  const showViewStatesButton =
-    region === "na" &&
-    naView === "countries" &&
-    selectedEntity?.canDrillDown === true;
+  const showViewStatesButton = false;
 
   // Show "View local actions →" in the panel when the selected US state
   // has county-level municipal data. Gives a discoverable entry point
@@ -1531,8 +1508,8 @@ export default function MapShell({
                   <NorthAmericaMap
                     onSelectEntity={handleSelectEntity}
                     onDoubleClickEntity={handleDoubleClickEntity}
-                    onSelectUsState={handleSelectUsState}
-                    onDoubleClickUsState={handleDoubleClickUsState}
+                    onSelectUsState={() => {}}
+                    onDoubleClickUsState={() => {}}
                     selectedGeoId={selectedGeoId}
                     setTooltip={setTooltip}
                     dimension={dimension} lens={lens}
@@ -2107,15 +2084,6 @@ export default function MapShell({
           the exact facility that's already pinned (its info is in the
           panel). Hovering OTHER facilities still shows the card so users
           can browse without first closing the pinned one. */}
-      {hoveredFacility &&
-        hoveredFacility.dc.id !== selectedFacility?.id && (
-          <DataCenterCard
-            facility={hoveredFacility.dc}
-            x={hoveredFacility.x}
-            y={hoveredFacility.y}
-            clusterSize={hoveredFacility.clusterSize}
-          />
-        )}
     </div>
   );
 }

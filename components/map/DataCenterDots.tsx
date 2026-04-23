@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useMapContext } from "react-simple-maps";
 import type { DataCenter, DataCenterStatus } from "@/types";
 
 interface DataCenterDotsProps {
@@ -326,10 +325,7 @@ export default function DataCenterDots({
   // when no prop is supplied. Context-derived projection has been flaky
   // under Turbopack/React 19 for reasons we don't fully understand —
   // going direct via prop is the reliable path.
-  const ctx = useMapContext();
-  const projection = (projectionProp ??
-    (ctx as { projection?: (c: [number, number]) => [number, number] | null } | undefined)
-      ?.projection) as
+  const projection = (projectionProp) as
     | ((c: [number, number]) => [number, number] | null | undefined)
     | undefined;
 
