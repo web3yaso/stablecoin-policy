@@ -4,185 +4,158 @@
   "name": "Ireland",
   "region": "eu",
   "level": "federal",
-  "contextBlurb": "Dublin hosts Europe's second-largest data center cluster — already 22% of national electricity, projected to hit 31% by 2034. In December 2025 the CRU ended a de facto Dublin moratorium with a new policy requiring new data centers to bring their own dispatchable generation and source 80% of demand from new Irish renewables within six years. Ireland is also among the EU's most advanced AI Act implementers, standing up a statutory National AI Office by August 2026.",
+  "stance": "favorable",
+  "stanceDatacenter": "favorable",
+  "stanceAI": "favorable",
+  "contextBlurb": "Ireland applies the EU’s MiCA regime with issuer rules for ART/EMT from 30 June 2024 and CASP authorisation from 30 December 2024; the Central Bank of Ireland (CBI) is the national competent authority for authorising and supervising ART/EMT issuers and CASPs. Stablecoins are classified under MiCA as asset-referenced tokens (ARTs) or e-money tokens (EMTs) (not legal tender), with issuer obligations on reserves, disclosures, governance and redemption; crypto-asset transfers are also subject to the EU Transfer of Funds Regulation (“travel rule”) from 30 December 2024.",
   "legislation": [
     {
-      "id": "ireland-cru-leu-connection-policy",
-      "billCode": "CRU2025236",
-      "title": "CRU Large Energy Users Connection Policy Decision (Data Centre Grid Connection Policy)",
-      "summary": "Published by the Commission for Regulation of Utilities in December 2025, this binding decision replaces the 2021 moratorium framework and requires new data centres above 10 MVA to provide on-site or proximate dispatchable generation matching their full grid import capacity, participate in the Single Electricity Market, and source 80% of annual electricity from additional Irish renewables within a six-year glide path. System Operators EirGrid and ESB Networks must assess each application against location constraints and publish a standardised connection process by 31 March 2026.",
+      "id": "ireland-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
       "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [
-        "grid-capacity",
-        "renewable-obligation",
-        "hyperscale",
-        "dublin-constraint",
-        "energy-security"
-      ],
-      "category": "data-center-energy",
-      "updatedDate": "2025-12-12",
-      "partyOrigin": "B",
-      "sourceUrl": "https://www.cru.ie/about-us/news/the-cru-publishes-its-decision-on-new-electricity-connection-policy-for-data-centres/"
-    },
-    {
-      "id": "ireland-leap-large-energy-user-action-plan",
-      "billCode": "LEAP-2026",
-      "title": "Large Energy User Action Plan (LEAP)",
-      "summary": "Approved by Cabinet on 13 January 2026 and jointly published by the Ministers for Enterprise and Climate, this 17-action government strategy sets a plan-led framework for siting very large energy users — including data centres, semiconductors, and pharma — near indigenous renewable energy sources, particularly offshore wind on Ireland's west coast. It identifies 'green energy park' locations for co-location of hyperscale facilities with renewables, aiming to redirect investment away from congested Dublin-area grid nodes toward unconstrained regional sites and signals intent to legislate for private wire connections in 2026.",
-      "stage": "Enacted",
-      "stance": "review",
-      "impactTags": [
-        "green-energy-parks",
-        "regional-siting",
-        "offshore-wind",
-        "private-wires",
-        "fdi"
-      ],
-      "category": "data-center-siting",
-      "updatedDate": "2026-01-13",
-      "partyOrigin": "B",
-      "sourceUrl": "https://enterprise.gov.ie/en/news-and-events/department-news/2026/january/20260113.html"
-    },
-    {
-      "id": "ireland-ai-bill-2026",
-      "billCode": "RAI Bill 2026",
-      "title": "General Scheme of the Regulation of Artificial Intelligence Bill 2026",
-      "summary": "Published in February 2026, this General Scheme gives full domestic effect to EU Regulation 2024/1689 (the EU AI Act) by establishing the legislative and institutional architecture for national supervision and enforcement. It proposes creating a new statutory independent body — the AI Office of Ireland (Oifig Intleachta Shaorga na hÉireann) — under the Department of Enterprise, Tourism and Employment, to serve as the central coordinating authority, operate a regulatory sandbox, and act as Ireland's Single Point of Contact with the European Commission, with the Office required to be operational by 2 August 2026.",
-      "stage": "Filed",
-      "stance": "review",
-      "impactTags": [
-        "eu-ai-act",
-        "national-ai-office",
-        "enforcement",
-        "regulatory-sandbox",
-        "high-risk-ai"
-      ],
+      "stance": "favorable",
+      "impactTags": [],
       "category": "ai-governance",
-      "updatedDate": "2026-02-04",
-      "partyOrigin": "B",
-      "sourceUrl": "https://enterprise.gov.ie/en/legislation/general-scheme-of-the-regulation-of-artificial-intelligence-bill-2026.html"
+      "updatedDate": ""
     },
     {
-      "id": "ireland-so-dc-process-march-2026",
-      "billCode": "SO Engagement Process",
-      "title": "System Operators Data Centre Engagement Process (March 2026)",
-      "summary": "Pursuant to the CRU's LEU decision, EirGrid and ESB Networks published their dedicated engagement and connection process for data-centre applicants by 31 March 2026, standardising how projects demonstrate dispatchable generation, storage, and SEM participation ahead of grid offers.",
+      "id": "ireland-leg-2",
+      "billCode": "2025-10-10",
+      "title": "CBI authorises Legend Financial Ireland Ltd (Legend Trading group) as a CASP (authorisation date on the CBI register).",
+      "summary": "",
       "stage": "Enacted",
-      "stance": "review",
-      "impactTags": [
-        "EirGrid",
-        "ESB-Networks",
-        "data-center",
-        "connection-process"
-      ],
-      "category": "data-center-energy",
-      "updatedDate": "2026-03-31",
-      "sourceUrl": "https://www.pinsentmasons.com/out-law/news/irish-data-centres-power-national-grid-regulator"
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-10-10"
+    },
+    {
+      "id": "ireland-leg-3",
+      "billCode": "2025-08-01",
+      "title": "S.I. No. 310/2025 takes effect: Ireland implements the Recast Transfer of Funds Regulation (“travel rule”) and designates the CBI as competent authority.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-08-01"
+    },
+    {
+      "id": "ireland-leg-4",
+      "billCode": "2024-11-30",
+      "title": "Remaining MiCA provisions, incl. CASP authorisation, apply across the EU.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-11-30"
+    },
+    {
+      "id": "ireland-leg-5",
+      "billCode": "2024-11-12",
+      "title": "S.I. No. 607/2024 published, designating the Central Bank of Ireland (CBI) as Ireland’s MiCA NCA and setting national measures.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-11-12"
+    },
+    {
+      "id": "ireland-leg-6",
+      "billCode": "2024-06-30",
+      "title": "MiCA stablecoin (ART/EMT) rules become applicable EU-wide (reserve, disclosure, redemption, governance obligations).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-06-30"
     }
   ],
   "keyFigures": [
     {
-      "id": "ireland-burke",
-      "name": "Peter Burke",
-      "role": "Minister for Enterprise, Tourism and Employment",
-      "party": "FG",
-      "stance": "favorable"
-    },
-    {
-      "id": "ireland-obrien",
-      "name": "Darragh O'Brien",
-      "role": "Minister for Climate, Energy and the Environment",
-      "party": "FF",
+      "id": "ireland-fig-1",
+      "name": "Central Bank of Ireland (CBI)",
+      "role": "MiCA national competent authority for Ireland; authorises and supervises ART/EMT issuers and CASPs; AML/CFT supervisor f",
+      "party": "N/A",
       "stance": "review"
     },
     {
-      "id": "ireland-smyth",
-      "name": "Niamh Smyth",
-      "role": "Minister of State for Trade Promotion, Artificial Intelligence and Digital Transformation",
-      "party": "FF",
-      "stance": "favorable"
-    },
-    {
-      "id": "ireland-sweeney",
-      "name": "Niamh Sweeney",
-      "role": "Commissioner, Data Protection Commission (DPC)",
+      "id": "ireland-fig-2",
+      "name": "FIU Ireland (Garda Síochána — GNECB)",
+      "role": "National Financial Intelligence Unit receiving suspicious transaction reports and coordinating AML/CFT financial intelli",
       "party": "N/A",
-      "stance": "concerning"
-    },
-    {
-      "id": "ireland-hogan",
-      "name": "Des Hogan",
-      "role": "Chairperson and Commissioner, Data Protection Commission (DPC)",
-      "party": "N/A",
-      "stance": "concerning"
-    },
-    {
-      "id": "ireland-ocallaghan",
-      "name": "Jim O'Callaghan",
-      "role": "Minister for Justice, Home Affairs and Migration",
-      "party": "Fianna Fáil",
       "stance": "review"
-    },
-    {
-      "id": "ireland-martin",
-      "name": "Micheál Martin",
-      "role": "Taoiseach (Prime Minister of Ireland)",
-      "party": "Fianna Fáil",
-      "stance": "favorable"
     }
   ],
   "news": [
     {
       "id": "ireland-news-1",
-      "headline": "New data centres must generate and supply electricity to wider market, regulator rules",
-      "source": "The Irish Times",
-      "date": "2025-12-12",
-      "url": "https://www.irishtimes.com/business/2025/12/12/new-data-centres-must-generate-and-supply-electricity-to-wider-market-regulator-rules/"
+      "headline": "CBI — MiCAR hub",
+      "source": "centralbank.ie",
+      "date": "2026-04-01",
+      "url": "https://www.centralbank.ie/regulation/markets-in-crypto-assets-regulation"
     },
     {
       "id": "ireland-news-2",
-      "headline": "Cabinet approves energy plan in bid to attract investment",
-      "source": "RTÉ News",
-      "date": "2026-01-13",
-      "url": "https://www.rte.ie/news/politics/2026/0113/1552975-energy-plan-govt/"
+      "headline": "CBI — Guidance note for issuers of ARTs/EMTs (EN PDF)",
+      "source": "centralbank.ie",
+      "date": "2026-04-01",
+      "url": "https://www.centralbank.ie/docs/default-source/regulation/micar/guidance-note-for-the-issuers-of-arts-and-emts.pdf"
     },
     {
       "id": "ireland-news-3",
-      "headline": "Ireland Moves to Establish AI Office Under 2026 Bill to Enforce EU AI Act",
-      "source": "BABL AI",
-      "date": "2026-02-10",
-      "url": "https://babl.ai/ireland-moves-to-establish-ai-office-under-2026-bill-to-enforce-eu-ai-act/"
-    },
-    {
-      "id": "ireland-news-4",
-      "headline": "PV and storage will be central to Ireland's first co-located data center and renewables campus",
-      "source": "PV Magazine",
-      "date": "2026-03-30",
-      "url": "https://www.pv-magazine.com/2026/03/30/pv-and-storage-will-be-central-to-irelands-first-co-located-data-center-and-renewables-campus/"
-    },
-    {
-      "id": "ireland-news-5",
-      "headline": "New Irish data centres must generate power back into national grid, rules regulator",
-      "source": "Pinsent Masons",
-      "date": "2025-12-19",
-      "url": "https://www.pinsentmasons.com/out-law/news/irish-data-centres-power-national-grid-regulator"
-    },
-    {
-      "id": "ireland-news-7",
-      "headline": "Powering AI: Europe switches on its first microgrid-connected data center",
-      "source": "CNBC",
-      "date": "2026-03-11",
-      "url": "https://www.cnbc.com/2026/03/11/data-center-microgrid-power-ireland-ai-boom-avk-pure-dc.html"
-    },
-    {
-      "id": "ireland-news-8",
-      "headline": "What the world can learn from Ireland's battle to power data centres",
-      "source": "Irish Times",
-      "date": "2026-03-17",
-      "url": "https://www.irishtimes.com/business/2026/03/17/what-the-world-can-learn-from-irelands-battle-to-power-data-centres/"
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
     }
   ],
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning"
+  "stablecoinMeta": {
+    "code": "IE",
+    "nameZh": "爱尔兰",
+    "flagImg": "https://flagcdn.com/w320/ie.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "Ireland applies the EU’s MiCA regime with issuer rules for ART/EMT from 30 June 2024 and CASP authorisation from 30 December 2024; the Central Bank of Ireland (CBI) is the national competent authority for authorising and supervising ART/EMT issuers and CASPs. Stablecoins are classified under MiCA as asset-referenced tokens (ARTs) or e-money tokens (EMTs) (not legal tender), with issuer obligations on reserves, disclosures, governance and redemption; crypto-asset transfers are also subject to the EU Transfer of Funds Regulation (“travel rule”) from 30 December 2024.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "In Ireland, stablecoins are classified under MiCA as e-money tokens (EMTs) when referencing a single official currency and asset-referenced tokens (ARTs) when referencing multiple assets; they are not legal tender. Issuers are authorised and supervised by the Central Bank of Ireland (CBI) as the nat",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "ireland-reg-1",
+        "name": "Central Bank of Ireland",
+        "acronym": "CBI",
+        "role": "MiCA national competent authority for Ireland; authorises and supervises ART/EMT issuers and CASPs; AML/CFT supervisor for VASPs and regulated firms; designated competent authority for the EU Transfer",
+        "websiteUrl": "https://www.centralbank.ie",
+        "isPrimary": true
+      },
+      {
+        "id": "ireland-reg-2",
+        "name": "FIU Ireland",
+        "role": "National Financial Intelligence Unit receiving suspicious transaction reports and coordinating AML/CFT financial intelligence (law-enforcement function; not a prudential supervisor).",
+        "websiteUrl": "https://fiu-ireland.ie/",
+        "isPrimary": false
+      }
+    ]
+  }
 }

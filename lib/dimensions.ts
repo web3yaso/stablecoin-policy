@@ -1,12 +1,17 @@
-import type { Dimension, DimensionLens, Entity, ImpactTag } from "@/types";
+import type { Dimension, DimensionLens, Entity, ImpactTag, StablecoinTag } from "@/types";
 import { STANCE_HEX } from "./map-utils";
+import { STABLECOIN_DIMENSION_TAGS, getIssuanceColor } from "./stablecoin-tags";
 
 /**
  * Which impact tags belong to which dimension. Used both for map recoloring
  * and for filtering the legislation table when a dimension is active.
  */
-export const DIMENSION_TAGS: Record<Exclude<Dimension, "overall">, ImpactTag[]> =
-  {
+/** Impact-tag sets for DC and AI dimensions only.
+ *  Stablecoin dimensions use STABLECOIN_DIMENSION_TAGS in stablecoin-tags.ts. */
+export const DIMENSION_TAGS: Record<
+  Exclude<Dimension, "overall" | `sc-${string}`>,
+  ImpactTag[]
+> = {
     // ─── Data Center lens ────────────────────────────────────────────
     environmental: [
       "water-consumption",
@@ -56,6 +61,12 @@ export const DIMENSION_COLOR: Record<
   "ai-workforce": "#C89554",
   "ai-public": "#5AA5A5",
   "ai-synthetic": "#D65AA8",
+  // Stablecoin lens
+  "sc-issuance": "#34C759",
+  "sc-reserve": "#007AFF",
+  "sc-consumer": "#5856D6",
+  "sc-cross-border": "#FF9500",
+  "sc-sovereignty": "#FF3B30",
 };
 
 /**
@@ -75,6 +86,11 @@ export const DIMENSION_TEXT: Record<
   "ai-workforce": "#1D1D1F",
   "ai-public": "#FFFFFF",
   "ai-synthetic": "#FFFFFF",
+  "sc-issuance": "#FFFFFF",
+  "sc-reserve": "#FFFFFF",
+  "sc-consumer": "#FFFFFF",
+  "sc-cross-border": "#FFFFFF",
+  "sc-sovereignty": "#FFFFFF",
 };
 
 /**
@@ -97,6 +113,12 @@ export const DIMENSION_GRADIENT: Record<
   "ai-workforce": { from: "#F0D5A0", to: "#8A5A2A" },
   "ai-public": { from: "#A8D0D0", to: "#2E6565" },
   "ai-synthetic": { from: "#E8A5CE", to: "#8B3A6E" },
+  // Stablecoin lens — not used for sc-issuance (categorical); used for others
+  "sc-issuance": { from: "#B8F0C8", to: "#1A7A34" },
+  "sc-reserve": { from: "#A8D0F8", to: "#004899" },
+  "sc-consumer": { from: "#C4C3F0", to: "#2A287A" },
+  "sc-cross-border": { from: "#FFE0A8", to: "#994400" },
+  "sc-sovereignty": { from: "#FFC0BC", to: "#991A14" },
 };
 
 /**
@@ -117,24 +139,37 @@ function lerpHex(a: string, b: string, t: number): string {
 }
 
 /**
- * Score 0..1 for an entity under a given dimension — based on how many of its
- * bills' impactTags intersect the dimension's tag set, capped at 5 matches.
+ * Score 0..1 for an entity under a given dimension.
+ * - For DC/AI dimensions: intersection of legislation impactTags with dimension tag set.
+ * - For stablecoin dimensions: intersection of stablecoinMeta.tags with dimension tag set.
  */
 function getDimensionScore(
   entity: Entity,
   dimension: Exclude<Dimension, "overall">,
 ): number {
-  const relevantTags = DIMENSION_TAGS[dimension];
+  if (dimension.startsWith("sc-")) {
+    const relevantTags = STABLECOIN_DIMENSION_TAGS[
+      dimension as Extract<Dimension, `sc-${string}`>
+    ];
+    const entityTags = (entity.stablecoinMeta?.tags ?? []) as StablecoinTag[];
+    const matches = entityTags.filter((t) => (relevantTags as readonly string[]).includes(t)).length;
+    return Math.min(1, matches / relevantTags.length);
+  }
+  const relevantTags = DIMENSION_TAGS[
+    dimension as Exclude<Dimension, "overall" | `sc-${string}`>
+  ];
   const allTags = entity.legislation.flatMap((l) => l.impactTags ?? []);
-  const matches = allTags.filter((t) => relevantTags.includes(t)).length;
+  const matches = allTags.filter((t) => (relevantTags as ImpactTag[]).includes(t)).length;
   return Math.min(1, matches / 5);
 }
 
 /**
  * Returns the fill color for an entity under the given dimension.
- *  - "overall" → uses the entity's stance from STANCE_HEX (diverging palette).
- *  - any other → interpolates the dimension's gradient based on the entity's
- *    tag-density score (continuous, not bucketed).
+ *  - "overall" → stance color from STANCE_HEX.
+ *  - "sc-issuance" → categorical: green (non-bank-permitted), amber (bank-only),
+ *    red (private-stablecoin-banned), gray (unknown).
+ *  - other sc-* → gradient based on stablecoin tag density.
+ *  - DC/AI dimensions → gradient based on impactTag density.
  */
 export function getEntityColorForDimension(
   entity: Entity,
@@ -142,8 +177,16 @@ export function getEntityColorForDimension(
   lens: DimensionLens = "datacenter",
 ): string {
   if (dimension === "overall") {
-    const stance = lens === "ai" ? entity.stanceAI : entity.stanceDatacenter;
+    const stance =
+      lens === "ai"
+        ? entity.stanceAI
+        : lens === "stablecoin"
+          ? (entity.stance ?? entity.stanceDatacenter)
+          : entity.stanceDatacenter;
     return STANCE_HEX[stance];
+  }
+  if (dimension === "sc-issuance") {
+    return getIssuanceColor((entity.stablecoinMeta?.tags ?? []) as StablecoinTag[]);
   }
   const score = getDimensionScore(entity, dimension);
   const grad = DIMENSION_GRADIENT[dimension];

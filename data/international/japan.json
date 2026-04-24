@@ -1,0 +1,147 @@
+{
+  "id": "japan",
+  "geoId": "392",
+  "name": "Japan",
+  "region": "asia",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Japan operates a clear, conservative stablecoin regime. Fiat-pegged, par-redeemable stablecoins are regulated as electronic payment instruments (EPIs) under amendments to the Payment Services Act (PSA). Issuance and handling are limited to licensed entities under the FSA framework, with strong AML/CFT and consumer-protection rules. The core regime has applied since June 2023, and authorities refined it through 2024–2025. On 27 January 2026, the FSA published strict collateral requirements for stablecoin reserves, mandating top-grade credit ratings for foreign bonds held by stablecoin issuers, further tightening reserve asset standards. Commercial roll-out is gradual: JPYC was authorised as the first licensed issuer in August 2025, while Circle–SBI are advancing USDC distribution via banking and market partnerships under Japan's rules.",
+  "legislation": [
+    {
+      "id": "japan-leg-1",
+      "billCode": "2026-01-27",
+      "title": "FSA published strict collateral requirements for stablecoin reserves, mandating top-grade credit ratings for foreign bonds held by issuers.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2026-01-27"
+    },
+    {
+      "id": "japan-leg-2",
+      "billCode": "2025-08-18",
+      "title": "JPYC announced registration as a funds-transfer registrant (Kanto Local Finance Bureau registration), enabling it to issue a yen-pegged EPI.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-08-18"
+    },
+    {
+      "id": "japan-leg-3",
+      "billCode": "2025-04-22",
+      "title": "FSA/Financial System Council working-group publications inform refinements to reserve and issuer rules and intermediary licensing.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-04-22"
+    },
+    {
+      "id": "japan-leg-4",
+      "billCode": "2025-03-07",
+      "title": "Diet work on updates to PSA/intermediary rules reported (clarifying reserves and cross-border handling).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-03-07"
+    },
+    {
+      "id": "japan-leg-5",
+      "billCode": "2023-06-01",
+      "title": "PSA amendments establishing the EPI framework take effect (legal recognition; licensing perimeter).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2023-06-01"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "japan-fig-1",
+      "name": "Financial Services Agency (FSA)",
+      "role": "Primary regulator for EPIs and crypto-asset intermediaries (licensing, AML/CFT, consumer protection, ongoing supervision",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "japan-fig-2",
+      "name": "Bank of Japan (BOJ)",
+      "role": "Leads CBDC research; monitors monetary and financial stability; coordinates with FSA/MOF on systemic issues.",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "japan-news-1",
+      "headline": "Yahoo Finance – Japan Proposes Strict Bond Standards for Stablecoin Reserves (January 27, 2026)",
+      "source": "finance.yahoo.com",
+      "date": "2026-01-27",
+      "url": "https://finance.yahoo.com/news/japan-proposes-strict-bond-standards-131815579.html"
+    },
+    {
+      "id": "japan-news-2",
+      "headline": "FSA outline of amendments (Dec 2022)",
+      "source": "fsa.go.jp",
+      "date": "2026-01-27",
+      "url": "https://www.fsa.go.jp/en/news/2022/20221207/01.pdf"
+    },
+    {
+      "id": "japan-news-3",
+      "headline": "Japan Times on Circle–SBI pact (Nov 28, 2023)",
+      "source": "japantimes.co.jp",
+      "date": "2026-01-27",
+      "url": "https://www.japantimes.co.jp/business/2023/11/28/companies/japan-sbi-stablecoin-pact/"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "JP",
+    "nameZh": "日本",
+    "flagImg": "https://flagcdn.com/w320/jp.png",
+    "lastUpdated": "Jan 27, 2026",
+    "summaryEn": "Japan operates a clear, conservative stablecoin regime. Fiat-pegged, par-redeemable stablecoins are regulated as electronic payment instruments (EPIs) under amendments to the Payment Services Act (PSA). Issuance and handling are limited to licensed entities under the FSA framework, with strong AML/CFT and consumer-protection rules. The core regime has applied since June 2023, and authorities refined it through 2024–2025. On 27 January 2026, the FSA published strict collateral requirements for stablecoin reserves, mandating top-grade credit ratings for foreign bonds held by stablecoin issuers, further tightening reserve asset standards. Commercial roll-out is gradual: JPYC was authorised as the first licensed issuer in August 2025, while Circle–SBI are advancing USDC distribution via banking and market partnerships under Japan's rules.",
+    "tags": [
+      "bank-only",
+      "licensing-required",
+      "fiat-reserve-11",
+      "redemption-rights",
+      "aml-kyc"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "payment_instrument",
+    "classificationNote": "Electronic payment instrument (EPI) for fiat-backed, par-redeemable stablecoins. Other designs fall under crypto-assets or, if structured as investment contracts, potentially securities.",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "japan-reg-1",
+        "name": "Financial Services Agency",
+        "acronym": "FSA",
+        "role": "Primary regulator for EPIs and crypto-asset intermediaries (licensing, AML/CFT, consumer protection, ongoing supervision).",
+        "websiteUrl": "https://www.fsa.go.jp/en/",
+        "isPrimary": true
+      },
+      {
+        "id": "japan-reg-2",
+        "name": "Bank of Japan",
+        "acronym": "BOJ",
+        "role": "Leads CBDC research; monitors monetary and financial stability; coordinates with FSA/MOF on systemic issues.",
+        "websiteUrl": "https://www.boj.or.jp/en/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About · Track Policy",
+  title: "关于 · 稳定币政策追踪",
 };
 
 export default function AboutPage() {
@@ -13,115 +13,77 @@ export default function AboutPage() {
           href="/"
           className="inline-flex items-center gap-1.5 text-xs text-muted hover:text-ink transition-colors mb-16"
         >
-          ← Back
+          ← 返回
         </Link>
 
         <div className="text-[13px] font-medium text-muted tracking-tight mb-3">
-          About
+          关于
         </div>
         <h1 className="text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-[1.05] mb-10">
-          What this is
+          这个网站是做什么的
         </h1>
 
         <div className="text-base text-ink/80 leading-relaxed space-y-5">
           <p>
-            I built{" "}
-            <a
-              href="https://trackpolicy.org"
-              className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-            >
-              trackpolicy.org
-            </a>{" "}
-            because I kept wanting a straightforward
-            answer to one question: where does this state or country stand
-            on AI and data centers? To actually answer it I had to check
-            legislature portals, read scattered news, and dig through
-            industry filings. Nobody was collecting it in one place, so
-            I did.
+            稳定币正在重塑全球支付体系，而各国政府对它的态度却大相径庭——有的积极立法推动，有的设置重重门槛，有的则明令禁止。我搭建这个网站，是因为我想要一个直接的答案：某个国家或地区，对稳定币究竟持什么立场？
           </p>
           <p>
-            Policy is also the part of this that gets the least attention.
-            Most of the conversation around AI is about chips and models.
-            But where compute gets built, how much it costs the grid, and
-            what governments will allow AI to do in schools, courts, and
-            hospitals is being decided right now in state capitols and
-            agency filings. I wanted a map.
+            要回答这个问题，原本需要逐一翻阅各国议会网站、监管公告和行业简报。没有人把这些信息汇集到一个地方，于是我来做这件事。
           </p>
           <p>
-            Every country, US state, and bloc on the site has a stance and
-            a set of impact tags based on the bills currently moving
-            through it. Click a region to see its legislation, who&rsquo;s
-            sponsoring what, recent news, and the data centers already on
-            the ground.
+            地图覆盖全球主要司法管辖区，包括美国各州、欧盟成员国、英国、亚洲各国等。点击任意国家或地区，可以看到当前正在推进的立法、监管机构、关键政策人物，以及最新资讯。每个司法管辖区都有一个立场评级，从"支持"到"限制"，基于其实际的法规和议案现状。
           </p>
           <p>
-            I was inspired by{" "}
-            <a
-              href="https://datacenterbans.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-            >
-              datacenterbans.com
-            </a>
-            , which tracks US-state data center moratoriums. Track Policy
-            covers more jurisdictions and more kinds of policy: not only
-            bans, but also incentives, disclosure rules, and study bills.
+            稳定币监管是当下全球金融政策中变动最快的领域之一。欧盟 MiCA 已全面生效，美国《GENIUS 法案》正在国会推进，香港、新加坡、日本也各自建立了本地框架。与此同时，印度、俄罗斯等国仍对私人稳定币持谨慎甚至禁止态度。这张地图试图把这些分散的信息变成一幅可以纵览全局的图景。
           </p>
           <p>
-            One of the things that pushed me to build this is how often
-            the public debate around data centers and AI runs on
-            intuition rather than detail. A lot of lawmakers writing these
-            bills are doing their best, but tech moves faster than most
-            committee staff can keep up with, and the headlines they
-            read from aren&rsquo;t always accurate about load growth,
-            water use, or what these facilities actually do. That gap
-            produces policy that sometimes misses the real issue in
-            either direction, whether it&rsquo;s a blanket moratorium on
-            a site that wouldn&rsquo;t have strained the grid, or an
-            incentive package for a build that quietly locks ratepayers
-            into decades of higher bills.
-          </p>
-          <p>
-            Track Policy isn&rsquo;t trying to take a side on whether
-            any particular bill is good. It&rsquo;s trying to show you
-            what&rsquo;s actually being proposed, what stage it&rsquo;s
-            at, and what it would do if it passed, so the people affected
-            can make up their own minds with the real information in
-            front of them.
+            这个网站不为任何立场站台。它的目标是如实呈现：哪些法案正在审议、走到了哪个阶段、通过后会带来什么影响——让关心这个议题的人能够基于真实信息形成自己的判断。
           </p>
 
           <div className="pt-5 mt-5 border-t border-black/[.06]">
             <p className="text-muted">
-              This is still early. I&rsquo;m open to feedback and edits.
-              The repo is public at{" "}
-              <a
-                href="https://github.com/isabellereks/track-policy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-              >
-                github.com/isabellereks/track-policy
-              </a>
-              , so you can open an issue or send a PR. You can also{" "}
+              数据持续更新中，欢迎反馈与建议。如有问题或补充，请{" "}
               <Link
                 href="/contact"
                 className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
               >
-                email me
+                联系我
               </Link>
-              .
+              。
             </p>
           </div>
         </div>
 
         <div className="mt-16 pt-10 border-t border-black/[.06]">
           <div className="text-[13px] font-medium text-muted tracking-tight mb-4">
-            Credits
+            数据来源
           </div>
           <ul className="text-sm text-ink/80 leading-relaxed space-y-2">
             <li>
-              Inspired by{" "}
+              本站 fork 自{" "}
+              <a
+                href="https://github.com/isabellereks/track-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
+              >
+                Isabelle Reksopuro
+              </a>{" "}
+              的开源项目 Track Policy，在其基础上专注于稳定币政策方向
+            </li>
+            <li>
+              立法数据参考各国议会官网、监管机构公告及{" "}
+              <a
+                href="https://legiscan.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
+              >
+                LegiScan
+              </a>
+            </li>
+            <li>
+              地图灵感来源于{" "}
               <a
                 href="https://datacenterbans.com"
                 target="_blank"
@@ -132,7 +94,7 @@ export default function AboutPage() {
               </a>
             </li>
             <li>
-              Icons by{" "}
+              图标来自{" "}
               <a
                 href="https://streamlinehq.com"
                 target="_blank"
@@ -142,26 +104,15 @@ export default function AboutPage() {
                 Streamline
               </a>
             </li>
-            <li>
-              Built by{" "}
-              <a
-                href="https://isabellereks.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-              >
-                Isabelle Reksopuro
-              </a>
-            </li>
             <li className="pt-2 text-muted">
-              Full data sources are listed on the{" "}
+              完整数据来源详见{" "}
               <Link
                 href="/methodology"
                 className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
               >
-                methodology
+                方法论
               </Link>{" "}
-              page.
+              页面。
             </li>
           </ul>
         </div>
@@ -169,4 +120,3 @@ export default function AboutPage() {
     </main>
   );
 }
-

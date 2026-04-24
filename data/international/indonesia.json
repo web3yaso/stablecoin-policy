@@ -212,6 +212,43 @@
       "url": "https://www.mlex.com/mlex/articles/2446189/indonesia-s-ai-regulatory-ambitions-will-face-enforcement-realities"
     }
   ],
-  "stanceDatacenter": "favorable",
-  "stanceAI": "review"
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "stablecoinMeta": {
+    "code": "ID",
+    "nameZh": "印度尼西亚",
+    "flagImg": "https://flagcdn.com/w320/id.png",
+    "lastUpdated": "",
+    "summaryEn": "Indonesia's stablecoin landscape is shaped by Bank Indonesia (BI) and the Financial Services Authority (OJK). Stablecoins are prohibited as payment instruments by Bank Indonesia, though digital assets can be traded on OJK-licensed crypto exchanges. A comprehensive stablecoin issuance framework has not yet been established.",
+    "tags": [
+      "bank-only",
+      "licensing-required",
+      "aml-kyc"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 2,
+    "regimeStatus": "in_progress",
+    "allowsFiatBacked": false,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "indonesia-reg-1",
+        "name": "Bank Indonesia",
+        "acronym": "BI",
+        "role": "Central bank. Prohibits stablecoins and virtual currencies as payment instruments. Oversees monetary policy and payment system regulation.",
+        "websiteUrl": "https://www.bi.go.id",
+        "isPrimary": true
+      },
+      {
+        "id": "indonesia-reg-2",
+        "name": "Otoritas Jasa Keuangan",
+        "acronym": "OJK",
+        "role": "Financial Services Authority. Supervises licensed crypto asset exchanges where digital assets including stablecoins can be traded as investment assets.",
+        "websiteUrl": "https://www.ojk.go.id",
+        "isPrimary": false
+      }
+    ]
+  }
 }

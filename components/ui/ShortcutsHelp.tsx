@@ -3,8 +3,6 @@
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import {
   StanceRow,
-  DataCenterRow,
-  SizeRow,
 } from "@/components/map/MobileLegend";
 
 interface ShortcutsHelpProps {
@@ -190,8 +188,6 @@ export default function ShortcutsHelp({ open, onClose }: ShortcutsHelpProps) {
                 Legend
               </div>
               <StanceRow />
-              <DataCenterRow />
-              <SizeRow />
             </div>
           </div>
         ) : (

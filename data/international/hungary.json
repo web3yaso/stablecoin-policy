@@ -1,0 +1,151 @@
+{
+  "id": "hungary",
+  "geoId": "348",
+  "name": "Hungary",
+  "region": "eu",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Hungary applies the EU MiCA regime via Act VII of 2024: issuer rules for ART/EMT apply from 30 June 2024 and CASP authorisation from 30 December 2024, with a national transition ending 1 July 2025 after which CASPs must be authorised by the MNB. From 1 July 2025, crypto-to-fiat and crypto-to-crypto exchanges are lawful only if validated by an SZTFH-licensed “crypto-asset conversion validation service provider,” which issues a compliance certificate; exchanges without a certificate are invalid and can trigger criminal liability at values from HUF 5 million. Stablecoins are not legal tender and are treated under MiCA as e-money tokens (EMT) or asset-referenced tokens (ART).",
+  "legislation": [
+    {
+      "id": "hungary-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": ""
+    },
+    {
+      "id": "hungary-leg-2",
+      "billCode": "2025-10-27",
+      "title": "SZTFH Decree 10/2025 (X.27.) publishes the validator (compliance-certificate) authorization procedure and requirements for crypto-asset conversions.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-10-27"
+    },
+    {
+      "id": "hungary-leg-3",
+      "billCode": "2025-07-01",
+      "title": "Hungary’s Criminal Code §394/A enters into force, penalising the use of unauthorised crypto-asset exchange services; users and providers must transact via authorised services.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-01"
+    },
+    {
+      "id": "hungary-leg-4",
+      "billCode": "2025-06-30",
+      "title": "MiCA’s stablecoin framework (Titles III & IV on ARTs/EMTs) becomes applicable EU-wide, covering issuers’ reserve, governance, disclosure, and redemption rules.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-06-30"
+    },
+    {
+      "id": "hungary-leg-5",
+      "billCode": "2024-12-30",
+      "title": "Remaining MiCA provisions, including CASP authorization and the recast TFR, become applicable across the EU.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-12-30"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "hungary-fig-1",
+      "name": "Central Bank of Hungary (MNB)",
+      "role": "MiCA competent authority (NCA) for Hungary; authorises and supervises CASPs and oversees ART/EMT issuance under MiCA.",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "hungary-fig-2",
+      "name": "Supervisory Authority for Regulated Activities (SZTFH)",
+      "role": "Licences and supervises crypto-asset conversion validation service providers; their compliance certificate is required f",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "hungary-news-1",
+      "headline": "MiCA (EU Reg. 2023/1114)",
+      "source": "eur-lex.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A32023R1114"
+    },
+    {
+      "id": "hungary-news-2",
+      "headline": "MNB — CASP authorisation guidance",
+      "source": "mnb.hu",
+      "date": "2026-04-01",
+      "url": "https://www.mnb.hu/letoltes/casp-tevekenysegi-engedelyezesi-utmutato-en.pdf"
+    },
+    {
+      "id": "hungary-news-3",
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "HU",
+    "nameZh": "匈牙利",
+    "flagImg": "https://flagcdn.com/w320/hu.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "Hungary applies the EU MiCA regime via Act VII of 2024: issuer rules for ART/EMT apply from 30 June 2024 and CASP authorisation from 30 December 2024, with a national transition ending 1 July 2025 after which CASPs must be authorised by the MNB. From 1 July 2025, crypto-to-fiat and crypto-to-crypto exchanges are lawful only if validated by an SZTFH-licensed “crypto-asset conversion validation service provider,” which issues a compliance certificate; exchanges without a certificate are invalid and can trigger criminal liability at values from HUF 5 million. Stablecoins are not legal tender and are treated under MiCA as e-money tokens (EMT) or asset-referenced tokens (ART).",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "In Hungary, stablecoins are treated as crypto-assets under MiCA, implemented nationally by Act VII of 2024. They are not a separate legal category but fall under MiCA’s two types: asset-referenced tokens (ARTs) and e-money tokens (EMTs), with issuer authorisation and conduct rules set in MiCA and ov",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "hungary-reg-1",
+        "name": "Central Bank of Hungary",
+        "acronym": "MNB",
+        "role": "MiCA competent authority (NCA) for Hungary; authorises and supervises CASPs and oversees ART/EMT issuance under MiCA.",
+        "websiteUrl": "https://www.mnb.hu/en",
+        "isPrimary": true
+      },
+      {
+        "id": "hungary-reg-2",
+        "name": "Supervisory Authority for Regulated Activities",
+        "acronym": "SZTFH",
+        "role": "Licences and supervises crypto-asset conversion validation service providers; their compliance certificate is required for exchange transactions under national law.",
+        "websiteUrl": "https://sztfh.hu/?lang=en",
+        "isPrimary": false
+      }
+    ]
+  }
+}

@@ -24,6 +24,9 @@ import NewsSection from "./NewsSection";
 import FacilityDetail from "./FacilityDetail";
 import DataCentersList from "./DataCentersList";
 import EnergySection from "./EnergySection";
+import StablecoinInfo from "./StablecoinInfo";
+import { useLocale } from "@/contexts/LocaleContext";
+import { t } from "@/lib/i18n";
 import { facilitiesForEntity } from "@/lib/datacenters";
 import { getStateProfile, plantsInState } from "@/lib/energy-data";
 
@@ -60,6 +63,7 @@ const LEVEL_LABEL: Record<GovLevel, string | null> = {
 type Layer =
   | "legislation"
   | "figures"
+  | "regulators"
   | "news"
   | "datacenters"
   | "local"
@@ -161,6 +165,8 @@ export default function SidePanel({
   lens = "datacenter",
   localActions,
 }: SidePanelProps) {
+  const { locale } = useLocale();
+
   // Mobile defaults to the bottom-anchored card; desktop to top-left.
   // Derived state (not initial useState) so it actually tracks the
   // useSyncExternalStore matchMedia subscription on the client. Once the
@@ -194,7 +200,8 @@ export default function SidePanel({
   // A pinned facility takes over the panel content while it's set.
   const facilityMode = !!facility;
   const hasLegislation = !!entity && entity.legislation.length > 0;
-  const hasFigures = !!entity && entity.keyFigures.length > 0;
+  const hasFigures = !!entity && entity.keyFigures.length > 0 && !entity.stablecoinMeta;
+  const hasRegulators = !!entity && (entity.stablecoinMeta?.regulators?.length ?? 0) > 0;
   const hasNews = !!entity && entity.news.length > 0;
 
   // Scope facilities to whatever the entity represents. The panel preview
@@ -239,8 +246,9 @@ export default function SidePanel({
   if (hasLegislation) availableLayers.push("legislation");
   if (hasLocal) availableLayers.push("local");
   if (hasFigures) availableLayers.push("figures");
+  if (hasRegulators) availableLayers.push("regulators");
   if (hasNews) availableLayers.push("news");
-  if (hasDatacenters) availableLayers.push("datacenters");
+  // if (hasDatacenters) availableLayers.push("datacenters");
   if (hasEnergy) availableLayers.push("energy");
   const activeLayer: Layer =
     availableLayers.length > 0 && !availableLayers.includes(preferredLayer)
@@ -614,19 +622,45 @@ export default function SidePanel({
       ) : (
         <div ref={scrollRef} className="flex-1 overflow-y-auto">
           <div className="px-6 pt-1 pb-5 border-b border-black/[.06]">
-            <h2 className="text-2xl font-semibold text-ink tracking-tight">
-              {entity.name}
-            </h2>
-            <div className="mt-2 flex items-center gap-3">
-              {/* Use the overall stance on the headline tag so a state
-                  like Texas — which has enacted AI/privacy bills but
-                  nothing data-center-specific — doesn't read as "No
-                  Action" when viewed under the data-center lens. The
-                  map coloring + SummaryBar still split by lens. */}
-              <StanceBadge
-                stance={entity.stance ?? (lens === "ai" ? entity.stanceAI : entity.stanceDatacenter)}
-                size="md"
-              />
+            <div className="flex items-center gap-3">
+              {entity.stablecoinMeta?.flagImg && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={entity.stablecoinMeta.flagImg}
+                  alt=""
+                  className="w-8 h-auto rounded-sm flex-shrink-0 shadow-sm"
+                />
+              )}
+              <h2 className="text-2xl font-semibold text-ink tracking-tight">
+                {entity.name}
+              </h2>
+            </div>
+            <div className="mt-2 flex items-center gap-3 flex-wrap">
+              {entity.stablecoinMeta ? (() => {
+                const ls = entity.stablecoinMeta.legalStatus;
+                const color =
+                  ls === "legal" ? "#34C759"
+                  : ls === "banned" ? "#FF3B30"
+                  : ls === "legal_with_restrictions" || ls === "partially_legal" ? "#FF9500"
+                  : "#8E8E93";
+                const label =
+                  ls === "legal" ? "Legal"
+                  : ls === "legal_with_restrictions" ? "Legal with restrictions"
+                  : ls === "banned" ? "Banned"
+                  : ls === "partially_legal" ? "Partially legal"
+                  : "Unclear";
+                return (
+                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-ink bg-black/[.04] border border-black/[.06] rounded-full px-3 py-1">
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
+                    {label}
+                  </span>
+                );
+              })() : (
+                <StanceBadge
+                  stance={entity.stance ?? (lens === "ai" ? entity.stanceAI : entity.stanceDatacenter)}
+                  size="md"
+                />
+              )}
               {LEVEL_LABEL[entity.level] && (
                 <span className="text-xs text-muted">
                   {LEVEL_LABEL[entity.level]}
@@ -650,7 +684,11 @@ export default function SidePanel({
               </div>
             )}
 
-            <ContextBlurb text={entity.contextBlurb} />
+            {entity.stablecoinMeta ? (
+              <StablecoinInfo meta={entity.stablecoinMeta} />
+            ) : (
+              <ContextBlurb text={entity.contextBlurb} />
+            )}
 
             {showViewStatesButton && onViewStates && (
               <button
@@ -700,16 +738,18 @@ export default function SidePanel({
                     const active = layer === activeLayer;
                     const label =
                       layer === "legislation"
-                        ? "Bills"
+                        ? t(locale, "panel.tab.bills")
                         : layer === "local"
-                          ? "Local"
+                          ? t(locale, "panel.tab.local")
                           : layer === "figures"
-                            ? "Figures"
-                            : layer === "news"
-                              ? "News"
-                              : layer === "datacenters"
-                                ? "Centers"
-                                : "Energy";
+                            ? t(locale, "panel.tab.figures")
+                            : layer === "regulators"
+                              ? t(locale, "panel.tab.regulators")
+                              : layer === "news"
+                                ? t(locale, "panel.tab.news")
+                                : layer === "datacenters"
+                                  ? t(locale, "panel.tab.centers")
+                                  : t(locale, "panel.tab.energy");
                     return (
                       <button
                         key={layer}
@@ -719,15 +759,7 @@ export default function SidePanel({
                         type="button"
                         role="tab"
                         aria-selected={active}
-                        title={
-                          layer === "legislation"
-                            ? "Legislation"
-                            : layer === "figures"
-                              ? "Key Figures"
-                              : layer === "datacenters"
-                                ? "Data Centers"
-                                : label
-                        }
+                        title={label}
                         onClick={() => setPreferredLayer(layer)}
                         className={`relative flex-1 min-w-0 text-xs font-medium px-2 py-1.5 rounded-full transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] truncate ${
                           active ? "text-ink" : "text-muted hover:text-ink"
@@ -808,6 +840,46 @@ export default function SidePanel({
                       expanded={expandedSections.has("figures")}
                       onToggle={() => toggleExpand("figures")}
                     />
+                  </motion.section>
+                )}
+
+                {activeLayer === "regulators" && hasRegulators && entity.stablecoinMeta?.regulators && (
+                  <motion.section layout className="flex flex-col gap-3">
+                    {entity.stablecoinMeta.regulators.map((reg) => (
+                      <div key={reg.id} className="rounded-xl bg-black/[.02] border border-black/[.05] px-3.5 py-3">
+                        <div className="flex items-start justify-between gap-2">
+                          <div>
+                            <div className="text-[13px] font-semibold text-ink leading-snug">
+                              {reg.acronym ? `${reg.acronym} · ` : ""}{reg.name}
+                            </div>
+                            {reg.isPrimary && (
+                              <span className="text-[10px] font-medium text-[#34C759]">{t(locale, "panel.primary_regulator")}</span>
+                            )}
+                          </div>
+                          {reg.websiteUrl && (
+                            <a
+                              href={reg.websiteUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[11px] text-muted hover:text-ink flex-shrink-0 mt-0.5"
+                            >
+                              ↗
+                            </a>
+                          )}
+                        </div>
+                        <p className="text-[12px] text-muted leading-snug mt-1.5 line-clamp-3">{reg.role}</p>
+                        {reg.headName && (
+                          <div className="mt-2 text-[11px] text-muted">
+                            {reg.headName}{reg.headTitle ? ` · ${reg.headTitle}` : ""}
+                          </div>
+                        )}
+                        {reg.headQuote && (
+                          <blockquote className="mt-1.5 text-[11px] text-ink/70 italic leading-snug border-l-2 border-black/10 pl-2">
+                            "{reg.headQuote}"
+                          </blockquote>
+                        )}
+                      </div>
+                    ))}
                   </motion.section>
                 )}
 

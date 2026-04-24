@@ -1,0 +1,117 @@
+{
+  "id": "canada",
+  "geoId": "124",
+  "name": "Canada",
+  "region": "na",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "As of 2025, Canada has no dedicated stablecoin statute. Most fiat-referenced “stablecoins” (VRCAs) are addressed through CSA securities/derivatives oversight of trading platforms under an interim approach, not an issuer law. The Bank of Canada has urged a payments-focused framework so that any widely used stablecoin meets prudential and consumer-protection standards. Deposit insurance does not cover crypto/stablecoins, so retail users lack bank-style protections.",
+  "legislation": [
+    {
+      "id": "canada-leg-1",
+      "billCode": "2025-10-22",
+      "title": "FINTRAC fines Cryptomus operator Xeltox Enterprises Ltd. a record C$176.96 million for AML and sanctions violations, signaling strict enforcement in the crypto sector.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-10-22"
+    },
+    {
+      "id": "canada-leg-2",
+      "billCode": "2025-09-19",
+      "title": "The U.S. GENIUS Act is implemented, creating a clear federal framework for stablecoin regulation, increasing pressure on Canada to harmonize its approach.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-09-19"
+    },
+    {
+      "id": "canada-leg-3",
+      "billCode": "2025-04-01",
+      "title": "CSA issues a decision document on Payward Canada, reinforcing the application of securities laws to crypto platforms and stablecoin trading.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-04-01"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "canada-fig-1",
+      "name": "Canadian Securities Administrators (CSA)",
+      "role": "Canada’s provincial/territorial regulators coordinate through the CSA. Under an interim “VRCA” approach, crypto trading ",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "canada-fig-2",
+      "name": "Financial Transactions and Reports Analysis Centre of Canada (FINTRAC)",
+      "role": "FINTRAC registers and supervises MSBs/FMSBs that deal in virtual currency. Obligations include an AML/ATF program, KYC, ",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "canada-news-1",
+      "headline": "CSA — Interim approach to Value-Referenced Crypto Assets (stablecoins) (press release / Staff Notice links)",
+      "source": "securities-administrators.ca",
+      "date": "2025-10-22",
+      "url": "https://www.securities-administrators.ca/news/canadian-securities-regulators-clarify-interim-approach-to-value-referenced-crypto-asset/"
+    },
+    {
+      "id": "canada-news-2",
+      "headline": "CSA — Update on VRCAs for crypto trading platforms (2024)",
+      "source": "securities-administrators.ca",
+      "date": "2025-10-22",
+      "url": "https://www.securities-administrators.ca/news/csa-provides-update-to-crypto-asset-trading-platforms-about-value-referenced-crypto-assets/"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "CA",
+    "nameZh": "加拿大",
+    "flagImg": "https://flagcdn.com/w320/ca.png",
+    "lastUpdated": "Oct 22, 2025",
+    "summaryEn": "As of 2025, Canada has no dedicated stablecoin statute. Most fiat-referenced “stablecoins” (VRCAs) are addressed through CSA securities/derivatives oversight of trading platforms under an interim approach, not an issuer law. The Bank of Canada has urged a payments-focused framework so that any widely used stablecoin meets prudential and consumer-protection standards. Deposit insurance does not cover crypto/stablecoins, so retail users lack bank-style protections.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "partially_legal",
+    "regulatoryClarity": 3,
+    "regimeStatus": "in_progress",
+    "classification": "security",
+    "classificationNote": "Canada has no dedicated issuer law. The CSA treats fiat-pegged stablecoins on trading platforms as “Value-Referenced Crypto Assets (VRCAs)” and generally securities and/or derivatives in the platform context. Platforms may list only VRCAs that meet CSA interim terms (1:1 high-quality reserves, segre",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "canada-reg-1",
+        "name": "Canadian Securities Administrators",
+        "acronym": "CSA",
+        "role": "Canada’s provincial/territorial regulators coordinate through the CSA. Under an interim “VRCA” approach, crypto trading platforms may list fiat-pegged stablecoins only if they meet specified terms (e.",
+        "websiteUrl": "https://www.securities-administrators.ca",
+        "isPrimary": true
+      },
+      {
+        "id": "canada-reg-2",
+        "name": "Financial Transactions and Reports Analysis Centre of Canada",
+        "acronym": "FINTRAC",
+        "role": "FINTRAC registers and supervises MSBs/FMSBs that deal in virtual currency. Obligations include an AML/ATF program, KYC, suspicious transaction reports (no threshold), Large Virtual Currency Transactio",
+        "websiteUrl": "https://www.fintrac-canafe.gc.ca",
+        "isPrimary": false
+      }
+    ]
+  }
+}

@@ -209,5 +209,42 @@
     }
   ],
   "stanceDatacenter": "favorable",
-  "stanceAI": "concerning"
+  "stanceAI": "favorable",
+  "stance": "favorable",
+  "stablecoinMeta": {
+    "code": "PL",
+    "nameZh": "波兰",
+    "flagImg": "https://flagcdn.com/w320/pl.png",
+    "lastUpdated": "Dec 2024",
+    "summaryEn": "Poland is an EU member state fully subject to the Markets in Crypto-Assets (MiCA) regulation, which became fully applicable on December 30, 2024. Fiat-backed stablecoins (e-money tokens) and asset-referenced tokens are now regulated under MiCA. The Polish Financial Supervision Authority (KNF) serves as the competent national authority.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal",
+    "regulatoryClarity": 4,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "Under MiCA, fiat-backed stablecoins are classified as e-money tokens (EMTs) and asset-backed stablecoins as asset-referenced tokens (ARTs).",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "poland-reg-1",
+        "name": "Komisja Nadzoru Finansowego",
+        "acronym": "KNF",
+        "role": "Polish Financial Supervision Authority. Competent national authority under MiCA for supervising crypto-asset service providers and stablecoin issuers in Poland.",
+        "websiteUrl": "https://www.knf.gov.pl",
+        "isPrimary": true
+      }
+    ]
+  }
 }

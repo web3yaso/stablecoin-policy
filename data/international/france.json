@@ -1,0 +1,173 @@
+{
+  "id": "france",
+  "geoId": "250",
+  "name": "France",
+  "region": "eu",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "By 2025 France regulates stablecoins primarily through the EU Markets in Crypto-Assets Regulation (MiCA), implemented in French law and supervised by the AMF, ACPR, and Banque de France. Issuance and retail use are permitted when compliant with licensing, reserve, audit, and consumer-protection rules. France adopted national measures (Ordonnance n° 2024-936 and Décret n° 2025-169) to align the Monetary and Financial Code with MiCA.",
+  "legislation": [
+    {
+      "id": "france-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": ""
+    },
+    {
+      "id": "france-leg-2",
+      "billCode": "2025-02-21",
+      "title": "Décret n° 2025-169 published (national measures implementing MiCA operational and prudential aspects).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-02-21"
+    },
+    {
+      "id": "france-leg-3",
+      "billCode": "2024-12-11",
+      "title": "FSB peer review of France published.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-12-11"
+    },
+    {
+      "id": "france-leg-4",
+      "billCode": "2024-10-15",
+      "title": "Ordonnance n° 2024-936 adopted to align national law with MiCA/TFR.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-10-15"
+    },
+    {
+      "id": "france-leg-5",
+      "billCode": "2024-07-01",
+      "title": "Circle announced ACPR EMI authorisation / MiCA compliance.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-07-01"
+    },
+    {
+      "id": "france-leg-6",
+      "billCode": "2024-06-30",
+      "title": "MiCA stablecoin provisions became applicable EU-wide.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-06-30"
+    },
+    {
+      "id": "france-leg-7",
+      "billCode": "2023-06-09",
+      "title": "MiCA published in the Official Journal (Regulation (EU) 2023/1114).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2023-06-09"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "france-fig-1",
+      "name": "Autorité des Marchés Financiers (AMF)",
+      "role": "Market conduct, white-paper review, registration and authorisation of CASPs/DASPs, investor protection, coordination for",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "france-fig-2",
+      "name": "Autorité de Contrôle Prudentiel et de Résolution (ACPR)",
+      "role": "Prudential supervisor (attached to Banque de France), licensing EMIs and credit institutions that issue EMTs; AML/CFT an",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "france-news-1",
+      "headline": "AMF — MiCA: information and updates",
+      "source": "amf-france.org",
+      "date": "2026-04-01",
+      "url": "https://www.amf-france.org/en/news-publications/depth/mica"
+    },
+    {
+      "id": "france-news-2",
+      "headline": "EBA — Asset-referenced and e-money tokens (MiCA)",
+      "source": "eba.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://www.eba.europa.eu/regulation-and-policy/asset-referenced-and-e-money-tokens-mica"
+    },
+    {
+      "id": "france-news-3",
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "FR",
+    "nameZh": "法国",
+    "flagImg": "https://flagcdn.com/w320/fr.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "By 2025 France regulates stablecoins primarily through the EU Markets in Crypto-Assets Regulation (MiCA), implemented in French law and supervised by the AMF, ACPR, and Banque de France. Issuance and retail use are permitted when compliant with licensing, reserve, audit, and consumer-protection rules. France adopted national measures (Ordonnance n° 2024-936 and Décret n° 2025-169) to align the Monetary and Financial Code with MiCA.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "E-money for single-fiat-pegged EMTs, or regulated crypto-asset (ART) under MiCA. Not legal tender.",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "france-reg-1",
+        "name": "Autorité des Marchés Financiers",
+        "acronym": "AMF",
+        "role": "Market conduct, white-paper review, registration and authorisation of CASPs/DASPs, investor protection, coordination for MiCA authorisations.",
+        "websiteUrl": "https://www.amf-france.org/en",
+        "isPrimary": true
+      },
+      {
+        "id": "france-reg-2",
+        "name": "Autorité de Contrôle Prudentiel et de Résolution",
+        "acronym": "ACPR",
+        "role": "Prudential supervisor (attached to Banque de France), licensing EMIs and credit institutions that issue EMTs; AML/CFT and prudential oversight of issuers.",
+        "websiteUrl": "https://acpr.banque-france.fr/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

@@ -246,7 +246,7 @@ export default function LiveNews({ showAll = false }: LiveNewsProps = {}) {
   const [query, setQuery] = useState("");
   const [activeScope, setActiveScope] = useState<ScopeFilter>("all");
   const [activeTopic, setActiveTopic] = useState<TopicFilter>("all");
-  const [sortKey, setSortKey] = useState<SortKey>("relevance");
+  const [sortKey, setSortKey] = useState<SortKey>("latest");
 
   const allRows = useMemo(() => buildNewsRows(), []);
   const lastUpdated = useMemo(
@@ -318,7 +318,7 @@ export default function LiveNews({ showAll = false }: LiveNewsProps = {}) {
   return (
     <div>
       {lastUpdated && (
-        <p className="text-xs text-muted -mt-6 mb-8">
+        <p className="text-xs text-muted -mt-6 mb-8" suppressHydrationWarning>
           Last updated {lastUpdated}
         </p>
       )}

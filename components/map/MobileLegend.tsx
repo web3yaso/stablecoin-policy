@@ -3,7 +3,6 @@
 import { STANCE_LABEL, type Dimension, DIMENSION_LABEL } from "@/types";
 import { STANCE_HEX } from "@/lib/map-utils";
 import { DIMENSION_GRADIENT } from "@/lib/dimensions";
-import { SIZE_BANDS } from "@/components/map/DataCenterDots";
 
 interface MobileLegendProps {
   dimension: Dimension;
@@ -75,32 +74,6 @@ function DimensionRow({ dimension }: { dimension: Dimension }) {
   );
 }
 
-export function SizeRow() {
-  return (
-    <div>
-      <div className="text-[11px] font-semibold text-muted tracking-tight mb-2">
-        Size by power
-      </div>
-      <div className="flex items-end justify-between gap-2">
-        {SIZE_BANDS.map((band) => (
-          <div
-            key={band.key}
-            className="flex items-center gap-1.5 flex-1 min-w-0"
-          >
-            <span
-              className="rounded-full bg-muted/30 flex-shrink-0"
-              style={{ width: band.r * 1.6, height: band.r * 1.6 }}
-              aria-hidden
-            />
-            <span className="text-[10px] text-muted truncate">
-              {band.label}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export function DataCenterRow() {
   const items = [
@@ -169,14 +142,6 @@ export default function MobileLegend({
       >
         <div className="px-4 py-3 flex flex-col gap-3">
           {showDimension ? <DimensionRow dimension={dimension} /> : <StanceRow />}
-          {showDataCenters && (
-            <>
-              <div className="h-px bg-black/[.05]" />
-              <DataCenterRow />
-              <div className="h-px bg-black/[.05]" />
-              <SizeRow />
-            </>
-          )}
         </div>
       </div>
     </div>

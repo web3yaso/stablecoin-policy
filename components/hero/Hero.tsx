@@ -3,6 +3,8 @@
 import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import type { Region } from "@/types";
+import { useLocale } from "@/contexts/LocaleContext";
+import { t } from "@/lib/i18n";
 
 // GlobeHero's d3-geo orthographic projection produces SVG path strings that
 // depend on viewport size, so the SSR'd path never matches the client path
@@ -22,6 +24,7 @@ type Props = {
 };
 
 export default function Hero({ progress, onRegionClick }: Props) {
+  const { locale } = useLocale();
   const headlineOpacity = clamp(1 - progress / 0.2, 0, 1);
   const headlineY = -progress * 40;
   // Scroll hint stays visible through most of the scroll since the map
@@ -103,9 +106,9 @@ export default function Hero({ progress, onRegionClick }: Props) {
           />
         </svg>
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-ink leading-[1.1] md:leading-[1.05]">
-          Tracking stablecoin
+          {t(locale, "hero.headline1")}
           <br />
-          policy worldwide
+          {t(locale, "hero.headline2")}
         </h1>
       </div>
 
@@ -137,7 +140,7 @@ export default function Hero({ progress, onRegionClick }: Props) {
       >
         <div className="flex items-center gap-1.5">
           <span className="text-xs font-medium text-ink tracking-tight">
-            Scroll to reveal the map
+            {t(locale, "hero.scroll_hint")}
           </span>
           <svg
             width="12"

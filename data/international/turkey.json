@@ -1,0 +1,116 @@
+{
+  "id": "turkey",
+  "geoId": "792",
+  "name": "Turkey",
+  "region": "eu",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "As of mid-2025, Turkish residents can hold and trade stablecoins via licensed crypto-asset service providers (KVHS/CASPs) licensed by the Capital Markets Board (SPK), but the use of crypto-assets for payments is banned. The 2024 Capital Markets Law amendment and two CMB communiqués (III-35/B.1 and III-35/B.2, Mar 13, 2025) created a licensing and operations regime for KVHS/CASPs (custody, listing, capital, segregation). Separately, MASAK's General Communiqué No. 29 (June 28, 2025) added transaction limits and 48–72 hour withdrawal holds aimed at AML and consumer protection.",
+  "legislation": [
+    {
+      "id": "turkey-leg-1",
+      "billCode": "2025-09-03",
+      "title": "CBRT invites firms to Digital Lira CBDC sandbox; no payment-ban repeal yet.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-09-03"
+    },
+    {
+      "id": "turkey-leg-2",
+      "billCode": "2025-03-13",
+      "title": "CMB Communiqués III-35/B.1 and III-35/B.2 published (Official Gazette 32840)",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-03-13"
+    },
+    {
+      "id": "turkey-leg-3",
+      "billCode": "2024-07-02",
+      "title": "Law No. 7518 (amending Capital Markets Law) published (Official Gazette 32590)",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-07-02"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "turkey-fig-1",
+      "name": "Capital Markets Board (CMB)",
+      "role": "Primary licensing & supervision of CASPs, transaction monitoring, sanctions.",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "turkey-fig-2",
+      "name": "Central Bank of Republic of Turkey (CBRT)",
+      "role": "Maintains payment ban; runs Digital Lira (CBDC) project & macro oversight.",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "turkey-news-1",
+      "headline": "SRP-Legal note (III-35/B.1 and III-35/B.2; Official Gazette 32840)",
+      "source": "srp-legal.com",
+      "date": "2025-11-11",
+      "url": "https://www.srp-legal.com/tr/kripto-varlik-hizmet-saglayicilarin-kurulus-ve-faaliyet-esaslari-hakkinda-teblig-ile-kripto-varlik-hizmet-saglayicilarin-calisma-usul-ve-esaslari-ile-sermaye-yeterliligi-hakkinda-teblig-yururluge-gird/"
+    },
+    {
+      "id": "turkey-news-2",
+      "headline": "Law No. 7518 (Official Gazette 32590; July 2, 2024)",
+      "source": "resmigazete.gov.tr",
+      "date": "2025-11-11",
+      "url": "https://www.resmigazete.gov.tr/eskiler/2024/07/20240702-1.htm"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "TR",
+    "nameZh": "土耳其",
+    "flagImg": "https://flagcdn.com/w320/tr.png",
+    "lastUpdated": "Nov 11, 2025",
+    "summaryEn": "As of mid-2025, Turkish residents can hold and trade stablecoins via licensed crypto-asset service providers (KVHS/CASPs) licensed by the Capital Markets Board (SPK), but the use of crypto-assets for payments is banned. The 2024 Capital Markets Law amendment and two CMB communiqués (III-35/B.1 and III-35/B.2, Mar 13, 2025) created a licensing and operations regime for KVHS/CASPs (custody, listing, capital, segregation). Separately, MASAK's General Communiqué No. 29 (June 28, 2025) added transaction limits and 48–72 hour withdrawal holds aimed at AML and consumer protection.",
+    "tags": [
+      "licensing-required",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 4,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "Stablecoins are treated as ‘crypto assets’ (intangible) under the Capital Markets Law; they are not legal tender or e-money. If a token’s features meet the criteria for a capital markets instrument, SPK may treat it accordingly; otherwise it remains a crypto asset.",
+    "allowsFiatBacked": false,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "turkey-reg-1",
+        "name": "Capital Markets Board",
+        "acronym": "CMB",
+        "role": "Primary licensing & supervision of CASPs, transaction monitoring, sanctions.",
+        "websiteUrl": "https://www.cmb.gov.tr",
+        "isPrimary": true
+      },
+      {
+        "id": "turkey-reg-2",
+        "name": "Central Bank of Republic of Turkey",
+        "acronym": "CBRT",
+        "role": "Maintains payment ban; runs Digital Lira (CBDC) project & macro oversight.",
+        "websiteUrl": "https://www.tcmb.gov.tr",
+        "isPrimary": false
+      }
+    ]
+  }
+}

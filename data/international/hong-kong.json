@@ -1,0 +1,171 @@
+{
+  "id": "hong-kong",
+  "geoId": "344",
+  "name": "Hong Kong",
+  "region": "asia",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Hong Kong operates a clear licensing regime for fiat-referenced stablecoins. The Stablecoins Ordinance (Cap. 656) commenced on 1 August 2025 and requires HKMA licences for issuers making public offers in Hong Kong. The SFC regulates virtual-asset trading platforms (VATPs), and the FSTB coordinated policy and the bill. On 10 April 2026, the HKMA granted the first stablecoin issuer licences under Cap. 656 to Anchorpoint Financial Limited and The Hongkong and Shanghai Banking Corporation Limited (HSBC), marking a major milestone in the formal implementation of the licensing regime.",
+  "legislation": [
+    {
+      "id": "hong-kong-leg-1",
+      "billCode": "2026-04-10",
+      "title": "HKMA granted first stablecoin issuer licences under Cap. 656 to Anchorpoint Financial Limited and HSBC.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2026-04-10"
+    },
+    {
+      "id": "hong-kong-leg-2",
+      "billCode": "2025-08-14",
+      "title": "HKMA & SFC joint market-caution statement on stablecoin licensing and hype.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-08-14"
+    },
+    {
+      "id": "hong-kong-leg-3",
+      "billCode": "2025-08-01",
+      "title": "Ordinance came into effect; HKMA guidelines gazetted.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-08-01"
+    },
+    {
+      "id": "hong-kong-leg-4",
+      "billCode": "2025-06-03",
+      "title": "Commencement Notice (L.N. 125 of 2025) appointed 1 Aug 2025.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-06-03"
+    },
+    {
+      "id": "hong-kong-leg-5",
+      "billCode": "2025-05-30",
+      "title": "Ordinance gazetted.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-05-30"
+    },
+    {
+      "id": "hong-kong-leg-6",
+      "billCode": "2025-05-26",
+      "title": "HKMA published draft Guidelines (supervision and AML/CFT).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-05-26"
+    },
+    {
+      "id": "hong-kong-leg-7",
+      "billCode": "2025-05-21",
+      "title": "LegCo passed the Stablecoins Bill (now Cap. 656).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-05-21"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "hong-kong-fig-1",
+      "name": "Hong Kong Monetary Authority (HKMA)",
+      "role": "Primary licensing and supervision of FRS issuers (prudential rules, reserves, AML/CFT).",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "hong-kong-fig-2",
+      "name": "Securities and Futures Commission (SFC)",
+      "role": "Regulates VATPs, custody, and the securities-law perimeter; coordinates with HKMA.",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "hong-kong-news-1",
+      "headline": "HKMA – Granting of stablecoin issuer licences (April 10, 2026)",
+      "source": "hkma.gov.hk",
+      "date": "2026-04-10",
+      "url": "https://www.hkma.gov.hk/eng/news-and-media/press-releases/2026/04/20260410-4/"
+    },
+    {
+      "id": "hong-kong-news-2",
+      "headline": "Morgan Lewis overview — \"Hong Kong's Stablecoins Ordinance to take effect August 1\" (June 2025)",
+      "source": "morganlewis.com",
+      "date": "2026-04-10",
+      "url": "https://www.morganlewis.com/pubs/2025/06/hong-kongs-stablecoins-ordinance-to-take-effect-august-1-an-overview-of-the-regulatory-framework"
+    },
+    {
+      "id": "hong-kong-news-3",
+      "headline": "Davis Polk client update — regime overview",
+      "source": "davispolk.com",
+      "date": "2026-04-10",
+      "url": "https://www.davispolk.com/insights/client-update/hong-kongs-new-stablecoin-licensing-and-regulatory-regime"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "HK",
+    "nameZh": "香港",
+    "flagImg": "https://flagcdn.com/w320/hk.png",
+    "lastUpdated": "Apr 10, 2026",
+    "summaryEn": "Hong Kong operates a clear licensing regime for fiat-referenced stablecoins. The Stablecoins Ordinance (Cap. 656) commenced on 1 August 2025 and requires HKMA licences for issuers making public offers in Hong Kong. The SFC regulates virtual-asset trading platforms (VATPs), and the FSTB coordinated policy and the bill. On 10 April 2026, the HKMA granted the first stablecoin issuer licences under Cap. 656 to Anchorpoint Financial Limited and The Hongkong and Shanghai Banking Corporation Limited (HSBC), marking a major milestone in the formal implementation of the licensing regime.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "monthly-attestation",
+      "redemption-rights",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 4,
+    "regimeStatus": "finalized",
+    "classification": "payment_instrument",
+    "classificationNote": "Distinct statutory category for \"specified stablecoins\" under Cap. 656.",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "hong-kong-reg-1",
+        "name": "Hong Kong Monetary Authority",
+        "acronym": "HKMA",
+        "role": "Primary licensing and supervision of FRS issuers (prudential rules, reserves, AML/CFT).",
+        "websiteUrl": "https://www.hkma.gov.hk/eng/key-functions/international-financial-centre/stablecoin-issuers/",
+        "isPrimary": true
+      },
+      {
+        "id": "hong-kong-reg-2",
+        "name": "Securities and Futures Commission",
+        "acronym": "SFC",
+        "role": "Regulates VATPs, custody, and the securities-law perimeter; coordinates with HKMA.",
+        "websiteUrl": "https://www.sfc.hk/en/Welcome-to-the-Fintech-Contact-Point/Virtual-assets/Virtual-asset-trading-platforms-operators/Lists-of-virtual-asset-trading-platforms",
+        "isPrimary": false
+      }
+    ]
+  }
+}

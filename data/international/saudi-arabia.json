@@ -1,0 +1,115 @@
+{
+  "id": "saudi-arabia",
+  "geoId": "682",
+  "name": "Saudi Arabia",
+  "region": "asia",
+  "level": "federal",
+  "stance": "none",
+  "stanceDatacenter": "none",
+  "stanceAI": "none",
+  "contextBlurb": "Saudi Arabia is developing plans for nationally regulated stablecoins under the joint oversight of the Saudi Central Bank (SAMA) and the Capital Market Authority (CMA). Announced in late 2025 by Minister Majed Al-Hogail, the initiative is aligned with Vision 2030 and aims to modernise digital payments, support cross-border transactions, and attract investment. The project is still at the policy-design stage: detailed rules on licensing, reserve backing, and consumer protection have not yet been published, and cryptoassets in general remain tightly regulated in the Kingdom.",
+  "legislation": [
+    {
+      "id": "saudi-arabia-leg-1",
+      "billCode": "2025-11-10",
+      "title": "Saudi Arabia signals plans for nationally regulated stablecoins under SAMA+CMA oversight.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "none",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-11-10"
+    },
+    {
+      "id": "saudi-arabia-leg-2",
+      "billCode": "2025-11-06",
+      "title": "Global crypto exchanges publicly back Saudi stablecoin ambitions.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "none",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-11-06"
+    },
+    {
+      "id": "saudi-arabia-leg-3",
+      "billCode": "2025-10-27",
+      "title": "Minister Al-Hogail: “We look forward to introducing stablecoins in the Kingdom soon, in partnership with the Capital Market Authority and the Central Bank.”",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "none",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-10-27"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "saudi-arabia-fig-1",
+      "name": "Saudi Central Bank (SAMA)",
+      "role": "The primary monetary authority responsible for overseeing the issuance and regulation of stablecoins, ensuring financial",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "saudi-arabia-fig-2",
+      "name": "Capital Market Authority (CMA)",
+      "role": "The main financial regulator responsible for supervising capital markets and digital asset activities, including licensi",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "saudi-arabia-news-1",
+      "headline": "Fintechnews Middle East",
+      "source": "fintechnews.ae",
+      "date": "2025-11-12",
+      "url": "https://fintechnews.ae/28658/fintech-saudi-arabia/saudi-arabia-regulated-stablecoins/"
+    },
+    {
+      "id": "saudi-arabia-news-2",
+      "headline": "Asharq Al-Awsat",
+      "source": "english.aawsat.com",
+      "date": "2025-11-12",
+      "url": "https://english.aawsat.com/business/5201905-saudi-arabia-moves-integrate-stablecoins-expand-real-estate-funds"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "SA",
+    "nameZh": "沙特阿拉伯",
+    "flagImg": "https://flagcdn.com/w320/sa.png",
+    "lastUpdated": "Nov 12, 2025",
+    "summaryEn": "Saudi Arabia is developing plans for nationally regulated stablecoins under the joint oversight of the Saudi Central Bank (SAMA) and the Capital Market Authority (CMA). Announced in late 2025 by Minister Majed Al-Hogail, the initiative is aligned with Vision 2030 and aims to modernise digital payments, support cross-border transactions, and attract investment. The project is still at the policy-design stage: detailed rules on licensing, reserve backing, and consumer protection have not yet been published, and cryptoassets in general remain tightly regulated in the Kingdom.",
+    "tags": [
+      "licensing-required",
+      "sandbox-available",
+      "aml-kyc"
+    ],
+    "legalStatus": "unclear",
+    "regulatoryClarity": 3,
+    "regimeStatus": "in_progress",
+    "classificationNote": "Saudi Arabia has no legal classification for stablecoins in force. Authorities have said since 2018 that virtual currencies are not approved or licensed in the Kingdom, and in late-2025 a minister announced plans to develop nationally regulated stablecoins under SAMA and CMA oversight. Until a ruleb",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "saudi-arabia-reg-1",
+        "name": "Saudi Central Bank",
+        "acronym": "SAMA",
+        "role": "The primary monetary authority responsible for overseeing the issuance and regulation of stablecoins, ensuring financial stability, and enforcing compliance with AML/KYC standards.",
+        "websiteUrl": "https://www.sama.gov.sa",
+        "isPrimary": true
+      },
+      {
+        "id": "saudi-arabia-reg-2",
+        "name": "Capital Market Authority",
+        "acronym": "CMA",
+        "role": "The main financial regulator responsible for supervising capital markets and digital asset activities, including licensing and enforcement related to stablecoin issuance and trading.",
+        "websiteUrl": "https://cma.gov.sa",
+        "isPrimary": false
+      }
+    ]
+  }
+}

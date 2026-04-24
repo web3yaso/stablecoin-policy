@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import {
   AI_DIMENSIONS,
   DATACENTER_DIMENSIONS,
+  STABLECOIN_DIMENSIONS,
   DIMENSION_LABEL,
   type Dimension,
   type DimensionLens,
@@ -21,12 +22,15 @@ interface DimensionToggleProps {
 const LENS_LABEL: Record<DimensionLens, string> = {
   datacenter: "Data Centers",
   ai: "AI Regulation",
+  stablecoin: "Stablecoins",
 };
 
 const LENS_BLURB: Record<DimensionLens, string> = {
   datacenter:
     "Where data center builds face opposition, setbacks, or energy constraints — and where governments roll out the welcome mat.",
   ai: "How governments are scoping, restricting, or encouraging AI development across governance, consumer protection, and public services.",
+  stablecoin:
+    "Who can issue stablecoins, how reserves must be held, what rights holders have, and how governments protect monetary sovereignty.",
 };
 
 // One-liner shown under the active dimension chip explaining what the map
@@ -54,6 +58,17 @@ const DIMENSION_BLURB: Record<Dimension, string> = {
     "Weighted by bills on AI in healthcare, education, criminal justice, and other public services.",
   "ai-synthetic":
     "Weighted by bills on synthetic media, deepfakes, election integrity, and child safety.",
+  // Stablecoin lens
+  "sc-issuance":
+    "Green = non-bank issuers permitted. Amber = bank-only. Red = private stablecoins banned. EU and US states shown as blocs.",
+  "sc-reserve":
+    "Weighted by reserve-related tags: 1:1 fiat backing, asset-backed, monthly attestation, algorithmic ban, rehypothecation rules.",
+  "sc-consumer":
+    "Weighted by consumer-protection tags: redemption rights, yield prohibition, insolvency priority, disclosure, AML/KYC.",
+  "sc-cross-border":
+    "Weighted by cross-border tags: equivalence principle, passporting, travel rule, foreign issuer requirements.",
+  "sc-sovereignty":
+    "Weighted by monetary-sovereignty tags: CBDC coexistence, USD stablecoin restrictions, capital flow controls, private stablecoin bans.",
 };
 
 export default function DimensionToggle({
@@ -67,15 +82,20 @@ export default function DimensionToggle({
   // on the map. When the user switches lens, if the current dimension
   // isn't valid for the new lens, we reset to "overall".
   const lensDimensions = useMemo<Dimension[]>(() => {
+    if (lens === "stablecoin") return STABLECOIN_DIMENSIONS;
     return lens === "datacenter" ? DATACENTER_DIMENSIONS : AI_DIMENSIONS;
   }, [lens]);
 
   const handleLensChange = (next: DimensionLens) => {
     onLensChange(next);
     const valid: Dimension[] =
-      next === "datacenter" ? DATACENTER_DIMENSIONS : AI_DIMENSIONS;
+      next === "datacenter"
+        ? DATACENTER_DIMENSIONS
+        : next === "stablecoin"
+          ? STABLECOIN_DIMENSIONS
+          : AI_DIMENSIONS;
     if (dimension !== "overall" && !valid.includes(dimension)) {
-      onChange("overall");
+      onChange(next === "stablecoin" ? "sc-issuance" : "overall");
     }
   };
 

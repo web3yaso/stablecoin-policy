@@ -1,0 +1,102 @@
+{
+  "id": "greenland",
+  "geoId": "304",
+  "name": "Greenland",
+  "region": "na",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "As of 2025 Greenland has no country-specific stablecoin legislation. Financial supervision and anti-money-laundering obligations relevant to crypto activity in Greenland are shaped primarily by Danish law and international AML/CFT standards, but EU laws (such as MiCA) do not automatically apply in Greenland because it is outside the EU. In practice the local market is small and activity is governed by the Kingdom’s legal arrangements and Denmark’s supervisory guidance where applicable. There is no formal Greenlandic framework for stablecoin issuance, reserve backing, or consumer protection; regulation and enforcement questions would be handled under the existing Danish/Kingdom legal channels and international standards (e.g., FATF).",
+  "legislation": [
+    {
+      "id": "greenland-leg-1",
+      "billCode": "2025-11-13",
+      "title": "Greenland introduces an Investment Screening Act to vet foreign investments in sensitive sectors (entry into force).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-11-13"
+    },
+    {
+      "id": "greenland-leg-2",
+      "billCode": "2025-07-18",
+      "title": "U.S. Congress enacts the GENIUS Act (Guiding and Establishing National Innovation for U.S. Stablecoins), creating a federal framework for payment stablecoins.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-18"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "greenland-fig-1",
+      "name": "Greenlandic Government Authorities",
+      "role": "Local Greenlandic government bodies are responsible for financial oversight, though there is no dedicated crypto regulat",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "greenland-fig-2",
+      "name": "Danish Financial Supervisory Authority (Finanstilsynet)",
+      "role": "While not directly regulating Greenland, Danish financial regulations and AML standards significantly influence Greenlan",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "greenland-news-1",
+      "headline": "Stablecoin Issuance Regulations 2025: Complete Guide",
+      "source": "antiersolutions.com",
+      "date": "2025-11-18",
+      "url": "https://www.antiersolutions.com/blogs/the-legal-blueprint-for-stablecoin-issuance-in-2025-what-founders-must-know/"
+    },
+    {
+      "id": "greenland-news-2",
+      "headline": "Greenland & Cryptocurrency - Freeman Law",
+      "source": "freemanlaw.com",
+      "date": "2025-11-18",
+      "url": "https://freemanlaw.com/cryptocurrency/greenland/"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "GL",
+    "nameZh": "格陵兰",
+    "flagImg": "https://flagcdn.com/w320/gl.png",
+    "lastUpdated": "Nov 18, 2025",
+    "summaryEn": "As of 2025 Greenland has no country-specific stablecoin legislation. Financial supervision and anti-money-laundering obligations relevant to crypto activity in Greenland are shaped primarily by Danish law and international AML/CFT standards, but EU laws (such as MiCA) do not automatically apply in Greenland because it is outside the EU. In practice the local market is small and activity is governed by the Kingdom’s legal arrangements and Denmark’s supervisory guidance where applicable. There is no formal Greenlandic framework for stablecoin issuance, reserve backing, or consumer protection; regulation and enforcement questions would be handled under the existing Danish/Kingdom legal channels and international standards (e.g., FATF).",
+    "tags": [
+      "licensing-required",
+      "aml-kyc"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 3,
+    "regimeStatus": "in_progress",
+    "classification": "crypto_asset",
+    "classificationNote": "Stablecoins are not specifically classified under Greenlandic law as of 2025. In practice they are treated as cryptoassets / virtual assets subject to general financial-sector and AML/CFT expectations influenced by Danish law and international standards. Greenland has no local, formal rules on stabl",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "greenland-reg-1",
+        "name": "Greenlandic Government Authorities",
+        "role": "Local Greenlandic government bodies are responsible for financial oversight, though there is no dedicated crypto regulator. Oversight is managed through general financial and legal frameworks.",
+        "websiteUrl": "https://www.greenland.com",
+        "isPrimary": true
+      },
+      {
+        "id": "greenland-reg-2",
+        "name": "Danish Financial Supervisory Authority",
+        "role": "While not directly regulating Greenland, Danish financial regulations and AML standards significantly influence Greenland's approach to crypto oversight.",
+        "websiteUrl": "https://www.finanstilsynet.dk",
+        "isPrimary": false
+      }
+    ]
+  }
+}

@@ -84,7 +84,11 @@ export default function BillExpanded({
           </>
         )}
         <span aria-hidden>·</span>
-        <span>Updated {bill.updatedDate}</span>
+        <span>
+          {bill.updatedDate && bill.updatedDate > new Date().toISOString().slice(0, 10)
+            ? `Effective ${bill.updatedDate}`
+            : `Updated ${bill.updatedDate}`}
+        </span>
       </div>
 
       {/* Impact tags */}

@@ -1,130 +1,60 @@
 {
   "id": "australia",
-  "geoId": "36",
+  "geoId": "036",
   "name": "Australia",
   "region": "asia",
   "level": "federal",
-  "contextBlurb": "Australia is betting on voluntary standards over AI legislation, relying on its October 2025 Guidance for AI Adoption and a forthcoming AI Safety Institute. In March 2026 the federal government issued its first national expectations for data center developers, tying regulatory priority to clean energy and water sustainability. Privacy reform is rolling out in tranches, and the eSafety Commissioner runs one of the world's most active online-safety enforcement regimes.",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Australia is moving to formalise stablecoin oversight. In September 2025, ASIC granted class relief so intermediaries can distribute a named AUD-backed stablecoin issued by an AFS-licensed issuer, subject to conditions such as making the PDS available to retail clients; the relief is time-limited and linked to ASIC Instrument 2025/631. In October 2025, the Government released exposure-draft payments licensing reforms proposing a graduated framework for stored-value facilities that would capture stablecoin issuers/wallets holding customer funds. Until those reforms are enacted, issuers may require an AFSL where the coin constitutes a financial product (e.g., a non-cash payment facility), and intermediaries can rely on the targeted ASIC relief.",
   "legislation": [
     {
-      "id": "australia-privacy-amendment-act-2024",
-      "billCode": "Privacy and Other Legislation Amendment Act 2024",
-      "title": "Privacy and Other Legislation Amendment Act 2024",
-      "summary": "Australia's first substantive overhaul of the Privacy Act 1988 since 2012, introducing a statutory tort for serious invasions of privacy (effective June 2025), mandatory disclosure of substantially automated decision-making in privacy policies (effective December 2026), a Children's Online Privacy Code, enhanced OAIC enforcement powers, and new anti-doxxing criminal offences. A second, more comprehensive tranche of reforms — covering expanded definitions of personal information, a fair-and-reasonable test, and removal of the small-business exemption — is under active government consultation as of early 2026.",
+      "id": "australia-leg-1",
+      "billCode": "2025-10-09",
+      "title": "Government releases exposure-draft payments-licensing reforms.",
+      "summary": "",
       "stage": "Enacted",
       "stance": "concerning",
-      "impactTags": [
-        "data-privacy",
-        "automated-decision-making",
-        "children-online-safety",
-        "enforcement"
-      ],
-      "category": "data-privacy",
-      "updatedDate": "2026-02-10",
-      "partyOrigin": "B",
-      "sourceUrl": "https://www.minterellison.com/articles/privacy-and-other-legislation-amendment-act-2024-now-in-effect"
-    },
-    {
-      "id": "australia-guidance-for-ai-adoption-2025",
-      "billCode": "GfAA 2025",
-      "title": "Guidance for AI Adoption (National AI Centre, October 2025)",
-      "summary": "Released on 21 October 2025, this non-binding framework replaced the Voluntary AI Safety Standard, condensing ten guardrails into six responsible AI practices covering governance, impact assessment, risk management, transparency, testing and monitoring, and human oversight — and is aligned with Australia's eight AI Ethics Principles. It signals a pivot away from imminent mandatory AI legislation toward a multi-regulator, standards-led model, with the government concurrently reviewing whether existing laws adequately address AI risks before committing to a standalone AI Act.",
-      "stage": "Enacted",
-      "stance": "review",
-      "impactTags": [
-        "ai-governance",
-        "voluntary-standards",
-        "responsible-ai",
-        "transparency"
-      ],
+      "impactTags": [],
       "category": "ai-governance",
-      "updatedDate": "2025-10-21",
-      "partyOrigin": "B",
-      "sourceUrl": "https://www.industry.gov.au/publications/voluntary-ai-safety-standard"
+      "updatedDate": "2025-10-09"
     },
     {
-      "id": "australia-data-centre-expectations-2026",
-      "billCode": "DC-AI Expectations 2026",
-      "title": "Expectations of Data Centres and AI Infrastructure Developers (March 2026)",
-      "summary": "Released on 23 March 2026 as part of the National AI Plan, these federal expectations set out five core requirements for new or expanded hyperscale and large-scale AI compute developments: alignment with national interest, support for the clean energy transition, responsible water use, investment in local jobs, and strengthening Australian innovation capacity. While not amending existing law, data centre proposals that do not align with the expectations will be deprioritised in Commonwealth regulatory assessments, giving the framework significant practical weight.",
+      "id": "australia-leg-2",
+      "billCode": "2025-09-25",
+      "title": "ASIC opens consultation to extend the stablecoin distribution exemption.",
+      "summary": "",
       "stage": "Enacted",
-      "stance": "favorable",
-      "impactTags": [
-        "data-center-siting",
-        "energy-transition",
-        "water-sustainability",
-        "sovereign-infrastructure"
-      ],
-      "category": "data-center-siting",
-      "updatedDate": "2026-03-23",
-      "partyOrigin": "B",
-      "sourceUrl": "https://www.industry.gov.au/publications/expectations-data-centres-and-ai-infrastructure-developers"
-    },
-    {
-      "id": "australia-ai-safety-institute-2026",
-      "billCode": "AISI-2026",
-      "title": "Australian AI Safety Institute (AISI)",
-      "summary": "Announced 25 November 2025 with AUD 29.9 million in funding, the AI Safety Institute launched in early 2026 to monitor, evaluate and coordinate regulatory responses to frontier AI risks. It works directly with privacy, consumer, competition, online-safety and sector regulators and partners with international AI Safety Institutes, acting as Australia's central hub for AI safety science rather than a dedicated AI law.",
-      "stage": "Enacted",
-      "stance": "review",
-      "impactTags": [
-        "ai-safety",
-        "frontier-models",
-        "regulator-coordination",
-        "AUD-29.9m"
-      ],
+      "stance": "concerning",
+      "impactTags": [],
       "category": "ai-governance",
-      "updatedDate": "2026-02-01",
-      "sourceUrl": "https://www.industry.gov.au/news/australia-establish-new-institute-strengthen-ai-safety"
+      "updatedDate": "2025-09-25"
+    },
+    {
+      "id": "australia-leg-3",
+      "billCode": "2025-09-18",
+      "title": "ASIC grants class relief for intermediaries distributing a Named AUD-backed stablecoin issued by an AFS-licensed issuer",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-09-18"
     }
   ],
   "keyFigures": [
     {
-      "id": "australia-ayres",
-      "name": "Tim Ayres",
-      "role": "Minister for Industry and Innovation, Minister for Science",
-      "party": "ALP",
-      "stance": "favorable"
-    },
-    {
-      "id": "australia-inman-grant",
-      "name": "Julie Inman Grant",
-      "role": "eSafety Commissioner",
+      "id": "australia-fig-1",
+      "name": "Australian Securities and Investments Commission (ASIC)",
+      "role": "ASIC is the primary regulator for stablecoins, overseeing licensing of issuers, granting temporary exemptions for distri",
       "party": "N/A",
-      "stance": "restrictive"
+      "stance": "review"
     },
     {
-      "id": "australia-rowland",
-      "name": "Michelle Rowland",
-      "role": "Attorney-General",
-      "party": "ALP",
-      "stance": "concerning"
-    },
-    {
-      "id": "australia-husic",
-      "name": "Ed Husic",
-      "role": "Former Minister for Industry and Science (AI policy architect)",
-      "party": "ALP",
-      "stance": "concerning"
-    },
-    {
-      "id": "australia-hanson-young",
-      "name": "Sarah Hanson-Young",
-      "role": "Senator, Greens Spokesperson for Communications and the Arts",
-      "party": "Greens",
-      "stance": "restrictive"
-    },
-    {
-      "id": "australia-leonard",
-      "name": "Anna Leonard",
-      "role": "Acting Australian Information Commissioner and Privacy Commissioner",
-      "party": "N/A",
-      "stance": "concerning"
-    },
-    {
-      "id": "australia-mchugh",
-      "name": "Tom McHugh",
-      "role": "Assistant Secretary, AI Policy Branch, Department of Industry, Science and Resources",
+      "id": "australia-fig-2",
+      "name": "Treasury",
+      "role": "Treasury is responsible for developing and proposing legislation to regulate digital asset platforms, stablecoins, and p",
       "party": "N/A",
       "stance": "review"
     }
@@ -132,61 +62,55 @@
   "news": [
     {
       "id": "australia-news-1",
-      "headline": "NSW moves 15 data centres worth AUD 51.9bn into IDA pipeline",
-      "source": "w.media",
-      "date": "2026-03-27",
-      "url": "https://w.media/nsw-moves-15-data-centres-worth-aud-51-9bn-into-ida-pipeline/"
+      "headline": "ASIC media release",
+      "source": "asic.gov.au",
+      "date": "2025-10-28",
+      "url": "https://www.asic.gov.au/about-asic/news-centre/news-items/asic-supports-innovation-through-exemptions-for-distributors-of-australian-stablecoin/"
     },
     {
       "id": "australia-news-2",
-      "headline": "Australian Government has signed a memorandum of understanding (MOU) with global AI innovator Anthropic",
-      "source": "Department of Industry Science and Resources",
-      "date": "2026-04-01",
-      "url": "https://www.industry.gov.au/news/australian-government-has-signed-memorandum-understanding-mou-global-ai-innovator-anthropic"
-    },
-    {
-      "id": "australia-news-3",
-      "headline": "Australia Abandons Proposed Mandatory AI Rules in New Plan",
-      "source": "Bank Info Security",
-      "date": "2025-12-02",
-      "url": "https://www.bankinfosecurity.asia/blogs/australia-abandons-proposed-mandatory-ai-rules-in-new-plan-p-3986"
-    },
-    {
-      "id": "australia-news-4",
-      "headline": "New industry codes seek to take on AI chatbots that encourage suicide and engage in sexually explicit conversations with Aussie kids",
-      "source": "eSafety Commissioner",
-      "date": "2026-01-08",
-      "url": "https://www.esafety.gov.au/newsroom/media-releases/new-industry-codes-seek-to-take-on-ai-chatbots-that-encourage-suicide-and-engage-in-sexually-explicit-conversations-with-aussie-kids"
-    },
-    {
-      "id": "australia-news-5",
-      "headline": "Stockland hyperscale data centre at Macquarie Park gets NSW approval",
-      "source": "w.media",
-      "date": "2026-02-18",
-      "url": "https://w.media/nsw-approves-stockland-data-centre-for-sydney-innovation-precinct/"
-    },
-    {
-      "id": "australia-news-6",
-      "headline": "Australia launches AI Safety Institute and releases National AI Plan",
-      "source": "Gadens",
-      "date": "2025-12-04",
-      "url": "https://www.gadens.com/legal-insights/australia-launches-ai-safety-institute-and-releases-national-ai-plan/"
-    },
-    {
-      "id": "australia-news-7",
-      "headline": "Southern Hemisphere's biggest data centre gets the green light",
-      "source": "NSW Government",
-      "date": "2026-01-30",
-      "url": "https://www.nsw.gov.au/ministerial-releases/southern-hemispheres-biggest-data-centre-gets-green-light"
-    },
-    {
-      "id": "australia-news-8",
-      "headline": "Australia Puts AI Data Centers on Notice With New Approval Rules",
-      "source": "Data Center Knowledge",
-      "date": "2026-03-24",
-      "url": "https://www.datacenterknowledge.com/regulations/australia-puts-ai-data-centers-on-notice-with-new-approval-rules"
+      "headline": "Treasury Minister media release",
+      "source": "ministers.treasury.gov.au",
+      "date": "2025-10-28",
+      "url": "https://ministers.treasury.gov.au/ministers/daniel-mulino-2025/media-releases/new-legislation-modernise-regulation-payment-service"
     }
   ],
-  "stanceDatacenter": "review",
-  "stanceAI": "review"
+  "stablecoinMeta": {
+    "code": "AU",
+    "nameZh": "澳大利亚",
+    "flagImg": "https://flagcdn.com/w320/au.png",
+    "lastUpdated": "Oct 28, 2025",
+    "summaryEn": "Australia is moving to formalise stablecoin oversight. In September 2025, ASIC granted class relief so intermediaries can distribute a named AUD-backed stablecoin issued by an AFS-licensed issuer, subject to conditions such as making the PDS available to retail clients; the relief is time-limited and linked to ASIC Instrument 2025/631. In October 2025, the Government released exposure-draft payments licensing reforms proposing a graduated framework for stored-value facilities that would capture stablecoin issuers/wallets holding customer funds. Until those reforms are enacted, issuers may require an AFSL where the coin constitutes a financial product (e.g., a non-cash payment facility), and intermediaries can rely on the targeted ASIC relief.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "aml-kyc"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 3,
+    "regimeStatus": "draft",
+    "classification": "payment_instrument",
+    "classificationNote": "Stablecoins are classified by function under the Corporations Act. Where a token enables payments, it will often be a non-cash payment (NCP) facility, making it a financial product that triggers AFSL and disclosure obligations. Depending on features and arrangements, a token could also meet other fi",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "australia-reg-1",
+        "name": "Australian Securities and Investments Commission",
+        "acronym": "ASIC",
+        "role": "ASIC is the primary regulator for stablecoins, overseeing licensing of issuers, granting temporary exemptions for distributors, and enforcing compliance with financial services laws.",
+        "websiteUrl": "https://www.asic.gov.au",
+        "isPrimary": true
+      },
+      {
+        "id": "australia-reg-2",
+        "name": "Treasury",
+        "role": "Treasury is responsible for developing and proposing legislation to regulate digital asset platforms, stablecoins, and payment services, including the exposure draft legislation released in 2025.",
+        "websiteUrl": "https://treasury.gov.au",
+        "isPrimary": false
+      }
+    ]
+  }
 }

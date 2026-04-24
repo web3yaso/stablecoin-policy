@@ -177,6 +177,39 @@ export type ImpactTag =
   | "child-safety"
   | "data-privacy";
 
+/** Stablecoin-specific policy tags, stored at both the jurisdiction
+ *  level (stablecoinMeta.tags) and the bill level (legislation.stablecoinTags). */
+export type StablecoinTag =
+  // Issuance — who can issue and on what terms
+  | "bank-only"
+  | "non-bank-permitted"
+  | "foreign-issuer-allowed"
+  | "licensing-required"
+  | "sandbox-available"
+  // Reserve & Backing — how reserves are held and verified
+  | "fiat-reserve-11"
+  | "asset-backed"
+  | "algorithmic-banned"
+  | "monthly-attestation"
+  | "rehypothecation-banned"
+  // Consumer Protection — holder rights and safeguards
+  | "redemption-rights"
+  | "yield-prohibited"
+  | "insolvency-priority"
+  | "disclosure-required"
+  | "aml-kyc"
+  // Cross-Border — treatment of foreign issuers and tokens
+  | "equivalence-principle"
+  | "passporting"
+  | "foreign-stablecoin-banned"
+  | "travel-rule"
+  | "local-entity-required"
+  // Monetary Sovereignty — government stance on private stablecoins
+  | "cbdc-coexistence"
+  | "usd-stablecoin-restricted"
+  | "capital-flow-controls"
+  | "private-stablecoin-banned";
+
 export type LegislationCategory =
   | "data-center-siting"
   | "data-center-energy"
@@ -187,7 +220,8 @@ export type LegislationCategory =
   | "ai-education"
   | "ai-government"
   | "data-privacy"
-  | "ai-criminal-justice";
+  | "ai-criminal-justice"
+  | "stablecoin-regulation";
 
 export type Dimension =
   | "overall"
@@ -201,9 +235,15 @@ export type Dimension =
   | "ai-consumer"
   | "ai-workforce"
   | "ai-public"
-  | "ai-synthetic";
+  | "ai-synthetic"
+  // Stablecoin lens
+  | "sc-issuance"
+  | "sc-reserve"
+  | "sc-consumer"
+  | "sc-cross-border"
+  | "sc-sovereignty";
 
-export type DimensionLens = "datacenter" | "ai";
+export type DimensionLens = "datacenter" | "ai" | "stablecoin";
 
 export const DATACENTER_DIMENSIONS: Dimension[] = [
   "environmental",
@@ -218,6 +258,14 @@ export const AI_DIMENSIONS: Dimension[] = [
   "ai-workforce",
   "ai-public",
   "ai-synthetic",
+];
+
+export const STABLECOIN_DIMENSIONS: Dimension[] = [
+  "sc-issuance",
+  "sc-reserve",
+  "sc-consumer",
+  "sc-cross-border",
+  "sc-sovereignty",
 ];
 
 export const IMPACT_TAG_LABEL: Record<ImpactTag, string> = {
@@ -259,6 +307,7 @@ export const CATEGORY_LABEL: Record<LegislationCategory, string> = {
   "ai-government": "Government",
   "data-privacy": "Privacy",
   "ai-criminal-justice": "Criminal Justice",
+  "stablecoin-regulation": "Stablecoins",
 };
 
 export const DIMENSION_LABEL: Record<Dimension, string> = {
@@ -274,6 +323,12 @@ export const DIMENSION_LABEL: Record<Dimension, string> = {
   "ai-workforce": "Workforce & employment",
   "ai-public": "Public services",
   "ai-synthetic": "Synthetic media",
+  // Stablecoin lens
+  "sc-issuance": "Issuance",
+  "sc-reserve": "Reserve & Backing",
+  "sc-consumer": "Consumer Protection",
+  "sc-cross-border": "Cross-Border",
+  "sc-sovereignty": "Monetary Sovereignty",
 };
 
 export interface Legislation {
@@ -292,6 +347,8 @@ export interface Legislation {
    */
   dimensionStances?: Partial<Record<Exclude<Dimension, "overall">, StanceType>>;
   impactTags: ImpactTag[];
+  /** Stablecoin-specific tags for this bill (bill-level granularity). */
+  stablecoinTags?: StablecoinTag[];
   category: LegislationCategory;
   updatedDate: string;
   partyOrigin?: "R" | "D" | "B";
@@ -431,12 +488,93 @@ export interface NewsItem {
   summarySource?: "article" | "headline-only";
 }
 
+export type LegalStatusEnum =
+  | "legal"
+  | "legal_with_restrictions"
+  | "banned"
+  | "partially_legal"
+  | "unclear";
+
+export type RegimeStatusEnum =
+  | "finalized"
+  | "pending_start"
+  | "in_progress"
+  | "draft"
+  | "none";
+
+export type ClassificationEnum =
+  | "payment_instrument"
+  | "crypto_asset"
+  | "e_money"
+  | "security"
+  | "unclear";
+
+export type PractitionerStatus = "ok" | "warn" | "no";
+
+export interface PractitionerQA {
+  text: string;
+  note?: string;
+  status: PractitionerStatus;
+}
+
+export type RegulatorStance = "favorable" | "cautious" | "restrictive" | "neutral";
+
+export interface Regulator {
+  id: string;
+  name: string;
+  acronym?: string;
+  role: string;
+  websiteUrl?: string;
+  isPrimary: boolean;
+  headName?: string;
+  headTitle?: string;
+  headStance?: RegulatorStance;
+  headQuote?: string;
+  headQuoteUrl?: string;
+}
+
+export interface StablecoinMeta {
+  /** ISO 3166-1 alpha-2 country code */
+  code?: string;
+  nameZh?: string;
+  flagImg?: string;
+  lastUpdated?: string;
+
+  summaryEn?: string;
+  /** Jurisdiction-level stablecoin policy tags — drives map coloring and
+   *  filter chips in the side panel. */
+  tags?: StablecoinTag[];
+
+  legalStatus: LegalStatusEnum;
+  /** 1–5 integer */
+  regulatoryClarity: number;
+  regimeStatus: RegimeStatusEnum;
+  classification?: ClassificationEnum;
+  classificationNote?: string;
+
+  allowsFiatBacked: boolean;
+  allowsAlgorithmic: boolean;
+  /** "partial" when some asset-backed types are allowed but not others */
+  allowsAssetBacked: boolean | "partial";
+  allowsAssetBackedNote?: string;
+
+  /** 从业者速查 — Practitioner Quick Reference */
+  canIssue?: PractitionerQA;
+  foreignStablecoin?: PractitionerQA;
+  reserveRequirement?: PractitionerQA;
+  algorithmicStatus?: PractitionerQA;
+  yieldToHolders?: PractitionerQA;
+
+  regulators?: Regulator[];
+}
+
 export interface Entity {
   id: string;
   geoId: string;
   name: string;
   region: Region;
   level: GovLevel;
+  stablecoinMeta?: StablecoinMeta;
   /** True for the regional overview entity (one per region). */
   isOverview?: boolean;
   /** True if this entity has a state-level drill-down (currently only US). */
@@ -546,9 +684,9 @@ export interface StateEnergyProfile {
 }
 
 export const REGION_LABEL: Record<Region, string> = {
-  na: "North America",
-  eu: "European Union",
-  asia: "Asia",
+  na: "Americas",
+  eu: "Europe",
+  asia: "Asia-Pacific",
 };
 
 export const REGION_ORDER: Region[] = ["na", "eu", "asia"];

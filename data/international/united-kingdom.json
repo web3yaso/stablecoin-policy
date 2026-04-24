@@ -1,0 +1,149 @@
+{
+  "id": "united-kingdom",
+  "geoId": "826",
+  "name": "United Kingdom",
+  "region": "eu",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "As of April 2026, the UK is finalising its new regime for \"qualifying stablecoins\" (UKQS). On 21 April 2026, HM Treasury published a policy note and draft Statutory Instrument amending the Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026, aiming to reduce barriers for businesses using UKQS in payment services and clarifying regulatory exemptions for UKQS before broader payment-service reforms take effect, while retaining oversight of lending activities involving UKQS. Earlier FCA consultations (CP25/14 and CP25/15, closed July 2025) and the near-final HMT draft legislation (April 2025) indicate final rules later in 2026.",
+  "legislation": [
+    {
+      "id": "united-kingdom-leg-1",
+      "billCode": "2026-04-21",
+      "title": "HM Treasury published policy note and draft SI amending the FSMA 2000 (Cryptoassets) Regulations 2026 to reduce barriers for UKQS in payment services.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2026-04-21"
+    },
+    {
+      "id": "united-kingdom-leg-2",
+      "billCode": "2025-09-15",
+      "title": "FCA publishes CP25/25 on applying existing Handbook rules to future regulated cryptoasset firms.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-09-15"
+    },
+    {
+      "id": "united-kingdom-leg-3",
+      "billCode": "2025-09-03",
+      "title": "BoE keynote outlines multi-money vision and upcoming systemic proposals.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-09-03"
+    },
+    {
+      "id": "united-kingdom-leg-4",
+      "billCode": "2025-05-28",
+      "title": "FCA launches CP25/14 and CP25/15 consultations (closed 2025-07-31); final rules planned for 2026.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-05-28"
+    },
+    {
+      "id": "united-kingdom-leg-5",
+      "billCode": "2025-04-29",
+      "title": "HMT publishes draft RAO and policy note.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-04-29"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "united-kingdom-fig-1",
+      "name": "Financial Conduct Authority (FCA)",
+      "role": "Will authorise issuers and custodians; set conduct, safeguarding and prudential rules for qualifying stablecoins.",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "united-kingdom-fig-2",
+      "name": "Bank of England (BoE)",
+      "role": "Will regulate systemic stablecoins/payment systems at scale; separate systemic regime.",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "united-kingdom-news-1",
+      "headline": "HMT – Policy note and draft SI on FSMA 2000 (Cryptoassets) Regulations 2026 amendments (April 21, 2026)",
+      "source": "regulationtomorrow.com",
+      "date": "2026-04-21",
+      "url": "https://www.regulationtomorrow.com/2026/04/hmt-issues-policy-note-and-draft-si-on-amendments-to-the-financial-services-and-markets-act-2000-cryptoassets-regulations-2026/"
+    },
+    {
+      "id": "united-kingdom-news-2",
+      "headline": "FCA – CP25/14 overview",
+      "source": "fca.org.uk",
+      "date": "2026-04-21",
+      "url": "https://www.fca.org.uk/publications/consultation-papers/cp25-14-stablecoin-issuance-cryptoasset-custody"
+    },
+    {
+      "id": "united-kingdom-news-3",
+      "headline": "HMT – Draft SI & policy note (RAO changes)",
+      "source": "gov.uk",
+      "date": "2026-04-21",
+      "url": "https://www.gov.uk/government/publications/regulatory-regime-for-cryptoassets-regulated-activities-draft-si-and-policy-note"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "GB",
+    "nameZh": "英国",
+    "flagImg": "https://flagcdn.com/w320/gb.png",
+    "lastUpdated": "Apr 21, 2026",
+    "summaryEn": "As of April 2026, the UK is finalising its new regime for \"qualifying stablecoins\" (UKQS). On 21 April 2026, HM Treasury published a policy note and draft Statutory Instrument amending the Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026, aiming to reduce barriers for businesses using UKQS in payment services and clarifying regulatory exemptions for UKQS before broader payment-service reforms take effect, while retaining oversight of lending activities involving UKQS. Earlier FCA consultations (CP25/14 and CP25/15, closed July 2025) and the near-final HMT draft legislation (April 2025) indicate final rules later in 2026.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "disclosure-required",
+      "redemption-rights",
+      "aml-kyc",
+      "travel-rule",
+      "local-entity-required"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 4,
+    "regimeStatus": "in_progress",
+    "classification": "e_money",
+    "classificationNote": "Regulated cryptoasset activities under FSMA (via amended RAO) for issuing qualifying stablecoins and safeguarding qualifying cryptoassets; not e-money or a security by default—bespoke activity with specific rules.",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "united-kingdom-reg-1",
+        "name": "Financial Conduct Authority",
+        "acronym": "FCA",
+        "role": "Will authorise issuers and custodians; set conduct, safeguarding and prudential rules for qualifying stablecoins.",
+        "websiteUrl": "https://www.fca.org.uk/",
+        "isPrimary": true
+      },
+      {
+        "id": "united-kingdom-reg-2",
+        "name": "Bank of England",
+        "role": "Will regulate systemic stablecoins/payment systems at scale; separate systemic regime.",
+        "websiteUrl": "https://www.bankofengland.co.uk/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

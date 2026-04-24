@@ -1,0 +1,113 @@
+{
+  "id": "algeria",
+  "geoId": "012",
+  "name": "Algeria",
+  "region": "eu",
+  "level": "federal",
+  "stance": "restrictive",
+  "stanceDatacenter": "restrictive",
+  "stanceAI": "restrictive",
+  "contextBlurb": "As of 2025, Algeria criminalizes all cryptocurrency activity, including stablecoins. Law 25-10 (Journal Officiel No. 48, 24 July 2025) adds Article 6 bis to the AML/CFT law, banning the issuance, purchase, sale, use, possession, trading, promotion, and the operation of exchanges/wallet platforms, and expressly includes mining. Breaches are punishable by two months to one year in prison and 200,000–1,000,000 DZD in fines (Article 31 bis). This builds on Algeria’s 2018 Finance Law prohibition on dealing in virtual currencies; the 2025 law makes violations explicitly criminal.",
+  "legislation": [
+    {
+      "id": "algeria-leg-1",
+      "billCode": "2025-10-14",
+      "title": "AML rule updated: institutions must automatically block any operation linked to virtual assets/VASPs and report to the FIU",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "restrictive",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-10-14"
+    },
+    {
+      "id": "algeria-leg-2",
+      "billCode": "2025-08-17",
+      "title": "Algeria introduces Instruction No. 06–2025, establishing rules for fintech and digital wallet providers, but explicitly prohibits any integration with cryptocurrencies or stablecoins, requiring all services to operate solely in Algerian dinars.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "restrictive",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-08-17"
+    },
+    {
+      "id": "algeria-leg-3",
+      "billCode": "2025-07-24",
+      "title": "Law 25-10 enters into force, criminalising issuance, use, possession, promotion, trading and platform operation for virtual assets (incl. mining).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "restrictive",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-24"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "algeria-fig-1",
+      "name": "Bank of Algeria",
+      "role": "Central bank; oversees monetary policy and payment-system oversight, and issues/supervises prudential and AML rules for ",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "algeria-fig-2",
+      "name": "Banking Commission",
+      "role": "Prudential supervisor of banks; monitors compliance with laws and regulations and can take supervisory action where inst",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "algeria-news-1",
+      "headline": "Journal Officiel No. 48",
+      "source": "joradp.dz",
+      "date": "2025-11-06",
+      "url": "https://www.joradp.dz/FTP/jo-francais/2025/F2025048.pdf"
+    },
+    {
+      "id": "algeria-news-2",
+      "headline": "Digital Policy Alert",
+      "source": "digitalpolicyalert.org",
+      "date": "2025-11-06",
+      "url": "https://digitalpolicyalert.org/event/28584-finance-law-for-the-year-2018-law-no-17-11-including-prohibition-of-the-purchase-sale-use-and-possession-of-virtual-currencies-under-article-117-entered-into-force?"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "DZ",
+    "nameZh": "阿尔及利亚",
+    "flagImg": "https://flagcdn.com/w320/dz.png",
+    "lastUpdated": "Nov 6, 2025",
+    "summaryEn": "As of 2025, Algeria criminalizes all cryptocurrency activity, including stablecoins. Law 25-10 (Journal Officiel No. 48, 24 July 2025) adds Article 6 bis to the AML/CFT law, banning the issuance, purchase, sale, use, possession, trading, promotion, and the operation of exchanges/wallet platforms, and expressly includes mining. Breaches are punishable by two months to one year in prison and 200,000–1,000,000 DZD in fines (Article 31 bis). This builds on Algeria’s 2018 Finance Law prohibition on dealing in virtual currencies; the 2025 law makes violations explicitly criminal.",
+    "tags": [
+      "private-stablecoin-banned",
+      "aml-kyc"
+    ],
+    "legalStatus": "banned",
+    "regulatoryClarity": 1,
+    "regimeStatus": "finalized",
+    "classification": "crypto_asset",
+    "classificationNote": "Algeria treats stablecoins as “virtual assets” within the scope of Law 25-10 (JO n°48, 24 Jul 2025), which prohibits their issuance, purchase, sale, use, possession, promotion, trading, and the creation or operation of related exchange/wallet platforms (mining included). The law does not classify th",
+    "allowsFiatBacked": false,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "algeria-reg-1",
+        "name": "Bank of Algeria",
+        "role": "Central bank; oversees monetary policy and payment-system oversight, and issues/supervises prudential and AML rules for banks. Not the criminal enforcer of the crypto ban; banks must comply with the b",
+        "websiteUrl": "https://www.bank-of-algeria.dz",
+        "isPrimary": true
+      },
+      {
+        "id": "algeria-reg-2",
+        "name": "Banking Commission",
+        "role": "Prudential supervisor of banks; monitors compliance with laws and regulations and can take supervisory action where institutions breach requirements (including AML/virtual-asset blocking obligations).",
+        "websiteUrl": "https://www.bank-of-algeria.dz",
+        "isPrimary": false
+      }
+    ]
+  }
+}

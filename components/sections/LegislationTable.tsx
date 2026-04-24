@@ -229,8 +229,10 @@ export default function LegislationTable({
       rows = rows.filter((r) => matchesStatus(r.bill.stage, activeStatus));
     }
 
-    if (dimension !== "overall") {
-      const dimensionTags = new Set(DIMENSION_TAGS[dimension]);
+    if (dimension !== "overall" && !dimension.startsWith("sc-")) {
+      const dimensionTags = new Set(
+        DIMENSION_TAGS[dimension as Exclude<Dimension, "overall" | `sc-${string}`>],
+      );
       rows = rows.filter((r) =>
         r.bill.impactTags.some((t) => dimensionTags.has(t)),
       );
@@ -261,8 +263,10 @@ export default function LegislationTable({
         billMatchesCategoryFilter(r.bill.category, activeCategory),
       );
     }
-    if (dimension !== "overall") {
-      const dimensionTags = new Set(DIMENSION_TAGS[dimension]);
+    if (dimension !== "overall" && !dimension.startsWith("sc-")) {
+      const dimensionTags = new Set(
+        DIMENSION_TAGS[dimension as Exclude<Dimension, "overall" | `sc-${string}`>],
+      );
       rows = rows.filter((r) =>
         r.bill.impactTags.some((t) => dimensionTags.has(t)),
       );
@@ -289,8 +293,10 @@ export default function LegislationTable({
   // Hide categories that have zero bills under the current dimension filter,
   // but always keep "all" visible.
   const dimensionFilteredRows = useMemo(() => {
-    if (dimension === "overall") return allRows;
-    const dimensionTags = new Set(DIMENSION_TAGS[dimension]);
+    if (dimension === "overall" || dimension.startsWith("sc-")) return allRows;
+    const dimensionTags = new Set(
+      DIMENSION_TAGS[dimension as Exclude<Dimension, "overall" | `sc-${string}`>],
+    );
     return allRows.filter((r) =>
       r.bill.impactTags.some((t) => dimensionTags.has(t)),
     );
@@ -566,8 +572,13 @@ export default function LegislationTable({
                     }}
                     className="w-full text-left cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-ink/20 rounded-lg"
                   >
-                    <div className="flex items-baseline gap-2 text-xs text-muted">
+                    <div className="flex items-center gap-2 text-xs text-muted">
                       <span>{bill.billCode}</span>
+                      {bill.updatedDate && bill.updatedDate > new Date().toISOString().slice(0, 10) && (
+                        <span className="inline-flex items-center rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 leading-none">
+                          Upcoming
+                        </span>
+                      )}
                       <span aria-hidden>·</span>
                       <button
                         type="button"

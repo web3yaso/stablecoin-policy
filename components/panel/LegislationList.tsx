@@ -38,7 +38,14 @@ export default function LegislationList({
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <div className="text-xs text-muted">{bill.billCode}</div>
+                <div className="flex items-center gap-1.5 text-xs text-muted">
+                  <span>{bill.billCode}</span>
+                  {bill.updatedDate && bill.updatedDate > new Date().toISOString().slice(0, 10) && (
+                    <span className="inline-flex items-center rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 leading-none">
+                      Upcoming
+                    </span>
+                  )}
+                </div>
                 <div className="text-sm font-medium mt-1 text-ink tracking-tight">
                   {bill.title}
                 </div>

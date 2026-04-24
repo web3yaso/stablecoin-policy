@@ -1,0 +1,160 @@
+{
+  "id": "czechia",
+  "geoId": "203",
+  "name": "Czechia",
+  "region": "eu",
+  "level": "federal",
+  "stance": "favorable",
+  "stanceDatacenter": "favorable",
+  "stanceAI": "favorable",
+  "contextBlurb": "Czechia applies the EU MiCA framework to stablecoins. MiCA classifies them as asset-referenced tokens (ARTs) and e-money tokens (EMTs). CNB is the national competent authority for all MiCA titles, licensing and supervising CASPs and overseeing ART/EMT matters. The Digital Finance Act (Act No. 31/2025 Coll.) took effect 15 Feb 2025, operationalising MiCA nationally. ART/EMT rules have applied EU-wide since 30 Jun 2024, with the rest of MiCA since 30 Dec 2024; Czechia opted for an 18-month transitional period for existing CASPs to 1 Jul 2026. MiCA sets reserve, disclosure, governance and redemption duties (EMTs: par-value in funds; ARTs: segregated reserve and market-value redemption). EBA takes over for significant ART/EMT issuers.",
+  "legislation": [
+    {
+      "id": "czechia-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": ""
+    },
+    {
+      "id": "czechia-leg-2",
+      "billCode": "2025-07-31",
+      "title": "Deadline to apply for MiCA authorisation to benefit from the 18-month Czech grandfathering; transition runs until 1 Jul 2026.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-31"
+    },
+    {
+      "id": "czechia-leg-3",
+      "billCode": "2025-07-10",
+      "title": "ESMA issues supervisory findings to tighten MiCA authorisations, signalling closer scrutiny across the EU (relevant to Czech applicants).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-10"
+    },
+    {
+      "id": "czechia-leg-4",
+      "billCode": "2025-02-15",
+      "title": "Act No. 31/2025 Coll. takes effect; CNB is the national competent authority to license and supervise CASPs under MiCA.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-02-15"
+    },
+    {
+      "id": "czechia-leg-5",
+      "billCode": "2024-12-30",
+      "title": "Remaining MiCA provisions (incl. CASP rules and ESMA’s interim register) apply across the EU, covering platforms operating in Czechia.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-12-30"
+    },
+    {
+      "id": "czechia-leg-6",
+      "billCode": "2024-06-30",
+      "title": "MiCA Titles III/IV start applying EU-wide: issuers of EMTs/ARTs must meet reserve, governance and disclosure rules.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-06-30"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "czechia-fig-1",
+      "name": "Czech National Bank (ČNB)",
+      "role": "Czechia’s MiCA national competent authority for all titles. Licenses and supervises CASPs and oversees ART/EMT matters; ",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "czechia-fig-2",
+      "name": "Financial Analytical Unit (FAÚ)",
+      "role": "Czech Republic’s financial intelligence unit (FIU). Enforces AML/CFT obligations for obliged entities (incl. CASPs), rec",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "czechia-news-1",
+      "headline": "ESMA — List of MiCA competent authorities",
+      "source": "esma.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://www.esma.europa.eu/sites/default/files/2024-12/List_of_Competent_Authorities_notified_to_ESMA_under_MiCA.pdf"
+    },
+    {
+      "id": "czechia-news-2",
+      "headline": "CNB — “Zákon o digitalizaci finančního trhu” takes effect",
+      "source": "cnb.cz",
+      "date": "2026-04-01",
+      "url": "https://www.cnb.cz/cs/cnb-news/aktuality/Zakon-o-digitalizaci-financniho-trhu-nabyva-ucinnosti/"
+    },
+    {
+      "id": "czechia-news-3",
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "CZ",
+    "nameZh": "捷克",
+    "flagImg": "https://flagcdn.com/w320/cz.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "Czechia applies the EU MiCA framework to stablecoins. MiCA classifies them as asset-referenced tokens (ARTs) and e-money tokens (EMTs). CNB is the national competent authority for all MiCA titles, licensing and supervising CASPs and overseeing ART/EMT matters. The Digital Finance Act (Act No. 31/2025 Coll.) took effect 15 Feb 2025, operationalising MiCA nationally. ART/EMT rules have applied EU-wide since 30 Jun 2024, with the rest of MiCA since 30 Dec 2024; Czechia opted for an 18-month transitional period for existing CASPs to 1 Jul 2026. MiCA sets reserve, disclosure, governance and redemption duties (EMTs: par-value in funds; ARTs: segregated reserve and market-value redemption). EBA takes over for significant ART/EMT issuers.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "Stablecoins in Czechia are governed by the EU MiCA regime and fall into two categories: e-money tokens (EMTs), which reference a single official currency and must be redeemable at par in funds by issuers that are credit or e-money institutions; and asset-referenced tokens (ARTs), which reference ano",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "czechia-reg-1",
+        "name": "Czech National Bank",
+        "role": "Czechia’s MiCA national competent authority for all titles. Licenses and supervises CASPs and oversees ART/EMT matters; coordinates with EU bodies and maintains the national MiCA registers.",
+        "websiteUrl": "https://www.cnb.cz/en/supervision-financial-market/the-cnbs-area-of-competence-under-the-regulation-on-markets-in-crypto-assets-mica/",
+        "isPrimary": true
+      },
+      {
+        "id": "czechia-reg-2",
+        "name": "Financial Analytical Unit",
+        "role": "Czech Republic’s financial intelligence unit (FIU). Enforces AML/CFT obligations for obliged entities (incl. CASPs), receives and analyses suspicious-transaction reports, and cooperates with ČNB and f",
+        "websiteUrl": "https://fau.gov.cz/en/new-legal-framework",
+        "isPrimary": false
+      }
+    ]
+  }
+}

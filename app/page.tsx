@@ -4,9 +4,12 @@ import { useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Hero from "@/components/hero/Hero";
+import Header from "@/components/ui/Header";
 import MapShell from "@/components/map/MapShell";
 import FadeInOnView from "@/components/ui/FadeInOnView";
 import { useScrollProgress } from "@/lib/use-scroll-progress";
+import { useLocale } from "@/contexts/LocaleContext";
+import { t as tr } from "@/lib/i18n";
 
 // Below-fold sections — lazy-loaded so the initial JS bundle only
 // includes Hero + MapShell + Section 1. Each dynamic import creates a
@@ -39,6 +42,7 @@ function smoothScrollToMap(duration = 1200) {
 
 export default function Page() {
   const progress = useScrollProgress();
+  const { locale } = useLocale();
   const navigateRef = useRef<((t: ViewTarget) => void) | null>(null);
 
   const handleNavigateToEntity = (t: ViewTarget) => {
@@ -57,9 +61,9 @@ export default function Page() {
 
   return (
     <>
+      <Header />
       <MapShell
         revealProgress={progress}
-        dimension="overall"
         navigateRef={navigateRef}
       />
       <Hero progress={progress} onRegionClick={handleGlobeRegionClick} />
@@ -69,10 +73,10 @@ export default function Page() {
       <section className="relative z-10 bg-bg border-t border-black/[.06]">
         <div className="max-w-5xl mx-auto px-8 py-20">
           <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
-            01 · Latest developments
+            {tr(locale, "page.s1.label")}
           </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight leading-[1.1] mb-10">
-            What happened this week
+            {tr(locale, "page.s1.title")}
           </h2>
           <FadeInOnView>
             <AIOverview />
@@ -87,10 +91,10 @@ export default function Page() {
       >
         <div className="max-w-5xl mx-auto px-8 pt-20 pb-24">
           <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
-            02 · The full record
+            {tr(locale, "page.s2.label")}
           </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight leading-[1.1] mb-10">
-            Every bill we&rsquo;re tracking
+            {tr(locale, "page.s2.title")}
           </h2>
           <FadeInOnView>
             <LegislationTable
@@ -108,14 +112,13 @@ export default function Page() {
       >
         <div className="max-w-5xl mx-auto px-8 pt-20 pb-24">
           <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
-            03 · Who voted how
+            {tr(locale, "page.s3.label")}
           </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight leading-[1.1] mb-2">
-            Politicians
+            {tr(locale, "page.s3.title")}
           </h2>
           <p className="text-sm text-muted mb-10 max-w-xl">
-            The legislators shaping stablecoin policy — and how
-            their votes stack up against what they said they believed.
+            {tr(locale, "page.s3.sub")}
           </p>
           <FadeInOnView>
             <PoliticiansOverview />
@@ -130,10 +133,10 @@ export default function Page() {
       >
         <div className="max-w-5xl mx-auto px-8 pt-20 pb-24">
           <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
-            04 · From the wire
+            {tr(locale, "page.s4.label")}
           </div>
           <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight leading-[1.1] mb-10 inline-flex items-center gap-3">
-            Live news
+            {tr(locale, "page.s4.title")}
             <span
               className="live-dot"
               role="img"
@@ -150,23 +153,20 @@ export default function Page() {
       {/* Footer */}
       <section className="relative z-10 bg-bg border-t border-black/[.06]">
         <div className="max-w-5xl mx-auto px-8 py-10 flex flex-wrap items-center justify-between gap-4 text-xs text-muted">
-          <span>Track Stablecoin Policy</span>
+          <span>{tr(locale, "footer.brand")}</span>
           <div className="flex gap-6">
             <Link href="/about" className="hover:text-ink transition-colors">
-              About
+              {tr(locale, "footer.about")}
             </Link>
-            <Link
-              href="/methodology"
-              className="hover:text-ink transition-colors"
-            >
-              Methodology
+            <Link href="/methodology" className="hover:text-ink transition-colors">
+              {tr(locale, "footer.methodology")}
             </Link>
             <Link href="/contact" className="hover:text-ink transition-colors">
-              Contact
+              {tr(locale, "footer.contact")}
             </Link>
           </div>
           <span>
-            Built by{" "}
+            {tr(locale, "footer.built_by")}{" "}
             <a
               href="https://x.com/isareksopuro"
               target="_blank"

@@ -1,0 +1,51 @@
+{
+  "id": "mexico",
+  "geoId": "484",
+  "name": "Mexico",
+  "region": "na",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Mexico's Fintech Law (2018) created a framework for financial technology institutions including crypto exchanges, but Banco de México has explicitly restricted the use of virtual assets — including stablecoins — as means of payment within the regulated financial system. Private stablecoin issuance for domestic payments is not permitted, though crypto assets can be held as investments.",
+  "legislation": [],
+  "keyFigures": [],
+  "news": [],
+  "stablecoinMeta": {
+    "code": "MX",
+    "nameZh": "墨西哥",
+    "flagImg": "https://flagcdn.com/w320/mx.png",
+    "lastUpdated": "",
+    "summaryEn": "Mexico's Fintech Law (2018) created a framework for financial technology institutions. However, Banco de México restricts virtual assets including stablecoins as payment instruments within the regulated financial system. Crypto can be held as investment assets.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 2,
+    "regimeStatus": "in_progress",
+    "allowsFiatBacked": false,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "mexico-reg-1",
+        "name": "Banco de México",
+        "acronym": "Banxico",
+        "role": "Central bank. Has prohibited regulated financial institutions from offering virtual asset transactions to clients and restricts stablecoin use for payments.",
+        "websiteUrl": "https://www.banxico.org.mx",
+        "isPrimary": true
+      },
+      {
+        "id": "mexico-reg-2",
+        "name": "Comisión Nacional Bancaria y de Valores",
+        "acronym": "CNBV",
+        "role": "Banking and securities regulator. Co-supervises fintech companies and crypto exchanges under the Fintech Law of 2018.",
+        "websiteUrl": "https://www.cnbv.gob.mx",
+        "isPrimary": false
+      }
+    ]
+  }
+}

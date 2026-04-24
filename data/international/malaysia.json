@@ -1,0 +1,50 @@
+{
+  "id": "malaysia",
+  "geoId": "458",
+  "name": "Malaysia",
+  "region": "asia",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Malaysia's Securities Commission (SC) regulates digital assets under the Capital Markets and Services (Prescription of Securities) (Digital Currency and Digital Token) Order 2019. Crypto exchanges must be registered with the SC. Stablecoins are treated as digital assets; specific stablecoin issuance rules have not yet been finalized. Bank Negara Malaysia (BNM) oversees payment-related aspects.",
+  "legislation": [],
+  "keyFigures": [],
+  "news": [],
+  "stablecoinMeta": {
+    "code": "MY",
+    "nameZh": "马来西亚",
+    "flagImg": "https://flagcdn.com/w320/my.png",
+    "lastUpdated": "",
+    "summaryEn": "Malaysia's Securities Commission (SC) regulates digital assets under the Capital Markets and Services Order 2019. Crypto exchanges must be registered with the SC. Stablecoins are treated as digital assets; specific stablecoin issuance rules have not yet been finalized.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "aml-kyc"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 2,
+    "regimeStatus": "in_progress",
+    "allowsFiatBacked": false,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "malaysia-reg-1",
+        "name": "Securities Commission Malaysia",
+        "acronym": "SC",
+        "role": "Primary regulator for digital assets and registered digital asset exchanges (DAX). Sets listing and compliance requirements for crypto assets including stablecoins.",
+        "websiteUrl": "https://www.sc.com.my",
+        "isPrimary": true
+      },
+      {
+        "id": "malaysia-reg-2",
+        "name": "Bank Negara Malaysia",
+        "acronym": "BNM",
+        "role": "Central bank overseeing payment systems and e-money regulation. Works alongside the SC on payment-related aspects of digital assets.",
+        "websiteUrl": "https://www.bnm.gov.my",
+        "isPrimary": false
+      }
+    ]
+  }
+}

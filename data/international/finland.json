@@ -4,175 +4,143 @@
   "name": "Finland",
   "region": "eu",
   "level": "federal",
-  "contextBlurb": "Finland is implementing the EU AI Act with a deliberately light touch — minimal extra national rules on top. It hosts Google's Hamina and Microsoft's Helsinki-area hyperscale campuses, both pioneering waste-heat recovery into municipal district heating. Starting July 2026, data centers lose their preferential electricity tax rate, replaced by a new value-added incentive scheme.",
+  "stance": "favorable",
+  "stanceDatacenter": "favorable",
+  "stanceAI": "favorable",
+  "contextBlurb": "As of 2025, Finland applies the EU’s MiCA framework to stablecoins and crypto-asset services. The Finnish Financial Supervisory Authority (FIN-FSA) is the national competent authority, authorising and supervising CASPs and MiCA-compliant stablecoin issuers. Finland opted for a 6-month transition that ended on 30 June 2025, after which only MiCA-authorised firms may operate. Under MiCA, EMTs (single-fiat tokens) carry a par-value redemption right and strict safeguarding; ARTs (basket-referenced) face reserve, disclosure and governance duties, with additional measures for “significant” tokens.",
   "legislation": [
     {
-      "id": "finland-he46-2025",
-      "billCode": "HE 46/2025 vp",
-      "title": "Act on the Supervision of Certain AI Systems (Laki eräiden tekoälyjärjestelmien valvonnasta)",
-      "summary": "This act implements Phase 1 of Finland's national obligations under the EU AI Act, designating Traficom as the central contact point and establishing a multi-member National Sanctions Board with powers to impose administrative fines up to EU AI Act maximums. It entered into force on January 1, 2026 following presidential approval, with Phase 2 provisions on regulatory sandboxes and a high-risk AI systems register expected by August 2, 2026.",
-      "stage": "Enacted",
-      "stance": "review",
-      "impactTags": [
-        "ai-governance",
-        "enforcement",
-        "supervisory-authority",
-        "EU-AI-Act"
-      ],
-      "category": "ai-governance",
-      "updatedDate": "2026-01-07",
-      "partyOrigin": "B",
-      "sourceUrl": "https://valtioneuvosto.fi/en/-/1410877/national-supervision-of-eu-artificial-intelligence-act-to-begin-laws-on-powers-of-authorities-to-take-effect-at-start-of-the-year"
-    },
-    {
-      "id": "finland-he156-2025",
-      "billCode": "HE 156/2025 vp",
-      "title": "Amendment to the Act on Excise Duty on Electricity and Certain Fuels — Data Centre Electricity Tax Reclassification",
-      "summary": "This government proposal moves data centers from the lower electricity tax Category II (0.05 cents/kWh) to the general Category I (2.24 cents/kWh), effective July 1, 2026, raising operating costs roughly 40-fold and generating ~€47 million annually in new revenue. To offset the impact, the government is developing a replacement incentive scheme targeting 'value-added' data centers, expected to enter force in autumn 2026, though its final form remains undecided.",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [
-        "electricity-tax",
-        "data-center-energy",
-        "investment-incentives",
-        "operating-costs"
-      ],
-      "category": "data-center-energy",
-      "updatedDate": "2026-03-11",
-      "partyOrigin": "B",
-      "sourceUrl": "https://valtioneuvosto.fi/en/-/government-safeguards-finland-s-competitiveness-in-attracting-data-centre-investments"
-    },
-    {
-      "id": "finland-ai-sandbox-proposal-2025",
-      "billCode": "Draft Government Proposal (AI Sandboxes, April 2025)",
-      "title": "Draft Government Proposal on AI Regulatory Sandboxes in Finland",
-      "summary": "Published April 25, 2025 by the Ministry of Economic Affairs and Employment, this proposal establishes national regulatory test environments (sandboxes) allowing organizations to develop and test AI systems under supervisory oversight, fulfilling Finland's EU AI Act obligation to operate at least one sandbox by August 2, 2026. Rules on AI sandboxes are expected to enter into force by February 1, 2026, and may be established in cooperation with other EU member states.",
+      "id": "finland-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
       "stage": "Enacted",
       "stance": "favorable",
-      "impactTags": [
-        "ai-governance",
-        "regulatory-sandbox",
-        "innovation",
-        "EU-AI-Act-Phase2"
-      ],
+      "impactTags": [],
       "category": "ai-governance",
-      "updatedDate": "2026-02-01",
-      "partyOrigin": "B",
-      "sourceUrl": "https://www.hannessnellman.com/news-and-views/blog/eu-ai-act-latest-regulatory-developments-in-finland/"
+      "updatedDate": ""
     },
     {
-      "id": "finland-ai-sandbox-feb-2026",
-      "billCode": "AI Sandbox act",
-      "title": "National AI Regulatory Sandbox (in force 1 Feb 2026)",
-      "summary": "The rules establishing Finland's national AI regulatory sandbox entered into force on 1 February 2026, with full operational readiness required by 2 August 2026 under the EU AI Act. The sandbox allows AI developers — particularly SMEs — to test high-risk and innovative systems under supervisory guidance with legal-certainty benefits.",
+      "id": "finland-leg-2",
+      "billCode": "2025-07-07",
+      "title": "Finland’s national transition period ends; national regime repealed and replaced by MiCA—only authorised CASPs may operate.",
+      "summary": "",
       "stage": "Enacted",
       "stance": "favorable",
-      "impactTags": [
-        "regulatory-sandbox",
-        "SME-support",
-        "innovation",
-        "AI-Act"
-      ],
+      "impactTags": [],
       "category": "ai-governance",
-      "updatedDate": "2026-02-01",
-      "sourceUrl": "https://tem.fi/en/ai-regulation"
+      "updatedDate": "2025-07-07"
+    },
+    {
+      "id": "finland-leg-3",
+      "billCode": "2025-07-01",
+      "title": "Updated FIN-FSA AML/CFT Regulations & Guidelines 2/2023 enter into force.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-01"
+    },
+    {
+      "id": "finland-leg-4",
+      "billCode": "2025-04-03",
+      "title": "FIN-FSA says firms must obtain CASP authorisation to continue after 30 Jun; eight applications received.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-04-03"
+    },
+    {
+      "id": "finland-leg-5",
+      "billCode": "2024-12-30",
+      "title": "MiCA becomes fully applicable; Finland confirms a 6-month national transition to 30 Jun 2025.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-12-30"
+    },
+    {
+      "id": "finland-leg-6",
+      "billCode": "2024-06-30",
+      "title": "MiCA’s stablecoin rules (Titles III & IV for ARTs/EMTs) start applying across the EU, covering issuance, reserves and redemption.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-06-30"
     }
   ],
   "keyFigures": [
     {
-      "id": "finland-orpo",
-      "name": "Petteri Orpo",
-      "role": "Prime Minister of Finland",
-      "party": "NCP",
-      "stance": "favorable"
-    },
-    {
-      "id": "finland-purra",
-      "name": "Riikka Purra",
-      "role": "Minister of Finance",
-      "party": "PS",
-      "stance": "review"
-    },
-    {
-      "id": "finland-saarimaki",
-      "name": "Jarkko Saarimäki",
-      "role": "Director-General, Finnish Transport and Communications Agency (Traficom)",
-      "party": "",
-      "stance": "review"
-    },
-    {
-      "id": "finland-rydman",
-      "name": "Wille Rydman",
-      "role": "Former Minister of Economic Affairs (AI / data-centre roadmap sponsor)",
-      "party": "Finns Party",
-      "stance": "favorable"
-    },
-    {
-      "id": "finland-multala",
-      "name": "Sari Multala",
-      "role": "Minister of Science and Culture; 1st Vice-Chair, Research and Innovation Council",
-      "party": "NCP",
-      "stance": "favorable"
-    },
-    {
-      "id": "finland-mattila",
-      "name": "Veli-Matti Mattila",
-      "role": "Government-appointed Rapporteur for the National Data Centre Roadmap",
+      "id": "finland-fig-1",
+      "name": "Finnish Financial Supervisory Authority (FIN-FSA)",
+      "role": "The primary regulator for stablecoins and crypto-assets in Finland, responsible for authorizing and supervising crypto-a",
       "party": "N/A",
-      "stance": "favorable"
-    },
-    {
-      "id": "finland-jaatinen",
-      "name": "Anu Talus",
-      "role": "Ombudsman for Data Protection (Tietosuojavaltuutettu)",
-      "party": "N/A",
-      "stance": "concerning"
+      "stance": "review"
     }
   ],
   "news": [
     {
       "id": "finland-news-1",
-      "headline": "Plans on hold for Google data center in Finland following potential electricity tax rise",
-      "source": "Data Center Dynamics",
-      "date": "2026-03-11",
-      "url": "https://www.datacenterdynamics.com/en/news/plans-on-hold-for-google-data-center-in-finland-following-potential-electricity-tax-raise/"
+      "headline": "FIN-FSA press release (Apr 3, 2025)",
+      "source": "finanssivalvonta.fi",
+      "date": "2026-04-01",
+      "url": "https://www.finanssivalvonta.fi/en/publications-and-press-releases/Press-release/2025/requirements-for-crypto-asset-services-have-tightened-with-the-mica-regulation--consumers-still-need-to-be-careful/"
     },
     {
       "id": "finland-news-2",
-      "headline": "National supervision of EU Artificial Intelligence Act to begin – laws on powers of authorities to take effect at start of the year",
-      "source": "Finnish Government (Valtioneuvosto)",
-      "date": "2026-01-07",
-      "url": "https://valtioneuvosto.fi/en/-/1410877/national-supervision-of-eu-artificial-intelligence-act-to-begin-laws-on-powers-of-authorities-to-take-effect-at-start-of-the-year"
+      "headline": "ESMA – MiCA grandfathering list",
+      "source": "esma.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://www.esma.europa.eu/sites/default/files/2024-12/List_of_MiCA_grandfathering_periods_art._143_3.pdf"
     },
     {
       "id": "finland-news-3",
-      "headline": "Finland, Sweden Warm Up to Data Centre District Heat Amid Lingering Sustainability Concerns",
-      "source": "The Energy Mix",
-      "date": "2025-12-12",
-      "url": "https://www.theenergymix.com/finland-sweden-warm-up-to-data-centre-district-heat-amid-lingering-sovereignty-concerns/"
-    },
-    {
-      "id": "finland-news-4",
-      "headline": "Finland aims to host a European AI gigafactory",
-      "source": "Finnish Government (Valtioneuvosto)",
-      "date": "2025-06-24",
-      "url": "https://valtioneuvosto.fi/en/-/finland-aims-to-host-a-european-ai-gigafactory-"
-    },
-    {
-      "id": "finland-news-6",
-      "headline": "3 E Network progress update on Finland AI Data Centre project: earthworks underway",
-      "source": "GlobeNewswire",
-      "date": "2026-04-06",
-      "url": "https://www.globenewswire.com/news-release/2026/04/06/3268367/0/en/3-E-Network-Announces-Progress-Update-on-Finland-AI-Data-Centre-Project-Site-Clearance-Completed-and-Earthworks-Underway.html"
-    },
-    {
-      "id": "finland-news-8",
-      "headline": "Finland AI Regulation Overview — 2026 update",
-      "source": "Regulations.AI",
-      "date": "2026-01-28",
-      "url": "https://regulations.ai/regulations/RAI-FI-NA-SUMMARY-2026"
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
     }
   ],
-  "stanceDatacenter": "review",
-  "stanceAI": "concerning"
+  "stablecoinMeta": {
+    "code": "FI",
+    "nameZh": "芬兰",
+    "flagImg": "https://flagcdn.com/w320/fi.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "As of 2025, Finland applies the EU’s MiCA framework to stablecoins and crypto-asset services. The Finnish Financial Supervisory Authority (FIN-FSA) is the national competent authority, authorising and supervising CASPs and MiCA-compliant stablecoin issuers. Finland opted for a 6-month transition that ended on 30 June 2025, after which only MiCA-authorised firms may operate. Under MiCA, EMTs (single-fiat tokens) carry a par-value redemption right and strict safeguarding; ARTs (basket-referenced) face reserve, disclosure and governance duties, with additional measures for “significant” tokens.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "Under MiCA, stablecoins in Finland are either Electronic Money Tokens (EMTs) or Asset-Referenced Tokens (ARTs). EMTs are pegged 1:1 to a single official currency (e.g., EUR) and may be issued only by credit institutions or e-money institutions, with statutory safeguarding and redemption obligations;",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "finland-reg-1",
+        "name": "Finnish Financial Supervisory Authority",
+        "role": "The primary regulator for stablecoins and crypto-assets in Finland, responsible for authorizing and supervising crypto-asset service providers (CASPs) under MiCA. It enforces licensing, AML, consumer ",
+        "websiteUrl": "https://www.finanssivalvonta.fi/en/financial-market-participants/capital-markets/crypto-asset-activities/",
+        "isPrimary": true
+      }
+    ]
+  }
 }

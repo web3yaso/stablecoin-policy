@@ -1,0 +1,150 @@
+{
+  "id": "austria",
+  "geoId": "040",
+  "name": "Austria",
+  "region": "eu",
+  "level": "federal",
+  "stance": "favorable",
+  "stanceDatacenter": "favorable",
+  "stanceAI": "favorable",
+  "contextBlurb": "As of 2025, Austria applies the EU MiCA regime. Stablecoins are classified as asset-referenced tokens (ARTs) and e-money tokens (EMTs). The FMA is the national competent authority. ART issuers need MiCA authorisation; EMTs may only be issued by banks or e-money institutions. Holders benefit from MiCA safeguards: reserves/custody and disclosures, and redemption rights (EMTs at par; ARTs per MiCA terms).\nTax: crypto income is taxed at 27.5% (from 1 Mar 2022, with a transitional rule for assets acquired after 28 Feb 2021).",
+  "legislation": [
+    {
+      "id": "austria-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": ""
+    },
+    {
+      "id": "austria-leg-2",
+      "billCode": "2025-09-25",
+      "title": "Nine European banks—including Austria’s Raiffeisen—announce a consortium to launch a MiCAR-compliant euro stablecoin.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-09-25"
+    },
+    {
+      "id": "austria-leg-3",
+      "billCode": "2025-09-15",
+      "title": "AMF, Austria’s FMA and Italy’s Consob call for a stronger EU supervisory framework under MiCA.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-09-15"
+    },
+    {
+      "id": "austria-leg-4",
+      "billCode": "2025-07-28",
+      "title": "ECB blog outlines financial-stability and sovereignty risks from stablecoins and options for Europe.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-28"
+    },
+    {
+      "id": "austria-leg-5",
+      "billCode": "2025-05-30",
+      "title": "Austria’s FMA grants MiCA (CASP) authorisation to Bybit EU GmbH, permitting multiple crypto-asset services under Article 63 MiCAR.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-05-30"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "austria-fig-1",
+      "name": "Austrian Financial Market Authority (FMA)",
+      "role": "Designated national competent authority under MiCA-VVG. Authorises and supervises ART issuers and crypto-asset service p",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "austria-fig-2",
+      "name": "Austrian National Bank (OeNB)",
+      "role": "Austria’s central bank. Monitors financial stability and supports macroprudential policy (incl. via the FMSB) and conduc",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "austria-news-1",
+      "headline": "RIS (MiCA-VVG, BGBl I 111/2024)",
+      "source": "ris.bka.gv.at",
+      "date": "2026-04-01",
+      "url": "https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Anlage=&Artikel=&Gesetzesnummer=20012654&Paragraf=22&Uebergangsrecht="
+    },
+    {
+      "id": "austria-news-2",
+      "headline": "FMA – “Information for CASP applicants”",
+      "source": "fma.gv.at",
+      "date": "2026-04-01",
+      "url": "https://www.fma.gv.at/en/cross-sectoral-topics/markets-in-crypto-assets-regulation-micar/information-for-casp-applicants/"
+    },
+    {
+      "id": "austria-news-3",
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "AT",
+    "nameZh": "奥地利",
+    "flagImg": "https://flagcdn.com/w320/at.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "As of 2025, Austria applies the EU MiCA regime. Stablecoins are classified as asset-referenced tokens (ARTs) and e-money tokens (EMTs). The FMA is the national competent authority. ART issuers need MiCA authorisation; EMTs may only be issued by banks or e-money institutions. Holders benefit from MiCA safeguards: reserves/custody and disclosures, and redemption rights (EMTs at par; ARTs per MiCA terms).\nTax: crypto income is taxed at 27.5% (from 1 Mar 2022, with a transitional rule for assets acquired after 28 Feb 2021).",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "Under the EU MiCA regime, Austria classifies stablecoins as e-money tokens (EMTs) and asset-referenced tokens (ARTs). EMTs reference a single official currency and are redeemable at par in funds; only credit institutions or e-money institutions may issue them. ARTs aim to keep a stable value by refe",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "austria-reg-1",
+        "name": "Austrian Financial Market Authority",
+        "acronym": "FMA",
+        "role": "Designated national competent authority under MiCA-VVG. Authorises and supervises ART issuers and crypto-asset service providers (CASPs); EMTs are supervised under banking/e-money frameworks. The FMA ",
+        "websiteUrl": "https://www.fma.gv.at/en/",
+        "isPrimary": true
+      },
+      {
+        "id": "austria-reg-2",
+        "name": "Austrian National Bank",
+        "role": "Austria’s central bank. Monitors financial stability and supports macroprudential policy (incl. via the FMSB) and conducts payment systems oversight; collaborates with the FMA on systemic-risk issues.",
+        "websiteUrl": "https://www.oenb.at/en.html",
+        "isPrimary": false
+      }
+    ]
+  }
+}

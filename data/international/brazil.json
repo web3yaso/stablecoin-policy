@@ -1,0 +1,134 @@
+{
+  "id": "brazil",
+  "geoId": "076",
+  "name": "Brazil",
+  "region": "na",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Brazil's central bank issued a three-part crypto rule set in Nov 2025—Res. BCB 519, 520 and 521—that brings virtual-asset service providers (VASPs) under BCB authorisation and prudential oversight and classifies fiat-pegged crypto (stablecoin) transactions as foreign-exchange/capital-markets operations. The framework introduces licensing, governance/consumer-protection and AML/CFT requirements; minimum capital bands are roughly US$2–7 million depending on activity. Resolutions 519, 520 and 521 entered into full force on 2 February 2026; reporting of covered FX/VA operations to the BCB is required from 4 May 2026. Foreign firms serving Brazilian clients must obtain local authorisation.",
+  "legislation": [
+    {
+      "id": "brazil-leg-1",
+      "billCode": "2026-02-02",
+      "title": "Res. BCB 519, 520 & 521 entered into force, establishing a comprehensive VASP licensing and prudential regime and treating stablecoin transactions as FX operations.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2026-02-02"
+    },
+    {
+      "id": "brazil-leg-2",
+      "billCode": "2025-11-10",
+      "title": "BCB issues Res. BCB 519, 520 & 521 (crypto/VASP rulebook; FX treatment for fiat-pegged stablecoins).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-11-10"
+    },
+    {
+      "id": "brazil-leg-3",
+      "billCode": "2025-11-03",
+      "title": "Executive submits Bill 5,582/2025 (“anti-faction” bill) to Congress to allow pre-trial liquidation of seized crypto.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-11-03"
+    },
+    {
+      "id": "brazil-leg-4",
+      "billCode": "2025-07-10",
+      "title": "“Operation Deep Hunt” dismantles a R$164M crypto-laundering syndicate.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-10"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "brazil-fig-1",
+      "name": "Central Bank of Brazil (Banco Central do Brasil, BCB)",
+      "role": "Primary regulator for stablecoins and virtual asset service providers (VASPs). Classifies stablecoin transactions as for",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "brazil-fig-2",
+      "name": "Securities and Exchange Commission of Brazil (Comissão de Valores Mobiliários, CVM)",
+      "role": "Regulates digital assets that qualify as securities. Acts as the SEC equivalent but does not regulate stablecoins unless",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "brazil-news-1",
+      "headline": "Rio Times – Brazil's New Cryptocurrency Regulations in Force (February 2026)",
+      "source": "riotimesonline.com",
+      "date": "2026-02-02",
+      "url": "https://www.riotimesonline.com/wp-content/uploads/2026/02/Brazil_Crypto_Regulations_Report.pdf"
+    },
+    {
+      "id": "brazil-news-2",
+      "headline": "CoinDesk",
+      "source": "coindesk.com",
+      "date": "2026-02-02",
+      "url": "https://www.coindesk.com/policy/2025/11/11/brazil-s-central-bank-sets-crypto-rules-establishes-up-to-usd7m-capital-bar-for-firms"
+    },
+    {
+      "id": "brazil-news-3",
+      "headline": "Reuters",
+      "source": "reuters.com",
+      "date": "2026-02-02",
+      "url": "https://www.reuters.com/world/americas/brazil-central-bank-tightens-rules-virtual-assets-cryptocurrency-2025-11-10/"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "BR",
+    "nameZh": "巴西",
+    "flagImg": "https://flagcdn.com/w320/br.png",
+    "lastUpdated": "Feb 2, 2026",
+    "summaryEn": "Brazil's central bank issued a three-part crypto rule set in Nov 2025—Res. BCB 519, 520 and 521—that brings virtual-asset service providers (VASPs) under BCB authorisation and prudential oversight and classifies fiat-pegged crypto (stablecoin) transactions as foreign-exchange/capital-markets operations. The framework introduces licensing, governance/consumer-protection and AML/CFT requirements; minimum capital bands are roughly US$2–7 million depending on activity. Resolutions 519, 520 and 521 entered into full force on 2 February 2026; reporting of covered FX/VA operations to the BCB is required from 4 May 2026. Foreign firms serving Brazilian clients must obtain local authorisation.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 4,
+    "regimeStatus": "finalized",
+    "classification": "payment_instrument",
+    "classificationNote": "Brazil classifies operations with fiat-pegged crypto (stablecoins) within the foreign-exchange and international-capital perimeter under Resolução BCB nº 521/2025, issued alongside Res. 519/2025 and 520/2025. In practice, covered payments, remittances and cross-border transfers involving stablecoins",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "brazil-reg-1",
+        "name": "Central Bank of Brazil",
+        "role": "Primary regulator for stablecoins and virtual asset service providers (VASPs). Classifies stablecoin transactions as foreign exchange operations, issues licenses, and enforces AML/CFT, capital, and re",
+        "websiteUrl": "https://www.bcb.gov.br/",
+        "isPrimary": true
+      },
+      {
+        "id": "brazil-reg-2",
+        "name": "Securities and Exchange Commission of Brazil",
+        "role": "Regulates digital assets that qualify as securities. Acts as the SEC equivalent but does not regulate stablecoins unless they have security-like features.",
+        "websiteUrl": "https://www.cvm.gov.br/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

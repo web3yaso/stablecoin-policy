@@ -1,0 +1,114 @@
+{
+  "id": "russia",
+  "geoId": "643",
+  "name": "Russia",
+  "region": "eu",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Russia restricts domestic crypto use while piloting a state CBDC and exploring limited cross-border use of crypto. Under Federal Law No. 259-FZ, crypto and stablecoins are not legal tender and cannot be used for domestic payments; tokenized instruments may be issued as digital financial assets on licensed platforms. The digital ruble is enabled by the 2023 law and is in an expanded pilot as a retail payment rail. In October 2025, the EU’s 19th sanctions package introduced the first EU-wide ban on transactions involving the rouble-pegged A7A5 stablecoin and designated related entities. Russia continues to test controlled international-settlement uses through experimental regimes, but broad retail access to stablecoins remains restricted.",
+  "legislation": [
+    {
+      "id": "russia-leg-1",
+      "billCode": "2025-10-23",
+      "title": "EU bans A7A5 transactions and lists related entities.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-10-23"
+    },
+    {
+      "id": "russia-leg-2",
+      "billCode": "2025-09-03",
+      "title": "Finance Ministry proposes easing thresholds for ‘especially qualified’ investors in crypto ELR.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-09-03"
+    },
+    {
+      "id": "russia-leg-3",
+      "billCode": "2025-03-12",
+      "title": "Bank of Russia outlines three-year Experimental Legal Regime for crypto; participation restricted.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-03-12"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "russia-fig-1",
+      "name": "Ministry of Finance",
+      "role": "Drafts and promotes crypto/DFA legislation and policy, including proposals for cross-border use within the experimental ",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "russia-fig-2",
+      "name": "Central Bank of Russia (CBR)",
+      "role": "Prudential and payments regulator. Registers and supervises DFA operators, reiterates that digital currency is not a dom",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "russia-news-1",
+      "headline": "Council of the EU - Press release (19th package): “EU targets energy, third-country banks and crypto providers” (HTML).",
+      "source": "consilium.europa.eu",
+      "date": "2025-10-23",
+      "url": "https://www.consilium.europa.eu/en/press/press-releases/2025/10/23/19th-package-of-sanctions-against-russia-eu-targets-russian-energy-third-country-banks-and-crypto-providers/"
+    },
+    {
+      "id": "russia-news-2",
+      "headline": "Council of the EU - Press release PDF: includes explicit A7A5 language.",
+      "source": "consilium.europa.eu",
+      "date": "2025-10-23",
+      "url": "https://www.consilium.europa.eu/en/press/press-releases/2025/10/23/19th-package-of-sanctions-against-russia-eu-targets-russian-energy-third-country-banks-and-crypto-providers/pdf/"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "RU",
+    "nameZh": "俄罗斯",
+    "flagImg": "https://flagcdn.com/w320/ru.png",
+    "lastUpdated": "Oct 23, 2025",
+    "summaryEn": "Russia restricts domestic crypto use while piloting a state CBDC and exploring limited cross-border use of crypto. Under Federal Law No. 259-FZ, crypto and stablecoins are not legal tender and cannot be used for domestic payments; tokenized instruments may be issued as digital financial assets on licensed platforms. The digital ruble is enabled by the 2023 law and is in an expanded pilot as a retail payment rail. In October 2025, the EU’s 19th sanctions package introduced the first EU-wide ban on transactions involving the rouble-pegged A7A5 stablecoin and designated related entities. Russia continues to test controlled international-settlement uses through experimental regimes, but broad retail access to stablecoins remains restricted.",
+    "tags": [
+      "licensing-required",
+      "aml-kyc",
+      "usd-stablecoin-restricted"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 3,
+    "regimeStatus": "in_progress",
+    "classificationNote": "Russia regulates tokenized instruments under the Digital Financial Assets (DFA) framework; DFAs are property-like digital rights issued and traded on licensed platforms. Stablecoins are not expressly defined in law. A January 2024 State Duma bill would add “secured stablecoins” to the DFA statute an",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "russia-reg-1",
+        "name": "Ministry of Finance",
+        "role": "Drafts and promotes crypto/DFA legislation and policy, including proposals for cross-border use within the experimental regime. In 2025 it proposed lowering the entry thresholds for “especially qualif",
+        "websiteUrl": "https://interfax.com/newsroom/top-stories/113875/",
+        "isPrimary": true
+      },
+      {
+        "id": "russia-reg-2",
+        "name": "Central Bank of Russia",
+        "acronym": "CBR",
+        "role": "Prudential and payments regulator. Registers and supervises DFA operators, reiterates that digital currency is not a domestic means of payment, and sets ELR participation rules, limiting crypto transa",
+        "websiteUrl": "https://www.cbr.ru/eng/finm_infrastructure/digital_oper/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

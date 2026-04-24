@@ -1,0 +1,133 @@
+{
+  "id": "china",
+  "geoId": "156",
+  "name": "China",
+  "region": "asia",
+  "level": "federal",
+  "stance": "restrictive",
+  "stanceDatacenter": "restrictive",
+  "stanceAI": "restrictive",
+  "contextBlurb": "Private (non-sovereign) stablecoins and related virtual-currency business activities are prohibited across Mainland China; the ban was set out by the People's Bank of China and nine other authorities in the Notice (Yin Fa [2021] No. 237) with effect from 15 September 2021. On 6 February 2026, Chinese regulators further tightened the policy by formally prohibiting unauthorised CNY-pegged stablecoins and restricting asset tokenisation (RWA) activities; any domestic or foreign entity is barred from issuing a CNY-pegged stablecoin without explicit government approval. China continues to pilot and expand a central bank digital currency (e-CNY) issued by the PBoC, which remains a separate, legal-tender CBDC.",
+  "legislation": [
+    {
+      "id": "china-leg-1",
+      "billCode": "2026-02-06",
+      "title": "Chinese regulators formalised an explicit ban on unauthorised CNY-pegged stablecoins and restricted RWA tokenisation activities; applies to domestic and foreign entities alike.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "restrictive",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2026-02-06"
+    },
+    {
+      "id": "china-leg-2",
+      "billCode": "2025-09-25",
+      "title": "e-CNY International Operation Center officially launched in Shanghai (PBoC news), underscoring continuing CBDC build-out (separate from private stablecoins)",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "restrictive",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-09-25"
+    },
+    {
+      "id": "china-leg-3",
+      "billCode": "2025-06-18",
+      "title": "PBoC governor's public remarks emphasising promotion and internationalisation of e-CNY and continued focus on digital-RMB infrastructure (reporting of forum speech). (Illustrates continued policy emphasis on CBDC rather than private stablecoins.)",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "restrictive",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-06-18"
+    },
+    {
+      "id": "china-leg-4",
+      "billCode": "2021-09-15",
+      "title": "Multi-agency Notice Yin Fa [2021] No. 237 issued (effective date 15 Sep 2021) — sets out national prohibition on virtual-currency business activities.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "restrictive",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2021-09-15"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "china-fig-1",
+      "name": "People's Bank of China (PBoC)",
+      "role": "Lead authority for monetary policy and the issuer/regulator of legal tender (including the e-CNY CBDC); co-author and im",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "china-fig-2",
+      "name": "Central Cyberspace Affairs Commission (网信办, CAC)",
+      "role": "Co-signatory; responsible for internet content/access measures and shutting down online apps/websites that support illeg",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "china-news-1",
+      "headline": "Yahoo Finance – China Formalizes Ban on Yuan Stablecoins, RWA (February 6, 2026)",
+      "source": "finance.yahoo.com",
+      "date": "2026-02-06",
+      "url": "https://finance.yahoo.com/news/china-formalizes-ban-yuan-stablecoins-163613628.html"
+    },
+    {
+      "id": "china-news-2",
+      "headline": "Notice on Further Preventing and Handling the Risks of Hype in Virtual Currency Trading",
+      "source": "gov.cn",
+      "date": "2026-02-06",
+      "url": "https://www.gov.cn/zhengce/zhengceku/2021-10/08/content_5641404.htm"
+    },
+    {
+      "id": "china-news-3",
+      "headline": "China to tighten regulation on virtual currency trading, speculation",
+      "source": "english.gov.cn",
+      "date": "2026-02-06",
+      "url": "https://english.www.gov.cn/statecouncil/ministries/202109/24/content_WS614dc30bc6d0df57f98e0c84.html"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "CN",
+    "nameZh": "中国",
+    "flagImg": "https://flagcdn.com/w320/cn.png",
+    "lastUpdated": "Feb 6, 2026",
+    "summaryEn": "Private (non-sovereign) stablecoins and related virtual-currency business activities are prohibited across Mainland China; the ban was set out by the People's Bank of China and nine other authorities in the Notice (Yin Fa [2021] No. 237) with effect from 15 September 2021. On 6 February 2026, Chinese regulators further tightened the policy by formally prohibiting unauthorised CNY-pegged stablecoins and restricting asset tokenisation (RWA) activities; any domestic or foreign entity is barred from issuing a CNY-pegged stablecoin without explicit government approval. China continues to pilot and expand a central bank digital currency (e-CNY) issued by the PBoC, which remains a separate, legal-tender CBDC.",
+    "tags": [
+      "private-stablecoin-banned",
+      "cbdc-coexistence",
+      "capital-flow-controls",
+      "usd-stablecoin-restricted"
+    ],
+    "legalStatus": "banned",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "crypto_asset",
+    "classificationNote": "Private stablecoins and other privately issued virtual currencies are treated as \"virtual currencies\" that do not possess the legal status of fiat and whose associated business activities are classified as illegal financial activities under the multi-agency Notice (Yin Fa [2021] No. 237). The PBoC's",
+    "allowsFiatBacked": false,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "china-reg-1",
+        "name": "People's Bank of China",
+        "role": "Lead authority for monetary policy and the issuer/regulator of legal tender (including the e-CNY CBDC); co-author and implementer of the 2021 Notice; supervises financial institutions on compliance wi",
+        "websiteUrl": "http://www.pbc.gov.cn/en/",
+        "isPrimary": true
+      },
+      {
+        "id": "china-reg-2",
+        "name": "Central Cyberspace Affairs Commission",
+        "role": "Co-signatory; responsible for internet content/access measures and shutting down online apps/websites that support illegal virtual-currency activities.",
+        "websiteUrl": "http://www.cac.gov.cn/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

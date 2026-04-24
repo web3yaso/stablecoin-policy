@@ -47,6 +47,14 @@ const EUROPE_CODES = new Set<number>([
   804, 807, 826,
 ]);
 
+// ISO numeric codes for the 27 EU member states — used to give non-EU
+// countries a more visible border so UK / Russia / Turkey read as distinct
+// from the MiCA bloc even when they share the same fill color.
+const EU_MEMBER_CODES = new Set<number>([
+  40, 56, 100, 191, 196, 203, 208, 233, 246, 250, 276, 300, 348, 372, 380,
+  428, 440, 442, 470, 528, 616, 620, 642, 703, 705, 724, 752,
+]);
+
 const BLOB_STYLE = {
   fill: NEUTRAL_FILL,
   stroke: NEUTRAL_FILL,
@@ -117,9 +125,19 @@ export default function EuropeMap({
                   );
                 }
 
-                const fill = getEntityColorForDimension(ent, dimension, lens);
-                const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
-                const strokeWidth = isSelected ? 4 : 1.5;
+                // For the stablecoin lens, EU is a single regulatory bloc (MiCA)
+                // so all member states share the eu-bloc entity's coloring.
+                const isEUMember = EU_MEMBER_CODES.has(parseInt(id, 10));
+                const colorEnt =
+                  lens === "stablecoin" && isEUMember
+                    ? (getEntity("eu-bloc", "eu") ?? ent)
+                    : ent;
+                const fill = getEntityColorForDimension(colorEnt, dimension, lens);
+                // Non-EU countries get a darker border so UK / Russia / Turkey
+                // remain visually distinct from the MiCA bloc even when they
+                // share the same fill color.
+                const stroke = isSelected ? "#FFFFFF" : isEUMember ? NEUTRAL_STROKE : "#9E9E9E";
+                const strokeWidth = isSelected ? 4 : isEUMember ? 1.5 : 2;
 
                 const base = {
                   fill,

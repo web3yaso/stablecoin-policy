@@ -77,7 +77,7 @@ export default function TopToolbar({
       <div
         role="toolbar"
         aria-label="Map controls"
-        className="fixed top-6 left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-1 p-1.5 lg:p-1 rounded-full bg-white/85 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] border border-black/[.04] max-w-[calc(100vw-2rem)]"
+        className="fixed top-14 left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-1 p-1.5 lg:p-1 rounded-full bg-white/85 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.08),0_2px_8px_rgba(0,0,0,0.04)] border border-black/[.04] max-w-[calc(100vw-2rem)]"
       >
         {/* Region tabs — the ink pill SLIDES between regions via
             framer-motion `layoutId`. Squishy spring: lower damping so it

@@ -1,0 +1,160 @@
+{
+  "id": "latvia",
+  "geoId": "428",
+  "name": "Latvia",
+  "region": "eu",
+  "level": "federal",
+  "stance": "favorable",
+  "stanceDatacenter": "favorable",
+  "stanceAI": "favorable",
+  "contextBlurb": "Latvia applies the EU’s MiCA regime: stablecoin (ART/EMT) issuer rules from 30 June 2024 and the CASP framework from 30 December 2024. Latvijas Banka is the national competent authority, accepting MiCA applications and supervising issuers and CASPs. Under MiCA, stablecoins are classified as asset-referenced tokens (ARTs) or e-money tokens (EMTs) (not legal tender); issuers must meet reserve/segregation, disclosure, governance and redemption requirements, and CASPs must obtain authorisation, with EU-wide passporting once authorised. No Latvia-specific overlay comparable to Hungary’s validator rule is in force; the framework follows the EU baseline with local supervisory guidance from Latvijas Banka.",
+  "legislation": [
+    {
+      "id": "latvia-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": ""
+    },
+    {
+      "id": "latvia-leg-2",
+      "billCode": "2026-01-01",
+      "title": "DAC8 crypto-asset reporting rules apply across the EU (first reporting year 2026).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2026-01-01"
+    },
+    {
+      "id": "latvia-leg-3",
+      "billCode": "2025-06-30",
+      "title": "Transitional deadline: CASPs operating under prior VID supervision must apply to Latvijas Banka by this date to continue operating while their MiCA application is decided.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-06-30"
+    },
+    {
+      "id": "latvia-leg-4",
+      "billCode": "2025-01-02",
+      "title": "Latvijas Banka starts accepting MiCA licence applications from CASPs.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-01-02"
+    },
+    {
+      "id": "latvia-leg-5",
+      "billCode": "2024-12-30",
+      "title": "MiCA becomes fully applicable EU-wide (CASP regime); Latvia applies the framework via Latvijas Banka.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-12-30"
+    },
+    {
+      "id": "latvia-leg-6",
+      "billCode": "2024-06-30",
+      "title": "Latvia’s Crypto-Asset Service Law enters into force, designating Latvijas Banka as the MiCA competent authority.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-06-30"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "latvia-fig-1",
+      "name": "Latvijas Banka",
+      "role": "Central bank and MiCA national competent authority; authorises and supervises ART/EMT issuers and CASPs, maintains regis",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "latvia-fig-2",
+      "name": "FIU Latvia (Financial Intelligence Unit)",
+      "role": "National FIU receiving and analysing suspicious transaction reports, disseminating intelligence to law-enforcement; comp",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "latvia-news-1",
+      "headline": "EUR-Lex — MiCA",
+      "source": "eur-lex.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A02023R1114-20240109"
+    },
+    {
+      "id": "latvia-news-2",
+      "headline": "Latvijas Banka — “Now accepting applications for EU MiCA licence”",
+      "source": "bank.lv",
+      "date": "2026-04-01",
+      "url": "https://www.bank.lv/en/news-and-events/news-and-articles/news/17124-latvijas-banka-now-accepting-applications-for-eu-mica-licence?template=tonga"
+    },
+    {
+      "id": "latvia-news-3",
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "LV",
+    "nameZh": "拉脱维亚",
+    "flagImg": "https://flagcdn.com/w320/lv.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "Latvia applies the EU’s MiCA regime: stablecoin (ART/EMT) issuer rules from 30 June 2024 and the CASP framework from 30 December 2024. Latvijas Banka is the national competent authority, accepting MiCA applications and supervising issuers and CASPs. Under MiCA, stablecoins are classified as asset-referenced tokens (ARTs) or e-money tokens (EMTs) (not legal tender); issuers must meet reserve/segregation, disclosure, governance and redemption requirements, and CASPs must obtain authorisation, with EU-wide passporting once authorised. No Latvia-specific overlay comparable to Hungary’s validator rule is in force; the framework follows the EU baseline with local supervisory guidance from Latvijas Banka.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "Under MiCA, stablecoins in Latvia are classified as e-money tokens (EMTs) when referencing a single official currency and asset-referenced tokens (ARTs) when referencing multiple assets; they are not legal tender. Latvijas Banka is the national competent authority applying these EU-wide classificati",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "latvia-reg-1",
+        "name": "Latvijas Banka",
+        "role": "Central bank and MiCA national competent authority; authorises and supervises ART/EMT issuers and CASPs, maintains registers, issues guidance, and conducts supervisory inspections/enforcement under Mi",
+        "websiteUrl": "https://www.bank.lv/en/operational-areas/licensing/crypto-asset",
+        "isPrimary": true
+      },
+      {
+        "id": "latvia-reg-2",
+        "name": "FIU Latvia",
+        "role": "National FIU receiving and analysing suspicious transaction reports, disseminating intelligence to law-enforcement; complements supervisory work but is not a prudential regulator.",
+        "websiteUrl": "https://fid.gov.lv/en",
+        "isPrimary": false
+      }
+    ]
+  }
+}

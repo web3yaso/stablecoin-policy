@@ -1,0 +1,150 @@
+{
+  "id": "lithuania",
+  "geoId": "440",
+  "name": "Lithuania",
+  "region": "eu",
+  "level": "federal",
+  "stance": "favorable",
+  "stanceDatacenter": "favorable",
+  "stanceAI": "favorable",
+  "contextBlurb": "As of 2025, Lithuania applies the EU MiCA regime: stablecoins are permitted as e-money tokens (EMTs) or asset-referenced tokens (ARTs), supervised by the Bank of Lithuania (MiCA NCA) with AML/CFT oversight by FCIS/FNTT. The Bank has issued Lithuania’s first CASP licence (Robinhood Europe UAB) and lists Ambr Payments UAB as an EMT issuer. From 2 Mar 2026, EMT activities that amount to payment services must be carried out by—or via—an appropriately licensed payment/e-money institution. EMTs carry par-value redemption; ARTs follow MiCA reserve, disclosure, and redemption rules.",
+  "legislation": [
+    {
+      "id": "lithuania-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": ""
+    },
+    {
+      "id": "lithuania-leg-2",
+      "billCode": "2025-07-24",
+      "title": "FNTT publishes a BoL warning: only MiCA-licensed CASPs may operate in Lithuania/EU; firms must inform clients about licensing plans.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-24"
+    },
+    {
+      "id": "lithuania-leg-3",
+      "billCode": "2025-05-30",
+      "title": "Bank of Lithuania issues the first CASP licence to Robinhood Europe UAB (passportable across the EU).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-05-30"
+    },
+    {
+      "id": "lithuania-leg-4",
+      "billCode": "2025-05-08",
+      "title": "Seimas adopts Law XV-185 amending KRĮ Art. 22, extending the national VASP-registry transition until 1 Jan 2026.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-05-08"
+    },
+    {
+      "id": "lithuania-leg-5",
+      "billCode": "2025-02-12",
+      "title": "Bank of Lithuania reminds that MiCA’s ART/EMT provisions have applied since 30 Jun 2024; CASPs must not offer non-compliant stablecoins.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-02-12"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "lithuania-fig-1",
+      "name": "Bank of Lithuania",
+      "role": "MiCA national competent authority; authorises and supervises ART/EMT issuers and CASPs, maintains registers, issues guid",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "lithuania-fig-2",
+      "name": "Financial Crime Investigation Service (FNTT)",
+      "role": "Lithuania’s Financial Intelligence Unit; receives and analyses suspicious-transaction reports and enforces AML/CFT legis",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "lithuania-news-1",
+      "headline": "Bank of Lithuania — MiCA/CASP authorisation hub",
+      "source": "lb.lt",
+      "date": "2026-04-01",
+      "url": "https://www.lb.lt/en/supervision-of-crypto-asset-market"
+    },
+    {
+      "id": "lithuania-news-2",
+      "headline": "ESMA list of MiCA national competent authorities",
+      "source": "esma.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://www.esma.europa.eu/sites/default/files/2024-12/List_of_NCAs-under-MiCA.pdf"
+    },
+    {
+      "id": "lithuania-news-3",
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "LT",
+    "nameZh": "立陶宛",
+    "flagImg": "https://flagcdn.com/w320/lt.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "As of 2025, Lithuania applies the EU MiCA regime: stablecoins are permitted as e-money tokens (EMTs) or asset-referenced tokens (ARTs), supervised by the Bank of Lithuania (MiCA NCA) with AML/CFT oversight by FCIS/FNTT. The Bank has issued Lithuania’s first CASP licence (Robinhood Europe UAB) and lists Ambr Payments UAB as an EMT issuer. From 2 Mar 2026, EMT activities that amount to payment services must be carried out by—or via—an appropriately licensed payment/e-money institution. EMTs carry par-value redemption; ARTs follow MiCA reserve, disclosure, and redemption rules.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "In Lithuania, stablecoins fall under the EU MiCA framework as e-money tokens (EMTs) when they reference a single official currency and asset-referenced tokens (ARTs) when they reference multiple assets; they are not legal tender. The Bank of Lithuania is the national competent authority for authoris",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "lithuania-reg-1",
+        "name": "Bank of Lithuania",
+        "role": "MiCA national competent authority; authorises and supervises ART/EMT issuers and CASPs, maintains registers, issues guidance, and conducts supervisory inspections/enforcement. Works with FNTT on AML/C",
+        "websiteUrl": "https://www.lb.lt/en",
+        "isPrimary": true
+      },
+      {
+        "id": "lithuania-reg-2",
+        "name": "Financial Crime Investigation Service",
+        "acronym": "FNTT",
+        "role": "Lithuania’s Financial Intelligence Unit; receives and analyses suspicious-transaction reports and enforces AML/CFT legislation. Travel-rule duties under Reg. (EU) 2023/1113 form part of AML/CFT superv",
+        "websiteUrl": "https://fntt.lrv.lt/en",
+        "isPrimary": false
+      }
+    ]
+  }
+}

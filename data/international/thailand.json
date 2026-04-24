@@ -1,0 +1,51 @@
+{
+  "id": "thailand",
+  "geoId": "764",
+  "name": "Thailand",
+  "region": "asia",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Thailand's SEC classifies most stablecoins as digital assets regulated under the 2018 Digital Asset Business Act. They may be traded on licensed exchanges but cannot be used as payment instruments. The Bank of Thailand (BOT) is developing a retail CBDC and has been cautious about private stablecoin issuance.",
+  "legislation": [],
+  "keyFigures": [],
+  "news": [],
+  "stablecoinMeta": {
+    "code": "TH",
+    "nameZh": "泰国",
+    "flagImg": "https://flagcdn.com/w320/th.png",
+    "lastUpdated": "",
+    "summaryEn": "Thailand's SEC classifies most stablecoins as digital assets regulated under the 2018 Digital Asset Business Act. They may be traded on licensed exchanges but cannot be used as payment instruments. The Bank of Thailand (BOT) is developing a retail CBDC and has been cautious about private stablecoin issuance.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 2,
+    "regimeStatus": "in_progress",
+    "allowsFiatBacked": false,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "thailand-reg-1",
+        "name": "Securities and Exchange Commission",
+        "acronym": "SEC",
+        "role": "Primary regulator for digital assets and crypto exchanges under the Digital Asset Business Act B.E. 2561 (2018).",
+        "websiteUrl": "https://www.sec.or.th",
+        "isPrimary": true
+      },
+      {
+        "id": "thailand-reg-2",
+        "name": "Bank of Thailand",
+        "acronym": "BOT",
+        "role": "Central bank overseeing payment system regulation. Restricts stablecoins as payment instruments and is developing a retail CBDC.",
+        "websiteUrl": "https://www.bot.or.th",
+        "isPrimary": false
+      }
+    ]
+  }
+}

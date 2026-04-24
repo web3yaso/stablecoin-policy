@@ -12,6 +12,7 @@ import {
 import {
   DATACENTER_DIMENSIONS,
   AI_DIMENSIONS,
+  STABLECOIN_DIMENSIONS,
   DIMENSION_LABEL,
   REGION_LABEL,
   REGION_ORDER,
@@ -25,6 +26,8 @@ import { getEntity, getOverviewEntity } from "@/lib/placeholder-data";
 import { STANCE_HEX, type SetTooltip, type TooltipState } from "@/lib/map-utils";
 import {
   DIMENSION_TAGS,
+  DIMENSION_COLOR,
+  DIMENSION_TEXT,
 } from "@/lib/dimensions";
 import { ALL_FACILITIES } from "@/lib/datacenters";
 import { plantsInState } from "@/lib/energy-data";
@@ -184,6 +187,12 @@ const SHORT_DIMENSION_LABEL: Record<Exclude<Dimension, "overall">, string> = {
   "ai-workforce": "Workforce",
   "ai-public": "Public services",
   "ai-synthetic": "Synthetic media",
+  // Stablecoin lens
+  "sc-issuance": "Issuance",
+  "sc-reserve": "Reserve",
+  "sc-consumer": "Consumer",
+  "sc-cross-border": "Cross-Border",
+  "sc-sovereignty": "Sovereignty",
 };
 
 const STANCE_SEVERITY: Record<StanceType, number> = {
@@ -241,10 +250,17 @@ interface MapShellProps {
 
 export default function MapShell({
   revealProgress = 1,
-  dimension = "overall",
-  lens = "datacenter",
   navigateRef,
-}: MapShellProps) {
+}: Omit<MapShellProps, "dimension" | "lens">) {
+  // Stablecoin issuance is the primary view for this tracker.
+  const [activeDimension, setActiveDimension] = useState<Dimension>("sc-issuance");
+  const [activeLens, setActiveLens] = useState<DimensionLens>("stablecoin");
+
+  // Convenience aliases so all the existing code that reads `dimension`
+  // and `lens` still works without touching every reference.
+  const dimension = activeDimension;
+  const lens = activeLens;
+
   const [history, setHistory] = useState<ViewState[]>([INITIAL_VIEW]);
   const [historyIdx, setHistoryIdx] = useState(0);
   const [tooltip, setTooltipInternal] = useState<TooltipState | null>(null);
@@ -1762,6 +1778,67 @@ export default function MapShell({
         </div>
       )}
 
+      {/* Floating "Color map by" dimension selector — bottom-left of map.
+          Shows the 5 stablecoin dimensions + an "Overall" pill.
+          Hidden on very small screens to avoid panel overlap. */}
+      <div
+        className="hidden sm:block fixed bottom-24 left-4 z-20"
+        style={{
+          opacity: chromeOpacity,
+          pointerEvents: chromeOpacity < 0.5 ? "none" : "auto",
+        }}
+      >
+        <div
+          className="rounded-2xl bg-white/92 backdrop-blur-2xl border border-black/[.04] px-3.5 pt-2.5 pb-3"
+          style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.08), 0 2px 10px rgba(0,0,0,0.04)" }}
+        >
+          <div className="text-[10.5px] font-semibold text-muted tracking-tight mb-2">
+            Color map by
+          </div>
+          <div className="flex flex-wrap gap-1.5 max-w-[14rem]">
+            {(["overall", ...STABLECOIN_DIMENSIONS] as Dimension[]).map((d) => {
+              const active = activeDimension === d;
+              const bgColor = active ? (d === "overall" ? "#1D1D1F" : DIMENSION_COLOR[d]) : undefined;
+              const textColor = active ? (d === "overall" ? "#FFFFFF" : DIMENSION_TEXT[d]) : undefined;
+              return (
+                <button
+                  key={d}
+                  type="button"
+                  onClick={() => {
+                    setActiveDimension(d);
+                    setActiveLens("stablecoin");
+                  }}
+                  style={active ? { backgroundColor: bgColor, color: textColor } : undefined}
+                  className={`text-[11px] font-medium px-2.5 py-1 rounded-full border transition-all duration-200 active:scale-[0.97] ${
+                    active
+                      ? "border-transparent"
+                      : "border-black/[.08] text-muted hover:text-ink hover:bg-black/[.03]"
+                  }`}
+                >
+                  {d === "overall" ? "Overall" : DIMENSION_LABEL[d]}
+                </button>
+              );
+            })}
+          </div>
+          {/* Issuance color legend — shown only when sc-issuance is active */}
+          {activeDimension === "sc-issuance" && (
+            <div className="mt-2.5 pt-2 border-t border-black/[.05] flex flex-col gap-1">
+              {[
+                { color: "#34C759", label: "Non-bank permitted" },
+                { color: "#FF9500", label: "Bank-only" },
+                { color: "#FF3B30", label: "Banned" },
+                { color: "#8E8E93", label: "Unclear / in progress" },
+              ].map(({ color, label }) => (
+                <span key={label} className="inline-flex items-center gap-1.5 text-[10.5px] text-muted">
+                  <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: color }} />
+                  {label}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Tooltip rendered OUTSIDE the slide rail so its position:fixed
           is relative to the viewport, not the transformed rail. */}
       {tooltip && !hoveredFacility && (() => {
@@ -1927,7 +2004,9 @@ export default function MapShell({
           if (!ent) return [];
           const rows: { dim: Exclude<Dimension, "overall">; count: number; stance: StanceType }[] = [];
           for (const dim of dims) {
-            const tags = DIMENSION_TAGS[dim];
+            // sc-* dimensions use stablecoin tags — skip DC/AI table scoring
+            if (dim.startsWith("sc-")) continue;
+            const tags = DIMENSION_TAGS[dim as Exclude<Dimension, "overall" | `sc-${string}`>];
             const perBillStances: (StanceType | undefined)[] = [];
             let count = 0;
             for (const b of bills) {

@@ -1,0 +1,117 @@
+{
+  "id": "south-korea",
+  "geoId": "410",
+  "name": "South Korea",
+  "region": "asia",
+  "level": "federal",
+  "stance": "none",
+  "stanceDatacenter": "none",
+  "stanceAI": "none",
+  "contextBlurb": "As of September 2025, South Korea is moving toward a won-backed stablecoin regime but the final statutory/technical standards are pending. A KRW-pegged token (KRW1) has been launched in a pilot/PoC phase with bank-held reserves, while lawmakers and regulators finalize the framework that will govern issuance, reserves, and supervision.",
+  "legislation": [
+    {
+      "id": "south-korea-leg-1",
+      "billCode": "2025-09-18",
+      "title": "KRW1 launched by BDACS on Avalanche with Woori Bank reserves – described as PoC/pilot",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "none",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-09-18"
+    },
+    {
+      "id": "south-korea-leg-2",
+      "billCode": "2025-08-18",
+      "title": "Reports indicate stablecoin bill to be submitted around October 2025 as part of Phase-2",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "none",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-08-18"
+    },
+    {
+      "id": "south-korea-leg-3",
+      "billCode": "2025-06-10",
+      "title": "DABA introduced to the National Assembly (ruling party initiative)",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "none",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-06-10"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "south-korea-fig-1",
+      "name": "Financial Services Commission (FSC)",
+      "role": "Policy lead and licensing/supervision for virtual-asset businesses under the new framework",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "south-korea-fig-2",
+      "name": "Bank of Korea (BOK)",
+      "role": "Central bank; advocates for strong role (even veto/backstop) given monetary/FX stability concerns",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "south-korea-news-1",
+      "headline": "Shin & Kim – Korea's emerging stablecoin framework",
+      "source": "law.asia",
+      "date": "2025-11-11",
+      "url": "https://law.asia/korea-stablecoin-regulation-framework/"
+    },
+    {
+      "id": "south-korea-news-2",
+      "headline": "Financial Times – policy tug-of-war on stablecoins",
+      "source": "ft.com",
+      "date": "2025-11-11",
+      "url": "https://www.ft.com/content/106a1e79-0a64-4c51-b74f-ad4d4f8896f6"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "KR",
+    "nameZh": "韩国",
+    "flagImg": "https://flagcdn.com/w320/kr.png",
+    "lastUpdated": "Nov 11, 2025",
+    "summaryEn": "As of September 2025, South Korea is moving toward a won-backed stablecoin regime but the final statutory/technical standards are pending. A KRW-pegged token (KRW1) has been launched in a pilot/PoC phase with bank-held reserves, while lawmakers and regulators finalize the framework that will govern issuance, reserves, and supervision.",
+    "tags": [
+      "licensing-required",
+      "algorithmic-banned",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "unclear",
+    "regulatoryClarity": 3,
+    "regimeStatus": "draft",
+    "classification": "crypto_asset",
+    "classificationNote": "Proposed classification under DABA distinguishes 'asset-linked digital assets' (including stablecoins) from other digital assets, with licensing by FSC and potential BOK role on stability issues. This is a bill, not yet settled law.",
+    "allowsFiatBacked": false,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "south-korea-reg-1",
+        "name": "Financial Services Commission",
+        "acronym": "FSC",
+        "role": "Policy lead and licensing/supervision for virtual-asset businesses under the new framework",
+        "websiteUrl": "https://www.fsc.go.kr/eng/",
+        "isPrimary": true
+      },
+      {
+        "id": "south-korea-reg-2",
+        "name": "Bank of Korea",
+        "acronym": "BOK",
+        "role": "Central bank; advocates for strong role (even veto/backstop) given monetary/FX stability concerns",
+        "websiteUrl": "https://www.bok.or.kr/eng/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

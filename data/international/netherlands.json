@@ -4,223 +4,135 @@
   "name": "Netherlands",
   "region": "eu",
   "level": "federal",
-  "contextBlurb": "The Netherlands has been tightening data center rules since 2019, culminating in a 2022 national ban on new hyperscale facilities across most of the country and an Amsterdam moratorium that now runs through 2030. Grid congestion is severe — data centers consume roughly 4.6% of national electricity. Despite the siting restrictions, the government still pursues AI ambition via a National AI Delta Plan and a 2025 Nvidia deal to build a national AI supercomputer.",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "As of 2025, the Netherlands applies the EU Markets in Crypto-Assets Regulation (MiCA). Retail users may lawfully buy, hold, and redeem MiCA-compliant stablecoins (EMTs/ARTs). Conduct supervision and CASP (crypto-asset service provider) licensing are handled by the AFM; prudential supervision of token issuers (e.g., reserves, own funds) sits with De Nederlandsche Bank (DNB) under the Netherlands' twin-peaks model. Stablecoins are not legal tender and carry issuer/operational risk.",
   "legislation": [
     {
-      "id": "netherlands-hyperscale-ban-blk",
-      "billCode": "Besluit kwaliteit leefomgeving (BKL) amendment",
-      "title": "Amendment to the Decree on Environmental Quality — Hyperscale Data Center Prohibition",
-      "summary": "Effective 1 January 2024, this amendment to the BKL formally banned new hyperscale data centers (>10 hectares and >70 MW) across most of the Netherlands, restricting new large-scale builds to designated municipalities such as Eemshaven (Het Hogeland) and Agriport A7 (Hollands Kroon). It codified the 2022 interim moratorium into permanent spatial planning law and does not apply to projects already permitted before its entry into force.",
-      "stage": "Enacted",
-      "stance": "restrictive",
-      "impactTags": [
-        "hyperscale-ban",
-        "spatial-planning",
-        "grid-congestion",
-        "energy-capacity"
-      ],
-      "category": "data-center-siting",
-      "updatedDate": "2024-01-01",
-      "partyOrigin": "B",
-      "sourceUrl": "https://www.gtlaw.com/en/insights/2024/3/challenges-in-the-dutch-data-center-market"
-    },
-    {
-      "id": "netherlands-amsterdam-dc-moratorium-2030",
-      "billCode": "Amsterdam Municipal Establishment Decision (Vestigingsbesluit) 2025",
-      "title": "Amsterdam Municipality Data Center Moratorium — No New Permits Until 2030",
-      "summary": "In April 2025, the Municipality of Amsterdam formally decided to allow no new data centers or expansions within city limits until at least 2030, citing scarce grid capacity and land constraints. The decision follows an earlier December 2023 round of municipal restrictions and compounds the national hyperscale ban, effectively freezing most large-scale digital infrastructure growth in Amsterdam's core market.",
-      "stage": "Enacted",
-      "stance": "restrictive",
-      "impactTags": [
-        "moratorium",
-        "energy-grid",
-        "amsterdam",
-        "land-use"
-      ],
-      "category": "data-center-energy",
-      "updatedDate": "2025-04-18",
-      "partyOrigin": "B",
-      "sourceUrl": "https://nltimes.nl/2025/04/18/amsterdam-allowing-data-centers-municipality"
-    },
-    {
-      "id": "netherlands-ai-act-uitvoeringswet",
-      "billCode": "EU AI Act Uitvoeringswet (Implementation Act, draft)",
-      "title": "Dutch EU AI Act Implementation Act — National Supervisory Authority Designation",
-      "summary": "This pending national implementation law will formally designate the Dutch supervisory authorities for the EU AI Act, including the Autoriteit Persoonsgegevens (AP) and the Rijksinspectie Digitale Infrastructuur (RDI) as lead market surveillance bodies, alongside sector-specific authorities ACM, AFM, and DNB. As of early 2026 the Minister of Economic Affairs indicated the bill is expected to be laid before the Tweede Kamer in Q4 2026, meaning the Netherlands will miss the August 2025 EU designation deadline; in the interim, a regulatory sandbox proposal was published in March 2025.",
-      "stage": "Filed",
-      "stance": "review",
-      "impactTags": [
-        "ai-governance",
-        "supervisory-authority",
-        "EU-AI-Act",
-        "regulatory-sandbox"
-      ],
-      "category": "ai-governance",
-      "updatedDate": "2026-01-15",
-      "partyOrigin": "B",
-      "sourceUrl": "https://cms.law/en/int/expert-guides/ai-regulation-scanner/the-netherlands"
-    },
-    {
-      "id": "netherlands-ai-act-high-risk-aug-2026",
-      "billCode": "EU AI Act Art. 6 (NL)",
-      "title": "EU AI Act High-Risk Obligations (applicable 2 Aug 2026)",
-      "summary": "From 2 August 2026, high-risk AI systems used in hiring, credit, law enforcement and critical infrastructure must comply with the EU AI Act's documentation, transparency, risk-management and human-oversight requirements. The Autoriteit Persoonsgegevens and RDI act as Dutch coordinating supervisors, with AFM and DNB covering financial services.",
+      "id": "netherlands-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
       "stage": "Enacted",
       "stance": "concerning",
-      "impactTags": [
-        "high-risk-AI",
-        "AP-supervision",
-        "RDI",
-        "hiring",
-        "financial-services"
-      ],
+      "impactTags": [],
       "category": "ai-governance",
-      "updatedDate": "2026-03-01",
-      "sourceUrl": "https://www.autoriteitpersoonsgegevens.nl/en/themes/algorithms-ai/eu-ai-act"
+      "updatedDate": ""
     },
     {
-      "id": "netherlands-ai-sandbox-aug-2026",
-      "billCode": "NL AI Sandbox",
-      "title": "Dutch National AI Regulatory Sandbox (operational Aug 2026)",
-      "summary": "The Autoriteit Persoonsgegevens confirmed the Netherlands' EU AI Act regulatory sandbox will become operational by 2 August 2026, providing supervised test environments for high-risk and GPAI systems with legal-certainty benefits for SMEs and public-sector developers.",
-      "stage": "Filed",
-      "stance": "favorable",
-      "impactTags": [
-        "regulatory-sandbox",
-        "AP",
-        "SME-support",
-        "GPAI-testing"
-      ],
-      "category": "ai-governance",
-      "updatedDate": "2026-02-12",
-      "sourceUrl": "https://ppc.land/netherlands-regulatory-sandbox-to-launch-by-2026-as-eu-clarifies-ai-rules/"
-    },
-    {
-      "id": "netherlands-ai-implementation-act-q4-2026",
-      "billCode": "AI Implementation Act (Uitvoeringswet)",
-      "title": "EU AI Implementation Act — designation of supervisory authorities (Q4 2026)",
-      "summary": "The AI Implementation Act designating Dutch supervisors and sanction competencies under the EU AI Act is expected to be laid before the House of Representatives in Q4 2026. It operationalises the coordinating role of the AP and RDI and sectoral regulators under a single national framework.",
-      "stage": "Filed",
+      "id": "netherlands-leg-2",
+      "billCode": "2025-09-25",
+      "title": "Nine major European banks, including ING, announced plans to launch a MiCA-compliant euro-denominated stablecoin, supervised by DNB, expected in 2026.",
+      "summary": "",
+      "stage": "Enacted",
       "stance": "concerning",
-      "impactTags": [
-        "AI-Act-implementation",
-        "supervisory-designation",
-        "national-framework"
-      ],
+      "impactTags": [],
       "category": "ai-governance",
-      "updatedDate": "2026-03-15",
-      "sourceUrl": "https://business.gov.nl/regulations/ai-act/"
+      "updatedDate": "2025-09-25"
+    },
+    {
+      "id": "netherlands-leg-3",
+      "billCode": "2025-06-30",
+      "title": "Netherlands-specific transitional period ends (six months); from 2025-07-01 providers must be MiCA-authorised or passported.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-06-30"
+    },
+    {
+      "id": "netherlands-leg-4",
+      "billCode": "2025-06-27",
+      "title": "Bitvavo announces MiCA authorisation in NL.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-06-27"
     }
   ],
   "keyFigures": [
     {
-      "id": "netherlands-beljaarts",
-      "name": "Dirk Beljaarts",
-      "role": "Minister of Economic Affairs",
-      "party": "PVV",
-      "stance": "favorable"
-    },
-    {
-      "id": "netherlands-boekholt-osullivan",
-      "name": "Elanor Boekholt-O'Sullivan",
-      "role": "Minister of Digital Affairs (successor to outgoing cabinet member on data center policy)",
-      "party": "B",
+      "id": "netherlands-fig-1",
+      "name": "AFM (Autoriteit Financiële Markten)",
+      "role": "First point of contact for MiCA CASP licensing and conduct supervision; coordinates with DNB.",
+      "party": "N/A",
       "stance": "review"
     },
     {
-      "id": "netherlands-grove",
-      "name": "Stijn Grove",
-      "role": "Managing Director, Dutch Data Center Association (DDA)",
+      "id": "netherlands-fig-2",
+      "name": "DNB (De Nederlandsche Bank)",
+      "role": "Prudential supervisor for MiCA issuers (EMTs/ARTs), capital/own funds and certain prudential topics; continues to superv",
       "party": "N/A",
-      "stance": "concerning"
-    },
-    {
-      "id": "netherlands-karremans",
-      "name": "Vincent Karremans",
-      "role": "Minister of Economic Affairs",
-      "party": "VVD",
-      "stance": "favorable"
-    },
-    {
-      "id": "netherlands-dejonge",
-      "name": "Hugo de Jonge",
-      "role": "Former Minister of Housing and Spatial Planning (hyperscale DC moratorium)",
-      "party": "CDA",
-      "stance": "restrictive"
-    },
-    {
-      "id": "netherlands-wolfsen",
-      "name": "Aleid Wolfsen",
-      "role": "Chair, Dutch Data Protection Authority (Autoriteit Persoonsgegevens)",
-      "party": "N/A",
-      "stance": "concerning"
-    },
-    {
-      "id": "netherlands-aerdts",
-      "name": "Willemijn Aerdts",
-      "role": "State Secretary for Digital Economy and Sovereignty",
-      "party": "D66",
       "stance": "review"
     }
   ],
   "news": [
     {
       "id": "netherlands-news-1",
-      "headline": "Permitted large data centers in Amsterdam and Lelystad move ahead despite opposition",
-      "source": "NL Times",
-      "date": "2026-03-29",
-      "url": "https://nltimes.nl/2026/03/29/permitted-large-data-centers-amsterdam-lelystad-move-ahead-despite-opposition"
+      "headline": "AFM – Contact & FAQ for CASP licensing, transitional period and AFM/DNB split",
+      "source": "afm.nl",
+      "date": "2026-04-01",
+      "url": "https://www.afm.nl/en/sector/cryptopartijen/contact-qa"
     },
     {
       "id": "netherlands-news-2",
-      "headline": "Minister says she can't stop massive Microsoft data center in Amsterdam",
-      "source": "NL Times",
-      "date": "2026-01-28",
-      "url": "https://nltimes.nl/2026/01/28/minister-says-cant-stop-massive-microsoft-data-center-amsterdam"
+      "headline": "DNB – Cryptos and supervision: what you need to know",
+      "source": "dnb.nl",
+      "date": "2026-04-01",
+      "url": "https://www.dnb.nl/en/reliable-financial-sector/cryptos-and-supervision-what-you-need-to-know/"
     },
     {
       "id": "netherlands-news-3",
-      "headline": "Microsoft and Google withhold Dutch data center energy data despite EU rules - report",
-      "source": "Data Center Dynamics",
-      "date": "2026-03-11",
-      "url": "https://www.datacenterdynamics.com/en/news/microsoft-and-google-withhold-dutch-data-center-energy-data-despite-eu-rules-report/"
-    },
-    {
-      "id": "netherlands-news-4",
-      "headline": "Data centers in Netherlands use as much power as 2 million homes",
-      "source": "NL Times",
-      "date": "2025-12-15",
-      "url": "https://nltimes.nl/2025/12/15/data-centers-netherlands-use-much-power-2-million-homes"
-    },
-    {
-      "id": "netherlands-news-5",
-      "headline": "Netherlands issues new AI Act guidance",
-      "source": "Pinsent Masons",
-      "date": "2025-12-11",
-      "url": "https://www.pinsentmasons.com/out-law/news/netherlands-issues-new-ai-act-guidance"
-    },
-    {
-      "id": "netherlands-news-6",
-      "headline": "Dutch Data Protection Authority wants government to speed up AI regulation",
-      "source": "Dutch Brief",
-      "date": "2026-02-20",
-      "url": "https://dutchbrief.com/dutch-data-protection-authority-wants-government-to-speed-up-ai-regulation/"
-    },
-    {
-      "id": "netherlands-news-7",
-      "headline": "Netherlands regulatory sandbox to launch by 2026 as EU clarifies AI rules",
-      "source": "PPC Land",
-      "date": "2026-01-30",
-      "url": "https://ppc.land/netherlands-regulatory-sandbox-to-launch-by-2026-as-eu-clarifies-ai-rules/"
-    },
-    {
-      "id": "netherlands-news-8",
-      "headline": "EU AI Act Netherlands Implementation Guide 2026",
-      "source": "Glacis",
-      "date": "2026-03-04",
-      "url": "https://www.glacis.io/guide-eu-ai-act-netherlands"
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
     }
   ],
-  "stanceDatacenter": "restrictive",
-  "stanceAI": "concerning"
+  "stablecoinMeta": {
+    "code": "NL",
+    "nameZh": "荷兰",
+    "flagImg": "https://flagcdn.com/w320/nl.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "As of 2025, the Netherlands applies the EU Markets in Crypto-Assets Regulation (MiCA). Retail users may lawfully buy, hold, and redeem MiCA-compliant stablecoins (EMTs/ARTs). Conduct supervision and CASP (crypto-asset service provider) licensing are handled by the AFM; prudential supervision of token issuers (e.g., reserves, own funds) sits with De Nederlandsche Bank (DNB) under the Netherlands' twin-peaks model. Stablecoins are not legal tender and carry issuer/operational risk.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "Stablecoins in the Netherlands are legally classified as either e-money tokens (EMTs) or asset-referenced tokens (ARTs) under MiCA, depending on their design. EMTs are treated similarly to electronic money and require full backing in permitted reserve assets.",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "netherlands-reg-1",
+        "name": "AFM",
+        "role": "First point of contact for MiCA CASP licensing and conduct supervision; coordinates with DNB.",
+        "websiteUrl": "https://www.afm.nl/en/",
+        "isPrimary": true
+      },
+      {
+        "id": "netherlands-reg-2",
+        "name": "DNB",
+        "role": "Prudential supervisor for MiCA issuers (EMTs/ARTs), capital/own funds and certain prudential topics; continues to supervise payment/e-money institutions.",
+        "websiteUrl": "https://www.dnb.nl/en/",
+        "isPrimary": false
+      }
+    ]
+  }
 }

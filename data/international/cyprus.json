@@ -1,0 +1,161 @@
+{
+  "id": "cyprus",
+  "geoId": "196",
+  "name": "Cyprus",
+  "region": "eu",
+  "level": "federal",
+  "stance": "favorable",
+  "stanceDatacenter": "favorable",
+  "stanceAI": "favorable",
+  "contextBlurb": "Cyprus applies the EU’s MiCA framework to stablecoins. ART/EMT rules have applied since 30 Jun 2024, with the rest of MiCA in force since 30 Dec 2024; pre-existing CASPs may operate under the Art. 143(3) transitional regime until 1 Jul 2026. CySEC is the national competent authority for CASPs and MiCA Title II (and parts of Titles III/V/VI), while the Central Bank of Cyprus (CBC) is the competent authority for Title IV (EMTs) and handles e-money/payment-institution supervision. Stablecoins are categorized as EMTs (fiat-referenced) or ARTs (asset-referenced), with issuer obligations on reserves, disclosures, and redemption set directly by MiCA and Level-2 measures.",
+  "legislation": [
+    {
+      "id": "cyprus-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": ""
+    },
+    {
+      "id": "cyprus-leg-2",
+      "billCode": "2025-07-11",
+      "title": "CySEC Circular C722 flags EBA/ESMA guidance on the PSD2/3 ↔ MiCA interplay, clarifying payment-services implications for CASPs.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-11"
+    },
+    {
+      "id": "cyprus-leg-3",
+      "billCode": "2025-06-18",
+      "title": "Cyprus publishes Law 96(I)/2025 (AML Law Amendment No. 2) in the Official Gazette, strengthening AML/CFT rules applicable to CASPs and transfer-of-funds obligations.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-06-18"
+    },
+    {
+      "id": "cyprus-leg-4",
+      "billCode": "2025-06-02",
+      "title": "The Central Bank of Cyprus’ new AML/CFT Directive 2025 enters into force (published 2 May 2025), updating requirements for supervised institutions including EMIs/PSPs.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-06-02"
+    },
+    {
+      "id": "cyprus-leg-5",
+      "billCode": "2024-12-30",
+      "title": "Remaining MiCA provisions become applicable EU-wide (beyond ART/EMT), with transitional arrangements for CASPs.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-12-30"
+    },
+    {
+      "id": "cyprus-leg-6",
+      "billCode": "2024-06-30",
+      "title": "MiCA Titles III–IV on ARTs/EMTs (stablecoins) apply across the EU, introducing reserve, redemption and governance rules.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-06-30"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "cyprus-fig-1",
+      "name": "Cyprus Securities and Exchange Commission (CySEC)",
+      "role": "CySEC is the national competent authority (NCA) for Crypto-Asset Service Providers (CASPs) and issuers of crypto-assets ",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "cyprus-fig-2",
+      "name": "Central Bank of Cyprus (CBC)",
+      "role": "MiCA competent authority for Title IV (EMTs) and Title III where the issuer is a credit institution. CBC licenses and su",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "cyprus-news-1",
+      "headline": "ESMA — MiCA application & transitional timeline",
+      "source": "esma.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica"
+    },
+    {
+      "id": "cyprus-news-2",
+      "headline": "ESMA — List of MiCA competent authorities",
+      "source": "esma.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://www.esma.europa.eu/sites/default/files/2024-12/List_of_Competent_Authorities_notified_to_ESMA_under_MiCA.pdf"
+    },
+    {
+      "id": "cyprus-news-3",
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "CY",
+    "nameZh": "塞浦路斯",
+    "flagImg": "https://flagcdn.com/w320/cy.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "Cyprus applies the EU’s MiCA framework to stablecoins. ART/EMT rules have applied since 30 Jun 2024, with the rest of MiCA in force since 30 Dec 2024; pre-existing CASPs may operate under the Art. 143(3) transitional regime until 1 Jul 2026. CySEC is the national competent authority for CASPs and MiCA Title II (and parts of Titles III/V/VI), while the Central Bank of Cyprus (CBC) is the competent authority for Title IV (EMTs) and handles e-money/payment-institution supervision. Stablecoins are categorized as EMTs (fiat-referenced) or ARTs (asset-referenced), with issuer obligations on reserves, disclosures, and redemption set directly by MiCA and Level-2 measures.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "Stablecoins in Cyprus are classified under the EU MiCA regime as e-money tokens (EMTs) and asset-referenced tokens (ARTs). EMTs reference a single official currency and must be redeemable at par in funds; only credit institutions or electronic-money institutions may issue them and CBC is the compete",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "cyprus-reg-1",
+        "name": "Cyprus Securities and Exchange Commission",
+        "role": "CySEC is the national competent authority (NCA) for Crypto-Asset Service Providers (CASPs) and issuers of crypto-assets (excluding EMTs issued by credit institutions). It is responsible for the author",
+        "websiteUrl": "https://www.cysec.gov.cy/en-GB/entities/crypto-asset-services-providers-casps/",
+        "isPrimary": true
+      },
+      {
+        "id": "cyprus-reg-2",
+        "name": "Central Bank of Cyprus",
+        "acronym": "CBC",
+        "role": "MiCA competent authority for Title IV (EMTs) and Title III where the issuer is a credit institution. CBC licenses and supervises electronic-money and payment institutions under national law and handle",
+        "websiteUrl": "https://www.centralbank.cy/en/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

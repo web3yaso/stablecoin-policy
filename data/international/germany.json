@@ -1,0 +1,171 @@
+{
+  "id": "germany",
+  "geoId": "276",
+  "name": "Germany",
+  "region": "eu",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Germany regulates stablecoins under the EU Markets in Crypto-Assets Regulation (MiCA) alongside national laws (KWG, ZAG). BaFin is the lead supervisor. MiCA treats e-money tokens (EMTs), such as euro-backed stablecoins, as electronic money requiring authorisation and strong consumer-protection, reserve, and transparency rules. Asset-referenced tokens (ARTs) are also permitted with MiCA authorisation and prudential conditions. Algorithmic or unbacked designs are effectively excluded from the MiCA issuance perimeter.",
+  "legislation": [
+    {
+      "id": "germany-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": ""
+    },
+    {
+      "id": "germany-leg-2",
+      "billCode": "2025-07-02",
+      "title": "AllUnity (DWS/Deutsche Bank partners) introduces a BaFin-regulated euro stablecoin initiative (EURAU)",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-02"
+    },
+    {
+      "id": "germany-leg-3",
+      "billCode": "2025-04-15",
+      "title": "BaFin orders wind-up of Ethena GmbH's USDe business in Germany (order dated Apr 14; notice published Apr 15)",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-04-15"
+    },
+    {
+      "id": "germany-leg-4",
+      "billCode": "2025-03-21",
+      "title": "BaFin prohibits new USDe offerings to the public and freezes reserves; special representative appointed",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-03-21"
+    },
+    {
+      "id": "germany-leg-5",
+      "billCode": "2024-12-30",
+      "title": "CASP rules applicable (with national transitional choices)",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-12-30"
+    },
+    {
+      "id": "germany-leg-6",
+      "billCode": "2024-06-30",
+      "title": "Stablecoin provisions (EMTs/ARTs) applicable EU-wide",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-06-30"
+    },
+    {
+      "id": "germany-leg-7",
+      "billCode": "2023-06-09",
+      "title": "MiCA published in the Official Journal",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2023-06-09"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "germany-fig-1",
+      "name": "BaFin (Federal Financial Supervisory Authority)",
+      "role": "National competent authority for MiCA authorisations and supervision (issuers and CASPs), and for ZAG/KWG compliance.",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "germany-fig-2",
+      "name": "Deutsche Bundesbank",
+      "role": "Cooperates with BaFin on supervision; macroprudential and financial-stability analysis; member of the Financial Stabilit",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "germany-news-1",
+      "headline": "BaFin – MiCAR overview",
+      "source": "bafin.de",
+      "date": "2026-04-01",
+      "url": "https://www.bafin.de/EN/Aufsicht/MiCAR/MiCAR_artikel_en.html"
+    },
+    {
+      "id": "germany-news-2",
+      "headline": "MiCA Regulation (EU) 2023/1114 (EUR-Lex)",
+      "source": "eur-lex.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32023R1114"
+    },
+    {
+      "id": "germany-news-3",
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "DE",
+    "nameZh": "德国",
+    "flagImg": "https://flagcdn.com/w320/de.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "Germany regulates stablecoins under the EU Markets in Crypto-Assets Regulation (MiCA) alongside national laws (KWG, ZAG). BaFin is the lead supervisor. MiCA treats e-money tokens (EMTs), such as euro-backed stablecoins, as electronic money requiring authorisation and strong consumer-protection, reserve, and transparency rules. Asset-referenced tokens (ARTs) are also permitted with MiCA authorisation and prudential conditions. Algorithmic or unbacked designs are effectively excluded from the MiCA issuance perimeter.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "E-money when qualifying as an EMT under MiCA/ZAG; otherwise a crypto-asset/financial instrument under KWG, depending on structure.",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "germany-reg-1",
+        "name": "BaFin",
+        "role": "National competent authority for MiCA authorisations and supervision (issuers and CASPs), and for ZAG/KWG compliance.",
+        "websiteUrl": "https://www.bafin.de/EN/Aufsicht/MiCAR/MiCAR_artikel_en.html",
+        "isPrimary": true
+      },
+      {
+        "id": "germany-reg-2",
+        "name": "Deutsche Bundesbank",
+        "role": "Cooperates with BaFin on supervision; macroprudential and financial-stability analysis; member of the Financial Stability Committee.",
+        "websiteUrl": "https://www.bundesbank.de/en/tasks/banking-supervision/individual-aspects/micar-markets-in-crypto-assets-regulation-913886",
+        "isPrimary": false
+      }
+    ]
+  }
+}

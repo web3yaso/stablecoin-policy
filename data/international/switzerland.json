@@ -1,0 +1,116 @@
+{
+  "id": "switzerland",
+  "geoId": "756",
+  "name": "Switzerland",
+  "region": "eu",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Swiss retail users can legally hold and use stablecoins. FINMA Guidance 06/2024 clarifies when fiat-referenced tokens can be offered without a full banking license if investors' redemption claims are covered by an irrevocable Swiss bank guarantee and AML/KYC rules apply. The SNB has no retail CBDC; it focuses on wholesale CBDC pilots on SDX.",
+  "legislation": [
+    {
+      "id": "switzerland-leg-1",
+      "billCode": "2025-04-30",
+      "title": "Swiss Bankers Association releases a stablecoin expert report urging a pragmatic CHF-stablecoin framework.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-04-30"
+    },
+    {
+      "id": "switzerland-leg-2",
+      "billCode": "2025-03-18",
+      "title": "BX Digital becomes the first FINMA-authorized DLT trading facility, enabling regulated secondary markets for tokenized assets.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-03-18"
+    },
+    {
+      "id": "switzerland-leg-3",
+      "billCode": "2024-07-26",
+      "title": "FINMA Guidance 06/2024 published (licensing, bank-guarantee, AML expectations).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-07-26"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "switzerland-fig-1",
+      "name": "FINMA",
+      "role": "Supervises banks and financial institutions, issues guidance for stablecoin structures, enforces AMLA, and assesses bank",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "switzerland-fig-2",
+      "name": "Swiss National Bank (SNB)",
+      "role": "Oversees financial stability and payment systems; runs wholesale CBDC pilots on SDX; no retail CBDC.",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "switzerland-news-1",
+      "headline": "Elliptic — FINMA guidance overview",
+      "source": "elliptic.co",
+      "date": "2025-11-11",
+      "url": "https://www.elliptic.co/blog/crypto-regulatory-affairs-swiss-regulator-publishes-guidance-for-stablecoin-issuers-banks-offering-guarantees"
+    },
+    {
+      "id": "switzerland-news-2",
+      "headline": "Global Legal Insights — Fintech (Switzerland, 2025)",
+      "source": "globallegalinsights.com",
+      "date": "2025-11-11",
+      "url": "https://www.globallegalinsights.com/practice-areas/fintech-laws-and-regulations/switzerland/"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "CH",
+    "nameZh": "瑞士",
+    "flagImg": "https://flagcdn.com/w320/ch.png",
+    "lastUpdated": "Nov 11, 2025",
+    "summaryEn": "Swiss retail users can legally hold and use stablecoins. FINMA Guidance 06/2024 clarifies when fiat-referenced tokens can be offered without a full banking license if investors' redemption claims are covered by an irrevocable Swiss bank guarantee and AML/KYC rules apply. The SNB has no retail CBDC; it focuses on wholesale CBDC pilots on SDX.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "aml-kyc"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 3,
+    "regimeStatus": "finalized",
+    "classification": "security",
+    "classificationNote": "Function-dependent. A stablecoin may constitute deposit-taking/bank business (requiring a license) unless structured with a compliant bank guarantee. Some models may fall under collective investment schemes or securities rules. Not legal tender; AMLA applies.",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "switzerland-reg-1",
+        "name": "FINMA",
+        "role": "Supervises banks and financial institutions, issues guidance for stablecoin structures, enforces AMLA, and assesses bank-guarantee models.",
+        "websiteUrl": "https://www.finma.ch/en/",
+        "isPrimary": true
+      },
+      {
+        "id": "switzerland-reg-2",
+        "name": "Swiss National Bank",
+        "acronym": "SNB",
+        "role": "Oversees financial stability and payment systems; runs wholesale CBDC pilots on SDX; no retail CBDC.",
+        "websiteUrl": "https://www.snb.ch/en/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

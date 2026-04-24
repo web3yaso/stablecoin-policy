@@ -1,0 +1,162 @@
+{
+  "id": "croatia",
+  "geoId": "191",
+  "name": "Croatia",
+  "region": "eu",
+  "level": "federal",
+  "stance": "favorable",
+  "stanceDatacenter": "favorable",
+  "stanceAI": "favorable",
+  "contextBlurb": "Croatia allows retail use of stablecoins but they are not legal tender. Supervision is shifting to the EU’s MiCA regime: EMTs (fiat-referenced) and ARTs (asset-referenced) have applied EU-wide since 30 Jun 2024, with the remainder of MiCA in force since 30 Dec 2024; pre-existing CASPs may operate under the Art. 143(3) transitional regime until 1 Jul 2026. Locally, HANFA maintains the AML VASP register/notification (pre-MiCA) and will supervise MiCA authorisations; HNB covers e-money/payment matters. Crypto gains are taxed as capital income (generally 10% plus any local surcharge) on disposal. Overall, the framework is permissive but mid-transition, with full CASP licensing clarity expected by mid-2026.",
+  "legislation": [
+    {
+      "id": "croatia-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": ""
+    },
+    {
+      "id": "croatia-leg-2",
+      "billCode": "2024-12-30",
+      "title": "MiCA fully applicable; pre-existing CASPs may operate under Art. 143(3) until 1 Jul 2026 (Croatia opted 18 months).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-12-30"
+    },
+    {
+      "id": "croatia-leg-3",
+      "billCode": "2024-07-27",
+      "title": "The Implementing Act enters into force (OG 85/2024), operationalising MiCA nationally.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-07-27"
+    },
+    {
+      "id": "croatia-leg-4",
+      "billCode": "2024-07-22",
+      "title": "ESMA publishes the list of competent authorities under MiCA showing HANFA/HNB as Croatia’s NCAs (by title).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-07-22"
+    },
+    {
+      "id": "croatia-leg-5",
+      "billCode": "2024-07-12",
+      "title": "Croatian Parliament passes the Act Implementing Regulation (EU) 2023/1114 (MiCA).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-07-12"
+    },
+    {
+      "id": "croatia-leg-6",
+      "billCode": "2024-06-30",
+      "title": "MiCA stablecoin titles (ART/EMT) apply EU-wide, including in Croatia.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-06-30"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "croatia-fig-1",
+      "name": "Croatian Financial Services Supervisory Agency (HANFA)",
+      "role": "Croatia’s MiCA national competent authority for Titles II, V and VI. Authorises and supervises crypto-asset service prov",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "croatia-fig-2",
+      "name": "Croatian National Bank (HNB)",
+      "role": "HNB oversees broader financial stability and monetary policy implications of crypto-assets, including stablecoins. It wo",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "croatia-news-1",
+      "headline": "ESMA – MiCA transitional & application dates",
+      "source": "esma.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica"
+    },
+    {
+      "id": "croatia-news-2",
+      "headline": "ESMA – List of competent authorities under MiCA",
+      "source": "esma.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://www.esma.europa.eu/sites/default/files/2024-12/List_of_Competent_Authorities_notified_to_ESMA_under_MiCA.pdf"
+    },
+    {
+      "id": "croatia-news-3",
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "HR",
+    "nameZh": "克罗地亚",
+    "flagImg": "https://flagcdn.com/w320/hr.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "Croatia allows retail use of stablecoins but they are not legal tender. Supervision is shifting to the EU’s MiCA regime: EMTs (fiat-referenced) and ARTs (asset-referenced) have applied EU-wide since 30 Jun 2024, with the remainder of MiCA in force since 30 Dec 2024; pre-existing CASPs may operate under the Art. 143(3) transitional regime until 1 Jul 2026. Locally, HANFA maintains the AML VASP register/notification (pre-MiCA) and will supervise MiCA authorisations; HNB covers e-money/payment matters. Crypto gains are taxed as capital income (generally 10% plus any local surcharge) on disposal. Overall, the framework is permissive but mid-transition, with full CASP licensing clarity expected by mid-2026.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "Under the EU MiCA regime, Croatia classifies stablecoins as e-money tokens (EMTs) and asset-referenced tokens (ARTs). EMTs reference one official currency and are redeemable at par in funds; they may be issued only by credit institutions or e-money institutions and are supervised in Croatia by the H",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": true,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "croatia-reg-1",
+        "name": "Croatian Financial Services Supervisory Agency",
+        "acronym": "HANFA",
+        "role": "Croatia’s MiCA national competent authority for Titles II, V and VI. Authorises and supervises crypto-asset service providers (CASPs) and enforces MiCA conduct, governance, disclosure and marketing ru",
+        "websiteUrl": "https://www.hanfa.hr",
+        "isPrimary": true
+      },
+      {
+        "id": "croatia-reg-2",
+        "name": "Croatian National Bank",
+        "acronym": "HNB",
+        "role": "HNB oversees broader financial stability and monetary policy implications of crypto-assets, including stablecoins. It works in coordination with HANFA to ensure systemic stability and compliance with ",
+        "websiteUrl": "https://www.hnb.hr",
+        "isPrimary": false
+      }
+    ]
+  }
+}

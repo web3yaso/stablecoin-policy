@@ -1,0 +1,160 @@
+{
+  "id": "denmark",
+  "geoId": "208",
+  "name": "Denmark",
+  "region": "eu",
+  "level": "federal",
+  "stance": "favorable",
+  "stanceDatacenter": "favorable",
+  "stanceAI": "favorable",
+  "contextBlurb": "Denmark applies the EU’s MiCA regime to stablecoins. Tokens fall under EMTs (fiat-pegged) and ARTs (basket-referenced), with Finanstilsynet as the national competent authority for all MiCA titles. MiCA requirements (already in force EU-wide) cover authorisation, governance, 1:1 liquid reserves and par-value redemption for EMTs, plus robust disclosures and supervision for ARTs. A Danish tax reform on crypto—including possible mark-to-market taxation from 2026—has been proposed by the Tax Law Council but not enacted; the government postponed the bill for further consultation. Separately, Danske Bank joined a nine-bank EU consortium planning a MiCA-compliant euro stablecoin for H2-2026; this is a pan-EU initiative and not an authorisation of a Danish EMT issuer.",
+  "legislation": [
+    {
+      "id": "denmark-leg-1",
+      "billCode": "REG-1",
+      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": ""
+    },
+    {
+      "id": "denmark-leg-2",
+      "billCode": "2026-07-01",
+      "title": "End of Denmark’s MiCA CASP transitional period (18-month grandfathering). After this date, only authorized CASPs may operate.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2026-07-01"
+    },
+    {
+      "id": "denmark-leg-3",
+      "billCode": "2026-01-01",
+      "title": "DAC8 crypto-asset reporting begins in Denmark; providers must report 2026 transactions to SKAT (first exchange in 2027).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2026-01-01"
+    },
+    {
+      "id": "denmark-leg-4",
+      "billCode": "2025-02-11",
+      "title": "Finanstilsynet authorizes Eurodollar ApS as an e-money token (EMT) issuer under MiCA (USD€).",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-02-11"
+    },
+    {
+      "id": "denmark-leg-5",
+      "billCode": "2024-12-30",
+      "title": "Remaining MiCA provisions (incl. CASPs) apply across the EU, completing the core regime beyond ARTs/EMTs.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-12-30"
+    },
+    {
+      "id": "denmark-leg-6",
+      "billCode": "2024-06-30",
+      "title": "MiCA Titles III–IV for ARTs/EMTs apply EU-wide, bringing reserve, redemption and disclosure rules for stablecoins into force.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "favorable",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2024-06-30"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "denmark-fig-1",
+      "name": "Danish Financial Supervisory Authority (Finanstilsynet)",
+      "role": "National competent authority under MiCA. Licenses and supervises CASPs and relevant token issuers, and oversees AML/CFT ",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "denmark-fig-2",
+      "name": "Danish Tax Agency (Skattestyrelsen)",
+      "role": "Administers tax rules for crypto-assets (including gains/losses, reporting). Not a prudential regulator.",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "denmark-news-1",
+      "headline": "ESMA list of MiCA NCAs",
+      "source": "esma.europa.eu",
+      "date": "2026-04-01",
+      "url": "https://www.esma.europa.eu/sites/default/files/2024-12/List_of_Competent_Authorities_notified_to_ESMA_under_MiCA.pdf"
+    },
+    {
+      "id": "denmark-news-2",
+      "headline": "Skatteministeriet press release",
+      "source": "skm.dk",
+      "date": "2026-04-01",
+      "url": "https://skm.dk/aktuelt/presse-nyheder/pressemeddelelser/ny-rapport-fra-skattelovraadet-kryptoaktiver-boer-fremover-lagerbeskattes"
+    },
+    {
+      "id": "denmark-news-3",
+      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
+      "source": "dig.watch",
+      "date": "2026-04-01",
+      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "DK",
+    "nameZh": "丹麦",
+    "flagImg": "https://flagcdn.com/w320/dk.png",
+    "lastUpdated": "Apr 2026",
+    "summaryEn": "Denmark applies the EU’s MiCA regime to stablecoins. Tokens fall under EMTs (fiat-pegged) and ARTs (basket-referenced), with Finanstilsynet as the national competent authority for all MiCA titles. MiCA requirements (already in force EU-wide) cover authorisation, governance, 1:1 liquid reserves and par-value redemption for EMTs, plus robust disclosures and supervision for ARTs. A Danish tax reform on crypto—including possible mark-to-market taxation from 2026—has been proposed by the Tax Law Council but not enacted; the government postponed the bill for further consultation. Separately, Danske Bank joined a nine-bank EU consortium planning a MiCA-compliant euro stablecoin for H2-2026; this is a pan-EU initiative and not an authorisation of a Danish EMT issuer.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal",
+    "regulatoryClarity": 5,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "Under MiCA, Denmark classifies stablecoins as Electronic Money Tokens (EMTs) (pegged 1:1 to a single official currency) or Asset-Referenced Tokens (ARTs) (referencing a basket of assets/values). EMTs must be issued by a credit or e-money institution authorised by Finanstilsynet, with e-money-style p",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "denmark-reg-1",
+        "name": "Danish Financial Supervisory Authority",
+        "role": "National competent authority under MiCA. Licenses and supervises CASPs and relevant token issuers, and oversees AML/CFT for financial sector entities.",
+        "websiteUrl": "https://www.finanstilsynet.dk/",
+        "isPrimary": true
+      },
+      {
+        "id": "denmark-reg-2",
+        "name": "Danish Tax Agency",
+        "role": "Administers tax rules for crypto-assets (including gains/losses, reporting). Not a prudential regulator.",
+        "websiteUrl": "https://www.skat.dk/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

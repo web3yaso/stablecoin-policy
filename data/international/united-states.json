@@ -1,0 +1,168 @@
+{
+  "id": "united-states",
+  "geoId": "840",
+  "name": "United States",
+  "region": "na",
+  "level": "federal",
+  "stance": "concerning",
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning",
+  "contextBlurb": "Retail stablecoins are widely used in the U.S., with supply dominated by USDT and USDC. The federal GENIUS Act—enacted July 18, 2025—creates a national regime for \"payment stablecoins,\" requiring 1:1 liquid reserves, a timely redemption policy with fee disclosure, and monthly publication of reserve composition. On April 8, 2026, the U.S. Treasury, OCC, and FDIC jointly issued a Notice of Proposed Rulemaking (NPRM) to implement the GENIUS Act, treating Permitted Payment Stablecoin Issuers (PPSIs) as financial institutions and establishing state-level regulatory frameworks and AML compliance requirements.",
+  "legislation": [
+    {
+      "id": "united-states-leg-1",
+      "billCode": "2026-04-08",
+      "title": "Treasury, OCC and FDIC jointly issued NPRM to implement the GENIUS Act; treats PPSIs as financial institutions and sets AML and state-framework requirements.",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2026-04-08"
+    },
+    {
+      "id": "united-states-leg-2",
+      "billCode": "2025-12-01",
+      "title": "US FDIC to propose GENIUS Act implementation framework this month",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-12-01"
+    },
+    {
+      "id": "united-states-leg-3",
+      "billCode": "2025-08-07",
+      "title": "NYDFS consent order and settlement with Paxos",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-08-07"
+    },
+    {
+      "id": "united-states-leg-4",
+      "billCode": "2025-07-18",
+      "title": "GENIUS Act signed into law",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-07-18"
+    },
+    {
+      "id": "united-states-leg-5",
+      "billCode": "2025-03-07",
+      "title": "OCC Interpretive Letter 1183 clarifies banks’ authority for certain crypto activities",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-03-07"
+    },
+    {
+      "id": "united-states-leg-6",
+      "billCode": "2023-08-08",
+      "title": "Federal Reserve “Novel Activities” supervision letters (SR 23-7, 23-8, 23-9). Federal Reserve press PDF (withdrawn Apr 24, 2025)",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2023-08-08"
+    },
+    {
+      "id": "united-states-leg-7",
+      "billCode": "2022-06-08",
+      "title": "NYDFS issued USD-stablecoin guidance on redeemability, reserves, and attestations",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2022-06-08"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "united-states-fig-1",
+      "name": "U.S. Treasury / Stablecoin Certification Review Committee (SCRC)",
+      "role": "Treasury chairs the SCRC (with the Fed and FDIC). It reviews/approves state-regime certifications, leads implementation ",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "united-states-fig-2",
+      "name": "OCC",
+      "role": "Charters/supervises Federal-qualified nonbank PPSIs and uninsured national banks issuing stablecoins; registers and supe",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "united-states-news-1",
+      "headline": "U.S. Treasury – NPRM to Implement the GENIUS Act (April 8, 2026)",
+      "source": "home.treasury.gov",
+      "date": "2026-04-08",
+      "url": "https://home.treasury.gov/news/press-releases/sb0435"
+    },
+    {
+      "id": "united-states-news-2",
+      "headline": "Fact Sheet: President Donald J. Trump Signs GENIUS Act into Law",
+      "source": "whitehouse.gov",
+      "date": "2026-04-08",
+      "url": "https://www.whitehouse.gov/fact-sheets/2025/07/fact-sheet-president-donald-j-trump-signs-genius-act-into-law/"
+    },
+    {
+      "id": "united-states-news-3",
+      "headline": "Congress Bill 119th Congress Senate Bill 1582 Actions",
+      "source": "congress.gov",
+      "date": "2026-04-08",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/1582/actions"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "US",
+    "nameZh": "美国",
+    "flagImg": "https://flagcdn.com/w320/us.png",
+    "lastUpdated": "Apr 8, 2026",
+    "summaryEn": "Retail stablecoins are widely used in the U.S., with supply dominated by USDT and USDC. The federal GENIUS Act—enacted July 18, 2025—creates a national regime for \"payment stablecoins,\" requiring 1:1 liquid reserves, a timely redemption policy with fee disclosure, and monthly publication of reserve composition. On April 8, 2026, the U.S. Treasury, OCC, and FDIC jointly issued a Notice of Proposed Rulemaking (NPRM) to implement the GENIUS Act, treating Permitted Payment Stablecoin Issuers (PPSIs) as financial institutions and establishing state-level regulatory frameworks and AML compliance requirements.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "monthly-attestation",
+      "aml-kyc"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 4,
+    "regimeStatus": "in_progress",
+    "classification": "payment_instrument",
+    "classificationNote": "Payment instrument (payment-stablecoin). Under the federal GENIUS Act (Public Law 119-27), “payment stablecoins” are a distinct digital asset used for payments and redeemable at par for monetary value; when issued by a Permitted Payment Stablecoin Issuer (PPSI) they are expressly excluded from the d",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "united-states-reg-1",
+        "name": "U.S. Treasury / Stablecoin Certification Review Committee",
+        "acronym": "SCRC",
+        "role": "Treasury chairs the SCRC (with the Fed and FDIC). It reviews/approves state-regime certifications, leads implementation rulemaking, and makes foreign-regime comparability determinations.",
+        "websiteUrl": "https://home.treasury.gov/news/press-releases/sb0254",
+        "isPrimary": true
+      },
+      {
+        "id": "united-states-reg-2",
+        "name": "OCC",
+        "role": "Charters/supervises Federal-qualified nonbank PPSIs and uninsured national banks issuing stablecoins; registers and supervises foreign payment stablecoin issuers approved under Treasury comparability.",
+        "websiteUrl": "https://www.occ.treas.gov/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

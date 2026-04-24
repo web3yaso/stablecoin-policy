@@ -207,5 +207,34 @@
     }
   ],
   "stanceDatacenter": "concerning",
-  "stanceAI": "review"
+  "stanceAI": "concerning",
+  "stance": "concerning",
+  "stablecoinMeta": {
+    "code": "TW",
+    "nameZh": "台湾",
+    "flagImg": "https://flagcdn.com/w320/tw.png",
+    "lastUpdated": "2024",
+    "summaryEn": "Taiwan's Financial Supervisory Commission (FSC) has implemented a Virtual Asset Service Provider (VASP) registration regime effective 2023. Stablecoins are treated as virtual assets and may be listed on registered exchanges. However, no specific stablecoin issuance framework exists. The FSC continues to develop more comprehensive regulations for virtual assets including stablecoins.",
+    "tags": [
+      "licensing-required",
+      "aml-kyc"
+    ],
+    "legalStatus": "legal_with_restrictions",
+    "regulatoryClarity": 3,
+    "regimeStatus": "in_progress",
+    "classification": "crypto_asset",
+    "allowsFiatBacked": false,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "taiwan-reg-1",
+        "name": "Financial Supervisory Commission",
+        "acronym": "FSC",
+        "role": "Primary regulator for virtual assets in Taiwan. Issues VASP registrations, sets listing standards, and is developing a comprehensive virtual asset regulatory framework.",
+        "websiteUrl": "https://www.fsc.gov.tw",
+        "isPrimary": true
+      }
+    ]
+  }
 }

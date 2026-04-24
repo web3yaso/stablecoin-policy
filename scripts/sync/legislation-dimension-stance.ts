@@ -80,6 +80,13 @@ const DIMENSION_TAGS: Record<DimKey, ImpactTag[]> = {
   "ai-workforce": ["ai-in-employment"],
   "ai-public": ["ai-in-healthcare", "ai-in-education"],
   "ai-synthetic": ["deepfake-regulation"],
+  // Stablecoin dimensions use StablecoinTag (not ImpactTag) — this script
+  // classifies DC/AI bills only, so sc-* entries are empty stubs.
+  "sc-issuance": [],
+  "sc-reserve": [],
+  "sc-consumer": [],
+  "sc-cross-border": [],
+  "sc-sovereignty": [],
 };
 
 const DIMENSION_DESCRIPTION: Record<DimKey, string> = {
@@ -92,6 +99,11 @@ const DIMENSION_DESCRIPTION: Record<DimKey, string> = {
   "ai-workforce": "AI in employment (hiring algorithms, workplace monitoring)",
   "ai-public": "AI in public services (healthcare, education)",
   "ai-synthetic": "synthetic media / deepfake regulation",
+  "sc-issuance": "stablecoin issuance rules",
+  "sc-reserve": "stablecoin reserve requirements",
+  "sc-consumer": "stablecoin consumer protections",
+  "sc-cross-border": "cross-border stablecoin rules",
+  "sc-sovereignty": "monetary sovereignty provisions",
 };
 
 type SingleStanceCache = Record<

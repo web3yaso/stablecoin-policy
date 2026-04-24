@@ -1,0 +1,104 @@
+{
+  "id": "egypt",
+  "geoId": "818",
+  "name": "Egypt",
+  "region": "eu",
+  "level": "federal",
+  "stance": "none",
+  "stanceDatacenter": "none",
+  "stanceAI": "none",
+  "contextBlurb": "As of 2025, Egypt maintains a prohibition-by-default stance: issuing, trading, promoting, or operating platforms for cryptoassets (including stablecoins) is illegal without prior approval from the Central Bank of Egypt (CBE). No approvals for stablecoin issuance or trading have been disclosed to date. Public use is therefore legally risky, despite occasional opinion pieces urging legalization.",
+  "legislation": [
+    {
+      "id": "egypt-leg-1",
+      "billCode": "2025-06-17",
+      "title": "PSO/PSP licensing rules take effect; 12-month transition to Jun 2026",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "none",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-06-17"
+    },
+    {
+      "id": "egypt-leg-2",
+      "billCode": "2025-05-06",
+      "title": "Egypt’s Financial Regulatory Authority (FRA) — Warning Against Unlicensed Financial Investment Schemes",
+      "summary": "",
+      "stage": "Enacted",
+      "stance": "none",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-05-06"
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "egypt-fig-1",
+      "name": "Central Bank of Egypt (CBE)",
+      "role": "Primary authority for banking/payments; issues prohibitions and licensing decisions",
+      "party": "N/A",
+      "stance": "review"
+    },
+    {
+      "id": "egypt-fig-2",
+      "name": "Financial Regulatory Authority (FRA)",
+      "role": "Warns against unlicensed investment schemes (including crypto promotions) in non-banking markets",
+      "party": "N/A",
+      "stance": "review"
+    }
+  ],
+  "news": [
+    {
+      "id": "egypt-news-1",
+      "headline": "CBE - Warning statement on cryptocurrencies (reiterated)",
+      "source": "cbe.org.eg",
+      "date": "2025-11-11",
+      "url": "https://www.cbe.org.eg/en/news-publications/news/2023/03/08/warning-statement"
+    },
+    {
+      "id": "egypt-news-2",
+      "headline": "CBE - Warning statement (2022) referencing Law 194/2020 prohibitions",
+      "source": "cbe.org.eg",
+      "date": "2025-11-11",
+      "url": "https://www.cbe.org.eg/en/news-publications/news/2022/09/12/warning-statement"
+    }
+  ],
+  "stablecoinMeta": {
+    "code": "EG",
+    "nameZh": "埃及",
+    "flagImg": "https://flagcdn.com/w320/eg.png",
+    "lastUpdated": "Nov 11, 2025",
+    "summaryEn": "As of 2025, Egypt maintains a prohibition-by-default stance: issuing, trading, promoting, or operating platforms for cryptoassets (including stablecoins) is illegal without prior approval from the Central Bank of Egypt (CBE). No approvals for stablecoin issuance or trading have been disclosed to date. Public use is therefore legally risky, despite occasional opinion pieces urging legalization.",
+    "tags": [
+      "licensing-required",
+      "aml-kyc"
+    ],
+    "legalStatus": "unclear",
+    "regulatoryClarity": 2,
+    "regimeStatus": "finalized",
+    "classification": "crypto_asset",
+    "classificationNote": "Stablecoins are treated within the cryptoasset prohibition under Law 194/2020 unless the CBE specifically licenses an activity (none disclosed).",
+    "allowsFiatBacked": false,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": false,
+    "regulators": [
+      {
+        "id": "egypt-reg-1",
+        "name": "Central Bank of Egypt",
+        "acronym": "CBE",
+        "role": "Primary authority for banking/payments; issues prohibitions and licensing decisions",
+        "websiteUrl": "https://www.cbe.org.eg/",
+        "isPrimary": true
+      },
+      {
+        "id": "egypt-reg-2",
+        "name": "Financial Regulatory Authority",
+        "acronym": "FRA",
+        "role": "Warns against unlicensed investment schemes (including crypto promotions) in non-banking markets",
+        "websiteUrl": "https://fra.gov.eg/",
+        "isPrimary": false
+      }
+    ]
+  }
+}

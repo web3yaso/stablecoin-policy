@@ -183,5 +183,42 @@
     }
   ],
   "stanceDatacenter": "favorable",
-  "stanceAI": "concerning"
+  "stanceAI": "favorable",
+  "stance": "favorable",
+  "stablecoinMeta": {
+    "code": "SE",
+    "nameZh": "瑞典",
+    "flagImg": "https://flagcdn.com/w320/se.png",
+    "lastUpdated": "Dec 2024",
+    "summaryEn": "Sweden is an EU member state fully subject to the MiCA regulation effective December 30, 2024. Finansinspektionen (FI) is the competent national authority. Sweden had previously operated one of Europe's most developed crypto markets, with several licensed exchanges. MiCA now provides a harmonized EU framework for stablecoin issuance and trading.",
+    "tags": [
+      "licensing-required",
+      "non-bank-permitted",
+      "fiat-reserve-11",
+      "algorithmic-banned",
+      "monthly-attestation",
+      "redemption-rights",
+      "passporting",
+      "aml-kyc",
+      "travel-rule"
+    ],
+    "legalStatus": "legal",
+    "regulatoryClarity": 4,
+    "regimeStatus": "finalized",
+    "classification": "e_money",
+    "classificationNote": "Under MiCA, fiat-backed stablecoins are e-money tokens (EMTs); asset-backed stablecoins are asset-referenced tokens (ARTs).",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": false,
+    "allowsAssetBacked": true,
+    "regulators": [
+      {
+        "id": "sweden-reg-1",
+        "name": "Finansinspektionen",
+        "acronym": "FI",
+        "role": "Swedish Financial Supervisory Authority. Competent national authority under MiCA for crypto-asset service providers and stablecoin issuers operating in Sweden.",
+        "websiteUrl": "https://www.fi.se",
+        "isPrimary": true
+      }
+    ]
+  }
 }
