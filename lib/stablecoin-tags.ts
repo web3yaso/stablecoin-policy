@@ -106,9 +106,14 @@ export const STABLECOIN_DIMENSION_TAGS: Record<
  * Categorical color for the sc-issuance dimension.
  * Priority: banned > bank-only > non-bank-permitted > unknown.
  */
-export function getIssuanceColor(tags: StablecoinTag[]): string {
+export function getIssuanceColor(tags: StablecoinTag[], legalStatus?: string): string {
   if (tags.includes("private-stablecoin-banned")) return "#FF3B30";
   if (tags.includes("bank-only")) return "#FF9500";
   if (tags.includes("non-bank-permitted")) return "#34C759";
+  // Tags take priority; fall back to legalStatus so countries with
+  // different legal statuses aren't collapsed into the same gray.
+  if (legalStatus === "banned") return "#FF3B30";
+  if (legalStatus === "legal_with_restrictions" || legalStatus === "partially_legal") return "#FF9500";
+  if (legalStatus === "legal") return "#34C759";
   return "#8E8E93";
 }

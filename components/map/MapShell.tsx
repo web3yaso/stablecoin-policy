@@ -1975,7 +1975,9 @@ export default function MapShell({
         const lensEntStance: StanceType = ent
           ? lens === "ai"
             ? ent.stanceAI
-            : ent.stanceDatacenter
+            : lens === "stablecoin"
+              ? (ent.stance ?? ent.stanceDatacenter)
+              : ent.stanceDatacenter
           : "none";
         const dcCount = DC_COUNT_BY_NAME[tooltip.label] ?? 0;
         const bills = ent?.legislation ?? [];
@@ -2028,13 +2030,13 @@ export default function MapShell({
           return rows.sort((a, b) => b.count - a.count);
         };
         const activeLensDims = (
-          lens === "ai" ? AI_DIMENSIONS : DATACENTER_DIMENSIONS
+          lens === "ai" ? AI_DIMENSIONS : lens === "stablecoin" ? STABLECOIN_DIMENSIONS : DATACENTER_DIMENSIONS
         ) as Exclude<Dimension, "overall">[];
         const fallbackLensDims = (
-          lens === "ai" ? DATACENTER_DIMENSIONS : AI_DIMENSIONS
+          lens === "ai" ? DATACENTER_DIMENSIONS : lens === "stablecoin" ? [] : AI_DIMENSIONS
         ) as Exclude<Dimension, "overall">[];
         let dimRows = computeDimRows(activeLensDims);
-        if (dimRows.length === 0) dimRows = computeDimRows(fallbackLensDims);
+        if (dimRows.length === 0 && fallbackLensDims.length > 0) dimRows = computeDimRows(fallbackLensDims);
         const visibleRows = dimRows.slice(0, 3);
         const hiddenRows = dimRows.length - visibleRows.length;
         const isRich = ent || dcCount > 0;
@@ -2079,8 +2081,12 @@ export default function MapShell({
                 )}
               </div>
 
-              {ent?.contextBlurb && (() => {
-                const b = ent.contextBlurb.trim();
+              {(() => {
+                const raw = lens === "stablecoin"
+                  ? (ent?.stablecoinMeta?.summaryEn ?? ent?.contextBlurb ?? "")
+                  : (ent?.contextBlurb ?? "");
+                if (!raw) return null;
+                const b = raw.trim();
                 const firstSentence = b.match(/^[^.!?]+[.!?]/);
                 let clip = (firstSentence?.[0] ?? b).trim();
                 if (clip.length > 120) {

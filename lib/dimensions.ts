@@ -186,7 +186,7 @@ export function getEntityColorForDimension(
     return STANCE_HEX[stance];
   }
   if (dimension === "sc-issuance") {
-    return getIssuanceColor((entity.stablecoinMeta?.tags ?? []) as StablecoinTag[]);
+    return getIssuanceColor((entity.stablecoinMeta?.tags ?? []) as StablecoinTag[], entity.stablecoinMeta?.legalStatus);
   }
   const score = getDimensionScore(entity, dimension);
   const grad = DIMENSION_GRADIENT[dimension];
