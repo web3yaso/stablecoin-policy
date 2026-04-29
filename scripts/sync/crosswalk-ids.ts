@@ -12,7 +12,7 @@
  *
  * Run: npx tsx scripts/sync/crosswalk-ids.ts
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 
 const UPSTREAM_URL =
@@ -67,7 +67,7 @@ function writeJson(path: string, data: unknown) {
 
 async function downloadLegislators(): Promise<UpstreamMember[]> {
   if (existsSync(RAW_PATH)) {
-    const stat = require("node:fs").statSync(RAW_PATH);
+    const stat = statSync(RAW_PATH);
     const ageHours = (Date.now() - stat.mtimeMs) / 36e5;
     if (ageHours < 24) {
       console.log(`[crosswalk] reusing cached ${RAW_PATH} (${ageHours.toFixed(1)}h old)`);

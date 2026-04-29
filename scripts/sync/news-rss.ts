@@ -132,7 +132,8 @@ function decodeEntities(s: string): string {
 // Coarse relevance gate. A new item must mention at least one of these
 // keywords in its headline, otherwise it never makes it to the Haiku
 // summarize step. Saves cost AND keeps off-topic noise (e.g. medical
-// cannabis, Hormuz blockade) out of an AI / data-center policy feed.
+// cannabis, Hormuz blockade) out of an AI / data-center / stablecoin
+// policy feed.
 const RELEVANCE_RE = new RegExp(
   [
     "data\\s?cent(?:er|re)",
@@ -166,6 +167,25 @@ const RELEVANCE_RE = new RegExp(
     "ftc",
     "doj",
     "white house",
+    "stablecoin",
+    "payment stablecoin",
+    "genius act",
+    "stable act",
+    "digital asset",
+    "tokenized dollar",
+    "dollar token",
+    "cryptoasset",
+    "crypto-asset",
+    "reserve requirement",
+    "reserve backing",
+    "issuer",
+    "redemption",
+    "treasury",
+    "occ\\b",
+    "fdic",
+    "federal reserve",
+    "money transmission",
+    "mica",
   ].join("|"),
   "i",
 );
@@ -281,7 +301,7 @@ async function summarize(
   body: string | null,
 ): Promise<{ summary: string; source: "article" | "headline-only" } | null> {
   const system =
-    "You write one- to two-sentence neutral summaries of news stories about AI governance and data-center policy. Plain factual prose. No editorializing.";
+    "You write one- to two-sentence neutral summaries of news stories about AI governance, data-center policy, and stablecoin regulation. Plain factual prose. No editorializing.";
   const userBlock = body
     ? `Headline: ${headline}\nSource: ${source} (${date})\n\nArticle body (trimmed):\n${body}\n\nWrite a 1–2 sentence neutral summary.`
     : `Headline: ${headline}\nSource: ${source} (${date})\n\nThe article body could not be retrieved. Write one factual sentence based on the headline alone — do not invent specifics.`;

@@ -112,6 +112,7 @@ const STANCE_SEVERITY: Record<StanceType, number> = {
   concerning: 3,
   review: 2,
   favorable: 1,
+  pioneering: 1,
   none: 0,
 };
 
@@ -249,6 +250,7 @@ function stateStance(bills: Legislation[]): StanceType {
     concerning: 0,
     review: 0,
     favorable: 0,
+    pioneering: 0,
     none: 0,
   };
   // Track ENACTED restrictive bills separately. A single filed moratorium
@@ -354,6 +356,7 @@ function lensStance(bills: Legislation[], lens: "datacenter" | "ai"): StanceType
         concerning: 3,
         review: 2,
         favorable: 1,
+        pioneering: 1,
         none: 0,
       };
       let pick: StanceType = dimVotes[0];
@@ -442,6 +445,7 @@ const STANCE_PHRASE: Record<StanceType, string> = {
   concerning: "advancing regulation",
   review: "under discussion",
   favorable: "leaning innovation-friendly",
+  pioneering: "advancing dedicated legislation",
   none: "no action",
 };
 
@@ -473,6 +477,7 @@ const STANCE_WEIGHT: Record<StanceType, number> = {
   restrictive: 4,
   concerning: 3,
   favorable: 3,
+  pioneering: 4,
   review: 1,
   none: 0,
 };

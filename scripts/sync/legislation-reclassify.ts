@@ -195,10 +195,10 @@ async function main() {
   );
 
   let calls = 0;
-  let cachedRead = 0;
-  let cachedWrite = 0;
-  let inputTokens = 0;
-  let outputTokens = 0;
+  const cachedRead = 0;
+  const cachedWrite = 0;
+  const inputTokens = 0;
+  const outputTokens = 0;
 
   for (const bill of todo) {
     if (calls >= MAX_CALLS) {
