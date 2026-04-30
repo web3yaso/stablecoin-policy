@@ -1,4 +1,4 @@
-export type Region = "na" | "eu" | "asia";
+export type Region = "na" | "eu" | "asia" | "latam" | "africa" | "oceania";
 
 /** Sub-view inside the NA region: countries → states → counties drill-down. */
 export type NaView = "countries" | "states" | "counties";
@@ -128,7 +128,8 @@ export type StanceType =
   | "review"
   | "favorable"
   | "concerning"
-  | "none";
+  | "none"
+  | "pioneering";
 
 /**
  * Single label map used for both US states and countries. Replaces the
@@ -141,6 +142,7 @@ export const STANCE_LABEL: Record<StanceType, string> = {
   review: "Under Discussion",
   none: "No Action",
   favorable: "Innovation-Friendly",
+  pioneering: "Dedicated Legislation",
 };
 
 export type GovLevel = "federal" | "state" | "bloc";
@@ -221,6 +223,7 @@ export type LegislationCategory =
   | "ai-government"
   | "data-privacy"
   | "ai-criminal-justice"
+  | "stablecoin-policy"
   | "stablecoin-regulation";
 
 export type Dimension =
@@ -307,6 +310,7 @@ export const CATEGORY_LABEL: Record<LegislationCategory, string> = {
   "ai-government": "Government",
   "data-privacy": "Privacy",
   "ai-criminal-justice": "Criminal Justice",
+  "stablecoin-policy": "Stablecoins",
   "stablecoin-regulation": "Stablecoins",
 };
 
@@ -586,9 +590,9 @@ export interface Entity {
    *  entities may predate this field. */
   stance?: StanceType;
   /** Lens-scoped stance: aggregated over bills relevant to the data-center lens. */
-  stanceDatacenter: StanceType;
+  stanceDatacenter?: StanceType;
   /** Lens-scoped stance: aggregated over bills relevant to the AI-regulation lens. */
-  stanceAI: StanceType;
+  stanceAI?: StanceType;
   contextBlurb: string;
   legislation: Legislation[];
   keyFigures: Legislator[];
@@ -685,8 +689,11 @@ export interface StateEnergyProfile {
 
 export const REGION_LABEL: Record<Region, string> = {
   na: "Americas",
+  latam: "Americas",
   eu: "Europe",
   asia: "Asia-Pacific",
+  africa: "Africa",
+  oceania: "Asia-Pacific",
 };
 
-export const REGION_ORDER: Region[] = ["na", "eu", "asia"];
+export const REGION_ORDER: Region[] = ["na", "eu", "asia", "africa"];
