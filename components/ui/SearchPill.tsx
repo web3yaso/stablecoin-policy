@@ -81,11 +81,14 @@ export default function SearchPill({ open, onClose, onNavigate }: SearchPillProp
   // stale result list under the new query.
   useEffect(() => {
     if (!open) {
-      setQuery("");
-      setActiveIdx(0);
-      return;
+      const resetId = requestAnimationFrame(() => {
+        setQuery("");
+        setActiveIdx(0);
+      });
+      return () => cancelAnimationFrame(resetId);
     }
-    requestAnimationFrame(() => inputRef.current?.focus());
+    const focusId = requestAnimationFrame(() => inputRef.current?.focus());
+    return () => cancelAnimationFrame(focusId);
   }, [open]);
 
   // Click-outside dismiss. Bound only while open so it doesn't run idle

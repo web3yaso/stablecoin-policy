@@ -2,28 +2,28 @@
   "_comment": "Curated RSS / Atom feeds polled by scripts/sync/news-rss.ts. Each feed declares a default `entity` (which entity bucket new items land in) and an optional `topicHint` (skipped if Haiku classifies otherwise). Add / remove freely; the script tolerates failed feeds.",
   "feeds": [
     {
-      "url": "https://www.npr.org/rss/rss.php?id=1019",
-      "name": "NPR Technology",
+      "url": "https://news.google.com/rss/search?q=stablecoin+(Congress+OR+Senate+OR+House+OR+Treasury+OR+OCC+OR+%22Federal+Reserve%22)&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — US Stablecoin Policy",
       "entity": "United States",
-      "topicHint": "ai-policy"
+      "topicHint": "stablecoin-policy"
     },
     {
-      "url": "https://apnews.com/hub/artificial-intelligence/feed",
-      "name": "AP — Artificial Intelligence",
+      "url": "https://news.google.com/rss/search?q=%22GENIUS+Act%22+OR+%22STABLE+Act%22+stablecoin&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — GENIUS / STABLE Act",
       "entity": "United States",
-      "topicHint": "ai-policy"
+      "topicHint": "stablecoin-policy"
     },
     {
-      "url": "https://www.theverge.com/rss/policy/index.xml",
-      "name": "The Verge — Policy",
+      "url": "https://news.google.com/rss/search?q=%22payment+stablecoin%22+OR+%22stablecoin+issuer%22+OR+%22stablecoin+reserve%22&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — Stablecoin Issuers & Reserves",
       "entity": "United States",
-      "topicHint": "ai-policy"
+      "topicHint": "stablecoin-policy"
     },
     {
-      "url": "https://feeds.arstechnica.com/arstechnica/tech-policy",
-      "name": "Ars Technica — Policy",
+      "url": "https://news.google.com/rss/search?q=stablecoin+(state+legislation+OR+New+York+OR+California+OR+Texas+OR+Wyoming+OR+Florida)&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — State Stablecoin Bills",
       "entity": "United States",
-      "topicHint": "ai-policy"
+      "topicHint": "stablecoin-policy"
     },
     {
       "url": "https://mainemorningstar.com/feed/",

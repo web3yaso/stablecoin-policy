@@ -44,11 +44,14 @@ export default async function NewsPage({
               <span className="text-[11px] text-muted tracking-tight">
                 Data centers
               </span>
-              <StanceBadge stance={entity.stanceDatacenter} size="md" />
+              <StanceBadge
+                stance={entity.stanceDatacenter ?? entity.stance ?? "none"}
+                size="md"
+              />
             </div>
             <div className="flex items-center gap-1.5">
               <span className="text-[11px] text-muted tracking-tight">AI</span>
-              <StanceBadge stance={entity.stanceAI} size="md" />
+              <StanceBadge stance={entity.stanceAI ?? entity.stance ?? "none"} size="md" />
             </div>
             <span className="text-sm text-muted">
               {total} {total === 1 ? "article" : "articles"}

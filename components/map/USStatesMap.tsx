@@ -8,10 +8,10 @@ import {
 } from "react-simple-maps";
 import { usProjection } from "@/lib/projections";
 import { getEntity } from "@/lib/placeholder-data";
-import { getEntityColorForDimension } from "@/lib/dimensions";
 import {
   NEUTRAL_FILL,
   NEUTRAL_STROKE,
+  STANCE_HEX,
   type SetTooltip,
 } from "@/lib/map-utils";
 import { US_FACILITIES } from "@/lib/datacenters";
@@ -54,6 +54,9 @@ const BLOB_STYLE = {
   pointerEvents: "none" as const,
 };
 
+const US_FEDERAL_FILL = STANCE_HEX.favorable;
+const US_TRACKED_PATTERN_ID = "us-stablecoin-states-detail-stripes";
+
 export default function USStatesMap({
   onSelectEntity,
   onDoubleClickEntity,
@@ -87,6 +90,18 @@ export default function USStatesMap({
           shapeRendering: "geometricPrecision",
         }}
       >
+        <defs>
+          <pattern
+            id={US_TRACKED_PATTERN_ID}
+            patternUnits="userSpaceOnUse"
+            width="8"
+            height="8"
+            patternTransform="rotate(135)"
+          >
+            <rect width="8" height="8" fill={US_FEDERAL_FILL} />
+            <rect width="2" height="8" fill="rgba(125, 125, 125, 0.36)" />
+          </pattern>
+        </defs>
         <Geographies geography={STATES_URL}>
           {({ geographies }) =>
             // Render selected last so its stroke sits on top of neighbours.
@@ -108,6 +123,34 @@ export default function USStatesMap({
               const isSelected = selectedGeoId === name;
 
               if (!interactive) {
+                if (lens === "stablecoin") {
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      style={{
+                        default: {
+                          fill: US_FEDERAL_FILL,
+                          stroke: NEUTRAL_STROKE,
+                          strokeWidth: 1.5,
+                          outline: "none",
+                          pointerEvents: "none",
+                        },
+                        hover: {
+                          fill: US_FEDERAL_FILL,
+                          stroke: NEUTRAL_STROKE,
+                          strokeWidth: 1.5,
+                          outline: "none",
+                          pointerEvents: "none",
+                        },
+                        pressed: {
+                          fill: US_FEDERAL_FILL,
+                          outline: "none",
+                        },
+                      }}
+                    />
+                  );
+                }
                 return (
                   <Geography
                     key={geo.rsmKey}
@@ -121,7 +164,17 @@ export default function USStatesMap({
                 );
               }
 
-              const fill = getEntityColorForDimension(ent, dimension, lens);
+              const isTrackedStablecoinState =
+                lens === "stablecoin" &&
+                ent.legislation.some((bill) => bill.category.startsWith("stablecoin-"));
+              const fill =
+                lens === "stablecoin"
+                  ? isTrackedStablecoinState
+                    ? `url(#${US_TRACKED_PATTERN_ID})`
+                    : US_FEDERAL_FILL
+                  : ent
+                    ? STANCE_HEX[ent.stance ?? ent.stanceDatacenter ?? "none"]
+                    : NEUTRAL_FILL;
               const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
               const strokeWidth = isSelected ? 4 : 1.5;
               const drillable = getMunicipalitiesByState(name).length > 0;

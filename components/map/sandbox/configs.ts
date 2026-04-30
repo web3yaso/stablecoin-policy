@@ -250,5 +250,7 @@ export function configFor(view: SandboxView): MapConfig | null {
       return ASIA_CONFIG;
     case "na":
       return NA_CONFIG;
+    default:
+      return null;
   }
 }

@@ -49,8 +49,11 @@ function isRegionCountry(numId: number): boolean {
 const REGION_CENTROIDS: Record<Region, [number, number]> = {
   // [lat, lng]
   na: [40, -100],
+  latam: [-15, -60],
   eu: [50, 15],
   asia: [30, 105],
+  africa: [2, 20],
+  oceania: [-24, 135],
 };
 
 // Spherical angular distance between two (lat, lng) points in degrees.
@@ -77,6 +80,12 @@ function angularDistance(
   );
 }
 
+function collapseRegion(region: Region): Region {
+  if (region === "latam") return "na";
+  if (region === "oceania") return "asia";
+  return region;
+}
+
 function nearestRegion(lat: number, lng: number): Region {
   let best: Region = "na";
   let bestDist = Infinity;
@@ -88,7 +97,7 @@ function nearestRegion(lat: number, lng: number): Region {
       best = r;
     }
   });
-  return best;
+  return collapseRegion(best);
 }
 
 type Props = {

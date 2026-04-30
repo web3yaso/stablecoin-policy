@@ -65,11 +65,12 @@ export default function SummaryBar({ lens }: SummaryBarProps) {
     concerning: [],
     review: [],
     favorable: [],
+    pioneering: [],
     none: [],
   };
   for (const s of states) {
-    const stance = lens === "ai" ? s.stanceAI : s.stanceDatacenter;
-    grouped[stance].push(s);
+    const stance = lens === "ai" ? s.stanceAI : lens === "stablecoin" ? (s.stance ?? s.stanceDatacenter) : s.stanceDatacenter;
+    if (stance) grouped[stance].push(s);
   }
 
   const restrictingCount =

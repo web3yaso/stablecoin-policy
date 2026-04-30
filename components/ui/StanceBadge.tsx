@@ -11,6 +11,7 @@ const DOT_COLOR: Record<StanceType, string> = {
   favorable: "var(--color-stance-favorable)",
   concerning: "var(--color-stance-concerning)",
   none: "var(--color-stance-none)",
+  pioneering: "var(--color-stance-favorable)",
 };
 
 export default function StanceBadge({ stance, size = "md" }: StanceBadgeProps) {

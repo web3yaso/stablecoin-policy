@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { findDonor, isDonorRelevant } from "../../lib/donor-data.js";
+import type { LegislationCategory } from "../../types/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
@@ -35,7 +36,7 @@ for (const bill of va.legislation.slice(0, 8)) {
     }
     hits += 1;
     const relevant = profile.topDonors.filter((d) =>
-      isDonorRelevant(d.industry, bill.category as any),
+      isDonorRelevant(d.industry, bill.category as LegislationCategory),
     );
     if (relevant.length) relevantHighlights += 1;
     sample.push(

@@ -22,7 +22,7 @@ import {
   type Region,
   type ViewTarget,
 } from "@/types";
-import { getEntity, getOverviewEntity } from "@/lib/placeholder-data";
+import { getEntity, getEntityByGeoId, getOverviewEntity } from "@/lib/placeholder-data";
 import { STANCE_HEX, type SetTooltip, type TooltipState } from "@/lib/map-utils";
 import {
   DIMENSION_TAGS,
@@ -170,6 +170,7 @@ const STANCE_READOUT: Record<StanceType, string> = {
   review: "Under review",
   favorable: "Favorable",
   none: "No action",
+  pioneering: "Dedicated Legislation",
 };
 
 /**
@@ -200,6 +201,7 @@ const STANCE_SEVERITY: Record<StanceType, number> = {
   concerning: 3,
   review: 2,
   favorable: 1,
+  pioneering: 1,
   none: 0,
 };
 
@@ -233,11 +235,24 @@ const INITIAL_VIEW: ViewState = {
   selectedGeoId: null,
 };
 
+function normalizeRegion(region: Region): Region {
+  if (region === "latam") return "na";
+  if (region === "oceania") return "asia";
+  return region;
+}
+
+function normalizeViewState(view: ViewState): ViewState {
+  const region = normalizeRegion(view.region);
+  return region === view.region ? view : { ...view, region };
+}
+
 function viewsEqual(a: ViewState, b: ViewState): boolean {
+  const left = normalizeViewState(a);
+  const right = normalizeViewState(b);
   return (
-    a.region === b.region &&
-    a.naView === b.naView &&
-    a.selectedGeoId === b.selectedGeoId
+    left.region === right.region &&
+    left.naView === right.naView &&
+    left.selectedGeoId === right.selectedGeoId
   );
 }
 
@@ -364,7 +379,7 @@ export default function MapShell({
     }
     if (!selectedGeoId) return overviewEntity;
     const found = getEntity(selectedGeoId, region);
-    return found ?? overviewEntity;
+    return found ?? getEntityByGeoId(selectedGeoId) ?? overviewEntity;
   }, [
     selectedGeoId,
     region,
@@ -417,14 +432,15 @@ export default function MapShell({
   }, []);
 
   const navigateTo = (next: ViewState) => {
-    if (viewsEqual(current, next)) return;
+    const normalized = normalizeViewState(next);
+    if (viewsEqual(current, normalized)) return;
     // Any navigation invalidates the current hover state — the geography
     // the tooltip was anchored to may no longer be on screen, so the
     // tooltip would otherwise stick in place until the user happens to
     // mouse over a fresh path.
     setTooltipInternal(null);
     setHoveredFacility(null);
-    const newHistory = [...history.slice(0, historyIdx + 1), next];
+    const newHistory = [...history.slice(0, historyIdx + 1), normalized];
     setHistory(newHistory);
     setHistoryIdx(newHistory.length - 1);
     if (typeof window !== "undefined") {
@@ -538,7 +554,7 @@ export default function MapShell({
 
   const handleRegionChange = (next: Region) => {
     const updated: ViewState = {
-      region: next,
+      region: normalizeRegion(next),
       naView: "countries",
       selectedGeoId: null,
     };
@@ -1778,11 +1794,10 @@ export default function MapShell({
         </div>
       )}
 
-      {/* Floating "Color map by" dimension selector — bottom-left of map.
-          Shows the 5 stablecoin dimensions + an "Overall" pill.
-          Hidden on very small screens to avoid panel overlap. */}
+      {/* Floating "Color map by" dimension selector — pinned to the
+          right edge so it stays visible above the mobile detail sheet. */}
       <div
-        className="hidden sm:block fixed bottom-24 left-4 z-20"
+        className="hidden sm:block fixed top-28 right-4 z-20"
         style={{
           opacity: chromeOpacity,
           pointerEvents: chromeOpacity < 0.5 ? "none" : "auto",
@@ -1974,10 +1989,10 @@ export default function MapShell({
           : null;
         const lensEntStance: StanceType = ent
           ? lens === "ai"
-            ? ent.stanceAI
+            ? (ent.stanceAI ?? ent.stance ?? "none")
             : lens === "stablecoin"
-              ? (ent.stance ?? ent.stanceDatacenter)
-              : ent.stanceDatacenter
+              ? (ent.stance ?? ent.stanceDatacenter ?? "none")
+              : (ent.stanceDatacenter ?? ent.stance ?? "none")
           : "none";
         const dcCount = DC_COUNT_BY_NAME[tooltip.label] ?? 0;
         const bills = ent?.legislation ?? [];

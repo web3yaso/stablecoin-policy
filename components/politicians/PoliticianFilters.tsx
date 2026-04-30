@@ -127,12 +127,9 @@ function SearchPill({
   onChange: (v: string) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [mac, setMac] = useState(true);
-
-  useEffect(() => {
-    if (typeof navigator === "undefined") return;
-    setMac(/mac|iphone|ipad|ipod/i.test(navigator.platform || navigator.userAgent));
-  }, []);
+  const [mac] = useState(
+    () => typeof navigator === "undefined" || /mac|iphone|ipad|ipod/i.test(navigator.platform || navigator.userAgent),
+  );
 
   // ⌘K / Ctrl+K focuses the search input — matches the global pattern
   // bound by TopToolbar everywhere else on the site.

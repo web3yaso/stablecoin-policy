@@ -41,8 +41,8 @@ export default function FadeInOnView({
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
-      setShown(true);
-      return;
+      const id = window.requestAnimationFrame(() => setShown(true));
+      return () => window.cancelAnimationFrame(id);
     }
     const io = new IntersectionObserver(
       (entries) => {

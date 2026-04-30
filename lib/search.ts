@@ -33,8 +33,14 @@ function buildIndex(): SearchItem[] {
 
   for (const entity of ENTITIES) {
     const naView: NaView = entity.level === "state" ? "states" : "countries";
+    const region =
+      entity.region === "latam"
+        ? "na"
+        : entity.region === "oceania"
+          ? "asia"
+          : entity.region;
     const target: ViewTarget = {
-      region: entity.region,
+      region,
       naView,
       // Overview entities navigate to "no selection" so the panel falls back
       // to the regional default.

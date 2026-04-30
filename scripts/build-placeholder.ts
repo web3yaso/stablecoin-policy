@@ -151,7 +151,7 @@ function buildFederalEntity() {
 
 function buildStateEntities() {
   const files = readdirSync(STATES_LEG_DIR).filter((f) => f.endsWith(".json"));
-  const entities: unknown[] = [];
+  const entities: Array<{ name: string } & Record<string, unknown>> = [];
   for (const f of files) {
     const leg = readJson<JsonLegFile>(join(STATES_LEG_DIR, f));
     const stateName = leg.state;
@@ -173,7 +173,7 @@ function buildStateEntities() {
     });
   }
   // Stable alphabetical order
-  entities.sort((a: any, b: any) => a.name.localeCompare(b.name));
+  entities.sort((a, b) => a.name.localeCompare(b.name));
   return entities;
 }
 

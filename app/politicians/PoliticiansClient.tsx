@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Legislator } from "@/types";
 import PoliticianCard from "@/components/politicians/PoliticianCard";
@@ -32,7 +32,6 @@ export default function PoliticiansClient({ all }: { all: Legislator[] }) {
 
   const PAGE = 75;
   const [visible, setVisible] = useState(PAGE);
-  useEffect(() => setVisible(PAGE), [state, billFilter]);
 
   const filtered = useMemo(() => {
     let list = all;
@@ -71,15 +70,12 @@ export default function PoliticiansClient({ all }: { all: Legislator[] }) {
     return sorted;
   }, [all, state, billFilter]);
 
-  // Deep links via ?id=… should always land on the target card, even
-  // when it sits beyond the current page.
-  useEffect(() => {
-    if (!focusedId) return;
+  const focusedVisible = useMemo(() => {
+    if (!focusedId) return visible;
     const idx = filtered.findIndex((p) => p.id === focusedId);
-    if (idx >= visible) {
-      setVisible(Math.ceil((idx + 1) / PAGE) * PAGE);
-    }
-  }, [focusedId, filtered, visible]);
+    if (idx < 0 || idx < visible) return visible;
+    return Math.ceil((idx + 1) / PAGE) * PAGE;
+  }, [PAGE, filtered, focusedId, visible]);
 
   return (
     <div className="flex flex-col gap-6 md:grid md:grid-cols-[240px_minmax(0,1fr)] md:gap-10">
@@ -90,25 +86,32 @@ export default function PoliticiansClient({ all }: { all: Legislator[] }) {
             <div className="text-muted">{billFilter}</div>
           </div>
         )}
-        <PoliticianFilters all={all} state={state} onChange={setState} />
+        <PoliticianFilters
+          all={all}
+          state={state}
+          onChange={(next) => {
+            setVisible(PAGE);
+            setState(next);
+          }}
+        />
       </aside>
 
       <div className="flex flex-col gap-3">
         <div className="text-xs text-muted">
           {filtered.length === 0
             ? "No politicians match these filters"
-            : `Showing ${Math.min(visible, filtered.length)} of ${filtered.length}`}
+            : `Showing ${Math.min(focusedVisible, filtered.length)} of ${filtered.length}`}
         </div>
-        {filtered.slice(0, visible).map((p) => (
+        {filtered.slice(0, focusedVisible).map((p) => (
           <PoliticianCard key={p.id} politician={p} defaultOpen={p.id === focusedId} />
         ))}
-        {visible < filtered.length && (
+        {focusedVisible < filtered.length && (
           <button
             type="button"
             onClick={() => setVisible((v) => v + PAGE)}
             className="self-center mt-2 text-xs text-muted hover:text-ink px-4 py-2 rounded-full bg-black/[.04] hover:bg-black/[.08] transition-colors"
           >
-            Show {Math.min(PAGE, filtered.length - visible)} more
+            Show {Math.min(PAGE, filtered.length - focusedVisible)} more
           </button>
         )}
       </div>

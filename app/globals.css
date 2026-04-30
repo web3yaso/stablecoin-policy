@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "SF Pro Display", "SF Pro Text", "Helvetica Neue", "Segoe UI",
+    ui-sans-serif, system-ui, sans-serif;
 
   /* Off-white warm neutral — beige stripped ~90% */
   --color-bg: #FAFAF8;
@@ -30,9 +31,7 @@ html,
 body {
   background-color: var(--color-bg);
   color: var(--color-ink);
-  /* Pin the whole app to Inter explicitly so we never silently fall
-     through to `system-ui` (SF Pro on macOS). */
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* Mobile Safari (iOS) auto-zooms into any form field whose computed

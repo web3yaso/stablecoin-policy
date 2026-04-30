@@ -24,7 +24,7 @@ export function useZoomPan({
       // Wrap longitude into [-180, 180] so east/west panning loops. Combined
       // with the world-base layer's triple-render in ZoomableSvgMap, this
       // feels like a seamless spin.
-      let wrappedLng = ((lng + 180) % 360 + 360) % 360 - 180;
+      const wrappedLng = ((lng + 180) % 360 + 360) % 360 - 180;
       // Latitude still clamps — no north/south wrap.
       const clampedLat = Math.max(clamp[0][1], Math.min(clamp[1][1], lat));
       return [wrappedLng, clampedLat];
@@ -46,8 +46,11 @@ export function useZoomPan({
 
   // Reset whenever the initial config changes (e.g. region switch).
   useEffect(() => {
-    setZoom(initialZoom);
-    setCenter(initialCenter);
+    const id = requestAnimationFrame(() => {
+      setZoom(initialZoom);
+      setCenter(initialCenter);
+    });
+    return () => cancelAnimationFrame(id);
   }, [initialCenter, initialZoom]);
 
   // Wheel: ⌘/ctrl = zoom, else pan.

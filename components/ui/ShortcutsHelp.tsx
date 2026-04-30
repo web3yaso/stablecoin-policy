@@ -52,7 +52,7 @@ const TOUCH_GROUPS: { title: string; rows: { label: string; hint: string }[] }[]
   {
     title: "Move between regions",
     rows: [
-      { label: "Switch region", hint: "Tap a pill at the top (N. America / Europe / Asia)" },
+      { label: "Switch region", hint: "Tap a pill at the top (Americas / Europe / Asia)" },
       { label: "Pan the map", hint: "Two-finger drag" },
       { label: "Zoom the map", hint: "Pinch in or out" },
     ],

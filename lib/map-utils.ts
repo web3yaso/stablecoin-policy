@@ -6,7 +6,8 @@ export const STANCE_HEX: Record<StanceType, string> = {
   concerning: "#D9A766",
   review: "#D9C980",
   none: "#C9CBD1",
-  favorable: "#7EBC8E",
+  favorable: "#A8D4B2",
+  pioneering: "#7EBC8E",
 };
 
 export const NEUTRAL_FILL = "#EFEDE8";

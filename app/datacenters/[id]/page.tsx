@@ -46,7 +46,10 @@ export default async function DataCentersPage({
               <span className="text-[11px] text-muted tracking-tight">
                 Data centers
               </span>
-              <StanceBadge stance={entity.stanceDatacenter} size="md" />
+              <StanceBadge
+                stance={entity.stanceDatacenter ?? entity.stance ?? "none"}
+                size="md"
+              />
             </div>
             <span className="text-sm text-muted">
               {total} {total === 1 ? "facility" : "facilities"}

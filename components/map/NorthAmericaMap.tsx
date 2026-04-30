@@ -12,6 +12,7 @@ import { getEntityColorForDimension } from "@/lib/dimensions";
 import {
   NEUTRAL_FILL,
   NEUTRAL_STROKE,
+  STANCE_HEX,
   type SetTooltip,
 } from "@/lib/map-utils";
 import { ALL_FACILITIES } from "@/lib/datacenters";
@@ -57,12 +58,23 @@ const COUNTRY_NAMES: Record<string, string> = {
   "032": "Argentina",
   "152": "Chile",
 };
+// Each country's region as stored in ENTITIES
+const COUNTRY_REGION: Record<string, "na" | "latam"> = {
+  "124": "na",
+  "484": "latam",
+  "076": "latam",
+  "032": "latam",
+  "152": "latam",
+};
 // South/Central American countries rendered as neutral context so the map
 // doesn't look amputated south of Mexico.
 const CONTEXT_IDS = new Set([
   "068", "170", "188", "192", "218", "222", "328", "332", "340", "388",
   "558", "591", "600", "604", "630", "740", "756", "858", "862",
 ]);
+
+const US_FEDERAL_FILL = STANCE_HEX.favorable;
+const US_TRACKED_PATTERN_ID = "us-stablecoin-state-stripes";
 
 export default function NorthAmericaMap({
   onSelectEntity,
@@ -102,6 +114,18 @@ export default function NorthAmericaMap({
           shapeRendering: "geometricPrecision",
         }}
       >
+        <defs>
+          <pattern
+            id={US_TRACKED_PATTERN_ID}
+            patternUnits="userSpaceOnUse"
+            width="8"
+            height="8"
+            patternTransform="rotate(135)"
+          >
+            <rect width="8" height="8" fill={US_FEDERAL_FILL} />
+            <rect width="2" height="8" fill="rgba(125, 125, 125, 0.36)" />
+          </pattern>
+        </defs>
         {/* Layer 1 — Americas: interactive countries + neutral context shapes */}
         <Geographies geography={WORLD_URL}>
           {({ geographies }) => {
@@ -131,7 +155,7 @@ export default function NorthAmericaMap({
                 );
               }
               // Interactive country
-              const ent = getEntity(id, "na");
+              const ent = getEntity(id, COUNTRY_REGION[id] ?? "na");
               if (!ent) return null;
               const isSelected = selectedGeoId === id;
               const fill = getEntityColorForDimension(ent, dimension, lens);
@@ -157,7 +181,13 @@ export default function NorthAmericaMap({
                   key={geo.rsmKey}
                   geography={geo}
                   onMouseEnter={(e) =>
-                    setTooltip({ x: e.clientX, y: e.clientY, label, geoId: id, region: "na" })
+                    setTooltip({
+                      x: e.clientX,
+                      y: e.clientY,
+                      label,
+                      geoId: id,
+                      region: COUNTRY_REGION[id] ?? "na",
+                    })
                   }
                   onMouseLeave={() => setTooltip(null)}
                   onClick={() => onSelectEntity(id)}
@@ -191,6 +221,32 @@ export default function NorthAmericaMap({
                 const ent = getEntity(name, "na");
                 const isSelected = selectedGeoId === name;
                 if (!ent) {
+                  if (lens === "stablecoin") {
+                    return (
+                      <Geography
+                        key={geo.rsmKey}
+                        geography={geo}
+                        style={{
+                          default: {
+                            fill: US_FEDERAL_FILL,
+                            stroke: NEUTRAL_STROKE,
+                            strokeWidth: 0.6,
+                            outline: "none",
+                            pointerEvents: "none",
+                          },
+                          hover: {
+                            fill: US_FEDERAL_FILL,
+                            outline: "none",
+                            pointerEvents: "none",
+                          },
+                          pressed: {
+                            fill: US_FEDERAL_FILL,
+                            outline: "none",
+                          },
+                        }}
+                      />
+                    );
+                  }
                   // Unmapped states (e.g. territories) render as neutral fill
                   return (
                     <Geography
@@ -217,13 +273,17 @@ export default function NorthAmericaMap({
                     />
                   );
                 }
-                // For the stablecoin lens, US stablecoin regulation is
-                // federal — all states share us-federal's coloring.
-                const colorEnt =
+                const isTrackedStablecoinState =
+                  lens === "stablecoin" &&
+                  ent.legislation.some((bill) => bill.category.startsWith("stablecoin-"));
+                const fill =
                   lens === "stablecoin"
-                    ? (getEntity("840", "na") ?? ent)
-                    : ent;
-                const fill = getEntityColorForDimension(colorEnt, dimension, lens);
+                    ? isTrackedStablecoinState
+                      ? `url(#${US_TRACKED_PATTERN_ID})`
+                      : US_FEDERAL_FILL
+                    : ent
+                      ? STANCE_HEX[ent.stance ?? ent.stanceDatacenter ?? "none"]
+                      : NEUTRAL_FILL;
                 const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
                 const strokeWidth = isSelected ? 3 : 0.6;
                 const base = {

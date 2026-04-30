@@ -13,9 +13,12 @@ interface TopToolbarProps {
 }
 
 const SHORT_LABEL: Record<Region, string> = {
-  na: "N. America",
+  na: "Americas",
+  latam: "Americas",
   eu: "Europe",
   asia: "Asia",
+  africa: "Africa",
+  oceania: "Asia",
 };
 
 function isMacLike(): boolean {
@@ -37,9 +40,7 @@ export default function TopToolbar({
 }: TopToolbarProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
-  const [mac, setMac] = useState(true);
-
-  useEffect(() => setMac(isMacLike()), []);
+  const [mac] = useState(isMacLike);
 
   // Global hotkeys for the toolbar's modals. ⌘K / Ctrl+K opens search,
   // `?` opens the shortcuts cheat sheet. Both ignore typing in inputs

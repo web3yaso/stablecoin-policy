@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useSyncExternalStore } from "react";
 
 export type Locale = "zh" | "en";
 
@@ -14,21 +14,43 @@ const LocaleContext = createContext<LocaleContextValue>({
   setLocale: () => {},
 });
 
-export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("zh");
+const LOCALE_STORAGE_KEY = "sc-locale";
 
-  useEffect(() => {
-    const stored = localStorage.getItem("sc-locale") as Locale | null;
-    if (stored === "en" || stored === "zh") setLocaleState(stored);
-  }, []);
+function readLocale(): Locale {
+  if (typeof window === "undefined") return "zh";
+  const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY);
+  return stored === "en" || stored === "zh" ? stored : "zh";
+}
+
+function subscribe(onStoreChange: () => void) {
+  if (typeof window === "undefined") return () => {};
+
+  function onStorage(e: StorageEvent) {
+    if (e.key === LOCALE_STORAGE_KEY) onStoreChange();
+  }
+
+  function onLocaleChange() {
+    onStoreChange();
+  }
+
+  window.addEventListener("storage", onStorage);
+  window.addEventListener("sc-locale-change", onLocaleChange);
+  return () => {
+    window.removeEventListener("storage", onStorage);
+    window.removeEventListener("sc-locale-change", onLocaleChange);
+  };
+}
+
+export function LocaleProvider({ children }: { children: React.ReactNode }) {
+  const locale = useSyncExternalStore<Locale>(subscribe, readLocale, () => "zh");
 
   useEffect(() => {
     document.documentElement.lang = locale === "zh" ? "zh-CN" : "en";
   }, [locale]);
 
   const setLocale = (l: Locale) => {
-    setLocaleState(l);
-    localStorage.setItem("sc-locale", l);
+    window.localStorage.setItem(LOCALE_STORAGE_KEY, l);
+    window.dispatchEvent(new Event("sc-locale-change"));
   };
 
   return (

@@ -2,7 +2,7 @@
   "id": "australia",
   "geoId": "036",
   "name": "Australia",
-  "region": "asia",
+  "region": "oceania",
   "level": "federal",
   "stance": "concerning",
   "stanceDatacenter": "concerning",
@@ -17,7 +17,7 @@
       "stage": "Enacted",
       "stance": "concerning",
       "impactTags": [],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2025-10-09"
     },
     {
@@ -28,7 +28,7 @@
       "stage": "Enacted",
       "stance": "concerning",
       "impactTags": [],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2025-09-25"
     },
     {
@@ -39,7 +39,7 @@
       "stage": "Enacted",
       "stance": "concerning",
       "impactTags": [],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2025-09-18"
     }
   ],

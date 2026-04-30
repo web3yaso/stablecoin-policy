@@ -265,6 +265,11 @@ const STANCE_STORY: Record<StanceType, { chip: string; line: string; dot: string
     line: "No public position on AI or data-center policy.",
     dot: "bg-stance-none",
   },
+  pioneering: {
+    chip: "Dedicated Legislation",
+    line: "Authored dedicated stablecoin or digital asset legislation.",
+    dot: "bg-stance-favorable",
+  },
 };
 
 /**

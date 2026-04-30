@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 import type { DataCenter, DataCenterStatus } from "@/types";
 
 interface DataCenterDotsProps {
@@ -47,6 +47,10 @@ export const DC_COLOR = {
 } as const;
 
 export type DcDotStatus = DataCenterStatus | "mixed";
+
+function subscribeMounted() {
+  return () => {};
+}
 
 /**
  * County-view data center icon — iOS-app-icon shape (squircle) with a
@@ -318,8 +322,7 @@ export default function DataCenterDots({
   // Gate on mount — projection output is float-sensitive, so server vs
   // client renders can diverge by a trailing digit. The dots have no
   // SEO/a11y value pre-hydration, so skip them until mounted.
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(subscribeMounted, () => true, () => false);
 
   // Prefer the projection passed as a prop; fall back to MapContext only
   // when no prop is supplied. Context-derived projection has been flaky

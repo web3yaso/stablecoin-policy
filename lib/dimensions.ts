@@ -1,5 +1,5 @@
 import type { Dimension, DimensionLens, Entity, ImpactTag, StablecoinTag } from "@/types";
-import { STANCE_HEX } from "./map-utils";
+import { STANCE_HEX, NEUTRAL_FILL } from "./map-utils";
 import { STABLECOIN_DIMENSION_TAGS, getIssuanceColor } from "./stablecoin-tags";
 
 /**
@@ -179,14 +179,18 @@ export function getEntityColorForDimension(
   if (dimension === "overall") {
     const stance =
       lens === "ai"
-        ? entity.stanceAI
+        ? (entity.stanceAI ?? entity.stance ?? "none")
         : lens === "stablecoin"
-          ? (entity.stance ?? entity.stanceDatacenter)
-          : entity.stanceDatacenter;
-    return STANCE_HEX[stance];
+          ? (entity.stance ?? entity.stanceDatacenter ?? "none")
+          : (entity.stanceDatacenter ?? entity.stance ?? "none");
+    return STANCE_HEX[stance] ?? NEUTRAL_FILL;
   }
   if (dimension === "sc-issuance") {
-    return getIssuanceColor((entity.stablecoinMeta?.tags ?? []) as StablecoinTag[], entity.stablecoinMeta?.legalStatus);
+    if (!entity.stablecoinMeta) {
+      const stance = entity.stance ?? entity.stanceDatacenter ?? "none";
+      return STANCE_HEX[stance] ?? NEUTRAL_FILL;
+    }
+    return getIssuanceColor((entity.stablecoinMeta.tags ?? []) as StablecoinTag[], entity.stablecoinMeta.legalStatus);
   }
   const score = getDimensionScore(entity, dimension);
   const grad = DIMENSION_GRADIENT[dimension];

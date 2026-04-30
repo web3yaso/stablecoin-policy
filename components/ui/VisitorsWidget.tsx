@@ -37,14 +37,13 @@ function seededBase(): number {
   return Math.round(trough + amplitude + jitter);
 }
 
-export default function VisitorsWidget() {
-  const [mounted, setMounted] = useState(false);
-  const [count, setCount] = useState(0);
-  const [labelIdx, setLabelIdx] = useState(0);
+function initialLabelIndex(): number {
+  return seededBase() % LABELS.length;
+}
 
-  // Pick a stable starting label so SSR → client hydration doesn't
-  // flicker. Rotates every ~6s once mounted.
-  const startingLabel = useMemo(() => Math.floor(Math.random() * LABELS.length), []);
+export default function VisitorsWidget() {
+  const [count, setCount] = useState(seededBase);
+  const [labelIdx, setLabelIdx] = useState(initialLabelIndex);
 
   // Longest possible string the slot ever holds, used as a ghost
   // measurer so the slot's actual rendered width matches the widest
@@ -57,9 +56,6 @@ export default function VisitorsWidget() {
   }, []);
 
   useEffect(() => {
-    setMounted(true);
-    setLabelIdx(startingLabel);
-
     // Session id persists for the tab lifetime. Using sessionStorage
     // (not localStorage) means each new tab counts as a fresh visitor
     // while a user clicking around stays one session.
@@ -153,9 +149,7 @@ export default function VisitorsWidget() {
       window.clearInterval(drift);
       window.clearInterval(rotate);
     };
-  }, [startingLabel]);
-
-  if (!mounted) return null;
+  }, []);
 
   return (
     <div

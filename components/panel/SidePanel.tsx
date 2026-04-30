@@ -182,6 +182,7 @@ export default function SidePanel({
   // that means a ~90vh sheet; on desktop a wider panel. Resets to
   // false whenever the panel collapses to the island.
   const [expanded, setExpanded] = useState(false);
+  const panelExpanded = size === "min" ? false : expanded;
   const tabRefs = useRef<Partial<Record<Layer, HTMLButtonElement | null>>>({});
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [expandedSections, setExpandedSections] = useState<Set<Layer>>(new Set());
@@ -235,12 +236,6 @@ export default function SidePanel({
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = 0;
   }, [entity?.id]);
-
-  // Expanded state is a per-session preference for the current view;
-  // collapsing to the island always clears it so reopening feels fresh.
-  useEffect(() => {
-    if (size === "min") setExpanded(false);
-  }, [size]);
 
   const availableLayers: Layer[] = [];
   if (hasLegislation) availableLayers.push("legislation");
@@ -336,11 +331,11 @@ export default function SidePanel({
           width: "calc(100vw - 1.5rem)",
           maxWidth: "26rem",
           minHeight: "0px",
-          maxHeight: expanded ? "min(44rem, 90vh)" : "min(30rem, 60vh)",
+          maxHeight: panelExpanded ? "min(44rem, 90vh)" : "min(30rem, 60vh)",
         };
       }
       return {
-        width: expanded
+        width: panelExpanded
           ? "min(26rem, calc(100vw - 2rem))"
           : "min(20rem, calc(100vw - 2rem))",
         minHeight: "0px",
@@ -348,7 +343,7 @@ export default function SidePanel({
       };
     }
     return {
-      width: expanded
+      width: panelExpanded
         ? "min(30rem, calc(100vw - 2rem))"
         : "min(22rem, calc(100vw - 2rem))",
       minHeight: "0px",
@@ -563,9 +558,9 @@ export default function SidePanel({
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          aria-label={expanded ? "Shrink" : "Expand"}
-          aria-pressed={expanded}
-          title={expanded ? "Shrink" : "Expand"}
+          aria-label={panelExpanded ? "Shrink" : "Expand"}
+          aria-pressed={panelExpanded}
+          title={panelExpanded ? "Shrink" : "Expand"}
           className="relative w-3 h-3 rounded-full bg-[#28C840] hover:brightness-95 active:brightness-90 transition"
         >
           {/* Two corner triangles, clearly separated by a blank
@@ -577,7 +572,7 @@ export default function SidePanel({
             className="absolute inset-0 w-full h-full opacity-0 group-hover/tl:opacity-100 transition-opacity"
             aria-hidden
           >
-            {expanded ? (
+            {panelExpanded ? (
               <>
                 <path d="M8 3.5 H4 L8 7.5 Z" fill="#003D00" />
                 <path d="M4 8.5 H8 L4 4.5 Z" fill="#003D00" />
@@ -657,7 +652,11 @@ export default function SidePanel({
                 );
               })() : (
                 <StanceBadge
-                  stance={entity.stance ?? (lens === "ai" ? entity.stanceAI : entity.stanceDatacenter)}
+                  stance={
+                    entity.stance ??
+                    (lens === "ai" ? entity.stanceAI : entity.stanceDatacenter) ??
+                    "none"
+                  }
                   size="md"
                 />
               )}
@@ -875,7 +874,7 @@ export default function SidePanel({
                         )}
                         {reg.headQuote && (
                           <blockquote className="mt-1.5 text-[11px] text-ink/70 italic leading-snug border-l-2 border-black/10 pl-2">
-                            "{reg.headQuote}"
+                            &ldquo;{reg.headQuote}&rdquo;
                           </blockquote>
                         )}
                       </div>

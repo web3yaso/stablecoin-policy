@@ -18,7 +18,7 @@
         "cross-border-data-transfer",
         "enforcement"
       ],
-      "category": "data-privacy",
+      "category": "stablecoin-regulation",
       "updatedDate": "2025-10-01",
       "partyOrigin": "B",
       "sourceUrl": "https://iclg.com/practice-areas/data-protection-laws-and-regulations/indonesia"
@@ -35,7 +35,7 @@
         "non-binding",
         "electronic-system-operators"
       ],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2023-12-19",
       "partyOrigin": "B",
       "sourceUrl": "https://www.mondaq.com/new-technology/1652492/artificial-intelligence-in-indonesia-legal-and-regulatory-insights"
@@ -53,7 +53,7 @@
         "ethics",
         "presidential-regulation"
       ],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2026-02-05",
       "partyOrigin": "B",
       "sourceUrl": "https://rri.co.id/en/national/2105710/indonesia-moves-toward-national-ai-regulation"
@@ -71,7 +71,7 @@
         "risk-tiered",
         "content-labelling"
       ],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2026-02-28",
       "sourceUrl": "https://thelegalwire.ai/two-priority-ai-presidential-decrees-to-be-signed-by-prabowo-in-early-2026/"
     },
@@ -88,7 +88,7 @@
         "sector-guidelines",
         "digital-talent"
       ],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2026-02-28",
       "sourceUrl": "https://ps-engage.com/indonesias-ai-national-roadmap-white-paper-paving-the-way-toward-a-smarter-and-sovereign-digital-future/"
     },
@@ -105,7 +105,7 @@
         "NVIDIA",
         "SEZ-tax-incentives"
       ],
-      "category": "data-center-siting",
+      "category": "stablecoin-regulation",
       "updatedDate": "2025-12-10",
       "sourceUrl": "https://introl.com/blog/indonesia-first-sovereign-ai-data-center-market-analysis"
     }

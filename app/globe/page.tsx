@@ -314,15 +314,15 @@ export default function GlobePage() {
       animId = requestAnimationFrame(animate);
     }
     animate();
-
-    setStatsReady(true);
+    const statsReadyId = requestAnimationFrame(() => setStatsReady(true));
 
     return () => {
+      cancelAnimationFrame(statsReadyId);
       cancelAnimationFrame(animId);
       globe.destroy();
       setStatsReady(false);
     };
-  }, [markers]);
+  }, [markers, topIds]);
 
   const operator = selectedFacility && (stripConfidence(selectedFacility.operator) ?? selectedFacility.operator);
   const capacity = selectedFacility && formatMW(selectedFacility.capacityMW);

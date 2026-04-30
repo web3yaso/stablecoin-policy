@@ -2,12 +2,12 @@
   "id": "argentina",
   "geoId": "032",
   "name": "Argentina",
-  "region": "na",
+  "region": "latam",
   "level": "federal",
   "stance": "concerning",
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
-  "contextBlurb": "Stablecoins are not legal tender in Argentina but may be held and used by private agreement. Banks and regulated payment service providers cannot offer or facilitate crypto services (BCRA Com. \"A\" 7506 for banks; Com. \"A\" 7759 for PSPs). A Virtual Asset Service Provider (PSAV) registration regime is in force under CNV RG 1058/2025, with staged rollout and ongoing guidance; UIF Res. 49/2024 sets AML/CFT obligations for PSAVs.",
+  "contextBlurb": "Stablecoins are not legal tender in Argentina, but they may be held and used by private agreement. Argentina does not yet have a stablecoin-specific issuance, reserve, or redemption regime. Financial institutions and payment account PSPs are restricted from offering or facilitating unauthorized digital-asset transactions under BCRA Communications “A” 7506 and “A” 7759. VASPs/PSAVs are subject to CNV registration and AML/CFT obligations under UIF Resolution 49/2024.",
   "legislation": [
     {
       "id": "argentina-leg-1",
@@ -17,7 +17,7 @@
       "stage": "Enacted",
       "stance": "concerning",
       "impactTags": [],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2025-09-01"
     },
     {
@@ -28,7 +28,7 @@
       "stage": "Enacted",
       "stance": "concerning",
       "impactTags": [],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2025-06-13"
     },
     {
@@ -39,7 +39,7 @@
       "stage": "Enacted",
       "stance": "concerning",
       "impactTags": [],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2025-05-26"
     },
     {
@@ -50,7 +50,7 @@
       "stage": "Enacted",
       "stance": "concerning",
       "impactTags": [],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2025-03-14"
     }
   ],

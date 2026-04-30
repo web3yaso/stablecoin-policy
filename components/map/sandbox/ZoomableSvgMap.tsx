@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   ComposableMap,
   Geographies,
@@ -70,11 +69,7 @@ export default function ZoomableSvgMap({
       clamp: config.clamp,
     });
 
-  const [highDetail, setHighDetail] = useState(false);
-  useEffect(() => {
-    if (!highDetail && zoom >= LOD_ENTER) setHighDetail(true);
-    else if (highDetail && zoom < LOD_EXIT) setHighDetail(false);
-  }, [zoom, highDetail]);
+  const highDetail = zoom >= LOD_ENTER;
 
   const strokeScale = (base: number, selected = false) =>
     (selected ? 3 * base : base) / zoom;

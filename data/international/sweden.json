@@ -19,7 +19,7 @@
         "regulatory-sandbox",
         "EU-AI-Act-compliance"
       ],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2025-10-06",
       "partyOrigin": "B",
       "sourceUrl": "https://www.twobirds.com/en/capabilities/artificial-intelligence/ai-legal-services/ai-regulatory-horizon-tracker/sweden"
@@ -38,7 +38,7 @@
         "sustainability",
         "transparency"
       ],
-      "category": "data-center-energy",
+      "category": "stablecoin-regulation",
       "updatedDate": "2025-07-01",
       "partyOrigin": "B",
       "sourceUrl": "https://www.energimyndigheten.se/en/climate/climate/data-centre-energy-performance-reporting/"
@@ -57,7 +57,7 @@
         "civil-liberties",
         "EU-AI-Act-exceptions"
       ],
-      "category": "ai-criminal-justice",
+      "category": "stablecoin-regulation",
       "updatedDate": "2026-03-03",
       "partyOrigin": "B",
       "sourceUrl": "https://riksdagsmonitor.com/news/2026-03-03-ai-facial-recognition-police-en.html"
@@ -75,7 +75,7 @@
         "AI-Act-alignment",
         "public-sector"
       ],
-      "category": "ai-governance",
+      "category": "stablecoin-regulation",
       "updatedDate": "2026-02-11",
       "sourceUrl": "https://www.government.se/articles/2026/02/swedens-ai-strategy-in-five-minutes/"
     }
