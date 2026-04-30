@@ -28,6 +28,7 @@ import {
   DIMENSION_TAGS,
   DIMENSION_COLOR,
   DIMENSION_TEXT,
+  DIMENSION_GRADIENT,
 } from "@/lib/dimensions";
 import { ALL_FACILITIES } from "@/lib/datacenters";
 import { plantsInState } from "@/lib/energy-data";
@@ -1835,7 +1836,25 @@ export default function MapShell({
               );
             })}
           </div>
-          {/* Issuance color legend — shown only when sc-issuance is active */}
+          {/* Overall stance color legend */}
+          {activeDimension === "overall" && (
+            <div className="mt-2.5 pt-2 border-t border-black/[.05] flex flex-col gap-1">
+              {[
+                { color: "#7EBC8E", label: "Dedicated Legislation" },
+                { color: "#A8D4B2", label: "Innovation-Friendly" },
+                { color: "#D9C980", label: "Under Discussion" },
+                { color: "#D9A766", label: "Concerning" },
+                { color: "#D98080", label: "Restrictive" },
+                { color: "#C9CBD1", label: "No Action" },
+              ].map(({ color, label }) => (
+                <span key={label} className="inline-flex items-center gap-1.5 text-[10.5px] text-muted">
+                  <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: color }} />
+                  {label}
+                </span>
+              ))}
+            </div>
+          )}
+          {/* Issuance color legend */}
           {activeDimension === "sc-issuance" && (
             <div className="mt-2.5 pt-2 border-t border-black/[.05] flex flex-col gap-1">
               {[
@@ -1851,6 +1870,23 @@ export default function MapShell({
               ))}
             </div>
           )}
+          {/* Gradient legend for all other stablecoin dimensions */}
+          {activeDimension !== "overall" && activeDimension !== "sc-issuance" && (() => {
+            const grad = DIMENSION_GRADIENT[activeDimension as Exclude<Dimension, "overall">];
+            if (!grad) return null;
+            return (
+              <div className="mt-2.5 pt-2 border-t border-black/[.05]">
+                <div
+                  className="h-2 rounded-full w-full mb-1.5"
+                  style={{ background: `linear-gradient(to right, ${grad.from}, ${grad.to})` }}
+                />
+                <div className="flex justify-between text-[9.5px] text-muted">
+                  <span>Less activity</span>
+                  <span>More activity</span>
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </div>
 

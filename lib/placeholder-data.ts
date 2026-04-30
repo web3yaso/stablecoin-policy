@@ -967,7 +967,16 @@ const NA_ENTITIES: Entity[] = [
   },
 ];
 
-export const ENTITIES: Entity[] = [...NA_ENTITIES, ...INTERNATIONAL_ENTITIES];
+// Enrich NA entities with stablecoinMeta from international research where
+// geoIds match (e.g. us-federal gets the stablecoinMeta from united-states.json).
+const intlByGeoId = new Map(INTERNATIONAL_ENTITIES.map((e) => [e.geoId, e]));
+export const ENTITIES: Entity[] = [
+  ...NA_ENTITIES.map((e) => {
+    const intl = intlByGeoId.get(e.geoId);
+    return intl?.stablecoinMeta ? { ...e, stablecoinMeta: intl.stablecoinMeta } : e;
+  }),
+  ...INTERNATIONAL_ENTITIES.filter((e) => !NA_ENTITIES.some((na) => na.geoId === e.geoId)),
+];
 
 export function getEntity(geoId: string, region: Region): Entity | null {
   return ENTITIES.find((e) => e.geoId === geoId && e.region === region) ?? null;

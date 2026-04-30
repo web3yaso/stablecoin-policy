@@ -7,50 +7,50 @@
   "stance": "concerning",
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
-  "contextBlurb": "Stablecoins are not legal tender in Argentina, but they may be held and used by private agreement. Argentina does not yet have a stablecoin-specific issuance, reserve, or redemption regime. Financial institutions and payment account PSPs are restricted from offering or facilitating unauthorized digital-asset transactions under BCRA Communications “A” 7506 and “A” 7759. VASPs/PSAVs are subject to CNV registration and AML/CFT obligations under UIF Resolution 49/2024.",
+  "contextBlurb": "Stablecoins are not legal tender in Argentina but may be held and used by private agreement. Argentina does not yet have a stablecoin-specific issuance, reserve, or redemption regime. Financial institutions and payment account providers are restricted from offering or facilitating unauthorized crypto services under BCRA Communications “A” 7506 and “A” 7759. A Virtual Asset Service Provider (PSAV) registration regime is in force under CNV RG 1058/2025, with AML/CFT obligations defined by UIF Resolution 49/2024.",
   "legislation": [
     {
       "id": "argentina-leg-1",
       "billCode": "2025-09-01",
       "title": "CNV Interpretative Criterion 97 (object-clause requirements for PSAV applicants).",
-      "summary": "",
+      "summary": "Provides additional guidance on corporate object requirements for entities applying to register as Virtual Asset Service Providers (PSAVs).",
       "stage": "Enacted",
       "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
+      "impactTags": ["licensing", "compliance"],
+      "category": "crypto-regulation",
       "updatedDate": "2025-09-01"
     },
     {
       "id": "argentina-leg-2",
       "billCode": "2025-06-13",
-      "title": "CNV RG 1069/2025 (tokenization of certain publicly offered securities) published.",
-      "summary": "",
+      "title": "CNV RG 1069/2025 (tokenization of certain publicly offered securities).",
+      "summary": "Introduces regulatory framework for tokenization of publicly offered securities under CNV oversight.",
       "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
+      "stance": "neutral",
+      "impactTags": ["tokenization", "securities"],
+      "category": "securities-tokenization",
       "updatedDate": "2025-06-13"
     },
     {
       "id": "argentina-leg-3",
       "billCode": "2025-05-26",
       "title": "PSAV registration filings moved to TAD platform.",
-      "summary": "",
+      "summary": "CNV requires PSAV registration and deregistration filings to be submitted via the TAD digital platform.",
       "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
+      "stance": "neutral",
+      "impactTags": ["registration"],
+      "category": "crypto-regulation",
       "updatedDate": "2025-05-26"
     },
     {
       "id": "argentina-leg-4",
       "billCode": "2025-03-14",
-      "title": "CNV RG 1058/2025 published (PSAV registry/rules).",
-      "summary": "",
+      "title": "CNV RG 1058/2025 (PSAV registry and regulatory framework).",
+      "summary": "Establishes the registration regime and ongoing compliance obligations for Virtual Asset Service Providers in Argentina.",
       "stage": "Enacted",
       "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
+      "impactTags": ["licensing", "compliance", "supervision"],
+      "category": "crypto-regulation",
       "updatedDate": "2025-03-14"
     }
   ],
@@ -58,14 +58,14 @@
     {
       "id": "argentina-fig-1",
       "name": "Comisión Nacional de Valores (CNV)",
-      "role": "Maintains the PSAV registry, sets registration/ongoing obligations, supervises and may sanction PSAVs.",
+      "role": "Maintains the PSAV registry, sets registration and compliance requirements, supervises and may sanction VASPs.",
       "party": "N/A",
       "stance": "review"
     },
     {
       "id": "argentina-fig-2",
       "name": "Unidad de Información Financiera (UIF)",
-      "role": "AML/CFT authority; PSAVs are Sujetos Obligados under Res. 49/2024.",
+      "role": "AML/CFT authority; PSAVs are designated obligated entities under Resolution 49/2024.",
       "party": "N/A",
       "stance": "review"
     }
@@ -73,16 +73,16 @@
   "news": [
     {
       "id": "argentina-news-1",
-      "headline": "BCRA Communication A 7506",
+      "headline": "BCRA Communication A 7506 restricts banks from offering crypto services",
       "source": "bcra.gob.ar",
-      "date": "2025-11-11",
+      "date": "2022-05-05",
       "url": "https://bcra.gob.ar/Pdfs/comytexord/a7506.pdf"
     },
     {
       "id": "argentina-news-2",
-      "headline": "BCRA Communication A 7759",
+      "headline": "BCRA Communication A 7759 extends restrictions to payment service providers",
       "source": "bcra.gob.ar",
-      "date": "2025-11-11",
+      "date": "2023-05-04",
       "url": "https://www.bcra.gob.ar/pdfs/comytexord/A7759.pdf"
     }
   ],
@@ -90,27 +90,27 @@
     "code": "AR",
     "nameZh": "阿根廷",
     "flagImg": "https://flagcdn.com/w320/ar.png",
-    "lastUpdated": "Nov 11, 2025",
-    "summaryEn": "Stablecoins are not legal tender in Argentina but may be held and used by private agreement. Banks and regulated payment service providers cannot offer or facilitate crypto services (BCRA Com. \"A\" 7506 for banks; Com. \"A\" 7759 for PSPs). A Virtual Asset Service Provider (PSAV) registration regime is in force under CNV RG 1058/2025, with staged rollout and ongoing guidance; UIF Res. 49/2024 sets AML/CFT obligations for PSAVs.",
+    "lastUpdated": "2026-04-29",
+    "summaryEn": "Stablecoins are not legal tender in Argentina but may be used privately. There is no dedicated stablecoin regulatory framework. Financial institutions and PSPs are restricted from facilitating unauthorized crypto services, while VASPs must register with the CNV and comply with AML/CFT obligations.",
     "tags": [
       "licensing-required",
-      "algorithmic-banned",
-      "aml-kyc"
+      "aml-kyc",
+      "no-stablecoin-framework"
     ],
     "legalStatus": "legal_with_restrictions",
     "regulatoryClarity": 3,
-    "regimeStatus": "finalized",
-    "classification": "security",
-    "classificationNote": "Crypto (including stablecoins) is treated as an asset for tax/contract purposes; tokens with securities features fall under CNV rules.",
-    "allowsFiatBacked": false,
-    "allowsAlgorithmic": false,
-    "allowsAssetBacked": false,
+    "regimeStatus": "developing",
+    "classification": "virtual_asset",
+    "classificationNote": "Crypto assets (including stablecoins) are treated as virtual assets; tokens with securities characteristics fall under CNV securities regulation.",
+    "allowsFiatBacked": true,
+    "allowsAlgorithmic": "unclear",
+    "allowsAssetBacked": true,
     "regulators": [
       {
         "id": "argentina-reg-1",
         "name": "Comisión Nacional de Valores",
         "acronym": "CNV",
-        "role": "Maintains the PSAV registry, sets registration/ongoing obligations, supervises and may sanction PSAVs.",
+        "role": "Primary regulator of virtual asset service providers and securities markets.",
         "websiteUrl": "https://www.argentina.gob.ar/cnv",
         "isPrimary": true
       },
@@ -118,8 +118,8 @@
         "id": "argentina-reg-2",
         "name": "Unidad de Información Financiera",
         "acronym": "UIF",
-        "role": "AML/CFT authority; PSAVs are Sujetos Obligados under Res. 49/2024.",
-        "websiteUrl": "https://www.boletinoficial.gob.ar/detalleAviso/primera/305109/20240325",
+        "role": "AML/CFT authority overseeing compliance obligations of PSAVs.",
+        "websiteUrl": "https://www.argentina.gob.ar/uif",
         "isPrimary": false
       }
     ]

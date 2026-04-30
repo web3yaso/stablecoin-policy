@@ -1,30 +1,10 @@
 import type { PowerPlant, StateEnergyProfile } from "@/types";
-import plantsData from "@/data/energy/power-plants.json";
-import profilesData from "@/data/energy/state-profiles.json";
 
-interface PlantsFile {
-  plants: PowerPlant[];
-}
-interface ProfilesFile {
-  profiles: StateEnergyProfile[];
-}
-
-const PLANTS = plantsData as unknown as PlantsFile;
-const PROFILES = profilesData as unknown as ProfilesFile;
-
-export const ALL_PLANTS: PowerPlant[] = PLANTS.plants;
+export const ALL_PLANTS: PowerPlant[] = [];
 
 const PLANTS_BY_STATE = new Map<string, PowerPlant[]>();
-for (const p of ALL_PLANTS) {
-  const list = PLANTS_BY_STATE.get(p.state) ?? [];
-  list.push(p);
-  PLANTS_BY_STATE.set(p.state, list);
-}
 
 const PROFILES_BY_STATE: Record<string, StateEnergyProfile> = {};
-for (const p of PROFILES.profiles) {
-  PROFILES_BY_STATE[p.state] = p;
-}
 
 export function plantsInState(stateName: string): PowerPlant[] {
   return PLANTS_BY_STATE.get(stateName) ?? [];

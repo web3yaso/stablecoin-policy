@@ -15,15 +15,12 @@ import { US_FACILITIES } from "@/lib/datacenters";
 import { plantsInState, plantsNearby } from "@/lib/energy-data";
 import { FUEL_COLOR, plantRadius } from "@/lib/energy-colors";
 import { DcIcon, SIZE_BANDS } from "./DataCenterDots";
-import waterDataRaw from "@/data/energy/us-water.json";
-
 void getMunicipalitiesByState;
 
-interface WaterFile {
-  rivers: FeatureCollection;
-  lakes: FeatureCollection;
-}
-const WATER = waterDataRaw as unknown as WaterFile;
+const WATER = {
+  rivers: { type: "FeatureCollection" as const, features: [] },
+  lakes: { type: "FeatureCollection" as const, features: [] },
+};
 
 function bandRadius(mw: number | undefined): number {
   const v = mw ?? 0;

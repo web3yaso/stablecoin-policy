@@ -27,6 +27,25 @@ npm install
 npm run dev
 ```
 
+## 数据同步脚本
+
+在 `.env.local` 中配置以下环境变量：
+
+```
+CONGRESS_API_KEY=   # Congress.gov，免费注册 https://api.congress.gov/sign-up/
+STATE_API_KEY=      # OpenStates API，免费注册 https://openstates.org/accounts/profile/
+ANTHROPIC_API_KEY=  # 新闻聚合与法案分类
+```
+
+| 脚本 | 说明 |
+|------|------|
+| `npx tsx scripts/smoke/congress-ping.ts` | 测试 Congress.gov 连通性 |
+| `npx tsx scripts/sync/bills-federal.ts` | 同步美国联邦稳定币法案（Congress.gov） |
+| `npx tsx scripts/sync/bills-states.ts` | 同步美国各州稳定币法案（OpenStates，NY/CA/TX等） |
+| `npx tsx scripts/sync/votes-congress.ts` | 同步联邦法案投票记录 |
+| `npx tsx scripts/sync/news-rss.ts` | 拉取最新新闻 |
+| `npx tsx scripts/sync/international.ts` | 更新国际数据 |
+
 ## 数据来源
 
-立法数据来自各国议会官网、监管机构公告及 LegiScan。完整来源见站内方法论页面。
+美国联邦立法数据来自 [Congress.gov API](https://api.congress.gov/)；州级数据来自 [OpenStates API](https://openstates.org/)；国际数据来自各国议会官网及监管机构公告。完整来源见站内方法论页面。
