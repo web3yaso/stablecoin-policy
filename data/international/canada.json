@@ -7,38 +7,38 @@
   "stance": "concerning",
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
-  "contextBlurb": "As of 2025, Canada has no dedicated stablecoin statute. Most fiat-referenced “stablecoins” (VRCAs) are addressed through CSA securities/derivatives oversight of trading platforms under an interim approach, not an issuer law. The Bank of Canada has urged a payments-focused framework so that any widely used stablecoin meets prudential and consumer-protection standards. Deposit insurance does not cover crypto/stablecoins, so retail users lack bank-style protections.",
+  "contextBlurb": "Canada now has a federal stablecoin statute on the books, but the operational regime is still being built. Budget 2025 legislation enacted the Stablecoin Act through Bill C-15 on 26 March 2026. The new framework will place non-financial-institution fiat-backed stablecoin issuers under Bank of Canada supervision and require 1:1 high-quality liquid reserves, at-par redemption, governance, cybersecurity and recovery planning. Until the framework is fully brought into force, stablecoin activity in Canada still sits alongside the CSA's interim VRCA rules for trading platforms and existing AML oversight. Deposit insurance still does not cover cryptoassets or stablecoins.",
   "legislation": [
     {
       "id": "canada-leg-1",
-      "billCode": "2025-10-22",
-      "title": "FINTRAC fines Cryptomus operator Xeltox Enterprises Ltd. a record C$176.96 million for AML and sanctions violations, signaling strict enforcement in the crypto sector.",
-      "summary": "",
+      "billCode": "2026-03-26",
+      "title": "Bill C-15 receives Royal Assent, enacting the Stablecoin Act as part of Budget 2025 Implementation Act, No. 1.",
+      "summary": "The federal Stablecoin Act creates a new framework for fiat-backed stablecoin issuance by non-financial institutions, to be supervised by the Bank of Canada, with reserve, redemption, governance and security requirements to be filled in through follow-on regulation.",
       "stage": "Enacted",
       "stance": "concerning",
-      "impactTags": [],
+      "impactTags": ["licensing", "fiat-reserve-11", "redemption-rights", "governance"],
       "category": "stablecoin-regulation",
-      "updatedDate": "2025-10-22"
+      "updatedDate": "2026-03-26"
     },
     {
       "id": "canada-leg-2",
-      "billCode": "2025-09-19",
-      "title": "The U.S. GENIUS Act is implemented, creating a clear federal framework for stablecoin regulation, increasing pressure on Canada to harmonize its approach.",
-      "summary": "",
-      "stage": "Enacted",
+      "billCode": "2025-11-18",
+      "title": "Bill C-15 is introduced in Parliament to implement Budget 2025, including the new Stablecoin Act.",
+      "summary": "Introduction of Bill C-15 moved Canada from discussion to legislation by proposing a dedicated federal statute for fiat-backed stablecoins, rather than relying only on securities-platform conditions and general payments law.",
+      "stage": "Filed",
       "stance": "concerning",
-      "impactTags": [],
+      "impactTags": ["licensing", "consultation"],
       "category": "stablecoin-regulation",
-      "updatedDate": "2025-09-19"
+      "updatedDate": "2025-11-18"
     },
     {
       "id": "canada-leg-3",
       "billCode": "2025-04-01",
-      "title": "CSA issues a decision document on Payward Canada, reinforcing the application of securities laws to crypto platforms and stablecoin trading.",
-      "summary": "",
+      "title": "CSA decision document for Payward Canada restates interim conditions for trading value-referenced crypto assets (VRCAs).",
+      "summary": "The Payward Canada decision confirms the CSA's interim approach: platforms may support VRCAs only if the token is fiat-referenced, redeemable at par, backed by segregated high-quality reserve assets and subject to disclosure and custodial safeguards.",
       "stage": "Enacted",
       "stance": "concerning",
-      "impactTags": [],
+      "impactTags": ["fiat-reserve-11", "redemption-rights", "disclosure", "custody"],
       "category": "stablecoin-regulation",
       "updatedDate": "2025-04-01"
     }
@@ -62,25 +62,25 @@
   "news": [
     {
       "id": "canada-news-1",
-      "headline": "CSA — Interim approach to Value-Referenced Crypto Assets (stablecoins) (press release / Staff Notice links)",
-      "source": "securities-administrators.ca",
-      "date": "2025-10-22",
-      "url": "https://www.securities-administrators.ca/news/canadian-securities-regulators-clarify-interim-approach-to-value-referenced-crypto-asset/"
+      "headline": "Canada's Stablecoin Framework",
+      "source": "canada.ca",
+      "date": "2026-04-01",
+      "url": "https://www.canada.ca/en/department-finance/programs/financial-sector-policy/canadas-stablecoin-framework.html"
     },
     {
       "id": "canada-news-2",
-      "headline": "CSA — Update on VRCAs for crypto trading platforms (2024)",
-      "source": "securities-administrators.ca",
-      "date": "2025-10-22",
-      "url": "https://www.securities-administrators.ca/news/csa-provides-update-to-crypto-asset-trading-platforms-about-value-referenced-crypto-assets/"
+      "headline": "Bill C-15 (45-1) - Budget 2025 Implementation Act, No. 1",
+      "source": "parl.ca",
+      "date": "2026-03-26",
+      "url": "https://www.parl.ca/legisinfo/en/bill/45-1/c-15"
     }
   ],
   "stablecoinMeta": {
     "code": "CA",
     "nameZh": "加拿大",
     "flagImg": "https://flagcdn.com/w320/ca.png",
-    "lastUpdated": "Oct 22, 2025",
-    "summaryEn": "As of 2025, Canada has no dedicated stablecoin statute. Most fiat-referenced “stablecoins” (VRCAs) are addressed through CSA securities/derivatives oversight of trading platforms under an interim approach, not an issuer law. The Bank of Canada has urged a payments-focused framework so that any widely used stablecoin meets prudential and consumer-protection standards. Deposit insurance does not cover crypto/stablecoins, so retail users lack bank-style protections.",
+    "lastUpdated": "2026-03-26",
+    "summaryEn": "Canada enacted the Stablecoin Act through Bill C-15 on 26 March 2026, but the regime is not yet fully in force. The Act sets up Bank of Canada supervision for non-financial-institution fiat-backed stablecoin issuers and points toward 1:1 reserve, par-redemption, governance and data-security rules. Until detailed regulations are completed and the framework comes into force, trading-platform access to stablecoins continues to rely heavily on the CSA's interim VRCA conditions.",
     "tags": [
       "licensing-required",
       "non-bank-permitted",
@@ -91,7 +91,7 @@
     "regulatoryClarity": 3,
     "regimeStatus": "in_progress",
     "classification": "security",
-    "classificationNote": "Canada has no dedicated issuer law. The CSA treats fiat-pegged stablecoins on trading platforms as “Value-Referenced Crypto Assets (VRCAs)” and generally securities and/or derivatives in the platform context. Platforms may list only VRCAs that meet CSA interim terms (1:1 high-quality reserves, segre",
+    "classificationNote": "Canada now has a dedicated federal Stablecoin Act for fiat-backed issuance by non-financial institutions, but trading-platform treatment still relies on the CSA's VRCA framework. In platform contexts, VRCAs are commonly treated as securities and/or derivatives, while the new federal framework focuses on payments-style issuer regulation under Bank of Canada supervision.",
     "allowsFiatBacked": true,
     "allowsAlgorithmic": false,
     "allowsAssetBacked": false,

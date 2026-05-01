@@ -41,6 +41,9 @@ const MAX_DAYS = 14;
 const FETCH_TIMEOUT_MS = 15_000;
 const PER_FEED_LIMIT = 20;
 const CONCURRENCY = 4;
+const SUMMARY_MAX_TOKENS = 120;
+const SUMMARY_MIN_INTERVAL_MS = 1_500;
+const SUMMARY_MAX_RETRIES = 3;
 
 interface FeedConfig {
   url: string;
@@ -131,53 +134,35 @@ function decodeEntities(s: string): string {
 
 // Coarse relevance gate. A new item must mention at least one of these
 // keywords in its headline, otherwise it never makes it to the Haiku
-// summarize step. Saves cost AND keeps off-topic noise (e.g. medical
-// cannabis, Hormuz blockade) out of an AI / data-center / stablecoin
-// policy feed.
+// summarize step. Saves cost AND keeps off-topic noise out of the
+// stablecoin policy feed.
 const RELEVANCE_RE = new RegExp(
   [
-    "data\\s?cent(?:er|re)",
-    "ai\\b",
-    "artificial intelligence",
-    "anthropic",
-    "openai",
-    "google",
-    "microsoft",
-    "nvidia",
-    "meta\\b",
-    "claude",
-    "chatgpt",
-    "compute",
-    "hyperscale",
-    "moratorium",
-    "grid",
-    "gigawatt",
-    "\\d+\\s?(?:m|g)w\\b",
-    "deepfake",
-    "algorithm",
-    "chatbot",
-    "frontier model",
-    "policy",
-    "regulat",
-    "legislat",
-    "bill\\b",
-    "executive order",
-    "lawsuit",
-    "court",
-    "ftc",
-    "doj",
-    "white house",
     "stablecoin",
+    "stable coin",
     "payment stablecoin",
+    "fiat-backed token",
+    "fiat backed token",
+    "dollar-backed token",
+    "dollar backed token",
+    "digital dollar",
+    "tokenized deposit",
     "genius act",
     "stable act",
     "digital asset",
+    "digital asset market clarity act",
     "tokenized dollar",
     "dollar token",
     "cryptoasset",
     "crypto-asset",
+    "virtual asset",
+    "e-money token",
+    "asset-referenced token",
+    "single-currency stablecoin",
+    "single currency stablecoin",
     "reserve requirement",
     "reserve backing",
+    "backed by reserves",
     "issuer",
     "redemption",
     "treasury",
@@ -186,6 +171,23 @@ const RELEVANCE_RE = new RegExp(
     "federal reserve",
     "money transmission",
     "mica",
+    "markets in crypto-assets",
+    "markets in crypto assets",
+    "hkma",
+    "\\bmas\\b",
+    "\\bfsa\\b",
+    "cbuae",
+    "vara",
+    "finma",
+    "bank of england",
+    "csa",
+    "bank of canada",
+    "banxico",
+    "bcb\\b",
+    "bcra",
+    "cnv\\b",
+    "\\bemt\\b",
+    "\\bart\\b",
   ].join("|"),
   "i",
 );
@@ -293,6 +295,31 @@ function stripBoilerplate(html: string): string | null {
 }
 
 const client = new Anthropic();
+let nextSummarySlotAt = 0;
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function waitForSummarySlot() {
+  const now = Date.now();
+  const waitMs = Math.max(0, nextSummarySlotAt - now);
+  nextSummarySlotAt = Math.max(now, nextSummarySlotAt) + SUMMARY_MIN_INTERVAL_MS;
+  if (waitMs > 0) {
+    await sleep(waitMs);
+  }
+}
+
+function isRateLimitError(err: unknown): boolean {
+  if (!err || typeof err !== "object") return false;
+  const status = "status" in err ? (err as { status?: number }).status : undefined;
+  if (status === 429) return true;
+  const message =
+    "message" in err && typeof (err as { message?: unknown }).message === "string"
+      ? (err as { message: string }).message
+      : "";
+  return /\b429\b|rate limit/i.test(message);
+}
 
 async function summarize(
   headline: string,
@@ -301,28 +328,41 @@ async function summarize(
   body: string | null,
 ): Promise<{ summary: string; source: "article" | "headline-only" } | null> {
   const system =
-    "You write one- to two-sentence neutral summaries of news stories about AI governance, data-center policy, and stablecoin regulation. Plain factual prose. No editorializing.";
+    "You write one- to two-sentence neutral summaries of news stories about stablecoin regulation, issuance, reserves, supervision, and related digital-asset policy. Plain factual prose. No editorializing.";
   const userBlock = body
     ? `Headline: ${headline}\nSource: ${source} (${date})\n\nArticle body (trimmed):\n${body}\n\nWrite a 1–2 sentence neutral summary.`
     : `Headline: ${headline}\nSource: ${source} (${date})\n\nThe article body could not be retrieved. Write one factual sentence based on the headline alone — do not invent specifics.`;
-  try {
-    const res = await client.messages.create({
-      model: MODEL,
-      max_tokens: 180,
-      system,
-      messages: [{ role: "user", content: userBlock }],
-    });
-    const text = res.content
-      .filter((b) => b.type === "text")
-      .map((b) => (b as { type: "text"; text: string }).text.trim())
-      .join(" ")
-      .trim();
-    if (!text) return null;
-    return { summary: text, source: body ? "article" : "headline-only" };
-  } catch (err) {
-    console.error("  summarize failed:", (err as Error).message);
-    return null;
+  for (let attempt = 1; attempt <= SUMMARY_MAX_RETRIES; attempt++) {
+    await waitForSummarySlot();
+    try {
+      const res = await client.messages.create({
+        model: MODEL,
+        max_tokens: SUMMARY_MAX_TOKENS,
+        system,
+        messages: [{ role: "user", content: userBlock }],
+      });
+      const text = res.content
+        .filter((b) => b.type === "text")
+        .map((b) => (b as { type: "text"; text: string }).text.trim())
+        .join(" ")
+        .trim();
+      if (!text) return null;
+      return { summary: text, source: body ? "article" : "headline-only" };
+    } catch (err) {
+      if (isRateLimitError(err) && attempt < SUMMARY_MAX_RETRIES) {
+        const backoffMs = attempt * 15_000;
+        console.warn(
+          `  summarize rate-limited; retrying in ${(backoffMs / 1000).toFixed(0)}s ` +
+            `(attempt ${attempt + 1}/${SUMMARY_MAX_RETRIES})`,
+        );
+        await sleep(backoffMs);
+        continue;
+      }
+      console.error("  summarize failed:", (err as Error).message);
+      return null;
+    }
   }
+  return null;
 }
 
 // ─── Plumbing ──────────────────────────────────────────────────────

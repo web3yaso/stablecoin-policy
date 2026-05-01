@@ -7,38 +7,38 @@
   "stance": "concerning",
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
-  "contextBlurb": "Australia is moving to formalise stablecoin oversight. In September 2025, ASIC granted class relief so intermediaries can distribute a named AUD-backed stablecoin issued by an AFS-licensed issuer, subject to conditions such as making the PDS available to retail clients; the relief is time-limited and linked to ASIC Instrument 2025/631. In October 2025, the Government released exposure-draft payments licensing reforms proposing a graduated framework for stored-value facilities that would capture stablecoin issuers/wallets holding customer funds. Until those reforms are enacted, issuers may require an AFSL where the coin constitutes a financial product (e.g., a non-cash payment facility), and intermediaries can rely on the targeted ASIC relief.",
+  "contextBlurb": "Australia still has no dedicated stablecoin statute in force, but ASIC has clarified that some stablecoins can already fall within existing financial-services law. On 18 September 2025, ASIC granted class relief for intermediaries distributing a named stablecoin issued by an AFS-licensed issuer under Instrument 2025/631. On 25 September 2025, ASIC consulted on extending that relief, and on 9 December 2025 it finalised broader relief for certain stablecoins and wrapped tokens under Instrument 2025/867. Treasury's separate payment-stablecoin reform remains proposed rather than enacted, so the current regime is a mix of existing licensing law plus targeted ASIC exemptions.",
   "legislation": [
     {
       "id": "australia-leg-1",
-      "billCode": "2025-10-09",
-      "title": "Government releases exposure-draft payments-licensing reforms.",
-      "summary": "",
+      "billCode": "2025-12-09",
+      "title": "ASIC finalises Instrument 2025/867 granting broader class relief for certain stablecoins and wrapped tokens.",
+      "summary": "ASIC finalised additional relief that lets intermediaries deal in eligible stablecoins and wrapped tokens without needing separate market, clearing or financial-services licences solely because the token is itself a financial product, while keeping disclosure and record-keeping conditions in place.",
       "stage": "Enacted",
       "stance": "concerning",
-      "impactTags": [],
+      "impactTags": ["licensing", "consumer-protection", "disclosure"],
       "category": "stablecoin-regulation",
-      "updatedDate": "2025-10-09"
+      "updatedDate": "2025-12-09"
     },
     {
       "id": "australia-leg-2",
       "billCode": "2025-09-25",
-      "title": "ASIC opens consultation to extend the stablecoin distribution exemption.",
-      "summary": "",
-      "stage": "Enacted",
+      "title": "ASIC consults on extending the stablecoin distribution exemption to a second eligible stablecoin.",
+      "summary": "ASIC proposed amending Instrument 2025/631 so intermediaries could distribute a second named stablecoin issued by an AFS-licensed issuer, signalling that any expansion of relief would still be handled instrument-by-instrument under existing law.",
+      "stage": "Filed",
       "stance": "concerning",
-      "impactTags": [],
+      "impactTags": ["licensing", "consultation"],
       "category": "stablecoin-regulation",
       "updatedDate": "2025-09-25"
     },
     {
       "id": "australia-leg-3",
       "billCode": "2025-09-18",
-      "title": "ASIC grants class relief for intermediaries distributing a Named AUD-backed stablecoin issued by an AFS-licensed issuer",
-      "summary": "",
+      "title": "ASIC grants Instrument 2025/631 for intermediaries distributing a stablecoin issued by an AFS-licensed issuer.",
+      "summary": "The first stablecoin-specific ASIC relief exempts intermediaries from separate AFS, market and clearing licences when they are only dealing in a specified stablecoin issued by an AFS licensee, provided retail disclosure conditions are met.",
       "stage": "Enacted",
       "stance": "concerning",
-      "impactTags": [],
+      "impactTags": ["licensing", "consumer-protection", "disclosure"],
       "category": "stablecoin-regulation",
       "updatedDate": "2025-09-18"
     }
@@ -62,25 +62,32 @@
   "news": [
     {
       "id": "australia-news-1",
-      "headline": "ASIC media release",
+      "headline": "ASIC finalises new exemptions to support digital asset innovation",
       "source": "asic.gov.au",
-      "date": "2025-10-28",
-      "url": "https://www.asic.gov.au/about-asic/news-centre/news-items/asic-supports-innovation-through-exemptions-for-distributors-of-australian-stablecoin/"
+      "date": "2025-12-09",
+      "url": "https://www.asic.gov.au/about-asic/news-centre/news-items/asic-finalises-new-exemptions-to-support-digital-asset-innovation/"
     },
     {
       "id": "australia-news-2",
-      "headline": "Treasury Minister media release",
-      "source": "ministers.treasury.gov.au",
-      "date": "2025-10-28",
-      "url": "https://ministers.treasury.gov.au/ministers/daniel-mulino-2025/media-releases/new-legislation-modernise-regulation-payment-service"
+      "headline": "ASIC proposes extending stablecoin distribution exemption",
+      "source": "asic.gov.au",
+      "date": "2025-09-25",
+      "url": "https://www.asic.gov.au/about-asic/news-centre/news-items/asic-proposes-extending-stablecoin-distribution-exemption/"
+    },
+    {
+      "id": "australia-news-3",
+      "headline": "ASIC supports innovation through exemptions for distributors of Australian stablecoin",
+      "source": "asic.gov.au",
+      "date": "2025-09-18",
+      "url": "https://www.asic.gov.au/about-asic/news-centre/news-items/asic-supports-innovation-through-exemptions-for-distributors-of-australian-stablecoin/"
     }
   ],
   "stablecoinMeta": {
     "code": "AU",
     "nameZh": "澳大利亚",
     "flagImg": "https://flagcdn.com/w320/au.png",
-    "lastUpdated": "Oct 28, 2025",
-    "summaryEn": "Australia is moving to formalise stablecoin oversight. In September 2025, ASIC granted class relief so intermediaries can distribute a named AUD-backed stablecoin issued by an AFS-licensed issuer, subject to conditions such as making the PDS available to retail clients; the relief is time-limited and linked to ASIC Instrument 2025/631. In October 2025, the Government released exposure-draft payments licensing reforms proposing a graduated framework for stored-value facilities that would capture stablecoin issuers/wallets holding customer funds. Until those reforms are enacted, issuers may require an AFSL where the coin constitutes a financial product (e.g., a non-cash payment facility), and intermediaries can rely on the targeted ASIC relief.",
+    "lastUpdated": "2025-12-09",
+    "summaryEn": "Australia does not yet have a dedicated stablecoin act in force. Instead, ASIC is using existing financial-services law plus targeted class relief: Instrument 2025/631 (18 September 2025) for distribution of a named stablecoin issued by an AFS licensee, a consultation on extending that relief (25 September 2025), and broader final relief for certain stablecoins and wrapped tokens under Instrument 2025/867 (9 December 2025). Treasury's payment-stablecoin reform remains proposed, so the regime is still developing.",
     "tags": [
       "licensing-required",
       "non-bank-permitted",
@@ -89,7 +96,7 @@
     ],
     "legalStatus": "legal_with_restrictions",
     "regulatoryClarity": 3,
-    "regimeStatus": "draft",
+    "regimeStatus": "in_progress",
     "classification": "payment_instrument",
     "classificationNote": "Stablecoins are classified by function under the Corporations Act. Where a token enables payments, it will often be a non-cash payment (NCP) facility, making it a financial product that triggers AFSL and disclosure obligations. Depending on features and arrangements, a token could also meet other fi",
     "allowsFiatBacked": true,

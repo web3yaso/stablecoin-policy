@@ -1,44 +1,9 @@
-import {
-  IMPACT_TAG_LABEL,
-  STABLECOIN_DIMENSIONS,
-  type Dimension,
-  type ImpactTag,
-  type StablecoinTag,
-} from "@/types";
-import { DIMENSION_COLOR, DIMENSION_TAGS } from "@/lib/dimensions";
+import { type StablecoinTag } from "@/types";
+import { DIMENSION_COLOR } from "@/lib/dimensions";
 import {
   STABLECOIN_TAG_LABEL,
   STABLECOIN_DIMENSION_TAGS,
 } from "@/lib/stablecoin-tags";
-
-type DcAiDimension = Exclude<Dimension, "overall" | `sc-${string}`>;
-
-interface LensSection {
-  title: string;
-  groups: { dimension: DcAiDimension; label: string }[];
-}
-
-const DC_AI_SECTIONS: LensSection[] = [
-  {
-    title: "Data Centers",
-    groups: [
-      { dimension: "environmental", label: "Environmental" },
-      { dimension: "energy", label: "Energy & grid" },
-      { dimension: "community", label: "Community" },
-      { dimension: "land-use", label: "Land use" },
-    ],
-  },
-  {
-    title: "AI Regulation",
-    groups: [
-      { dimension: "ai-governance-dim", label: "Governance" },
-      { dimension: "ai-consumer", label: "Consumer protection" },
-      { dimension: "ai-workforce", label: "Workforce & employment" },
-      { dimension: "ai-public", label: "Public services" },
-      { dimension: "ai-synthetic", label: "Synthetic media" },
-    ],
-  },
-];
 
 const STABLECOIN_SECTIONS = [
   {
@@ -77,18 +42,6 @@ const STABLECOIN_SECTIONS = [
     categoricalColors: {} as Partial<Record<StablecoinTag, string>>,
   },
 ];
-
-function uniq(tags: ImpactTag[]): ImpactTag[] {
-  const seen = new Set<ImpactTag>();
-  const out: ImpactTag[] = [];
-  for (const t of tags) {
-    if (!seen.has(t)) {
-      seen.add(t);
-      out.push(t);
-    }
-  }
-  return out;
-}
 
 export default function NuanceLegend() {
   return (
@@ -149,79 +102,6 @@ export default function NuanceLegend() {
         </div>
       </div>
 
-      {/* ── Map coloring note ── */}
-      <div className="bg-black/[.02] border border-black/[.05] rounded-2xl px-5 py-4">
-        <div className="text-[12px] font-medium text-ink tracking-tight mb-1.5">
-          Issuance coloring — how the map works
-        </div>
-        <div className="flex flex-wrap gap-3 mb-2">
-          {[
-            { color: "#34C759", label: "Non-Bank Permitted" },
-            { color: "#FF9500", label: "Bank Only" },
-            { color: "#FF3B30", label: "Private Stablecoin Banned" },
-            { color: "#8E8E93", label: "Unknown / In Progress" },
-          ].map(({ color, label }) => (
-            <span key={label} className="inline-flex items-center gap-1.5 text-[11px] text-muted">
-              <span
-                className="w-3 h-3 rounded-sm flex-shrink-0"
-                style={{ backgroundColor: color }}
-              />
-              {label}
-            </span>
-          ))}
-        </div>
-        <p className="text-[11px] text-muted leading-relaxed">
-          EU member states all inherit the EU-bloc color (MiCA is uniform
-          across the single market). US states all inherit the US-federal
-          color (federal law governs payment stablecoins).
-        </p>
-      </div>
-
-      {/* ── Legacy DC / AI taxonomy ── */}
-      <div className="bg-card border border-black/[.06] rounded-3xl p-6">
-        <h3 className="text-sm font-semibold text-ink tracking-tight mb-1">
-          Data center &amp; AI impact tags
-        </h3>
-        <p className="text-xs text-muted mb-6">
-          Legacy tags grouped by lens and dimension.
-        </p>
-        <div className="flex flex-col gap-8">
-          {DC_AI_SECTIONS.map((section) => (
-            <div key={section.title}>
-              <div className="text-sm font-semibold text-ink tracking-tight mb-4">
-                {section.title}
-              </div>
-              <div className="flex flex-col gap-5">
-                {section.groups.map(({ dimension, label }) => {
-                  const tags = uniq(DIMENSION_TAGS[dimension]);
-                  const dotColor = DIMENSION_COLOR[dimension];
-                  return (
-                    <div key={dimension}>
-                      <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
-                        {label}
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-[11px] bg-black/[.04] text-muted px-2 py-0.5 rounded-full inline-flex items-center gap-1.5"
-                          >
-                            <span
-                              className="w-1.5 h-1.5 rounded-full"
-                              style={{ backgroundColor: dotColor }}
-                            />
-                            {IMPACT_TAG_LABEL[tag]}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

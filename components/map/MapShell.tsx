@@ -22,7 +22,7 @@ import {
   type Region,
   type ViewTarget,
 } from "@/types";
-import { getEntity, getEntityByGeoId, getOverviewEntity } from "@/lib/placeholder-data";
+import { getEntity, getOverviewEntity, ENTITIES } from "@/lib/placeholder-data";
 import { STANCE_HEX, type SetTooltip, type TooltipState } from "@/lib/map-utils";
 import {
   DIMENSION_TAGS,
@@ -380,7 +380,7 @@ export default function MapShell({
     }
     if (!selectedGeoId) return overviewEntity;
     const found = getEntity(selectedGeoId, region);
-    return found ?? getEntityByGeoId(selectedGeoId) ?? overviewEntity;
+    return found ?? ENTITIES.find((e) => e.geoId === selectedGeoId) ?? overviewEntity;
   }, [
     selectedGeoId,
     region,
