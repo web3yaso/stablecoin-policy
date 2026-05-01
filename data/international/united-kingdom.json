@@ -7,49 +7,49 @@
   "stance": "concerning",
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
-  "contextBlurb": "As of April 2026, the UK is finalising its new regime for \"qualifying stablecoins\" (UKQS). On 21 April 2026, HM Treasury published a policy note and draft Statutory Instrument amending the Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026, aiming to reduce barriers for businesses using UKQS in payment services and clarifying regulatory exemptions for UKQS before broader payment-service reforms take effect, while retaining oversight of lending activities involving UKQS. Earlier FCA consultations (CP25/14 and CP25/15, closed July 2025) and the near-final HMT draft legislation (April 2025) indicate final rules later in 2026.",
+  "contextBlurb": "The UK now has primary cryptoasset regulations made, but its stablecoin regime is still not operational. The Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026 were made on 4 February 2026 and establish a framework for activities including issuing qualifying stablecoin, but they do not come into force until October 2027. HM Treasury published a draft amending SI on 21 April 2026 to smooth stablecoin payment use cases, and the FCA opened guidance consultation on 15 April 2026, with firms expected to start applying for authorisation from September 2026. The overall picture is advanced and highly structured, but still pre-commencement.",
   "legislation": [
     {
       "id": "united-kingdom-leg-1",
       "billCode": "2026-04-21",
       "title": "HM Treasury published policy note and draft SI amending the FSMA 2000 (Cryptoassets) Regulations 2026 to reduce barriers for UKQS in payment services.",
-      "summary": "",
-      "stage": "Enacted",
+      "summary": "HM Treasury proposed targeted amendments to the 2026 cryptoasset regulations to provide greater certainty for stablecoin payment services and remove barriers to certain use cases before the full regime commences.",
+      "stage": "Filed",
       "stance": "concerning",
-      "impactTags": [],
+      "impactTags": ["payment-use", "consultation"],
       "category": "stablecoin-regulation",
       "updatedDate": "2026-04-21"
     },
     {
       "id": "united-kingdom-leg-2",
-      "billCode": "2025-09-15",
-      "title": "FCA publishes CP25/25 on applying existing Handbook rules to future regulated cryptoasset firms.",
-      "summary": "",
-      "stage": "Enacted",
+      "billCode": "2026-04-15",
+      "title": "FCA consults on guidance for the UK's future crypto regime, including issuing qualifying stablecoin.",
+      "summary": "The FCA opened consultation on how firms should interpret and prepare for the future regime covering activities such as issuing qualifying stablecoin, with applications for authorisation expected to open from September 2026.",
+      "stage": "Filed",
       "stance": "concerning",
-      "impactTags": [],
+      "impactTags": ["licensing", "guidance", "consultation"],
       "category": "stablecoin-regulation",
-      "updatedDate": "2025-09-15"
+      "updatedDate": "2026-04-15"
     },
     {
       "id": "united-kingdom-leg-3",
-      "billCode": "2025-09-03",
-      "title": "BoE keynote outlines multi-money vision and upcoming systemic proposals.",
-      "summary": "",
+      "billCode": "2026-02-04",
+      "title": "The Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026 are made.",
+      "summary": "The 2026 Regulations establish the UK's new cryptoasset regulatory perimeter, including issuance of qualifying stablecoin, but the regime will only come into force in October 2027.",
       "stage": "Enacted",
       "stance": "concerning",
-      "impactTags": [],
+      "impactTags": ["licensing", "redemption-rights", "disclosure"],
       "category": "stablecoin-regulation",
-      "updatedDate": "2025-09-03"
+      "updatedDate": "2026-02-04"
     },
     {
       "id": "united-kingdom-leg-4",
       "billCode": "2025-05-28",
       "title": "FCA launches CP25/14 and CP25/15 consultations (closed 2025-07-31); final rules planned for 2026.",
-      "summary": "",
-      "stage": "Enacted",
+      "summary": "The FCA's 2025 consultations set out the conduct, safeguarding and prudential approach it expected to apply to stablecoin issuance and cryptoasset custody under the future UK framework.",
+      "stage": "Filed",
       "stance": "concerning",
-      "impactTags": [],
+      "impactTags": ["consultation", "custody", "licensing"],
       "category": "stablecoin-regulation",
       "updatedDate": "2025-05-28"
     },
@@ -57,10 +57,10 @@
       "id": "united-kingdom-leg-5",
       "billCode": "2025-04-29",
       "title": "HMT publishes draft RAO and policy note.",
-      "summary": "",
-      "stage": "Enacted",
+      "summary": "HM Treasury published draft statutory provisions for the new cryptoasset regime, including the proposed regulated activity of issuing qualifying stablecoin and the definition of backing assets.",
+      "stage": "Filed",
       "stance": "concerning",
-      "impactTags": [],
+      "impactTags": ["consultation", "licensing", "fiat-reserve-11"],
       "category": "stablecoin-regulation",
       "updatedDate": "2025-04-29"
     }
@@ -84,24 +84,24 @@
   "news": [
     {
       "id": "united-kingdom-news-1",
-      "headline": "HMT – Policy note and draft SI on FSMA 2000 (Cryptoassets) Regulations 2026 amendments (April 21, 2026)",
-      "source": "regulationtomorrow.com",
+      "headline": "HM Treasury – Policy note: Draft statutory instrument amending the Cryptoasset Regulations",
+      "source": "gov.uk",
       "date": "2026-04-21",
-      "url": "https://www.regulationtomorrow.com/2026/04/hmt-issues-policy-note-and-draft-si-on-amendments-to-the-financial-services-and-markets-act-2000-cryptoassets-regulations-2026/"
+      "url": "https://www.gov.uk/government/publications/policy-note-draft-statutory-instrument-amending-the-cryptoasset-regulations"
     },
     {
       "id": "united-kingdom-news-2",
-      "headline": "FCA – CP25/14 overview",
+      "headline": "FCA – consults on guidance on UK's future crypto regime",
       "source": "fca.org.uk",
-      "date": "2026-04-21",
-      "url": "https://www.fca.org.uk/publications/consultation-papers/cp25-14-stablecoin-issuance-cryptoasset-custody"
+      "date": "2026-04-15",
+      "url": "https://www.fca.org.uk/news/press-releases/fca-consults-guidance-uk-future-crypto-regime"
     },
     {
       "id": "united-kingdom-news-3",
-      "headline": "HMT – Draft SI & policy note (RAO changes)",
-      "source": "gov.uk",
-      "date": "2026-04-21",
-      "url": "https://www.gov.uk/government/publications/regulatory-regime-for-cryptoassets-regulated-activities-draft-si-and-policy-note"
+      "headline": "FCA – selects 4 firms to test stablecoin innovation in its Regulatory Sandbox",
+      "source": "fca.org.uk",
+      "date": "2026-02-25",
+      "url": "https://www.fca.org.uk/news/press-releases/4-firms-selected-test-stablecoin-regulatory-sandbox"
     }
   ],
   "stablecoinMeta": {
@@ -109,7 +109,7 @@
     "nameZh": "英国",
     "flagImg": "https://flagcdn.com/w320/gb.png",
     "lastUpdated": "Apr 21, 2026",
-    "summaryEn": "As of April 2026, the UK is finalising its new regime for \"qualifying stablecoins\" (UKQS). On 21 April 2026, HM Treasury published a policy note and draft Statutory Instrument amending the Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026, aiming to reduce barriers for businesses using UKQS in payment services and clarifying regulatory exemptions for UKQS before broader payment-service reforms take effect, while retaining oversight of lending activities involving UKQS. Earlier FCA consultations (CP25/14 and CP25/15, closed July 2025) and the near-final HMT draft legislation (April 2025) indicate final rules later in 2026.",
+    "summaryEn": "The UK's dedicated cryptoasset framework is now legally made but not yet in force. The Financial Services and Markets Act 2000 (Cryptoassets) Regulations 2026 were made on 4 February 2026 and include issuing qualifying stablecoin within the future regulatory perimeter, but commencement is set for October 2027. HM Treasury issued a draft amending SI on 21 April 2026 to improve stablecoin payment use cases, while the FCA consulted on guidance on 15 April 2026 and plans to begin taking authorisation applications from September 2026.",
     "tags": [
       "licensing-required",
       "non-bank-permitted",

@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact · Track Policy",
+  title: "Contact · Track Stablecoin Policy",
 };
 
 export default function ContactPage() {
@@ -25,44 +25,33 @@ export default function ContactPage() {
 
         <div className="text-base text-ink/80 leading-relaxed space-y-5">
           <p>
-            If I got something wrong, if a bill is missing, or if you
-            disagree with a stance call, please tell me. Corrections are
-            how the site gets more accurate, and I want them.
+            If something is wrong, if a bill is missing, or if you
+            disagree with a classification call, please reach out.
+            Corrections make the tracker better.
           </p>
           <p>
-            Tips on things I should be tracking are also welcome. State
-            committees, EU developments, or anything happening outside
-            the usual legislative portals.
+            Tips on stablecoin legislation, regulator notices, issuer
+            developments, or country-level framework changes are also
+            welcome.
           </p>
         </div>
 
         <div className="mt-12 pt-10 border-t border-black/[.06] space-y-5">
           <div>
             <div className="text-[11px] font-medium tracking-tight text-muted mb-1.5">
-              Email
-            </div>
-            <a
-              href="mailto:reksopuro.isabelle@gmail.com"
-              className="text-base text-ink underline underline-offset-2 hover:text-muted transition-colors"
-            >
-              reksopuro.isabelle@gmail.com
-            </a>
-          </div>
-
-          <div>
-            <div className="text-[11px] font-medium tracking-tight text-muted mb-1.5">
               Twitter / X
             </div>
             <a
-              href="https://x.com/isareksopuro"
+              href="https://x.com/web3law_tech"
               target="_blank"
               rel="noopener noreferrer"
               className="text-base text-ink underline underline-offset-2 hover:text-muted transition-colors"
             >
-              @isareksopuro
+              @web3law_tech
             </a>
             <span className="text-sm text-muted ml-2">
-              DMs are open for quick tips.
+              DMs are open for corrections, source suggestions, and
+              partnership inquiries.
             </span>
           </div>
 
@@ -71,30 +60,28 @@ export default function ContactPage() {
               GitHub
             </div>
             <a
-              href="https://github.com/isabellereks/track-policy"
+              href="https://github.com/web3yaso/stablecoin-policy"
               target="_blank"
               rel="noopener noreferrer"
               className="text-base text-ink underline underline-offset-2 hover:text-muted transition-colors"
             >
-              github.com/isabellereks/track-policy
+              github.com/web3yaso/stablecoin-policy
             </a>
             <span className="text-sm text-muted ml-2">
-              Open an issue for data corrections.
+              Open an issue or reference a commit when reporting a data
+              correction.
             </span>
           </div>
 
           <div>
             <div className="text-[11px] font-medium tracking-tight text-muted mb-1.5">
-              Personal site
+              What to send
             </div>
-            <a
-              href="https://isabellereks.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-base text-ink underline underline-offset-2 hover:text-muted transition-colors"
-            >
-              isabellereks.com
-            </a>
+            <p className="text-base text-ink/80 leading-relaxed">
+              The most helpful reports include the jurisdiction, bill or
+              rule name, a short note about what looks wrong, and the
+              primary source link you want me to review.
+            </p>
           </div>
         </div>
       </div>

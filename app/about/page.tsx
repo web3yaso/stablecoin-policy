@@ -62,12 +62,12 @@ export default function AboutPage() {
             <li>
               本站 fork 自{" "}
               <a
-                href="https://github.com/isabellereks/track-policy"
+                href="https://github.com/web3yaso/stablecoin-policy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
               >
-                Isabelle Reksopuro
+                web3yaso/stablecoin-policy
               </a>{" "}
               的开源项目 Track Policy，在其基础上专注于稳定币政策方向
             </li>

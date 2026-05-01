@@ -17,9 +17,9 @@ import { FUEL_COLOR, plantRadius } from "@/lib/energy-colors";
 import { DcIcon, SIZE_BANDS } from "./DataCenterDots";
 void getMunicipalitiesByState;
 
-const WATER = {
-  rivers: { type: "FeatureCollection" as const, features: [] },
-  lakes: { type: "FeatureCollection" as const, features: [] },
+const WATER: { rivers: { features: Feature[] }; lakes: { features: Feature[] } } = {
+  rivers: { features: [] },
+  lakes: { features: [] },
 };
 
 function bandRadius(mw: number | undefined): number {

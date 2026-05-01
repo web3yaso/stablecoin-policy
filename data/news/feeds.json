@@ -26,28 +26,76 @@
       "topicHint": "stablecoin-policy"
     },
     {
-      "url": "https://mainemorningstar.com/feed/",
-      "name": "Maine Morning Star",
-      "entity": "Maine",
-      "topicHint": "data-centers"
+      "url": "https://www.eba.europa.eu/rss.xml",
+      "name": "European Banking Authority — RSS",
+      "entity": "European Union",
+      "topicHint": "stablecoin-policy"
     },
     {
-      "url": "https://planetdetroit.org/feed/",
-      "name": "Planet Detroit",
-      "entity": "Michigan",
-      "topicHint": "data-centers"
+      "url": "https://news.google.com/rss/search?q=stablecoin+%22United+Kingdom%22+OR+FCA+OR+%22Bank+of+England%22&hl=en-GB&gl=GB&ceid=GB:en",
+      "name": "Google News — UK Stablecoin Policy",
+      "entity": "United Kingdom",
+      "topicHint": "stablecoin-policy"
     },
     {
-      "url": "https://news.google.com/rss/search?q=%22data+center%22+moratorium&hl=en-US&gl=US&ceid=US:en",
-      "name": "Google News — Data Center Moratoriums",
-      "entity": "United States",
-      "topicHint": "data-centers"
+      "url": "https://news.google.com/rss/search?q=stablecoin+Canada+OR+CSA+OR+%22Bank+of+Canada%22&hl=en-CA&gl=CA&ceid=CA:en",
+      "name": "Google News — Canada Stablecoin Policy",
+      "entity": "Canada",
+      "topicHint": "stablecoin-policy"
     },
     {
-      "url": "https://news.google.com/rss/search?q=anthropic+OR+%22ai+policy%22&hl=en-US&gl=US&ceid=US:en",
-      "name": "Google News — AI Policy",
-      "entity": "United States",
-      "topicHint": "ai-policy"
+      "url": "https://news.google.com/rss/search?q=stablecoin+Australia+OR+ASIC+OR+Treasury&hl=en-AU&gl=AU&ceid=AU:en",
+      "name": "Google News — Australia Stablecoin Policy",
+      "entity": "Australia",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+%22Hong+Kong%22+OR+HKMA&hl=en-HK&gl=HK&ceid=HK:en",
+      "name": "Google News — Hong Kong Stablecoin Policy",
+      "entity": "Hong Kong",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Singapore+OR+MAS&hl=en-SG&gl=SG&ceid=SG:en",
+      "name": "Google News — Singapore Stablecoin Policy",
+      "entity": "Singapore",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Japan+OR+FSA&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — Japan Stablecoin Policy",
+      "entity": "Japan",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Brazil+OR+BCB&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+      "name": "Google News — Brazil Stablecoin Policy",
+      "entity": "Brazil",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Argentina+OR+CNV+OR+BCRA&hl=es-419&gl=AR&ceid=AR:es-419",
+      "name": "Google News — Argentina Stablecoin Policy",
+      "entity": "Argentina",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Mexico+OR+Banxico&hl=es-419&gl=MX&ceid=MX:es-419",
+      "name": "Google News — Mexico Stablecoin Policy",
+      "entity": "Mexico",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Switzerland+OR+FINMA&hl=en-CH&gl=CH&ceid=CH:en",
+      "name": "Google News — Switzerland Stablecoin Policy",
+      "entity": "Switzerland",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+%22United+Arab+Emirates%22+OR+CBUAE+OR+VARA&hl=en-AE&gl=AE&ceid=AE:en",
+      "name": "Google News — UAE Stablecoin Policy",
+      "entity": "United Arab Emirates",
+      "topicHint": "stablecoin-policy"
     }
   ]
 }

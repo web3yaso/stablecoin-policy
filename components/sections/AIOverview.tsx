@@ -192,11 +192,11 @@ export default function AIOverview() {
   const [activeTab, setActiveTab] = useState<RegionKey>("na");
   const [newsSummaries, setNewsSummaries] = useState<NewsSummariesShape>({});
 
-  // One-shot fetch on mount. Errors are silent — the section already has
-  // an empty-state path when no regional summaries are present.
+  // One-shot fetch on mount. Use no-store so regenerated summaries are
+  // reflected immediately instead of sticking to a stale browser cache.
   useEffect(() => {
     let cancelled = false;
-    fetch("/news-summaries.json", { cache: "force-cache" })
+    fetch("/news-summaries.json", { cache: "no-store" })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         if (!cancelled && data) setNewsSummaries(data as NewsSummariesShape);
