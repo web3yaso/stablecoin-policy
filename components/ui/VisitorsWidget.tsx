@@ -15,12 +15,12 @@ import { AnimatePresence, motion } from "framer-motion";
  */
 
 const LABELS = [
-  "watching the grid",
-  "counting bills",
-  "tracking politicians",
-  "scouting local bills",
-  "watching the news",
-  "finding data centers",
+  "tracking stablecoin policy",
+  "reading the latest bills",
+  "following legislators",
+  "watching regulations",
+  "monitoring the news",
+  "checking country stances",
 ];
 
 function seededBase(): number {

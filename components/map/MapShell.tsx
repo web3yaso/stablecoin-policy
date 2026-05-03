@@ -316,7 +316,7 @@ export default function MapShell({
 }: Omit<MapShellProps, "dimension" | "lens">) {
   const { locale } = useLocale();
   // Stablecoin issuance is the primary view for this tracker.
-  const [activeDimension, setActiveDimension] = useState<Dimension>("sc-issuance");
+  const [activeDimension, setActiveDimension] = useState<Dimension>("overall");
   const [activeLens, setActiveLens] = useState<DimensionLens>("stablecoin");
 
   // Convenience aliases so all the existing code that reads `dimension`
@@ -1698,7 +1698,7 @@ export default function MapShell({
           it fades in with the rest of the map UI once the hero reveal
           is complete. */}
       <div
-        className="hidden md:block fixed top-6 right-6 z-30"
+        className="hidden md:block fixed top-16 right-6 z-30"
         style={{
           opacity: chromeOpacity,
           pointerEvents: chromeOpacity < 0.5 ? "none" : "auto",
