@@ -25,7 +25,7 @@ import FacilityDetail from "./FacilityDetail";
 import DataCentersList from "./DataCentersList";
 import EnergySection from "./EnergySection";
 import StablecoinInfo from "./StablecoinInfo";
-import { useLocale } from "@/contexts/LocaleContext";
+import { useLocale, type Locale } from "@/contexts/LocaleContext";
 import { t } from "@/lib/i18n";
 import { facilitiesForEntity } from "@/lib/datacenters";
 import { getStateProfile, plantsInState } from "@/lib/energy-data";
@@ -54,10 +54,19 @@ interface SidePanelProps {
   localActions?: Legislation[];
 }
 
-const LEVEL_LABEL: Record<GovLevel, string | null> = {
-  federal: "Federal Government",
-  state: "State Government",
-  bloc: null,
+const LEVEL_LABEL: Record<GovLevel, Record<Locale, string | null>> = {
+  federal: {
+    en: "Federal Government",
+    zh: "联邦政府",
+  },
+  state: {
+    en: "State Government",
+    zh: "州政府",
+  },
+  bloc: {
+    en: null,
+    zh: null,
+  },
 };
 
 type Layer =
@@ -448,7 +457,11 @@ export default function SidePanel({
 
   const islandPrimary = facility
     ? facility.operator.replace(/\s*#\w+/g, "").trim() || "Data center"
-    : entity?.name ?? null;
+    : entity
+      ? locale === "zh" && entity.stablecoinMeta?.nameZh
+        ? entity.stablecoinMeta.nameZh
+        : entity.name
+      : null;
 
   const renderMin = () => (
     // Plain <button> with onClick. The previous pointer-capture +
@@ -611,7 +624,7 @@ export default function SidePanel({
       ) : !entity ? (
         <div className="flex-1 flex items-center justify-center px-8 py-12 min-h-[160px]">
           <p className="text-xs text-muted text-center">
-            Select a region to see its policies and data centers
+            {t(locale, "panel.no_entity")}
           </p>
         </div>
       ) : (
@@ -627,7 +640,9 @@ export default function SidePanel({
                 />
               )}
               <h2 className="text-2xl font-semibold text-ink tracking-tight">
-                {entity.name}
+                {locale === "zh" && entity.stablecoinMeta?.nameZh
+                  ? entity.stablecoinMeta.nameZh
+                  : entity.name}
               </h2>
             </div>
             <div className="mt-2 flex items-center gap-3 flex-wrap">
@@ -638,16 +653,10 @@ export default function SidePanel({
                   : ls === "banned" ? "#FF3B30"
                   : ls === "legal_with_restrictions" || ls === "partially_legal" ? "#FF9500"
                   : "#8E8E93";
-                const label =
-                  ls === "legal" ? "Legal"
-                  : ls === "legal_with_restrictions" ? "Legal with restrictions"
-                  : ls === "banned" ? "Banned"
-                  : ls === "partially_legal" ? "Partially legal"
-                  : "Unclear";
                 return (
                   <span className="inline-flex items-center gap-1.5 text-xs font-medium text-ink bg-black/[.04] border border-black/[.06] rounded-full px-3 py-1">
                     <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
-                    {label}
+                    {t(locale, `legal.${ls}` as Parameters<typeof t>[1])}
                   </span>
                 );
               })() : (
@@ -660,9 +669,9 @@ export default function SidePanel({
                   size="md"
                 />
               )}
-              {LEVEL_LABEL[entity.level] && (
+              {LEVEL_LABEL[entity.level][locale] && (
                 <span className="text-xs text-muted">
-                  {LEVEL_LABEL[entity.level]}
+                  {LEVEL_LABEL[entity.level][locale]}
                 </span>
               )}
             </div>
@@ -676,10 +685,14 @@ export default function SidePanel({
             {entity.isOverview && (
               <div className="rounded-2xl bg-[oklch(0.96_0.025_85)] border border-[oklch(0.88_0.05_85)]/50 px-4 py-3 text-[12px] text-ink/80 leading-relaxed">
                 <div className="text-ink font-semibold mb-0.5">
-                  Click anywhere to explore
+                  {t(locale, "panel.hint.title")}
                 </div>
-                A country, state, or any data center pin opens its
-                detail. <span className="hidden lg:inline">Press <kbd className="font-sans px-1 rounded bg-white/85 border border-black/[.08] text-[10px] text-ink">?</kbd> for keyboard shortcuts.</span>
+                {t(locale, "panel.hint.body")}{" "}
+                <span className="hidden lg:inline">
+                  {t(locale, "panel.hint.shortcuts")}{" "}
+                  <kbd className="font-sans px-1 rounded bg-white/85 border border-black/[.08] text-[10px] text-ink">?</kbd>{" "}
+                  {t(locale, "panel.hint.shortcuts_end")}
+                </span>
               </div>
             )}
 

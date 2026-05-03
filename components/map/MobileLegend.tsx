@@ -3,6 +3,7 @@
 import { STANCE_LABEL, type Dimension, DIMENSION_LABEL } from "@/types";
 import { STANCE_HEX } from "@/lib/map-utils";
 import { DIMENSION_GRADIENT } from "@/lib/dimensions";
+import { useLocale, type Locale } from "@/contexts/LocaleContext";
 
 interface MobileLegendProps {
   dimension: Dimension;
@@ -20,19 +21,29 @@ const STANCE_ORDER = [
 
 // Compact labels for the small legend chips — full STANCE_LABEL is
 // too verbose for a mobile pill.
-const SHORT_STANCE: Record<(typeof STANCE_ORDER)[number], string> = {
-  restrictive: "Restricted",
-  concerning: "Active",
-  review: "Reviewing",
-  none: "Inactive",
-  favorable: "Favorable",
+const SHORT_STANCE: Record<Locale, Record<(typeof STANCE_ORDER)[number], string>> = {
+  en: {
+    restrictive: "Restricted",
+    concerning: "Active",
+    review: "Reviewing",
+    none: "Inactive",
+    favorable: "Favorable",
+  },
+  zh: {
+    restrictive: "限制",
+    concerning: "推进中",
+    review: "讨论中",
+    none: "无行动",
+    favorable: "友好",
+  },
 };
 
 export function StanceRow() {
+  const { locale } = useLocale();
   return (
     <div>
       <div className="text-[11px] font-semibold text-muted tracking-tight mb-2">
-        Stance
+        {locale === "zh" ? "立场" : "Stance"}
       </div>
       <div className="flex items-center justify-between gap-1">
         {STANCE_ORDER.map((s) => (
@@ -43,7 +54,7 @@ export function StanceRow() {
               aria-label={STANCE_LABEL[s]}
             />
             <span className="text-[9px] text-muted truncate max-w-full">
-              {SHORT_STANCE[s]}
+              {SHORT_STANCE[locale][s]}
             </span>
           </div>
         ))}
@@ -53,6 +64,7 @@ export function StanceRow() {
 }
 
 function DimensionRow({ dimension }: { dimension: Dimension }) {
+  const { locale } = useLocale();
   if (dimension === "overall") return null;
   const grad = DIMENSION_GRADIENT[dimension];
   return (
@@ -67,8 +79,8 @@ function DimensionRow({ dimension }: { dimension: Dimension }) {
         }}
       />
       <div className="flex justify-between mt-1">
-        <span className="text-[9px] text-muted">Less</span>
-        <span className="text-[9px] text-muted">More</span>
+        <span className="text-[9px] text-muted">{locale === "zh" ? "较少" : "Less"}</span>
+        <span className="text-[9px] text-muted">{locale === "zh" ? "较多" : "More"}</span>
       </div>
     </div>
   );
@@ -76,15 +88,16 @@ function DimensionRow({ dimension }: { dimension: Dimension }) {
 
 
 export function DataCenterRow() {
+  const { locale } = useLocale();
   const items = [
-    { color: "#0A84FF", label: "Operational", hollow: false },
-    { color: "#FF9500", label: "Building", hollow: false },
-    { color: "#5856D6", label: "Proposed", hollow: true },
+    { color: "#0A84FF", label: locale === "zh" ? "运营中" : "Operational", hollow: false },
+    { color: "#FF9500", label: locale === "zh" ? "建设中" : "Building", hollow: false },
+    { color: "#5856D6", label: locale === "zh" ? "拟建" : "Proposed", hollow: true },
   ];
   return (
     <div>
       <div className="text-[11px] font-semibold text-muted tracking-tight mb-2">
-        Data centers
+        {locale === "zh" ? "数据中心" : "Data centers"}
       </div>
       <div className="flex items-center justify-between gap-2">
         {items.map((item) => (

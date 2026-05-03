@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ViewTarget } from "@/types";
 import { search, type SearchItem, type SearchKind } from "@/lib/search";
+import { useLocale, type Locale } from "@/contexts/LocaleContext";
 
 /**
  * Spotlight-style command palette. Always renders as a modal — the
@@ -22,11 +23,19 @@ const KIND_DOT: Record<SearchKind, string> = {
   bill: "bg-stance-restrictive",
 };
 
-const KIND_TAG: Record<SearchKind, string> = {
-  country: "Country",
-  state: "State",
-  bloc: "Region",
-  bill: "Bill",
+const KIND_TAG: Record<Locale, Record<SearchKind, string>> = {
+  en: {
+    country: "Country",
+    state: "State",
+    bloc: "Region",
+    bill: "Bill",
+  },
+  zh: {
+    country: "国家",
+    state: "州",
+    bloc: "区域",
+    bill: "法案",
+  },
 };
 
 function SearchIcon() {
@@ -70,6 +79,7 @@ function ClearButton({ onClick }: { onClick: () => void }) {
 }
 
 export default function SearchPill({ open, onClose, onNavigate }: SearchPillProps) {
+  const { locale } = useLocale();
   const [query, setQuery] = useState("");
   const [activeIdx, setActiveIdx] = useState(0);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -130,7 +140,7 @@ export default function SearchPill({ open, onClose, onNavigate }: SearchPillProp
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Search"
+      aria-label={locale === "zh" ? "搜索" : "Search"}
       className={`fixed inset-0 z-40 flex items-start justify-center pt-[14vh] px-4 bg-white/55 backdrop-blur-2xl transition-[opacity,backdrop-filter] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
         open ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
@@ -154,7 +164,7 @@ export default function SearchPill({ open, onClose, onNavigate }: SearchPillProp
               setActiveIdx(0);
             }}
             onKeyDown={onKeyDown}
-            placeholder="Search countries, states, bills…"
+            placeholder={locale === "zh" ? "搜索国家、州、法案…" : "Search countries, states, bills…"}
             className="flex-1 bg-transparent text-sm text-ink placeholder:text-muted focus:outline-none min-w-0"
           />
           {query && (
@@ -192,7 +202,7 @@ export default function SearchPill({ open, onClose, onNavigate }: SearchPillProp
                     )}
                   </div>
                   <span className="text-[11px] font-medium text-muted/70 tracking-tight mt-1 flex-shrink-0">
-                    {KIND_TAG[r.kind]}
+                    {KIND_TAG[locale][r.kind]}
                   </span>
                 </button>
               );

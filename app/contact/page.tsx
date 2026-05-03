@@ -1,8 +1,8 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Contact · Track Stablecoin Policy",
+  title: "Contact · Stablecoin Policy",
 };
 
 export default function ContactPage() {

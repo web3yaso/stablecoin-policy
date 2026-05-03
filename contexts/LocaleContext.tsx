@@ -10,16 +10,17 @@ interface LocaleContextValue {
 }
 
 const LocaleContext = createContext<LocaleContextValue>({
-  locale: "zh",
+  locale: "en",
   setLocale: () => {},
 });
 
 const LOCALE_STORAGE_KEY = "sc-locale";
+const DEFAULT_LOCALE: Locale = "en";
 
 function readLocale(): Locale {
-  if (typeof window === "undefined") return "zh";
+  if (typeof window === "undefined") return DEFAULT_LOCALE;
   const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY);
-  return stored === "en" || stored === "zh" ? stored : "zh";
+  return stored === "en" || stored === "zh" ? stored : DEFAULT_LOCALE;
 }
 
 function subscribe(onStoreChange: () => void) {
@@ -42,7 +43,7 @@ function subscribe(onStoreChange: () => void) {
 }
 
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const locale = useSyncExternalStore<Locale>(subscribe, readLocale, () => "zh");
+  const locale = useSyncExternalStore<Locale>(subscribe, readLocale, () => DEFAULT_LOCALE);
 
   useEffect(() => {
     document.documentElement.lang = locale === "zh" ? "zh-CN" : "en";

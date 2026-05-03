@@ -9,7 +9,7 @@ const STABLECOIN_SECTIONS = [
   {
     dimension: "sc-issuance" as const,
     label: "Issuance",
-    description: "谁可以发行，门槛是什么",
+    description: "Who can issue and under what conditions",
     // Categorical: show green/amber/red chips for the three issuance outcomes
     categoricalColors: {
       "non-bank-permitted": "#34C759",
@@ -20,25 +20,25 @@ const STABLECOIN_SECTIONS = [
   {
     dimension: "sc-reserve" as const,
     label: "Reserve & Backing",
-    description: "钱放在哪里，怎么证明",
+    description: "Where reserves sit and how they are verified",
     categoricalColors: {} as Partial<Record<StablecoinTag, string>>,
   },
   {
     dimension: "sc-consumer" as const,
     label: "Consumer Protection",
-    description: "持有人有什么权利",
+    description: "What rights holders receive",
     categoricalColors: {} as Partial<Record<StablecoinTag, string>>,
   },
   {
     dimension: "sc-cross-border" as const,
     label: "Cross-Border",
-    description: "外国发行人和外国稳定币的待遇",
+    description: "Treatment of foreign issuers and foreign stablecoins",
     categoricalColors: {} as Partial<Record<StablecoinTag, string>>,
   },
   {
     dimension: "sc-sovereignty" as const,
     label: "Monetary Sovereignty",
-    description: "政府对私人稳定币的态度",
+    description: "How governments treat private stablecoins",
     categoricalColors: {} as Partial<Record<StablecoinTag, string>>,
   },
 ];

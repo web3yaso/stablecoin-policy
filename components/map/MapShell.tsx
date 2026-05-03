@@ -41,6 +41,7 @@ import DepthStepper from "@/components/ui/DepthStepper";
 import TopToolbar from "@/components/ui/TopToolbar";
 import VisitorsWidget from "@/components/ui/VisitorsWidget";
 import type { BreadcrumbItem } from "@/components/ui/Breadcrumb";
+import { useLocale, type Locale } from "@/contexts/LocaleContext";
 import dynamic from "next/dynamic";
 
 // Code-split each region map — only the active region's JS + d3
@@ -197,6 +198,51 @@ const SHORT_DIMENSION_LABEL: Record<Exclude<Dimension, "overall">, string> = {
   "sc-sovereignty": "Sovereignty",
 };
 
+const DIMENSION_LABEL_LOCALIZED: Record<Locale, Record<Dimension, string>> = {
+  en: DIMENSION_LABEL,
+  zh: {
+    overall: "总体",
+    environmental: "环境影响",
+    energy: "能源与电网",
+    community: "社区影响",
+    "land-use": "土地使用",
+    "ai-governance-dim": "治理",
+    "ai-consumer": "消费者保护",
+    "ai-workforce": "劳动力与就业",
+    "ai-public": "公共服务",
+    "ai-synthetic": "合成媒体",
+    "sc-issuance": "发行",
+    "sc-reserve": "储备与背书",
+    "sc-consumer": "消费者保护",
+    "sc-cross-border": "跨境",
+    "sc-sovereignty": "货币主权",
+  },
+};
+
+const OVERALL_LEGEND_LABEL: Record<Locale, string[]> = {
+  en: [
+    "Dedicated Legislation",
+    "Innovation-Friendly",
+    "Under Discussion",
+    "Concerning",
+    "Restrictive",
+    "No Action",
+  ],
+  zh: [
+    "专门立法",
+    "创新友好",
+    "讨论中",
+    "审慎推进",
+    "限制性",
+    "无行动",
+  ],
+};
+
+const ISSUANCE_LEGEND_LABEL: Record<Locale, string[]> = {
+  en: ["Non-bank permitted", "Bank-only", "Banned", "Unclear / in progress"],
+  zh: ["允许非银行发行", "仅银行发行", "禁止", "不明确 / 推进中"],
+};
+
 const STANCE_SEVERITY: Record<StanceType, number> = {
   restrictive: 4,
   concerning: 3,
@@ -268,6 +314,7 @@ export default function MapShell({
   revealProgress = 1,
   navigateRef,
 }: Omit<MapShellProps, "dimension" | "lens">) {
+  const { locale } = useLocale();
   // Stablecoin issuance is the primary view for this tracker.
   const [activeDimension, setActiveDimension] = useState<Dimension>("sc-issuance");
   const [activeLens, setActiveLens] = useState<DimensionLens>("stablecoin");
@@ -1809,7 +1856,7 @@ export default function MapShell({
           style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.08), 0 2px 10px rgba(0,0,0,0.04)" }}
         >
           <div className="text-[10.5px] font-semibold text-muted tracking-tight mb-2">
-            Color map by
+            {locale === "zh" ? "地图着色依据" : "Color map by"}
           </div>
           <div className="flex flex-wrap gap-1.5 max-w-[14rem]">
             {(["overall", ...STABLECOIN_DIMENSIONS] as Dimension[]).map((d) => {
@@ -1831,7 +1878,7 @@ export default function MapShell({
                       : "border-black/[.08] text-muted hover:text-ink hover:bg-black/[.03]"
                   }`}
                 >
-                  {d === "overall" ? "Overall" : DIMENSION_LABEL[d]}
+                  {DIMENSION_LABEL_LOCALIZED[locale][d]}
                 </button>
               );
             })}
@@ -1840,16 +1887,16 @@ export default function MapShell({
           {activeDimension === "overall" && (
             <div className="mt-2.5 pt-2 border-t border-black/[.05] flex flex-col gap-1">
               {[
-                { color: "#7EBC8E", label: "Dedicated Legislation" },
-                { color: "#A8D4B2", label: "Innovation-Friendly" },
-                { color: "#D9C980", label: "Under Discussion" },
-                { color: "#D9A766", label: "Concerning" },
-                { color: "#D98080", label: "Restrictive" },
-                { color: "#C9CBD1", label: "No Action" },
-              ].map(({ color, label }) => (
-                <span key={label} className="inline-flex items-center gap-1.5 text-[10.5px] text-muted">
+                "#7EBC8E",
+                "#A8D4B2",
+                "#D9C980",
+                "#D9A766",
+                "#D98080",
+                "#C9CBD1",
+              ].map((color, index) => (
+                <span key={color} className="inline-flex items-center gap-1.5 text-[10.5px] text-muted">
                   <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: color }} />
-                  {label}
+                  {OVERALL_LEGEND_LABEL[locale][index]}
                 </span>
               ))}
             </div>
@@ -1857,15 +1904,10 @@ export default function MapShell({
           {/* Issuance color legend */}
           {activeDimension === "sc-issuance" && (
             <div className="mt-2.5 pt-2 border-t border-black/[.05] flex flex-col gap-1">
-              {[
-                { color: "#34C759", label: "Non-bank permitted" },
-                { color: "#FF9500", label: "Bank-only" },
-                { color: "#FF3B30", label: "Banned" },
-                { color: "#8E8E93", label: "Unclear / in progress" },
-              ].map(({ color, label }) => (
-                <span key={label} className="inline-flex items-center gap-1.5 text-[10.5px] text-muted">
+              {["#34C759", "#FF9500", "#FF3B30", "#8E8E93"].map((color, index) => (
+                <span key={color} className="inline-flex items-center gap-1.5 text-[10.5px] text-muted">
                   <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: color }} />
-                  {label}
+                  {ISSUANCE_LEGEND_LABEL[locale][index]}
                 </span>
               ))}
             </div>
@@ -1881,8 +1923,8 @@ export default function MapShell({
                   style={{ background: `linear-gradient(to right, ${grad.from}, ${grad.to})` }}
                 />
                 <div className="flex justify-between text-[9.5px] text-muted">
-                  <span>Less activity</span>
-                  <span>More activity</span>
+                  <span>{locale === "zh" ? "活动较少" : "Less activity"}</span>
+                  <span>{locale === "zh" ? "活动较多" : "More activity"}</span>
                 </div>
               </div>
             );

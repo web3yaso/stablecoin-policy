@@ -1,8 +1,8 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import AboutContent from "./AboutContent";
 
 export const metadata: Metadata = {
-  title: "关于 · 稳定币政策追踪",
+  title: "About · Stablecoin Policy",
 };
 
 export default function AboutPage() {

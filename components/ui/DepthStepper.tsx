@@ -3,6 +3,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { REGION_LABEL, REGION_ORDER, type Region } from "@/types";
 import type { BreadcrumbItem } from "./Breadcrumb";
+import { useLocale, type Locale } from "@/contexts/LocaleContext";
 
 interface DepthStepperProps {
   region: Region;
@@ -16,11 +17,24 @@ interface DepthStepperProps {
   segments: BreadcrumbItem[];
 }
 
+const REGION_LABEL_LOCALIZED: Record<Locale, Record<Region, string>> = {
+  en: REGION_LABEL,
+  zh: {
+    na: "美洲",
+    latam: "美洲",
+    eu: "欧洲",
+    asia: "亚太",
+    africa: "非洲",
+    oceania: "亚太",
+  },
+};
+
 export default function DepthStepper({
   region,
   onRegionChange,
   segments,
 }: DepthStepperProps) {
+  const { locale } = useLocale();
   const [pickerOpen, setPickerOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -76,7 +90,7 @@ export default function DepthStepper({
                     active ? "bg-ink" : "bg-black/20"
                   }`}
                 />
-                {REGION_LABEL[r]}
+                {REGION_LABEL_LOCALIZED[locale][r]}
               </button>
             );
           })}
@@ -103,7 +117,7 @@ export default function DepthStepper({
               atTop ? "bg-ink" : "bg-ink/60"
             }`}
           />
-          <span className="whitespace-nowrap">{REGION_LABEL[region]}</span>
+          <span className="whitespace-nowrap">{REGION_LABEL_LOCALIZED[locale][region]}</span>
           <svg
             width="9"
             height="9"

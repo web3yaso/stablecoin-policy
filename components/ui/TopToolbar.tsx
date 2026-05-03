@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { REGION_LABEL, REGION_ORDER, type Region, type ViewTarget } from "@/types";
 import SearchPill from "./SearchPill";
 import ShortcutsHelp from "./ShortcutsHelp";
+import { useLocale, type Locale } from "@/contexts/LocaleContext";
 
 interface TopToolbarProps {
   region: Region;
@@ -12,13 +13,23 @@ interface TopToolbarProps {
   onSearchNavigate: (target: ViewTarget) => void;
 }
 
-const SHORT_LABEL: Record<Region, string> = {
-  na: "Americas",
-  latam: "Americas",
-  eu: "Europe",
-  asia: "Asia",
-  africa: "Africa",
-  oceania: "Asia",
+const SHORT_LABEL: Record<Locale, Record<Region, string>> = {
+  en: {
+    na: "Americas",
+    latam: "Americas",
+    eu: "Europe",
+    asia: "Asia",
+    africa: "Africa",
+    oceania: "Asia",
+  },
+  zh: {
+    na: "美洲",
+    latam: "美洲",
+    eu: "欧洲",
+    asia: "亚洲",
+    africa: "非洲",
+    oceania: "亚洲",
+  },
 };
 
 function isMacLike(): boolean {
@@ -38,6 +49,7 @@ export default function TopToolbar({
   onRegionChange,
   onSearchNavigate,
 }: TopToolbarProps) {
+  const { locale } = useLocale();
   const [searchOpen, setSearchOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [mac] = useState(isMacLike);
@@ -116,7 +128,7 @@ export default function TopToolbar({
                     }}
                   />
                 )}
-                <span className="relative z-10">{SHORT_LABEL[r]}</span>
+                <span className="relative z-10">{SHORT_LABEL[locale][r]}</span>
               </button>
             );
           })}
@@ -128,7 +140,7 @@ export default function TopToolbar({
         <motion.button
           type="button"
           onClick={() => setSearchOpen(true)}
-          aria-label="Open search"
+          aria-label={locale === "zh" ? "打开搜索" : "Open search"}
           whileTap={{ scale: 0.94 }}
           transition={{ type: "spring", stiffness: 400, damping: 30, mass: 0.6 }}
           className="h-9 lg:h-7 inline-flex items-center gap-2 px-2.5 lg:px-2 rounded-full text-muted hover:text-ink hover:bg-black/[.04] transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
@@ -143,7 +155,7 @@ export default function TopToolbar({
             />
           </svg>
           <span className="hidden sm:inline text-[11px] tracking-tight">
-            Search
+            {locale === "zh" ? "搜索" : "Search"}
           </span>
           <span className="hidden md:inline-flex items-center gap-0.5 text-[10px] text-muted/70 font-medium">
             <kbd className="font-sans">{mac ? "⌘" : "Ctrl"}</kbd>
@@ -155,7 +167,7 @@ export default function TopToolbar({
         <motion.button
           type="button"
           onClick={() => setHelpOpen((v) => !v)}
-          aria-label="Keyboard shortcuts"
+          aria-label={locale === "zh" ? "快捷键" : "Keyboard shortcuts"}
           aria-pressed={helpOpen}
           whileTap={{ scale: 0.9 }}
           transition={{ type: "spring", stiffness: 400, damping: 30, mass: 0.6 }}

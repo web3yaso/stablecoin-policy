@@ -4,6 +4,7 @@ import { useEffect, useRef, useSyncExternalStore } from "react";
 import {
   StanceRow,
 } from "@/components/map/MobileLegend";
+import { useLocale } from "@/contexts/LocaleContext";
 
 interface ShortcutsHelpProps {
   open: boolean;
@@ -99,8 +100,67 @@ function Kbd({ children }: { children: React.ReactNode }) {
 }
 
 export default function ShortcutsHelp({ open, onClose }: ShortcutsHelpProps) {
+  const { locale } = useLocale();
   const cardRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const keyboardGroups =
+    locale === "zh"
+      ? [
+          {
+            title: "切换区域",
+            rows: [
+              { keys: ["A", "←"], label: "上一个区域" },
+              { keys: ["D", "→"], label: "下一个区域" },
+              { keys: ["1"], label: "北美" },
+              { keys: ["2"], label: "欧洲" },
+              { keys: ["3"], label: "亚洲" },
+            ],
+          },
+          {
+            title: "进入 / 返回",
+            rows: [
+              { keys: ["S", "↓"], label: "进入当前选择" },
+              { keys: ["W", "↑"], label: "返回上一层" },
+              { keys: ["Esc"], label: "清除选择" },
+            ],
+          },
+          {
+            title: "查找",
+            rows: [
+              { keys: ["⌘", "K"], label: "打开搜索" },
+              { keys: ["?"], label: "显示帮助" },
+            ],
+          },
+        ]
+      : KEYBOARD_GROUPS;
+  const touchGroups =
+    locale === "zh"
+      ? [
+          {
+            title: "切换区域",
+            rows: [
+              { label: "切换区域", hint: "点击顶部区域按钮（美洲 / 欧洲 / 亚洲）" },
+              { label: "平移地图", hint: "双指拖动" },
+              { label: "缩放地图", hint: "双指捏合" },
+            ],
+          },
+          {
+            title: "探索地点",
+            rows: [
+              { label: "选择国家或州", hint: "点击地图区域" },
+              { label: "查看县级数据", hint: "点击高亮州进入下一层" },
+              { label: "打开数据中心", hint: "点击地图圆点" },
+            ],
+          },
+          {
+            title: "侧边栏",
+            rows: [
+              { label: "查看详情", hint: "点击顶部小胶囊展开" },
+              { label: "收起", hint: "从侧边栏把手向下滑动" },
+            ],
+          },
+        ]
+      : TOUCH_GROUPS;
 
   useEffect(() => {
     if (!open) return;
@@ -122,7 +182,7 @@ export default function ShortcutsHelp({ open, onClose }: ShortcutsHelpProps) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={isMobile ? "Map guide" : "Keyboard shortcuts"}
+      aria-label={isMobile ? (locale === "zh" ? "地图指南" : "Map guide") : (locale === "zh" ? "快捷键" : "Keyboard shortcuts")}
       className={`fixed inset-0 z-40 flex items-start justify-center pt-[14vh] px-4 bg-white/55 backdrop-blur-2xl transition-[opacity,backdrop-filter] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
         open ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
@@ -137,7 +197,7 @@ export default function ShortcutsHelp({ open, onClose }: ShortcutsHelpProps) {
       >
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-sm font-semibold text-ink tracking-tight">
-            {isMobile ? "Map guide" : "Keyboard shortcuts"}
+            {isMobile ? (locale === "zh" ? "地图指南" : "Map guide") : (locale === "zh" ? "快捷键" : "Keyboard shortcuts")}
           </h2>
           <button
             type="button"
@@ -158,7 +218,7 @@ export default function ShortcutsHelp({ open, onClose }: ShortcutsHelpProps) {
 
         {isMobile ? (
           <div className="flex flex-col gap-5">
-            {TOUCH_GROUPS.map((group) => (
+            {touchGroups.map((group) => (
               <div key={group.title}>
                 <div className="text-[11px] font-medium text-muted tracking-tight mb-2">
                   {group.title}
@@ -185,14 +245,14 @@ export default function ShortcutsHelp({ open, onClose }: ShortcutsHelpProps) {
                 tap away. */}
             <div className="pt-1 flex flex-col gap-3 border-t border-black/[.06]">
               <div className="text-[11px] font-medium text-muted tracking-tight mt-1">
-                Legend
+                {locale === "zh" ? "图例" : "Legend"}
               </div>
               <StanceRow />
             </div>
           </div>
         ) : (
           <div className="flex flex-col gap-4">
-            {KEYBOARD_GROUPS.map((group) => (
+            {keyboardGroups.map((group) => (
               <div key={group.title}>
                 <div className="text-[11px] font-medium text-muted tracking-tight mb-2">
                   {group.title}
@@ -210,7 +270,7 @@ export default function ShortcutsHelp({ open, onClose }: ShortcutsHelpProps) {
                             key={k}
                             className="flex items-center gap-1 text-muted"
                           >
-                            {i > 0 && <span className="text-[11px]">or</span>}
+                            {i > 0 && <span className="text-[11px]">{locale === "zh" ? "或" : "or"}</span>}
                             <Kbd>{k}</Kbd>
                           </span>
                         ))}
