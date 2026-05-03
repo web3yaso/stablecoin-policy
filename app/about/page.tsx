@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import AboutContent from "./AboutContent";
 
 export const metadata: Metadata = {
