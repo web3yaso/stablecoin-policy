@@ -38,6 +38,15 @@ jobs:
 
       - run: npm ci --no-audit --no-fund
 
+      - name: Check Anthropic API key
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [[ -z "$ANTHROPIC_API_KEY" ]]; then
+            echo "ANTHROPIC_API_KEY is missing. Add it in GitHub: Settings → Secrets and variables → Actions → Repository secrets."
+            exit 1
+          fi
+
       - name: Restart window (manual only)
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.restart == 'true' }}
         run: npx tsx scripts/sync/news-rss.ts --restart
