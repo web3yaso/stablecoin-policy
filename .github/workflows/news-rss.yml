@@ -8,11 +8,8 @@ name: news-rss
 
 on:
   schedule:
-    # Three times a day in UTC: ~5am ET (morning newsroom drop), ~11am ET
-    # (midday wave), ~7pm ET (after-market / late filings). News is steady
-    # but not minute-by-minute, so this catches the meaningful waves
-    # without burning CI on empty polls.
-    - cron: "0 9,15,23 * * *"
+    # Daily at 8pm America/Regina (02:00 UTC).
+    - cron: "0 2 * * *"
   workflow_dispatch: # manual trigger from the Actions tab
     inputs:
       restart:
@@ -55,7 +52,7 @@ jobs:
           if [[ -n "$(git status --porcelain data/news/)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/news/summaries.json data/news/.rss-started
+            git add data/news/summaries.json data/news/.rss-started public/news-summaries.json
             git commit -m "news: rss poll $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             git push
           else
