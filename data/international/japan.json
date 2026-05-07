@@ -84,10 +84,10 @@
   "news": [
     {
       "id": "japan-news-1",
-      "headline": "Yahoo Finance – Japan Proposes Strict Bond Standards for Stablecoin Reserves (January 27, 2026)",
-      "source": "finance.yahoo.com",
-      "date": "2026-01-27",
-      "url": "https://finance.yahoo.com/news/japan-proposes-strict-bond-standards-131815579.html"
+      "headline": "FSA outline of stablecoin amendments under the Payment Services Act",
+      "source": "fsa.go.jp",
+      "date": "2022-12-07",
+      "url": "https://www.fsa.go.jp/en/news/2022/20221207/01.pdf"
     },
     {
       "id": "japan-news-2",
@@ -98,10 +98,10 @@
     },
     {
       "id": "japan-news-3",
-      "headline": "Japan Times on Circle–SBI pact (Nov 28, 2023)",
-      "source": "japantimes.co.jp",
-      "date": "2026-01-27",
-      "url": "https://www.japantimes.co.jp/business/2023/11/28/companies/japan-sbi-stablecoin-pact/"
+      "headline": "SBI Holdings partners with Circle to pioneer USDC in Japan",
+      "source": "Circle",
+      "date": "2023-11-27",
+      "url": "https://www.circle.com/pressroom/sbi-holdings-partners-with-circle-to-pioneer-digital-currency-innovation-in-japan-with-usdc-banking-and-web3-services"
     }
   ],
   "stablecoinMeta": {

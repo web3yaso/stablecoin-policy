@@ -26,10 +26,10 @@
   "news": [
     {
       "id": "lithuania-news-1",
-      "headline": "Crypto-asset services and MiCA information",
+      "headline": "Bank of Lithuania guidance for crypto-asset service providers",
       "source": "Bank of Lithuania",
       "date": "2025-01-01",
-      "url": "https://www.lb.lt/en/"
+      "url": "https://www.lb.lt/en/crypto-assets"
     }
   ],
   "stablecoinMeta": {

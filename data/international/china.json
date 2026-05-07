@@ -73,10 +73,10 @@
   "news": [
     {
       "id": "china-news-1",
-      "headline": "Yahoo Finance – China Formalizes Ban on Yuan Stablecoins, RWA (February 6, 2026)",
-      "source": "finance.yahoo.com",
-      "date": "2026-02-06",
-      "url": "https://finance.yahoo.com/news/china-formalizes-ban-yuan-stablecoins-163613628.html"
+      "headline": "China reiterates restrictions on virtual currency trading and related activity",
+      "source": "State Council of China",
+      "date": "2021-09-24",
+      "url": "https://english.www.gov.cn/statecouncil/ministries/202109/24/content_WS614dc30bc6d0df57f98e0c84.html"
     },
     {
       "id": "china-news-2",

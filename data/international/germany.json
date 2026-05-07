@@ -106,10 +106,10 @@
   "news": [
     {
       "id": "germany-news-1",
-      "headline": "BaFin – MiCAR overview",
-      "source": "bafin.de",
+      "headline": "EBA MiCA hub for asset-referenced and e-money tokens",
+      "source": "eba.europa.eu",
       "date": "2026-04-01",
-      "url": "https://www.bafin.de/EN/Aufsicht/MiCAR/MiCAR_artikel_en.html"
+      "url": "https://eba.europa.eu/regulation-and-policy/asset-referenced-and-e-money-tokens-mica"
     },
     {
       "id": "germany-news-2",
@@ -156,7 +156,7 @@
         "id": "germany-reg-1",
         "name": "BaFin",
         "role": "National competent authority for MiCA authorisations and supervision (issuers and CASPs), and for ZAG/KWG compliance.",
-        "websiteUrl": "https://www.bafin.de/EN/Aufsicht/MiCAR/MiCAR_artikel_en.html",
+        "websiteUrl": "https://www.bafin.de/EN/Homepage/homepage_node.html",
         "isPrimary": true
       },
       {

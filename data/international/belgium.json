@@ -26,10 +26,10 @@
   "news": [
     {
       "id": "belgium-news-1",
-      "headline": "Crypto-assets and MiCA information",
+      "headline": "FSMA information for crypto-asset service providers under MiCA",
       "source": "FSMA",
       "date": "2025-01-01",
-      "url": "https://www.fsma.be/en/crypto-assets"
+      "url": "https://www.fsma.be/en/crypto-asset-service-provider-casp"
     }
   ],
   "stablecoinMeta": {
