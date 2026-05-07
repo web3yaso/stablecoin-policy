@@ -56,9 +56,12 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: npx tsx scripts/sync/news-rss.ts
 
+      - name: Sync public news summaries
+        run: cp data/news/summaries.json public/news-summaries.json
+
       - name: Commit if changed
         run: |
-          if [[ -n "$(git status --porcelain data/news/)" ]]; then
+          if [[ -n "$(git status --porcelain data/news/ public/news-summaries.json)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add data/news/summaries.json data/news/.rss-started public/news-summaries.json
