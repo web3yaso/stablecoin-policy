@@ -1,20 +1,28 @@
 {
-  "generatedAt": "2026-05-07T05:39:49.759Z",
+  "generatedAt": "2026-05-07T05:47:36.389Z",
   "regional": {
     "na": {
-      "summary": "The GENIUS Act stablecoin framework is advancing as the central legislative battleground in the United States, with Circle urging the OCC to finalize strong GENIUS Act stablecoin rules while banking trade groups argue that a Senate stablecoin rewards proposal 'falls short' on deposit protection concerns. Yield mechanisms remain a flashpoint, with U.S. officials holding a third White House meeting on stablecoin yield policy and the OCC's stablecoin regulations becoming a point of contention over yield debate. In Canada, Visa Canada and Wealthsimple launched a stablecoin settlement pilot, and Tetra Digital Trust launched the first regulated Canadian dollar stablecoin on May 5, expanding the practical deployment of stablecoin infrastructure ahead of formal rules. The Bank of Canada indicated that stablecoin rules could be introduced by mid or late 2027, leaving a significant regulatory gap as industry pilots accelerate. Delaware has also made a move at the state level, taking regulatory action to position itself within the stablecoin oversight landscape.",
+      "summary": "The GENIUS Act framework is advancing in Congress as the central legislative vehicle for U.S. stablecoin regulation, with Circle urging the OCC to finalize strong rules in a letter submitted to the Office of the Comptroller of the Currency, while the AICPA separately called on the OCC to incorporate established reporting and controls criteria into its rulemaking. Stablecoin yield mechanisms have emerged as the most contested policy question, drawing a third White House meeting with industry representatives, critical comments from bank trade groups who say the Senate stablecoin reward fix 'falls short' amid deposit protection concerns, and a rebuttal report from Americans for Financial Reform. Delaware has moved to position itself within the stablecoin oversight landscape, and the OCC's draft rules have become a battleground for the yield debate. In Canada, Tetra Digital Trust officially launched a regulated Canadian dollar stablecoin on May 5, while Visa Canada and Wealthsimple launched a stablecoin settlement pilot to test faster payment settlement using a U.S. stablecoin. The Bank of Canada indicated that stablecoin rules could be introduced by mid or late 2027, underscoring the gap in regulatory timelines between the two countries.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "GENIUS Act stablecoin rules",
+          "text": "GENIUS Act framework",
           "topic": "legislation"
         },
         {
-          "text": "third White House meeting on stablecoin yield",
+          "text": "OCC to finalize strong rules",
           "topic": "legislation"
         },
         {
-          "text": "falls short",
+          "text": "third White House meeting",
+          "topic": "cooperation"
+        },
+        {
+          "text": "Senate stablecoin reward fix 'falls short'",
+          "topic": "legislation"
+        },
+        {
+          "text": "regulated Canadian dollar stablecoin",
           "topic": "legislation"
         },
         {
@@ -22,42 +30,26 @@
           "topic": "infrastructure"
         },
         {
-          "text": "first regulated Canadian dollar stablecoin",
-          "topic": "infrastructure"
-        },
-        {
           "text": "stablecoin rules could be introduced by mid or late 2027",
-          "topic": "legislation"
-        },
-        {
-          "text": "Delaware has also made a move at the state level",
           "topic": "legislation"
         }
       ],
-      "generatedAt": "2026-05-07T05:39:35.128Z"
+      "generatedAt": "2026-05-07T05:47:22.303Z"
     },
     "eu": {
-      "summary": "UBS and five partner Swiss banks launched a CHF stablecoin sandbox on April 8, 2026, aimed at bridging blockchain and fiat payment systems, marking the most concrete infrastructure step in European stablecoin development this period. In the United Kingdom, the Financial Conduct Authority opened a consultation on cryptoasset activities including stablecoin issuance on April 15, 2026, while also signaling that AML rules will apply to U.S. stablecoin firms operating in the UK market. The stablecoin industry has since pushed back against a separate Bank of England proposal to ban unhosted wallets, with opposition mounting as of May 6, 2026. Bank of England Governor Andrew Bailey noted on April 15 that progress on global stablecoin standards has slowed, a statement that underscores the difficulty of achieving international regulatory alignment. Coinbase listed the first GBP stablecoin on April 22, 2026, adding commercial momentum even as the FCA's formal compliance framework for UK payment firms remains pending ahead of its expected 2026 implementation.",
+      "summary": "The UK Financial Conduct Authority opened a public consultation on stablecoin and cryptocurrency custody regulation on May 5, 2026, following an earlier April consultation on cryptoasset activities including stablecoin issuance, as compliance obligations for UK payment firms are expected to take effect under FCA stablecoin rules in 2026. The stablecoin industry has simultaneously pushed back against a proposed Bank of England ban on unhosted wallets, while Bank of England Governor Andrew Bailey has warned that progress on global stablecoin standards has slowed. In Switzerland, UBS partnered with five banks to launch a Swiss franc stablecoin sandbox in April 2026, with the initiative aimed at bridging blockchain technology with traditional fiat payment systems. Coinbase listed the first GBP stablecoin on April 22, 2026, adding a market milestone alongside these regulatory and pilot developments across the region.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "UBS and five partner Swiss banks launched a CHF stablecoin sandbox",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "bridging blockchain and fiat payment systems",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "Financial Conduct Authority opened a consultation on cryptoasset activities including stablecoin issuance",
+          "text": "UK Financial Conduct Authority opened a public consultation on stablecoin and cryptocurrency custody regulation on May 5, 2026",
           "topic": "legislation"
         },
         {
-          "text": "AML rules will apply to U.S. stablecoin firms",
+          "text": "compliance obligations for UK payment firms are expected to take effect under FCA stablecoin rules in 2026",
           "topic": "legislation"
         },
         {
-          "text": "ban unhosted wallets",
+          "text": "proposed Bank of England ban on unhosted wallets",
           "topic": "legislation"
         },
         {
@@ -65,54 +57,58 @@
           "topic": "cooperation"
         },
         {
-          "text": "Coinbase listed the first GBP stablecoin",
+          "text": "UBS partnered with five banks to launch a Swiss franc stablecoin sandbox in April 2026",
           "topic": "infrastructure"
         },
         {
-          "text": "FCA's formal compliance framework for UK payment firms",
-          "topic": "legislation"
+          "text": "bridging blockchain technology with traditional fiat payment systems",
+          "topic": "infrastructure"
+        },
+        {
+          "text": "Coinbase listed the first GBP stablecoin on April 22, 2026",
+          "topic": "infrastructure"
         }
       ],
-      "generatedAt": "2026-05-07T05:39:42.071Z"
+      "generatedAt": "2026-05-07T05:47:28.339Z"
     },
     "asia": {
-      "summary": "Hong Kong has issued its first stablecoin licenses—including one to HSBC—and simultaneously launched an AI-powered anti-fraud platform to combat counterfeit tokens that had already begun exploiting the regime before licensed products were introduced. Authorities have outlined strict conditions for subsequent applicants, signaling a deliberately cautious licensing posture rather than rapid rollout. In Australia, a Treasury report has called for stricter oversight of stablecoins, while a draft payments vision released on April 30 explicitly eyes stablecoin interoperability as part of a broader payment infrastructure overhaul. Singapore continues to attract commercial activity, with AX Coin signing an MOU with Singapore Gulf Bank to advance stablecoin and digital asset cooperation, and Visa expanding its stablecoin settlement pilot to include five additional blockchains. Across the region, stablecoin adoption in Asia Pacific is described as past the pilot stage, with institutional and cross-border remittance use cases—including an OxPay subsidiary obtaining a license in Bhutan for stablecoin remittances—accelerating the shift toward regulated deployment.",
+      "summary": "Hong Kong has issued its first stablecoin licenses, with HSBC among the initial recipients, and has since published strict conditions governing future applicants while deploying an AI-powered anti-fraud platform ahead of full rollout. Japan launched the world's first yen-convertible stablecoin on May 6, marking a significant step in the region's digital asset policy. Australia released a draft payments vision that eyes stablecoin interoperability and is advancing a broader payment infrastructure overhaul to integrate stablecoin technology, while its Treasury report calls for stricter oversight of stablecoins. In Singapore, AX Coin signed an MOU with Singapore Gulf Bank to advance stablecoin and digital asset cooperation, and Visa expanded its stablecoin settlement pilot to include five additional blockchains. Taken together, these moves confirm that stablecoin adoption in Asia Pacific is past the pilot stage and entering sustained regulatory and commercial development.",
       "keyDevelopments": [],
       "highlights": [
         {
+          "text": "HSBC among the initial recipients",
+          "topic": "legislation"
+        },
+        {
+          "text": "strict conditions governing future applicants",
+          "topic": "legislation"
+        },
+        {
           "text": "AI-powered anti-fraud platform",
-          "topic": "legislation"
-        },
-        {
-          "text": "strict conditions for subsequent applicants",
-          "topic": "legislation"
-        },
-        {
-          "text": "stricter oversight of stablecoins",
-          "topic": "legislation"
-        },
-        {
-          "text": "stablecoin interoperability",
           "topic": "infrastructure"
+        },
+        {
+          "text": "world's first yen-convertible stablecoin",
+          "topic": "infrastructure"
+        },
+        {
+          "text": "eyes stablecoin interoperability",
+          "topic": "legislation"
+        },
+        {
+          "text": "Treasury report calls for stricter oversight of stablecoins",
+          "topic": "legislation"
         },
         {
           "text": "MOU with Singapore Gulf Bank to advance stablecoin and digital asset cooperation",
           "topic": "cooperation"
         },
         {
-          "text": "five additional blockchains",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "stablecoin adoption in Asia Pacific is described as past the pilot stage",
+          "text": "stablecoin adoption in Asia Pacific is past the pilot stage",
           "topic": "cooperation"
-        },
-        {
-          "text": "license in Bhutan for stablecoin remittances",
-          "topic": "legislation"
         }
       ],
-      "generatedAt": "2026-05-07T05:39:49.759Z"
+      "generatedAt": "2026-05-07T05:47:36.389Z"
     }
   },
   "entities": {
@@ -534,6 +530,15 @@
           "date": "2026-05-07",
           "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5HVFN6d08tZXdEMWFLb29ZR1lmVHhpeGpCS0FDLWlscnA4a00xNGNSa1NKSGdJbFZMZ2J0cFpoWXZ5azl5VDVLZEZDZzZOWnZRd2NsNWRB0gFWQVVfeXFMTkdUU3p3Ty1ld0QxYUtvb1lHWWZUeGl4akJLQUMtaWxycDhrTTE0Y1JrU0pIZ0lsVkxnYnRwWmhZdnlrOXlUNUtkRkNnNk5adlF3Y2w1ZEE?oc=5",
           "summary": "The Office of the Comptroller of the Currency's stablecoin regulations have become a point of contention regarding yield mechanisms and related policy matters.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-pgr5z6",
+          "headline": "Anchorage Digital plans to launch a \"Cashless\" stablecoin reserve model on Solana - WEEX",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-05-06",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPWG5GSkVNdjlyVHdDdUZITTZ2blhiV1ZlMkh1bV9sR1JESUpDRFlqLWJaaFBhWGR2bUM1TTRPLXh6ZXNlTUdGVzJYdEUzN2dWM3Buamk0bE5XTkt2b1p4ZDhoXzB4VzRQcnZ4dXlLbUVWNTNfVzdaWTJYQ2M1ODFncXVVd3pDZGFxSkNWS1Y4WlZQZDRoT0VsRnZRSl8xNHRjQ1VzMGJPeGwxbVpZbWs2b0Z6RnlhWDhMbTdZ?oc=5",
+          "summary": "Anchorage Digital announced plans to launch a stablecoin with a \"cashless\" reserve model on the Solana blockchain.",
           "summarySource": "headline-only"
         },
         {
@@ -1599,6 +1604,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-state-stable-szqmm1",
+          "headline": "Wyoming announces Frontier, a government-backed stablecoin - StateScoop",
+          "source": "Google News — State Stablecoin Bills",
+          "date": "2025-08-19",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE14V2dlaTBlNzNWM0RTWWRnUjhxUHFza183NFRGSEU4dkZBcXlJZHlMTXo2bmtCYXJHU3g3ZXFQTjNIWXAzTkRuWVhSWmtCMU9FOUp3d0p2WEhwX3N5aF9oU0g3eDF3ejlfaVhtR3FBZ3I?oc=5",
+          "summary": "Wyoming has announced a government-backed stablecoin project called Frontier.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-state-stable-ojrhnu",
           "headline": "The GENIUS Act of 2025: Stablecoin Legislation Adopted in the US - Latham & Watkins LLP",
           "source": "Google News — State Stablecoin Bills",
@@ -1771,6 +1785,15 @@
     "Japan": {
       "news": [
         {
+          "id": "rss-google-news-japan-stable-nkjiz4",
+          "headline": "Japan Launches World's First Yen-Convertible Stablecoin, Signals Big Digital Shift - Dailyhunt",
+          "source": "Google News — Japan Stablecoin Policy",
+          "date": "2026-05-06",
+          "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxPZUJVZ1lEclNNRUVYLXZpUjdCQTlNVWxxMWhMZ3ZtVEtnYnFkS1FmZGZiaV9ybHdFbGhvbUhNODBzZ0VTejVCRlBpUmhORVhLSDdOVVZHUjM3VHlSRjRNaFd3ZW1XTTZaM2ttUERod2JTMXdlT0FVMHBMVTMwZG5aNWtuR0xYYU1wYW1GMkNCRlhrSF91V3M0OW9VQ0p3bEwwSVgySGtjRUx1ZU5IMmV2STItUDJ6YWd4aUVjRk14ZWhJYWlXSTJtRWxNaDM3bmNvY3FReFlOd3FTN1B4MW5oSjROSG0tMUNTMTVZZ2pjQzVMbUJEa2U4aXh2Nk1TZVZlb01J?oc=5",
+          "summary": "Japan has launched a yen-convertible stablecoin as part of its digital asset policy development.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-japan-stable-rh560r",
           "headline": "Japan FSA Classifies JPYC Under Regulated Payment Services Framework - The Crypto Times",
           "source": "Google News — Japan Stablecoin Policy",
@@ -1786,6 +1809,15 @@
           "date": "2026-04-25",
           "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE11eW5aaEZDcnFwT2tWSnM0NUdmUXFTWlRjQk82MlNMVWdVbmVlSmJFOXBMZFNubDUySElENFBtdDJKZ2JwaEIzOUhTMmcxdG8?oc=5",
           "summary": "Polygon has supported JPYC, a Japanese yen-denominated stablecoin, in reaching over $100 million in circulation as activity in Japan's stablecoin market grows.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-japan-stable-hc4wcu",
+          "headline": "Ripple Reveals $33 Trillion Stablecoin Prediction at XRP Tokyo 2026 - Yahoo Finance",
+          "source": "Google News — Japan Stablecoin Policy",
+          "date": "2026-04-07",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPdUxUa245aUk4b1YzSEJVdTFzX2tJR3dmZWdRc3ZhczFBdEM0ZUpqNkg3dHJpaGNIRXhGSHBxb0NUN2VmdEd0Zl92S3RBS2JiWUFtUGhybDliOEVzMG9NVkJHQm1HejY4dWJ5bkVNNU4zNnlIZTBaVG5qWFhKMjMxZmh6R3J2c2ItVWp4cnk4T2RNakpLWFNXN3dRZTlEWjIxNWIyRg?oc=5",
+          "summary": "Ripple has made a prediction regarding stablecoin market size at an event in Tokyo.",
           "summarySource": "headline-only"
         },
         {
@@ -2351,6 +2383,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-singapore-st-gwlj46",
+          "headline": "Singapore dollar-backed stablecoin XSGD launches on Coinbase amid rising crypto adoption - CNA",
+          "source": "Google News — Singapore Stablecoin Policy",
+          "date": "2025-10-01",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOZmpsTUV6alNwRlhxWFB3d19oMjRENjZVUm51MTliQ01NTnhQQnFGQ3FGb3JZeGp6WEdNdDZRMG01SV9XUFI3ZWE2em1DQTJvTVJNRGtHTjB6WG1hNDN2ZzMtUl95QThhLWw5UkVaSW42ek9id1Nrd08tX29ZT1ZmSFdoUXdpeVBmei1TdERFbndRQlJJZUdwQ284SHFETkVYNU1PaVJUT3A?oc=5",
+          "summary": "Singapore dollar-backed stablecoin XSGD has launched on the Coinbase exchange, reflecting continued growth in stablecoin availability on major cryptocurrency platforms.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-singapore-st-uva6gc",
           "headline": "First Singapore dollar-backed stablecoin XSGD to launch on Coinbase on Sept 30 - The Straits Times",
           "source": "Google News — Singapore Stablecoin Policy",
@@ -2406,12 +2447,30 @@
     "United Kingdom": {
       "news": [
         {
+          "id": "rss-google-news-uk-stablecoi-b75mgi",
+          "headline": "Stablecoin industry opposes Bank of England’s unhosted wallet ban - MSN",
+          "source": "Google News — UK Stablecoin Policy",
+          "date": "2026-05-06",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPWEdqblpSVUlNWjJ3YzFNamJRMHV6WDliUjNVN1huYzZpUGhfSVZCYXJ2b2hwS1VZcmtfZ1BlYWVvRGtMZVFUa3dCanhYMHNJcG5ndnpjcHd5S2JJSEtWa3VkdG83aXlpeXRGc2djVmhQR1lzV3RWMkpUYlBhY2U4TkgyUGxYZm9FbnRkVS1teHJlTGxwYXNWamFRM1pjd3Z3TWNhMnNibDBzMVFlRzhJTFl4M19udw?oc=5",
+          "summary": "The stablecoin industry has expressed opposition to a proposed Bank of England ban on unhosted wallets.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-uk-stablecoi-1f1ot3",
           "headline": "Stablecoin industry opposes Bank of England’s unhosted wallet ban - Cryptonews.net",
           "source": "Google News — UK Stablecoin Policy",
           "date": "2026-05-06",
           "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBBWEZxVHpianJfQ1lXNmtQVWlDTloySVR0cUpsdW44YnJHVWJKMFVZang0dzQ0cThIZU1zVEM5UklScVZtSUZTZkx4eDBjeTZRUy10ZEJB?oc=5",
           "summary": "The stablecoin industry has expressed opposition to a proposed Bank of England ban on unhosted wallets.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-uk-stablecoi-clbvev",
+          "headline": "UK FCA requests public comments on stablecoin, crypto custody regulation - MSN",
+          "source": "Google News — UK Stablecoin Policy",
+          "date": "2026-05-05",
+          "url": "https://news.google.com/rss/articles/CBMi1wJBVV95cUxNR3VubXVTQ2tONTMxdVE3anhsTlhUcjJobHIwd3ZkTTc4ZW15U01kNXo2OF85Vi1pYjFmN3k4RWlrZWdzd2liYTl5aEJFdk1kVHptSVBjRVM0dTZuM2dvcEpyaklza3RMa2stRS02eXZqeDZoVUNyMXdJaXp6S2g2UnU2SUx5d2xwdm1IWUJjZ2J2SC04RENmSDNuOXNlcW1sZlpiTHZUZDA5b0NwZWxzb09GZjFIUHFidnBQMWRoZnlKcEw5Q2FZaWNpRzgwcHpsS2FFY0N0OFFGZEtaQVZGOG1VVFhsbG1scktkeVNkbmZDd1pwUTF3U3F4VDVYaEVSMy1ZSlloLWo2YngtRzNOaFlTTnFwREVrV1ZoTHdxeHEzTUlZcGNVOTNvMDA4SFYzMFZ4Q1M5aU1GeXYxZEJ6eGVCc281Vl9LbTBKdnB0aUQ0cFRDZ2kw?oc=5",
+          "summary": "The UK Financial Conduct Authority has opened a public consultation on regulatory approaches for stablecoins and cryptocurrency custody arrangements.",
           "summarySource": "headline-only"
         },
         {
@@ -2707,6 +2766,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-australia-st-w3qcug",
+          "headline": "Tetra Trust Unveils CADD, a Canadian Dollar Stablecoin - bloomingbit",
+          "source": "Google News — Australia Stablecoin Policy",
+          "date": "2026-05-04",
+          "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE10YU85OVF1NTBCdGVZekF5MzUxeWlNMEtPTU93YnJsNVpncDRkUldjN1ZrZVFFSHFuejhKMmZ2QmhoOW5PNDliSmJKQTd4NEYxTkk4aA?oc=5",
+          "summary": "Tetra Trust has launched CADD, a stablecoin denominated in Canadian dollars.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-australia-st-6q21j1",
           "headline": "Treasury report calls for stricter oversight of stablecoins - Investment Executive",
           "source": "Google News — Australia Stablecoin Policy",
@@ -2908,6 +2976,15 @@
     },
     "Hong Kong": {
       "news": [
+        {
+          "id": "rss-google-news-hong-kong-st-aeacvs",
+          "headline": "Bison Bank, wholly owned by Hong Kong's Bison Capital, launches its MiCA-compliant stablecoin for institutional cross-border payments - Bolsamania",
+          "source": "Google News — Hong Kong Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMiogJBVV95cUxQQTJhUjdjS2lTOTB5VjNsVFNRMThrcHhZcHlydTN2WXhsZVJXSExlUUVHS0k3OXNpcEZSOWcyaGtOMW5jb0lubG1ydTFZZExXc2tMNGNEVUhTSXNhUWRENDNKYjRieFRzZFlSNndEWHRlZlFVUWNHYmRpSmN6M3lWY3l1V0VkZFlyYWRjVjdmNXVwZndFN1hickY4U28yRFh3Ynlic3B5SnhXSXk2M2xrT0pVT1NUX3U2NGx0Mnlya09YeC1tVjZRVVltblBhY2Mtdll6ck11a0xZU2FUU0poVFFPSUVvcGFOUEp6SWVpRnVmeFVVNEFlUWtpN1E2LUdnTFlyVjdLbzZXMzMzMFdpNW1LUkZPVG8zbDlRS0FMY0J3UdIBpwJBVV95cUxQMkVpSy1tNGJqTENsZ0RLR0VCUFpnSE15TzlkZElfS0U0a2dFbkY5VjQ0a1ZsVWFJWmo0UFZzVXdxRXN4V3c5Nkh3VmgzSTM4X2NxZXN0RWhnWHJ4S2tBc29nN2ctcjhFZWQ1cVBoMEIyS1ByV3YxNWdxcUEyQ1BIOWpjU3JWZG5EWEk0M1ZxUlp0TF95ODA3bE01bzhDczlUZERyQXlyeTEzWW1mZUxoV0FJTXRJeHl5Q1lMSEdmYjkwTWJBNFplYWZEa0wzU2wzQjhOaDA1cTFTMzBMdnk2ZmNBdzR0dkt4bVhpcVVxakZkMlh3U3QtZUg1X21MWDMwQTNlWVRaR0pEWmpibmM4SEdITEo3NjBGRVJoSVNiajFGckpZbmFB?oc=5",
+          "summary": "Bison Bank, a subsidiary of Hong Kong's Bison Capital, has launched a stablecoin designed for institutional cross-border payments that complies with the European Union's Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-hong-kong-st-x7vhqj",
           "headline": "Hong Kong Sets Strict Conditions for Future Stablecoin Licenses After First Approvals - CoinCentral",
