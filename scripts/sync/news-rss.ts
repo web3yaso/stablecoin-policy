@@ -294,7 +294,17 @@ function stripBoilerplate(html: string): string | null {
   return s.slice(0, 4000);
 }
 
-const client = new Anthropic();
+function getAnthropicApiKey(): string {
+  const key = process.env.ANTHROPIC_API_KEY?.trim();
+  if (!key) {
+    throw new Error(
+      "ANTHROPIC_API_KEY is missing. Add it to GitHub Actions secrets or .env.local before running news polling.",
+    );
+  }
+  return key;
+}
+
+const client = new Anthropic({ apiKey: getAnthropicApiKey() });
 let nextSummarySlotAt = 0;
 
 function sleep(ms: number) {

@@ -106,7 +106,17 @@ interface NewsFile {
   entities: Record<string, { news: NewsItem[] }>;
 }
 
-const client = new Anthropic();
+function getAnthropicApiKey(): string {
+  const key = process.env.ANTHROPIC_API_KEY?.trim();
+  if (!key) {
+    throw new Error(
+      "ANTHROPIC_API_KEY is missing. Add it to GitHub Actions secrets or .env.local before regenerating news summaries.",
+    );
+  }
+  return key;
+}
+
+const client = new Anthropic({ apiKey: getAnthropicApiKey() });
 
 // Only feed the summarizer items from the last ~30 days so the prose
 // stays grounded in recent developments. If the region is quiet we fall
