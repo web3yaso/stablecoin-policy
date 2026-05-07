@@ -20,7 +20,7 @@
 
 import "../env.js";
 import { execSync } from "node:child_process";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import Anthropic from "@anthropic-ai/sdk";
@@ -33,6 +33,7 @@ import {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
 const NEWS_PATH = join(ROOT, "data/news/summaries.json");
+const PUBLIC_NEWS_PATH = join(ROOT, "public/news-summaries.json");
 const FEEDS_PATH = join(ROOT, "data/news/feeds.json");
 const STARTED_PATH = join(ROOT, "data/news/.rss-started");
 
@@ -507,7 +508,9 @@ async function main() {
 
   news.generatedAt = new Date().toISOString();
   writeFileSync(NEWS_PATH, JSON.stringify(news, null, 2) + "\n");
+  copyFileSync(NEWS_PATH, PUBLIC_NEWS_PATH);
   console.log(`rss: added ${added} new item(s)`);
+  console.log("rss: synced public/news-summaries.json");
 
   // The UI reads ENTITIES from lib/placeholder-data.ts (generated), not
   // from data/news/summaries.json directly — so the new items have to be
