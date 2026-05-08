@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-05-07T05:47:36.389Z",
+  "generatedAt": "2026-05-08T04:52:54.202Z",
   "regional": {
     "na": {
-      "summary": "The GENIUS Act framework is advancing in Congress as the central legislative vehicle for U.S. stablecoin regulation, with Circle urging the OCC to finalize strong rules in a letter submitted to the Office of the Comptroller of the Currency, while the AICPA separately called on the OCC to incorporate established reporting and controls criteria into its rulemaking. Stablecoin yield mechanisms have emerged as the most contested policy question, drawing a third White House meeting with industry representatives, critical comments from bank trade groups who say the Senate stablecoin reward fix 'falls short' amid deposit protection concerns, and a rebuttal report from Americans for Financial Reform. Delaware has moved to position itself within the stablecoin oversight landscape, and the OCC's draft rules have become a battleground for the yield debate. In Canada, Tetra Digital Trust officially launched a regulated Canadian dollar stablecoin on May 5, while Visa Canada and Wealthsimple launched a stablecoin settlement pilot to test faster payment settlement using a U.S. stablecoin. The Bank of Canada indicated that stablecoin rules could be introduced by mid or late 2027, underscoring the gap in regulatory timelines between the two countries.",
+      "summary": "The GENIUS Act has moved to the center of U.S. stablecoin policy, with the Securities Industry and Financial Markets Association issuing implementation recommendations, Circle urging the OCC to finalize strong rules, and a third White House meeting convened specifically to debate stablecoin yield mechanisms. BlackRock has formally challenged the OCC's 20% stablecoin cap, while Senator Elizabeth Warren sent a letter to Mark Zuckerberg seeking details on Meta's stablecoin plans, underscoring growing congressional scrutiny. The Clarity Act is advancing toward Senate markup as the yield debate continues to narrow legislative options. In Canada, the Bank of Canada indicated that stablecoin rules could be introduced by mid or late 2027, even as Tetra launched the first regulated Canadian dollar stablecoin and Visa Canada partnered with Wealthsimple to bring stablecoin settlement to Canada.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "GENIUS Act framework",
+          "text": "GENIUS Act",
           "topic": "legislation"
         },
         {
-          "text": "OCC to finalize strong rules",
+          "text": "OCC's 20% stablecoin cap",
           "topic": "legislation"
         },
         {
@@ -18,34 +18,38 @@
           "topic": "cooperation"
         },
         {
-          "text": "Senate stablecoin reward fix 'falls short'",
+          "text": "Clarity Act is advancing toward Senate markup",
           "topic": "legislation"
-        },
-        {
-          "text": "regulated Canadian dollar stablecoin",
-          "topic": "legislation"
-        },
-        {
-          "text": "Visa Canada and Wealthsimple launched a stablecoin settlement pilot",
-          "topic": "infrastructure"
         },
         {
           "text": "stablecoin rules could be introduced by mid or late 2027",
           "topic": "legislation"
-        }
-      ],
-      "generatedAt": "2026-05-07T05:47:22.303Z"
-    },
-    "eu": {
-      "summary": "The UK Financial Conduct Authority opened a public consultation on stablecoin and cryptocurrency custody regulation on May 5, 2026, following an earlier April consultation on cryptoasset activities including stablecoin issuance, as compliance obligations for UK payment firms are expected to take effect under FCA stablecoin rules in 2026. The stablecoin industry has simultaneously pushed back against a proposed Bank of England ban on unhosted wallets, while Bank of England Governor Andrew Bailey has warned that progress on global stablecoin standards has slowed. In Switzerland, UBS partnered with five banks to launch a Swiss franc stablecoin sandbox in April 2026, with the initiative aimed at bridging blockchain technology with traditional fiat payment systems. Coinbase listed the first GBP stablecoin on April 22, 2026, adding a market milestone alongside these regulatory and pilot developments across the region.",
-      "keyDevelopments": [],
-      "highlights": [
+        },
         {
-          "text": "UK Financial Conduct Authority opened a public consultation on stablecoin and cryptocurrency custody regulation on May 5, 2026",
+          "text": "first regulated Canadian dollar stablecoin",
           "topic": "legislation"
         },
         {
-          "text": "compliance obligations for UK payment firms are expected to take effect under FCA stablecoin rules in 2026",
+          "text": "Visa Canada partnered with Wealthsimple to bring stablecoin settlement to Canada",
+          "topic": "cooperation"
+        },
+        {
+          "text": "Senator Elizabeth Warren sent a letter to Mark Zuckerberg",
+          "topic": "legislation"
+        }
+      ],
+      "generatedAt": "2026-05-08T04:52:40.874Z"
+    },
+    "eu": {
+      "summary": "The UK Financial Conduct Authority has opened a public consultation on regulatory approaches for stablecoins and cryptocurrency custody arrangements, building on its April consultation on cryptoasset activities including stablecoin issuance, with full compliance obligations for UK payment firms expected to take effect in 2026. The stablecoin industry has expressed opposition to a proposed Bank of England ban on unhosted wallets, even as the Bank simultaneously engages on broader policy matters related to digital assets, stablecoins, and the potential development of a central bank digital currency. Bank of England Governor Andrew Bailey has noted that progress on global stablecoin standards has slowed, a concern that sits alongside anti-money laundering rules set to apply to U.S. stablecoin firms operating in the UK market. In Switzerland, six Swiss banks have launched a sandbox environment to test a Swiss franc-denominated stablecoin, advancing one of the more concrete pilot programs in European stablecoin infrastructure.",
+      "keyDevelopments": [],
+      "highlights": [
+        {
+          "text": "UK Financial Conduct Authority has opened a public consultation on regulatory approaches for stablecoins and cryptocurrency custody arrangements",
+          "topic": "legislation"
+        },
+        {
+          "text": "compliance obligations for UK payment firms expected to take effect in 2026",
           "topic": "legislation"
         },
         {
@@ -57,30 +61,22 @@
           "topic": "cooperation"
         },
         {
-          "text": "UBS partnered with five banks to launch a Swiss franc stablecoin sandbox in April 2026",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "bridging blockchain technology with traditional fiat payment systems",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "Coinbase listed the first GBP stablecoin on April 22, 2026",
-          "topic": "infrastructure"
-        }
-      ],
-      "generatedAt": "2026-05-07T05:47:28.339Z"
-    },
-    "asia": {
-      "summary": "Hong Kong has issued its first stablecoin licenses, with HSBC among the initial recipients, and has since published strict conditions governing future applicants while deploying an AI-powered anti-fraud platform ahead of full rollout. Japan launched the world's first yen-convertible stablecoin on May 6, marking a significant step in the region's digital asset policy. Australia released a draft payments vision that eyes stablecoin interoperability and is advancing a broader payment infrastructure overhaul to integrate stablecoin technology, while its Treasury report calls for stricter oversight of stablecoins. In Singapore, AX Coin signed an MOU with Singapore Gulf Bank to advance stablecoin and digital asset cooperation, and Visa expanded its stablecoin settlement pilot to include five additional blockchains. Taken together, these moves confirm that stablecoin adoption in Asia Pacific is past the pilot stage and entering sustained regulatory and commercial development.",
-      "keyDevelopments": [],
-      "highlights": [
-        {
-          "text": "HSBC among the initial recipients",
+          "text": "anti-money laundering rules set to apply to U.S. stablecoin firms",
           "topic": "legislation"
         },
         {
-          "text": "strict conditions governing future applicants",
+          "text": "six Swiss banks have launched a sandbox environment to test a Swiss franc-denominated stablecoin",
+          "topic": "infrastructure"
+        }
+      ],
+      "generatedAt": "2026-05-08T04:52:46.114Z"
+    },
+    "asia": {
+      "summary": "Hong Kong set strict licensing conditions for stablecoin issuers following its first approval batch and simultaneously launched an AI-powered anti-fraud platform ahead of its broader stablecoin rollout, signaling a deliberate, sequenced regulatory approach. Payward, the parent company of cryptocurrency exchange Kraken, announced a $600 million acquisition of Hong Kong-based stablecoin firm Reap on May 7, marking one of the largest deals targeting Asia-Pacific stablecoin payments infrastructure to date. Japan launched the world's first yen-convertible stablecoin on May 6 as part of its accelerating digital asset policy development. In Singapore, AX Coin signed an MOU with Singapore Gulf Bank to advance stablecoin and digital asset cooperation, while an OxPay subsidiary secured a Bhutan licence for cryptocurrency payments and stablecoin remittances, extending the regional regulatory footprint beyond major financial centers. Bison Bank, wholly owned by Hong Kong's Bison Capital, separately launched a MiCA-compliant stablecoin targeting institutional cross-border payments, reflecting cross-jurisdictional compliance strategies emerging across the Asia-Pacific corridor.",
+      "keyDevelopments": [],
+      "highlights": [
+        {
+          "text": "strict licensing conditions for stablecoin issuers",
           "topic": "legislation"
         },
         {
@@ -88,15 +84,11 @@
           "topic": "infrastructure"
         },
         {
-          "text": "world's first yen-convertible stablecoin",
+          "text": "$600 million acquisition of Hong Kong-based stablecoin firm Reap",
           "topic": "infrastructure"
         },
         {
-          "text": "eyes stablecoin interoperability",
-          "topic": "legislation"
-        },
-        {
-          "text": "Treasury report calls for stricter oversight of stablecoins",
+          "text": "world's first yen-convertible stablecoin",
           "topic": "legislation"
         },
         {
@@ -104,16 +96,38 @@
           "topic": "cooperation"
         },
         {
-          "text": "stablecoin adoption in Asia Pacific is past the pilot stage",
+          "text": "Bhutan licence for cryptocurrency payments and stablecoin remittances",
+          "topic": "legislation"
+        },
+        {
+          "text": "MiCA-compliant stablecoin targeting institutional cross-border payments",
           "topic": "cooperation"
         }
       ],
-      "generatedAt": "2026-05-07T05:47:36.389Z"
+      "generatedAt": "2026-05-08T04:52:54.202Z"
     }
   },
   "entities": {
     "Canada": {
       "news": [
+        {
+          "id": "rss-google-news-canada-stabl-h7ooj6",
+          "headline": "BoC announces Stablecoin regulations; Ethereum slips - equiti.com",
+          "source": "Google News — Canada Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNamdLeXdKV0ZjbTdXLUdfcFlMZHRrZ0pLRVNtd2FoWVFnTmc0dFFBa19IblRIWGd0UTU5dHdmRGpGdU9Ga3JMcEtLeXJ1Qm1zclgzN2VHVnl1ODh0d19iSW4wUXpybHcxNTFJNWRUODFlSXNwSzc1VWd1M1RxQ29RdkZLUW5hS3JnX2g5bGU2azc1LWRYcHZHclFkRVVoUQ?oc=5",
+          "summary": "The Bank of Canada has announced regulations for stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-canada-stabl-wjg3kk",
+          "headline": "Bank of Canada says stablecoins rules could be introduced by mid or late 2027 - CTV News",
+          "source": "Google News — Canada Stablecoin Policy",
+          "date": "2026-05-06",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQaTNTY29icm1HanRzQlYyVDBESVY5bnpyQzdyQThsbXNkVk1wa2FQaGQtVjRfZERjRk5FeUlaUEwxOFJuM0hQVjNqQzhRNVVNRTJqMXJsY3hzYmMweFV6bV83S1N6TkFVdWhGUE5UYkJqSDNPS1BqYUpTNmFtM0VvbmhyOXdhai01NXltdld5ZjBXNzZkWXVDOHdadHVWR2Itc2hoY2ZIVUlLWkNfelR1NDlYZGtrMGs?oc=5",
+          "summary": "The Bank of Canada has indicated that regulatory rules for stablecoins could be introduced by the middle or end of 2027.",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-canada-stabl-dpuc36",
           "headline": "Visa Launches ‘Agentic Ready’ Program, Taps Wealthsimple for Stablecoin Pilot - Fintech.ca |",
@@ -524,12 +538,102 @@
     "United States": {
       "news": [
         {
+          "id": "rss-google-news-state-stable-8373zx",
+          "headline": "Florida Candidate Frank Russo Backs Bitcoin Pension Plan And State Stablecoin - Yellow.com",
+          "source": "Google News — State Stablecoin Bills",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQbHpNalUxeWdOckk3MHpmUU1tWUdmLVFaVEJjREwtb0tLOTF1MmdKUUFWYXRMQkFSUjdya2NjNkExdDVrbElIREVRdUYtbVpVcW1HN3ZPQTFEbEpkcFJBYmUwY3FNSlpUNEZiZGEtVS14bHZQOHFLLTVhM2JDRGFvNndpNkRKVXRC?oc=5",
+          "summary": "A Florida political candidate has expressed support for incorporating Bitcoin into pension plans and creating a state-backed stablecoin.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-86gzgy",
+          "headline": "BlackRock Challenges the OCC’s 20% Stablecoin Cap: Here Is What Is at Stake for BUIDL - CCN.com",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQc1dBajZkaUg3bVlpYzh4SXZ1eW9BVTIzbGVtb2RoQ3ZaeVdfMmkwM1o3cjE0NkJ2MmpIN2dHQlEtTktueGlMSS13SGVsM1VsVUdYZGpocHJ4a1R3N20xZ0c4dVN3TW9hbXJJeUJORTdOZGt0a1dVVnpVY29nZ0hLYnlFdFZuemJHb1ZJWkxRZHVNQU5oVnd4SFdhTzNRRGljd1hJ?oc=5",
+          "summary": "BlackRock has challenged a 20% stablecoin cap imposed by the Office of the Comptroller of the Currency, raising questions about regulatory limits on stablecoin issuance or holdings.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-9er9iz",
+          "headline": "OCC Stablecoin Rules Become Battleground For Yield Debate - Law360",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQNGpWLV9ZZ3lINnRmMmxuaGt0eWtROHVBeEtpVHozNGdmaVg1OFZYUm5mU2FJUHZDc1BVc2ZxR29zUktPN1JXSzVWRkdYMnNJckE2ZkNMa0g2N2l2MEdMNnRpeFZMeFRrTl8wRGJqUTlxcVZyb3cwWXpldk81TEJ1VEFvZ0Izcl9CNVJkYVpkWFZqT1MySXZDZnlfZVBTUdIBVkFVX3lxTE5HVFN6d08tZXdEMWFLb29ZR1lmVHhpeGpCS0FDLWlscnA4a00xNGNSa1NKSGdJbFZMZ2J0cFpoWXZ5azl5VDVLZEZDZzZOWnZRd2NsNWRB?oc=5",
+          "summary": "The Office of the Comptroller of the Currency's stablecoin regulations have become a subject of dispute regarding how stablecoin issuers should handle yield on reserve assets.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-yvorfs",
+          "headline": "Clarity Act edges toward Senate markup as stablecoin fight narrows options for crypto yield - crypto.news",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNc05wQ1hZZ2l4Z3gzd3JhOWNZRkhPc2kwNVhDLWVpNlR3QmN4WjREWUFSTS1mNGVDbXJXZG40NGZjbWh1aDlxeE5zUEZZYnNpUW9wdEx4Y0xtSVJRNXVNMmdCTkEtc2k1TVA4VFhfZkYxWGtRamlNTkNFVG5NZGFhV2FLb09CY0tlRmVxdDFhWWdJYmhKZTNPU1FhRXA5WS0wclVSdkxwa3BRRHA2ajZub3Bn?oc=5",
+          "summary": "The Clarity Act is progressing toward Senate markup as stablecoin regulatory discussions narrow the available policy options related to cryptocurrency yield products.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-bmr2bs",
+          "headline": "Squads raises $18 mn for Solana-based stablecoin treasury platform - Beinsure",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE04WTVCZGc1Q2dTaGdDeUltR3ZfX2ExZGxZWGdMV1R1N0FEZllsYnBjbUloTnY2d2tSOEVhZkZKcGpYZVEwd2JRbUZlanJqZGlGY1Y1RFBCUEdVOWxIREpQMW1qS3NIbTlpcFl3UWpILVNmNFUyMHBaUnV4TUJEa3c?oc=5",
+          "summary": "Squads, a platform built on Solana, raised $18 million in funding for developing stablecoin treasury management capabilities.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-9fltnc",
+          "headline": "Stablecoin Firm Mesta Expands Platform As Startups Target Business Treasury - Crowdfund Insider",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxON2FSc1RiZk1vWnBvQTQ2Rm9uUFA2MjJKM3lzYXRXeFhKaXlueHB0aFRNTGluMVp6Nm5TS3FORnZ1SUNaOTk5TEpRWkh6X1NQTlRSOFpjU1pzS19vV3pVaW9nWGJSenZTVWpNOVN3SFVwNmVCMHA1RW00dG53S2FoeGwtNElxanV3cnBSN3hVb08wQ3pOZnBFVUxUZldUN1ZTWmJjT2MtSTA1NmNtQ19MMVRIR3I2OWNSOTZaRFRxSnNLZw?oc=5",
+          "summary": "Mesta, a stablecoin firm, has expanded its platform while targeting business treasury services in a market focused on startup solutions.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-opcexu",
+          "headline": "AI agents and large corporates will lead the next stablecoin boom, executives say - CoinDesk",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQU1JlN3dXVFlwR1AtNm5qb0hBTUxfWHJNOV8zQnlVMXpKMlZRRngxQ0JET2RUeV9PUW9tR2xuWnNnWnh0MGZCSDhFZDdGUS1UTDVPUy1IOWNKTzNSVE5TLU02dGotSjAzLUZRYVd1dlRDMWFfQVZyVVdHWjZiUzJUUEkyTURDYWNlNU85SXVsaTNFVl9DR05DOFY2WXIybEhybDdPM0ZVMEFUYTUybDRLekRiY3ZVX0s0Uk5wNFFwM0p3MEE?oc=5",
+          "summary": "Executives predict that artificial intelligence agents and large corporations will be primary drivers of growth in the stablecoin market going forward.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-ye66u9",
+          "headline": "World Liberty Financial Co-Founder on Senate Crypto Legislation and Stablecoin Momentum - News and Statistics - IndexBox",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQSkVfc3QyQk9tdHh5ZVprMXR5TEpWdkdGb09pTk05cWRaMVZIM0RMMDRsVUxLVTh6Y3RwRHJkM2twdGFUbEpVTHQ2WnlIaFp0NzFVMlRYNDhJVWRWT25YYl91RFdDY2p4ZkFnX0RqSHp2cmhyU1hFVVRVNDc3a1Jfa3hnMndubnlUS1JBMWhaUmNieGxWc2xCU29rRHpHVHphX1Q0ZQ?oc=5",
+          "summary": "A co-founder of World Liberty Financial discussed Senate cryptocurrency legislation and stablecoin momentum.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-hsvayr",
+          "headline": "Elizabeth Warren seeks information on Meta’s latest stablecoin plans in letter to Mark Zuckerberg - Fortune",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQeHI3c2N1WENxYlQydFcxbTdpWFBtZ0QxMUhiNnM0TTlqQkM4dTJUSzNvQld6TnpjbnY0ZnVJSVJ3N0E5V2JZcGs4clY2UE91YmthVnVFTHJqRDZYREhCclVqYndaYm1SdVdMbGoxNVJWVElCZnVic1o0RVFXWG4wSzZoZTFEMmM?oc=5",
+          "summary": "Senator Elizabeth Warren has requested information from Meta CEO Mark Zuckerberg regarding the company's current stablecoin initiatives.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-us-stablecoi-4mm6nv",
           "headline": "OCC Stablecoin Rules Become Battleground For Yield Debate - Law360",
           "source": "Google News — US Stablecoin Policy",
           "date": "2026-05-07",
           "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5HVFN6d08tZXdEMWFLb29ZR1lmVHhpeGpCS0FDLWlscnA4a00xNGNSa1NKSGdJbFZMZ2J0cFpoWXZ5azl5VDVLZEZDZzZOWnZRd2NsNWRB0gFWQVVfeXFMTkdUU3p3Ty1ld0QxYUtvb1lHWWZUeGl4akJLQUMtaWxycDhrTTE0Y1JrU0pIZ0lsVkxnYnRwWmhZdnlrOXlUNUtkRkNnNk5adlF3Y2w1ZEE?oc=5",
           "summary": "The Office of the Comptroller of the Currency's stablecoin regulations have become a point of contention regarding yield mechanisms and related policy matters.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-wo9ivr",
+          "headline": "SIFMA offers recommendations for implementation of GENIUS Act - Financial Regulation News -",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-05-06",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPZDZCcVNCRDBRWXptZkZyS0N1eFNueWtZYWtQNzI0UEE3UVQ0dUpJd3QyZS1nRDlxTEpWNUJpWW1pZS1MaU5jejdiSElQNG45MjBhcXh5OC12UzA1VEN1Z2lDRnNrRnEwR3lGYjlIdW54aGVZd1pBV18wWHBnWmo1b1hBOEd3VncybGNjNGNBYWd0ZXVDUlE?oc=5",
+          "summary": "The Securities Industry and Financial Markets Association has provided recommendations regarding implementation of the GENIUS Act, proposed legislation addressing digital asset regulation.",
           "summarySource": "headline-only"
         },
         {
@@ -1217,6 +1321,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-stablecoin-i-nibjgg",
+          "headline": "FDIC proposes GENIUS Act rule establishing framework for FDIC-supervised payment stablecoin issuers - JD Supra",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-04-13",
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE54c3FVZmlhUnZkaW9fQTdPXzZZbndBbTN2YWNuaHExaU9BcUtPSFVpSjFpQ2VYeFZSd2xnV3JYNmttRURhcTZnOU9vUnJ0VFhhUm5YM3BTcHU0SGdQRi1xajAtQXhFNnhNcHJXc2cyT3hZRUZXR1otV0NfQ2g?oc=5",
+          "summary": "The FDIC has proposed a rule establishing a framework for FDIC-supervised payment stablecoin issuers under the GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-stablecoin-i-c5zwnq",
           "headline": "Hong Kong Grants Stablecoin Issuer Licences - Wealth Briefing",
           "source": "Google News — Stablecoin Issuers & Reserves",
@@ -1289,6 +1402,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-stablecoin-i-3wi0yx",
+          "headline": "Proposed OCC regulations for payment stablecoins under the GENIUS Act - Nixon Peabody",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-04-02",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxON3ktSlMzWEJXbUlTNGtadDlUb3NDTGRJZmp4b0RJMmd0X3F4WkxHQlR4RXJ0UTNxb2JKeHZpZ1FUUEhVN0Vvcnl1X3FLZ2gyeEdfSEhIMGZleVBBNGFCaUJ4NVJJcW1kYmNzQk1JeEhOQnEwVVBhNkw3VzJyNXIxYW5mQlEzYlNwTERMMmhNSjI0SFhCdUdlU3B1NVo5S2pDRzdqY2k0d1EtYXVDYWxaeDJzVTlqZUhsekR4V25pNktfZTg?oc=5",
+          "summary": "The OCC has proposed regulations for payment stablecoins under the GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-state-stable-aajn6u",
           "headline": "GENIUS And Treasury Preserve Dual Banking System For Stablecoins - Forbes",
           "source": "Google News — State Stablecoin Bills",
@@ -1313,6 +1435,15 @@
           "date": "2026-03-16",
           "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNMm9VbVF3TlFCSVFtMHhDY2dadHlIMmRWNDk0ZmFHMVJzSnpHVEdRZk8zaHlKUmhWNEJQdDh4dkJVZXlEM0hlUWYwUEFnLW5rejlEMmdNWnpkUm5pbUlLeWh5RUhzYmRUa2dCd01md1JrOTM2UVA0T1lQT0Rjd29wczJTTE9jT2VDT19KbW5vUG1Bd1pYaExrVWJNUGVHMFJzVGw1Y0I0NkNaN2hQWncw?oc=5",
           "summary": "The Federal Reserve Bank of Atlanta has published material examining various policy and regulatory issues related to stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-state-stable-a3eovy",
+          "headline": "How Florida's Stablecoin Bill Mirrors 'Big Brother' Tools Outlawed Under Ron DeSantis' CDBC Ban - Yahoo Finance",
+          "source": "Google News — State Stablecoin Bills",
+          "date": "2026-03-15",
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNMWx4cm5rZ0VKaDZqZlJjRGtSQlFidVhGcnNGMHhCTDJTdUV1Q1JzWlJPLU5aQXhlLXlBb3pBeEVONDFBSEtvY3VKZjJwYkdrbnhyaVh2WV9KQ3ZSWFA2bHVjZHFSVUpxU3B5YjRLOWdsZjlVdzFaSG9qWDNZSi1NU1ZnMXFRd0hrdnc?oc=5",
+          "summary": "A Florida stablecoin bill has drawn criticism for resembling surveillance mechanisms that Governor Ron DeSantis previously opposed in his central bank digital currency ban.",
           "summarySource": "headline-only"
         },
         {
@@ -1487,6 +1618,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-stablecoin-i-5y544b",
+          "headline": "NCUA proposes new stablecoin issuer application guidelines under GENIUS Act - JD Supra",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-02-16",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOT0ZsZGtVYmN2NVVIOUFrNm13Z1owdXh4T3JoS3o4Y2FxZ0NlSWZjdFA4TUZ4X3RfdkNocWNnV3NnS0huR1NrcTJ4akNaeFc4Q3F6cU53UlNvVW1Cby0zbzZtMmdXMmJOUWdiQXpUTmhVOVpPLTdkV2hNOUNmbGxCMi11bUM?oc=5",
+          "summary": "The National Credit Union Administration has proposed new application guidelines for stablecoin issuers under the GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-state-stable-tfb47m",
           "headline": "New York Attorney General Letitia James slams stablecoin law GENIUS citing consumer protection concerns - The Block",
           "source": "Google News — State Stablecoin Bills",
@@ -1559,6 +1699,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-stablecoin-i-gtcy8n",
+          "headline": "Stablecoin Reserve Attestations: Key Considerations for Compliance - Forvis Mazars US",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2025-11-06",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNSlp1V0tWSXJZZ3FEOFBjZXNmeUZ3QndHSUNGX2llUGc2a05YNXQ2S2VFamVhamFhMTRud0xUM1J0c3hVN0U0aGl3ZkxDZlM2dW9pUjZGZDY5SHAzXzBiYjZteVpheTVYYnVTZVVhMTE4Tkc5VklZa0FGQUpQMzMxUDE1M3JpajdyUVg5SU5aQ1NTOWNvUS1meVRhV1FoX2pjdTZJRFp3LXBYOVRjMVBWSg?oc=5",
+          "summary": "Forvis Mazars US has published guidance addressing compliance considerations related to attestations of reserves held by stablecoin issuers.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-genius-stabl-fryoq2",
           "headline": "What the GENIUS Act means for stablecoin issuers and banks - Grant Thornton",
           "source": "Google News — GENIUS / STABLE Act",
@@ -1619,6 +1768,15 @@
           "date": "2025-07-24",
           "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPajV3cUxfTmlMcXIzcDZ1djZwT3VJVGhja1VLRDZyM1lNNTl2am12SGxjbklzOG9sSG9CX2VsRVNFaU54a21mc3dya1c3dWREaW9lSFFHVGJESmxueXE3ZDIwUlY3Qm01M1ZMbFlaMEhWSXZaSHBjVEFYaElwZjU4T1o2OE96d0NaVlRiX25PS1dwaGhMZk9qOWx3?oc=5",
           "summary": "The U.S. adopted stablecoin legislation called the GENIUS Act in 2025.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-smrd38",
+          "headline": "What the GENIUS Act Means for Payment Stablecoin Issuers, Banks, and Custodians - WilmerHale",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2025-07-18",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNbkx0Mjk1eWN3clRrVkdXLXk5Y1BDWVBBTzN0VktKSFlIS0pwc1o2bko3Qnk3eUhFUGRTb3diTnBsSVc4SVN5ZEFLRE0zU1k1cVFnYzg0TjJWVjQ2emExWHMyNHp1MHFIbVV2VnpzUGNqbGpQUzlLaUVTUjkxdkdJMVlSWjdhVE1XeXpwSmlFajYyMlJ5elVpMzZCZ3p0TlFZTHk5TGVYUE5GRVc1ZmU3Z05VUGZMa3Bwbml6ZU9scnpPcXp5bTJQVEM2QVVBUkdLVHNpVzlR?oc=5",
+          "summary": "The GENIUS Act proposes regulatory framework changes affecting how payment stablecoins are issued and how banks and custodians handle related responsibilities.",
           "summarySource": "headline-only"
         },
         {
@@ -2447,6 +2605,24 @@
     "United Kingdom": {
       "news": [
         {
+          "id": "rss-google-news-uk-stablecoi-r6cjq9",
+          "headline": "Bank of England engages on digital assets, stablecoins, and digital pound - Cryptopolitan",
+          "source": "Google News — UK Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1HcmZ6aHFYY3Q5Y2w1RVVqbXNQTUdvUG96RC1pQlJLanRzV1pyLVU4TEk2Qm5QSWJxYk94cUY1Y2RPMEs1U2JhZEZENUF0b1ZVc1VaRnE0d0pPUFlYeHFncXhZM19PTkJnWEc5NXRmTlZHQkVoT3lET2NyTk8?oc=5",
+          "summary": "The Bank of England is engaging on policy matters related to digital assets, stablecoins, and the potential development of a central bank digital currency.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-uk-stablecoi-1i14z6",
+          "headline": "Stablecoin industry opposes Bank of England’s unhosted wallet ban - TradingView",
+          "source": "Google News — UK Stablecoin Policy",
+          "date": "2026-05-06",
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPWlhFd19FUUU4c3IxaDYtTk00cjhDcHZLOWc4Z3h2bVJBaV85d244NmgtSHBaMjJiNUhWamwxRzk0ODNhTWwydVZrYTBxX2pfcmtkNHpjOG1Md2JzeTJaWW94MTNzOU81SnJDZWpDcERqdF95WF9ISGxia2xhVXdPRjI1Nm9oNUh6bWpJNWFrblFrX1NHeG82ZG1ZSTZRcmg4LWpIa2JiTE9zSHdQMGtaeHNPUmN0RWRuVDV4RVd4Q0FuUmdwRWl3dg?oc=5",
+          "summary": "The stablecoin industry has expressed opposition to a proposed Bank of England policy that would restrict transactions involving unhosted wallets.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-uk-stablecoi-b75mgi",
           "headline": "Stablecoin industry opposes Bank of England’s unhosted wallet ban - MSN",
           "source": "Google News — UK Stablecoin Policy",
@@ -2757,12 +2933,57 @@
     "Australia": {
       "news": [
         {
+          "id": "rss-google-news-australia-st-69eeuy",
+          "headline": "Kraken parent Payward to acquire Reap in $600M deal to expand stablecoin payments infrastructure - AMBCrypto",
+          "source": "Google News — Australia Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQUnZENTYzRDRaWnJ3WFFqQXhBN0IzWW9NZTNhbEJySGJReHFPcms1Y0FUbXZqNVA3c3liUlF1d2FLU0xfSVA3ZDhDbS1tdkNxTFF5aWpYOEcxOU10bDdGTDJJVVhJaU9EZUJlYm03XzhNNTNmblVlSlRsdVZWT1VhYVgwbDF4VWVsX0NMczh4WW9ubHZLczVQcElieE5wajZ4T0dWOU90RWJUU0VheWVlMUpHMzk3VFYwd2fSAb8BQVVfeXFMTXpiWWhKa0RobFoyOFB2RlJMaFN5V0M0SE15X3NkTTkwV01id0ViSHBQbEdJckx4WUVHQ3Uyc2R1b240T1BZeDAxel9rWjBaS1NPZ0ZNbjR6ZjNib2tzbG0zMm00cXhPVGtVaU1mVVhlRkJVOWQ5QV82ZlZ3VnpmUDZkVkJPMkpfemVFdEJhLWdmcXZ0eHlNY2R4Mjc5RGVmRUlVcnBNLWNsV0tpQ3AtYldHcVZxSWtzbjU5VEg3aDg?oc=5",
+          "summary": "Kraken's parent company Payward agreed to acquire Reap in a $600 million deal to expand stablecoin payments infrastructure.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-australia-st-52xa7g",
+          "headline": "Kraken's Parent Company Acquires Stablecoin Payments Firm Reap for $600M - thedefiant.io",
+          "source": "Google News — Australia Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxObjBSNmprUDk4akMxVFF5ZlRxM0hvZkxtVHpEZld2dVhXRUVkVmRORnNxbUstaXdSY2FaREVvakJFeXc5alpqcjBKaHJRYkczSlRlQzEta3d6VEVBOGZEdy1ta0Y4eXdiRzE4ZzhYcFNvZldBWE12MlVXRUdDS0dFVEItVGJtMlB4ODdMRGoySUNoWWhiaS1EM205OFdBbkhxSVlnbDd3?oc=5",
+          "summary": "Kraken's parent company has acquired stablecoin payments firm Reap for $600 million.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-australia-st-q4rw0l",
+          "headline": "Kraken parent Payward to buy Reap in $600M stablecoin payments push - TradingView",
+          "source": "Google News — Australia Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNRGhBRE1BS1lscXdxNF9WenBnMGduTzV2SFZ1cTNoTWJRSDlwY3M3aExQck1rUUhObnlJWURGM0c2Z29DS2pSSGg3Rmg1VEVnSlVKMlE1eG5xWUlXN2pVTkNjZzJHXzJNSWk5Rk13RjdBcW1tLTFxLV82MmpjdkhYNTVad1owN25FY09LRHluaDBqdWtWX3ZpZndfU3hyRmVERkJvZzgtblpyMTFWb3d6TXhYRlRvUV8wLWQ5M3Bnd09Mdk1nSXpzd1R3?oc=5",
+          "summary": "Payward, the parent company of cryptocurrency exchange Kraken, announced a $600 million acquisition of Reap to expand its stablecoin payments capabilities.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-australia-st-aw9pjr",
+          "headline": "AUDC hires two execs to scale stablecoin business - investordaily.com.au",
+          "source": "Google News — Australia Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQaTUwQjdoUzQ4LXRrQ2F5cU1xQWtZZHlxSzJhRU1OeHZXMXRYN19XSG4xb1ZNcUVDTWV4dHczM3VVZmtUd3ZlTWZFdkpKdDlJYzZWdEhJd2FMcXlXYlhYVDVlamN5bndiNnBRaVB1YklqUUxXRjdhLTJSOVp6WkJEVWJ6dEhKUWgyTFdv?oc=5",
+          "summary": "AUDC has appointed two executives to support expansion of its stablecoin operations.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-australia-st-euuba7",
           "headline": "Dialogue Velocity Eric: What is the stablecoin track that the CFO really wants? - WEEX",
           "source": "Google News — Australia Stablecoin Policy",
           "date": "2026-05-07",
           "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxORXZCdDBDazBfblVjdDVGYXp1RzQ4T3VrbmlaY1ZMek05TjFNWFRCd1RPUzhjV2ItTmRpakZBSFA1VUtFeG9aMmxFam5udFRUd0J0ODA1V2J2ZXZCQWlYVXA1bWVtaVIxNmZqamFidFhwVmlJU29iRExoQmVxenMyVUpiUkNySDNJTUZia05RTkFsVkVDel9NdGtXSlNuN0ZWaktzTU9ZZ1B1bFFhUXloXzhlYWV0UExV?oc=5",
           "summary": "A discussion addresses what approach to stablecoin regulation or policy an unnamed CFO prioritizes.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-australia-st-wv5i0g",
+          "headline": "Western Union Selects Fireblocks to Power its First Stablecoin, USDPT - PR Newswire",
+          "source": "Google News — Australia Stablecoin Policy",
+          "date": "2026-05-04",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPaWQ0T0NyeXZDY0FGeTUycjctNU16MFA4ZGppc21SOXJFME9oX2E1Mi00bHZqWGF3YWlBS3pSY3lWYVN6WEVOM3psb0pSQ1JRdzByVHlYOFo4MkZRLWxBdlVaVlM5MXBzc2tiaEE3VjRSMkh0SjlDYUhGVDhmenk4VTVsU25NalJ4NTZNb1o3eThVS3Q1ZVlGZGV0cHFxbzRkMkJOT3Vxd0cwRWJQQmFUc2s4Z2prdURCaEdnUjdtc0d2dw?oc=5",
+          "summary": "Western Union has selected Fireblocks to support its first stablecoin offering, which it has branded as USDPT.",
           "summarySource": "headline-only"
         },
         {
@@ -2976,6 +3197,42 @@
     },
     "Hong Kong": {
       "news": [
+        {
+          "id": "rss-google-news-hong-kong-st-xmqdy6",
+          "headline": "Kraken’s $600M Reap Deal Signals Massive Stablecoin Expansion - BeInCrypto",
+          "source": "Google News — Hong Kong Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBaYmtFdUV0b3YtVUk1N1dqZExUTWV4MENwSTY4QXZhOFJLQTc2d204R0hfY0RMYzVxMXAwZ2gxeEcxbHBDSTVjQllIc2NBYWRmekg4bklwcGp2T2NPTVBsWGZPNzZ3ZWs?oc=5",
+          "summary": "Kraken announced a significant transaction or partnership valued at $600 million that relates to stablecoin operations or expansion.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-hong-kong-st-6gkb04",
+          "headline": "Kraken buys Hong Kong stablecoin firm Reap for $600 million in Asia push - crypto.news",
+          "source": "Google News — Hong Kong Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPeWJVZHl5aEE1d2JzdEdjc3FZcWM0SnpHT0VvZkM2eXI4QVlXZ05YSWNrSnFYVVB3MExFdHJHNzRkeGhwLUM4ZkF4RlEtOFVFeGtIUzhyWks0X1JYYnNYV1oxY1Zray1WOFA4Y04yLXpVRWhYVlpWSkNhVXJuc095cHVDRlJPY3lWYVIyaWtxb2YycnZTaHVR?oc=5",
+          "summary": "Kraken has acquired Hong Kong-based stablecoin firm Reap for $600 million as part of an expansion effort in Asia.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-hong-kong-st-iy9x4q",
+          "headline": "Kraken to buy stablecoin payments firm Reap in $600 million deal: Bloomberg - CoinDesk",
+          "source": "Google News — Hong Kong Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQby01NTB0VzNVY0JkSlpSY3BlVXprQTBkblVIcHQ1RzF1bnFvbllJaEx5amwyNUJhNTdGZ3ZzZzJqdWNkLXJvNktlemY3eUlGdnREUGRSSWFPSEFweE50ckZ6WElsVW9GSHBrdUpSQVhGMHBJSjdkdUYyNi1yLXAtYVFvS3o1X0pwN0ZTM0lTeHJhSnRwblFNNVBmTWlPZGVwLUw1MVgyRGZDVDdKbldCd19TbTcyam5TN3NOYXJB?oc=5",
+          "summary": "Cryptocurrency exchange Kraken announced plans to acquire stablecoin payments firm Reap for $600 million.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-hong-kong-st-u3uwtf",
+          "headline": "Kraken parent Payward to acquire Hong Kong stablecoin firm Reap for $600 million - The Block",
+          "source": "Google News — Hong Kong Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZ0NmZ1R0UlFHQ3BBb3RRNFN6WHcyOGZxcnp4ZDlXWVkxa3FyOUVqR2lYZXVQa18wR2lfZ09EbHNhaW9SdTNWX0tLS2xqYzZYVE9qT3p5WjE3amdrakFoU1laSGxPLXA0ZjVOcVRoTEotWHNoRHQ1ZmpMZDR5d3NCNGY2S0hBSU44NXNGZFBOMEVpVzlETUpSRFhEcFJTcXMyS1BNZ1Byc29SZjRteE0yS2Q5UlNxdw?oc=5",
+          "summary": "Payward, the parent company of cryptocurrency exchange Kraken, announced an acquisition of Hong Kong-based stablecoin firm Reap for $600 million.",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-hong-kong-st-aeacvs",
           "headline": "Bison Bank, wholly owned by Hong Kong's Bison Capital, launches its MiCA-compliant stablecoin for institutional cross-border payments - Bolsamania",
@@ -3395,6 +3652,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-brazil-stabl-ums5vv",
+          "headline": "Brasil avança para banir stablecoins algorítmicas como a USDe da Ethena - CoinDesk",
+          "source": "Google News — Brazil Stablecoin Policy",
+          "date": "2026-02-05",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNLVNMVlB6ekJCQUpJWE42MkNNUUxsbEwxM1dXS2NyMmpXZ1FmMnVSSm5BWGx4VlFPak5uYXF0NkZPYVM2RTJMUzMzUUJQWXlTakNMNkRsSHlfb0dCZllad2NlZjFnYzdfU0V1cmNFODFTbnpEZ0pBcmlzZ2lBU2NoVV9qSFI4aVM1cEdvRS1udnJPdEtiUXZzcnhjQjIzak5BeldsOXNMWjZCMUgwZ3lTTA?oc=5",
+          "summary": "Brazil is advancing toward banning algorithmic stablecoins such as Ethena's USDe.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-brazil-stabl-tvuymi",
           "headline": "Stablecoins, capital mínimo e fiscalização: o pacote do Banco Central que muda tudo no mercado cripto do Brasil - TradingView",
           "source": "Google News — Brazil Stablecoin Policy",
@@ -3482,6 +3748,15 @@
           "date": "2025-11-18",
           "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNUWZxeklUX3hMOGs1VEZPSHl6T3d3STVnbm0zV05ySGpfQUhOaGhPSEc3MXBuR2FYV0QxUnBtdXllT2R3VTdFOHFSX1QtaXpaWjZNdV9tMkotMWN4UmpYLXA3Y1RPc0g0dFZoNnY3azloNWlMZTMxLVFoY0pWZmlrRUM5UQ?oc=5",
           "summary": "An opinion piece in Brazil Journal discusses concerns about stablecoin regulation.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-brazil-stabl-2b8213",
+          "headline": "Regulação das criptomoedas: BC impõe regras inéditas para stablecoins e carteiras privadas - criptofacil.com",
+          "source": "Google News — Brazil Stablecoin Policy",
+          "date": "2025-11-10",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxORlppaGhUZ1VyYmttZlp2ajYzYzZhdjY5bm9uV29YT19Bd1hsR3FGVFpXWXFuX0NyWEhzMktRY2p0WGktR1VUXzVWRFlRWURla0gxRVJUV2lzUXgzSkpqQ0M5QVZoZUdnSGFFb3FzSWs5RmFsQWY1WnB4dFI0WXNxY09TR1ZISi1NM0lfQXVjVkpZTFdzZEtETGpqNXpvcThZQUpOMktqMGdpWEg2c2YwVXV1QWQxby1KaEE?oc=5",
+          "summary": "Brazil's central bank has introduced new regulatory rules for stablecoins and private cryptocurrency wallets.",
           "summarySource": "headline-only"
         },
         {
@@ -3772,6 +4047,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-mexico-stabl-8exynr",
+          "headline": "Stablecoins USDT USDC: Guía Completa en México - juarez.gob.mx",
+          "source": "Google News — Mexico Stablecoin Policy",
+          "date": "2026-04-12",
+          "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9IUDhKSUROelY1MEFEeHByMzlMOXZtNUQtc2FRUXlVdEZHX2I4b0E3WXAxcV9KZGp5ZmJnMVVGQm9LQmIxdWVCWWR4U2JseXJxZUlkNEVjVU5ldXVMcUtzQjAxYjc3eVBfWFhhUGY4ZlJNUQ?oc=5",
+          "summary": "A Mexican government source published a guide about stablecoins USDT and USDC.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-mexico-stabl-ndjtr5",
           "headline": "Stablecoins USDT USDC en México: Guía Completa - juarez.gob.mx",
           "source": "Google News — Mexico Stablecoin Policy",
@@ -3989,6 +4273,24 @@
           "date": "2026-04-09",
           "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5BbXVGWk1aSkYzUklCM1R2dkh5ODMzQllFMlhsX3Q5S3JLSEgyazMyUDlrZTJDU3pJYjVKZUJVZGgwUjRGbzU4dmFRMURUVVR1a0xLZFJ1Ymd0SEdKSERQX3NvT0hMR2pvNm41NUEyTF85Snd4UXJRcw?oc=5",
           "summary": "Six Swiss banks have launched a sandbox initiative to develop a Swiss franc stablecoin.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-switzerland--kfevnc",
+          "headline": "Swiss Banking Giants Form Sandbox to Test CHF Stablecoin Through 2026 - Binance",
+          "source": "Google News — Switzerland Stablecoin Policy",
+          "date": "2026-04-08",
+          "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5Na3lmdE5KNVBNM0sxZVBjZUl3RlNXcUhOUldIMl9hME50R1pUaFFkM1k2RnZIWG02ZEU3ZXNtTmdVTjBLY1JkclBMSDNLbU9sSTdKOFFOUnA0NXJ5RUJEWTh6dVU?oc=5",
+          "summary": "A group of major Swiss banks have created a sandbox environment to test a Swiss franc-denominated stablecoin through 2026.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-switzerland--jfhpho",
+          "headline": "UBS Joins Swiss Banking Consortium to Test Franc-Backed Stablecoin - Startup Fortune",
+          "source": "Google News — Switzerland Stablecoin Policy",
+          "date": "2026-04-08",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNNjU5QUt0MFF5cGlLanFMMDdTQnFtaXVEdllrT2NMMW5UUlljNmFxWDdRZzNjODJOeFZtbE9iQnd1VnhTQ2lrT3ZhcG5ZalBGQVJHTGZmOXVjVkdIbmo0dDhQZHBScHBzLVRPSWNPWTZyYnlmVUU4ZG1Ub1dqT3dKMlNuY0xTdGRNQ2NFbHFCYS1kNUVYanFPRDhn?oc=5",
+          "summary": "UBS is participating in a Swiss banking consortium project to test a stablecoin backed by the Swiss franc.",
           "summarySource": "headline-only"
         },
         {
@@ -4220,6 +4522,24 @@
     },
     "United Arab Emirates": {
       "news": [
+        {
+          "id": "rss-google-news-uae-stableco-4dqxo",
+          "headline": "AE Coin and USDU launch regulated UAE stablecoin conversion rail - crypto.news",
+          "source": "Google News — UAE Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOakQxaHRtV3o3QUZta3d3NG9VMVdoakRjbDIzcDNKTF9jNVB0TklTc0ptVGk0VEJsMjBxeV9fd0JvMVVBbmgyY2FnbnRvU21VbFZsVWQzUVRzX0ptOFhudWhiZXB6cDRucDNmVXpYbVg1Q2FfdmpvM1BWT0RCaWVJSkhCNWIyZ0pETG8xaEp3?oc=5",
+          "summary": "AE Coin and USDU have launched a regulated stablecoin conversion service in the UAE.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-uae-stableco-u7lv22",
+          "headline": "VARA clarifies token issuance framework for virtual assets in Dubai - crypto.news",
+          "source": "Google News — UAE Stablecoin Policy",
+          "date": "2026-04-09",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOZWxpWDFHYlUxU1VXV1h6NS1iZzVacnhBdUk5bzJYWGc1WnJTNDlZQzRmdEVNVFFlVUJwRnJGTWUwM2p4MEJkekFuYzlYQ1R2azNCa0lESGlvNjhBTHVkV2ZQbnNYeGp6SUZBSURrUXdGM2FGb1MxNzNGMGRCRTZqMzRhNjdocnNDbG9JcEUyOHNudw?oc=5",
+          "summary": "The Virtual Assets Regulatory Authority (VARA) has issued clarification on its framework governing token issuance for virtual assets in Dubai.",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-uae-stableco-lpvdmt",
           "headline": "Dubai’s Crucial VARA Guidelines: Clarifying RWA and Stablecoin Issuance Rules for Market Stability - CryptoRank",
