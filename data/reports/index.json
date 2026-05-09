@@ -1,0 +1,45 @@
+[
+  {
+    "slug": "web3-1-bm6nnqo",
+    "title": "Web3风险观察第1期：预测市场内幕交易进入刑事起诉时代",
+    "summary": "本报告梳理 Polymarket 军人内幕交易刑事起诉与 Kalshi 候选人自押处罚两起事件，分析预测市场合规义务、平台主动监控、链上证据与美国监管立法窗口。",
+    "category": "enforcement",
+    "jurisdiction": [
+      "US"
+    ],
+    "publishedAt": "2026-04-23T00:00:00.000Z",
+    "wordCount": 1456,
+    "priceUSD": 0.01,
+    "encryptedContentFile": "web3-1-bm6nnqo.md.enc"
+  },
+  {
+    "slug": "bitrace-fl8m-te",
+    "title": "新币洗钱网络图解：Bitrace 报告解读",
+    "summary": "本报告基于 Bitrace 资料拆解新币担保网络的规模、增长速度、垄断程度、产业链结构和 Telegram 节点体系，说明地下金融基础设施化后的反洗钱风险。",
+    "category": "analysis",
+    "jurisdiction": [
+      "GLOBAL"
+    ],
+    "publishedAt": "2026-04-27T00:00:00.000Z",
+    "wordCount": 2333,
+    "priceUSD": 0.01,
+    "encryptedContentFile": "bitrace-fl8m-te.md.enc"
+  },
+  {
+    "slug": "web3-kskyvsg",
+    "title": "战争阴霾下，Web3人该重新思考地理套利风险了吗？",
+    "summary": "本报告从 Bybit 中东 BCP、云基础设施受损、开城工业园区与 FTX 巴哈马案例出发，讨论 Web3 公司和从业者在地理套利中低估的地缘政治、连续性和退出成本。",
+    "category": "policy",
+    "jurisdiction": [
+      "AE",
+      "BH",
+      "KR",
+      "BS",
+      "US"
+    ],
+    "publishedAt": "2026-03-01T00:00:00.000Z",
+    "wordCount": 2246,
+    "priceUSD": 0.01,
+    "encryptedContentFile": "web3-kskyvsg.md.enc"
+  }
+]

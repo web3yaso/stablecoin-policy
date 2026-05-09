@@ -57,6 +57,31 @@ TEST_BUYER_PRIVATE_KEY=  # 仅用于 Base Sepolia 测试脚本；绝不要填 ma
 
 报告 API 的 MVP 定价为每篇 `$0.01 USDC`，仅用于 Base Sepolia testnet validation；生产定价待后续版本决定。
 
+## 付费报告内容存储
+
+公开仓库不会提交报告全文明文。报告索引在 `data/reports/index.json`，全文只以 AES-256-GCM 密文 `data/reports/*.md.enc` 存储；本地明文 `.md` 文件会被 `.gitignore` 忽略。
+
+添加报告前先生成 32 字节密钥并写入 `.env.local`：
+
+```bash
+openssl rand -base64 32
+```
+
+然后从 repo 外或 `data/reports/private/` 中的明文 markdown 生成密文报告：
+
+```bash
+npx tsx scripts/reports/add-report.ts \
+  --file /path/to/report.md \
+  --title "中文标题" \
+  --summary "100-200字摘要" \
+  --category policy \
+  --jurisdiction US,EU \
+  --price-usd 0.01 \
+  --source-url "https://mp.weixin.qq.com/..."
+```
+
+`data/reports/private/` 和 `data/reports/*.md` 不应提交；可提交的只有 `index.json` 与 `*.md.enc`。
+
 | 脚本 | 说明 |
 |------|------|
 | `npx tsx scripts/smoke/congress-ping.ts` | 测试 Congress.gov 连通性 |
