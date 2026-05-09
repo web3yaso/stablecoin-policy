@@ -14,9 +14,13 @@
     "news:regen": "tsx scripts/sync/news-regen.ts && cp data/news/summaries.json public/news-summaries.json"
   },
   "dependencies": {
+    "@coinbase/x402": "^2.1.0",
     "@number-flow/react": "^0.6.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/kv": "^3.0.0",
+    "@x402/core": "^2.11.0",
+    "@x402/evm": "^2.11.0",
+    "@x402/next": "^2.11.0",
     "cobe": "^2.0.1",
     "d3-geo": "^3.1.1",
     "framer-motion": "^12.38.0",

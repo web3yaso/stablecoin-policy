@@ -37,6 +37,26 @@ STATE_API_KEY=      # OpenStates API，免费注册 https://openstates.org/accou
 ANTHROPIC_API_KEY=  # 新闻聚合与法案分类
 ```
 
+## 环境变量
+
+除上面的数据同步变量外，x402 报告 API 需要以下服务端环境变量。请只在 `.env.local` 或 Vercel 环境变量中填写真实值；不要提交任何密钥。
+
+```
+CDP_API_KEY_ID=          # Coinbase CDP API Key ID，用于 x402 facilitator
+CDP_API_KEY_SECRET=      # Coinbase CDP API Key Secret
+X402_PAY_TO=             # Base Sepolia 收款地址
+X402_NETWORK=eip155:84532
+X402_FACILITATOR_URL=    # 可选；留空使用 Coinbase 官方 facilitator
+REPORTS_ENCRYPTION_KEY=  # 报告全文 AES-256-GCM 解密密钥
+KV_REST_API_URL=         # Vercel KV REST URL，用于付款日志
+KV_REST_API_TOKEN=       # Vercel KV REST token
+TEST_BUYER_PRIVATE_KEY=  # 仅用于 Base Sepolia 测试脚本；绝不要填 mainnet 私钥
+```
+
+`X402_FACILITATOR_URL` 仅用于测试或应急覆盖。生产环境应使用官方 facilitator，避免把付款验证交给未审计的第三方服务。
+
+报告 API 的 MVP 定价为每篇 `$0.01 USDC`，仅用于 Base Sepolia testnet validation；生产定价待后续版本决定。
+
 | 脚本 | 说明 |
 |------|------|
 | `npx tsx scripts/smoke/congress-ping.ts` | 测试 Congress.gov 连通性 |
