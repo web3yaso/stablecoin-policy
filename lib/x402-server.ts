@@ -2,6 +2,11 @@ import { HTTPFacilitatorClient, x402ResourceServer } from "@x402/core/server";
 import type { Network } from "@x402/core/types";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { createFacilitatorConfig } from "@coinbase/x402";
+import {
+  getReportSlugFromRequirements,
+  reservePaymentPayload,
+  writePaymentLog,
+} from "./payment-logs";
 
 export const X402_NETWORK = readX402Network();
 
@@ -20,6 +25,36 @@ export const x402Server = new x402ResourceServer(facilitatorClient).register(
   X402_NETWORK,
   new ExactEvmScheme(),
 );
+
+x402Server.onBeforeSettle(async (context) => {
+  const slug = getReportSlugFromRequirements(context.requirements);
+  if (!slug) {
+    return { abort: true, reason: "missing-report-slug" };
+  }
+
+  const reserved = await reservePaymentPayload(slug, context.paymentPayload);
+  if (!reserved) {
+    return {
+      abort: true,
+      reason: "payment-replay-or-log-unavailable",
+      message: "Payment could not be accepted.",
+    };
+  }
+});
+
+x402Server.onAfterSettle(async (context) => {
+  const slug = getReportSlugFromRequirements(context.requirements);
+  if (!slug) {
+    return;
+  }
+
+  try {
+    await writePaymentLog(slug, context.requirements, context.result);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "unknown error";
+    console.warn(`x402 payment log warning: ${message}`);
+  }
+});
 
 export const x402FacilitatorReady = x402Server
   .initialize()
