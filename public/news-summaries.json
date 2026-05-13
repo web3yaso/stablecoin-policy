@@ -1,28 +1,20 @@
 {
-  "generatedAt": "2026-05-12T05:37:06.638Z",
+  "generatedAt": "2026-05-13T05:46:17.724Z",
   "regional": {
     "na": {
-      "summary": "The U.S. Senate is scheduled to vote on May 14 on stablecoin legislation, with the revised CLARITY Act drawing intense lobbying from banking groups who oppose stablecoin yield provisions; the American Bankers Association's CEO made a final-hour push for tightened limits on stablecoin rewards ahead of the Senate Banking Committee vote, while the White House revealed that U.S. banks refused to attend meetings to resolve the stablecoin rewards issue. Separately, the FDIC has proposed stablecoin issuer rules under the GENIUS Act framework, and both the FDIC and OCC are contending for regulatory authority over stablecoins. Augustus secured conditional OCC approval to operate as a bank with AI and stablecoin capabilities, having also raised $40 million, making it one of the rare institutions to obtain such a charter. In Canada, the Bank of Canada indicated that stablecoin rules could arrive later in 2027, while Deloitte Canada adopted the QCAD stablecoin for institutional payments, signaling growing private-sector momentum ahead of formal regulation.",
+      "summary": "The U.S. Senate Banking Committee advanced a revised stablecoin bill that addresses stablecoin rewards and decentralized finance provisions, while the separately released Clarity Act text laid out additional cryptocurrency rules ahead of a congressional hearing. Banking industry opposition intensified, with the American Bankers Association CEO pressing for tighter limits on stablecoin rewards before the committee vote and more than 8,000 letters sent to the Senate opposing a yield compromise, even as the White House revealed that U.S. banks refused to attend resolution meetings. On the regulatory front, Augustus received conditional OCC approval to operate as an AI and stablecoin bank after raising $40 million, and both the FDIC and OCC are actively seeking supervisory authority over stablecoins, with the American Financial Council urging the OCC to provide tailored oversight during its rulemaking process. JPMorgan launched a blockchain fund targeting stablecoin issuers under the GENIUS Act framework and is separately seeking to launch an Ethereum-based tokenized money market fund designed to serve as reserves for stablecoins. In Canada, CADD launched on Base as the country's first regulated Canadian dollar stablecoin, coinciding with Canada's move toward establishing a federal stablecoin regime.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "vote on May 14",
+          "text": "revised stablecoin bill",
           "topic": "legislation"
         },
         {
-          "text": "CLARITY Act",
+          "text": "Clarity Act text",
           "topic": "legislation"
         },
         {
-          "text": "tightened limits on stablecoin rewards",
-          "topic": "legislation"
-        },
-        {
-          "text": "U.S. banks refused to attend meetings",
-          "topic": "legislation"
-        },
-        {
-          "text": "GENIUS Act framework",
+          "text": "8,000 letters sent to the Senate",
           "topic": "legislation"
         },
         {
@@ -30,82 +22,134 @@
           "topic": "legislation"
         },
         {
-          "text": "stablecoin rules could arrive later in 2027",
+          "text": "FDIC and OCC are actively seeking supervisory authority over stablecoins",
           "topic": "legislation"
         },
         {
-          "text": "Deloitte Canada adopted the QCAD stablecoin for institutional payments",
+          "text": "GENIUS Act framework",
+          "topic": "legislation"
+        },
+        {
+          "text": "Ethereum-based tokenized money market fund",
           "topic": "infrastructure"
+        },
+        {
+          "text": "first regulated Canadian dollar stablecoin",
+          "topic": "legislation"
+        },
+        {
+          "text": "federal stablecoin regime",
+          "topic": "legislation"
         }
       ],
-      "generatedAt": "2026-05-12T05:36:50.987Z"
+      "generatedAt": "2026-05-13T05:46:05.390Z"
     },
     "eu": {
-      "summary": "Bank of England Governor Andrew Bailey has warned of a 'coming wrestle' with the US on stablecoin oversight, flagging that divergent regulatory approaches could become a significant transatlantic flashpoint in 2026. Bailey has specifically cautioned that US-issued stablecoins could destabilize the UK in a crisis by triggering deposit runs on stablecoin issuers, concerns the Bank of England echoes alongside the European Union regarding stablecoins that operate across multiple jurisdictions. Separately, the Bank of England is considering relaxing certain elements of its proposed stablecoin framework, even as the stablecoin industry opposes a proposed unhosted wallet ban that remains part of current drafts. The UK Financial Conduct Authority has opened a public consultation on regulatory approaches for stablecoins and cryptocurrency custody arrangements, and is also reported to be conducting a probe into Visa while that firm expands its stablecoin and AI efforts.",
+      "summary": "Bank of England Governor Andrew Bailey has warned that stablecoin oversight is set to become a significant point of tension with the United States, describing an anticipated 'coming wrestle' with US regulators over diverging global stablecoin standards. Bailey has specifically cautioned that US-issued stablecoins could destabilize the UK during a financial crisis, raising the risk of deposit runs on stablecoin issuers operating in the United Kingdom. The Bank of England has echoed EU concerns over multi-jurisdiction stablecoins and called for coordinated regulatory approaches with the US, even as it considers easing parts of its own proposed stablecoin framework. Separately, the stablecoin industry has expressed opposition to a proposed Bank of England ban on unhosted wallets, a measure that remains under review alongside broader digital asset and digital pound policy consultations. The UK Financial Conduct Authority is also conducting a probe into Visa as the payments firm expands its stablecoin and AI efforts.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "'coming wrestle' with the US on stablecoin oversight",
+          "text": "Governor Andrew Bailey",
+          "topic": "legislation"
+        },
+        {
+          "text": "'coming wrestle' with US regulators",
           "topic": "cooperation"
         },
         {
-          "text": "US-issued stablecoins could destabilize the UK in a crisis",
-          "topic": "legislation"
-        },
-        {
-          "text": "echoes alongside the European Union regarding stablecoins that operate across multiple jurisdictions",
+          "text": "global stablecoin standards",
           "topic": "cooperation"
         },
         {
-          "text": "relaxing certain elements of its proposed stablecoin framework",
+          "text": "US-issued stablecoins could destabilize the UK",
           "topic": "legislation"
         },
         {
-          "text": "stablecoin industry opposes a proposed unhosted wallet ban",
+          "text": "echoed EU concerns over multi-jurisdiction stablecoins",
+          "topic": "cooperation"
+        },
+        {
+          "text": "opposition to a proposed Bank of England ban on unhosted wallets",
           "topic": "legislation"
         },
         {
-          "text": "UK Financial Conduct Authority has opened a public consultation on regulatory approaches for stablecoins and cryptocurrency custody arrangements",
+          "text": "UK Financial Conduct Authority is also conducting a probe into Visa",
           "topic": "legislation"
         }
       ],
-      "generatedAt": "2026-05-12T05:36:59.244Z"
+      "generatedAt": "2026-05-13T05:46:11.803Z"
     },
     "asia": {
-      "summary": "Payward, the parent company of cryptocurrency exchange Kraken, announced a $600 million acquisition of Hong Kong-based stablecoin payments provider Reap, marking one of the largest stablecoin-focused deals in the Asia-Pacific region and signaling a major push into stablecoin payments infrastructure. In Japan, major banks launched a stablecoin pilot program with backing from the Financial Services Agency, reflecting growing regulatory engagement with digital currency instruments at the institutional level. Singapore-based merchants gained access to stablecoin payment services through a partnership between Yuno and Triple-A, while in Australia, AUDC hired two executives to scale its stablecoin business. Across the region, these developments arrive as ECB President Christine Lagarde raised concerns that euro-denominated stablecoins could pose risks to banking stability and monetary policy transmission, a warning with potential cross-border regulatory relevance.",
+      "summary": "Payward, the parent company of cryptocurrency exchange Kraken, agreed to acquire Hong Kong-based stablecoin payments provider Reap in a $600 million deal, marking one of the largest consolidation moves in Asia-Pacific's stablecoin infrastructure to date. Japan's major banks initiated a stablecoin pilot program with support from the Financial Services Agency, signaling official backing for regulated digital currency experimentation at scale. HSBC launched a stablecoin offering in Hong Kong aimed at retail and wealth management customers, while Stables deployed a t-0 network to promote institutional-grade stablecoin adoption across Asia. The U.S. Treasury proposed anti-money laundering and sanctions compliance rules applicable to stablecoin issuers, a regulatory development with direct implications for Asia-Pacific firms operating cross-border settlement infrastructure. JPMorgan filed to launch a tokenized Treasury fund called JLTXX on the Ethereum blockchain, adding institutional momentum to the region's rapidly expanding digital asset landscape.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "$600 million acquisition of Hong Kong-based stablecoin payments provider Reap",
+          "text": "acquire Hong Kong-based stablecoin payments provider Reap in a $600 million deal",
           "topic": "infrastructure"
         },
         {
-          "text": "Payward, the parent company of cryptocurrency exchange Kraken",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "stablecoin pilot program with backing from the Financial Services Agency",
+          "text": "stablecoin pilot program with support from the Financial Services Agency",
           "topic": "legislation"
         },
         {
-          "text": "Yuno and Triple-A",
+          "text": "HSBC launched a stablecoin offering in Hong Kong aimed at retail and wealth management customers",
           "topic": "infrastructure"
         },
         {
-          "text": "AUDC hired two executives to scale its stablecoin business",
-          "topic": "infrastructure"
+          "text": "t-0 network to promote institutional-grade stablecoin adoption across Asia",
+          "topic": "cooperation"
         },
         {
-          "text": "ECB President Christine Lagarde raised concerns that euro-denominated stablecoins could pose risks to banking stability and monetary policy transmission",
+          "text": "anti-money laundering and sanctions compliance rules applicable to stablecoin issuers",
           "topic": "legislation"
+        },
+        {
+          "text": "tokenized Treasury fund called JLTXX on the Ethereum blockchain",
+          "topic": "infrastructure"
         }
       ],
-      "generatedAt": "2026-05-12T05:37:06.638Z"
+      "generatedAt": "2026-05-13T05:46:17.724Z"
     }
   },
   "entities": {
     "Canada": {
       "news": [
+        {
+          "id": "rss-google-news-canada-stabl-evst50",
+          "headline": "Canada’s First Regulated Canadian Dollar Stablecoin Lands on Base - CoinCentral",
+          "source": "Google News — Canada Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOTE5qcFA3d3NNOTZiYlo5NGtUSGV2a3BUVENoX2ZZdTU4TktTVms1Ukx5SGNCemstczh1OXlCZm9oWTByTzFqVlh5VTJBWFBKRmpBMjRYQWJSOG1pcTdzZVk2Y2p6bG9TM1ViWEc5R09qWEd6VldtNzMwWlBYc003R2dUQm9QNlZSNHpHbmhvZEVGdFU?oc=5",
+          "summary": "A Canadian dollar-denominated stablecoin has launched on the Base blockchain under regulatory approval in Canada.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-canada-stabl-bqs0jw",
+          "headline": "Base welcomes CADD, Canada’s first regulated dollar stablecoin - Cryptonews.net",
+          "source": "Google News — Canada Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE15clZfQmRzNURzM2tYcWFZUFpVa1luTFZGaGFzZ3VlWmtuVTJ1TUhyZmdoOWpGa2lZSjlYMFg3QTQ3X2VicTRRQjlHVWxsWjNjM2tURjA0Z0xkQQ?oc=5",
+          "summary": "Base has begun supporting CADD, a Canadian stablecoin that has received regulatory approval as the first of its kind in Canada.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-canada-stabl-2nntp1",
+          "headline": "Canada’s move toward a federal stablecoin regime - Law360 Canada",
+          "source": "Google News — Canada Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQUl9BUURZTTVhRURZTWx5TnhqRGJYY3FqN3dEb1hhMGZaTWNDRnN4ZmVWN2M2ODNqTVlVTmlzbHd2dTlpdml2OWpocjdJaVVwWGY0TmJ5c2t1Tk1ZQVJNa0FyUkZkeHY2TWZXNWRHZkgwODFZcWpycllkY0t1OE9fd2x6RW1TZHFueFh1RHpYQmNVLUJuWmcxZjhB0gFYQVVfeXFMTkJMem54T2R2QVJSUzJmSXBkT3RnLTlSM1pPQVd3alhIREM3M1JjbmktVXJsSHdLZTFpODBRQ3VuNnBMNHNCbkVfZEZnWFhGS3RQSFRnWExveA?oc=5",
+          "summary": "Canada is moving toward establishing a federal regulatory framework for stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-canada-stabl-mvxouh",
+          "headline": "Tokenization & Stablecoins: Canada's Financial Future - Investing News Network",
+          "source": "Google News — Canada Stablecoin Policy",
+          "date": "2026-05-11",
+          "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFB2UE9MYlA0MzBpU1BjbllNc2k5QzZueks4Y2hSZEJYRktjSjhIcTZ2cU51NFlpSllacjdsOUNOdGoyaWUtTGQyNG1FX0hISWRWb3RqWUctaGRnMmZXQUxhb3A5WkE2TnFvWl8wdg?oc=5",
+          "summary": "An article discusses the potential role of tokenization and stablecoins in Canada's financial future.",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-canada-stabl-bvzy91",
           "headline": "Bank of Canada Says Stablecoin Rules Could Arrive Later in 2027 - Yahoo Finance",
@@ -587,6 +631,78 @@
     },
     "United States": {
       "news": [
+        {
+          "id": "rss-google-news-stablecoin-i-ijcy9u",
+          "headline": "JPMorgan seeks to launch Ethereum-based tokenised MMF targeting stablecoin reserve demand - 디지털투데이",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-05-13",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNTXZaZDRXZG9FZzA5WXB0LW9iY2t4N0NBRDVuUmI4RVBJaUo3OFpoZEJORVRmeEtDdDF6clpKNVJaRllMMnNURTF0SHFWc2ZGS1FOT256d01xT09OYnNOSTduTDFtSThDU215OUlnRzAxSmVpWTJMS1VNUTMxWF9tdVJER2hzYnFXUkxBaGYyczNFZjFlRm9HNVhqUDhrbWdQQ2VhV3ZhTmR4VzZ6MVJ2RTBGcVNNdnpvckdkLUtXbmhRUDBFRW9IamJhRzQzM3BGSDkzM3dHRQ?oc=5",
+          "summary": "JPMorgan is seeking to launch a tokenized money market fund on Ethereum that would be designed to serve as reserves for stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-9ti677",
+          "headline": "US Banks Intensify Opposition to Stablecoin Yield Compromise, Send 8,000 Letters to Senate - bloomingbit",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-13",
+          "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBEU0g1enVNS2VUQXBZRFFyQVd4Z1dURGVBVlUzdkRVM3lxTGR1ZG1hLS1lcmFUT2NZZEduTGJ5QTF4RnBhZmdtSE83YmswNm5aTXBYcg?oc=5",
+          "summary": "Multiple U.S. banks submitted thousands of letters to the Senate opposing a compromise proposal related to stablecoin yield arrangements.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-fekcu9",
+          "headline": "The Transformation Written into Circle's Financial Report: From Stablecoin Issuer to Internet Platform - 富途牛牛",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOSHlOTHFMbFBNZ0FUSEdyOWllVXBrUjM2MGM3Vlc5NWlLcWhtQ2hFY1NmTmplMFcxa1kzRXhkZElLajJRMURNMjNZVHVzbUROaHZKd05yZVpWNm8tZGtkQXAtT0NqNVJiZXBYX1YzMmRaSVNuRXRSclVJaFBMVmR0ZllrRngtUnBvd1ctUDZFT0RVQms1N0kyblZLbDBQMzlSbWlIUndDTDAzbmpoNS1pQk92X2Q?oc=5",
+          "summary": "Circle has undergone a strategic shift in its business positioning, moving beyond its core stablecoin issuance operations toward a broader internet platform model, according to its latest financial report.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-yazq5c",
+          "headline": "Stablecoin Issuer Circle Launches Open-Source Infrastructure For Agentic Economy - Crowdfund Insider",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOSkxKaHB1OHoyc3pNN0Y5WTRIeE1JdVpHRllrd01NeG0xUVktWURjd25MVkszY3J0dnBWak9qY054SEpFMjg2LS04dVpCQzR2TGczcXpGenN4dFQyOTk0MEJqNUdmdlU1cEpVZV9Sb0pDZkh1OFg1ZkRxdDJ4QlZVTVVySmdNaW92bnQ5TGJ5RnR0bzBZLVQ3U1kweG9KcWNZb0lMMllwZVh1TUhtUkwyM0o1MFEtbE1SREJiMGMyMjhFM1ZieGNTdw?oc=5",
+          "summary": "Circle, a stablecoin issuer, has launched open-source infrastructure designed to support the agentic economy.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-uglkdc",
+          "headline": "JPMorgan’s new blockchain fund targets stablecoin issuers under GENIUS Act - AMBCrypto",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOSThSanRqeEdvelhDSTVGLVFEOE55Y21nT0pWeU1mc25kWlBYLWFBeGdCUGxXdW9pVnotQ1Q0SVNGVG1aVklxVWNTRTZrbHczUzI3MFhFRGhXZC1PcXFybzNUaVkzN245R0xhakFnUndmMG1ucjdQdEZJYktPZVM4Q0QxNHI2MXBlRmxqV3NRcTJIMEgwcjJvV2UtamrSAaIBQVVfeXFMTmQ4c0lQa3RzUGZWZkZ6TTZzOG5PazNKOHFaRFlkbFN1UmR0XzVsMjJzYmNEV3BrbExnRXpMZGFPMU53Qy1CMVYtSDNkLXBvWVBKNEd3UlpWMzlqSDB4MFczSXdjU0ctall1VDNqYVVkRkQtcGFLeExMcFEwR28wY1NYRzhiSDV5TF9OZEhqVHVwZ2w2WWUwMEJQdjEwUWhEWS1B?oc=5",
+          "summary": "JPMorgan has launched a blockchain fund that aims to support stablecoin issuers operating under the GENIUS Act framework.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-w2ydvc",
+          "headline": "AFC Urges Regulatory Clarity and Tailored Oversight in OCC Stablecoin Rulemaking - The Fintech Times",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQaTBGM0pKUlJSemYwdG9aZ3RFOElLVHFmb25IT3lONVFzRXFhaUExamZnODJmOGZiZDZoZlZnQ1lWVXpXbWp6VHJXV3E2YzJmQXY5Ymt6blVEYUZWWC1lajQyVXAtRWlHS0pxaW5Uay1JSzFlUnVDWGtGbGcyYTNHeHVyYmZIZjZOTFFiV1BoQ1l3S0FxWUNJOTVpNlc1MXdqWWJFeW9ibUZGRFdobVE?oc=5",
+          "summary": "The American Financial Council urged the Office of the Comptroller of the Currency to provide clearer regulatory guidelines and implement oversight approaches tailored to stablecoins during its rulemaking process.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-63d03p",
+          "headline": "Clarity Act Text Reveals Stablecoin Rules, Crypto Provisions Ahead Of Hearing - Investor's Business Daily",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOdS1iMXR6TWQtWkhLTWVLY09WaUt5d3o0OEc3eEhmM2FORXhZVjVkeGJrQTAxcFpjZ2Q4Nkctck1TQ1pxN0dHcFgzZWptM1pSemRhcmk1MndMYmNSbDJ1QTZKLWdfVnBsWnp5MUVQVmRTQURwSk0xSEtVekp6VjhkUTI4dF9QTmVib3V6U3NCaVB5QQ?oc=5",
+          "summary": "The text of the Clarity Act, which addresses stablecoin regulations and cryptocurrency provisions, has been released in advance of a congressional hearing.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-24hsko",
+          "headline": "Financial trade groups urge Senate Banking committee to refine stablecoin bill - Financial Regulation News -",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOc0JiZ2JkbTFOUFl0emotc01kUXU5cXNNaWdveHh5bXVxTVcxbktTUFJkTlE3TFpfR3VUcGtUYWJJbnRJRFRnc3UtcVRuQnhuV3pmMS13cUczMDNod21rTVIzNEZEZ0FrNkpqV1I4MTlYY0dwakN4TjRvTWpRVndBMmQ5S0tfdTZZYmpDM3l3NnpXX2c0TWx5Ui1GOERITXprQ055alc0RE1ESWV3?oc=5",
+          "summary": "Industry trade groups have urged the Senate Banking Committee to modify a stablecoin bill under consideration.",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-us-stablecoi-ysn4l0",
           "headline": "Augustus secures conditional OCC approval for AI and stablecoin bank - Crypto Briefing",
@@ -2416,6 +2532,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-japan-stable-v2cgjn",
+          "headline": "Japan Stablecoin Regulation Explained: PSA Rules, JPY Coins and Bank Issuers - Bitcoin News",
+          "source": "Google News — Japan Stablecoin Policy",
+          "date": "2026-04-03",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOSERYYUIzMXJ4OWdqWE96SEw1UEJoMW1FZzA2aUZPaFdkRUUzaENIbjJSZTJEeTNqRV9GOXc2eUxlXzlndm01Q01kSnlVaGlGYkRISVpWalpMcTFrUUhId0p1V2Fhd2h6S1Badnl1Wmpydk5WTTBORGZxbWJBVTVZZ1pacnViaTJTSjBtbXdPRm1GSXBnVnNwWGN3d19xU256OEE?oc=5",
+          "summary": "Japan has established regulatory frameworks for stablecoins that address payment service provider rules, yen-denominated coins, and requirements for bank issuers.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-japan-stable-lfky5d",
           "headline": "The State Of Stablecoin In Japan - Forrester",
           "source": "Google News — Japan Stablecoin Policy",
@@ -2689,6 +2814,15 @@
     },
     "Singapore": {
       "news": [
+        {
+          "id": "rss-google-news-singapore-st-xvyidx",
+          "headline": "Stables Accelerates Stablecoin Adoption With t-0 Network, Unlocking Institutional-Grade Liquidity Across Asia - TradingView",
+          "source": "Google News — Singapore Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxPWlNlWjNaVWJRMEI1RzNoX2g2cWY0ZllmdGswcU1LYVlnSGVNQTBJVklUOXZ1MW5XU19lLXEzSWVTWEJYbVhac19mbWNrU3FkRGh0ZDFUd1doRGNMUlloSjRkUmxxZDFhUmNiZVA4TlZmRlZoSUVWRGNXSDUzSnZEUUVRX3drVG1JYmQ2U1RrSWNEUWtsZ0FSMC1SbUJIdWpyTjF0d2xBX0hGbnNHMjVQdlVBb1g4c1lxNV8telVzU3Vnc2laRzl5OEswQXVKcU5DRkFDM2dQem5jWHpsVjlzdThGeU1LZzIwcXllZy1aeXRqbC1EOWhrUTVHakc?oc=5",
+          "summary": "Stables has launched a t-0 network aimed at promoting stablecoin adoption among institutional users across Asia.",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-singapore-st-p3x0uw",
           "headline": "Lagarde sees euro-stablecoin risks for banking, monetary policy - The Edge Singapore",
@@ -3150,6 +3284,24 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-uk-stablecoi-8zlzu2",
+          "headline": "Bank of England Governor Warns of Stablecoin Regulatory Risks - Intellectia AI",
+          "source": "Google News — UK Stablecoin Policy",
+          "date": "2026-05-11",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPT05VM2ktdUoxXy15N2oybUd1YmxGdU1NLXlUUmoySUJBdlEwbnR6VHNkVkFReG5CREQtT255d1B4aHJ6MEVReWhaNll2dm9iZEdEZ2xuanM1SGx0a0lnRXZyR2c5RTF5M1FDWXpMdk9vN2JNT0NibWswVjZuNkN3MUhrWVpwTHNBcUd2SXNLQ2QtUDQzOFZES00tYmc?oc=5",
+          "summary": "The Bank of England's Governor has issued a warning regarding regulatory risks associated with stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-uk-stablecoi-bviars",
+          "headline": "Bank of England Governor Warns of Stablecoin Risks, Calls for US Coordination - MEXC Exchange",
+          "source": "Google News — UK Stablecoin Policy",
+          "date": "2026-05-11",
+          "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE55ZmlmSTVnZk9Ia05mNTVjZFd0ak9VdzBoVnhUZmRZVE1wUG1yS2ZhMGJ5LTZDZ282WHBadmEwV3hBWUJXbi1z?oc=5",
+          "summary": "The Bank of England Governor has warned of risks associated with stablecoins and called for coordinated regulatory approaches with the United States.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-uk-stablecoi-xkow5k",
           "headline": "Bank of England Warns of Global Stablecoin Clash With - MEXC",
           "source": "Google News — UK Stablecoin Policy",
@@ -3354,6 +3506,15 @@
           "date": "2026-04-22",
           "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQa3NPTXc2ZGp1bjBaLVFvSmNxbTlxWHFlRU8xTnNQeExiczFMbGhKd3BiN1VyU2lwd282N055NzFScHhxOV9kdVMzZmhKTUhOMWhkdm5iUlFYTkpEZHlVQWZldHotVEczWlZ3SWhsRjVzeDNLX3BHMmEyS2kxS3ljRnFRLTQ?oc=5",
           "summary": "Coinbase has listed a stablecoin pegged to the British pound sterling.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-uk-stablecoi-pfl4xf",
+          "headline": "BoE governor urges quick action on global stablecoin standards - CoinGeek",
+          "source": "Google News — UK Stablecoin Policy",
+          "date": "2026-04-20",
+          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOaHdNS2dOZUVEZFZlRFJ5Q283NlowcWxINEpQdHVJaURseWhJZ3RsQURjYkNEQW51bEllaU00NUFpTWtQWVZCM2pzdWJNMlBqZWNYRmk4emJZN2JPMHQ3bjVmTUpseHhtS3NzTjV2YVJ2Wmdzb2psR1Zkc0pzZ0ZlUGhHV2gzdUoxODR3ZA?oc=5",
+          "summary": "The Bank of England's governor has called for swift development of international standards governing stablecoins.",
           "summarySource": "headline-only"
         },
         {
@@ -3622,6 +3783,24 @@
     "Australia": {
       "news": [
         {
+          "id": "rss-google-news-australia-st-95dk9",
+          "headline": "JPMorgan Files for JLTXX: New Tokenized Treasury Fund on Ethereum for Stablecoins - The Crypto Times",
+          "source": "Google News — Australia Stablecoin Policy",
+          "date": "2026-05-13",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQV3oxM3dpSVJPR0VWY3dvQl9QRi13cDJTaW5CZHp5dzk3MFlEWno0aUpVMHVQclktVHpVWTlaXzN2QmFBc0FwYlBNTTJTd0FMSk9BXzR1S1hkOUtSclRWQXMxakktcUppcTlzUjh3N1dtSzNUai1pVHFxd3JuZGNPOFNHTnVFY2FOZkZVb1h0bmFQY192X0dMUG5wenNTVE9DNDFsZDJRT1pBcHB2d09aeEdta2U4X3FCRlJB?oc=5",
+          "summary": "JPMorgan has filed to launch a tokenized Treasury fund called JLTXX on the Ethereum blockchain.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-australia-st-g68d46",
+          "headline": "US Treasury Proposes AML and Sanctions Rules for Stablecoin Issuers - CoinMarketCap",
+          "source": "Google News — Australia Stablecoin Policy",
+          "date": "2026-05-11",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQQ1FLTVlabC1qamxNV3c4UzN6LVVHY0JiWDBEUkZVLXBCMDZ0RkFIcFQxc0l6Wm5zTllWLWNwamlYekhPWGJFY0hfRzZ1MjZxNDUtUXo5UUl1WDdEa0dIWXZJNy1CQVk3S3JyVkkxMlhFaVhsR2tDdlEyUWpJaVZYcU5sN0s4Y2wtMXJIb29YeTJCSE5QVVB2dllqUlV2YXJQS18zZjFYWXA3YmpNa3c?oc=5",
+          "summary": "The US Treasury has proposed anti-money laundering and sanctions compliance rules applicable to stablecoin issuers.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-australia-st-hjao89",
           "headline": "Corpay Adds Stablecoin Wallets and Settlement Through BVNK Partnership - FinanceFeeds",
           "source": "Google News — Australia Stablecoin Policy",
@@ -3874,6 +4053,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-australia-st-lllfs1",
+          "headline": "Stablecoins and Australia's financial architecture: A policy choice, not a technology question - Westpac IQ",
+          "source": "Google News — Australia Stablecoin Policy",
+          "date": "2026-02-10",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOVjM5U0pyOHNBUE5FUktHaUJjaEtNc0lLLWU4ci1ZOUtVaDYyM0xHMUNuSlZNT3pTZzN0T3lFdWgwakdTZE5KUDdIRkFxTm9WdVNNWkhOclBqbkVqeC13NUhWaUQ2WTNwYnpUTDhmckZBVzhiLWdmRmFoaEJiWnE0UmxBOTJMb2l3Z2JyakR4WFBGVHhXQzhWb1JvRnNPN3dQdGc?oc=5",
+          "summary": "Westpac IQ argues that stablecoin regulation in Australia is fundamentally a policy decision rather than a technical issue.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-australia-st-82ihd2",
           "headline": "ASIC grants stablecoin AFSL as offshore competition heats up - investordaily.com.au",
           "source": "Google News — Australia Stablecoin Policy",
@@ -3976,6 +4164,15 @@
     },
     "Hong Kong": {
       "news": [
+        {
+          "id": "rss-google-news-hong-kong-st-4z98sr",
+          "headline": "HSBC targets retail and wealth with new Hong Kong stablecoin - TheBanker.com",
+          "source": "Google News — Hong Kong Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5aeWo2SkVqMUcwZHlCOWRGZUtCd2JPNEU2MXZuYVVjSm16cjBnOWZQQWlhcWVNX1BUbkkyUWVBc1BDYS1CbVBicS1iVm5YS05RVDVHLWZES2F3cG5oRG41aW9zeGx3MEJpa3hDRlpxZzRHdkF3eU9aU3FB?oc=5",
+          "summary": "HSBC has launched a stablecoin offering in Hong Kong aimed at retail and wealth management customers.",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-hong-kong-st-2sukj5",
           "headline": "Payward to buy Hong Kong stablecoin payments provider Reap for $600m - Yahoo Finance",
@@ -4337,6 +4534,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-hong-kong-st-uinbti",
+          "headline": "HSBC, Standard Chartered to Get Stablecoin Licenses in Hong Kong - Bloomberg.com",
+          "source": "Google News — Hong Kong Stablecoin Policy",
+          "date": "2026-03-12",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNVEhmU2pEMUdXNFhiVFFNTDVHV2R4S2pTSkFDODBWc3paSFVMRDNfOURnR3lnbVVaNDRxODJGRkFKU0FNUDhyWENCcHFDTlpMZGFOZnlYSnZsU2ppeXhOclhEZjBaUV9YdC03Y19tTzJZcGw4dm10Yldsb09rZHhjZjExWEE4ZHZya3VFVEc5SHc3TUU3emd4UktjbTZ0Rl9RbUYxdmo4dzlaUDI5Ti1jbVBvZEs?oc=5",
+          "summary": "HSBC and Standard Chartered have been approved to obtain stablecoin licenses in Hong Kong.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-hong-kong-st-aa2ten",
           "headline": "Hong Kong proceeds with stablecoin plans despite Beijing's reservations - CNBC",
           "source": "Google News — Hong Kong Stablecoin Policy",
@@ -4647,6 +4853,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-brazil-stabl-7hsrzc",
+          "headline": "Brasil precisa definir regulação diante do avanço das stablecoins - Consultor Jurídico",
+          "source": "Google News — Brazil Stablecoin Policy",
+          "date": "2025-07-30",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQZXhfVHdZM0lRUEV3Yy15eE1PQXdjOFo0MzJjME9TSWFvLUNyVVl3S0xXOTA4UlZpNy1OYmRibVRqU0hENExmVkdSZ1lKaW1YaUpvYlM4RHNmYncyV192dUo4QkpHWENxenEtcnJySGVOVU01WTdCYjQ3aF9XZTJ0Yy1Mcmp0V2t1em5uOTJaZHRUZG5YTFZwbXg1OXVSeDJweF94U0hTRkVOcjZOSVV6OEFFTk50Q2QxWC1faTFn?oc=5",
+          "summary": "Brazil needs to establish regulatory frameworks to address the growing adoption of stablecoins, according to a legal consultant.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-brazil-stabl-xfk771",
           "headline": "EUA regulam stablecoins, um divisor de águas para as cripto nas finanças - Brazil Journal",
           "source": "Google News — Brazil Stablecoin Policy",
@@ -4723,6 +4938,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-argentina-st-n72ki9",
+          "headline": "Bitcoin para ahorrar y Stablecoins para pagar: La fórmula anti-crisis - iProfesional",
+          "source": "Google News — Argentina Stablecoin Policy",
+          "date": "2026-04-23",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOanZZWnpmcld5bVZDNEJKekpxZVZvLU5YaFFvYUZrcTQ4VUU4MjcyUWV0SkR4RXdoUGtyM0dlWnFSMm5Ub0pXU2lMQXZoX21wWHVLODlLd3ZwQ0xjdDB5Ykt6b2NuVHR3ck95UGNoNlF4ZGNQQWJoaTdsZEliaFNsSDdfNkJZRXZ5ZTkxRVlvTDh5QkVkYmhtcFRQbnkzWm1LTTRUdDdTMUdNekNrSHUweGFoaE03d9IBuwFBVV95cUxQcVgwcEx2LVgxaHp3NXNCVTZCYVVpaTJPd2JPdFFBS1R0eFlQY3NEcjd3YnpiMWZDQlAySEFkcXF3ZDVwT0MxVktvZEtvR1hyTlZ1SGlFcDNCLWNGM1VzRDRBMFd6RUNfUURjY3ZGSXpteDlCNThzcWRIOHN1R2Nod2Nwb29JQW44OGhRUThOV3dWZFhWQzFLTXh6X29VRjRvSFIzd2NVZWNiZ0wxWFQ4ZjBlRl9tdlM3dzZB?oc=5",
+          "summary": "An Argentine publication discusses a proposed approach of using Bitcoin as a savings mechanism and stablecoins as a payment method in response to economic challenges.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-argentina-st-kzlxpn",
           "headline": "CNV, stablecoins y el eterno retorno del Howey test: el caso Belo/ARGt - Abogados.com.ar",
           "source": "Google News — Argentina Stablecoin Policy",
@@ -4783,6 +5007,15 @@
           "date": "2026-03-27",
           "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQZ1ZJaHRsVWhjRUlsaXRfMTgzY1RUMHZCUHVWY3ZrNFFfYklCWi1YV2FxenJDaFktbHV4ZF9nTno0bEVJdVFsNk11OHNzcVhGbHZaTDVyZmdQNTZ4VXg5TC1mTnI0cXViWERMYTN0UktiUWFQaFEwQkduZVNvWWhfdUg2X0NfN3o0a3B2dDZPSGJRVE5GaFR3dFBwN1A0NEtUcnozTzdfbXZIMGtpTE9ORjhaZVN6b0xHaHc?oc=5",
           "summary": "Argentina has experienced rising loan delinquency rates alongside growing stablecoin adoption, according to reporting on shifts in the country's financial landscape.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-argentina-st-rf9wq6",
+          "headline": "La CNV ordenó frenar ARGt por irregularidades: qué pasó con la stablecoin del peso - iProUP",
+          "source": "Google News — Argentina Stablecoin Policy",
+          "date": "2026-03-12",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOSUdENTdBVHdhSGkzSWhzTS1qZGxqTmItaUpjSjFzLWI4c0tBOWp6dWJ2N0NYeW1vWVBfM1hCNjdSd0R3ZHY3b2RFamtsX2ZDWWpEZ1lCSFdYN0ZpZHgxV0lKZm84QjI5Y1l3Vk1ieU1tVG41REpxU2M1NEtIWTB5OGx5ZEVsSU50WHc3OEVNazBtTTU4SWFBc1VKQjhCQy1XUkRucEthUE1SU2s?oc=5",
+          "summary": "Argentina's securities regulator (CNV) ordered a halt to ARGt, a peso-denominated stablecoin, citing irregularities.",
           "summarySource": "headline-only"
         },
         {
@@ -5509,6 +5742,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-uae-stableco-iktdvz",
+          "headline": "USDT Stablecoins in UAE: Top Exchanges & Legal Guide 2026 - Bitget",
+          "source": "Google News — UAE Stablecoin Policy",
+          "date": "2026-03-09",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNVU1zd29zYWRDbkk1NWR2dm9UNXVxeTVFVHBjUzh6emNYZUM4MUIyUWMwRThhZV9Tb1VkMGxTTDRYcUR5WlZiYnFDdzJTMlJUUXBGYU1BZm5HOV9aRUotbWJ3V0NKNGpySVRWR0NwdnhZNWF6Z2FRWFpRQWZLc0JBV3hQekRiSmFJVEw5Si1IZERFQ0xpTW9hY3AwSEVTQUhoOHJUbWk4QdIBrAFBVV95cUxNV0ZiTDRDOXZ4YzR6VEZWeUVhRVVRX2puSVRfaUhXcHQzNldWTy0wT1g2YkYxLTlpejBMZ2Q4S2pSZ3VHUkVNTzB0MUpDSGtCZnV4N1U4bkRfSXFKdHFvLUI3WnR0VkN3Yy1BNnZVcmtfR0x2cTdlVFhUMjhBX0JvWHI4QW5hQXJzQ2M5VXdyZUxpaXBGLUs2dHJXMktvVnhkMmtXckQzUG1LaXk5?oc=5",
+          "summary": "The article discusses the availability and regulatory status of USDT stablecoins on major exchanges in the UAE as of 2026.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-uae-stableco-t2s1w8",
           "headline": "Best Stablecoin Platforms & Usage in UAE 2026 Guide - Bitget",
           "source": "Google News — UAE Stablecoin Policy",
@@ -5578,6 +5820,15 @@
           "date": "2026-02-12",
           "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTFA1ZjY0V3JqMmd5clRDTmFTenM0UElURTltb1hVX3dGSkVIMm9FZzVDb2VKWm96Wi1FOXBzUjNvSGxXQUh2NGY4?oc=5",
           "summary": "The United Arab Emirates has launched its first regulated stablecoin.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-uae-stableco-pil9ao",
+          "headline": "CBUAE approves launch of UAE dirham-backed stablecoin 'DDSC' on ADI Chain - TradingView",
+          "source": "Google News — UAE Stablecoin Policy",
+          "date": "2026-02-11",
+          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPMDV1WFV0OWN1ejNlS0lFbjZySnpKaWIwYWJGbFAtSjlfUDg0R3JJUzRHajFRay1vUnQwdVYydWNYalFwNXk3M3lKRGNXNWNpeWxvRUF5cHRncWtBR2RKQ24zNHRZVUs1Rk93M1VMTDZhTThzYWhkTEdQUnBRN19HdWRmeC1xTmVxYUZRV1hhOWhqX2FnOHdPZlUyNkNaajBzOFdyZ2p3bng1SlBTUTkyT2ozZ0t0RmRYNFcwbVdFcHlsbmZmNS1LX2RxVTVVcE1STFNGN1NjNUMwSVZiZmFaWA?oc=5",
+          "summary": "The Central Bank of the UAE has approved the launch of a dirham-backed stablecoin called DDSC on the ADI Chain blockchain platform.",
           "summarySource": "headline-only"
         },
         {
