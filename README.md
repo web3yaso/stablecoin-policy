@@ -82,6 +82,36 @@ npx tsx scripts/reports/add-report.ts \
 
 `data/reports/private/` 和 `data/reports/*.md` 不应提交；可提交的只有 `index.json` 与 `*.md.enc`。
 
+## x402 购买流程测试
+
+测试脚本只允许在 Base Sepolia (`eip155:84532`) 运行。先准备一个 testnet 买家钱包，并从 Coinbase Faucet 或 Base Sepolia faucet 领取测试 ETH 和 USDC。不要使用 mainnet 私钥。
+
+在 `.env.local` 中配置：
+
+```
+TEST_BUYER_PRIVATE_KEY= # TESTNET ONLY
+REPORTS_API_BASE_URL=http://localhost:3000
+BASE_SEPOLIA_RPC_URL=   # 可选；自定义 Base Sepolia RPC
+```
+
+本地先启动服务：
+
+```bash
+npm run dev
+```
+
+然后另开终端运行：
+
+```bash
+npx tsx scripts/reports/verify-x402.ts
+```
+
+部署后测试生产环境：
+
+```bash
+REPORTS_API_BASE_URL=https://stablecoin-policy.vercel.app npx tsx scripts/reports/verify-x402.ts
+```
+
 | 脚本 | 说明 |
 |------|------|
 | `npx tsx scripts/smoke/congress-ping.ts` | 测试 Congress.gov 连通性 |

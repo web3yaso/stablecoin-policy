@@ -30,7 +30,8 @@
     "react-dom": "19.2.4",
     "react-grab": "^0.1.31",
     "react-simple-maps": "^1.0.0",
-    "topojson-client": "^3.1.0"
+    "topojson-client": "^3.1.0",
+    "viem": "^2.48.11"
   },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.88.0",
