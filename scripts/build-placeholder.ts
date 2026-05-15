@@ -87,16 +87,46 @@ function loadFigures(path: string, limit: number): ReturnType<typeof toLegislato
   return arr.slice(0, limit).map(toLegislator);
 }
 
+interface NewsItem {
+  id: string;
+  headline: string;
+  source: string;
+  date: string;
+  url: string;
+  summary?: string;
+  summarySource?: "article" | "headline-only";
+}
+
 interface NewsFile {
-  entities?: Record<string, { news: Array<{ id: string; headline: string; source: string; date: string; url: string }> }>;
+  entities?: Record<string, { news: NewsItem[] }>;
 }
 
 const newsData: NewsFile = existsSync(NEWS_PATH)
   ? (readJson(NEWS_PATH) as NewsFile)
   : {};
 
-function loadEntityNews(entityName: string) {
+function loadEntityNews(entityName: string): NewsItem[] {
   return newsData.entities?.[entityName]?.news ?? [];
+}
+
+/**
+ * News buckets for international entities, keyed by entity `name`.
+ * INTERNATIONAL_ENTITIES is hand-curated (lib/international-entities.ts) so we
+ * can't rebuild those entities from JSON the way we do for NA — instead we
+ * pass through the curated entity and overwrite its `news` field at module-load
+ * time with the freshest items the RSS poller has collected. Only buckets that
+ * (a) aren't already claimed by an NA entity and (b) actually carry items are
+ * emitted, so most rows in summaries.json stay out of the bundle.
+ */
+function collectInternationalNews(naNames: Set<string>): Record<string, NewsItem[]> {
+  const out: Record<string, NewsItem[]> = {};
+  for (const [entityName, bucket] of Object.entries(newsData.entities ?? {})) {
+    if (naNames.has(entityName)) continue;
+    const items = bucket?.news ?? [];
+    if (items.length === 0) continue;
+    out[entityName] = items;
+  }
+  return out;
 }
 
 /** JSON.stringify that emits TS-style identifier keys where possible. */
@@ -200,7 +230,13 @@ function main() {
   na.push(buildCanadaEntity());
   na.push(...buildStateEntities());
 
-  const body = `import type { Entity, Region } from "@/types";
+  const naNames = new Set<string>(
+    na.map((e) => (e as { name: string }).name),
+  );
+  const internationalNews = collectInternationalNews(naNames);
+  const internationalNewsCount = Object.keys(internationalNews).length;
+
+  const body = `import type { Entity, NewsItem, Region } from "@/types";
 import { INTERNATIONAL_ENTITIES } from "./international-entities";
 
 /**
@@ -209,12 +245,31 @@ import { INTERNATIONAL_ENTITIES } from "./international-entities";
  * on the next sync run. Edit data/*.json or the sync scripts instead.
  *
  * EU + Asia + Canada-adjacent entities live in lib/international-entities.ts
- * and are hand-curated.
+ * and are hand-curated. Their news field is overlaid here from
+ * data/news/summaries.json so the RSS poller's items actually reach the UI
+ * (the entity objects themselves stay hand-curated for context blurbs,
+ * legislation, and key figures).
  */
 
 const NA_ENTITIES: Entity[] = ${toTs(na, 2, 0)};
 
-export const ENTITIES: Entity[] = [...NA_ENTITIES, ...INTERNATIONAL_ENTITIES];
+const INTERNATIONAL_NEWS_OVERRIDES: Record<string, NewsItem[]> = ${toTs(internationalNews, 2, 0)};
+
+function applyInternationalNews(entity: Entity): Entity {
+  const fresh = INTERNATIONAL_NEWS_OVERRIDES[entity.name];
+  if (!fresh || fresh.length === 0) return entity;
+  // Merge fresh RSS items with the hand-curated tail, deduping by URL so a
+  // hand-written entry that later appears in the feed isn't shown twice. The
+  // UI sorts by date desc, so chronology survives regardless of provenance.
+  const seen = new Set(fresh.map((n) => n.url));
+  const tail = entity.news.filter((n) => !seen.has(n.url));
+  return { ...entity, news: [...fresh, ...tail] };
+}
+
+export const ENTITIES: Entity[] = [
+  ...NA_ENTITIES,
+  ...INTERNATIONAL_ENTITIES.map(applyInternationalNews),
+];
 
 export function getEntity(geoId: string, region: Region): Entity | null {
   return ENTITIES.find((e) => e.geoId === geoId && e.region === region) ?? null;
@@ -231,7 +286,7 @@ export function getEntitiesByRegion(region: Region): Entity[] {
 
   writeFileSync(OUT, body);
   console.log(
-    `[build-placeholder] wrote ${na.length} NA entities + INTERNATIONAL_ENTITIES passthrough → lib/placeholder-data.ts`,
+    `[build-placeholder] wrote ${na.length} NA entities + ${internationalNewsCount} international news overrides → lib/placeholder-data.ts`,
   );
 }
 
