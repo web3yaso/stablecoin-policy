@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { withX402, type RouteConfig } from "@x402/next";
+import { declareDiscoveryExtension } from "@x402/extensions/bazaar";
 import {
   getReportBySlug,
   getReportMetaBySlug,
@@ -102,6 +103,33 @@ function createRouteConfig(
     resource: requestUrl,
     description: meta.title,
     mimeType: "text/markdown",
+    extensions: {
+      ...declareDiscoveryExtension({
+        input: {
+          slug: meta.slug,
+        },
+        inputSchema: {
+          type: "object",
+          properties: {
+            slug: {
+              type: "string",
+              description:
+                "Report slug selected from GET /api/reports. Use this value in the /api/reports/{slug} path.",
+              pattern: "^[a-z0-9][a-z0-9-]{5,80}$",
+            },
+          },
+          required: ["slug"],
+          additionalProperties: false,
+        },
+        output: {
+          example: `# ${meta.title}\n\nFull report Markdown content is returned after payment.`,
+          schema: {
+            type: "string",
+            description: "Full report content in Markdown.",
+          },
+        },
+      }),
+    },
     unpaidResponseBody: () => ({
       contentType: "application/json",
       body: {},

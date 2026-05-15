@@ -2,6 +2,7 @@ import { HTTPFacilitatorClient, x402ResourceServer } from "@x402/core/server";
 import type { Network } from "@x402/core/types";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { createFacilitatorConfig } from "@coinbase/x402";
+import { bazaarResourceServerExtension } from "@x402/extensions/bazaar";
 import {
   getReportSlugFromRequirements,
   reservePaymentPayload,
@@ -21,10 +22,9 @@ const facilitatorClient = new HTTPFacilitatorClient(
       ),
 );
 
-export const x402Server = new x402ResourceServer(facilitatorClient).register(
-  X402_NETWORK,
-  new ExactEvmScheme(),
-);
+export const x402Server = new x402ResourceServer(facilitatorClient)
+  .register(X402_NETWORK, new ExactEvmScheme())
+  .registerExtension(bazaarResourceServerExtension);
 
 x402Server.onBeforeSettle(async (context) => {
   const slug = getReportSlugFromRequirements(context.requirements);

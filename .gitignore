@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.local.example
 
 # vercel
 .vercel
@@ -43,6 +44,11 @@ next-env.d.ts
 # sync pipeline caches — regenerable, not committed
 /data/raw
 /data/sources
+/data/reports/*.md
+/data/reports/*.pdf
+/data/reports/*.txt
+/data/reports/.DS_Store
+/data/reports/private
 
 # claude code local state
 /.claude
