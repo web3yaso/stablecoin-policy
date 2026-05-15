@@ -70,6 +70,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="describedby" href="/.well-known/x402-skill.md" />
+      </head>
       <body className="font-sans bg-white text-ink antialiased">
         <script
           dangerouslySetInnerHTML={{

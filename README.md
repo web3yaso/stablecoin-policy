@@ -37,6 +37,81 @@ STATE_API_KEY=      # OpenStates API，免费注册 https://openstates.org/accou
 ANTHROPIC_API_KEY=  # 新闻聚合与法案分类
 ```
 
+## 环境变量
+
+除上面的数据同步变量外，x402 报告 API 需要以下服务端环境变量。请只在 `.env.local` 或 Vercel 环境变量中填写真实值；不要提交任何密钥。
+
+```
+CDP_API_KEY_ID=          # Coinbase CDP API Key ID，用于 x402 facilitator
+CDP_API_KEY_SECRET=      # Coinbase CDP API Key Secret
+X402_PAY_TO=             # Base Sepolia 收款地址
+X402_NETWORK=eip155:84532
+X402_FACILITATOR_URL=    # 可选；留空使用 Coinbase 官方 facilitator
+REPORTS_ENCRYPTION_KEY=  # 报告全文 AES-256-GCM 解密密钥
+KV_REST_API_URL=         # Vercel KV REST URL，用于付款日志
+KV_REST_API_TOKEN=       # Vercel KV REST token
+TEST_BUYER_PRIVATE_KEY=  # 仅用于 Base Sepolia 测试脚本；绝不要填 mainnet 私钥
+```
+
+`X402_FACILITATOR_URL` 仅用于测试或应急覆盖。生产环境应使用官方 facilitator，避免把付款验证交给未审计的第三方服务。
+
+报告 API 的 MVP 定价为每篇 `$0.01 USDC`，仅用于 Base Sepolia testnet validation；生产定价待后续版本决定。
+
+## 付费报告内容存储
+
+公开仓库不会提交报告全文明文。报告索引在 `data/reports/index.json`，全文只以 AES-256-GCM 密文 `data/reports/*.md.enc` 存储；本地明文 `.md` 文件会被 `.gitignore` 忽略。
+
+添加报告前先生成 32 字节密钥并写入 `.env.local`：
+
+```bash
+openssl rand -base64 32
+```
+
+然后从 repo 外或 `data/reports/private/` 中的明文 markdown 生成密文报告：
+
+```bash
+npx tsx scripts/reports/add-report.ts \
+  --file /path/to/report.md \
+  --title "中文标题" \
+  --summary "100-200字摘要" \
+  --category policy \
+  --jurisdiction US,EU \
+  --price-usd 0.01 \
+  --source-url "https://mp.weixin.qq.com/..."
+```
+
+`data/reports/private/` 和 `data/reports/*.md` 不应提交；可提交的只有 `index.json` 与 `*.md.enc`。
+
+## x402 购买流程测试
+
+测试脚本只允许在 Base Sepolia (`eip155:84532`) 运行。先准备一个 testnet 买家钱包，并从 Coinbase Faucet 或 Base Sepolia faucet 领取测试 ETH 和 USDC。不要使用 mainnet 私钥。
+
+在 `.env.local` 中配置：
+
+```
+TEST_BUYER_PRIVATE_KEY= # TESTNET ONLY
+REPORTS_API_BASE_URL=http://localhost:3000
+BASE_SEPOLIA_RPC_URL=   # 可选；自定义 Base Sepolia RPC
+```
+
+本地先启动服务：
+
+```bash
+npm run dev
+```
+
+然后另开终端运行：
+
+```bash
+npx tsx scripts/reports/verify-x402.ts
+```
+
+部署后测试生产环境：
+
+```bash
+REPORTS_API_BASE_URL=https://stablecoin-policy.vercel.app npx tsx scripts/reports/verify-x402.ts
+```
+
 | 脚本 | 说明 |
 |------|------|
 | `npx tsx scripts/smoke/congress-ping.ts` | 测试 Congress.gov 连通性 |

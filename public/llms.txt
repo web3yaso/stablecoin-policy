@@ -1,0 +1,19 @@
+# Web3Law Stablecoin Policy Reports
+
+Machine-readable regulatory analysis reports on global stablecoin policy.
+
+## API
+
+- List reports (free): https://stablecoin-policy.vercel.app/api/reports
+- Full content (paid via x402): https://stablecoin-policy.vercel.app/api/reports/[slug]
+
+## Payment
+
+- Protocol: x402
+- Network: Base Sepolia (eip155:84532) [testnet]
+- Currency: USDC
+- Pricing: $0.01 per report (testnet validation pricing - production pricing TBD)
+
+## Skill
+
+See: https://stablecoin-policy.vercel.app/.well-known/x402-skill.md
