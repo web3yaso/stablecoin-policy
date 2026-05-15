@@ -32,6 +32,120 @@
       "topicHint": "stablecoin-policy"
     },
     {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Germany+OR+BaFin+OR+Bundesbank+OR+MiCA&hl=de-DE&gl=DE&ceid=DE:de",
+      "name": "Google News — Germany Stablecoin Policy",
+      "entity": "Germany",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+France+OR+AMF+OR+ACPR+OR+%22Banque+de+France%22+OR+MiCA&hl=fr-FR&gl=FR&ceid=FR:fr",
+      "name": "Google News — France Stablecoin Policy",
+      "entity": "France",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Spain+OR+CNMV+OR+%22Banco+de+Espa%C3%B1a%22+OR+MiCA&hl=es-ES&gl=ES&ceid=ES:es",
+      "name": "Google News — Spain Stablecoin Policy",
+      "entity": "Spain",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Italy+OR+CONSOB+OR+%22Banca+d%27Italia%22+OR+MiCA&hl=it-IT&gl=IT&ceid=IT:it",
+      "name": "Google News — Italy Stablecoin Policy",
+      "entity": "Italy",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Netherlands+OR+%22De+Nederlandsche+Bank%22+OR+AFM+OR+MiCA&hl=nl-NL&gl=NL&ceid=NL:nl",
+      "name": "Google News — Netherlands Stablecoin Policy",
+      "entity": "Netherlands",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Belgium+OR+FSMA+OR+%22National+Bank+of+Belgium%22+OR+MiCA&hl=fr-BE&gl=BE&ceid=BE:fr",
+      "name": "Google News — Belgium Stablecoin Policy",
+      "entity": "Belgium",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Austria+OR+FMA+OR+OeNB+OR+MiCA&hl=de-AT&gl=AT&ceid=AT:de",
+      "name": "Google News — Austria Stablecoin Policy",
+      "entity": "Austria",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Ireland+OR+%22Central+Bank+of+Ireland%22+OR+MiCA&hl=en-IE&gl=IE&ceid=IE:en",
+      "name": "Google News — Ireland Stablecoin Policy",
+      "entity": "Ireland",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Denmark+OR+Finanstilsynet+OR+MiCA&hl=da-DK&gl=DK&ceid=DK:da",
+      "name": "Google News — Denmark Stablecoin Policy",
+      "entity": "Denmark",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Finland+OR+FIN-FSA+OR+MiCA&hl=fi-FI&gl=FI&ceid=FI:fi",
+      "name": "Google News — Finland Stablecoin Policy",
+      "entity": "Finland",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Greece+OR+%22Hellenic+Capital+Market+Commission%22+OR+MiCA&hl=el-GR&gl=GR&ceid=GR:el",
+      "name": "Google News — Greece Stablecoin Policy",
+      "entity": "Greece",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Czechia+OR+%22Czech+National+Bank%22+OR+MiCA&hl=cs-CZ&gl=CZ&ceid=CZ:cs",
+      "name": "Google News — Czechia Stablecoin Policy",
+      "entity": "Czechia",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Cyprus+OR+CySEC+OR+MiCA&hl=en-CY&gl=CY&ceid=CY:en",
+      "name": "Google News — Cyprus Stablecoin Policy",
+      "entity": "Cyprus",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Estonia+OR+Finantsinspektsioon+OR+MiCA&hl=et-EE&gl=EE&ceid=EE:et",
+      "name": "Google News — Estonia Stablecoin Policy",
+      "entity": "Estonia",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Latvia+OR+%22Latvijas+Banka%22+OR+MiCA&hl=lv-LV&gl=LV&ceid=LV:lv",
+      "name": "Google News — Latvia Stablecoin Policy",
+      "entity": "Latvia",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Lithuania+OR+%22Bank+of+Lithuania%22+OR+MiCA&hl=lt-LT&gl=LT&ceid=LT:lt",
+      "name": "Google News — Lithuania Stablecoin Policy",
+      "entity": "Lithuania",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Hungary+OR+MNB+OR+MiCA&hl=hu-HU&gl=HU&ceid=HU:hu",
+      "name": "Google News — Hungary Stablecoin Policy",
+      "entity": "Hungary",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Bulgaria+OR+%22Bulgarian+National+Bank%22+OR+FSC+OR+MiCA&hl=bg-BG&gl=BG&ceid=BG:bg",
+      "name": "Google News — Bulgaria Stablecoin Policy",
+      "entity": "Bulgaria",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Croatia+OR+HANFA+OR+%22Croatian+National+Bank%22+OR+MiCA&hl=hr-HR&gl=HR&ceid=HR:hr",
+      "name": "Google News — Croatia Stablecoin Policy",
+      "entity": "Croatia",
+      "topicHint": "stablecoin-policy"
+    },
+    {
       "url": "https://news.google.com/rss/search?q=stablecoin+%22United+Kingdom%22+OR+FCA+OR+%22Bank+of+England%22&hl=en-GB&gl=GB&ceid=GB:en",
       "name": "Google News — UK Stablecoin Policy",
       "entity": "United Kingdom",
@@ -59,6 +173,54 @@
       "url": "https://news.google.com/rss/search?q=stablecoin+Singapore+OR+MAS&hl=en-SG&gl=SG&ceid=SG:en",
       "name": "Google News — Singapore Stablecoin Policy",
       "entity": "Singapore",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+China+OR+PBOC+OR+%22People%27s+Bank+of+China%22+OR+%22digital+yuan%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+      "name": "Google News — China Stablecoin Policy",
+      "entity": "China",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+%22South+Korea%22+OR+FSC+OR+%22Bank+of+Korea%22+OR+%22Digital+Asset+Basic+Act%22&hl=ko-KR&gl=KR&ceid=KR:ko",
+      "name": "Google News — South Korea Stablecoin Policy",
+      "entity": "South Korea",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+India+OR+RBI+OR+SEBI+OR+%22Reserve+Bank+of+India%22&hl=en-IN&gl=IN&ceid=IN:en",
+      "name": "Google News — India Stablecoin Policy",
+      "entity": "India",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Taiwan+OR+FSC+OR+%22Central+Bank+of+the+Republic+of+China%22&hl=zh-TW&gl=TW&ceid=TW:zh-Hant",
+      "name": "Google News — Taiwan Stablecoin Policy",
+      "entity": "Taiwan",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Indonesia+OR+OJK+OR+%22Bank+Indonesia%22+Bappebti&hl=id-ID&gl=ID&ceid=ID:id",
+      "name": "Google News — Indonesia Stablecoin Policy",
+      "entity": "Indonesia",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Malaysia+OR+%22Bank+Negara+Malaysia%22+OR+SC&hl=en-MY&gl=MY&ceid=MY:en",
+      "name": "Google News — Malaysia Stablecoin Policy",
+      "entity": "Malaysia",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Thailand+OR+SEC+OR+%22Bank+of+Thailand%22&hl=th-TH&gl=TH&ceid=TH:th",
+      "name": "Google News — Thailand Stablecoin Policy",
+      "entity": "Thailand",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Philippines+OR+BSP+OR+%22Bangko+Sentral+ng+Pilipinas%22&hl=en-PH&gl=PH&ceid=PH:en",
+      "name": "Google News — Philippines Stablecoin Policy",
+      "entity": "Philippines",
       "topicHint": "stablecoin-policy"
     },
     {
@@ -95,6 +257,42 @@
       "url": "https://news.google.com/rss/search?q=stablecoin+%22United+Arab+Emirates%22+OR+CBUAE+OR+VARA&hl=en-AE&gl=AE&ceid=AE:en",
       "name": "Google News — UAE Stablecoin Policy",
       "entity": "United Arab Emirates",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Turkey+OR+TCMB+OR+CMB+OR+SPK&hl=tr-TR&gl=TR&ceid=TR:tr",
+      "name": "Google News — Turkey Stablecoin Policy",
+      "entity": "Turkey",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Saudi+Arabia+OR+SAMA+OR+CMA&hl=en-SA&gl=SA&ceid=SA:en",
+      "name": "Google News — Saudi Arabia Stablecoin Policy",
+      "entity": "Saudi Arabia",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Russia+OR+%22Bank+of+Russia%22+OR+%22digital+ruble%22&hl=ru-RU&gl=RU&ceid=RU:ru",
+      "name": "Google News — Russia Stablecoin Policy",
+      "entity": "Russia",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Egypt+OR+%22Central+Bank+of+Egypt%22+OR+FRA&hl=ar-EG&gl=EG&ceid=EG:ar",
+      "name": "Google News — Egypt Stablecoin Policy",
+      "entity": "Egypt",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Algeria+OR+%22Bank+of+Algeria%22+OR+%22Banque+d%27Alg%C3%A9rie%22&hl=fr-DZ&gl=DZ&ceid=DZ:fr",
+      "name": "Google News — Algeria Stablecoin Policy",
+      "entity": "Algeria",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+Greenland+OR+cryptoasset+Greenland+OR+%22digital+asset%22+Greenland&hl=en-GL&gl=GL&ceid=GL:en",
+      "name": "Google News — Greenland Stablecoin Policy",
+      "entity": "Greenland",
       "topicHint": "stablecoin-policy"
     }
   ]
