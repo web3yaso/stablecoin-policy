@@ -26,8 +26,8 @@
       "topicHint": "stablecoin-policy"
     },
     {
-      "url": "https://www.eba.europa.eu/rss.xml",
-      "name": "European Banking Authority — RSS",
+      "url": "https://news.google.com/rss/search?q=stablecoin+(MiCA+OR+EBA+OR+ESMA+OR+%22European+Union%22)&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — EU Stablecoin Policy",
       "entity": "European Union",
       "topicHint": "stablecoin-policy"
     },
