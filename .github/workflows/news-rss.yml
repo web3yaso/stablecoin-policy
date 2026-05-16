@@ -49,6 +49,8 @@ jobs:
 
       - name: Restart window (manual only)
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.restart == 'true' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: npx tsx scripts/sync/news-rss.ts --restart
 
       - name: Poll feeds
