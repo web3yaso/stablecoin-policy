@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-05-15T04:53:26.934Z",
+  "generatedAt": "2026-05-16T16:10:57.261Z",
   "regional": {
     "na": {
-      "summary": "The U.S. Senate Banking Committee advanced the CLARITY Act on May 14, marking a milestone for federal stablecoin legislation even as GSR's legal chief placed its odds of final passage below 50% and U.S. banks sent more than 8,000 letters opposing a stablecoin yield compromise. Senate negotiators separately reached a compromise on stablecoin yield provisions, though over 100 amendments targeting stablecoins, ethics, and DeFi had been filed ahead of the committee vote. The U.S. Treasury is simultaneously conducting a stablecoin test program expected to shape how states approach oversight. In Canada, the country's first regulated Canadian dollar stablecoin launched on the Base blockchain on or around May 12, backed by major institutional support, as Canada moves concurrently toward a federal stablecoin regime.",
+      "summary": "The U.S. Senate Banking Committee advanced the CLARITY Act on May 14, a milestone stablecoin regulatory bill that attracted more than 100 amendments covering decentralized finance, stablecoin yield products, and ethics concerns before the vote. Senate negotiators have since reached a compromise on stablecoin yield provisions, though GSR's legal chief has assessed the CLARITY Act's passage odds at below 50%, citing unresolved yield and ethics issues. The U.S. Treasury is simultaneously conducting a stablecoin oversight test expected to shape state-level regulatory frameworks, while North Carolina's House advances its own stablecoin bill and Kansas community banks have flagged a stablecoin loophole as a competitive threat. On the institutional side, JPMorgan plans to launch a second tokenized fund targeting stablecoin reserves, and multiple major financial institutions made strategic moves in the stablecoin reserve market within the same week. Canada launched its first regulated CAD stablecoin with major institutional backing on May 14, marking a significant step in North American stablecoin infrastructure.",
       "keyDevelopments": [],
       "highlights": [
         {
@@ -10,7 +10,11 @@
           "topic": "legislation"
         },
         {
-          "text": "Senate Banking Committee",
+          "text": "more than 100 amendments",
+          "topic": "legislation"
+        },
+        {
+          "text": "stablecoin yield provisions",
           "topic": "legislation"
         },
         {
@@ -18,101 +22,97 @@
           "topic": "legislation"
         },
         {
-          "text": "more than 8,000 letters",
+          "text": "U.S. Treasury is simultaneously conducting a stablecoin oversight test",
           "topic": "legislation"
         },
         {
-          "text": "stablecoin yield",
-          "topic": "legislation"
+          "text": "second tokenized fund targeting stablecoin reserves",
+          "topic": "infrastructure"
         },
         {
-          "text": "U.S. Treasury is simultaneously conducting a stablecoin test program",
-          "topic": "legislation"
+          "text": "Canada launched its first regulated CAD stablecoin with major institutional backing",
+          "topic": "infrastructure"
         },
         {
-          "text": "first regulated Canadian dollar stablecoin",
-          "topic": "legislation"
-        },
-        {
-          "text": "federal stablecoin regime",
+          "text": "Kansas community banks have flagged a stablecoin loophole",
           "topic": "legislation"
         }
       ],
-      "generatedAt": "2026-05-15T04:53:13.260Z"
+      "generatedAt": "2026-05-16T16:10:47.462Z"
     },
     "eu": {
-      "summary": "The Bank of England is moving to scrap its £20,000 stablecoin ownership cap and water down broader stablecoin rules after sustained industry pressure characterized the original proposals as 'overly conservative.' Deputy Governor Breeden has signaled the retreat, with the central bank now weighing alternative regulatory approaches to address liquidity stress requirements while preventing a UK crypto exodus. The BoE also confirmed it will begin accepting systemic stablecoin applications by the end of 2026, treating stablecoins as a new form of money. Experts argue the stablecoin shift is critical for UK competitiveness in digital asset markets.",
+      "summary": "The Bank of England is preparing to water down its stablecoin regulatory framework after sustained industry pressure, with Deputy Governor Breeden signaling a retreat on proposed ownership limits, including the widely criticized £20,000 stablecoin ownership cap. The BoE is also set to begin accepting stablecoin issuance applications in 2026, a step experts say is critical for UK competitiveness in digital asset markets. Across the Channel, the EU's Markets in Crypto-Assets Regulation (MiCA) has spurred a surge in euro stablecoin activity, with issuers reporting growing interest in what is characterized as a €16T market opportunity. European policymakers continue working to close the stablecoin gap with other jurisdictions, while institutional players such as Fireblocks are landing new clients on the back of MiCA tailwinds.",
       "keyDevelopments": [],
       "highlights": [
+        {
+          "text": "water down its stablecoin regulatory framework",
+          "topic": "legislation"
+        },
         {
           "text": "£20,000 stablecoin ownership cap",
           "topic": "legislation"
         },
         {
-          "text": "water down broader stablecoin rules",
+          "text": "Deputy Governor Breeden signaling a retreat",
           "topic": "legislation"
         },
         {
-          "text": "Deputy Governor Breeden",
+          "text": "accepting stablecoin issuance applications in 2026",
           "topic": "legislation"
         },
         {
-          "text": "liquidity stress requirements",
+          "text": "Markets in Crypto-Assets Regulation (MiCA)",
           "topic": "legislation"
         },
         {
-          "text": "UK crypto exodus",
-          "topic": "legislation"
+          "text": "€16T market opportunity",
+          "topic": "infrastructure"
         },
         {
-          "text": "systemic stablecoin applications by the end of 2026",
-          "topic": "legislation"
-        },
-        {
-          "text": "critical for UK competitiveness",
+          "text": "close the stablecoin gap",
           "topic": "cooperation"
+        },
+        {
+          "text": "MiCA tailwinds",
+          "topic": "legislation"
         }
       ],
-      "generatedAt": "2026-05-15T04:53:20.234Z"
+      "generatedAt": "2026-05-16T16:10:40.859Z"
     },
     "asia": {
-      "summary": "Japan's stablecoin push accelerated significantly as the Japan Blockchain Foundation announced plans to issue EJPY, a yen-pegged stablecoin for B2B transactions, on both Ethereum and Japan Open Chain, while SBI and Startale are targeting a Q2 2026 launch for a separate trust bank-backed yen stablecoin. In Hong Kong, HSBC launched a stablecoin aimed at retail and wealth management customers as the territory works to balance regulatory oversight against the risk of becoming irrelevant in digital asset markets. Australia is examining the US stablecoin regulatory framework as a blueprint for its own digital payments policy, while Grove Basin named BlackRock and Janus Henderson as partners in a $1 billion stablecoin liquidity outlet enabling instant redemptions on tokenized funds. Singapore-based Stables launched a t-0 network designed to unlock institutional-grade liquidity across Asia, adding further depth to the region's rapidly developing digital asset infrastructure.",
+      "summary": "Japan's stablecoin activity is accelerating on multiple fronts: the Japan Blockchain Foundation plans to issue the yen-pegged stablecoin EJPY on both Ethereum and Japan Open Chain for B2B transactions, while SBI and Startale are targeting a Q2 2026 launch of Japan's first trust bank-backed yen stablecoin. In India, Xflow has launched the first cross-border payments platform to bring compliant stablecoin acceptance to Indian businesses through a pilot program, even as Zerodha co-founder Nikhil Kamath publicly favored gold-backed stablecoins and credited UPI infrastructure with limiting India's exposure to dollar-linked crypto. Hong Kong is actively shaping stablecoin policy to capture cross-border digital asset flows while avoiding both regulatory chaos and market irrelevance, with HashKey Research noting Asia may hold yield advantages despite the U.S. CLARITY legislation strengthening dollar stablecoins globally. In Australia, Grove Basin launched a $1 billion stablecoin liquidity outlet in partnership with BlackRock and Janus Henderson, enabling instant redemptions for tokenized funds, while local policymakers are looking to the US stablecoin bill as a blueprint for Australia's digital payments future.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "Japan Blockchain Foundation",
+          "text": "yen-pegged stablecoin EJPY on both Ethereum and Japan Open Chain",
+          "topic": "infrastructure"
+        },
+        {
+          "text": "SBI and Startale are targeting a Q2 2026 launch of Japan's first trust bank-backed yen stablecoin",
           "topic": "legislation"
         },
         {
-          "text": "yen-pegged stablecoin for B2B transactions",
+          "text": "compliant stablecoin acceptance to Indian businesses",
           "topic": "legislation"
         },
         {
-          "text": "Ethereum and Japan Open Chain",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "trust bank-backed yen stablecoin",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "HSBC launched a stablecoin aimed at retail and wealth management customers",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "US stablecoin regulatory framework as a blueprint",
+          "text": "CLARITY legislation strengthening dollar stablecoins",
           "topic": "legislation"
         },
         {
-          "text": "$1 billion stablecoin liquidity outlet",
+          "text": "$1 billion stablecoin liquidity outlet in partnership with BlackRock and Janus Henderson",
           "topic": "infrastructure"
         },
         {
-          "text": "institutional-grade liquidity across Asia",
+          "text": "US stablecoin bill as a blueprint for Australia's digital payments future",
+          "topic": "legislation"
+        },
+        {
+          "text": "Hong Kong is actively shaping stablecoin policy to capture cross-border digital asset flows",
           "topic": "cooperation"
         }
       ],
-      "generatedAt": "2026-05-15T04:53:26.933Z"
+      "generatedAt": "2026-05-16T16:10:57.261Z"
     }
   },
   "entities": {
@@ -134,6 +134,15 @@
           "date": "2026-05-13",
           "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5MWW5JWTUtUDZjSTJiM2VOeDdNNGt0SjV3XzNDeWZod2RRZUZTT3FyWlNJRThaVVd3YUFxb3NtcTg4V1VKQXZaMUdYWGRZcTI4VzBrMHZBNjYwYWlWQU9yUXRNRdIBY0FVX3lxTE5MWW5JWTUtUDZjSTJiM2VOeDdNNGt0SjV3XzNDeWZod2RRZUZTT3FyWlNJRThaVVd3YUFxb3NtcTg4V1VKQXZaMUdYWGRZcTI4VzBrMHZBNjYwYWlWQU9yUXRNRQ?oc=5",
           "summary": "Canada has launched its first stablecoin pegged to the Canadian dollar, according to reporting from Bitget.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-canada-stabl-9rpom3",
+          "headline": "Base welcomes CADD, Canada’s first regulated dollar stablecoin - Crypto Briefing",
+          "source": "Google News — Canada Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBTZUZuNkdKenNfbVp6bi1NVFY5V0tXRFZIM01yRERGOW5Ybk96c0RnMWZPTUEwclk5X3ZFanVmcS1OckJLWFdUYWdBM2Fydm5xT1pNaWhJS25EeExkWUtqVnI4WENITjVTMXB3Q3BHeS02VGc?oc=5",
+          "summary": "Base has begun supporting CADD, which is Canada's first stablecoin issued under regulatory oversight and denominated in Canadian dollars.",
           "summarySource": "headline-only"
         },
         {
@@ -233,6 +242,15 @@
           "date": "2026-05-07",
           "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNamdLeXdKV0ZjbTdXLUdfcFlMZHRrZ0pLRVNtd2FoWVFnTmc0dFFBa19IblRIWGd0UTU5dHdmRGpGdU9Ga3JMcEtLeXJ1Qm1zclgzN2VHVnl1ODh0d19iSW4wUXpybHcxNTFJNWRUODFlSXNwSzc1VWd1M1RxQ29RdkZLUW5hS3JnX2g5bGU2azc1LWRYcHZHclFkRVVoUQ?oc=5",
           "summary": "The Bank of Canada has announced regulations for stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-canada-stabl-d9lkz2",
+          "headline": "Visa Canada and Wealthsimple pilot stablecoin settlement in Canada - Open Banking Expo",
+          "source": "Google News — Canada Stablecoin Policy",
+          "date": "2026-05-06",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQTTNLVGgyTFhCZTRmWC1ST2YtTTItSEQwbUxwa3dxZlNzQWJiN1JPSXlwcVJqVHUxU3VtMTlpS2xaLXgtSHlpVlJseEVqdEc5cHhKMlJrMGNlQ1dCNUhvMmxJTU1lcU5wYVpqNWxCQzVPbjFTNWFCN0llS2RDQWVGWWFwc0FLVVhrcm1Ra3lHTGplTnpMNzRuZE53OFR1SlRwdEZzS1d2SQ?oc=5",
+          "summary": "Visa Canada and Wealthsimple are conducting a pilot program to test stablecoin settlement in Canada.",
           "summarySource": "headline-only"
         },
         {
@@ -672,12 +690,48 @@
     "United States": {
       "news": [
         {
+          "id": "rss-google-news-us-stablecoi-z30c93",
+          "headline": "Stablecoin loophole threatens lending by Kansas community banks - The Topeka Capital-Journal",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-16",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPNHE4VURQYUdHVHhoUkxXUkUteUkzdG1VRm5XSlJXalNvTTNfMUdJQVVMRnR6NmNENThWWWVoMUprc0pDUXJlVGZHeFRvSkVld1VOM29lMzlTMWt5aktCcDRQTVdJNE43aTFad2dtZEJ6NF9rZS1vWE40dXViZ3lrYnJIWS1WUWFQTHZIX3QxSjdIcHEtQTJRdWNaLVBxRHhnMFN3eWJtUG9Obm9mYXlKYjdJeGJvV21PRXJRUDVR?oc=5",
+          "summary": "Kansas community banks face potential competitive or regulatory challenges related to a stablecoin loophole, according to reporting by the Topeka Capital-Journal.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-o95ts7",
+          "headline": "Stablecoin bill moving through the NC House - The North State Journal",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-16",
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQVjVnbEJQNUgxb0xGeUU1QzlzVDlNRU5VWTh1QkNPNzJnRjRPWkdIN094T0xlSkEwUU9tSUJwTTR4aDAwY3pKVU1SWTRXQzJiNWI1cXpYUUNWcG15YnZHMjRYYnFLdGxUVWNoNF9PZHF0UjVEQkxiUmdPcFBhRk1XbmJyb0tUZmJVNFE?oc=5",
+          "summary": "A stablecoin bill is advancing through the North Carolina House of Representatives.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-33oz70",
+          "headline": "Bank of England considers changing stablecoin reserve plan and holding limits, Simon Taylor notes - Traders Union",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-05-15",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOWUduaTJ3MGs0dGxmNnpmUVpoOXRGWDhUa0F3a2cxVS1sMkg3YzJYbUVNNVdya2hIaDZOdy15SUF5S2lWcmI1UE1TNXF6aFpIZEs2Znp0eVVUUlp4QktKUzF6SERZMXZSQ1NqZDhqQzYwUnRLQjUzQ0huTTdtUnh6UENjV3pYSUF5dWgwREtDM1g?oc=5",
+          "summary": "The Bank of England is considering modifications to its approach regarding stablecoin reserve requirements and holding limits.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-us-stablecoi-xh7fdv",
           "headline": "Stablecoin Yield Saga: Senate Compromise Signals Path Forward for CLARITY Act - The National Law Review",
           "source": "Google News — US Stablecoin Policy",
           "date": "2026-05-15",
           "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNY2IyT0RaRWVWVmtiLXJ6b05MRGlQR1U0NTA4MVluS3J4Y1lCX3FwbWItM2wwUjJNdXF4UktydFp0WTJMdktaQUhhYkF1SUs2Wkw2Z2hCcXpjb2Y0MkRxUlktbzRfR2puaUgzaURFU09URG5FSWFQcGF6UVY1b2dhdnZBLXlLZ0lvU091YzF2V1JkODdQd2hOaXUwZmJaeUhRNUZqdjg5czXSAa4BQVVfeXFMT0FCYTZuR3NHaVJhU0RRTEpNS0lvYkxPY2ZIWnhHUkhsSmRVZm11OG9wbFFBb3M4dnR5Q1FpNXVkYXpIMWxRVVVqSklnR3E3dFkzMEpBUm8wQ1NiQ29sNlFUVVJ1VjdhZk1ZOHhDbXFZeGlEZW9XRUMzNmxwUzhVdUFNNERzZjl2a0hubDhkVWJFUDkxLXJHM2pCeVJWME1qTkpRSkhXWl95UW5aYmVB?oc=5",
           "summary": "Senate negotiators have reached a compromise on the CLARITY Act related to stablecoin yield provisions.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-yk70tx",
+          "headline": "Galaxy research head says 'banks are wrong' about GENIUS Act—stablecoins will boost US credit, not drain it - MSN",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-05-14",
+          "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxOSnlicEZENGJkaGQtMzhyaXh4TzBrbWJkUGROVFpjOE9aZ2gxNUx1RXU5WWNwN1pKVTV6cVp0dTVsUnhuaXd1WnlzcVlCbXdMbWp3NzlSU3NsSHJHWDBqeUg1TWliWmJ6S0hkcGFJbnpNYTJ6c3Z0RUc3N3FLUmNwUjR1a0M0Z3FDVzVrZWF6MlNJdHJPSFp3WHZRVWZGOFlGNHR6QVFnZDNfUjRoZUFsTWdBTFRiQklKQ25GZ2pOcmoybldPVmFaZ2YyVFB3T0FHWW5ERkN5QW14V3ZxTnQ0dHlvMEtRY0tIMEdzdQ?oc=5",
+          "summary": "A Galaxy Digital research official has disputed banking industry concerns about the GENIUS Act, arguing that stablecoins would expand rather than reduce U.S. credit availability.",
           "summarySource": "headline-only"
         },
         {
@@ -723,6 +777,15 @@
           "date": "2026-05-14",
           "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQQmtiejZzMjNhZHR6cVhNdXFXODdaRzJRS2d2eWZBdHctXzBPdHlPTmYydFlCR3BDQjFySi05Nkk3MU80cExJNG5ValJfUG16TllnR1hobXZ2bXlqLWhuT0t2cm9iamV5QzlkUXlFNVVhbUstbkFpX3NGXzl4MVBxeWxFbGptX2NSMGdjRklGRjJUdDhuMm5oZGtHaWVnRWtNQ2k0VktaQWVfcmhh?oc=5",
           "summary": "The Senate has advanced the CLARITY Act, legislation related to stablecoin regulation, as debate continues over stablecoin yield arrangements.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-k24vmr",
+          "headline": "jimi FITZ: Senate Showdown on Stablecoin Rules Could Shape Crypto’s Future - NBC Palm Springs",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-13",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOU2kycjQtempsckVOa1Fka3ZIaTFQbVAzNEdlX2pDV3Q0THFJS2V4aG0zbVNRRVF6bkdKNVNabGM3OEN0M2RMWXZDcHVtWU15Tm1scENMNDdhd3BYYWJiUGs1N0UxUEJSZml5UWNmQ0ZHRE9jSHBpY0U3akRSLURQckNpaGk0MjEteG85Wk1yT3lpaFJsLXR2N0dYS1FMV1JGRHdUT2ljOXNIVjFvUmRkLXlIemI?oc=5",
+          "summary": "A Senate debate on stablecoin regulations is underway that could influence the future regulatory framework for cryptocurrency.",
           "summarySource": "headline-only"
         },
         {
@@ -1896,6 +1959,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-stablecoin-i-3a5q4s",
+          "headline": "Morgan Stanley launches Stablecoin Reserves Portfolio. Here's what it means - CoinDesk",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-04-23",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNbl80SU0xLWFaR2RmaTNrdVRWRElLYmlFcE4xU3A0ZWZyWnZyZ1V1QjJHM3diczRDbDRCTk5CM21UWFF6ZnVLY2V1b1lrNERRMVRuYTlzRnp3Q1g4NHZTODQwdVZBNTY3ZHZtT3NMZV81dnlRbHh2WWlrMWZHVkdLTlJrMHlaRk9kLXVCeC1oVnpjc21ieVVpblNTREh6UmMwd21rTWtNZG5wUHhCeHV1NjFxdFpEQndnWkxnMlVLWmktSnUyT1RWRnN3SQ?oc=5",
+          "summary": "Morgan Stanley has launched a portfolio service related to stablecoin reserves.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-state-stable-os8hqt",
           "headline": "MoonPay launches virtual accounts in New York State, expanding enterprise stablecoin payment infrastructure - WEEX",
           "source": "Google News — State Stablecoin Bills",
@@ -1965,6 +2037,15 @@
           "date": "2026-04-23",
           "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOMW9ROFJtX3VuQmlQYkRVR3dITDY2UFZ2VzJOc1hWZm5LOFFmQVVYV3JncWNXSUZBbG9JQV80Z1BjOHBvZm9Dd282ejhwSE0welBPcm5JQmswTUJDV2w1ZWlxaXg0cS1kQ3RncFNzMm9QX0w1UlpSSERuS3hLTFhlSnB3NmJFamsyTFRDcE1LbHZVLS0wMTFCaWk1ZU9Udzg0VzBHUHVFUUtzQ3lUVU1MM3dFT0NFblFnbUtxakIxVmx6V3lFdXQxUEs3LURVeGV2MFNIU3ZBU3pXdUhXWWZjaExB?oc=5",
           "summary": "MoonPay announced the launch of virtual accounts in New York as part of an expansion of its enterprise stablecoin infrastructure services.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-sfbch5",
+          "headline": "Banks seek to slow down implementation of crypto's GENIUS Act on stablecoin oversight - CoinDesk",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-04-22",
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPSDY3NUUzcWFyUWhzcGtlc2JiWWVGVzV2c3lCMTVPZHZpSXF1UUl2eEZhMmRCc2hpdERHSGlZNlhTS0IyZzdEX1FlYTRRaUU3YWl1TGpoMmk1X0psU2RfRTBnSTJ5RFZYcHFPWmRjVGJJZF9YVnR6a2E2YVZLdk5uWFhnNzVQYXU3S3NCb1d6cFE1dDdVdG45NVVhMTAtWUZ1YW5oQVFLZzJ3YjlZLTdCdjdJQ1RNN2lQNmFwd1AyVzB3eTlRVnQ4?oc=5",
+          "summary": "Banking industry representatives are advocating for a delayed implementation timeline of the GENIUS Act, which establishes oversight requirements for stablecoins.",
           "summarySource": "headline-only"
         },
         {
@@ -2145,6 +2226,15 @@
           "date": "2026-04-02",
           "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPaEFJYjBMQWl3czZIOWJ2WG15emd6WFYxV3hfYThmb0s5VzFEbDA3SE9MR1VuVW9UN3FodnpCR0xKcVhGckVaVzIzZ2JMREtvSG56V3paVTIwbTNLWVlJVzdKZE5kcVo4aXE2ZmNfSzJqdUlmNDJ4eWUtSFM1Ulh5SEVZdkJWREo0NnJNR0ZUTVZxOHN3THBHU0pZUEFEaDN3TzVXTnRmcEFPVlhyUlJ1dE9sekQ3a0E?oc=5",
           "summary": "A proposal referred to as GENIUS has been advanced alongside Treasury involvement to maintain a dual banking system structure for stablecoin regulation.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-state-stable-rnbl98",
+          "headline": "Delaware’s New Stablecoin Bill: A Strategic Push to Become the US Crypto Hub - TradingView",
+          "source": "Google News — State Stablecoin Bills",
+          "date": "2026-03-25",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPc3RkcEdDTldfNnpZcTlnU0Zycy1rMEo5cnFIcHpiSmhIMUh1TXVKOFZDOUJvVEhkYXliWThfYjFxR3Q4c2tJUk1MSVFrTjY3UGJlZUJwY21SamJyVTBXMlhQelo2X2dXeGJsU041aHNlVW5Xc1FCSC1YemZwRDBCdk1ta0FSUzJZZ2dQdUdXUkVsWGo0amtZQVpqWTVVeGlQbmhBVkpWU3g1R2dwT0FRV3RWUjZMWE4xc3lqX2RyMmxJbjRiN2hidzYyeWZPV0g3THRvbQ?oc=5",
+          "summary": "Delaware has introduced legislation aimed at establishing itself as a hub for stablecoin issuance and regulation in the United States.",
           "summarySource": "headline-only"
         },
         {
@@ -2689,6 +2779,15 @@
     "Japan": {
       "news": [
         {
+          "id": "rss-google-news-japan-stable-27r3m2",
+          "headline": "Japan corporate-led blockchain to issue yen stablecoin for B2B payments - 디지털투데이",
+          "source": "Google News — Japan Stablecoin Policy",
+          "date": "2026-05-16",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOREhIT3M5bnlfcm9ZQTdUWEFCVTBQU1FlakFBQjBlZzVNZHZjaXpGYVNuN2dBckhiblJuNmZTeGluc1UyRkc1MGZJemVWd09ZRWZkMG84WnpINTlPMlFCdFBjQnR1SC1yc3NsTVJvSTJFOW0zaG9YLVIzR1d3aWRBLWFnZmN3RVdwNXB2aTJUYksySGgyWE43QlFReEVNb01BdWRDcVdBNVcxWnJnQmRkYkVmRTdWZjA?oc=5",
+          "summary": "A Japan-based corporate blockchain initiative plans to issue a yen-denominated stablecoin intended for business-to-business payments.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-japan-stable-j33dhv",
           "headline": "Stablecoin-powered neobank Fasset raises $51 million to expand across emerging markets - CoinDesk",
           "source": "Google News — Japan Stablecoin Policy",
@@ -3170,6 +3269,15 @@
     "Singapore": {
       "news": [
         {
+          "id": "rss-google-news-singapore-st-exwg1q",
+          "headline": "After CLARITY: How the US Crypto Framework Stacks Up Against MiCA, MAS, and VARA - Finance Magnates",
+          "source": "Google News — Singapore Stablecoin Policy",
+          "date": "2026-05-15",
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOcHpidlFkZTJBQjRfSENhS3lYTVkwM29mdGNtY1h6LTQ2RFNMWFVqTTVmd1FTMmo2bTc1WFh1VTh5NWZYQkc0STBnMTV4UFM0Tk9VTno5NXhqN1ZDMmR2U1JoU21XaGhDb1lDOGc1V1JUNmZnR09XZXR2b2RPd2JwdXZ5U2NNZkkwb3Etd1BoYk9ucWJ1c3JTRkNZLThZd3c2b2MtcndYN3cxWE1yVk03SVFEcHRPOW84aUpjTHFkY1NYRzhzMVNTS21hRDNCX0oyaXc?oc=5",
+          "summary": "The article compares the U.S. crypto regulatory framework with stablecoin and digital asset regulations in the European Union, Singapore, and another jurisdiction.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-singapore-st-m2tvyy",
           "headline": "Stables Accelerates Stablecoin Adoption With t-0 Network, Unlocking Institutional-Grade Liquidity Across Asia - thedefiant.io",
           "source": "Google News — Singapore Stablecoin Policy",
@@ -3185,6 +3293,15 @@
           "date": "2026-05-12",
           "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxPWlNlWjNaVWJRMEI1RzNoX2g2cWY0ZllmdGswcU1LYVlnSGVNQTBJVklUOXZ1MW5XU19lLXEzSWVTWEJYbVhac19mbWNrU3FkRGh0ZDFUd1doRGNMUlloSjRkUmxxZDFhUmNiZVA4TlZmRlZoSUVWRGNXSDUzSnZEUUVRX3drVG1JYmQ2U1RrSWNEUWtsZ0FSMC1SbUJIdWpyTjF0d2xBX0hGbnNHMjVQdlVBb1g4c1lxNV8telVzU3Vnc2laRzl5OEswQXVKcU5DRkFDM2dQem5jWHpsVjlzdThGeU1LZzIwcXllZy1aeXRqbC1EOWhrUTVHakc?oc=5",
           "summary": "Stables has launched a t-0 network aimed at promoting stablecoin adoption among institutional users across Asia.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-singapore-st-g7uchf",
+          "headline": "Lagarde sees euro-stablecoin risks for banking, monetary policy - The Edge Singapore",
+          "source": "Google News — Singapore Stablecoin Policy",
+          "date": "2026-05-08",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNRzBGRzZnODB4eG9qUHlubGJIVXdlRmgtOVpFdXRQUGFrS053SzF3TFlrTXl6Z1ZCM29Ja09fZFdMUnhFeWpEWDJybjhVY2swLWRvX01wZGVoMjVTXzY0ZzZVYWJSU19pM00xZEU4M0tFWE1Na2szU296aHlubXo0MkFERkRfNktMVTNDNkpDTURDTGFWelRBZXBSSWtqNUV1dVdxV3F30gGrAUFVX3lxTE1vNVNUZFhuc3I3WUdKaUEzTHJNLTdxOUhyZjVXTzIza1hqTHdMQ1JxdTVqREJLTDhNdTVURnNfUnE2YVRQVnRGcVNyeTQ1dEk2STRiS3JqSFEwRXRtUVJjTE03bmZLQ3pHYnREQ3d5WGk0ak1wdnZ5NnNIX1dlTHJpUVBpRFFCTGZRbzc5aE9ZQ2JPem9odkdIbEtLc2xDR2VuSGN3bFdibTB0SQ?oc=5",
+          "summary": "European Central Bank President Christine Lagarde has raised concerns about potential risks that euro-denominated stablecoins could pose to banking and monetary policy.",
           "summarySource": "headline-only"
         },
         {
@@ -3383,6 +3500,15 @@
           "date": "2026-04-16",
           "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQWFZpUmM2bDlKd0NfNXhDZVBUWVBfQUFESlNRUWFZSFRBTEw2Y2Q1dEdMbUJwV015M2dCcXlNNV9xcU9ySExVNVhBd1JMcHVZNEtLWFNYcWxsM0o2WXdjX2NxeGVyLWJVaXNGRW1ScV9zd1BWbGNCOGZuV194VGlBQ1oyYXlGbnd4bEdIbmNRdGxUSV9oZ0JMUQ?oc=5",
           "summary": "OKX Singapore has launched a Visa debit card that can be funded with stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-singapore-st-zayc59",
+          "headline": "Visa Launches Validator Node on Tempo Network for Stablecoin Payments - Fintech Singapore",
+          "source": "Google News — Singapore Stablecoin Policy",
+          "date": "2026-04-15",
+          "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5sSHAyelZSV1BUX0RUQ180c0s5MEx2bzFWMFV0MmFheHRqWEJ6cVphX0ZSZTlZMWx3ZTh3WldjaGJaczdHako1M2pzTE81TW5iYWM5SDNoOXVWZTZsanZ5Vlpn?oc=5",
+          "summary": "Visa has launched a validator node on the Tempo Network to support stablecoin payment functionality.",
           "summarySource": "headline-only"
         },
         {
@@ -3604,40 +3730,1337 @@
       ]
     },
     "Thailand": {
-      "news": []
+      "news": [
+        {
+          "id": "rss-google-news-thailand-sta-26qwsa",
+          "headline": "JPMorgan ยื่นจดทะเบียนกองทุนตลาดเงินโทเคนบน Ethereum รองรับสำรอง Stablecoin - Siam Blockchain",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQenVkMnZHMHBFdkJnaWlaenNhUFBlQjh0QVUwS05yc2l2V3pjeW8xSFZJa3NHLUR1WFZkRWVqam1ZdGVPdkhDV3R2WWg3LTZFLTlDSDhxbVRaLXZxX2J5bEJhV2oyRlMzczFYU1p0dVdRVjdOWGFpY3VQRDVha1RWbnFPOExyRHZFdXJjYzRhUVphNlhxb3NBQnFiVWtVbnJUdXJKbg?oc=5",
+          "summary": "JPMorgan filed to register a tokenized money market fund on Ethereum that would back a stablecoin with reserves.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-puyhaw",
+          "headline": "สหรัฐฯ ขีดกติกา Stablecoin ชัด CLARITY Act เปิดทางธนาคารทำ Yield บ.คริปโตฯ ให้ Reward ตามการใช้งาน - Thairath.co.th",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-05-05",
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFAwbENjeEVlZ0FfZGh6bGZYSHBweEhVempTT3lrQXdGV0hNSUIzM0pRNmpDV3FfbEkxOXpRZWhydWpabG1KeXphMS02QWlsMTJvbjNYc1lKbi1KbWYxSWQyT2JkT1FfTWFlNnVEbTA3MTBtc2RKQjNtR1ZNQQ?oc=5",
+          "summary": "The U.S. CLARITY Act establishes stablecoin regulatory guidelines that would permit banks and crypto companies to offer yield and rewards based on user activity.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-h00c0i",
+          "headline": "พระราชบัญญัติ CLARITY กำหนดกฎเกณฑ์ผลตอบแทน Stablecoin เป็นที่สิ้นสุด ร่างกฎหมายคริปโตคืบหน้า - MEXC",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-05-02",
+          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1yOGxaelo0VnRDNHNON0tkRU0yOFI2cXNqRDNXYU9XOTIwcGNMcDhBbk1iQ2NqWFVYQTZkNmhjcXNKeHlsMm12MWt4Z0JtWUVR?oc=5",
+          "summary": "Thailand's CLARITY Act establishes regulatory standards for stablecoin yield and rewards, marking progress in the country's cryptocurrency legislation framework.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-mlp57",
+          "headline": "Bitazza Thailand ประกาศจุดยืนใหม่ พลิกโฉมไทยสู่ศูนย์กลาง Stablecoin | การเงินธนาคาร - LINE TODAY",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-04-28",
+          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFB6UUVjSHBabE5ha09rQ2Y4aDlUUXlHeFlZYjFXd011UVhMVkVRMVFwTTc1NzhjRTI3RXlPeURyX3QxTkhWVnlNeXo4T2wzSm1ETi1LQ2xn?oc=5",
+          "summary": "Bitazza, a Thailand-based cryptocurrency exchange, has announced a new position regarding stablecoins and Thailand's potential role as a regional stablecoin hub.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-ytm7tk",
+          "headline": "5 ความเสี่ยง Stablecoin ที่เทรดเดอร์จำเป็นต้องรู้ก่อนใช้งาน - Thunhoon",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-04-25",
+          "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1ZeGp4NThiakE3UDFSNXliN0o0RmNnRnhCMjhtVkMxUU9yLUZEYkpkdWZkMDRSQWpPbll0a1pqN3h3S1dEeHRpN05fMHp1US1fNDZFOUtxUVNTLWlOTklZY0lkMWpXZktaUm1JSUtkVQ?oc=5",
+          "summary": "A Thai financial source has published an article identifying five risks associated with stablecoins that traders should understand before using them.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-6uf4w7",
+          "headline": "DeeMoney Concludes High-Impact Participation at Money20/20 Asia 2026; Announces \"Tourist Stop\" QR Solution and Stablecoin Exploration - newswit",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-04-22",
+          "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5URVd0VnlabU9oVFczV0poOGlQSHBqUWRSQlc3ZGZLYjVxUFVmVzUyTHJ0dUZLRDVWczc3MlJDeTlxb0R6d000a2tVUUdiZktYbkRQZHpYRG1sdHozXzFoWWllSGhGUnpLdVVr?oc=5",
+          "summary": "DeeMoney announced a \"Tourist Stop\" QR solution and stated it is exploring stablecoin offerings following its participation at the Money20/20 Asia 2026 conference.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-i39wfg",
+          "headline": "จ่อปิดดีล 48 ชม.! CLARITY Act ปลดล็อกเกณฑ์ Stablecoin ดันคริปโทพุ่ง? - Thunhoon",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-04-02",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE40V2JZZG5SVTRBc2dXV19RajlvR0pLbEliU205TG5fTDljRjFhWkNCSGdIOFppUHZaVGpOV3hyamg3U2E0d1hraUVjMU1pSGRGY1dHTUFmMUl4SkZVcUp1Skh5N1MwV00?oc=5",
+          "summary": "A proposed U.S. legislative measure known as the CLARITY Act appears aimed at establishing regulatory criteria for stablecoins, potentially affecting cryptocurrency market momentum.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-fyzmy1",
+          "headline": "จ่อปิดดีล 48 ชม.! CLARITY Act ปลดล็อกเกณฑ์ Stablecoin ดันคริปโทพุ่ง? - facebook.com",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-04-02",
+          "url": "https://news.google.com/rss/articles/CBMiyARBVV95cUxOSEhjWHBtckhQRzhYaTZQRU12UWlickhwTDk2VWNUVk5fSE9aRmxYaU1mTWhrc2lhMlZQZk1NM255OXk2VGFMZ2lqeHEyeE9pamdORVNjc2pMSGl3Q1VhM3Niclp3U01HRExVcnFFX0haRU41M3NFQUZyNEFYUDk1S21TRmY1aF93SUd2dDhYaDlJUGlDQWU0UDZ0LVR3ZzFiQ1N2WEYya3JCdkJjQ3ZxY3ZXMHkwMEtWMGI0NkF4bkgtQVZ2SDcxdlgzQzJEaFEtSWZfcHc3Z3ExYi1BX2lCalVrWVc5WDNqLTR6QUVkQTQzdGJxVVFfaGJxVDNyRVlFaFFZcFBzektnMzV6LUhyZWZDdi1WSkpGWUk4aUhIOHZtWlNyaUFfTHVnLUpRSnkwejhodk5OaFhGUUF5Vy1TanhiOTBRX0lUSmVseUk3alNRdS0yX1NOaXZoZDN2R2JSRHdBZWtnQWlnR2xYc01fR1NpMFcwaGxDLTJJQWo2VmZ3bnRyVXpqRl9TV1JoMDBCaWJSbGlUWmhXekNPOUNvUzZpZHluc3hYal9kbUdUV1F3c1kwWnQxZGFsaU1vWmlVTXhaWUxvSjJ5bWdNQXQ5MFVZVGJyNnR2S2hiTWtOeFU1T0VIeklFS19tWVFHM19UcmdVaERpSnB6V2pMbklKLVNIRVRjVXFfb0UtSFpGVEdVMG5NbGcxaTAyRGpLRTBEOFlvX3BpTVhmUUhWTDZYeGlOWXNrMThkVWlraUtNcU4yb1VlMVlheg?oc=5",
+          "summary": "The CLARITY Act appears to be moving toward finalization within 48 hours and addresses regulatory standards for stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-yox2rw",
+          "headline": "“Jeremy Allaire” เศรษฐีพันล้านเหรียญคนใหม่ จากแพลตฟอร์มสร้างเว็บไซต์ สู่เจ้าพ่อ Stablecoin - Forbes Thailand",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-03-26",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQdVh4ZGs4RVBQUzRNcjRFcjNZd0xJX2ZQY202Yl8zSWdhc0JIMFRkaF9VLTN3QnlXMVRCRVlKN3lMYmUzTll4dXBOT205QVBqcHBkc1NybmZOU3BpdndVTS1sb2dQWDN0bm53SURPakdsSFJRQVBnajJVOVYxUmhCX0JhZ1dMWjQ4M1lqZGhNaUtwUUJjZmNjQ1NseTN5dHdXRjhkM1BlM2g5VGdlR2J3?oc=5",
+          "summary": "Jeremy Allaire, the CEO of Circle, has accumulated significant wealth through his work in the stablecoin and digital payments sector.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-fzifdi",
+          "headline": "ธนาคารยักษ์ขยับ! HSBC-Standard Chartered จ่อคว้าใบอนุญาต Stablecoin ฮ่องกง - Thunhoon",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-03-13",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE4wdlRaWnA4NTJ5REJianZaV3ZZbDlydjBDSWF0UFZLdEFkRy1MczdoSGNJS0FMV0N6R1JkbS1jeGZ5ZW1halBLS01nTVVEVTl0Zl9RenNMS2JodE1zWUtxeW5LQ0txYnRUZjY2QW5Pc1RxUG8?oc=5",
+          "summary": "HSBC and Standard Chartered are reportedly preparing to apply for stablecoin licenses in Hong Kong.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-ro2o4c",
+          "headline": "Visa ผนึก Stripe บุก 100 ประเทศ! ส่งบัตร Stablecoin รูดซื้อของได้ทั่วโลก - Thunhoon",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-03-04",
+          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNd0lkYkFoaDg3VHp1NnlWMFB1UzN1VGtMVEVZaXRXZmg2d256UU45OUNoRXA4UUFwTFYyOHo4azFFclY2TzIzeUV6QlR4S0Q5ekR0MURwQTJIWTd4ZU91cFlGVUptaW41TWZyNDYxTkNKOXFTbV9zY1ZEYW93a25DdEl1dw?oc=5",
+          "summary": "Visa and Stripe announced a partnership to expand stablecoin card services across approximately 100 countries.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-tct07b",
+          "headline": "AI Agent + Stablecoin: คู่หูใหม่ที่กำลังจะเปลี่ยนโครงสร้างการเงินโลก - LINE TODAY",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-02-27",
+          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5nOGdHT1E2eUtjRTJuX1lrdTJqOUVLRWhncUxyYVFVdXBxNndyaUxvckJhazVHUHZsVXpwUUtBV3VUOVYyTlcyOW45cGVGdi1aLXRyRUdR?oc=5",
+          "summary": "A Thai news outlet published an article discussing the potential role of AI agents and stablecoins in reshaping global financial structures.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-b7vd87",
+          "headline": "ก.ล.ต. สหรัฐฯ เสนอให้ Stablecoin เป็นทุนสำรองได้ วอลล์สตรีทเตรียมใช้แทนเงินสด - Siam Blockchain",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-02-21",
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPd1E4enBaNDhOOG40c3VLSXU4YUtnYk9Wc1BFODhWTEJzMnBsUXZ1dlhLVFg2aXR6SjVuZWV5TGhjSjJDNUE1dm12LXRqaF9STkRqbTNOdzRoZ3Qwb0xLSF9vb1hyUEh4SWhHWmhRbW1ReHBIR3lCQWRyMTNKckRuVEJENEJsTFYyNWZmajRNWTBRNGYxeWx0QXNJcjNRa05OcGJGOEtvakpISEVPU25nd3J0Q1ZNMHQ3ZTdZcmluNk52cklmOU5r?oc=5",
+          "summary": "The U.S. Securities and Exchange Commission has proposed allowing stablecoins to serve as reserve assets, with Wall Street preparing to use them as a cash substitute.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-w86z4h",
+          "headline": "เจรจาล่ม! แบงก์-คริปโทตกลงกันไม่ได้ ดอกเบี้ย Stablecoin หวั่นทำเงินฝากหนี - Thunhoon",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-02-11",
+          "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFB3NXhxSEp6cDZUY0JFU0hkWFNXZmNKQ0tpbEVtTkdRbVdEbzdyVzhfb0VEUmN4Tk5wanQyTkhpMGpPU1pzdmNvQjJJcXBtc0NrWkIwcmhEWnlWOVIyQ0szX2RWSE5BSmlx?oc=5",
+          "summary": "Thai banks and cryptocurrency entities have failed to reach agreement on stablecoin interest rates, amid concerns that such rates could affect traditional deposit competition.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-pnvozb",
+          "headline": "“Tether-Ascend Bit-J Ventures” ถอดบทบาท Stablecoin ในโลก Web3 - LINE TODAY",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2025-11-13",
+          "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBOZXFuT1Jta3ZwWmw1cjZBSktnT25mWDNwNnBCYU5NaGs5enhCUEFGV3dIUzFvVGp2ZzlTZ3FqMy04ZVlZcHdhMjFfZEdFbVVXd3BBcXRR?oc=5",
+          "summary": "An article discusses the role of stablecoins in the Web3 ecosystem, with reference to Tether and related ventures.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-viywsf",
+          "headline": "สภาสหรัฐฯ ผ่านร่างกฎหมายกำกับดูแล Stablecoin ส่งต่อทรัมป์ลงนาม - posttoday",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2025-07-17",
+          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1HV05LR2NNX2JlNlBNNFM2MERxRWk1cWNMUS0waWtQMUxpSDBKblJWdXVuclU5RGhWdWl2c3l4eGhELThRaXRDSkZ4dmdGbDQ4Q24zNjFsc2VhbkRBNnpLVQ?oc=5",
+          "summary": "The U.S. Congress has passed stablecoin regulation legislation and sent it to the President for signature.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-h8500b",
+          "headline": "บริการโอนเงินข้ามพรมแดนผ่าน Stablecoin - ธนาคารไทยพาณิชย์",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2025-03-15",
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5XTFQtaDRsMVpmd0Z5cVIzcGl5NmowTFI0cGo2M1FQOXpTQTY1SHRtTW5vQVkwUWlUZGY3T3NKd0F2aHlRU0lMWFJTem5EUEZ0OUZEbUttV2toSGFmT1ZKNER2ajlRclJGZFRjc1drUEJFaEVIYlNtUEpBUQ?oc=5",
+          "summary": "Thai Commercial Bank is exploring cross-border money transfer services using stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-dd27jh",
+          "headline": "รู้จักพันธบัตร ‘Stablecoin’ หมื่นล้าน ในวันที่ไทยก้าวสู่ยุคเงิน Digital - thepeople",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2025-02-17",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9kc01MeEp4aVdkOTh5d2J4bnhoRG94NmNjTC1Md0d0dWdPYjVrX1hpSU1jNTFsN0p2MEZKTlVRRTdrcll0QTJIaTQ4RHFBOHc3TmdYQTEtZ2w?oc=5",
+          "summary": "Thailand is moving toward establishing policies and frameworks for stablecoin issuance as part of its broader digital currency adoption strategy.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-8gkoaq",
+          "headline": "Stable Coin ไทยบาท: จุดเปลี่ยนของตลาดสินทรัพย์ดิจิทัลไทย? - thestandard.co",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2025-02-04",
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE4za0Q4M2VXdk43SS1qNVVUODRNSDA5RU4zZ0xxN0dWVVNJeFJ3eHZqRnZYaG1lMFJSZGxEVmJjVUVtS3N2OWFWYzhxeERuWEc5U0ROSUk3WTJWRzNDRWd5b3BVTQ?oc=5",
+          "summary": "A Thai news outlet published a headline questioning whether a Thai baht stablecoin could represent a turning point for Thailand's digital asset market.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-33fr2w",
+          "headline": "SCB 10X ส่ง Rubie Wallet นำ Stablecoin เข้าทดสอบบน Regulatory Sandbox ของ ธปท. และ ก.ล.ต. ช่วงวันที่ 5-25 พ.ย. นี้ - thestandard.co",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2024-11-11",
+          "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE5lejZNMEpCUnlYVEt3Znc4b3BQMVJ4LVUwRkJheWdhSDNOVk5wTThjc2pudDYwWXBxeEw4cnhDVVpEN2tmZU9Kck84aTU2Ymx5dTYwQUJheWFKSDZsa2tZM1FrWlJqWHVVUGJJ?oc=5",
+          "summary": "SCB 10X has launched Rubie Wallet to pilot stablecoin functionality within Thailand's regulatory sandbox operated by the Bank of Thailand and the Securities and Exchange Commission during November 5-25, 2024.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-mgwyrm",
+          "headline": "สิงคโปร์ขึ้นแท่นประเทศแรกของโลก ออกกฎหมายรับรอง Stablecoin หวังเข้าใกล้เป้าหมาย ‘ศูนย์กลางสกุลเงินดิจิทัล’ - thestandard.co",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2023-08-16",
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9KYVRjOGYzUjZqWEUzTWlPbDNNY2RfWVpFc21TSnZwRWpQRlpsN1pzWjI2Z3NPNFlmeGNHUUdXX3RIVERWY2F5bjI0UG1rTlc5UEtFZFMxbVlOQ0xVV3dqWkdVdks2TXpRUGo1dVlEekVFLVlOU2ZkbWROR1U?oc=5",
+          "summary": "Singapore has become the first country in the world to enact legislation recognizing stablecoins, as part of its efforts to establish itself as a digital currency hub.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-thailand-sta-dvbisp",
+          "headline": "Stablecoin ที่มีการระบุหน่วยมูลค่าเป็นบาท - bot.or.th",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2021-03-17",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE4tUlFTNDVaN2R0ejVQT1EyeC1vbS1SNFk0cU9Kb2RzOUhuTHBMVEd2cU1EQ3hGUUl0cHNsSm9JdGxGS3FDUnFTdXJ6NVB1cFl4Nk8wRW9pQ3F5MVE4T0ZYUU52elZzRzM4aFpUYndxQ0dhZTQ?oc=5",
+          "summary": "Thailand's Bank of Thailand has published information regarding stablecoins denominated in Thai baht.",
+          "summarySource": "headline-only"
+        }
+      ]
     },
     "Indonesia": {
-      "news": []
+      "news": [
+        {
+          "id": "rss-google-news-indonesia-st-kghyoe",
+          "headline": "OJK Buka Peluang Uji Coba Stablecoin Lewat Sandbox Bersama BI - Bloomberg Technoz",
+          "source": "Google News — Indonesia Stablecoin Policy",
+          "date": "2025-05-06",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPUlphV0VKZWR5UnllZkozUXRSWS1USGpOUzdKWHJrdDFTbGJqNWFkbi1ucXVvV1U2YUpMWlBCaGJqMnE4cklNVDhya2wtVmJSZkFPNkowX282ejVoNnQyUi1XbGFONEQxTXZPTFpwVFo4bGs5aGU1LWtjTkYyUjVvTzUzeHBKQXkwR1hmUkdfT2ZQNU9qRmhuU2h2X1lrandyWTZ3NUxPd2duRzlCTFNtakdB?oc=5",
+          "summary": "Indonesia's financial regulator OJK has announced an opportunity for stablecoin testing through a regulatory sandbox in cooperation with the central bank BI.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-indonesia-st-6jceyl",
+          "headline": "Ethena dan TON Foundation Bawa USDe ke Telegram, Dorong Adopsi Stablecoin Kripto - Ajaib",
+          "source": "Google News — Indonesia Stablecoin Policy",
+          "date": "2025-05-02",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQQnBCLVUwcVhhSUFBWWIzQ3lqdDNGWElEU05uRzZyTV9BNVI2UzBLbDJLYVBzazBEbWV0RGc0MFpMOEV4cV96M2p1N2VJTUt6RnF6WEw2YkVtNFpScl94eWp5V0hTWDktOUZ5bXRkTmZBcEpna2FISGdmc3RsYUJldHA0eV9jbVE?oc=5",
+          "summary": "Ethena and the TON Foundation have partnered to bring the USDe stablecoin to Telegram, aiming to increase cryptocurrency stablecoin adoption.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-indonesia-st-xg5teh",
+          "headline": "Circle Luncurkan Refund Protocol, Solusi Pembayaran Stablecoin Tanpa Perantara Terpusat - Ajaib",
+          "source": "Google News — Indonesia Stablecoin Policy",
+          "date": "2025-04-22",
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQbGxHRHdqV0FsUV82ZkJsNnlNV0J5QV92WHl4TG8zTDZzUUVGamtsUDYtenQwcUlDTEd0Mzd6Q0d4Y2UxeGNZZFhxOU41MTJiSUdxQy12aUlxVTRYd3dwS1ZraDZtRGlyNXdvT1VNUEcxa1AtaGFiUVpqeHowM1p2Y2xjUjZiWGZ1MlprMXltZGhpTnVPSDlrdHpvMERONFItckFkSnhYcUJNbnRQM3hvQ2gtTDJtLXJyQmMybkNna3lIV3RyWi04?oc=5",
+          "summary": "Circle has launched a refund protocol designed to enable stablecoin payments without reliance on a centralized intermediary.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-indonesia-st-3o9mmv",
+          "headline": "Stablecoin jadi Pilihan Investor Kripto Lokal saat Tarif AS Tekan Pasar - jatimnow.com",
+          "source": "Google News — Indonesia Stablecoin Policy",
+          "date": "2025-04-11",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPQS1hRDNfZnZMWGpOMWNrendJb204Q09wN0h3T1NQS2dDaE9iQXRpcDUtUnBJdE1IT3gzSWEyOUtnSE5RY1VSOU5VbWtVWlJrcE5nZWVyaWRYZjJEb01ST3d5ZHF3Nm1GdmlnODY4QndqMlJMTjBDNGRjVGR5cnBLRm1kWmxSTkZhc3ZIS3M4bU90Z3pYRklHc1NHam9COUhRNGYxZ0pB0gGrAUFVX3lxTE44WkJzMHBISzlsZ19DcGNULUVOaW1SZ2wtam1wWHdFVlA2aGlORm5Lc3lmMXpwZWdLRzBHSXVWekRpZkN0R3RyalMydWl3RXVaUl82OFo0VHRjUHlFZEJBajZCU1R5WTJ1WHl0NDMycEh3TlpIRUs2Um5YTHozaGl3bHhWMmhhNlFTQ1JCb1NwRVJHTEdUb2xJTEpRQXNPMVFaVHp6MGFzSU1hbw?oc=5",
+          "summary": "Indonesian cryptocurrency investors are reportedly turning to stablecoins as an investment option amid pressure on the broader market from U.S. tariffs.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-indonesia-st-wd3af1",
+          "headline": "SMBC, Bank Terbesar Kedua di Jepang, Berencana Meluncurkan Stablecoin di Avalanche - Ajaib",
+          "source": "Google News — Indonesia Stablecoin Policy",
+          "date": "2025-04-03",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNR2dqaWtIeHM2c1JrTWFSMWJrX3FhdVNLQ2lXNWdDU2YwTllZdUN1a3lGQWVXZnBfdF9nWDE1LVpVNTJjakt5eVNCdEluT3ZlSklvTVA3TXJ5Z2RkN1ZfcmludmtBUWRMc0V1UEg2NEwxalZHTHBOVzJTeHVTdGtsTHJWYk1JTk5CWnBmYUFn?oc=5",
+          "summary": "Sumitomo Mitsui Banking Corporation, Japan's second-largest bank, plans to launch a stablecoin on the Avalanche blockchain.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-indonesia-st-lbeo2m",
+          "headline": "Stablecoin USDG dari Paxos Kini Tersedia di Solana - Ajaib",
+          "source": "Google News — Indonesia Stablecoin Policy",
+          "date": "2025-02-26",
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQR0Vhcm0tYVlWYkliS3pndjBsVkFpem5SRlB1Z214NDZsc2FtbmxlMHRyXzFwb1ZqS2lKYVFiYUlkdFpHNDA0X2tnUF93NlhlclZGYmU4Z250N2F4eDd3Z1JienYya05GS0d1aE5PeDZGbkRfTEwwX19KS0owakctR2Ywc0J2bjQ5N3c?oc=5",
+          "summary": "Paxos's stablecoin USDG has become available on the Solana blockchain.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-indonesia-st-zdv9ks",
+          "headline": "Ripple Berubah Citra dengan Fokus pada Pembayaran Lintas Batas dan Stablecoin - Ajaib",
+          "source": "Google News — Indonesia Stablecoin Policy",
+          "date": "2025-02-19",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPTWdOSDBIQi1HcERTRC1wMVhKaGVkS1lUanBNeUgzLVNMd3F1alQ3OWV1RE93blVvODhKeUJVeEcxemJmdzQ1LV9KcTFyYzA5UGNvdW5OaXVkWG9UZlZFTUpWSnpSMGVvUVczdlRtMG81WmFwWUd3NmI2ZlpzUEJUV203dHkwWW5Ud25n?oc=5",
+          "summary": "Ripple is repositioning its business focus toward cross-border payments and stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-indonesia-st-kcdw8d",
+          "headline": "Stablecoin RLUSD Milik Ripple Melampaui $3 Triliun dalam Perdagangan dalam Sebulan - Ajaib",
+          "source": "Google News — Indonesia Stablecoin Policy",
+          "date": "2025-01-31",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQRDhzOWw5OUg2R0pRa0c1X2hydEVwY2h2S1kycmZkXzRBb1YxTWZuYURQeENVb0hlMnQyQXJJS2VsbnZiQ2N1OXpvd0JjWmdjcllhWUs4N19TR3BPUWsyNFZsNEt5ODBPQlBYTWsydDhsM3hTN3Y3eU5RaV9kNjd4RFNqTmFSOUls?oc=5",
+          "summary": "Ripple's RLUSD stablecoin reportedly exceeded $3 trillion in trading volume within a month.",
+          "summarySource": "headline-only"
+        }
+      ]
     },
     "Philippines": {
-      "news": []
+      "news": [
+        {
+          "id": "rss-google-news-philippines--7awaoc",
+          "headline": "Western Union begins USDPT stablecoin rollout on Solana - TradingView",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-05-05",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNdDlmYkY3MjBFa1RBM3FtMUhJTkZXejVtb191ZGUzd2ZPM0hJWUZ5eGN6LUpZaF9IVkd5NjRPUWVTUENVa054dklpM1Q4VjRGNlJXbGc4ZXhNcmFweS1fblhXTzJuYndJNUo3YUdtNW1jU1A3ZHJRRmw1NkYyQkRYQkN3VThxQWQyMWtnVnRfclRmSk55eUFxLTl1SngzTWVTWDdtNTFsUlNMMm9iN3Y2Zl9vYW1RczlmMnBZ?oc=5",
+          "summary": "Western Union has begun rolling out a stablecoin called USDPT on the Solana blockchain.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--zfo8v",
+          "headline": "Philippine Peso-Backed Stablecoin, PHPC, Granted Approval for Pilot by Central Bank - CoinMarketCap",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-05-01",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOVE1vUDU1VWhiR0djb0RodnJVTlQ0eDlER2k1WW9Va1pIREZONFR0enpuYmoxR3ZoT0MwTlYtY2tCcUwtZ3NxWXNvMWlNay1FZk1YRDlTMkpaNUhOZnBDa1B3VHBKMFJrVmdlZktHSllEN1l5XzhmSG5HdWFyRW9TakQzbmVTRklDOXcyZDBKNXpBLU1NbXRNN2NuTzhiZFhqT3l0eEZnaHRvTU5XZlFlSGxBcXBPYXc4MGVsaXk0d3I?oc=5",
+          "summary": "The Philippine central bank has approved a pilot program for PHPC, a stablecoin backed by the Philippine peso.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--u2s1o6",
+          "headline": "Stablecoins Go Mainstream As Meta Rolls Out Creator Payouts In Philippines, Colombia - TradingView",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-30",
+          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOc0dXUnp1TzFodGtLM0c0TGIwS0xveUZVc0FON1ZYSjFwc2tueTBGSkJIVG1tMUlYNG42X3hOYi1DY3V4MGlsUTdRTlRJT3AxWDZGbTFuY0ppUzhFOWJXcE04MElaMDRoOVBvcVd5aFFXcDZvWmFxamhfUjFaYjQ0dm1TT1JZRmtPTlE2MWpFYXJlYUJpUW9ka2RiZXk5d21UOWZESEN6M3hZcG1zZnhvR3dlVVZ1RDVPNlZMR1VaaVFQOEVTWldNWnJGMy1aMjUwRU5qLTc4RnI?oc=5",
+          "summary": "Meta has begun offering stablecoin-based creator payment options in the Philippines and Colombia.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--ptjtxt",
+          "headline": "Meta Begins Offering Stablecoin Payments to Creators - PYMNTS.com",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-30",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQRzRvNHRPRHhPblhxd1ZOZjh5WlFUamZrZDhJdnlUOTFQQy1NUEpXcjNSakg1anhUQTlKQzdhUFBhRWVOQlUxRGdDVG9kUDN6eGgtOVltS3RGNWxVVERCaUVjeHBoYmpFREpScEszYlRjVlZua2I4WDdXTHpUQlI4MmtvYVBfYWFrMzctMUtJaG9ONU8zV0FDVGJGX3g?oc=5",
+          "summary": "Meta has begun offering stablecoin payments as a payment option for content creators on its platforms.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--3vebjx",
+          "headline": "Meta rolls out stablecoin payouts for creators in Philippines, Colombia - TradingView",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-30",
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOYlB2ektTY3RoZzF1NUh5R2tDejc4OVZoWkRmUC1xZlVQY1RyV1BVTk9fZXQ3S2JkNFFHdjNBQ092bG5UaEJPVUV3THpuZTZ5NVpIRnZKZjFmQmZjWmFMQ1dPdTFxRE1lNjhBWEx3YXdjUWVqSFNnVGJzSFVhbTF6UFVZZjdNNl9yUUhNdW0xcHVWcDgtenlqYURqS0VJY0pncm5lcUo4WmdyR2Q1c1BseEF5bzF4M0NFMXJQeEJ6U1AwbkEtd3JJOTYzNmlxTHM?oc=5",
+          "summary": "Meta has begun offering stablecoin payouts to content creators in the Philippines and Colombia.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--6h6xre",
+          "headline": "Meta Launches USDC Stablecoin Payouts for Creators In The Philippines - Fintech News Philippines",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-30",
+          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY0RzYno0YkEtdU8yU1dWdktkX2RXOGd3ZG1aQmFlZEhIMVFuejk5NmtLOHZJRjFxMUFZSjFGWnkzYVJUVVBlUzB6RHo0MFZJMjNpS1Rka2xUTUhpN1Z3UjluemtOUXIzMDFPaWtseVliSDZNaWE3Uk43WFFUODIwcTJRbw?oc=5",
+          "summary": "Meta has begun offering USDC stablecoin payouts to content creators in the Philippines.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--8gyrd0",
+          "headline": "Meta Adds USDC Stablecoin Payouts for Creators in Colombia and Philippines - CoinCentral",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-29",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQaXVYNFZhcEJOeGcxS3VSSU1DY3BWS21nVkdRVEhNZFBJcGR1ZHlrNlB3eGJsbURDbmVSMHE1NDVoVF9XeWJPb2ZsTUZNblQzOGluUTFwemt2VEZGVy1iOFdEZEZpcmh0YjFNTE1lSy1kbW1vUVBVeXRKTHJmM2U0d1Z4YlE2QWNGNno0VUdKZXFqNE56VEpqeWdsM0plR2Y1?oc=5",
+          "summary": "Meta has added USDC stablecoin as a payout option for content creators in Colombia and the Philippines.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--9t86k3",
+          "headline": "Meta Stablecoin Creator Payouts Go Live in Colombia and the Philippines - MEXC",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-29",
+          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1KaWp2Z0dzVWlaVUVvZVFZWkYzMmg5aVNDNW1rZElYZzJSZ1B0dDh3WjlacXNQZGVDell3QTFlR1lFOGxtbzMyTE90a181OVJ0?oc=5",
+          "summary": "Meta has launched stablecoin creator payouts in Colombia and the Philippines.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--fmi1ag",
+          "headline": "Meta Begins Stablecoin Payouts to Select Creators in Colombia and Philippines - Yahoo Finance",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-29",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQaFlUblBQaFRHcGM3d1QxLXR5VTNZeFZYdDhNZ2tWbC1abV90UVNfeXdIZ0xTTV9QTWd6N0Nqd2NvanctNG5PMExNdmNCc3Z0Nnlic25HdmRpT3hCUmdzWi1YS0VqUGp0M2xRRHRSRDVmN2lkLUZ5VnhoRGpWalg1a0JEYlFhUFZ3eDRCTzdDT3JNU2E2X2Z0NnJwWjJnYy1zaU1Xdg?oc=5",
+          "summary": "Meta has begun distributing stablecoin payments to a select group of content creators in Colombia and the Philippines.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--jfgu64",
+          "headline": "Meta Launches USDC Stablecoin Payouts for Creators in Colombia and the Philippines - Bitcoin News",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-29",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPRS1qNi1yT3hDdlMzU2VmZFZKUlVDNUhyanJaRFYweVJkc3c1MEZRdHBwZWhXVWFRanlUR09KdUpuZXN4a2RxWXg5WVpTdFpFemYzb1NOemt2X01TQnBUUUtQakI0emg0TGdGcE5rbkhVZmM5RjJxdUZ2Mm1TRVJxMFk4b2daUmV2MzIyQnBKQW5GTGZsdERoRFZ1bE1mdVFqdkxfRFU0cTVDQ2hr?oc=5",
+          "summary": "Meta has launched USD Coin (USDC) stablecoin payout options for content creators in Colombia and the Philippines.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--uwpa7y",
+          "headline": "Meta Launches Stablecoin Payouts In Colombia And The Philippines - LCX Exchange",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-29",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPNWFoSTI1SHRmTVlNQzdZVHZBdTNMdDdIMlVZc290NzBPUHlpbDRfSTRZVF8taV9iY2FqcURFZzFPNm5odTVmb3ZUME5wWE9nWW44RGVrTXNBV2s0dFlwcFQzYlZSUXR5d3o5V25qcF9kaTFzU0dxV0lfV1VOWHhuR0thRDNfS2V3V3VZSXduU2ZBS2JRSWdSS3ZR?oc=5",
+          "summary": "Meta has launched stablecoin payout functionality in Colombia and the Philippines.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--6tx9m6",
+          "headline": "Meta quietly rolls out stablecoin payments four years after shelving controversial Libra project - Fortune",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-29",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPVDJKNmVESmQ0Y21tVTFVbXNVRllKUmtxelFnbUlNVUp1UldSU0NCa3BfMlRCVlUyNHJyX0xrX0xmdlVsX3JTQUN1cWs5RmhVTTJJZHVyMEZkTTVERjlMalZPbExiSlFzSFBoYV9xSlhOQlhha1d0WmxDc0lIVDRreHVBMTQ4MEw1MGJJQ0JvNDhRQQ?oc=5",
+          "summary": "Meta has reintroduced stablecoin payment functionality, approximately four years after discontinuing its previously contentious Libra project.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--a4gix2",
+          "headline": "Meta Launches Stablecoin Payouts In Colombia And The Philippines - thedefiant.io",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-29",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNWHIxWnYwdHFNd2VHVWdrWjZwVVU1eENKRVFmWS1FYWlwaVM4Y3NXSUpJOWVRUU5VZEs5UEhjYzN3Z0NCNnBWUHJpQUgwUmtwOEloNHhrYTZVN3RJcFlkbG5UODJtbkdwTmZUVU0wSGc4VmpkV0loRDNFTGo2dFpZckMtTjZ5dVlnekMtVlBvMmg1VjVCOW5xZW1aYU4?oc=5",
+          "summary": "Meta has begun offering stablecoin payouts in Colombia and the Philippines.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--snzstg",
+          "headline": "Coins.ph Pioneers Stablecoin Payment Utility in the Philippines with First-of-its-Kind QRPh Integration By Chainwire - Investing.com",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-21",
+          "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNUlNOVW5HSUJXV1BOVUVkbVZaclh0RHpOUnRFRV9YeEJyQ1BDQ1ktNFZnTkVDWHNqZ0ptTGlhTHB5ZnBVeExaTm1QMk44S3kxRmp4OXNGRGpkakFiMUVaOE5nRXpQQVlrQlFNOTg4TzFMeDVEalpzZUJwZ2lUU0xCTlJ1X0ZBOHY2eWl1eHpWUG1hQ0xFUFY1R0ExWTl5RnlMOWUxOElLczdBRThtZzBPUHVlbmszcXNxSGhxVXNwLVVZNURQS01hdUlyMV9jbFd4ZDZncTlMdnpyNEk2Y1dOVGdLaklaZ19zeU00eWRVcw?oc=5",
+          "summary": "Coins.ph has integrated a stablecoin payment utility with QRPh, a Philippines-based QR code payment system.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--hfoc5n",
+          "headline": "Philippines’ stablecoin ambitions face regulatory hurdles - TheBanker.com",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-04-21",
+          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9YVkNWeVlpbWhxZ01WTVVzYzljZHYxbmlycS02NU00a0Mzakk2WVU2QTVHN1UxSGhDeXlCSWEtVGpJTW9pWklna0Y3T21nZUNCV296RmZiamhKWUx2TTJramlvZlJNOEkwVk04ZGZkNlQwLVZpN1BjSlp3?oc=5",
+          "summary": "The Philippines is encountering regulatory challenges in its pursuit of stablecoin development and adoption.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--vfph8k",
+          "headline": "'The Philippines Will Benefit Most': Tech Leaders Push for Stablecoin Remittances at Morph Manila Panel - BitPinas",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-03-19",
+          "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE9LVldqZkQyWTZRcEtvOHFfNVAwUnJiSmRZbG9mcjhWcHdyVFFLb2tFX1IzbDI4TmVVRG5LcXk3NHQ1YUZLQ25Da0Z5Z0oxX2t0ZUw0Rml4eEJxbTBoX1hfWGFjMDk?oc=5",
+          "summary": "Tech leaders discussed potential benefits of stablecoin-based remittances for the Philippines at a panel at Morph Manila.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--p4e8vj",
+          "headline": "Stablecoins Power Philippines’ Thriving Gig Economy - PaymentsJournal",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-03-03",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNR1FnRjU2RUFXdlFzZXFZemw2aWxHVzM3R3BHV0c2YWRPZUd4VGczUUU5cVVEUnVLWmRVcU1iQ2NBcjlwcEhUZFBzSUVseUFYSTRocmVVaW5QN0VpV0l4M1kzaWRCYVFKczFEejJVUmNndXVyM3dwclVDYU1iUW5mM0t3OXlNWXFGY2NF0gGQAUFVX3lxTE83NTFpeVZfZWdLTlQ0M0RFQnNkZl9aNkZweE4zOG9SVkh2VHhTZXJwMHlCSTZ4Y2tFM2JwOXFqWHVEcGRvcmYzU0hubVZhYU9OUjRsb1VvUVJ4alJYWDVjeE1OeE1CRktfSEZYcVNOOE5vX3A4Nnk4WDFlUkk1eEtidnVPRE1oUXJDbVRzMnA1eA?oc=5",
+          "summary": "Stablecoins are reportedly being used to facilitate payments within the Philippines' gig economy sector.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--b7b3ke",
+          "headline": "OSN Launches Fiat-to-Stablecoin FX Settlement Corridor for Philippine Trade - Fintech News Philippines",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-02-11",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOT25mVWl1TGNmbWlHbDgySjM3OTFfTk1sN0dWS2NmOHViSlAyQVRkemdUdksxV28xUUdwbDFEX3BQWHlWSm1aN2E1NElWeGxrM3RYUjZ2Z1ZCVjczLTRoZDVWSElxNS1zUzlCUlp4Sk43cksxZERERTNYeUFJRkwzTmpORzdYa3JzMnNMT2RaVk11Szc0U1JXbmVJdmlJR3JuNVdRbEdWUzZ2cUc5R2RCZUx2amItekU?oc=5",
+          "summary": "OSN has launched a fiat-to-stablecoin foreign exchange settlement corridor designed to facilitate trade transactions in the Philippines.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--lcoa0y",
+          "headline": "Remitly and Coins.ph Target US and Canada for New Stablecoin Remittance Service - Fintech News Philippines",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-01-12",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQNjNsLWNrR183OU1zME5xQUV5MF9MMHZ2QUVKWDlGVjBpV1Q1ZVBScGhycjJUQ2xXdEdoaHBmcUlNVU0xNlBHdThkeElrYl94UnEzSkVteHhpcXdKeGhRQUVTazVWREpBUUR6SWQ1dWs0VGZxT21tTXk5dFR2SVFTZ01oNzJWX1czX3NQVERfZ3djQUFvY09wNlFtNEY5X3dMNGZ0RG93?oc=5",
+          "summary": "Remitly and Coins.ph are launching a stablecoin-based remittance service targeting the US and Canada markets.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--tctumc",
+          "headline": "Remitly and Coins.ph leverage stablecoin technology to transform cross-border payments to the Philippines - CoinGeek",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-01-09",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOSGhCRmZKTHMwY0JzbngzU1lycDMxWnNwOXZhb2pQeXJfR0hiTXN2aWdXMGx6M1k2R0V2bk1QMXhfbklGUTBXOS1ibVc3LVotS2VmdWZqWjlNSmdSbTBlckpDNFh3YXlhR1ZZeWJGTmYxa3lHUTZTY04zODg2eTVQTXBlNEcwQmRqaW9na1JNWWxsN3dJVHF4YXhHVXVfLWNpRERMaFd2SmxNRHhfdkdUQlJpbjBDTTExMFFoRWh3NnhjRkJSOWc?oc=5",
+          "summary": "Remitly and Coins.ph are using stablecoin technology to facilitate cross-border payments to the Philippines.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--1edamf",
+          "headline": "BSP Reviews Stablecoin Proposals Amid Cautious Approach to Crypto in the Philippines - BitPinas",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2025-12-01",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9ia0l4ZElURFdJRkhFWGhXMnBLZTVlYnA3b3BMQkR0MjVfRExDVEhmakY4ak9jWWdQYTUwZnptODBxbUQwSVNOSS1wV2xlS1A4YnBSNEM2MkVkYmpDSjI1YzBjaVFKdlU?oc=5",
+          "summary": "The Bangko Sentral ng Pilipinas is reviewing stablecoin proposals while maintaining a cautious stance toward cryptocurrency regulation in the Philippines.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--vsnpsd",
+          "headline": "Coins.ph to launch nationwide stablecoin education drive after successful Polkadot Asset Hub integration - CoinGeek",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2025-11-21",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQU2w4UzNTeHd3NXU0Q0FhMlR6ODdMMHJFeFNKQzE5R2EzYzlYMlpKWDlKRUViWHBzb05YSWkyRE9DTTNZNW44Nmh3bm9TREpkZjdGdzJNM1RTZ1lsSGlCYXUzWWZOTU1wSVNZTGpoZDNNbkFWa0Q0MjlPRjhINU5RcFpNNTNId1Zab0I3VF9UQXZYYXNKV0hYZnY4X19nZ3VBM3d3dF9HYmM0TFVZZGZUSUNHVU83WDVpWmRjcE9PZ0N5bTBN?oc=5",
+          "summary": "Coins.ph plans to conduct a nationwide stablecoin education campaign following its integration with Polkadot Asset Hub.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--hvh6m",
+          "headline": "Coins.ph and BCRemit Partner on Stablecoin Remittance - Fintech News Philippines",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2025-11-06",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPUm9ZbWJmNngtX0NKdWotSm90MVY3ZFBQWlY1VnBpMmZXbXdFTGlYdmZtTDR4aHhqNFpHZWdmRGtKc0laY3cwbm1PNmxmb25CVXhSZmZvdjBJWFR1cWVTRXM0UmRPR1A3eXB6NkhLRjAyYjRkVEUzYmdUQjNoNHQxMkFZd3NYMWVPMU5yaER4aHlUNzRmYklCa1VsbTFzakRSTzRKLVFR?oc=5",
+          "summary": "Coins.ph and BCRemit announced a partnership involving stablecoin remittance services.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--zfo475",
+          "headline": "Coins.ph launches first Philippines regulated stablecoin - ledgerinsights.com",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2025-06-12",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNdXBER294cnZha1UzajVNUFEtN3FkWVBuV3hSVlV1Z29PUXNIbU5vMExZano5TndNWmdPeDhoR21FTWREYnR0cTduN0hNZEJUZkVZcE5FQ2FGMzN1MXduazM3OGZET3VIR25ZaHRUNnpNLUM4bjIzUDRQb1pyMUpGaUhENnNrUGhkd25mbVpQMDJpQQ?oc=5",
+          "summary": "Coins.ph has launched a stablecoin in the Philippines under regulatory oversight.",
+          "summarySource": "headline-only"
+        }
+      ]
     },
     "Taiwan": {
-      "news": []
+      "news": [
+        {
+          "id": "rss-google-news-taiwan-stabl-3tuuvg",
+          "headline": "ANALYSIS/Fintech expert urges NTD stablecoin to protect monetary sovereignty|English News - 僑務電子報",
+          "source": "Google News — Taiwan Stablecoin Policy",
+          "date": "2025-12-14",
+          "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE82WEd1TXpCYWR1QU9PTmhkbXozSUZQTUFhWU1VOXNNSXN6WUlOOEthUjdqdDE1MEpZbmlmQjdwX002akVza2R0V0tvTQ?oc=5",
+          "summary": "A fintech expert has advocated for an NTD-denominated stablecoin as a means to protect Taiwan's monetary sovereignty.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-taiwan-stabl-ibk96e",
+          "headline": "Taiwan's 1st stablecoin to launch in H2 2026 at earliest: FSC Chair|English News - 僑務電子報",
+          "source": "Google News — Taiwan Stablecoin Policy",
+          "date": "2025-12-07",
+          "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1YYmJEVWh5NmRsZThRZ2NDSWhCNE45SFd5UXJlZktvLUllYVgxMHpRb3lsRUhMblI3V0psOFlhSFV2Y1FmbFlvY3Vlbw?oc=5",
+          "summary": "Taiwan's Financial Supervisory Commission Chair indicated that the country's first stablecoin is not expected to launch before the second half of 2026.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-taiwan-stabl-gfuss8",
+          "headline": "《TAIPEI TIMES》 Taiwan’s stablecoin could debut next year, regulator says - 自由時報",
+          "source": "Google News — Taiwan Stablecoin Policy",
+          "date": "2025-12-04",
+          "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9haFRveVY4U0lqU1NvU1pwVG9KTHAtckhKZlI5Y2hQWWJTdkZnMHhQQXdORWtWaVFiSDV5b3lLS045eVlUSWJ2ZDlscGE2S0dMMmM2VnFHaldJZExLdTQyM1pDbWh5UdIBa0FVX3lxTFAxVFdyWVZXTTFmYTN6Mlp6MGZubzN3U2xVeWZlcEJ6cVdFNFVqejRQdkpYem9uQUExTUhINFBpNDNZVVBxbFZxbC0zWlprbjFfeGUxU3pwWlc3TFZQaC1vcWVTRzRyNEd5QUpR?oc=5",
+          "summary": "Taiwan's financial regulator indicated that a stablecoin developed in the country could potentially launch in 2026.",
+          "summarySource": "headline-only"
+        }
+      ]
     },
     "India": {
-      "news": []
+      "news": [
+        {
+          "id": "rss-google-news-india-stable-ze5b37",
+          "headline": "Zerodha's Nikhil Kamath backs gold-based stablecoin over dollar-linked crypto; says UPI saved India from a bigger risk - MSN",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-16",
+          "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPa2VzT3g1eW5UZWVCclFBZzFjZ2JnUEU0N1l0ZUVWUXMwY2RDVFR0YVlyZnBxZTFsU2JGSUJMV3o4RFdMc3A2dHVXeGZyYkZJWWhzejJjeHNEdGhST2RJRFBSU0dWN0Vjc3RIUWFkQjI4MG5hMER5ZVBpbmVnSVFZSkJJWVhVSGlsdnBOZVEybGhTZ3RrUWlaRVJMU0VBdkx0NGlQUVhhaE5HVjJjdWxTS003Q0RoMUhoY09vc2NRN2NZYzd1U1JNXzZtRWlDR3lHa092MGR0bFlzS01MX3BMRTFuR0szQUVWZHZWQURfRnpKTG9vQW5GRURn?oc=5",
+          "summary": "Nikhil Kamath, co-founder of Indian brokerage Zerodha, has expressed preference for gold-backed stablecoins over dollar-linked versions and suggested that UPI infrastructure may have reduced India's need for alternative payment systems.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-wb4tox",
+          "headline": "Xflow Becomes the First Cross-Border Payments Platform to Bring Compliant Stablecoin Acceptance to Indian Businesses - TheWire.in",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-14",
+          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQRDU1SVpKc0pHQkZJbVNxQkwyclRtT2xKZk9ESVlEQmM5bUY4UU5WcUNCdGNFWWRHNDlyOVJrTGVHaXc5ZE5BVV9icTd5WEw1Nnlxd2JXTHljX1FSS1pjQVlpYmtnUjRKNncyT2NOM0x6WHpGdmlKejZreEx1RTdVSlF3UGNwdWliX3B5ckFfSUF3MkFKdmtFajNwMzBQY3FxbEQwY2RwSGdEU1E4QndhRE5tWTdJNFlZY0tFNjZ5T09JLUNWallBckl4SjUzZXhaMjYzQ2R2bEV2VE5jdjM1TUkwTThCelhtMkpj0gHwAUFVX3lxTE5QTGt2MHltZW1xWml2OXhYTjlhOTlZS05hXzBKZXJRRzhzWk1JSUNfX3dxZkZYX2VMdVFZM0JVVUhSUUJFck44ZXNyVnRTY0xTNWhFeUdjakZrUGFqYzBXNm9HYXhEMWhRcjVFclAxYXYxTFl1TWpxaWFxS2pkZUViQjk0eEd2cjQzMktCNGpPeGN4WVIyTVY3cnB6UGNoZVFJNERnY29OWHJpRXpRWWU5U1ZhZU5jUGNvWnNqYlpkbTJpbE5seUZGczFxSC1OTXVTU2N4QmViR2szOTRkUG1kTlVvUUZhTG9KZkZMd2w0ZQ?oc=5",
+          "summary": "Xflow launched as a cross-border payments platform offering stablecoin acceptance capabilities to Indian businesses in compliance with local regulations.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-6p8qho",
+          "headline": "Xflow Revolutionizes Cross-Border Payments in India with Stablecoin Pilot Program - Devdiscourse",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-14",
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPZDdpQjdjSHMyYjBTNWNqcERvSDZ3V1ltT1phY2RNVG9DMzZ0alZ4TjJuREh5eXdXb1VKRkhjNkNsVW0wM21KS0JidmUxUVJ2Q2tvRVF2OG9QUTdaYTJsN3FGNzVlcjExaUtoRjFmN2JKTnNuVkU4OTh2MjBMT09mSFhYbG5rNEZSdXJxOGdfM01jbnkxUVN0djNPUEJTWUpvR3d4a1NiMXZQbWttYUpxaEw4MFg3QWpEYWdvekllMEl1RlZPa0EwdGZNNlhMQUE4b3fSAdcBQVVfeXFMTm5OdDN6dG82NWR0cHRtN2k2MXN4MzRxak5kdGgyNG4tRjR0MnJjeUdUQUF1MEF0dGVZa2pDRHM3T21KOVdQTUhDTEpaU0N3SFNOMW4yLTBiVzFVOTBqNGVPaThSZ010czhQb0JBZGFsZXRVZ3Jfbzl4QThQRklSS2dfOHJiZzY2MU80eWxFOVVGMVIyOWpkSzZRYUpRWnplcmZWT25lZHhfSjFQcW9Pd0V4dVB6cVA4U2dxV2RSaHNpZGotc3ZsTXlxUDdzdUpOcTEyQUtkSE0?oc=5",
+          "summary": "Xflow has launched a pilot program using stablecoins for cross-border payments in India.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-i71al7",
+          "headline": "Xflow Becomes the First Cross-Border Payments Platform to Bring Compliant Stablecoin Acceptance to Indian Businesses - TheWire.in",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-14",
+          "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOUExrdjB5bWVtcVppdjl4WE45YTk5WUtOYV8wSmVyUUc4c1pNSUlDX193cWZGWF9lTHVRWTNCVVVIUlFCRXJOOGVzclZ0U2NMUzVoRXlHY2pGa1BhamMwVzZvR2F4RDFoUXI1RXJQMWF2MUxZdU1qcWlhcUtqZGVFYkI5NHhHdnI0MzJLQjRqT3hjeFlSMk1WN3JwelBjaGVRSTREZ2NvTlhyaUV6UVllOVNWYWVOY1Bjb1pzamJaZG0yaWxObHlGRnMxcUgtTk11U1NjeEJlYkdrMzk0ZFBtZE5Vb1FGYUxvSmZGTHdsNGXSAfABQVVfeXFMTlBMa3YweW1lbXFaaXY5eFhOOWE5OVlLTmFfMEplclFHOHNaTUlJQ19fd3FmRlhfZUx1UVkzQlVVSFJRQkVyTjhlc3JWdFNjTFM1aEV5R2NqRmtQYWpjMFc2b0dheEQxaFFyNUVyUDFhdjFMWXVNanFpYXFLamRlRWJCOTR4R3ZyNDMyS0I0ak94Y3hZUjJNVjdycHpQY2hlUUk0RGdjb05YcmlFelFZZTlTVmFlTmNQY29ac2piWmRtMmlsTmx5RkZzMXFILU5NdVNTY3hCZWJHazM5NGRQbWROVW9RRmFMb0pmRkx3bDRl?oc=5",
+          "summary": "Xflow launched as a cross-border payments platform offering stablecoin acceptance to Indian businesses in compliance with local regulations.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-bhf7fi",
+          "headline": "India’s Gold obsession, Dollar drain, and Nikhil Kamath’s Stablecoin idea - SME Futures",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-13",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQUnRmckpZUS1YOXVyRXZYS1ZTMXFUbi1CZXJyUzBDSWtPcXZoNkFHbGdyTk1iTENja2U3a3JRd1V6UVBtQ05HNm84ME5hSm8xUmRFZ1Q2VHMybDFfTC1rYVN5dUg0RjdaeUFHVU90UEppbFRGVkE5SXZMQkZucmVhdDZJY3hFd2ppZjF3dU1pS1FTMWJfa181NQ?oc=5",
+          "summary": "The headline references discussions in India regarding gold imports, currency flows, and a stablecoin proposal from entrepreneur Nikhil Kamath in relation to economic policy.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-l2lpt5",
+          "headline": "Zerodha’s Nikhil Kamath Suggests Gold-Based Stablecoin Over Dollar-Linked Crypto - Outlook Money",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-13",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQNlhnTkxvTkZUeFIteWhtTHg1SEdBYVZNOGxSWDJzYnd5X2tfUloycFdTYXJNcWthZjFTekVKT3NpWWhlaUU5S0JCLU11bDY1YlF5OG9rZm5MVUJNZllnYXpZSWh1WEF6QTVjS0VWQ3UyWDNnQVhBcDVqVWtfWTBnN0tGWlJmcTJpWlZ1YlphVUlTOXpOMldJWnVsVXg1N2lTNHItVmlwOS1lS0NJSDZISzFuTk5Md9IBwwFBVV95cUxQTXgxeFZMdWJ3VE9mZjREdXNETS0wWmhfZGlvVTVBdlpvU2RJazdHRmhlU1VyZTZRZ3pyWjdXaGRUOWdyTUw3RlAwaXFwTjVmVEVwNlhpTVlsNmdTRU1xWm1LVGlJdjVidzJTQkNXOE1EVDhtZFQxdkwwSXA4UE82MFV5NWd4blpOZHNRclNsT0tHMlZKSDItUWJNOGZ0S09MQ0FUYTlTZmIxQ3hOSXRraFVMMlBsSUVCaXhCa0NsajJHMjQ?oc=5",
+          "summary": "Zerodha co-founder Nikhil Kamath has proposed that India consider a gold-backed stablecoin as an alternative to dollar-linked stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-efwh65",
+          "headline": "Zerodha's Nikhil Kamath backs gold-based stablecoin over dollar-linked crypto; says UPI saved India from a bigger risk - Mint",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMikwJBVV95cUxOM3hxOHp0LWY0TjJCX2lJaFc0SHNSWHdVTldidUlWOE5pNGtQYmkwX2VwRjNIajhDWGxucWRvdWQ4YjI4SkIxbGowekRjRXlYZHFDOVdqQUZTd3lqdWY0ZmRKQXdZMlBRYk1ubXpXTmh0TlpGTkVtU0FNY25YMTFnT1Z1bWZzSEV4VC1qdEZSMjBqVTRKUTBlY3JrZDh4TGlnMUhnczlvelBGMTYtckdmQjkwa2pLMVhzVEY5N1dpalBVZFdkQWhrdlVXNWs0UUliX3NsSTJvYy1yb1otSmdHU015M0VDRzg4UTZwaEpwZEltQXg1dUM5cjZKcU1ldGI2am8wcG85Sm9rMm8zTXhydWh6Z9IBmAJBVV95cUxPUWlZTGR6RUYzMzFsRGx3Y0NUNTlIMVNBMFhrZHhwcDVYVUZqdmdNNTMwSXhmWjl2dWIyemtsUHdrMVNSWWtsaUdrUk9TSkRqaEg1Ni1rVHhhaXdHbkRzUjNPdXRubW8xN3JNN1dWUVVCNE5lV18wUUlpT284R3JaSlZJZEZtU0N6NVJ3cDdOekk5OWNoN1psLUF3eWptN2V0bkhvRHdDbUdvNGxmWTVObmoyTTk5bWJmWXdJdlBUNzhCcWlXU0x6elVQekZEQ3NEM3Q5SHpiYzdfbUJUU0V5aEQ5RG1fdjFQTG52QTJlZ0dSMGlocV9GT01HeTUtQUFUS29tQ0xRYUNDbjc1OVhXN084aUFlZ2JT?oc=5",
+          "summary": "Nikhil Kamath, co-founder of Indian brokerage Zerodha, has expressed a preference for gold-backed stablecoins over dollar-linked versions in the Indian context.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-hjhed",
+          "headline": "Crypto News: Zerodha’s Nikhil Kamath Backs Gold-Backed Stablecoin Over Dollar Crypto for India - Bitget",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFAzaVJMVU9kQ0JaMFd2V1c2VWE0N09rcmpSRm1pS2tEY2tPZUtNSU5MYXNOUWU0ODd0MnZSZVQ0WEdHUUdNVnZyLUZSSW9mZW1Jcl9qLXg2ckppenZnTFHSAWNBVV95cUxQVU9fMUUyLWJ5ajNPREpOYXBsUnV0aF9VZkRRR25wOF82Wk8wemxFN0NPanhTdk1xZmYzdU5rUFRET3NlRG1MdFRIRTNwLU5oazk4ZXJrVXBFV3BycWtPNmdUX1U?oc=5",
+          "summary": "Nikhil Kamath, co-founder of Indian brokerage Zerodha, has expressed support for gold-backed stablecoins over dollar-denominated stablecoins as a potential policy approach for India.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-aoqp94",
+          "headline": "Zerodha's Nikhil Kamath suggests exploring gold-based stablecoins for India - The Economic Times",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-11",
+          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOYmZnem9HTEI4b1c1NmJOVC0td3V5LUdMNDAtb2p2aFZFbnRvREVjLWFMNEVQQXdEcURmdVFfZFp2VUNseDFuYTJ2ZGQta29XeEEySlZVNWh1T0JFeUFxV1JvejkzUzh5d0FlVDkzQUxlSzItNTZ5X1MyQXVOdUpzVkQwdVdPZlBiQ3VCdVNiZzdpalFoa1lGREtWYVlNSzhjWmdVWEVkWlFYV3hNckQxVFNTWXNCclgyZkJzUGNfNkIxSGxLVkdoYW1DanZNUGpiT0sxUGxfRDhjdUdSVHVwSVRR0gHnAUFVX3lxTE1hb2dkSWFGZ2F5NVp1Tzd3NjJyenIwNXJNanFDcFJWX256U3NMX0d1a1FnOF95cUcxakV0SVN3YTZuN014WVNhT2ZSNHc0TktQZ0pKOWlYaUpKYmZsajUzVlc2TVk5dEU3SGliUEJPbUxiMldHUV9tUHdxMVhyOHFoNm1GWjFDSmZKd2RNYVJzZEZtaE5IUG9mbzlMVjJJNUNHVHpTLXl6c1oxeTMwcXdfWS1Zc0xFc0prRjU2TjEwWWJ6SmJxTWx2SkVhVEZyaFBHUklNTHhTdDV3TzdFTjlBNnhEQjhsOA?oc=5",
+          "summary": "Zerodha co-founder Nikhil Kamath has suggested that India explore the development of gold-backed stablecoins as a potential policy option.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-kq3fc1",
+          "headline": "Satoshi a BTC Stablecoin Price Today in India | TSAT to INR Live Price & Chart - Binance",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-10",
+          "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5BcXA5M2xYNFNudVFTdVA2NXUwU2pOTjdwSURjQTlJWHRYZHN5alB1ejJBRk8wRGpPMkdLRGRrR3JLUmtqYjdxaExNaUxwVmtCTzJrMFBBOGlidlFsWk01MkNUSlRqYUZkc2VldQ?oc=5",
+          "summary": "A cryptocurrency exchange is displaying price information for a token called Satoshi, which appears to be marketed as a Bitcoin-based stablecoin trading against Indian rupees.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-qc58q9",
+          "headline": "Stablecoins, unhosted wallets and the compliance gap - ET Edge Insights",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-04-22",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOSG9QZHc2d0dSblhJNUlCb2doYUstQnZremVJNFpfN2xqMDAtbjEwUnMwV0ZsLXRMZ284U3p1aFlYbGtyaGVtWEk0SFA3MlAyODVyWEV6ZEtQYlRTaHlBVVZXdDBzeWFRb1ctWGtlMlBlSUI4RFVzQV9wbDJ4blVTLVdRUldUcS1GaXM2VFNrbVBVVWhnaHc?oc=5",
+          "summary": "India's regulatory framework for stablecoins and unhosted wallets faces compliance challenges.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-228lm",
+          "headline": "Regulating Stablecoins: A Global Perspective with Insights for India - Nasscom",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-04-06",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNTnRqNU1aZ3ZCNVItbVFMdnFjSTRybm0wQ2ZUWlJJdi1neDBwVXk3MkNIb2w4TGhqMk9jR25ScG92Z3hBZG9Gd3pxUDZyb1hFSXBIbmpZcVdoeS1HUV9iUmdpcDJIR2J5RHFCT1F4NERiR3UwYm51M3FnVUxROTBkcUtXSG1MQmFhWENyV3dfbzMtTHE1UDJoNHV2OXBlUmszUDNkUHJfbG9XUXhK?oc=5",
+          "summary": "Nasscom has published analysis examining stablecoin regulation from a global perspective with implications for India's policy approach.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-weihp1",
+          "headline": "ARC Tokens India 2026: Stablecoin, AI Utility, Best Exchanges - Bitget",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-03-09",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOVHljWmlQbGhZWUpZeVNTOHd3OUVvcE9tMHhGeFRrX1VyRGxUa1dvTHBEa2h3LWw2TFRuVGFaTHpJOVJTTFVicnNRdHpUcjB5SDhGejMtSm9oQTBRZmtmYlZXOE84M08yQXhkNU1MWXNPMm11NHNVZFpfbnhSSjhxRWk2RndsUkJNMGlGNkdORDYtazE1S3F2eVpZOHVsRXBYQlp4TjBMZXVSWmhqd21F0gG0AUFVX3lxTE5WVzBWUjloNjVXd05KWkx1TV8wY1JnNkJjc25sU1ZBLTJmeFhHeHpjVW8tT2Zta2wzYllmRmQtNDMtRkppNzlmOTRnSy1iaGwtTGRfV1lQVGJ5elhENVhDVmNKVDlETjloOE1Ba3lCVVpsa3dLcWxhU2hwZ0Zwby1UbUlneFY4THVvSW5tZnRUTDBEZXRITElKcjdjeGVDODh2eWtURXphbEluT3NYazV3aU9yZQ?oc=5",
+          "summary": "A report discusses ARC tokens in India, covering aspects of stablecoins, artificial intelligence utility, and cryptocurrency exchange listings.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-haetgr",
+          "headline": "India’s Pine Labs targets overseas markets in stablecoin push – report - Yahoo Finance",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-03-03",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNbVBUTDdURmY5TFpMWE53NXlRdF9qUGQ0ZTZ4U2JLN3J0YzhpM2ktNS1YX3dRQUtFMHAtdnNhNGZxMnQ2ci16d0dza2pvY1RjR2VlT2R3b0kxR2xid2QwaUxYdnhNZ1pwYUNOYnFJQ2R0VUdRQkROODVZM29hSTEtUG4zRVg?oc=5",
+          "summary": "Pine Labs, an Indian fintech company, is reportedly pursuing stablecoin expansion into overseas markets.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-r04sov",
+          "headline": "India’s stablecoin problem won’t be solved by a tax bill - The Ken",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-02-26",
+          "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBFVGVka1pFNTh5djFWeXcyODlJOUE2UC00Yzc4bHFJUnB6V0hqTXhvaGJGTWZteVd4cTBYLWdUdjRRLWgySXBVUkZMdldsTjR5cHJkWXFUbC1ySG5qRTU5T0swSDNEaHNXS1ZYLTRmY29MUQ?oc=5",
+          "summary": "India faces stablecoin regulatory challenges that a tax bill alone is unlikely to address.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-w9irhh",
+          "headline": "How stablecoins can reshape India’s monetary system and RBI’s policy approach - Forbes India",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-02-06",
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNLXI3Uml0SWkwYXdFRU92dXJyaWlFaDdwUlZPMzA5ZUpvOVgySE1ab2kwNEpESUp2d19QVl8tY0RGZTNvRkxxRWt1MnoyQ0lMa2daSWtZV2xIZGZsSWtXM2VHX3JVYnluT0o2TnlaeVM0QWV0QkRQcFZOODlQVEdBOFFxWUNLSFc0djl6akttcVRreE96M3hpclhteTFIcDZoZXUtREdBWl8xNkU1VWJGWXVFQ2ZIU2hrR2w5MFVUNS1ObkFXTzNpWXZoRnhycERualHSAdcBQVVfeXFMUHlaWHJyZHluMVM2U3BtUFEzR19FNjlOdzRCOFQyWldDZ3lYTG4yYl9MUXg2Z3E0M2o1Wl9NOEwzVFowREE2YVBhNXpQZWtqb3dnSy1BVEtIZTY0eUJWOEZGaE55bTBweG9jOFFJeGJRNW5fUjRsOWpFeklFLWJjYTdBUnQ3SU9qdnI5X2Y5VG9sUVBEZ0ZiRkFJQ3RXeUlhSXlIamw3R0h5M2ViWnN0Z1h3Y000a1dJR1NFMHBQNC0zQ1BrTUhWYnBuY1l1MnNvTGdEQS1fZVE?oc=5",
+          "summary": "A Forbes India article discusses potential ways that stablecoins could influence India's monetary system and the Reserve Bank of India's policy framework.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-5ba9yn",
+          "headline": "RBI Deputy Governor rules out stablecoins in India - The Hindu",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2025-12-12",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOOHA2ZHBGZnVvVEVNSFVfTzVSNkxJWVFxa2xsdEE0WENUVXVZNGVaZ2RVMjY1M0FtS0ZsSDdJb0hFbDdZV3NzLVZ0WWNRT3F6ZzNVLTNXYk9ocXdpMDZWMF9YN0FZakJsNWZqRlhIaDEtdFVfd3praWVpUXhQVTUxSmMtcFFOdy04eTNGNk4zSXZRek0tZ2xvVktRa0VhRnEyTnBCVGVkQdIBrgFBVV95cUxOOXdFcHdkMHhNM3RSclZobmJzY0U4QWZwXzFlVXVOQzFjY0JaakY4dTVOMFREYVUwdXIteWxGbXotSjFiVHFWcE5TR0hyVC1MUFVWWHB3Uy1teHpfcVVYRVVzSENhUzFrR0ktN2pJMDNLYlZYQUJMOHRieHlJVi1aVlBIQmJrWU9ZT24ydXV1bERnUWgycVIydWF1V1l6anBtUjVTR3VDRWo3TmVPb2c?oc=5",
+          "summary": "India's Reserve Bank deputy governor has stated that stablecoins will not be permitted in the country.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-3me6hx",
+          "headline": "India central bank deputy warns of stablecoin risks, dismisses claims of utility - Reuters",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2025-12-12",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPNWFkb3RjNGxfQXpfTk5rTnp1ZTNZRUN4b3Iyc1FBNGMtRVAzbjVNdS1oMFNsdDVfNDZjUEZVcUdtbldCQVdKYUFkcU5ibGRpYVZBeEFqNzhIZU9UQXdRTDhBaGZxZ0d2aFBuM2VWY3o2SlJ3YXNpRUcxQ3pZRHc5Qk9mTHlUeWhFcHdrX182SG5ZUGFIaHpPU3BaUl9wSXpFX0JZR3lnX3J6LXNNU0VaNzM4S21NRHhubExFSnR3?oc=5",
+          "summary": "An official from India's central bank has cautioned about risks associated with stablecoins while rejecting arguments about their practical utility.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-oqdx5p",
+          "headline": "India wants its own stablecoin? - Finshots",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2025-11-12",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNVW01WG1nWkViWk9kajNWQ0FkZTZ1T21tLUh2WS0wWjRyYU1SMlZDNTBEN3Nta2JLS0JjaVJqY0RHTTlndGRyZmUxLUZ0dklOelRiSDdRSUUycnk5Y2x4c3BGUUx0UEVRTW56OGJ5MVFSTklUQk5fcEhZYVdTOGdEejdKODZBNDJ6QW5kYTVXQTByZ1FSUWVtSG53X09NcENIYmduUTk5SVN0b1dTMkE?oc=5",
+          "summary": "India is considering the development of its own stablecoin.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-yn6fx0",
+          "headline": "Polygon, Anq developing sovereign-backed Indian ‘stablecoin’ model tied to government securities, say sou - The Times of India",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2025-11-05",
+          "url": "https://news.google.com/rss/articles/CBMilwJBVV95cUxNdWR6UkZGdEpya0lmRXJnQ0dhR0pjUU5CWWNRRzV1VnEwMHpXbGZRVU1IZzQtczA3WGtYYlFVeFZkX2YwUnEza3dLMkZKUkpGekJNSUFWLXhkNF9hZWtmWEVKSVpnQnlXdDZnSi0tMGl1eExwYWhNd2hvYkZTaHdDanFXanphNmVlUi1aaWdVRzNCTzU5VEhMa2FacGF1NjdUZWtFZ3NfRDhrY3RfUDAyZmZiOHE2WGhWMzk3d2JuLWNxNVpQS3hLMl9OY0o0M2FqT2VhclZJNlpaQmRWb05VZ0ZlNkpGNV9KY0FwRV9pUUNCMEx4QVc0cmZKbEdVSXpFdjl3eVFlRWtFNXF2Mm9uTjdOcG5tX1nSAZwCQVVfeXFMUGJzMi1nbXhDa3VFZUY0U1BHQ241RUpiTFN6MjA1OTF5N3NaMmIyM29CWkdmVDRGUS1LeU43bmZpMEZuU3ktRmRwV2JaMTE2LTBVaWxiRWkzeWtqX3BvSVNnRUJjaFpfbHFJcW5FMno1bVo2ak96eE1DXzR3Y1o0RUxJTm40akQxMXMyOHVEbTBoYnNTWDVNVDlNb3Fra0ttTU1acER6MkkzNTVWMnVFU1FMTVRBTFhUOUl5TUxSYzhjUWpzS2szZ1JJS0J5Wlp2X2tUdjZfMFVzeGR0QmIzUGFhOVFnWFdmamMybmZYellsdWFoRWg4NlBUWm9LZmpxSjBnLW9xT3ZMQ0VuN3NvWTFuYlJtWjJaWVMyTkU?oc=5",
+          "summary": "Polygon and Anq are reportedly developing a stablecoin model for India that would be backed by government securities.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-2y2q8q",
+          "headline": "RBI Governor Advocates CBDCs Over Stablecoins for Safer Global Payments - Vajiram & Ravi",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2025-10-17",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOaEFUUEpERjlvRHpQbFFRWGh5UkVuUlBLaC1OU2ZOVE41akUtdjFxWmZobXpPQkJkY1NOT2o2S044V2wtZG1DbW8ta09YNnRmNUlmVnRocmsyNnFhakEtUDhyOGhXWmVOVjV4Zlc2c3RYVV9pVFQwWEIwS0xPNHpocDJXSXB6Ulk3WkdWd1RCZGlfWTBnUjE5LWtXaVlxVHhXTDhnSWlXcE9faGdaVjQ1cWpBaDY2Zw?oc=5",
+          "summary": "India's Reserve Bank Governor has stated a preference for central bank digital currencies over stablecoins as a safer framework for global payments.",
+          "summarySource": "headline-only"
+        }
+      ]
     },
     "European Union": {
-      "news": []
+      "news": [
+        {
+          "id": "rss-google-news-eu-stablecoi-wlt4ao",
+          "headline": "Fireblocks Lands New Institutional Wins as Stablecoin and MiCA Tailwinds Build - TipRanks",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-05-16",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQazByYU1sVGpQdXhyZHdFSUczdVhfd3dpYUdGRzhnZGFfOC1MWEdvWmc5YmY2UnMwS010SGdpN3E0MXVzVDllZDkzbGszZlVQY0tILUtaOWtIc2g5dEUyc2ZaM2w5NW5kOXJERVRqU1JzQVpfeVh3ZHdMY1lwYjA5ZXZsZXY3MlJQaEdEMUdjUVBTb1UyQmUwYmJxZ2tvS1puMVFVeHU4c0dvbXMzV1JqZDEyMHhrVWNpRWdlLW1qQ2I4VGh1?oc=5",
+          "summary": "Fireblocks has secured new institutional clients amid growing regulatory momentum around stablecoins and the European Markets in Crypto-assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-jd1uko",
+          "headline": "EUR stablecoin issuers see growing interest in €16T market opportunity - Cryptonews.net",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-05-15",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1lUUFGRzdOQkNKMXN3LTE4dlE3a21NWFJpOWxEcXh2SE9IZHRoMXFqOUEwUEh4VzJacDJhSlRJUnNKT1BBSWhrdzdfcXNKM3E2M3BFcE5FQks?oc=5",
+          "summary": "EUR stablecoin issuers are reportedly seeing increased interest in the eurozone market.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-97xw2b",
+          "headline": "Euro stablecoin market sees surge after MiCA rollout - grafa.com",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-05-15",
+          "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5wbUNkYVVfMUtjcnNMcWJZd0VjbXNZb3FoTDN5YjFxU3ZlTFFWQVJoSlZnOEhtaUtoV0NudXBvOUpuZUN1VUR4SExocDRMMUNERmtIYXlYLTdlUm9xSDZRRy1XNk9oV2ZDTkx3eg?oc=5",
+          "summary": "The euro stablecoin market experienced increased activity following the implementation of the Markets in Crypto-Assets Regulation (MiCA) in the European Union.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-fel6en",
+          "headline": "Europe Vies to Close Stablecoin Gap - Global Finance Magazine",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-05-15",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9hSUpsWVBEVzBadDZKc1BRT1NBQUNCRWIyWFdKX1QxX1VXb0VHUVljN0NLekk2cjdnWnI2dTNwSU5FN3UzSWo1NHIzVmRuOTZzbXI5RE0tYkVsUG9paWtaTG10eDB1U0RUVXBGaldvMVNrc0U?oc=5",
+          "summary": "European policymakers are working to develop regulatory frameworks for stablecoins to keep pace with global developments in digital-asset regulation.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-ekz6ki",
+          "headline": "Paybis Wins MiCA and Latvia Licenses, Signals Stablecoin Compliance - MEXC",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-05-13",
+          "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1PS2RkdzFhUi1YZ3ZhaU9oYWtFaENqWmVHSTZ3NzJJYUJhSEIyUEpBUzllREhrN05wYzJTbi1HMkwydEZ6cG5EZQ?oc=5",
+          "summary": "Paybis has obtained regulatory licenses under the EU's Markets in Crypto-Assets (MiCA) framework and from Latvia's financial authority.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-l86204",
+          "headline": "The largest EUR stablecoin is issued by a US-based company, and Europe should be paying attention - Crypto Briefing",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE94NUtjdVI1Ujd5UlBBNWx1dTNKWFU5U0FOSlJlRG51S1dwYUcxcmt1Nlk0R3R5OUJwMVhPT25QQkdnOXl4bVJ4czl3aFd1WmdtMkRON2tZYUIzMDIyWmtaWTdvZTZVM2tIdzN0amNDcFBlOWpxeUE?oc=5",
+          "summary": "A major euro-denominated stablecoin is issued by a U.S.-based company, raising questions about European regulatory oversight of the asset.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-sjqd8g",
+          "headline": "Euro Stablecoin Market Cap Doubles After MiCA Rollout - CoinMarketCap",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNQTUwZUlZdDZna0x2ZGlGaEVFT0hUUy01NU43aExnVGpUSjhlT09oQzl2YzhmRllURmtYUXhkVXdfcXBXUUU0M0ZRZ2NlSHVsWUljRXZDVHZhLS12TmptSGxRY1BYR3ViT3hXVHZQWC1tWjVWU3Q4UFpNVkFwa045b3AtVGVuczJYa21hZGpYYmZzbnlaY1h6TXZIUQ?oc=5",
+          "summary": "Euro stablecoin market capitalization increased following the implementation of the Markets in Crypto-Assets Regulation (MiCA) in the European Union.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-iylk1i",
+          "headline": "Bison Bank Launches Portugal’s First MiCA-Compliant Stablecoin - CoinCentral",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNZTB4cVd0dUtNTVdIWER3S2tFUGIwdVRCTmpsa1NWNDBLSG5DeFZMVHRhclNDOVU2OENPSnFuMGRpRVh6Mi13dGdZWUUteTQzQ012Mi1RTUhrSmV0VnhiaHVadVFWQzlLb3VZYlM1eldvY0tqQndxVFN5cjh4QXFtMVFRSzRuQW1OWnlRWnRKQQ?oc=5",
+          "summary": "Bison Bank has launched a stablecoin in Portugal that complies with the Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-9xjzoy",
+          "headline": "Solana news: Germany’s AllUnity expands EURAU to Solana as euro stablecoins gain traction - CoinDesk",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-04-30",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQVHZhQ2FIWUJ1bVhIekhncUIxUks1cXo3WjZwUkhQM2p0NlpwZV9BYktmcUxyT2FKWnNMd0ROSHVRZEtGU2lwd1ZUbTl6ZHFtYkdWcDAwT1NfUnh5ZFkxeEo4R2ZLcklGMTBaemluUnBJSHJZaUFFLThab2FJRkFyV3dNdXFvQzRfYno3LXNya2tmT0pTbW5OY1dxTEk5NDB6YVU3VUxTYXFWRGlack1fclRwQkVScmMtMjJIUGRB?oc=5",
+          "summary": "Germany-based AllUnity has expanded its EURAU euro stablecoin to the Solana blockchain as part of a broader trend of euro stablecoin adoption.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-wj5wyw",
+          "headline": "MiCA has made euro stablecoins safe but weak, new report argues - TradingView",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-04-27",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQa09FcjdfWkpJLVpISDRydWMtUGJGRV9kak5fSEtJSWtCWWIySVhSOXNHMmlhZEg4dGh1clBIRHk2czRBUXlUaDdCTTEyeTlSWFQzRmJfb3NrLWE3MlJFUHppMU9aUi02MTJJM1RFbk9yQ01kaWdSdDJUWlpST0ZrN05ZLWxWaHFDTnBPWS1DWk9mUXVVX2xfZmlONzVETFNEalpoWmdyU1lGZXV1eEI0QlZycHIwOFpnNE5SSFY5M2tpWmlY?oc=5",
+          "summary": "A report argues that the EU's Markets in Crypto-Assets Regulation (MiCA) has enhanced safety standards for euro stablecoins while potentially limiting their competitiveness or utility.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-fjedx",
+          "headline": "MiCA-licensed Banking Circle joins bank stablecoin settlement race in Europe - MSN",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-04-27",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOck85UC1mekFCa040WGlrNG8wdFU4cW1NQTFJb0d1Zi1GVnNta0ZuQ2s1MkR1SXBBSHRyWlQ1SjE3QlJTTHVKMVpGTk5QMmY2VHpEYWdKT3BZdlV2bGRILUFqRzRKOEMtR3Z4OWdiWklaRkxjZ2RtY1k2VkNjeFMzT1B5SGZOcTl0elRfaHJkLTFtM2NmU256Y25qMDk1WUhlb0MwR3czaFlTT1hQVHg0V3UxSUxZTUQwWFBPLXEyZ09oMmxIUFZKTnVB?oc=5",
+          "summary": "Banking Circle, which holds a Markets in Crypto Assets Regulation license, has entered the European market for bank-issued stablecoin settlement services.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-lyu7rg",
+          "headline": "SocGen brings MiCA-compliant USDCV dollar stablecoin to MetaMask - MSN",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-04-25",
+          "url": "https://news.google.com/rss/articles/CBMi8wJBVV95cUxPb0ZFV1ctdERLSTAyZzBobDhHODNiVjlEVjBMSE5mU1NiTEhhYnUzalhRNDdPbEFzMk0wekwxel83LThtSjF1VExmWmVCaFd1VmJ0WDBPTTZ4QzRJQTU2azZzR1J0YWQwVkFkWGxyN013cTdRaHFOMWpHdUFISk1pTkctejlBZkQ0dW9BRC03Xzd5TTcxNW5RNVNhQ2ZXM3Z5UGE1VTZuanptVW54Rk9CT2tfWUpHRk9QVkdKVHZTamVuZ0VkS2x1QWlFSnVUWDJ0cFJmRUNEQTVWSXdWS1VCekM2MEptS3lzNzBVanRrWEgtVDlNSTdyeHBPX3EtUi0yeXRCYkpHVWZYNWhJOWhmc1BYM2kyUU5Kb2FBMGNCaWtDMjV1MTB4Z0U0MU01Nnk2dElxNDJBbzRMMGw1S1d2T1hKYWlvMENpQ1hKMW1oeENQcGhldWQ5WlFhaUdvc0oxUEd4cUpMeFlhaVlGRlBhTVE1OA?oc=5",
+          "summary": "Société Générale has launched a Markets in Crypto Assets Regulation (MiCA) compliant USD-backed stablecoin called USDCV through integration with the MetaMask wallet.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-509ilg",
+          "headline": "Euro stablecoins explode 1200% under MiCA as capital pours into regulated assets - Cryptopolitan",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-04-24",
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9fWFh5TG9DLXM1eVV6VlFXZWRjSXh0TFFvOU1CRjJyNmNHc2RBS19NSzRtN3htdUU2SDI0WW1HUG83c05PaWgyTDVfR3QwQjAyX3pUX1JpT2d2Q1U2TzAtRm5WMEM0LTcwTHdrd2VoZ004cWJKaFo2TkRBTQ?oc=5",
+          "summary": "Euro stablecoin issuance has increased significantly following the implementation of the Markets in Crypto-Assets Regulation (MiCA) in the European Union.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-2wzu5k",
+          "headline": "European Banks Tap Fireblocks for Mica-Compliant Euro Stablecoin - Glenbrook Partners",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-04-22",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOZTUwNW56ZW52TDV3MU0yTWRNMHVxVXdJV0Z0dFhuUEtzdk1fS2lnSW4yc3dzYWl0LU5EN2dudTI5V0x4emRleUhnVVVuc2ZnRVg4SXRDUXI0SHYtVjU3R3BMWU1GbVlUeEtDMUYwREZ3dnRLVTZpbTVvZ0R2RE1pSTlaeEg5aldPeHpYNjlSQ0xSOHhBcXJodzcwT1NHU2tHVjdz?oc=5",
+          "summary": "European banks are using Fireblocks infrastructure to develop a euro stablecoin designed to comply with the European Union's Markets in Crypto-assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-17ltzl",
+          "headline": "12 European Banks Back Fireblocks for MiCA-Compliant Euro Stablecoin - CoinMarketCap",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-04-21",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOTkUzQUF0QVF5aE9BN1RzVWlqbDNBUmM2NGprNldQZVpLSTh6d1R2MldaTHQ3UWZ5VGlLMnJkdVozS1E1azFqdERwdnFhUlUyWmc0NlhOWlJTMDNVWUdQdzBmMm1kSTkwajZscGpqRVBGNWtGTFdGbG50a2xDbDlqMjBPQWN4Z1FqWFFUM0lBLUozZEhhZFgyam5WVTZMREZlOTBxb0hDMm9IYzhFZlM0?oc=5",
+          "summary": "Twelve European banks have selected Fireblocks to support the development of a euro stablecoin that complies with the Markets in Crypto-Assets (MiCA) regulation.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-prxphz",
+          "headline": "MiCA Forces Crypto Firms to Get Licensed or Get Out - PYMNTS.com",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-04-21",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQYVZSVGhxdDBiWW5GV1dWM2FfNElwaVJMdFljc2hQamNCTGJDUWwyVGN3NWdUT015VklFLXQ1c2xaWXZ3SVh0RHdtR25JRF9TdGQzekZHN3NabTltYVRYOG1JbnBKZGkzTXpvLU4tcDBXMlVsaElWVWI2WndCY2ZveldpcVcyanRIR1JUVFNKRUNKNWVudlNmLXhvNA?oc=5",
+          "summary": "The Markets in Crypto-Assets Regulation (MiCA) framework requires cryptocurrency firms to obtain licenses or cease operations in the European Union.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-1ssnw2",
+          "headline": "European banks tap Fireblocks for MiCA-compliant euro stablecoin - MSN",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-04-21",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNMDRleHV0d0xvYkRsdGJUMFhnaWlxUFRxSkVrb2EwUk9rWWhNbXl1N0RNdUFyby1rc0JLMjd4Q3FnVy1NX1gyYUhYTWVXUzJCVEJjQmlfM0luWmZudGtmbk56dFMyUHBUZ0JQdkhFeVRjRUpaMXZzV1hNWFl3NTA1TDFOWTdmal9QcHFOQXdfZENwTFlfenVpeHRkOFJCSk9DLVdWNjVtZ21LSW9UTmhfTFNTWWFpaEpQN0NJZnVSRWl4RmVZRVJyZXhJRUN6ZGdkM3ZmZDlR?oc=5",
+          "summary": "European banks are using Fireblocks infrastructure to issue euro stablecoins that comply with the Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-bqk5jt",
+          "headline": "Societe Generale unit adds MiCA-compliant stablecoin to MetaMask - The Block",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-04-15",
+          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQYlp0d3ZSYWc3UXgxbVN0ODB1WVBvLU1aQmVXcHNMS3lCdERrdVRnSGIzM0llOTJ0UXcwS0NkS09lbmV3X2dubm82NHBCYk8yYV85OXhad3NqXzh0SjdGRHV5TXhRZUZuZXNTNHRhZnRveWZQSENpcXhYZ1lVcW9QUmtkTQ?oc=5",
+          "summary": "A unit of Société Générale has launched a stablecoin compliant with the Markets in Crypto-assets Regulation (MiCA) and made it available through the MetaMask wallet.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-hu8a8r",
+          "headline": "ClearBank says it's first Dutch bank with MiCA approval, rolls out EURC, USDC - CoinDesk",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-04-13",
+          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOSF9WaHllMkVTSGJtNDhIaDNXN3RxeEp6bjJsd2dKNERrNUcxX0V1SmwyS2cxRWJHRG82am0zeGVUclJxOW4wNXFhVUwwcVBxWVA0THFDd1VHeEM5MWFxam9vUGdxSElXNzJqQk1KSHc5YnMtM2V6aTg3U0VxM2t4NXVnVHdBRTQtTFFrN29nS0xqdUx1ZW9ldzhVeUNlMEdkNTZiRk00NTBsOHp4N0kzdXBOVWdBam02b1cya1VZcjh2eURnWWJzVWhWNTVVMjlBR3FGMGFuTi0?oc=5",
+          "summary": "ClearBank announced it has obtained regulatory approval under the EU's Markets in Crypto-Assets Regulation (MiCA) in the Netherlands and will offer EURC and USDC stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-c6q3j2",
+          "headline": "How Are Stablecoins Regulated in the US and Globally? - Paxos",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-03-13",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBpRnFiV0JRdlJQclRVWWtJYnBsWnBhLWtHZTVGTmNROC1Dd1VTN203dXd3T3Q2UDdEY0laLXVvNEJ2WGk5cXh6SlpwSVAzOW1OUjVObmpTS2pVUzJvYjdxQ2czZEozQjQ?oc=5",
+          "summary": "Stablecoin regulation in the US and globally remains a developing policy area with varying approaches across jurisdictions.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-cmrqo0",
+          "headline": "What Is a Regulated Stablecoin? - Paxos",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-03-04",
+          "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFAtZlVsQ0VDU1lGVkVLMmYzWGM3cW1mcnRiOTFZZU9jZUpXMXp2NVFhcTl1QlV6dzVPWVdFVnE5d0N0ZjFnY0pqWGd0b3F6Z1dIQjItSTlzM2ZXa0E?oc=5",
+          "summary": "Paxos published content explaining the definition and characteristics of regulated stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-7bvl5m",
+          "headline": "European Banks’ Qivalis Targets H2 2026 Launch for MiCA-Era Euro Stablecoin - Yahoo Finance",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-03-03",
+          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNOE9oWFpfSHRRUFRwd3BrT1pPNFNtdHJPNzVmamE2cEFnZEVBR2lGVGhRYThfMGxTb3hNSU5kc2RRa2tXdHB6R3BxeTUtSEJ5NGFyakZJalNiZXBVd3VQRl8yRzI1d2FwMC1Sa05hS0RROVNaY2tReUljTGhzNVkxNkN3a3NyZw?oc=5",
+          "summary": "European banks' Qivalis consortium plans to launch a euro stablecoin in the second half of 2026 that will operate under the Markets in Crypto-Assets (MiCA) regulatory framework.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-rjmjy5",
+          "headline": "Major Jurisdictions Broadly Align on the Key Principles of Stablecoin Regulations but Not Always on the Details - Skadden, Arps, Slate, Meagher & Flom LLP",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-01-13",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQdEYySFVRazlkdFE5RUlpMDFsb0FvZi1BeEVkQk1lNHVydlF4dXM4SkxYaUNBcWNkWTd0MXcybF96dmZvWFRscWtzajc4c1drOWI1cGpuM1NrbTZLb1hMdFBVRVNqZXlic29TRkNGcWZPajd2a3l0LUhtbm9FYVRoV1Z4SVRuam0xVm9EQWZIbnlRV2pQdVdubXo1eWFfQjI0TTYxUkd2WFNHeWMwemFaVU1feU9Idzg?oc=5",
+          "summary": "Major jurisdictions have converged on fundamental stablecoin regulatory principles while maintaining divergent approaches to specific implementation details.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-bn35h4",
+          "headline": "\"One Year of MiCA: The Market in Figures and the Challenges Ahead\" - BBVA",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2025-12-24",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOVUU5cXlkR3VFUlgyWGhZam1RSlNHZWNKU1NKZUNYOHlHQ3dCZ3FwZUdrdWJyVngwN2tvWEszNzAxc2FsYzhZWXY1TF95dkdIUk80V1ZMck9ONTJtc2pXWjA1em5ZQjhydzRQS1REMkViM09oU1Y5NkFRYUZ6NUpINzlGR0ZodzM3OHRXTnBNS0pyRGROUEdhT3JfMGdIMnlmUkhma2JnQjE0WHVY?oc=5",
+          "summary": "BBVA examines the first year of the EU's Markets in Crypto-Assets Regulation (MiCA) and discusses ongoing challenges for the regulatory framework.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-icz8hi",
+          "headline": "5 Stablecoin Trends Shaping Global Payments in 2026 - Thunes",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2025-12-17",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNSFdVX1QtdTlWV0pUS2xYbUFXYnEzSEpCZWNyVFFkYXVNbWRGYUIxM2dPay04bkc2c3J5N29keU9kOGp4TFFGdk82ZTFCZWZFV0gyNEhCRzlBd001dGUzcUQ4bTZhZ2o5QTlQc3BOWEdieWJUTE9mUmk3ay02ejJaM3JJbi1RNzVx?oc=5",
+          "summary": "An article discusses anticipated stablecoin trends expected to influence global payments during 2026.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-8g86qx",
+          "headline": "EU & third-country stablecoin multi-issuance schemes under MiCAR - Reed Smith LLP",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2025-11-17",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNdDRFb1Z4QmQwV3RmcTg5UkpCOU9TQXV6RUFuaGYxem1vUEJqek1HNVNZdWdJbWFsNWlzelAydVFiWTlUcFowajRjUWJqUG9qN2duRG9zMjRRcXhMRTVXUHJadm5wS3RFb3JaY01QS3E5WklsSGwzSnpyVmFDV2V0V0VWbTFUbUVXTXNCUU9HdVdHQVI5OHF0NUdhbW1wa0h2a0l1TFN2OTZiSldSU2IzcG5hQjJCa3M2RUZmakFYd3FQZVpLUFE?oc=5",
+          "summary": "The European Union's Markets in Crypto-Assets Regulation (MiCAR) establishes requirements for stablecoin issuance schemes involving both EU and third-country participants.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-ooo3vf",
+          "headline": "Crypto rule comparison: the US GENIUS Act versus EU's MiCA - The World Economic Forum",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2025-09-17",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQT3FiYUxuZWRxb3AzQllKM0V4Mnd3QVFMOVVhV3NIcFNqOWw0Z29KSmFNd2hUOVJxQ2M4aXdyWDUyZ2pnbGkyZkVwX1N0RnV1dm83aF9fdTNOcDd4Z2FjMVBybm0yUmVrQTVQMUs4UUpoZTNscnFQems3MkV5NHFDaG9KWVduazdQQU9OOTNfUlM?oc=5",
+          "summary": "The article compares regulatory approaches to cryptocurrency and stablecoins between the U.S. GENIUS Act and the EU's Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        }
+      ]
     },
     "Ireland": {
-      "news": []
+      "news": [
+        {
+          "id": "rss-google-news-ireland-stab-mcjj8f",
+          "headline": "Bison Bank, wholly owned by Hong Kong's Bison Capital, launches its MiCA-compliant stablecoin for institutional cross-border payments - TradingView",
+          "source": "Google News — Ireland Stablecoin Policy",
+          "date": "2026-05-07",
+          "url": "https://news.google.com/rss/articles/CBMikwJBVV95cUxNNk9jcHZpaGJwc1NZWG4wWFNMdi1WZnhhQ1h2Nlg5SWUzNkJIZE9kXy16dkJWcl9rdVJoM0NybzFzWkM4TWY4Ry0yMEJLOXpzaFhsSFJGX0RuQ2tIS21lM3NyOU1LRDFFOTgwa0U3bWV1NWt0cDRaNjVUUVozT2YtamtBMThCd2lDM3Ftc2xoZkswdWlieHNaTWdza0dnbGJVa0hXQ0FieU1UQm9QaURDOWZIaFFxb0FRR0lSMmEzaE1LQUNZaEkzUU5YdUgwOUUzemFwNjdyTWtFLTdVZkpDTm1sclVvZDBpOGxzMkx3bVk2Und2WF93QU5QeGhtNDlzMnhHR2dkSk5RMGx3Y3JCTDFORQ?oc=5",
+          "summary": "Bison Bank, owned by Hong Kong's Bison Capital, has launched a stablecoin compliant with the European Union's Markets in Crypto-Assets regulation for use in institutional cross-border payments.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-ireland-stab-yrwqza",
+          "headline": "Senior European systemic risk adviser backs EU stablecoin clampdown - TheBanker.com",
+          "source": "Google News — Ireland Stablecoin Policy",
+          "date": "2026-04-30",
+          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBkS1RhLU1kc20xdi1fc1R2SGJVQ2hyWGh0WmllWGJ6dGdKQ2Rfb2R3bnpER0VORmFCWVlHUklTX25DSENVM2tDZXZCeHlKdE9GMmdIMXFtcjR4a0JBUDl2MEQxRF9pMnR0QlY1aGxYMDRJZTQwRW9kYWt3?oc=5",
+          "summary": "A senior European official responsible for monitoring systemic risk has expressed support for stricter regulatory measures on stablecoins within the European Union.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-ireland-stab-hsooq8",
+          "headline": "‘No justification’ – Crypto lobby pushes for MiCA changes to boost Euro stablecoin growth - AMBCrypto",
+          "source": "Google News — Ireland Stablecoin Policy",
+          "date": "2026-04-28",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOdF9uUGN6S2plWkpCMzJrQzBWY3BqZC1ldkZNN3JnSmEyQjBVSDUyRmkwc2dYTS1VN1QyRkppSlRMa3Z5R0V5NVFlaGQySmVxOEd3Nnpya05fbHc3bVlRNzRLUVJ0TzhwSldxcHh3cTRkMUt6SFhCTEstZWF6LUU4eDg5Tzk3am9UWEUwRng5ZUlpVUE3ZDA0cWNtRG4yOF9oaG1sUk1NbjlzUUF20gGyAUFVX3lxTFA5Z29vdWhLUmlvWHBCZENpZnFnTGFmTk5HV0xmaDZjNUNiNHVZRktvSjVYUzZPNGd1Rm1FTDB4UGRtOTNqaWt4SlhTSmNCZEQ1NEtZdVVuUzdnbm1vNE5YamNwcjZzQ2ZsbUZkZDl2dzROM1otUS1KUExZOEVWdl9pQXlvN0w5ZXVzdjg3emZhbE0xT2szd3lYUnVjUTUyNml3dnE5QUdNUTh3bk5VVW9iLVE?oc=5",
+          "summary": "Cryptocurrency industry representatives are advocating for modifications to the Markets in Crypto-Assets Regulation (MiCA) framework, arguing that current provisions hinder the development of euro-denominated stablecoins in Europe.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-ireland-stab-jn3nsj",
+          "headline": "Stablecoin News: 12-Bank Consortium to Create MiCA-Compliant Stablecoin - The Coin Republic",
+          "source": "Google News — Ireland Stablecoin Policy",
+          "date": "2026-04-22",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQQjZrMnFlbFM5ZVZuRUFGdkM3VGQ4YjJnT0JnRU9lTkpPclkyc2xFOWd6dDVsbWVWQkFWelhIV3VvUnJtLTVoMF9SM0JZeXFCTXg1NG1Fc2FpU3pzYjVha3BPa09ScEJ1NG9mME4tWnU4OUJlRnEweU02ZmlYa205cHpuYWxCdklFcE1zeE9uakVDVW5mcnhBTXVXdzZWQnpncEJKeEpKaUJ2YVJvbF9aTGVYR1DSAboBQVVfeXFMT2JhdkhKclZhbGlFeVpYR2p4ODY5NWlCSVVWLUNsVVRZWGRyTF9VVWRGRWFWci1IVFlBZl9MVXJsWEI4LTI4bjRPQ1dUNllfODZTcG56anB1Y1RFelIxMTJhNHpyU3RkaWNOVGRqY2lxT1dGMkNCMk1WNHQyOEJQYkVLUDF6Y2xsZXZaWm84Z2ExSk4zdWtDT0JvS1B0NXhpRk5LZlV0aktZNmtBekFjSlBVbHRmT19HUzFB?oc=5",
+          "summary": "A consortium of 12 banks is planning to create a stablecoin that complies with the Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-ireland-stab-esjchj",
+          "headline": "European Banks Tap Fireblocks for MiCA Euro Stablecoin by 2026 - MEXC",
+          "source": "Google News — Ireland Stablecoin Policy",
+          "date": "2026-04-21",
+          "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5VMnI4QTlLZDl0NlBCTTZyQlhBY2NHdW5WVXhIRlN1ODJVUEM2bEN5S0k0ZWoxUmo2UmNBU2FHcElLWnBoVmlnVQ?oc=5",
+          "summary": "European banks are reportedly planning to use Fireblocks infrastructure to issue euro stablecoins in compliance with the Markets in Crypto-Assets Regulation (MiCA) by 2026.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-ireland-stab-qkuscv",
+          "headline": "European banks tap Fireblocks for MiCA-compliant euro stablecoin - TradingView",
+          "source": "Google News — Ireland Stablecoin Policy",
+          "date": "2026-04-21",
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNeXpFWnl1VWE0X0pWYzVTc2VyZVhQOWJuV3ltLTctT1l2dnpLNUNjUUNhRG1iaUVJeEZheklLelZyMWpxTDVrdHJ0Q3FJWkhORGFIQkJudUMtTDdFM0ZCZnVBQlZ5X1BUTnFCc2JXYklpZXkwdVQzMUgwNXg3TDRiTDJhVFI5S1FqNnhUemd6YnB2RWhVd3V3REthZFdkSHdlOW1ILW1hVDJacHl4SzcteXh0SzJXb01wSHJ2SkZoSkJXeHItWm1N?oc=5",
+          "summary": "European banks are using Fireblocks infrastructure to issue euro stablecoins that comply with the Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-ireland-stab-cga9m1",
+          "headline": "Confirmo bolsters European stablecoin solution with payment institution licence in Ireland - FinTech Futures",
+          "source": "Google News — Ireland Stablecoin Policy",
+          "date": "2026-04-10",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxORm1HY3VmUy13VXZfTmVsYThDZ3dpNFl1NFdOX05PZGplRzFiOS0yN25JaDZ2bVg5OGdFVkp1MUZVQWZfZUFvb1RhWXRySDJFdUJOQVZWNlk1cXp1Q0JzQ2cyaVNKYUZUbVRLZ2VqajE5YlF3MWJISHVHSVU2ZjBPX3lMTThFUW5RNFBsRUNqTld4NW1MTFZaakdBaXhnT19CckZEbnMza1Q5WWpPd1ZuNEF2RS1rMWhiUDZ3WW5uZXJOSnJOd2ZNOEItQ05qOGplVExaUVcyZw?oc=5",
+          "summary": "Confirmo has obtained a payment institution license in Ireland for its European stablecoin operations.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-ireland-stab-weuboc",
+          "headline": "Confirmo Becomes One of Europe's First Fully Dual-Licensed Stablecoin Payment Providers Following Central Bank of Ireland Authorisation - Fintech Finance",
+          "source": "Google News — Ireland Stablecoin Policy",
+          "date": "2026-04-09",
+          "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQaWFwaFoxOFFrWEMzWklqU214bDAxRnlYdUhHRlBHVTBSZTVCdGlPZEtrc1FtTWVCNWlIcGtsRXpyRWdRY0dUR2JwQmpnb2ZnSmNlT0E3RGZ6NnZha3NrU0tsMEZGTFFxSmVaSWd5VzV1a1ZJQ0NGcVc4RFN5MDRwbDN3aXdLbVZEZzFPRmJNZUdYSTlHdjVPZ0hCNFhfZ1N1ZWpGYV8tSmNOb0VEZTc0b3hiQ2lJOGZPMlFaNjAwenVhaWtCWmI0bkZXbmp3UUFndTVMYmpiTHA2aTBYSi1jOUFPck1PWjlyeWg2TDYxYW1nWng4SzliaHBR?oc=5",
+          "summary": "Confirmo received authorization from the Central Bank of Ireland to operate as a dual-licensed stablecoin payment provider, making it one of Europe's first companies to achieve this regulatory status.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-ireland-stab-a8znxg",
+          "headline": "Tokenisation, Stablecoins and Institutional DeFi — Insight - PwC Ireland",
+          "source": "Google News — Ireland Stablecoin Policy",
+          "date": "2026-03-10",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNYWxKd3Jod2xQN1FyTjVFaUhpNFRLTE9TX05oNWcydGRPRmlSZklGNWdnUjl5czA3YzNPUjJsXzhuaGxPOVBwcFFvU0kxMjB1NkJDdE5SM0FRR1A0TlRsSG44SlYzRUNZaFdMTGZOU3kzdXUyTjZScldNM1ZVNWxHb0ZpT3pXOERWV1ZZa1JYdXNFRXIyNzBOb2xHMlFJWE45WHEzTkdwYw?oc=5",
+          "summary": "PwC Ireland published analysis on tokenization, stablecoins, and institutional decentralized finance.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-ireland-stab-10jeyk",
+          "headline": "Analysis: Stablecoins – what are they and what is the law in Europe and Ireland? - Irish Legal News",
+          "source": "Google News — Ireland Stablecoin Policy",
+          "date": "2026-02-19",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQOUdWbTdjY201b1BwMVRxdzAxMFlrRTM4Z0J3OUtrUXBqLUloNDU4VGZJaURSQWxTNlZ2WVBLaDV3QmdEcURROTBvN3ItLVlEeHBzMVgzN1BpbTFaU3BqY1ZveFJxMWNab2V6enpEMWFYYk5UR0RGVlhxeExIeVhpSHFwQU9HYXRNTzkyeUliQ2ViLWZkeDNoM05FblhVeXhrdkZqV2U4UzMwQjFjQjlFb1F3?oc=5",
+          "summary": "An article examines the characteristics of stablecoins and the regulatory framework governing them in Europe and Ireland.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-ireland-stab-wgf8ky",
+          "headline": "Checkout.com acquires EU MiCA stablecoin license - ledgerinsights.com",
+          "source": "Google News — Ireland Stablecoin Policy",
+          "date": "2026-01-27",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQV0EwUnNxcFUtZktTN1B2eWxOQ0hvaHlFaHBZTmU0dE5paVlGV3NsSVEyUDVCRmhDTTBqRDlHRWhRQzVnbHpVbDF0UHBxX01JYVlXQnlFWGFFZXVxSWhmWDZ2VUxzaURLVlh1Mmdhc0RYekVsdjljM3lzQWp3YkV1aEpDSlhvRmM?oc=5",
+          "summary": "Payment processing platform Checkout.com has obtained a stablecoin issuer license under the European Union's Markets in Crypto-assets (MiCA) regulation.",
+          "summarySource": "headline-only"
+        }
+      ]
     },
     "Germany": {
-      "news": []
+      "news": [
+        {
+          "id": "rss-google-news-germany-stab-82teqn",
+          "headline": "Circle France erhält AMF-Genehmigung für MiCA-konforme Stablecoin-Dienste im gesamten EWR - Mares Media",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-05-10",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPVmhrN3d0MjRteDREM0owYlBtbXAzS0tSOFA1QlFDelQ2ZVRQUjhmNkxGVnNackkwNXBmX3d2SllXd2U4WDN0dGVwNFRMZUF2TDVqcTdEa3VVeVQ0aFJKei1LTlk0UkxRQnNHNEhqTS00MGo5S0xEMGU2a2NhWTBjV3VMeTBaaDVYNE1aTmVoYVNEdHlTZXRGb0MzZWNfYjIzeGhDWjlkMnFnOG1UOF9XUmEtWnpBNW02SXc?oc=5",
+          "summary": "Circle France has received approval from France's financial regulator (AMF) to provide stablecoin services compliant with the Markets in Crypto-Assets (MiCA) regulation throughout the European Economic Area.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-2y9f0z",
+          "headline": "Bison Bank bringt MiCA-konformen Stablecoin auf den Markt - Cryptonews.net",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-05-08",
+          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE8zT3dra3Q4YU1QTzRqaTBUVXprNXh4eGFQVTNUWU1zeDktTnViOVlpLTh0X0pnUGxhY0hQMENBcTRKUS1aRnpIVWF2UGE3Z0YzQW14TUdBRjVZYS1z?oc=5",
+          "summary": "Bison Bank has launched a stablecoin that complies with the Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-9rwmz4",
+          "headline": "Regulierungsdruck auf Stablecoins: MCDEX und die MiCA-Deadline 2026 - it boltwise",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-05-05",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNVHV6ajRDal9jRTFTZGF4c000Y0oxR3B6OVBsbTJjbmd6cElTQkx4RU1QYWVoMTU0NDlKbXVLY2libzBVbFFkdFRYRjR2cEs3RUZ5TjhGaUxraE41aG9wazk2djZqU2t3cEZIMnZuV0gwRm9ub0pJZDdNZGJibzROdlBvZWtlTzAteDVySU42X1V4WEpwdWdCX1IwSnl2VE0?oc=5",
+          "summary": "The European Union's Markets in Crypto-Assets Regulation (MiCA) approaching its 2026 deadline is creating regulatory pressure on stablecoin issuers and platforms.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-9tbmtv",
+          "headline": "Euro-Stablecoins statt Dollar-Dominanz: Warum Europas Banken unter Druck geraten - BTC-ECHO",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-04-27",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNb0ZoWkxKbXJ4eGhHYnJmU3FjOEYwVW5hblY0UVNPZHpWRGhWc2kwMlpJbzR5UVZIektzUXV3RHlqTjQ3SHVON04teGZzN0hVRTFxMy1qNlRRM2xYR2p6SGg3allIcWUwTk1vZVM0czY5N3poM0VWdWNaSEl3SW85Uw?oc=5",
+          "summary": "A headline suggests that European banks face pressure as euro-denominated stablecoins potentially challenge dollar-based stablecoin dominance in digital asset markets.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-ttcaac",
+          "headline": "Euro-Stablecoins explodieren unter MiCA um 1200 %, da Kapital in regulierte Anlagen strömt - Cryptopolitan",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-04-24",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE84UlVQbllmZlFjZS0xMWs1YWdadlgxR1UwM051Z1ZuS3poQlN6T1FteW10YmR0UVE2VjE4dGJvdUozRzJ3ZjV5N19VMnJNaDBKSWZKYjRLZjVTdnRoalNqbzY4ZS1KUjVLV1VXMEhpLVJuWmVGclkzZDNNblZPSlE?oc=5",
+          "summary": "Euro-denominated stablecoins experienced significant growth following implementation of the Markets in Crypto-Assets (MiCA) regulation in the European Union.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-ixfbi1",
+          "headline": "Stablecoin Nachrichten: 12-Banken-Konsortium will MiCA-kompatiblen Stablecoin schaffen - The Coin Republic",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-04-22",
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPaUIwS0dRZFo1cEJCWDEzSDhuU0xuSG9ER1F5bWM3MkNSYUV4MDFla0VkdWxDc2xyS19iZHNGblRGTUVhaGNVYTdTMTdORVNsWUxzX2tsMFl4Z0o3OHJzcUVndGR2MGpwNG1mckNkOUE2UU5hU0Y5Q0o1RHVuT001T0Nxc2VXYXRaTXJjX3dnRFJwNzhQdUZDU19qOXhuZ2RtQjFmbERma1QzenpvLTVRRl9HdVY3SUdhTlUxaTAyY05oRmtnVjd1ZnRlMVrSAdIBQVVfeXFMUFoxSE4tR3pydzI5aFlNTzI4Tlk3UURHOEJ5blVRTW1jTXBLLTRHVUdrVm1Rc0VkTldMSDNBRkJwVXFYRGd3cms4dnNfc2FMaTh4SlFfOV9jMmFpU25PbWlvaVA4bWNCOXIxS21Gek0tMHZJX1dzRUVabnMyU19EZ3JCLTBwOG5QQm1wMWpMNzZXR2FWYi1lUUE4NkhmQ1RHa01ua1VHOUZ2Q0EyY2pPcVZ4UkxRUmpNSTVDTFRLU3ozNG5ORzJIRHJkbFVZWEQwU1Vn?oc=5",
+          "summary": "A consortium of 12 banks is seeking to create a stablecoin that complies with the Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-60xpw",
+          "headline": "Zwölf Großbanken unterstützen Qivalis-Euro-Stablecoin und setzen auf Fireblocks als Infrastruktur - Yellow.com",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-04-21",
+          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOaXlzTGxyOGQ1YVpVdjB1YXZyVE40d2p1cVRHUk5PMnhnekNUck9EdE5aTFNkeThHbU5iWEJvR1BfMlY0NXFJRnVZenpHVWJLRFQxZS1YVkZ6bDZ5TUtZSDVMdkIwRk94QmZWTUVpcGZYc0RUQ2d4YWVTVnlJLVh0REUxdjM0UlFNNmtBRTRZN0Y3bXAzaHVjRWtYcHB5c2pkMExlRmoyTi1ncnpNNks1cHNUOEdIbnpQQkMzTm16eXZtYUNUS2NNWHNleFNCbnI1OXA4OWs2UHMyRWhrckR3eS0tM1htZGc?oc=5",
+          "summary": "Twelve major banks have announced support for a euro-denominated stablecoin called Qivalis and selected Fireblocks as the infrastructure provider.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-anvwg9",
+          "headline": "ClearBank gibt bekannt, dass es die erste niederländische Bank mit MiCA-Zulassung ist, führt EURC und USDC ein - CoinDesk",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-04-13",
+          "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxOdmNKZTNqODhEZUZ1dFAyWWkzVE93bDNhR1U1ZXh6bGhEdVloc19MbmwxMlQ5Si1XR3IyN0N4MEJtUE0wNGZzOXBwZXVlX29GUi12LU1zNXl0cmo1QUU5TzhpRjlDV2xiUlRyRS16OW5YSEQ2ZG5xRjJHczY0VVhScnpiUFhHM1pZTmFVTlltVEgzNDE2eUpoZnFFak9CUmlnMTRZTkgzUHp4MlE2bE03WFc4UElYQnd2NlA3R0lHQVFiRmkwaFlEMnB3QmFyY2lMa0VNdURSeTdUMXpB?oc=5",
+          "summary": "ClearBank announced it has received MiCA authorization as the first Dutch bank and is introducing EURC and USDC stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-ox9mqg",
+          "headline": "Frankreich fordert strengere MiCA-Regeln für Stablecoins - BTC-ECHO",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-04-11",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQUmxvLXVPYjI5UjEzZG92YXNBSDNYVkxkSFlMa2JjVENibDUwM3QydVNra1huejVzR3NzLW9wTXlPM2haSW91ZWs2SVpuWVc4SWljYk5XVFdJZXctZEtLeG1nQTdQSG1sckFOSnFoNGlOd1hLNEJWdmt3SGlSUHdDZFY2cl9kMzJWNjFwUXYzUDVhZ21xVlVQZi1NcE1QRnBxTEhzYw?oc=5",
+          "summary": "France has called for stricter regulations on stablecoins under the Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-u1lx7c",
+          "headline": "PayPal treibt mit Bybit-Partnerschaft und Stablecoin-Expansion Krypto-Integration voran - AD HOC NEWS",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-03-19",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQeWE5cTZGMExiOGZ5UlJqSU9yRHY0RkRpNHdiTjZ2aXJiejBjQTBUUFRGY0E4aEZkVnFkTW5KSHEtXy00SlcxZVJ1bFd5T0w2ekctZUU3d0RwZG9SbGxEZVNraXN2eHhya3FjbGp3OGhGSlIzY1JVampOdjhRZGNENThsVUhJN2VldF9GTjhWSUJ4Y3YwQksyanpMcGRWek5EaXBGUEhFWTN0LXFtWTRGRXhXbGVUNXU2Z2Zrak53?oc=5",
+          "summary": "PayPal is expanding its cryptocurrency integration through a partnership with Bybit and stablecoin initiatives.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-5dyrr0",
+          "headline": "Europa zählt 29 regulierte Stablecoins gemäß MiCAR – doch es besteht eine große Lücke - BeInCrypto",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-03-11",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQZllKREZmWkMyNUlKTjlfTHJvV1NQLU5CY2FWdVFMX3lGa3FrNXJmSzRtM0NZZVdQMkIwUE5YT1Izd2F4UUVYTkw3LU1WTUhZSjAtbHRVQzcycnY0bzNGekdUMUJCMkhxMjlXVENPTXhzYkdvV2o1cEl1Vk9DR0s0dHRpZC0?oc=5",
+          "summary": "Europe currently has 29 regulated stablecoins under the Markets in Crypto-Assets Regulation (MiCAR), though a significant gap remains in the regulatory framework.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-hhom7m",
+          "headline": "Qivalis befindet sich vor dem Start eines Euro-Stablecoins in Gesprächen mit Krypto-Börsen - CoinDesk",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-03-02",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQVmRkV1hZTlh4ZjEwMm9iMkJFaUs3SkRDM1NLdUlSLWNVS2hDajlVYzgzNlJhRmZ3TzV3RXBZQTNmVGVwdVQ0SVI0RkphRXNDTHRPZTFrdDc2WlRjRXdCdEVCbjFnR1c3SGg4Z2F2M0JFR3VqTTlPcTBoaUFyVS1UV3RVVHpzZ0lGLW1uMjNYelAwaHJPQTlFcGVtdUtuMlhGVEZoXzlQQW1MbHRnZWxkcmxfTGgxRVI0eU5yYTllczN6YWxxZVNfbjVB?oc=5",
+          "summary": "Qivalis is in discussions with cryptocurrency exchanges ahead of launching a euro-denominated stablecoin.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-vd8d7",
+          "headline": "Bybit EU erweitert den Zugang zu USDC und EURC mit neuen Stablecoin-Kampagnen in Europa | Corporate - EQS News",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-02-20",
+          "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxQM0preVVqeWZzdVZxUEdVX1hJb2Z4dVRUcDV5clotSnloYVZjOWVXRzBGX1NZQUNyWkNQVzhsRFBOajJ0Qml3V2RRMHE4d3Q2aFBlbWo0ZGh5SUhRdEVXTnJJREhMWWRlZld3cEQwZnhKZTFVdGVwNG45dWFtektCdy03eXRvUG0yX28tMnpvZEhOUVZndVpXOVBacy1DWHlaZU9aRlRfNW1jVnZOeWhKQ3VQdFhQVHdJNTBPUHhBRVpvVmo4N1RqTjF5bVE1R0ZyM29vVXZVdmFtdHlWWmRXd1MzenhYLXhWaEVJTENZTEw1Z1duZXpZa0FaYw?oc=5",
+          "summary": "Bybit's European operations launched promotional campaigns to expand user access to the stablecoins USDC and EURC.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-2kwg1f",
+          "headline": "Stablecoin auf Franken-Basis: AllUnity plant CHFAU - BTC-ECHO",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-02-02",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQY2swSWNqUEczUk1aRG5vM185UnFkbDhwcGhxUW51YzlXa1BKM0JkSFJjZDJfR2hNa3FNR0I0SnhZbjExN2VpekJhdkx3Umc4ZXhFUlJ0eENJZV82VnZmMWZHd19NbDVISTBYblRvb0tIM2NMSlhGWGtHYy0xcG16djR3VnE0RVBzOXd2RVVnaHEtZzZ4elZydzFiZWh3Wm4y?oc=5",
+          "summary": "AllUnity plans to launch a stablecoin pegged to the Swiss franc.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-cd7hfc",
+          "headline": "Stablecoins gelten als „der Standard“ für Zahlungen, während OKX die Krypto-Karte nach Europa bringt - CoinDesk",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-01-28",
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQWVg4TUYta1RNQmRGOERyMV9IMHJ5MnBUalRnOGFEWkU0TkVkR3FpZFJnTl9CUl9fa2pjQVpmUlZTR0l1cm5CcFEwSFFaZGk1cmI5aERsNERHR0I3Z2U0QjRQZ0NUR2FPTjk2ZXZIV29sYVR4MVlWQ0VzUUhQSUI1R0c0eTBrTVNBcjBBcW5icmFIMW5oTU5nQXN2b0g3bnpzNjFrVWRYQW1KMmE3Q2JlM1JkMTYyUVh5SDNlVWk5d2lOTHdqRUJz?oc=5",
+          "summary": "OKX has launched a cryptocurrency card in Europe as stablecoins are increasingly viewed as a standard payment method.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-grwuy",
+          "headline": "Neue Studie: Spektakuläres Wachstum von Euro-Stablecoins – das ist der Grund - BTC-ECHO",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2025-12-06",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQTGlrSlN5M19ETEZiUUN6UWpBcEJQbG9PWGVMU2NXZmltMVFPVTh5U2VWVHFHY3Y4ZGtUcENYYndNd1pFQmxXR2c0azBtaFVFTGNmTkkxUnlxNmVFZF9nNWEyMnZuRmlqZkJ3LUUzbUVocmJIUjZaMGRXbTJWU1l4WmRIRTZLQ2RoV0k4dUhyR3h4b2R5eC1XNXJoVmtJS1A0WXI1QWRPSXFjdmtqVjRoVmRXVHExY3V0Vmk4?oc=5",
+          "summary": "A new study reports significant growth in euro-denominated stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-suwvlu",
+          "headline": "10 EU-Banken schließen sich zusammen, um bis 2026 einen Euro Stablecoin einzuführen - Yahoo! Finanzen Deutschland",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2025-12-03",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOYWx6WTZobktVclA4QVdvVUd2LXV2cGhpQW5pdVFmZ25LZFFTMDBETU5Dd1lKS2Vfc0FLOUdzU2xDQnlJQ0pMRXRlS3BoRF9BODNYMU9KdWpfSDVXRVV3NlhpOXVTTHo3SFpwQ1R3Y0ZhN1RqNXJDbnpGSVA2dGFHdUliN3BRWlJ2bEFmTmZQVENCV1hZRGZv?oc=5",
+          "summary": "Ten European banks are planning to launch a euro-denominated stablecoin by 2026.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-yzcxza",
+          "headline": "Qivalis bringt Euro-Stablecoin 2026: Europas Banken wollen digitale Währung - FAZ",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2025-12-02",
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNU0o1TFZiczVnS3BsZVFkaHVWU3VEYU1kd2todWlvelhVdG9nVFJ4a2ppcjgzOWI1djNGZ2lWcW0tdGR4QldCSFE0T3FfRWFqSXpGd3o1ZVc4MjJDQnpmVGI0NnB4MDFuTnhvejN6cjhXcDJjSFRmVHU3eHdIdmRhdWpmQnZ1RFdRZldhRWxZUzVoMU03UktMcGRYU3FJSTFTMWNBTWVlTy1VUUhyMDREb09Xdl9EVjk4MnBaT09vcUh3TFp5c2xXZW1wWUcwYTF3R3llVmdzRGY3bUxqTmc?oc=5",
+          "summary": "European banks are planning to launch a euro-denominated stablecoin through Qivalis in 2026.",
+          "summarySource": "headline-only"
+        }
+      ]
     },
     "Luxembourg": {
       "news": []
     },
     "China": {
-      "news": []
+      "news": [
+        {
+          "id": "rss-google-news-china-stable-mtnute",
+          "headline": "Hong Kong Allows RMB Stablecoins as HSBC Plans Launch - Cryptonews.net",
+          "source": "Google News — China Stablecoin Policy",
+          "date": "2026-04-11",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1NOFZKZDRCZHk5djdQN0ZmR0RvWlNaQ3lTemFYclVyV0lJeTV2WGVuRkZfVFVVU0FBalBEdjBDTVEwaXhudXlrUXhWVGt2VjlrbVFWajdMMkM?oc=5",
+          "summary": "Hong Kong has permitted RMB-denominated stablecoins, with HSBC reportedly planning to launch such a product.",
+          "summarySource": "headline-only"
+        }
+      ]
     },
     "South Korea": {
-      "news": []
+      "news": [
+        {
+          "id": "rss-google-news-south-korea--itdrzd",
+          "headline": "Stablecoins Shift from Speculative Assets to Payment Infrastructure as U.S. Regulatory Clarity Emerges - Korea IT Times",
+          "source": "Google News — South Korea Stablecoin Policy",
+          "date": "2026-05-04",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBmNnFPVmlFNGZ2NHpYbnJjZDZuTjAwbVpoeGp6YTJZaFU2TlBqNkpwbDU3TDRMVHJVeVlvRlBuM1FEeV9tTGNDTXJGQlRMdVVnZ3dwWlBJRjR1TmhhSWZpbWs1ZTRKT2YzcXBaWkpIdXY?oc=5",
+          "summary": "Stablecoins are being repositioned as payment infrastructure rather than speculative assets as regulatory frameworks in the United States become clearer.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-south-korea--3gp6bx",
+          "headline": "‘Major shareholder ownership cap’ Digital Asset Basic Act final draft expected on the 5th - 경향신문",
+          "source": "Google News — South Korea Stablecoin Policy",
+          "date": "2026-03-04",
+          "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE4yNGdxNFRHek9hUTRyanJtSXVvM2pVc1ZFUlNPenRPMVVnaDFKa28wcXhVa3ZIa1hkNTNWQ3RiMlVUalRCeEQySVFQeGhMenlyWVd6YnQ3WVNsbnZ3SXc?oc=5",
+          "summary": "South Korea is expected to finalize a digital asset law on March 5 that includes provisions capping major shareholder ownership in stablecoin issuers.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-south-korea--141sga",
+          "headline": "Stablecoin Bill Decision Looms in Korea; Ruling Party Balk at ‘Bank 51% Rule’ - 마켓인",
+          "source": "Google News — South Korea Stablecoin Policy",
+          "date": "2026-01-06",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1UNDN2Vi1SUmhaZ1dMVG1jdTJkWnFTYjBxX2xGcWNxcXFhaEZOUC1NYnppbVNub0REMl9DN2swcUF1Mm9fdFA4VFgtU0c2RmZ0WWROMThsRUhRWmlaeXBtcjZ1azVSZWZudEs3YVVUZ04ySjQ?oc=5",
+          "summary": "South Korea's ruling party is expressing hesitation about a stablecoin bill that would require banks to hold a 51% stake in stablecoin issuers, as a legislative decision on the matter remains pending.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-south-korea--366q1a",
+          "headline": "[Part 3] Stablecoin Hegemony: Ethereum’s 'Meta Transactions' as the Key to Cost Innovation - Korea IT Times",
+          "source": "Google News — South Korea Stablecoin Policy",
+          "date": "2025-07-12",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1UZEdGX01KNERGNjY5emxJMlV0Z0NqM1NuTTJUVlZvcG1jUk9ub01FUl9EWEphSW1wR080VUVpZXpjbnNqOFExQkhWMU1vS3IyRk80RDBFOGNheHZmX21PcE0xaUtRX2RSbldDV0hERDU?oc=5",
+          "summary": "The article discusses Ethereum's meta transaction technology as a potential mechanism for reducing costs associated with stablecoin operations.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-south-korea--csm3zh",
+          "headline": "Kakao Pay Plunges Over 10% After Trading Resumes Amid Stablecoin Policy Uncertainty - 알파경제",
+          "source": "Google News — South Korea Stablecoin Policy",
+          "date": "2025-06-30",
+          "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE82UlgtTFBMUXlpQWdKb0dVbVNxWGJROE56YnpwWDZHbkFZUmVVVXI0NVJ6YmpMWlBqR21rb19BTXpybm9HWG5lamJCTXMwNjJsRjVtYWxOMWZURmFROWfSAW5BVV95cUxQWkhwazZ0RG5wcGxYam12VmwyN2QzNnByeG5GWG1ub3pPdHgyY3NFbjdlNWwtTGthb1A5ZlRzbVBrR3hsR1k3SjhPdnB6d29lSXlLTmQ2N3FCa0lmb003NUlHd1d3bUw3ZUpLWjRXdw?oc=5",
+          "summary": "Kakao Pay's stock price fell more than 10% after trading resumed in an environment marked by uncertainty surrounding South Korea's stablecoin policy.",
+          "summarySource": "headline-only"
+        }
+      ]
     },
     "United Kingdom": {
       "news": [
+        {
+          "id": "rss-google-news-uk-stablecoi-hkf6at",
+          "headline": "Bank of England Softens ‘Overly Conservative’ Stablecoin Plans Amid Industry Pressure - LCX Exchange",
+          "source": "Google News — UK Stablecoin Policy",
+          "date": "2026-05-15",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNd05lbGhuUWoyZmo0dTVCMG1STFQ2b1RkRGVFSGx3WmZYZm9UT2F6U3VGeUhLYUpYbHROYm1XRkRJbmN1b282UU1WT25KTDlCOGJXMThldno1VmFpT2RJQWJKek8yRUg1NGl0N1d5S3J2QUNjTFNzbUNGV1o3V25DTV9WaVRiTEVqWm11c1RUa2RvczhIWjVJTVBsLWV1Wk9rSkdwWVpvVktUZ0o3Nm1Pckl2bkU?oc=5",
+          "summary": "The Bank of England has adjusted its approach to stablecoin regulation in response to industry feedback regarding previously proposed requirements.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-uk-stablecoi-b5j6z5",
+          "headline": "Bank of England reviews stablecoin proposals after industry feedback- report - Electronic Payments International",
+          "source": "Google News — UK Stablecoin Policy",
+          "date": "2026-05-15",
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQSF9XcTBydElmQkZuLXZvaVpKd05hWEtja3Z0YmRDUTMtM2RBaFlGeWlVanBGdzQ0RlB6UGgzRkdDUDFYQXZJSlp2YXZETWdlNUwzZ0RqZ2dzVWJJTXM3ZGVTQmNfd0FlU3l2NmVnaFhJcTdYeThRUG9YbzZ5ZGhXQVpncDZmUGtYN1liZ0lpQmxDWmJaNGdVLTNKeF90eEg1dldFdzBzLVQyYVhfQkQ4NGw2UHNtZDhKMXQyWENPc1NGeXkxWmJ0SA?oc=5",
+          "summary": "The Bank of England is reviewing its stablecoin regulatory proposals following feedback from industry participants.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-uk-stablecoi-6auemf",
+          "headline": "Bank of England softens stablecoin rules after industry pressure - FStech",
+          "source": "Google News — UK Stablecoin Policy",
+          "date": "2026-05-15",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPX0NxeUtqS0MtZTN3RWduYV83WlBwa0YtSksxNnlaaTNoZnlPbEttX3lDOHBTbXMzSjJxM1Rhcks1NDBWSW1ROEZPV1d3VlZEMl9xZ3VzMzRRSS1xZG53SnRxZGZVRjVuZlNCU01qSko3RTBUX085b1AxQWtYcWF6TlVlQm9vekdsdWRsM2xnR1BhMDNDQ1UwOFpkVmhZUQ?oc=5",
+          "summary": "The Bank of England has modified its stablecoin regulatory requirements in response to feedback from industry participants.",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-uk-stablecoi-oh96t0",
           "headline": "Bank of England Reconsiders Stablecoin Limits Following Industry Concerns - East & Partners",
@@ -4390,6 +5813,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-australia-st-ovsv8o",
+          "headline": "Prove and Velocity Partner to Close the Trust Gap in the Global Stablecoin Economy - Business Wire",
+          "source": "Google News — Australia Stablecoin Policy",
+          "date": "2026-05-14",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOb3hNTklBeW4xZWVpcnFXNFdwVnBrZFJMSkNOTVM5T1dTOWVUVGNkZS1zX2JwVkhrdmdjOHpQTWxkVzFEQ1dIR3V1SjliYlVDR0RnZXU3b0R2OG0zZ2FNcUdqU0VYcGJDTjVjTFR1bll6MTRTVjdyNHgtRnlrSlFrdllFc25zaWZzSndtRDdPWDNrT2xuQUdmUk51SmpMRHZnVndDRGctNEJWeEMtMW14c0JBR0FuUzNGNlIwVFBJa3BKU2d1TG9qU1pGU0h3QXF4Q2txQ1RR?oc=5",
+          "summary": "Prove and Velocity have announced a partnership aimed at addressing trust-related issues in the global stablecoin market.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-australia-st-puqtbo",
           "headline": "BlackRock, Janus Henderson tokenized funds get instant redemptions with new $1 billion facility - CoinDesk",
           "source": "Google News — Australia Stablecoin Policy",
@@ -4816,6 +6248,15 @@
     },
     "Hong Kong": {
       "news": [
+        {
+          "id": "rss-google-news-hong-kong-st-g44ny0",
+          "headline": "CLARITY will strengthen dollar stablecoins, but Asia wins on yield: HashKey Research - CoinDesk",
+          "source": "Google News — Hong Kong Stablecoin Policy",
+          "date": "2026-05-15",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNLTJQeVNwM0Z3b0R5YmNTX2VFd21yeEJOWUtWaS11T0kzUkZOMzlUUHQ5TnYtLWNnajBMWE16V3NCb3djNnVFM3RBdHFUbzhYZ1RoTm0zOWthcVhWNXV1VlJIRFJuMUc3ekFWNHktZmo1WVBsQVotVnhxSnJoNkVod0RySTJicmFpei1vRVFQN05qVTV5VVlfblNyT0RwXzFJbzhEVlk3b1lHcUZaVElXZEZ4MkcwM2xOZFN1Y2pVSTdvb1k?oc=5",
+          "summary": "HashKey Research suggests that U.S. stablecoin regulation through CLARITY legislation will strengthen dollar-based stablecoins, though Asia may offer competitive advantages through higher yield offerings.",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-hong-kong-st-ckdren",
           "headline": "Hong Kong’s Stablecoin Potential and Cross-Border Scale Highlighted in Digital Asset Infrastructure Outlook - TipRanks",
@@ -5599,12 +7040,30 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-argentina-st-qfuqxd",
+          "headline": "Western Union entra al mundo cripto con su propia stablecoin - iProUP",
+          "source": "Google News — Argentina Stablecoin Policy",
+          "date": "2026-05-02",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPc3Y4YjJUaW11Tlhic1Z4ZTVodjJBZE5VY0hEdUpxRmFSTmd4cmRrbW9vRThPZnhFTXVJYjlQNE5WY2xOZW1yQm9tSEpmbVlOaFp6MUpPMmtBTUwyYzBzRXdrcGJEaVBSUTExMktYR3A0ek5xNEZwMGpibm9WbzBFM3dUQ2pXYUtiSWdSRG9Td3dvNmI1OXliZU9tVjFFbFRNZWRqZ0VOM1o5VWtiS3l2eFlTcFZQYkXSAa8BQVVfeXFMT3ZkVVUtR0JGODk0bldQMUpWeGZja0ZyU0ZPNzJ5UWdWTlFGaWVfYm1iMEdHQlJ0LVZqdWkzaE9tVmtncF9pb21yM25qazFvRlR5QmQ3aHdoNXdkTURuRXZjRGxUTjA2OXVWZjdaeERhSHk2em5pRy1kRTc0M0c2ZWRyZEcwRV9YZ2duVHdjZ01zU093WS11Wmtkd2dYRFk3ZWZSNjcwTXV1WFdRclB4SQ?oc=5",
+          "summary": "Western Union has entered the cryptocurrency market by launching its own stablecoin.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-argentina-st-3lsun2",
           "headline": "“En Argentina falta integración de bancos y fintechs al ecosistema de stablecoins” - CriptoNoticias",
           "source": "Google News — Argentina Stablecoin Policy",
           "date": "2026-05-01",
           "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNUUJyX3JVVmFxUEx0akFoZXVSRkRiQmNzQkJwbXZWTzJPdE41SngxdWtVMndlLWNVYjdkQVowbmo0OWE1QmlSMmNPenNyV2dFMWZlWlI5a1NRakJNRWpTS3lFX1FYc1RQVGUxVkU1NlRxY05DNWpua2RIZmpiZ2FHeEU2SEQtdjVBRGxSRHhVVFpHWXl6V2Y2T2Y0RGlvdw?oc=5",
           "summary": "An Argentine financial news source reports that banks and fintech companies lack integration into the country's stablecoin ecosystem.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-argentina-st-h5kf4p",
+          "headline": "Coinbase elimina una stablecoin en mayo y convertirá saldos a USDS - iProUP",
+          "source": "Google News — Argentina Stablecoin Policy",
+          "date": "2026-04-30",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOcTQ3RHpEZmljOU1PUkJ0NzRjejRQZmpkdjdaQ01sY3pJV1FST2RFd0tTby12ZnFLN0NrNFFQdUhUazhKLTNoNThXX3JRQlFRZlo0V3k5LWVPOUF4NmEzMFY2M0ltanhsZFQzaFdtQkJORlBRZzJKZkhOTTdGbnFyUW42QmxrU25oa0ZrMWs0ZjRSWDM1R3dsd1BXaDZXMmMwenJ6anB1TnoxSEx1R1VPbjh4elZZcU0wZERMTHZqNNIBtwFBVV95cUxOV0k0b3FZd1ZUNTZnR0MzNGpteTQza1hHS21RMk1pVkxYWk1pY05EMkpDVUtSM3BmcFRuWnZLWDBDU2NoM0l5SXlMYzlpWi1FMlJ6SU1McmtEc2hGODl2dThLcXd3aEN1UmhFZkl5QnpfRUlESmJrV3VoWXkzMGJEMkRFMFhQTHBEQjA3YjI3SjRfQmRaX184d2U4WE1BbFhaTTRSVFFXcDJOTnlNRE1PY0JpeFVSZG8?oc=5",
+          "summary": "Coinbase will discontinue a stablecoin in May and convert user balances to USDS.",
           "summarySource": "headline-only"
         },
         {
@@ -6111,6 +7570,15 @@
     "Switzerland": {
       "news": [
         {
+          "id": "rss-google-news-switzerland--al9pfy",
+          "headline": "UBS, Five Banks Launch Swiss Franc Stablecoin Sandbox - CoinMarketCap",
+          "source": "Google News — Switzerland Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQQ0hfNTdQd05HOW5UWnNyR2RnUUJEX0w1SUJBcm1CemRDLS1ScnpXNFBoYXBiNFN1YnZUNW9TcDdHdFpZSFVaZktxaTZMM3llc180bHlfYnptVzR6OW1UUUcxeUZ4RTRhZXpXbTI0cExvX2xDaXRROUlpYU9tYmFOZkNFbWNvaTV3emVzek5EeXdNQWdzWFU5SlpB?oc=5",
+          "summary": "UBS and four other banks have launched a sandbox project to test a Swiss franc-denominated stablecoin.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-switzerland--c02kiz",
           "headline": "Best 5 Countries Shaping Stablecoin Development - vocal.media",
           "source": "Google News — Switzerland Stablecoin Policy",
@@ -6580,6 +8048,15 @@
           "date": "2026-02-02",
           "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOTUthSXV0aUJqZEhHVFExQUo2ZVVVZVhSNGc4SW5Lb0ZSbXkwT0FLZ2lBa0lsUTFGMnZLZzg2WHo1UlF5VFp2NWZUdmMxSl9RSUlZcS1LMEhoemg2Y2VrUV9fYndmLVB4azhWRzk3U09tNHVOTG5nUk1PV0hhNHFUb0V6OXN3UGNIUXlFajBxeUtjVTZzM0E?oc=5",
           "summary": "The United Arab Emirates' central bank has approved the registration of USDU, a USD-denominated stablecoin.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-uae-stableco-s4v9xn",
+          "headline": "UAE central bank approves first USD-backed stable coin - INSIGHTS IAS",
+          "source": "Google News — UAE Stablecoin Policy",
+          "date": "2026-01-31",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNdFhPT3g4T3h6eHJMZmQ0RHNPSWlDM0d1RDhjVmlIcWphdl9vb1ZpVzZYU3V6Wi1nSEp3S0pNRzVRanN6Mmd5VzRMMWFQUFZUaU92dEdib1BWSVlZNHVpRWxKeW4wU09xdmFYNjVxS3pQWEpBblRScDdSOWNqMWpmOVZSVnNJM1k5N1dCTWc5YUhYTFpPdXQ1RjJ6WFdtTVE?oc=5",
+          "summary": "The central bank of the United Arab Emirates has approved the issuance of a stablecoin backed by U.S. dollars.",
           "summarySource": "headline-only"
         },
         {
