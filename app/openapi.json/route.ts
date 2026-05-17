@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export function GET(request: NextRequest) {
   const origin = new URL(request.url).origin;
 
-  return NextResponse.json(createOpenApiDocument(origin), {
+  return NextResponse.json(createOpenApiDocument(origin, readOwnershipProofs()), {
     headers: {
       "Cache-Control": "public, max-age=300",
       "Access-Control-Allow-Origin": "*",
@@ -14,7 +14,14 @@ export function GET(request: NextRequest) {
   });
 }
 
-function createOpenApiDocument(origin: string) {
+function readOwnershipProofs(): string[] {
+  return (process.env.X402_OWNERSHIP_PROOFS ?? "")
+    .split(",")
+    .map((p) => p.trim())
+    .filter(Boolean);
+}
+
+function createOpenApiDocument(origin: string, ownershipProofs: string[]) {
   return {
     openapi: "3.1.0",
     info: {
@@ -52,24 +59,6 @@ function createOpenApiDocument(origin: string) {
               },
             },
           },
-          "x-payment-info": {
-            authMode: "unprotected",
-            protocols: [
-              {
-                x402: {
-                  scheme: "exact",
-                  network: "eip155:84532",
-                  currency: "USDC",
-                  note: "Discovery marker only. The homepage is free and does not require payment.",
-                },
-              },
-            ],
-            price: {
-              mode: "fixed",
-              currency: "USD",
-              amount: "0",
-            },
-          },
           responses: {
             "200": {
               description: "Human-readable homepage",
@@ -101,24 +90,6 @@ function createOpenApiDocument(origin: string) {
                   properties: {},
                 },
               },
-            },
-          },
-          "x-payment-info": {
-            authMode: "unprotected",
-            protocols: [
-              {
-                x402: {
-                  scheme: "exact",
-                  network: "eip155:84532",
-                  currency: "USDC",
-                  note: "Discovery marker only. This list endpoint is free and does not require payment at runtime.",
-                },
-              },
-            ],
-            price: {
-              mode: "fixed",
-              currency: "USD",
-              amount: "0",
             },
           },
           responses: {
@@ -198,6 +169,9 @@ function createOpenApiDocument(origin: string) {
               amount: "0.01",
             },
           },
+          ...(ownershipProofs.length > 0
+            ? { "x-discovery": { ownershipProofs } }
+            : {}),
           responses: {
             "200": {
               description: "Full report Markdown",

@@ -1,5 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { withX402, type RouteConfig } from "@x402/next";
+import {
+  withX402FromHTTPServer,
+  x402HTTPResourceServer,
+  type RouteConfig,
+} from "@x402/next";
 import { declareDiscoveryExtension } from "@x402/extensions/bazaar";
 import {
   getReportBySlug,
@@ -46,30 +50,31 @@ export async function GET(request: NextRequest, context: ReportRouteContext) {
     );
   }
 
-  const paidHandler = withX402(
-    async () => {
-      const report = await getReportBySlug(slug);
+  // Named route pattern so the bazaar discovery extension emits a real
+  // `:slug` path param. withX402() hardcodes the pattern to "*", which
+  // makes discovery metadata fall back to ":var1" and breaks registry
+  // probes that substitute path params.
+  const httpServer = new x402HTTPResourceServer(x402Server, {
+    "/api/reports/:slug": createRouteConfig(meta, payTo, request.url),
+  });
 
-      if (!report) {
-        return NextResponse.json(
-          { error: "report-not-found" },
-          { status: 404 },
-        );
-      }
+  const paidHandler = withX402FromHTTPServer(async () => {
+    const report = await getReportBySlug(slug);
 
-      return new NextResponse(report.content, {
-        status: 200,
-        headers: {
-          "Content-Type": "text/markdown; charset=utf-8",
-          "Cache-Control": "private, no-store",
-          "X-Report-Slug": report.meta.slug,
-          "X-Word-Count": String(report.meta.wordCount),
-        },
-      });
-    },
-    createRouteConfig(meta, payTo, request.url),
-    x402Server,
-  );
+    if (!report) {
+      return NextResponse.json({ error: "report-not-found" }, { status: 404 });
+    }
+
+    return new NextResponse(report.content, {
+      status: 200,
+      headers: {
+        "Content-Type": "text/markdown; charset=utf-8",
+        "Cache-Control": "private, no-store",
+        "X-Report-Slug": report.meta.slug,
+        "X-Word-Count": String(report.meta.wordCount),
+      },
+    });
+  }, httpServer);
 
   try {
     return await paidHandler(request);
