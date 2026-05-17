@@ -157,8 +157,19 @@ const SHORT_DATE_FMT = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
 });
 
+// Bare YYYY-MM-DD is parsed as UTC midnight by `new Date`, so west of
+// UTC it formats to the previous day ("2026-05-16" → "May 15"). Parse
+// the bare form in the local timezone instead — same fix as
+// formatLastUpdated above.
 function formatShortDate(iso: string): string {
-  const d = new Date(iso);
+  const bareDate = /^\d{4}-\d{2}-\d{2}$/.exec(iso);
+  const d = bareDate
+    ? new Date(
+        Number(iso.slice(0, 4)),
+        Number(iso.slice(5, 7)) - 1,
+        Number(iso.slice(8, 10)),
+      )
+    : new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
   return SHORT_DATE_FMT.format(d);
 }
