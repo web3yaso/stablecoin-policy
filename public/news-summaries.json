@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-05-16T16:10:57.261Z",
+  "generatedAt": "2026-05-17T05:51:50.517Z",
   "regional": {
     "na": {
-      "summary": "The U.S. Senate Banking Committee advanced the CLARITY Act on May 14, a milestone stablecoin regulatory bill that attracted more than 100 amendments covering decentralized finance, stablecoin yield products, and ethics concerns before the vote. Senate negotiators have since reached a compromise on stablecoin yield provisions, though GSR's legal chief has assessed the CLARITY Act's passage odds at below 50%, citing unresolved yield and ethics issues. The U.S. Treasury is simultaneously conducting a stablecoin oversight test expected to shape state-level regulatory frameworks, while North Carolina's House advances its own stablecoin bill and Kansas community banks have flagged a stablecoin loophole as a competitive threat. On the institutional side, JPMorgan plans to launch a second tokenized fund targeting stablecoin reserves, and multiple major financial institutions made strategic moves in the stablecoin reserve market within the same week. Canada launched its first regulated CAD stablecoin with major institutional backing on May 14, marking a significant step in North American stablecoin infrastructure.",
+      "summary": "A Senate committee advanced the CLARITY Act on May 14, moving stablecoin legislation past a significant procedural milestone despite more than 100 amendments filed targeting stablecoins, ethics, and DeFi ahead of the vote. Senate negotiators reached a compromise on stablecoin yield provisions, though GSR's legal chief has assessed the probability of the Clarity Act passing as below 50%, citing stablecoin yield and ethics concerns. The U.S. Treasury is conducting a test related to stablecoin regulation expected to influence how states approach oversight, while North Carolina's stablecoin bill is advancing through the NC House and Kansas community banks face a stablecoin loophole that threatens their lending operations. Canada launched its first regulated CAD stablecoin with major institutional backing, and JPMorgan plans to launch a second tokenized fund targeting stablecoin reserves as Wall Street accelerates strategic positioning in the sector.",
       "keyDevelopments": [],
       "highlights": [
         {
@@ -10,77 +10,73 @@
           "topic": "legislation"
         },
         {
-          "text": "more than 100 amendments",
+          "text": "more than 100 amendments filed targeting stablecoins, ethics, and DeFi",
           "topic": "legislation"
         },
         {
-          "text": "stablecoin yield provisions",
+          "text": "probability of the Clarity Act passing as below 50%",
           "topic": "legislation"
         },
         {
-          "text": "below 50%",
+          "text": "how states approach oversight",
           "topic": "legislation"
         },
         {
-          "text": "U.S. Treasury is simultaneously conducting a stablecoin oversight test",
+          "text": "advancing through the NC House",
           "topic": "legislation"
+        },
+        {
+          "text": "Canada launched its first regulated CAD stablecoin with major institutional backing",
+          "topic": "cooperation"
         },
         {
           "text": "second tokenized fund targeting stablecoin reserves",
           "topic": "infrastructure"
-        },
-        {
-          "text": "Canada launched its first regulated CAD stablecoin with major institutional backing",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "Kansas community banks have flagged a stablecoin loophole",
-          "topic": "legislation"
         }
       ],
-      "generatedAt": "2026-05-16T16:10:47.462Z"
+      "generatedAt": "2026-05-17T05:51:43.230Z"
     },
     "eu": {
-      "summary": "The Bank of England is preparing to water down its stablecoin regulatory framework after sustained industry pressure, with Deputy Governor Breeden signaling a retreat on proposed ownership limits, including the widely criticized £20,000 stablecoin ownership cap. The BoE is also set to begin accepting stablecoin issuance applications in 2026, a step experts say is critical for UK competitiveness in digital asset markets. Across the Channel, the EU's Markets in Crypto-Assets Regulation (MiCA) has spurred a surge in euro stablecoin activity, with issuers reporting growing interest in what is characterized as a €16T market opportunity. European policymakers continue working to close the stablecoin gap with other jurisdictions, while institutional players such as Fireblocks are landing new clients on the back of MiCA tailwinds.",
+      "summary": "The Bank of England is preparing to scrap its proposed £20,000 stablecoin ownership cap and ease sterling stablecoin rules more broadly after sustained industry pressure, with Deputy Governor Breeden signaling a retreat on ownership limits that critics had characterized as overly conservative. The shift is driven in part by concerns that an excessively strict regime could trigger a UK crypto exodus, undermining the country's competitive position in digital asset markets. Across the Channel, the EU's Markets in Crypto-Assets Regulation (MiCA) rollout has catalyzed a surge in euro stablecoin activity, with EUR stablecoin issuers reporting growing interest in what analysts describe as a €16T market opportunity. Fireblocks has secured new institutional clients amid the MiCA tailwinds, reflecting broader momentum among institutional participants engaging with the post-MiCA European market. European policymakers continue working to close the stablecoin gap with other jurisdictions as both the UK and EU frameworks evolve in parallel.",
       "keyDevelopments": [],
       "highlights": [
-        {
-          "text": "water down its stablecoin regulatory framework",
-          "topic": "legislation"
-        },
         {
           "text": "£20,000 stablecoin ownership cap",
           "topic": "legislation"
         },
         {
-          "text": "Deputy Governor Breeden signaling a retreat",
+          "text": "sterling stablecoin rules",
           "topic": "legislation"
         },
         {
-          "text": "accepting stablecoin issuance applications in 2026",
+          "text": "Deputy Governor Breeden signaling a retreat on ownership limits",
           "topic": "legislation"
         },
         {
-          "text": "Markets in Crypto-Assets Regulation (MiCA)",
+          "text": "UK crypto exodus",
+          "topic": "legislation"
+        },
+        {
+          "text": "Markets in Crypto-Assets Regulation (MiCA) rollout",
+          "topic": "legislation"
+        },
+        {
+          "text": "surge in euro stablecoin activity",
           "topic": "legislation"
         },
         {
           "text": "€16T market opportunity",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "close the stablecoin gap",
           "topic": "cooperation"
         },
         {
-          "text": "MiCA tailwinds",
-          "topic": "legislation"
+          "text": "new institutional clients",
+          "topic": "cooperation"
         }
       ],
-      "generatedAt": "2026-05-16T16:10:40.859Z"
+      "generatedAt": "2026-05-17T05:51:35.109Z"
     },
     "asia": {
-      "summary": "Japan's stablecoin activity is accelerating on multiple fronts: the Japan Blockchain Foundation plans to issue the yen-pegged stablecoin EJPY on both Ethereum and Japan Open Chain for B2B transactions, while SBI and Startale are targeting a Q2 2026 launch of Japan's first trust bank-backed yen stablecoin. In India, Xflow has launched the first cross-border payments platform to bring compliant stablecoin acceptance to Indian businesses through a pilot program, even as Zerodha co-founder Nikhil Kamath publicly favored gold-backed stablecoins and credited UPI infrastructure with limiting India's exposure to dollar-linked crypto. Hong Kong is actively shaping stablecoin policy to capture cross-border digital asset flows while avoiding both regulatory chaos and market irrelevance, with HashKey Research noting Asia may hold yield advantages despite the U.S. CLARITY legislation strengthening dollar stablecoins globally. In Australia, Grove Basin launched a $1 billion stablecoin liquidity outlet in partnership with BlackRock and Janus Henderson, enabling instant redemptions for tokenized funds, while local policymakers are looking to the US stablecoin bill as a blueprint for Australia's digital payments future.",
+      "summary": "Japan's stablecoin infrastructure push accelerated significantly, with the Japan Blockchain Foundation announcing plans to issue the yen-pegged stablecoin EJPY on both Ethereum and Japan Open Chain for B2B transactions, while SBI and Startale are targeting a Q2 2026 launch for Japan's first trust bank-backed yen stablecoin. In India, Xflow became the first cross-border payments platform to bring compliant stablecoin acceptance to Indian businesses through a pilot program, while Zerodha co-founder Nikhil Kamath separately argued that UPI infrastructure may have reduced India's need for dollar-linked crypto alternatives. Hong Kong is actively shaping stablecoin policy to position itself as a cross-border digital asset hub, with HashKey Research noting that Asia may offer competitive yield advantages even as U.S. CLARITY legislation strengthens dollar stablecoins globally. In Australia, policymakers are examining the US stablecoin bill as a blueprint for the country's digital payments future, and Grove Basin launched a $1 billion stablecoin liquidity outlet in partnership with BlackRock and Janus Henderson to enable instant redemptions on tokenized Treasury funds.",
       "keyDevelopments": [],
       "highlights": [
         {
@@ -88,31 +84,31 @@
           "topic": "infrastructure"
         },
         {
-          "text": "SBI and Startale are targeting a Q2 2026 launch of Japan's first trust bank-backed yen stablecoin",
-          "topic": "legislation"
+          "text": "SBI and Startale are targeting a Q2 2026 launch for Japan's first trust bank-backed yen stablecoin",
+          "topic": "infrastructure"
         },
         {
           "text": "compliant stablecoin acceptance to Indian businesses",
           "topic": "legislation"
         },
         {
-          "text": "CLARITY legislation strengthening dollar stablecoins",
+          "text": "UPI infrastructure may have reduced India's need for dollar-linked crypto alternatives",
+          "topic": "legislation"
+        },
+        {
+          "text": "Asia may offer competitive yield advantages",
+          "topic": "cooperation"
+        },
+        {
+          "text": "US stablecoin bill as a blueprint for the country's digital payments future",
           "topic": "legislation"
         },
         {
           "text": "$1 billion stablecoin liquidity outlet in partnership with BlackRock and Janus Henderson",
           "topic": "infrastructure"
-        },
-        {
-          "text": "US stablecoin bill as a blueprint for Australia's digital payments future",
-          "topic": "legislation"
-        },
-        {
-          "text": "Hong Kong is actively shaping stablecoin policy to capture cross-border digital asset flows",
-          "topic": "cooperation"
         }
       ],
-      "generatedAt": "2026-05-16T16:10:57.261Z"
+      "generatedAt": "2026-05-17T05:51:50.517Z"
     }
   },
   "entities": {
@@ -689,6 +685,24 @@
     },
     "United States": {
       "news": [
+        {
+          "id": "rss-google-news-us-stablecoi-93c1z5",
+          "headline": "The stablecoin talk is loud this earnings season - CFO Brew",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-05-16",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPS1JhM3ZKdmdXZ3ZEMU9zei1VM0xKd25EWGgtNkRlcVp6MXp0V3d6VmFObC1rZVhQREM5UXNLZGFFMktRb1JGZVFPQi1Ba1B3cHI0elFHM25MckJXRFZhNU0tU0xrNHY3V1Q5bFFUSHNLRnpfdnZfQm80OGZna2M0bVRIRnZvRTA?oc=5",
+          "summary": "Stablecoin regulation and policy have become a notable topic of discussion during the current corporate earnings season.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-3y5ut3",
+          "headline": "Crypto News: Sterling Stablecoin Reserve Rules Ease as AlphaPepe Builds Contract-Risk Checks for Retail Buyers - openPR.com",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-05-16",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQMEJLSG1ERU5uN3BBVkZNc1Fpb202T01Ib3pQX2RfUDhVRV9jRU1FOXNWWmo4ZTJ5VmdYWlpySllaV1AyRTdtNmVudUd1cExjTG5JU2I1M0xnQ1IzN08wVl9kVlY2VEdvQmJiRU1EcVZyMG9ILU41UVZZWEs2M2dFZG5TdGh0SlFiZF9LTkp3Z0tvRW8?oc=5",
+          "summary": "The UK has eased reserve requirements for sterling-backed stablecoins while a project called AlphaPepe has developed risk assessment tools for retail investors using stablecoin contracts.",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-us-stablecoi-z30c93",
           "headline": "Stablecoin loophole threatens lending by Kansas community banks - The Topeka Capital-Journal",
@@ -1884,6 +1898,15 @@
           "date": "2026-04-25",
           "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPMS0xcHhaTUxBRTd1ZDA2ck5MYWFHRURNZkd1MTFuMVM4emtLcndoMWt4WWxWamg0NHZPY05ZbW5EUDk1eVduS05rMG8xWlJqeEY0NDR0UTNITERLQU5uMVNlWWRSQjFFT0IySTF2X2JTbk40d1ZCQnp4WW1WZ3pha2diSWNMa0pQaXJOSUJFLXgxa2RN0gGaAUFVX3lxTE4wMHdpeF9pVkNvSV9YbTJlLWtzVkgtVG10SXNRUHdpcEhHMUU5aGhpUy04cFJPUHV1MV94Snd0Z0VrYjlYbmZGUFpxd29BbHZQc2c5czNiWTFmYUh5U01RTVpyVkZRUzNqVXc5SExKVkFRVmpPN2k5amdOeDVQajhSX0I5LW80V2ZzYk1NTDh0eXEyMUZtZTZFcEE?oc=5",
           "summary": "Morgan Stanley has made a stablecoin-related reserve announcement, signaling institutional involvement in digital asset infrastructure.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-w2nkx7",
+          "headline": "Morgan Stanley launches stablecoin reserves fund aligned with GENIUS Act requirements - The Block",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-04-24",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPdnQweHRGZWE2S3BpS1JpZWtIeVFzbW85ekVXQlQxSGh3Y3ItSWt5X1B6MWlKbHZlNUZhcnRxUXlFZ0pfUGdmNWVfZ3V2TE5kejFhNGZJUExLM0FuNkk2MnUySHZ2SjNKZFpXQ3hyeU5LZ1ZOYnRGUlJIX29GZ1E3QzFOTHdjT2JSeUtXQXRxWXh2QjNyTU1FXzZELXZKS0NRWG9ZOER3TjdweTBkcDhobUZaOVdxWjlxeGdoLVBR?oc=5",
+          "summary": "Morgan Stanley has launched a reserves fund for stablecoins that is designed to comply with requirements set out in the GENIUS Act.",
           "summarySource": "headline-only"
         },
         {
@@ -3813,6 +3836,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-thailand-sta-8d7qhs",
+          "headline": "ไทยพร้อมแล้วหรือยังสำหรับ Stablecoin ที่ผูกกับเงินบาท? - bangkokbiznews",
+          "source": "Google News — Thailand Stablecoin Policy",
+          "date": "2026-03-24",
+          "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9BbkU1N1BfNTlLM0R5ZlhobjZhYXc5U05kWHM4SS1WUkF3MXdhSmtjclZlWG1JMFRWV3ZvRXN5NEgwRzRCS1hlSkJXWXo1VUZLd2pvZllKNWVSQ0toREZ6Z2p4XzM4cVhjR3lrNDFkaw?oc=5",
+          "summary": "Thailand is considering whether it is prepared for the introduction of stablecoins pegged to the Thai baht.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-thailand-sta-fzifdi",
           "headline": "ธนาคารยักษ์ขยับ! HSBC-Standard Chartered จ่อคว้าใบอนุญาต Stablecoin ฮ่องกง - Thunhoon",
           "source": "Google News — Thailand Stablecoin Policy",
@@ -4163,12 +4195,30 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-philippines--7t106a",
+          "headline": "Why The $2 Trillion Stablecoin Prediction Is Too Low - Fintech News Philippines",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-02-25",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOSzJMUXZJbmFMMVNkVHdRQlMwdTlNYVN2eEswTmN4SVNQX3RpajNieG51eURCYzNwZ216MzdFaHExaEVRODdVVEhpU3VZRUFyaTdzeE9fVkFXU21sQWQzZmQ4dnRRdGdWcEhvT0FvUDZCRk92UEFzcjBxVmFnemRUdGRjczRwMXllc1ktQmJtd2xwZw?oc=5",
+          "summary": "An analysis suggests that projections for stablecoin market growth may underestimate the potential size of the sector.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-philippines--b7b3ke",
           "headline": "OSN Launches Fiat-to-Stablecoin FX Settlement Corridor for Philippine Trade - Fintech News Philippines",
           "source": "Google News — Philippines Stablecoin Policy",
           "date": "2026-02-11",
           "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOT25mVWl1TGNmbWlHbDgySjM3OTFfTk1sN0dWS2NmOHViSlAyQVRkemdUdksxV28xUUdwbDFEX3BQWHlWSm1aN2E1NElWeGxrM3RYUjZ2Z1ZCVjczLTRoZDVWSElxNS1zUzlCUlp4Sk43cksxZERERTNYeUFJRkwzTmpORzdYa3JzMnNMT2RaVk11Szc0U1JXbmVJdmlJR3JuNVdRbEdWUzZ2cUc5R2RCZUx2amItekU?oc=5",
           "summary": "OSN has launched a fiat-to-stablecoin foreign exchange settlement corridor designed to facilitate trade transactions in the Philippines.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-philippines--h37ztf",
+          "headline": "Remitly and Coins.ph leverage stablecoin technology to transform cross-border payments to PHL - BusinessMirror",
+          "source": "Google News — Philippines Stablecoin Policy",
+          "date": "2026-01-14",
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOV0RaMUQ0T0R5R1lmang5VENSamVtOWh4STdBSUtzX1ppSDRoRE9KVWNYQW9ZY3hKYkVoTk5SdEhqQ3lsaUhuM0NxN2JPR3NELXpaZ0gzNUtIbENsNXNnTEVSTGRKVGR4d0dLQm0ySGx4ZklsWi1XRGxVU1FmWjhjTjFtUlB3MVJoakQzVXV4OWFRQlpKV2xkSS1yRWlkSDdIQ29rT2otZTUwTVB3RnJEc0hJN3FYMUZGRnY3bHdKNUhscjV5bWNmOXFsRHNDcU1L?oc=5",
+          "summary": "Remitly and Coins.ph are utilizing stablecoin technology to improve cross-border payment services to the Philippines.",
           "summarySource": "headline-only"
         },
         {
@@ -4297,6 +4347,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-india-stable-3ydcpv",
+          "headline": "Crypto News: Zerodha’s Nikhil Kamath Backs Gold-Backed Stablecoin Over Dollar Crypto for India - Bitget",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-13",
+          "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1uaHRpRVg0RnhGaVFQdFdISjYxVnZZOEpaZHNUMGdrRHo2UEd1WHBqWERqREZRS1FuUHZYZjhsMnBqWnM3YVNUWE9vLV8yOW5IOHRLUDN6aGEzYnhtT2hjb2x4TldfdEt6aWfSAWpBVV95cUxNbmh0aUVYNEZ4RmlRUHRXSEo2MVZ2WThKWmRzVDBna0R6NlBHdVhwalhEakRGUUtRblB2WGY4bDJwalpzN2FTVFhPby1fMjluSDh0S1AzemhhM2J4bU9oY29seE5XX3RLemln?oc=5",
+          "summary": "Nikhil Kamath, cofounder of Indian brokerage Zerodha, has expressed support for gold-backed stablecoins over dollar-denominated stablecoins for use in India.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-india-stable-bhf7fi",
           "headline": "India’s Gold obsession, Dollar drain, and Nikhil Kamath’s Stablecoin idea - SME Futures",
           "source": "Google News — India Stablecoin Policy",
@@ -4312,6 +4371,15 @@
           "date": "2026-05-13",
           "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQNlhnTkxvTkZUeFIteWhtTHg1SEdBYVZNOGxSWDJzYnd5X2tfUloycFdTYXJNcWthZjFTekVKT3NpWWhlaUU5S0JCLU11bDY1YlF5OG9rZm5MVUJNZllnYXpZSWh1WEF6QTVjS0VWQ3UyWDNnQVhBcDVqVWtfWTBnN0tGWlJmcTJpWlZ1YlphVUlTOXpOMldJWnVsVXg1N2lTNHItVmlwOS1lS0NJSDZISzFuTk5Md9IBwwFBVV95cUxQTXgxeFZMdWJ3VE9mZjREdXNETS0wWmhfZGlvVTVBdlpvU2RJazdHRmhlU1VyZTZRZ3pyWjdXaGRUOWdyTUw3RlAwaXFwTjVmVEVwNlhpTVlsNmdTRU1xWm1LVGlJdjVidzJTQkNXOE1EVDhtZFQxdkwwSXA4UE82MFV5NWd4blpOZHNRclNsT0tHMlZKSDItUWJNOGZ0S09MQ0FUYTlTZmIxQ3hOSXRraFVMMlBsSUVCaXhCa0NsajJHMjQ?oc=5",
           "summary": "Zerodha co-founder Nikhil Kamath has proposed that India consider a gold-backed stablecoin as an alternative to dollar-linked stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-india-stable-3dcait",
+          "headline": "Zerodha’s Kamath says Dollar-Backed Stablecoins are a Bad Idea for India - The Crypto Times",
+          "source": "Google News — India Stablecoin Policy",
+          "date": "2026-05-12",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQZ1UtcEhOazAzaEFlQkdjVnZHOGJyNUlUZElkU0MzSXNYTVRQLS1KMlA1bHlCcWpaUjVVRHZTTnBCRTZkdHFYWmVINGdVUW9RcnZGZno0eTEwc3pkaXQ2MHlRNkdIa2ltcU0yLVNvY2xjc3VkQ2ZvcU9zSjl4bW9la3RRaEZrWTlua3RhNFVyUjM1ZXdGcnA3LS1xRlNnWEVDTFR0MVMxUzIzUFo4d0hB?oc=5",
+          "summary": "Zerodha founder Kamath expressed concerns about the adoption of dollar-backed stablecoins in India.",
           "summarySource": "headline-only"
         },
         {
@@ -4849,6 +4917,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-germany-stab-f1rqpq",
+          "headline": "MiCA zwingt Pornhub, USDT gegen USDC einzutauschen – Wer ist der Nächste? - Coinfomania",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-04-23",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPUHRCRjFvMmlIaE1rVFJqTEFHU09pQVhIdFpSVzdwaVNBdlJ1cXhQR3E3S1VuRzNKZTVFMVVkanA5VFdrcGlPUnY5TVFORjFHV0tVOTFfNUFIV1lDYkZPbERFTWtOTDhFbW14X1kyTTdHZXRzMnUtVmpuRXRtZ2R4VF9SbGs4S2lIMUlFVXYxekk3U2l1YTVjOFp3?oc=5",
+          "summary": "The headline suggests that MiCA regulations may be prompting certain platforms to transition from USDT to alternative stablecoins like USDC for compliance purposes.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-germany-stab-ixfbi1",
           "headline": "Stablecoin Nachrichten: 12-Banken-Konsortium will MiCA-kompatiblen Stablecoin schaffen - The Coin Republic",
           "source": "Google News — Germany Stablecoin Policy",
@@ -4912,12 +4989,30 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-germany-stab-f97a6w",
+          "headline": "Deutschlands AllUnity gibt regulierten Stablecoin aus, der an den sicheren Schweizer Franken gebunden ist - CoinDesk",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-02-27",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPa1dpMjBrVURzeVNSajNRUU9USEx1VERRQnFla0stWWJCdG5xWC1iVWJMQ043b19TS3Q2cjA0LU1yeG00TXlGUWpMeWhCdXY2dklELU5zS2FfTHhRZEIzNmJNOUxqSHB4MDdrTGVWWXdNVS1FaXJoQW9LejZ6TkVWZU9IcWhNamdhUFgzNGk5aFotNG4yaUpOY291YjlSV1Z4VmtxX01sZHhIOUZNYVJ3YUtvZ3d0eXhyVVZEOHdVeHE0SUJB?oc=5",
+          "summary": "A German company called AllUnity has issued a regulated stablecoin pegged to the Swiss franc.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-germany-stab-vd8d7",
           "headline": "Bybit EU erweitert den Zugang zu USDC und EURC mit neuen Stablecoin-Kampagnen in Europa | Corporate - EQS News",
           "source": "Google News — Germany Stablecoin Policy",
           "date": "2026-02-20",
           "url": "https://news.google.com/rss/articles/CBMi-wFBVV95cUxQM0preVVqeWZzdVZxUEdVX1hJb2Z4dVRUcDV5clotSnloYVZjOWVXRzBGX1NZQUNyWkNQVzhsRFBOajJ0Qml3V2RRMHE4d3Q2aFBlbWo0ZGh5SUhRdEVXTnJJREhMWWRlZld3cEQwZnhKZTFVdGVwNG45dWFtektCdy03eXRvUG0yX28tMnpvZEhOUVZndVpXOVBacy1DWHlaZU9aRlRfNW1jVnZOeWhKQ3VQdFhQVHdJNTBPUHhBRVpvVmo4N1RqTjF5bVE1R0ZyM29vVXZVdmFtdHlWWmRXd1MzenhYLXhWaEVJTENZTEw1Z1duZXpZa0FaYw?oc=5",
           "summary": "Bybit's European operations launched promotional campaigns to expand user access to the stablecoins USDC and EURC.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-huj5ys",
+          "headline": "Der nächste CHF-gedeckte Stablecoin kommt aus Deutschland - MoneyToday",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-02-04",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOOU9WOWwwZ25wclhpMTJZUnZWR28wM3Npd1ZKZ2RsTjl0Vk5NNThjSjNwMFRJTExDLWxtVGp5Rk5nWHNqWmFBbFZSWElvbHhsVU9nVWZ4ZWJtZFNWMHNUQXJUdUNhbF9yX3l2MVRnN1QwYTFyVkZ3RzhiQWFoX0lTYXBlUHpfTkkteXZxY0FKb3gzYU0?oc=5",
+          "summary": "A Swiss franc-backed stablecoin is reportedly being launched by a German entity.",
           "summarySource": "headline-only"
         },
         {
@@ -4986,6 +5081,15 @@
     "South Korea": {
       "news": [
         {
+          "id": "rss-google-news-south-korea--3d2o7g",
+          "headline": "ASIA DEEP INSIGHT: Can Korean won stable coin actually become real? - 네이트",
+          "source": "Google News — South Korea Stablecoin Policy",
+          "date": "2026-05-17",
+          "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBnbTB3eXEzbjhGSEVuaW54ay1lYTlRWm1lbkFYRmlpQUZETXlVS3VlVzFscGRCb2N5ZVhWVEVqb1ItdGJJcUh6Nmc2bnh3NjBDWG9z?oc=5",
+          "summary": "A South Korean news outlet examined the feasibility of creating a stablecoin pegged to the Korean won.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-south-korea--itdrzd",
           "headline": "Stablecoins Shift from Speculative Assets to Payment Infrastructure as U.S. Regulatory Clarity Emerges - Korea IT Times",
           "source": "Google News — South Korea Stablecoin Policy",
@@ -5034,6 +5138,15 @@
     },
     "United Kingdom": {
       "news": [
+        {
+          "id": "rss-google-news-uk-stablecoi-d8xurb",
+          "headline": "Bank of England softens stablecoin rules after industry pressure - FStech",
+          "source": "Google News — UK Stablecoin Policy",
+          "date": "2026-05-15",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQNW90RzZoWDhHQXIyS0N0aUdLSFladmNjRUFJc0ZsZnNuV2QxWnJaVEk1UzdadVJwUEI1RGFvZzU5anhKQTZnUGdjaXdCT0ZVUkdHNUhwYmdxNnhod2JMZHd3VHlnT3o4YnNEUm5IenBmQ0JuWnh1ZGx1eVJILXJIb1l3RXNYdXBCM2tKRUsyVEdtbnc5WmxXOA?oc=5",
+          "summary": "The Bank of England has modified its stablecoin regulatory requirements in response to feedback from the industry.",
+          "summarySource": "headline-only"
+        },
         {
           "id": "rss-google-news-uk-stablecoi-hkf6at",
           "headline": "Bank of England Softens ‘Overly Conservative’ Stablecoin Plans Amid Industry Pressure - LCX Exchange",
