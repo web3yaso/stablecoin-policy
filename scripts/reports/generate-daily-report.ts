@@ -1,8 +1,18 @@
 import "../env";
 
+import { createCipheriv, randomBytes } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import Anthropic from "@anthropic-ai/sdk";
+import type { ReportMeta } from "../../lib/reports";
+
+// Fixed-slug sellable report: the daily brief is refreshed in place
+// (same slug, content overwritten) and sold via the x402 API.
+const SELLABLE_SLUG = "global-stablecoin-policy-report";
+const SELLABLE_ENC_FILE = `${SELLABLE_SLUG}.md.enc`;
+const SELLABLE_PRICE_USD = 0.1;
+const SELLABLE_CATEGORY = "policy" as const;
+const SELLABLE_JURISDICTION = ["GLOBAL"];
 
 type JsonValue = unknown;
 type RiskLevel = "Low" | "Medium" | "Medium-High" | "High";
@@ -64,8 +74,111 @@ type RegionalSummary = {
 const ROOT = process.cwd();
 const OUTPUT_DIR_JSON = path.join(ROOT, "data", "reports", "daily");
 const OUTPUT_DIR_MD = path.join(ROOT, "public", "reports", "daily");
+const REPORTS_DIR = path.join(ROOT, "data", "reports");
+const REPORTS_INDEX_PATH = path.join(REPORTS_DIR, "index.json");
 const TODAY = new Date().toISOString().slice(0, 10);
 const PROMPT_INPUT_LIMIT = 120_000;
+
+type EncryptedReportFile = {
+  version: 1;
+  algorithm: "aes-256-gcm";
+  iv: string;
+  authTag: string;
+  ciphertext: string;
+};
+
+function countWords(markdown: string): number {
+  const cjk = markdown.match(/[㐀-鿿]/g)?.length ?? 0;
+  const latin =
+    markdown
+      .replace(/[㐀-鿿]/g, " ")
+      .match(/[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*/g)?.length ?? 0;
+  return cjk + latin;
+}
+
+function getReportsEncryptionKey(): Buffer {
+  const raw = process.env.REPORTS_ENCRYPTION_KEY;
+  if (!raw) {
+    throw new Error(
+      "REPORTS_ENCRYPTION_KEY is required to publish the sellable report",
+    );
+  }
+  const base64Key = Buffer.from(raw, "base64");
+  if (base64Key.length === 32) return base64Key;
+  const hexKey = Buffer.from(raw, "hex");
+  if (hexKey.length === 32) return hexKey;
+  throw new Error("REPORTS_ENCRYPTION_KEY must be 32 bytes, base64 or hex");
+}
+
+function encryptMarkdown(markdown: string): EncryptedReportFile {
+  const key = getReportsEncryptionKey();
+  const iv = randomBytes(12);
+  const cipher = createCipheriv("aes-256-gcm", key, iv);
+  const ciphertext = Buffer.concat([
+    cipher.update(Buffer.from(markdown, "utf8")),
+    cipher.final(),
+  ]);
+  return {
+    version: 1,
+    algorithm: "aes-256-gcm",
+    iv: iv.toString("base64"),
+    authTag: cipher.getAuthTag().toString("base64"),
+    ciphertext: ciphertext.toString("base64"),
+  };
+}
+
+async function readReportIndex(): Promise<ReportMeta[]> {
+  try {
+    const raw = await fs.readFile(REPORTS_INDEX_PATH, "utf8");
+    const parsed = JSON.parse(raw) as unknown;
+    if (!Array.isArray(parsed)) {
+      throw new Error("reports index must be an array");
+    }
+    return parsed as ReportMeta[];
+  } catch (error) {
+    if (error instanceof Error && "code" in error && error.code === "ENOENT") {
+      return [];
+    }
+    throw error;
+  }
+}
+
+// Replace the fixed-slug entry in place (or append if absent) so the
+// catalog keeps a single, daily-refreshed sellable report.
+async function upsertReportIndex(meta: ReportMeta): Promise<void> {
+  const existing = await readReportIndex();
+  const next = existing.some((r) => r.slug === meta.slug)
+    ? existing.map((r) => (r.slug === meta.slug ? meta : r))
+    : [...existing, meta];
+  await fs.writeFile(
+    REPORTS_INDEX_PATH,
+    `${JSON.stringify(next, null, 2)}\n`,
+    "utf8",
+  );
+}
+
+// Public preview only — the valuable analysis stays behind the x402
+// paywall. Leaking the full markdown to public/ would make the paid
+// endpoint pointless.
+function reportToPreviewMarkdown(report: DailyReport): string {
+  return `# ${report.title}
+
+**Generated at:** ${report.generatedAt}
+
+> This is a free preview. The full report — top policy developments, the
+> regulatory signal table, market-impact analysis, and the analyst
+> takeaway — is available via paid API:
+> \`GET /api/reports/${SELLABLE_SLUG}\` ($${SELLABLE_PRICE_USD.toFixed(2)}, x402).
+
+## Executive Summary
+
+${report.executiveSummary.map((item) => `- ${item}`).join("\n")}
+
+## Watchlist
+
+${report.watchlist.map((item) => `- ${item}`).join("\n")}
+`;
+}
 
 async function pathExists(filePath: string): Promise<boolean> {
   try {
@@ -442,9 +555,9 @@ ${report.watchlist.map((item) => `- ${item}`).join("\n")}
 
 ${report.analystTakeaway}
 
-## 7. Source Files
+## 7. Source
 
-${report.sourceFiles.map((item) => `- \`${item}\``).join("\n")}
+Compiled from public stablecoin policy and regulatory news tracking at https://stablecoin-policy.vercel.app/
 `;
 }
 
@@ -478,6 +591,7 @@ async function main() {
 
   const report = await generateWithAnthropic(input);
   const markdown = reportToMarkdown(report);
+  const previewMarkdown = reportToPreviewMarkdown(report);
 
   const jsonPath = path.join(OUTPUT_DIR_JSON, `${date}.json`);
   const mdPath = path.join(OUTPUT_DIR_MD, `${date}.md`);
@@ -490,16 +604,37 @@ async function main() {
     `${JSON.stringify(report, null, 2)}\n`,
     "utf8",
   );
-  await fs.writeFile(mdPath, markdown, "utf8");
-  await fs.writeFile(latestMdPath, markdown, "utf8");
+  // public/ gets the preview only; full content is sold via x402.
+  await fs.writeFile(mdPath, previewMarkdown, "utf8");
+  await fs.writeFile(latestMdPath, previewMarkdown, "utf8");
+
+  // Publish the full report as the daily-refreshed sellable entry.
+  const encrypted = encryptMarkdown(markdown);
+  await fs.writeFile(
+    path.join(REPORTS_DIR, SELLABLE_ENC_FILE),
+    `${JSON.stringify(encrypted, null, 2)}\n`,
+    "utf8",
+  );
+  const sellableMeta: ReportMeta = {
+    slug: SELLABLE_SLUG,
+    title: report.title,
+    summary: report.executiveSummary.join(" ").slice(0, 280),
+    category: SELLABLE_CATEGORY,
+    jurisdiction: SELLABLE_JURISDICTION,
+    publishedAt: report.generatedAt,
+    wordCount: countWords(markdown),
+    priceUSD: SELLABLE_PRICE_USD,
+    encryptedContentFile: SELLABLE_ENC_FILE,
+  };
+  await upsertReportIndex(sellableMeta);
 
   console.log(`Generated daily report JSON: ${path.relative(ROOT, jsonPath)}`);
   console.log(
     `Generated latest report JSON: ${path.relative(ROOT, latestJsonPath)}`,
   );
-  console.log(`Generated daily report Markdown: ${path.relative(ROOT, mdPath)}`);
+  console.log(`Wrote public preview: ${path.relative(ROOT, latestMdPath)}`);
   console.log(
-    `Generated latest report Markdown: ${path.relative(ROOT, latestMdPath)}`,
+    `Published sellable report "${SELLABLE_SLUG}" ($${SELLABLE_PRICE_USD.toFixed(2)}, ${sellableMeta.wordCount} words)`,
   );
 }
 
