@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-05-17T05:51:50.517Z",
+  "generatedAt": "2026-05-18T06:18:35.571Z",
   "regional": {
     "na": {
-      "summary": "A Senate committee advanced the CLARITY Act on May 14, moving stablecoin legislation past a significant procedural milestone despite more than 100 amendments filed targeting stablecoins, ethics, and DeFi ahead of the vote. Senate negotiators reached a compromise on stablecoin yield provisions, though GSR's legal chief has assessed the probability of the Clarity Act passing as below 50%, citing stablecoin yield and ethics concerns. The U.S. Treasury is conducting a test related to stablecoin regulation expected to influence how states approach oversight, while North Carolina's stablecoin bill is advancing through the NC House and Kansas community banks face a stablecoin loophole that threatens their lending operations. Canada launched its first regulated CAD stablecoin with major institutional backing, and JPMorgan plans to launch a second tokenized fund targeting stablecoin reserves as Wall Street accelerates strategic positioning in the sector.",
+      "summary": "The U.S. Senate Banking Committee advanced the CLARITY Act on May 14, marking a significant legislative milestone for stablecoin regulation despite more than 100 amendments filed covering stablecoins, ethics, and DeFi, and a GSR legal chief placing passage odds below 50%. Senate negotiators have signaled a compromise path on stablecoin yield provisions, while the U.S. Treasury is conducting a stablecoin oversight test expected to shape state-level regulatory frameworks. In parallel, a stablecoin bill is moving through the North Carolina House, and Kansas community banks have flagged a stablecoin loophole as a competitive threat. Canada launched its first regulated CAD stablecoin with major institutional backing on May 13–14, positioning itself ahead of a formalized federal framework. On the institutional side, JPMorgan plans to launch a second tokenized fund targeting stablecoin reserves as Wall Street accelerates strategic moves into the stablecoin reserve market.",
       "keyDevelopments": [],
       "highlights": [
         {
@@ -10,19 +10,19 @@
           "topic": "legislation"
         },
         {
-          "text": "more than 100 amendments filed targeting stablecoins, ethics, and DeFi",
+          "text": "more than 100 amendments filed",
           "topic": "legislation"
         },
         {
-          "text": "probability of the Clarity Act passing as below 50%",
+          "text": "stablecoin yield provisions",
           "topic": "legislation"
         },
         {
-          "text": "how states approach oversight",
+          "text": "U.S. Treasury is conducting a stablecoin oversight test",
           "topic": "legislation"
         },
         {
-          "text": "advancing through the NC House",
+          "text": "stablecoin bill is moving through the North Carolina House",
           "topic": "legislation"
         },
         {
@@ -34,7 +34,7 @@
           "topic": "infrastructure"
         }
       ],
-      "generatedAt": "2026-05-17T05:51:43.230Z"
+      "generatedAt": "2026-05-18T06:18:35.571Z"
     },
     "eu": {
       "summary": "The Bank of England is preparing to scrap its proposed £20,000 stablecoin ownership cap and ease sterling stablecoin rules more broadly after sustained industry pressure, with Deputy Governor Breeden signaling a retreat on ownership limits that critics had characterized as overly conservative. The shift is driven in part by concerns that an excessively strict regime could trigger a UK crypto exodus, undermining the country's competitive position in digital asset markets. Across the Channel, the EU's Markets in Crypto-Assets Regulation (MiCA) rollout has catalyzed a surge in euro stablecoin activity, with EUR stablecoin issuers reporting growing interest in what analysts describe as a €16T market opportunity. Fireblocks has secured new institutional clients amid the MiCA tailwinds, reflecting broader momentum among institutional participants engaging with the post-MiCA European market. European policymakers continue working to close the stablecoin gap with other jurisdictions as both the UK and EU frameworks evolve in parallel.",
@@ -6849,6 +6849,15 @@
           "date": "2026-05-03",
           "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNQWhiLTNxVUtFOXJtZ0QyQzJtM1hndWl5dndDcm1TdlV5Z0o2cjRuUnpQTV9qdUJNSVlvOWJxLVdhVmxSSllnVnprZHI3R1hJSE1TTmVLTTNEMGZHODBkMnhScFk2cHhHQkpMQURiNDhIUTg2TGxfb3Q1ZFlmQVBiajh2QQ?oc=5",
           "summary": "Brazil's central bank restricted stablecoins in the eFX (electronic foreign exchange) market while permitting their continued use in other contexts.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-brazil-stabl-tmvxcp",
+          "headline": "BC veta Bitcoin e stablecoins no eFX internacional - Webitcoin",
+          "source": "Google News — Brazil Stablecoin Policy",
+          "date": "2026-05-02",
+          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOZjFzR1dGQ2NGNm13OFM5Z2R5VXRTZjBHLW96TXRJa2M5R01CdDBrZnRsVHl5SlhMN1J1WklEb3EwN0h3SkFtZE5icVFWWEFXVXFmYzRuMzNIVm5xM3J1RWRxUVdSNU9vOVJKcEY3THdQcm9Ba19IZEpObE52aGNNN0Q2OA?oc=5",
+          "summary": "Brazil's central bank has vetoed the use of Bitcoin and stablecoins in international electronic foreign exchange transactions.",
           "summarySource": "headline-only"
         },
         {

@@ -7024,6 +7024,15 @@ const INTERNATIONAL_NEWS_OVERRIDES: Record<string, NewsItem[]> = {
       summarySource: "headline-only",
     },
     {
+      id: "rss-google-news-brazil-stabl-tmvxcp",
+      headline: "BC veta Bitcoin e stablecoins no eFX internacional - Webitcoin",
+      source: "Google News — Brazil Stablecoin Policy",
+      date: "2026-05-02",
+      url: "https://news.google.com/rss/articles/CBMigwFBVV95cUxOZjFzR1dGQ2NGNm13OFM5Z2R5VXRTZjBHLW96TXRJa2M5R01CdDBrZnRsVHl5SlhMN1J1WklEb3EwN0h3SkFtZE5icVFWWEFXVXFmYzRuMzNIVm5xM3J1RWRxUVdSNU9vOVJKcEY3THdQcm9Ba19IZEpObE52aGNNN0Q2OA?oc=5",
+      summary: "Brazil's central bank has vetoed the use of Bitcoin and stablecoins in international electronic foreign exchange transactions.",
+      summarySource: "headline-only",
+    },
+    {
       id: "rss-google-news-brazil-stabl-n3z9ip",
       headline: "Stablecoins não foram proibidas: entenda o que muda com a nova regra do Banco Central - Portal do Bitcoin",
       source: "Google News — Brazil Stablecoin Policy",
