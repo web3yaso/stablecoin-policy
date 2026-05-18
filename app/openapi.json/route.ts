@@ -1,13 +1,23 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { listReports } from "@/lib/reports";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export function GET(request: NextRequest) {
+type PriceInfo =
+  | { mode: "fixed"; currency: "USD"; amount: string }
+  | { mode: "dynamic"; currency: "USD"; min: string; max: string };
+
+export async function GET(request: NextRequest) {
   const origin = new URL(request.url).origin;
 
   return NextResponse.json(
-    createOpenApiDocument(origin, readOwnershipProofs(), readX402Network()),
+    createOpenApiDocument(
+      origin,
+      readOwnershipProofs(),
+      readX402Network(),
+      await readPriceInfo(),
+    ),
     {
       headers: {
         "Cache-Control": "public, max-age=300",
@@ -15,6 +25,30 @@ export function GET(request: NextRequest) {
       },
     },
   );
+}
+
+// Reflect the real catalog: a single price → fixed, varying prices →
+// dynamic range. The per-report price is what the runtime 402 charges,
+// so this never advertises a price the endpoint won't honor.
+async function readPriceInfo(): Promise<PriceInfo> {
+  try {
+    const prices = (await listReports()).map((r) => r.priceUSD);
+    if (prices.length === 0) {
+      return { mode: "fixed", currency: "USD", amount: "0.01" };
+    }
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    return min === max
+      ? { mode: "fixed", currency: "USD", amount: min.toFixed(2) }
+      : {
+          mode: "dynamic",
+          currency: "USD",
+          min: min.toFixed(2),
+          max: max.toFixed(2),
+        };
+  } catch {
+    return { mode: "fixed", currency: "USD", amount: "0.01" };
+  }
 }
 
 function readOwnershipProofs(): string[] {
@@ -42,6 +76,7 @@ function createOpenApiDocument(
   origin: string,
   ownershipProofs: string[],
   network: string,
+  price: PriceInfo,
 ) {
   const label = networkLabel(network);
   return {
@@ -183,11 +218,7 @@ function createOpenApiDocument(
                 },
               },
             ],
-            price: {
-              mode: "fixed",
-              currency: "USD",
-              amount: "0.01",
-            },
+            price,
           },
           ...(ownershipProofs.length > 0
             ? { "x-discovery": { ownershipProofs } }
