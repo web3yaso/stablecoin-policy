@@ -6,12 +6,15 @@ export const dynamic = "force-dynamic";
 export function GET(request: NextRequest) {
   const origin = new URL(request.url).origin;
 
-  return NextResponse.json(createOpenApiDocument(origin, readOwnershipProofs()), {
-    headers: {
-      "Cache-Control": "public, max-age=300",
-      "Access-Control-Allow-Origin": "*",
+  return NextResponse.json(
+    createOpenApiDocument(origin, readOwnershipProofs(), readX402Network()),
+    {
+      headers: {
+        "Cache-Control": "public, max-age=300",
+        "Access-Control-Allow-Origin": "*",
+      },
     },
-  });
+  );
 }
 
 function readOwnershipProofs(): string[] {
@@ -21,16 +24,33 @@ function readOwnershipProofs(): string[] {
     .filter(Boolean);
 }
 
-function createOpenApiDocument(origin: string, ownershipProofs: string[]) {
+// Mirror lib/x402-server.ts's network resolution so the advertised
+// network in this static doc never diverges from the runtime 402
+// challenge. Imported indirectly (not from x402-server) to avoid
+// pulling facilitator init into the openapi route.
+function readX402Network(): string {
+  return process.env.X402_NETWORK?.trim() || "eip155:84532";
+}
+
+function networkLabel(network: string): string {
+  if (network === "eip155:8453") return "Base mainnet";
+  if (network === "eip155:84532") return "Base Sepolia testnet";
+  return network;
+}
+
+function createOpenApiDocument(
+  origin: string,
+  ownershipProofs: string[],
+  network: string,
+) {
+  const label = networkLabel(network);
   return {
     openapi: "3.1.0",
     info: {
       title: "Web3Law Stablecoin Policy Reports API",
       version: "1.0.0",
-      description:
-        "Machine-readable stablecoin regulatory analysis reports. Report metadata is free; full Markdown reports are payable via x402 on Base Sepolia testnet.",
-      "x-guidance":
-        "Start by calling GET /api/reports to retrieve available reports, summaries, slugs, and prices. Pick a relevant report slug from that response. To retrieve full content, call GET /api/reports/{slug}. If the response is 402 Payment Required, use the x402 payment requirements to create and submit a Base Sepolia USDC payment, then retry the same URL with the X-Payment or Payment-Signature header. Missing slugs return 404 before payment. Do not invent slugs or prices; prices are selected by the server.",
+      description: `Machine-readable stablecoin regulatory analysis reports. Report metadata is free; full Markdown reports are payable via x402 on ${label}.`,
+      "x-guidance": `Start by calling GET /api/reports to retrieve available reports, summaries, slugs, and prices. Pick a relevant report slug from that response. To retrieve full content, call GET /api/reports/{slug}. If the response is 402 Payment Required, use the x402 payment requirements to create and submit a ${label} USDC payment, then retry the same URL with the X-Payment or Payment-Signature header. Missing slugs return 404 before payment. Do not invent slugs or prices; prices are selected by the server.`,
     },
     servers: [{ url: origin }],
     tags: [
@@ -157,7 +177,7 @@ function createOpenApiDocument(origin: string, ownershipProofs: string[]) {
               {
                 x402: {
                   scheme: "exact",
-                  network: "eip155:84532",
+                  network,
                   currency: "USDC",
                   paymentHeaders: ["X-Payment", "Payment-Signature"],
                 },
