@@ -44,14 +44,14 @@
   },
   {
     "slug": "global-stablecoin-policy-report",
-    "title": "Daily Stablecoin Policy Brief - 2026-05-18",
-    "summary": "U.S. Senate Banking Committee advanced the CLARITY Act on May 14, 2026, despite over 100 amendments and below-50% passage odds cited by GSR's legal chief due to stablecoin yield and ethics disputes. Bank of England signals retreat on proposed £20,000 sterling stablecoin ownership",
+    "title": "Daily Stablecoin Policy Brief - 2026-05-26",
+    "summary": "The FDIC proposed AML, BSA, and sanctions compliance rules for stablecoin issuers under the GENIUS Act, deferring certain authority to Treasury, while FinCEN and OFAC simultaneously advanced their own AML/CFT framework for payment stablecoin issuers. Senate passage of the CLARITY",
     "category": "policy",
     "jurisdiction": [
       "GLOBAL"
     ],
-    "publishedAt": "2026-05-18T13:41:06.912Z",
-    "wordCount": 1775,
+    "publishedAt": "2026-05-26T18:43:20.971Z",
+    "wordCount": 1966,
     "priceUSD": 0.1,
     "encryptedContentFile": "global-stablecoin-policy-report.md.enc"
   }
