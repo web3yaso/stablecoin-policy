@@ -51,6 +51,7 @@ interface FeedConfig {
   name: string;
   entity: string;
   topicHint?: string;
+  trustedSource?: boolean;
 }
 
 interface FeedsFile {
@@ -133,6 +134,30 @@ function decodeEntities(s: string): string {
     .trim();
 }
 
+// Wider gate for trusted first-party regulator feeds: their headlines
+// rarely contain "stablecoin" verbatim ("Final rule on payment systems",
+// "Supervisory letter on reserve management") so the strict RELEVANCE_RE
+// would drop almost everything. Layer 2 (the Haiku NOT_RELEVANT gate in
+// summarize()) catches off-topic items that slip through.
+const LAYER_1_RE = new RegExp(
+  [
+    "\\bstable\\b",
+    "stablecoin",
+    "digital asset",
+    "digital currency",
+    "\\bcrypto",
+    "\\btoken",
+    "tokeniz",
+    "payment system",
+    "\\breserve",
+    "supervisory",
+    "virtual asset",
+    "e-money",
+    "asset-referenced",
+  ].join("|"),
+  "i",
+);
+
 // Coarse relevance gate. A new item must mention at least one of these
 // keywords in its headline, otherwise it never makes it to the Haiku
 // summarize step. Saves cost AND keeps off-topic noise out of the
@@ -193,8 +218,8 @@ const RELEVANCE_RE = new RegExp(
   "i",
 );
 
-function isRelevant(headline: string): boolean {
-  return RELEVANCE_RE.test(headline);
+function isRelevant(headline: string, trusted: boolean): boolean {
+  return (trusted ? LAYER_1_RE : RELEVANCE_RE).test(headline);
 }
 
 function pickTag(block: string, tag: string): string | null {
@@ -337,9 +362,14 @@ async function summarize(
   source: string,
   date: string,
   body: string | null,
+  trusted: boolean,
 ): Promise<{ summary: string; source: "article" | "headline-only" } | null> {
-  const system =
+  const baseSystem =
     "You write one- to two-sentence neutral summaries of news stories about stablecoin regulation, issuance, reserves, supervision, and related digital-asset policy. Plain factual prose. No editorializing.";
+  const gate = trusted
+    ? " If this story is not about stablecoin / digital-asset payment policy, supervision, reserves, redemption, AML/CFT, sanctions, custody, or issuer eligibility, respond with exactly NOT_RELEVANT and nothing else."
+    : "";
+  const system = baseSystem + gate;
   const userBlock = body
     ? `Headline: ${headline}\nSource: ${source} (${date})\n\nArticle body (trimmed):\n${body}\n\nWrite a 1–2 sentence neutral summary.`
     : `Headline: ${headline}\nSource: ${source} (${date})\n\nThe article body could not be retrieved. Write one factual sentence based on the headline alone — do not invent specifics.`;
@@ -358,6 +388,7 @@ async function summarize(
         .join(" ")
         .trim();
       if (!text) return null;
+      if (text.startsWith("NOT_RELEVANT")) return null;
       return { summary: text, source: body ? "article" : "headline-only" };
     } catch (err) {
       if (isRateLimitError(err) && attempt < SUMMARY_MAX_RETRIES) {
@@ -445,7 +476,9 @@ async function main() {
 
   const candidates = fetched.flat();
   const pending = candidates.filter(
-    (c) => !seenUrls.has(c.parsed.link) && isRelevant(c.parsed.title),
+    (c) =>
+      !seenUrls.has(c.parsed.link) &&
+      isRelevant(c.parsed.title, c.feed.trustedSource ?? false),
   );
   const filteredOut = candidates.length - pending.length;
   console.log(
@@ -463,7 +496,7 @@ async function main() {
     seenUrls.add(parsed.link);
 
     const body = await fetchArticleText(parsed.link);
-    const sum = await summarize(parsed.title, feed.name, parsed.pubDate, body);
+    const sum = await summarize(parsed.title, feed.name, parsed.pubDate, body, feed.trustedSource ?? false);
     if (!sum) return;
 
     const entityBucket = news.entities[feed.entity];
