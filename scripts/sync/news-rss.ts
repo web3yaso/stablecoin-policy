@@ -46,7 +46,7 @@ const SUMMARY_MAX_TOKENS = 120;
 const SUMMARY_MIN_INTERVAL_MS = 1_500;
 const SUMMARY_MAX_RETRIES = 3;
 
-interface FeedConfig {
+export interface FeedConfig {
   url: string;
   name: string;
   entity: string;
@@ -58,7 +58,7 @@ interface FeedsFile {
   feeds: FeedConfig[];
 }
 
-interface NewsItem {
+export interface NewsItem {
   id: string;
   headline: string;
   source: string;
@@ -68,13 +68,13 @@ interface NewsItem {
   summarySource?: "article" | "headline-only";
 }
 
-interface NewsFile {
+export interface NewsFile {
   generatedAt: string;
   regional: Record<string, Record<string, unknown>>;
   entities: Record<string, { news: NewsItem[] }>;
 }
 
-interface ParsedItem {
+export interface ParsedItem {
   title: string;
   link: string;
   pubDate: string;
@@ -234,7 +234,7 @@ function pickAtomLink(block: string): string | null {
   return m ? decodeEntities(m[1]) : null;
 }
 
-function parseFeed(xml: string): ParsedItem[] {
+export function parseFeed(xml: string): ParsedItem[] {
   const out: ParsedItem[] = [];
   // RSS 2.0
   const rssRe = /<item\b[\s\S]*?<\/item>/gi;
@@ -259,7 +259,7 @@ function parseFeed(xml: string): ParsedItem[] {
   return out;
 }
 
-async function fetchFeed(url: string): Promise<string | null> {
+export async function fetchFeed(url: string): Promise<string | null> {
   const ctl = new AbortController();
   const t = setTimeout(() => ctl.abort(), FETCH_TIMEOUT_MS);
   try {
@@ -429,7 +429,7 @@ function slugifyId(name: string, url: string): string {
   return `rss-${slug}-${hash}`;
 }
 
-interface PendingItem {
+export interface PendingItem {
   feed: FeedConfig;
   parsed: ParsedItem;
 }
