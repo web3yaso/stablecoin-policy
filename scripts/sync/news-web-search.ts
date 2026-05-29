@@ -17,10 +17,7 @@ import { fileURLToPath } from "node:url";
 import {
   fetchFeed,
   parseFeed,
-  type FeedConfig,
   type NewsFile,
-  type NewsItem,
-  type ParsedItem,
   type PendingItem,
 } from "./news-rss.js";
 
@@ -241,4 +238,51 @@ export function buildQueries(news: NewsFile, now: number = Date.now()): PlannedQ
   const site = pickSiteRotationQuery();
   if (site) plans.push(site);
   return plans.slice(0, MAX_QUERIES_PER_RUN);
+}
+
+// ─── IO ───────────────────────────────────────────────────────────
+
+/**
+ * For each planned query, fetch the Google News RSS, parse it, and map
+ * each item into a PendingItem with a synthetic FeedConfig. trustedSource
+ * is always false — Google News surfaces unfiltered third-party outlets.
+ */
+export async function runWebSearch(news: NewsFile): Promise<PendingItem[]> {
+  if (process.env.NEWS_WEB_SEARCH_DISABLED === "1") {
+    console.log("web-search: NEWS_WEB_SEARCH_DISABLED=1, skipping");
+    return [];
+  }
+
+  const plans = buildQueries(news, Date.now());
+  if (plans.length === 0) {
+    console.log("web-search: no queries planned this run");
+    return [];
+  }
+
+  console.log(`web-search: dispatching ${plans.length} queries`);
+
+  const results = await Promise.all(
+    plans.map(async (plan) => {
+      const xml = await fetchFeed(plan.url);
+      if (!xml) {
+        console.warn(`  query FAIL: ${plan.query}`);
+        return [] as PendingItem[];
+      }
+      const items = parseFeed(xml).slice(0, PER_QUERY_ITEM_LIMIT);
+      return items.map<PendingItem>((parsed) => ({
+        feed: {
+          url: plan.url,
+          name: `WebSearch [${plan.kind}]: ${plan.query}`,
+          entity: hostToEntity(parsed.link, plan.defaultEntity),
+          topicHint: "stablecoin-policy",
+          trustedSource: false,
+        },
+        parsed,
+      }));
+    }),
+  );
+
+  const flat = results.flat();
+  console.log(`web-search: produced ${flat.length} candidate item(s)`);
+  return flat;
 }

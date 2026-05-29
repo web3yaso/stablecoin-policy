@@ -34,29 +34,42 @@ async function main() {
     console.log(`  [${p.kind}] (defaultEntity=${p.defaultEntity}) ${p.query}`);
   }
 
-  if (!process.argv.includes("--fetch")) return;
-
-  console.log("\n--fetch: running each query…");
-  for (const p of plans) {
-    const xml = await fetchFeed(p.url);
-    if (!xml) {
-      console.log(`  FAIL ${p.query}`);
-      continue;
+  if (process.argv.includes("--fetch")) {
+    console.log("\n--fetch: running each query…");
+    for (const p of plans) {
+      const xml = await fetchFeed(p.url);
+      if (!xml) {
+        console.log(`  FAIL ${p.query}`);
+        continue;
+      }
+      const parsed = parseFeed(xml).slice(0, 20);
+      const kept = parsed.filter((item) => RELEVANCE_RE.test(item.title));
+      const entityHits = parsed
+        .map((item) => hostToEntity(item.link, p.defaultEntity))
+        .reduce<Record<string, number>>((acc, e) => {
+          acc[e] = (acc[e] ?? 0) + 1;
+          return acc;
+        }, {});
+      const entitySummary = Object.entries(entityHits)
+        .map(([e, n]) => `${e}=${n}`)
+        .join(", ");
+      console.log(
+        `  ${p.kind.padEnd(7)} candidates=${String(parsed.length).padStart(3)} layer1_kept=${String(kept.length).padStart(3)} ${entitySummary} :: ${p.query}`,
+      );
     }
-    const parsed = parseFeed(xml).slice(0, 20);
-    const kept = parsed.filter((item) => RELEVANCE_RE.test(item.title));
-    const entityHits = parsed
-      .map((item) => hostToEntity(item.link, p.defaultEntity))
-      .reduce<Record<string, number>>((acc, e) => {
-        acc[e] = (acc[e] ?? 0) + 1;
-        return acc;
-      }, {});
-    const entitySummary = Object.entries(entityHits)
-      .map(([e, n]) => `${e}=${n}`)
-      .join(", ");
-    console.log(
-      `  ${p.kind.padEnd(7)} candidates=${String(parsed.length).padStart(3)} layer1_kept=${String(kept.length).padStart(3)} ${entitySummary} :: ${p.query}`,
-    );
+  }
+
+  if (process.argv.includes("--runWebSearch")) {
+    console.log("\n--runWebSearch: calling runWebSearch() end-to-end…");
+    const { runWebSearch } = await import("../sync/news-web-search.js");
+    const items = await runWebSearch(news);
+    console.log(`runWebSearch returned ${items.length} PendingItem(s)`);
+    // Show first 5 so we can eyeball entity attribution.
+    for (const it of items.slice(0, 5)) {
+      console.log(
+        `  entity=${it.feed.entity.padEnd(20)} trusted=${String(it.feed.trustedSource).padEnd(5)} ${it.parsed.title.slice(0, 90)}`,
+      );
+    }
   }
 }
 
