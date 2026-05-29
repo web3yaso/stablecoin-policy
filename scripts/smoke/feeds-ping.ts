@@ -2,10 +2,8 @@
 /**
  * Health-check every feed in data/news/feeds.json.
  *
- * - Direct RSS feeds: HEAD must return 2xx OR the body must contain at least
- *   one <item>/<entry>.
- * - Google News RSS feeds (URL host news.google.com): GET and require at
- *   least 1 <item>.
+ * Strategy: GET each feed (no HEAD path — many regulator hosts 405 on HEAD)
+ * and require the body to contain at least one <item> (RSS) or <entry> (Atom).
  *
  * Exits non-zero if any feed fails so this can run on CI.
  */
@@ -25,6 +23,7 @@ interface FeedConfig {
   name: string;
   entity: string;
   topicHint?: string;
+  // Populated by feeds added in Task 2; shows a "[trusted]" marker in the output.
   trustedSource?: boolean;
 }
 interface FeedsFile { feeds: FeedConfig[]; }
