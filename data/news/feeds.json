@@ -311,7 +311,7 @@
     },
     {
       "url": "https://news.google.com/rss/search?q=stablecoin+site%3Acftc.gov&hl=en-US&gl=US&ceid=US:en",
-      "name": "Google News — site:cftc.gov stablecoin",
+      "name": "Google News — CFTC (site-proxy)",
       "entity": "United States",
       "topicHint": "stablecoin-policy"
     },
@@ -352,37 +352,37 @@
     },
     {
       "url": "https://news.google.com/rss/search?q=stablecoin+site%3Amas.gov.sg&hl=en-US&gl=US&ceid=US:en",
-      "name": "Google News — site:mas.gov.sg stablecoin",
+      "name": "Google News — MAS (site-proxy)",
       "entity": "Singapore",
       "topicHint": "stablecoin-policy"
     },
     {
       "url": "https://news.google.com/rss/search?q=stablecoin+site%3Aocc.gov&hl=en-US&gl=US&ceid=US:en",
-      "name": "Google News — site:occ.gov stablecoin",
+      "name": "Google News — OCC (site-proxy)",
       "entity": "United States",
       "topicHint": "stablecoin-policy"
     },
     {
       "url": "https://news.google.com/rss/search?q=stablecoin+site%3Afdic.gov&hl=en-US&gl=US&ceid=US:en",
-      "name": "Google News — site:fdic.gov stablecoin",
+      "name": "Google News — FDIC (site-proxy)",
       "entity": "United States",
       "topicHint": "stablecoin-policy"
     },
     {
       "url": "https://news.google.com/rss/search?q=stablecoin+site%3Atreasury.gov&hl=en-US&gl=US&ceid=US:en",
-      "name": "Google News — site:treasury.gov stablecoin",
+      "name": "Google News — US Treasury (site-proxy)",
       "entity": "United States",
       "topicHint": "stablecoin-policy"
     },
     {
       "url": "https://news.google.com/rss/search?q=stablecoin+site%3Ahkma.gov.hk&hl=en-US&gl=US&ceid=US:en",
-      "name": "Google News — site:hkma.gov.hk stablecoin",
+      "name": "Google News — HKMA (site-proxy)",
       "entity": "Hong Kong",
       "topicHint": "stablecoin-policy"
     },
     {
       "url": "https://news.google.com/rss/search?q=stablecoin+site%3Afsa.go.jp&hl=en-US&gl=US&ceid=US:en",
-      "name": "Google News — site:fsa.go.jp stablecoin",
+      "name": "Google News — FSA Japan (site-proxy)",
       "entity": "Japan",
       "topicHint": "stablecoin-policy"
     }
