@@ -29,6 +29,7 @@ import {
   regionForEntity,
   type RegionKey,
 } from "./news-regional-summary.js";
+import { runWebSearch } from "./news-web-search.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
@@ -474,20 +475,37 @@ async function main() {
     }),
   );
 
-  const candidates = fetched.flat();
-  const pending = candidates.filter(
+  const rssCandidates = fetched.flat();
+
+  let webSearchCandidates: PendingItem[] = [];
+  try {
+    webSearchCandidates = await runWebSearch(news);
+  } catch (err) {
+    console.warn(`web-search top-up failed: ${(err as Error).message} — continuing with RSS only`);
+  }
+
+  const candidates: PendingItem[] = [...rssCandidates, ...webSearchCandidates];
+
+  const layer1Survivors = candidates.filter(
     (c) =>
       !seenUrls.has(c.parsed.link) &&
       isRelevant(c.parsed.title, c.feed.trustedSource ?? false),
   );
+  const pending = layer1Survivors;
+
+  const layer1KeptTrusted = layer1Survivors.filter((c) => c.feed.trustedSource).length;
+  const layer1KeptUntrusted = layer1Survivors.length - layer1KeptTrusted;
   const filteredOut = candidates.length - pending.length;
   console.log(
-    `rss: ${candidates.length} items across ${feedsCfg.feeds.length} feeds; ` +
+    `rss: ${candidates.length} items (rss=${rssCandidates.length} webSearch=${webSearchCandidates.length}); ` +
       `${pending.length} new + relevant (${filteredOut} skipped: dup or off-topic)`,
   );
   if (pending.length === 0) return;
 
   let added = 0;
+  let layer2Dropped = 0;
+  let webSearchAdded = 0;
+  let trustedAdded = 0;
   const touchedRegions = new Set<RegionKey>();
   await runPool<PendingItem>(pending, async ({ feed, parsed }) => {
     // Don't reprocess the same URL if we've already added it in this run
@@ -497,7 +515,13 @@ async function main() {
 
     const body = await fetchArticleText(parsed.link);
     const sum = await summarize(parsed.title, feed.name, parsed.pubDate, body, feed.trustedSource ?? false);
-    if (!sum) return;
+    if (!sum) {
+      // Either Haiku failed, returned empty, or returned NOT_RELEVANT.
+      // We can't cheaply distinguish here, so count as layer2 drop only
+      // when the feed was trusted (where NOT_RELEVANT is the gate).
+      if (feed.trustedSource) layer2Dropped++;
+      return;
+    }
 
     const entityBucket = news.entities[feed.entity];
     if (!entityBucket) {
@@ -515,6 +539,8 @@ async function main() {
       summarySource: sum.source,
     });
     added++;
+    if (feed.name.startsWith("WebSearch ")) webSearchAdded++;
+    if (feed.trustedSource) trustedAdded++;
     touchedRegions.add(regionForEntity(feed.entity));
 
     // Checkpoint every few items so a transient crash doesn't lose work.
@@ -539,6 +565,13 @@ async function main() {
     console.log(`rss: regenerated ${updated.length} region summary(ies)`);
   }
 
+  console.log(
+    `rss-summary: candidates=${candidates.length} ` +
+      `layer1_kept=${layer1Survivors.length} ` +
+      `(trusted=${layer1KeptTrusted}, untrusted=${layer1KeptUntrusted}) ` +
+      `layer2_dropped=${layer2Dropped} added=${added} ` +
+      `(trusted=${trustedAdded}, webSearch=${webSearchAdded})`,
+  );
   news.generatedAt = new Date().toISOString();
   writeFileSync(NEWS_PATH, JSON.stringify(news, null, 2) + "\n");
   copyFileSync(NEWS_PATH, PUBLIC_NEWS_PATH);
