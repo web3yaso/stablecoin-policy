@@ -7,6 +7,7 @@
  * (same regex news-rss.ts uses for non-trusted feeds), and print
  * candidate / kept counts per query. Still does not write anything.
  */
+import "./skip-autorun.js";
 import "../env.js";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";

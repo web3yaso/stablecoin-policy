@@ -555,7 +555,13 @@ async function main() {
   }
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+export async function run(): Promise<void> {
+  await main();
+}
+
+if (process.env.NEWS_RSS_SKIP_AUTORUN !== "1") {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}
