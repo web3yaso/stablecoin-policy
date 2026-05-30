@@ -23,13 +23,27 @@ type JsonFileInput = {
   data: JsonValue;
 };
 
+type RecentNewsItem = {
+  headline: string;
+  date: string;
+  source: string;
+  url: string;
+  summary?: string;
+};
+
+type JurisdictionBlock = {
+  jurisdiction: string;
+  recentNews: RecentNewsItem[];
+  legislation?: JsonValue;
+};
+
 type ReportInput = {
   generatedAt: string;
   date: string;
-  newsSummary: JsonValue | null;
-  federalLegislation: JsonValue | null;
-  stateLegislation: JsonFileInput[];
-  international: JsonFileInput[];
+  regionalSummaries: { na?: string; eu?: string; asia?: string };
+  jurisdictions: JurisdictionBlock[];
+  /** Raw paths used; kept for the report's sourceFiles field. */
+  sourceFiles: string[];
 };
 
 type DailyReport = {
@@ -61,6 +75,7 @@ type DailyReport = {
   watchlist: string[];
   analystTakeaway: string;
   sourceFiles: string[];
+  sources: Array<{ outlet: string; url: string; headline: string; date: string }>;
 };
 
 type RegionalSummary = {
@@ -230,145 +245,212 @@ async function readJsonDir(relativeDir: string): Promise<JsonFileInput[]> {
   return results;
 }
 
+const RECENT_DAYS = 7;
+const MAX_NEWS_PER_BLOCK = 10;
+
+// Region tagging mirrors news-regional-summary.ts. Kept local so we do
+// not pull a runtime import from a sync script with its own .env logic.
+const EU_ENTITIES_FOR_REPORT = new Set([
+  "Netherlands", "Ireland", "Sweden", "Finland", "Germany", "France",
+  "United Kingdom", "Spain", "Italy", "Poland", "Denmark", "Norway",
+  "Belgium", "Austria", "Portugal", "Greece", "Czech Republic", "Czechia",
+  "Switzerland", "Luxembourg", "European Union",
+]);
+const ASIA_ENTITIES_FOR_REPORT = new Set([
+  "Japan", "China", "South Korea", "Republic of Korea", "Singapore",
+  "India", "Taiwan", "Indonesia", "Australia", "Malaysia", "Thailand",
+  "Vietnam", "Philippines", "Hong Kong",
+]);
+
+function recentNewsFor(
+  newsSummary: JsonValue | null,
+  entity: string,
+  now: number,
+): RecentNewsItem[] {
+  if (!newsSummary || typeof newsSummary !== "object" || Array.isArray(newsSummary)) return [];
+  const root = (newsSummary as { entities?: Record<string, { news?: unknown[] }> }).entities;
+  const bucket = root?.[entity];
+  const items = Array.isArray(bucket?.news) ? (bucket!.news as RecentNewsItem[]) : [];
+  const cutoff = now - RECENT_DAYS * 24 * 60 * 60 * 1000;
+  return items
+    .filter((it) => {
+      const t = Date.parse(it?.date ?? "");
+      return Number.isFinite(t) && t >= cutoff;
+    })
+    .sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""))
+    .slice(0, MAX_NEWS_PER_BLOCK)
+    .map((it) => ({
+      headline: it.headline,
+      date: it.date,
+      source: it.source,
+      url: it.url,
+      summary: it.summary,
+    }));
+}
+
+function countRecentItems(items: RecentNewsItem[]): number {
+  return items.length;
+}
+
+function jurisdictionFromStateFile(file: JsonFileInput): string {
+  // e.g. data/legislation/states/california.json → "US-California"
+  const base = file.id.replace(/[-_]/g, " ");
+  const titled = base
+    .split(" ")
+    .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(" ");
+  return `US-${titled}`;
+}
+
+function jurisdictionFromInternationalFile(file: JsonFileInput): string {
+  return file.id
+    .split(/[-_]/)
+    .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(" ");
+}
+
+function regionOfJurisdiction(jurisdiction: string, entity: string | null): "na" | "eu" | "asia" | "other" {
+  if (jurisdiction === "US-Federal" || jurisdiction.startsWith("US-")) return "na";
+  if (entity && EU_ENTITIES_FOR_REPORT.has(entity)) return "eu";
+  if (entity && ASIA_ENTITIES_FOR_REPORT.has(entity)) return "asia";
+  return "other";
+}
+
+function buildJurisdictionBlocks(args: {
+  newsSummary: JsonValue | null;
+  federalLegislation: JsonValue | null;
+  stateLegislation: JsonFileInput[];
+  international: JsonFileInput[];
+  now: number;
+}): JurisdictionBlock[] {
+  const { newsSummary, federalLegislation, stateLegislation, international, now } = args;
+  const blocks: JurisdictionBlock[] = [];
+
+  // 1. US-Federal: news bucket is "United States"; federal legislation JSON.
+  blocks.push({
+    jurisdiction: "US-Federal",
+    recentNews: recentNewsFor(newsSummary, "United States", now),
+    legislation: federalLegislation ?? undefined,
+  });
+
+  // 2. US-States: per-state legislation, no per-state news bucket exists
+  //    (news-rss.ts files everything under the single "United States" entity).
+  //    Rank by legislation file size as a recent-activity proxy and only
+  //    surface states that actually have entries.
+  const stateBlocks: JurisdictionBlock[] = stateLegislation
+    .filter((f) => Array.isArray((f.data as { legislation?: unknown[] })?.legislation) &&
+                   ((f.data as { legislation: unknown[] }).legislation.length > 0))
+    .map((f) => ({
+      jurisdiction: jurisdictionFromStateFile(f),
+      recentNews: [],
+      legislation: f.data,
+    }))
+    .sort((a, b) => {
+      const al = ((a.legislation as { legislation?: unknown[] })?.legislation ?? []).length;
+      const bl = ((b.legislation as { legislation?: unknown[] })?.legislation ?? []).length;
+      return bl - al;
+    });
+  blocks.push(...stateBlocks);
+
+  // 3. International: each file becomes a block; news bucket name matches
+  //    the file id title-cased (best effort) OR — for the EU — "European Union".
+  const international_blocks: JurisdictionBlock[] = international.map((f) => {
+    let entityGuess = jurisdictionFromInternationalFile(f);
+    if (entityGuess === "European Union" || f.id === "european-union") entityGuess = "European Union";
+    return {
+      jurisdiction: entityGuess,
+      recentNews: recentNewsFor(newsSummary, entityGuess, now),
+      legislation: f.data,
+    };
+  });
+
+  // Rank: EU first, UK second, then by recent-news count desc, others last.
+  international_blocks.sort((a, b) => {
+    const rank = (j: string) => (j === "European Union" ? 0 : j === "United Kingdom" ? 1 : 2);
+    const ra = rank(a.jurisdiction);
+    const rb = rank(b.jurisdiction);
+    if (ra !== rb) return ra - rb;
+    return countRecentItems(b.recentNews) - countRecentItems(a.recentNews);
+  });
+
+  blocks.push(...international_blocks);
+  return blocks;
+}
+
+function buildRegionalSummaries(newsSummary: JsonValue | null): { na?: string; eu?: string; asia?: string } {
+  const regional = readRegionalSummary(newsSummary).regional ?? {};
+  return {
+    na: regional.na?.summary,
+    eu: regional.eu?.summary,
+    asia: regional.asia?.summary,
+  };
+}
+
 function compactForPrompt(input: ReportInput): string {
-  return JSON.stringify(input, null, 2).slice(0, PROMPT_INPUT_LIMIT);
+  const lines: string[] = [];
+  lines.push(`Date: ${input.date}`);
+  lines.push(`Generated at: ${input.generatedAt}`);
+  if (input.regionalSummaries.na) lines.push(`\nRegional summary — NA:\n${input.regionalSummaries.na}`);
+  if (input.regionalSummaries.eu) lines.push(`\nRegional summary — EU:\n${input.regionalSummaries.eu}`);
+  if (input.regionalSummaries.asia) lines.push(`\nRegional summary — Asia:\n${input.regionalSummaries.asia}`);
+
+  let used = lines.join("\n").length;
+  const BUDGET = 100_000;
+  for (const block of input.jurisdictions) {
+    const blockLines: string[] = [];
+    blockLines.push(`\n## ${block.jurisdiction}`);
+    if (block.recentNews.length > 0) {
+      blockLines.push("Recent news (last 7 days):");
+      for (const n of block.recentNews) {
+        blockLines.push(`- [${n.date}] ${n.source}: ${n.headline} (${n.url})`);
+        if (n.summary) blockLines.push(`  ${n.summary}`);
+      }
+    }
+    if (block.legislation) {
+      blockLines.push("Legislation:");
+      blockLines.push(JSON.stringify(block.legislation, null, 2));
+    }
+    const blockText = blockLines.join("\n");
+    if (used + blockText.length > BUDGET) break;
+    lines.push(blockText);
+    used += blockText.length;
+  }
+  return lines.join("\n");
 }
 
 function fallbackReport(input: ReportInput): DailyReport {
-  const regional = readRegionalSummary(input.newsSummary).regional ?? {};
-
+  // Placeholder: keeps types valid until Task 11 rewrites this with the
+  // sparse-data behavior. This implementation only fires when
+  // REPORT_FORCE_FALLBACK=1 or when Anthropic is unreachable.
+  const regional = input.regionalSummaries;
   const executiveSummary = [
-    regional.na?.summary
-      ? `North America: ${firstLine(regional.na.summary)}`
-      : "North America remains focused on stablecoin legislation, issuer rules, and implementation risk.",
-    regional.eu?.summary
-      ? `Europe / UK: ${firstLine(regional.eu.summary)}`
-      : "Europe and the UK continue to refine stablecoin, custody, and payment-related frameworks.",
-    regional.asia?.summary
-      ? `Asia-Pacific: ${firstLine(regional.asia.summary)}`
-      : "Asia-Pacific remains active in stablecoin licensing, payment pilots, and reserve standards.",
+    regional.na ? `North America: ${firstLine(regional.na)}` : "North America: insufficient signal.",
+    regional.eu ? `Europe / UK: ${firstLine(regional.eu)}` : "Europe / UK: insufficient signal.",
+    regional.asia ? `Asia-Pacific: ${firstLine(regional.asia)}` : "Asia-Pacific: insufficient signal.",
   ];
-
   return {
     date: input.date,
     generatedAt: input.generatedAt,
     title: `Daily Stablecoin Policy Brief - ${input.date}`,
     executiveSummary,
-    topDevelopments: [
-      {
-        jurisdiction: "United States / North America",
-        headline:
-          "Stablecoin policy momentum remains centered on implementation and supervision.",
-        signal:
-          "Legislation, issuer supervision, AML/CFT, sanctions, and yield guardrails remain key themes.",
-        whyItMatters:
-          "Stablecoin companies should prepare for detailed implementation rules rather than only tracking headline bill progress.",
-        affectedParties: [
-          "Stablecoin issuers",
-          "Exchanges",
-          "Wallets",
-          "Payment companies",
-          "Compliance teams",
-        ],
-        riskLevel: "High",
-      },
-      {
-        jurisdiction: "United Kingdom / Europe",
-        headline:
-          "Stablecoin and custody rules continue to move through consultation and implementation planning.",
-        signal:
-          "Regulators are balancing innovation, financial stability, custody rules, and cross-border exposure.",
-        whyItMatters:
-          "Firms targeting UK or European users should prepare authorization, custody, disclosure, and reserve documentation.",
-        affectedParties: [
-          "Payment firms",
-          "Custodians",
-          "Stablecoin issuers",
-          "Fintechs",
-        ],
-        riskLevel: "Medium-High",
-      },
-      {
-        jurisdiction: "Asia-Pacific",
-        headline:
-          "Regulated stablecoin payment infrastructure continues to advance.",
-        signal:
-          "Licensing, issuer approval, bank partnerships, and cross-border payment use cases are gaining traction.",
-        whyItMatters:
-          "Asia-Pacific may become one of the most commercially active regions for compliant stablecoin payments.",
-        affectedParties: [
-          "Banks",
-          "Payment companies",
-          "Stablecoin issuers",
-          "Institutional settlement providers",
-        ],
-        riskLevel: "Medium",
-      },
-    ],
-    regulatorySignalTable: [
-      {
-        jurisdiction: "United States",
-        signal: "Implementation and supervision",
-        direction: "More formalized and restrictive",
-        riskLevel: "High",
-        businessImpact:
-          "Issuers and intermediaries should prepare for federal compliance requirements.",
-      },
-      {
-        jurisdiction: "Canada",
-        signal: "Stablecoin rulemaking and CAD stablecoin activity",
-        direction: "Framework building",
-        riskLevel: "Medium",
-        businessImpact:
-          "Canadian stablecoin and payment pilots may grow while detailed rules are finalized.",
-      },
-      {
-        jurisdiction: "United Kingdom",
-        signal: "Stablecoin and custody consultation",
-        direction: "Pre-authorization preparation",
-        riskLevel: "Medium-High",
-        businessImpact:
-          "Firms should prepare licensing and compliance documentation early.",
-      },
-      {
-        jurisdiction: "Hong Kong / Singapore / Japan",
-        signal: "Licensed, reserve-backed stablecoin models",
-        direction: "Regulated payment infrastructure",
-        riskLevel: "Medium",
-        businessImpact:
-          "Institution-grade stablecoin payment rails are becoming more attractive.",
-      },
-    ],
+    topDevelopments: [],
+    regulatorySignalTable: [],
     marketImpact: {
-      stablecoinIssuers:
-        "The strongest regulatory direction is toward licensed issuance, high-quality reserves, at-par redemption, and stronger governance.",
-      exchangesAndWallets:
-        "Listing, promotion, rewards, custody, and user access will increasingly depend on jurisdiction-specific rules.",
-      paymentCompanies:
-        "Stablecoin settlement and cross-border payment use cases are becoming more viable where licensing frameworks are clearer.",
-      defiProtocols:
-        "Yield-bearing and non-fiat-backed stablecoin models may face stronger scrutiny in major regulated markets.",
+      stablecoinIssuers: "Insufficient signal — see recent reports.",
+      exchangesAndWallets: "Insufficient signal — see recent reports.",
+      paymentCompanies: "Insufficient signal — see recent reports.",
+      defiProtocols: "Insufficient signal — see recent reports.",
     },
-    watchlist: [
-      "U.S. stablecoin implementation rules",
-      "Treasury AML/CFT and sanctions obligations",
-      "UK FCA stablecoin and custody consultation",
-      "Hong Kong stablecoin licensing updates",
-      "Canada stablecoin rulemaking timeline",
-    ],
+    watchlist: [],
     analystTakeaway:
-      "The global stablecoin market is moving from legislative debate to licensing, supervision, and implementation. The commercial opportunity is shifting toward compliance-ready payment infrastructure.",
+      "Data ingestion was sparse or AI generation was unavailable. The next refresh runs at the next scheduled cron tick.",
     sourceFiles: buildSourceFiles(input),
+    sources: [],
   };
 }
 
 function buildSourceFiles(input: ReportInput): string[] {
-  return [
-    "data/news/summaries.json",
-    "data/legislation/federal.json",
-    ...input.stateLegislation.map((item) => item.file),
-    ...input.international.map((item) => item.file),
-  ];
+  return input.sourceFiles;
 }
 
 async function generateWithAnthropic(input: ReportInput): Promise<DailyReport> {
@@ -577,13 +659,29 @@ async function main() {
   const date = process.env.REPORT_DATE || TODAY;
   const generatedAt = new Date().toISOString();
 
+  const newsSummary = await readJsonIfExists("data/news/summaries.json");
+  const federalLegislation = await readJsonIfExists("data/legislation/federal.json");
+  const stateLegislation = await readJsonDir("data/legislation/states");
+  const international = await readJsonDir("data/international");
+  const now = Date.now();
+
   const input: ReportInput = {
     generatedAt,
     date,
-    newsSummary: await readJsonIfExists("data/news/summaries.json"),
-    federalLegislation: await readJsonIfExists("data/legislation/federal.json"),
-    stateLegislation: await readJsonDir("data/legislation/states"),
-    international: await readJsonDir("data/international"),
+    regionalSummaries: buildRegionalSummaries(newsSummary),
+    jurisdictions: buildJurisdictionBlocks({
+      newsSummary,
+      federalLegislation,
+      stateLegislation,
+      international,
+      now,
+    }),
+    sourceFiles: [
+      "data/news/summaries.json",
+      "data/legislation/federal.json",
+      ...stateLegislation.map((item) => item.file),
+      ...international.map((item) => item.file),
+    ],
   };
 
   await fs.mkdir(OUTPUT_DIR_JSON, { recursive: true });
