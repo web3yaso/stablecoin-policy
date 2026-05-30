@@ -138,6 +138,7 @@ function buildGoogleNewsUrl(query: string): string {
   u.searchParams.set("hl", "en-US");
   u.searchParams.set("gl", "US");
   u.searchParams.set("ceid", "US:en");
+  u.searchParams.set("when", "7d");
   return u.toString();
 }
 

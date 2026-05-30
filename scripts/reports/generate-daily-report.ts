@@ -194,7 +194,7 @@ ${report.watchlist.map((item) => `- ${item}`).join("\n")}
 ${report.sources.length > 0 ? `\n## Sources\n\n${report.sources
   .slice()
   .sort((a, b) => a.outlet.localeCompare(b.outlet))
-  .map((s) => `- [${s.outlet} — ${s.headline}](${s.url}) · ${s.date}`)
+  .map((s) => `- [${escapeMdLinkText(s.outlet)} — ${escapeMdLinkText(s.headline)}](${s.url}) · ${s.date}`)
   .join("\n")}\n` : ""}`;
 }
 
@@ -310,13 +310,6 @@ function jurisdictionFromInternationalFile(file: JsonFileInput): string {
     .split(/[-_]/)
     .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1) : w))
     .join(" ");
-}
-
-function regionOfJurisdiction(jurisdiction: string, entity: string | null): "na" | "eu" | "asia" | "other" {
-  if (jurisdiction === "US-Federal" || jurisdiction.startsWith("US-")) return "na";
-  if (entity && EU_ENTITIES_FOR_REPORT.has(entity)) return "eu";
-  if (entity && ASIA_ENTITIES_FOR_REPORT.has(entity)) return "asia";
-  return "other";
 }
 
 function buildJurisdictionBlocks(args: {
@@ -627,6 +620,10 @@ function escapeMd(text: string): string {
   return text.replace(/\|/g, "\\|");
 }
 
+function escapeMdLinkText(s: string): string {
+  return s.replace(/[\[\]\\]/g, "\\$&").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
+}
+
 function reportToMarkdown(report: DailyReport): string {
   const topDevelopments = report.topDevelopments
     .map((item, index) => {
@@ -654,7 +651,7 @@ function reportToMarkdown(report: DailyReport): string {
     ? report.sources
         .slice()
         .sort((a, b) => a.outlet.localeCompare(b.outlet))
-        .map((s) => `- [${s.outlet} — ${s.headline}](${s.url}) · ${s.date}`)
+        .map((s) => `- [${escapeMdLinkText(s.outlet)} — ${escapeMdLinkText(s.headline)}](${s.url}) · ${s.date}`)
         .join("\n")
     : "_No sources cited for this brief._";
 
