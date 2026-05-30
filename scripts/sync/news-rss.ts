@@ -42,10 +42,18 @@ const MODEL = "claude-haiku-4-5-20251001";
 const MAX_DAYS = 14;
 const FETCH_TIMEOUT_MS = 15_000;
 const PER_FEED_LIMIT = 20;
-const CONCURRENCY = 4;
+const CONCURRENCY = 2;
 const SUMMARY_MAX_TOKENS = 120;
-const SUMMARY_MIN_INTERVAL_MS = 1_500;
+const SUMMARY_MIN_INTERVAL_MS = 3_000;
+// Circuit breaker: on the first 429 of a run, abort remaining summarize()
+// calls instead of retrying. A tight-tier org's rate limit can blow up
+// into a 3x-retry storm without this. SUMMARY_MAX_RETRIES applies only
+// to non-429 transient errors now.
 const SUMMARY_MAX_RETRIES = 3;
+// Hard cap per run. Cron load is well under this; dev-triggered runs
+// (which previously could hit ~500+ calls) are bounded to a survivable
+// number even if invoked accidentally.
+const MAX_HAIKU_CALLS_PER_RUN = 80;
 
 export interface FeedConfig {
   url: string;
@@ -358,22 +366,31 @@ function isRateLimitError(err: unknown): boolean {
   return /\b429\b|rate limit/i.test(message);
 }
 
+type SummarizeGate = {
+  circuitTripped: boolean;
+  callsMade: number;
+};
+
 async function summarize(
   headline: string,
   source: string,
   date: string,
   body: string | null,
   trusted: boolean,
+  gate: SummarizeGate,
 ): Promise<{ summary: string; source: "article" | "headline-only" } | null> {
   const baseSystem =
     "You write one- to two-sentence neutral summaries of news stories about stablecoin regulation, issuance, reserves, supervision, and related digital-asset policy. Plain factual prose. No editorializing.";
-  const gate = trusted
+  const notRelevantClause = trusted
     ? " If this story is not about stablecoin / digital-asset payment policy, supervision, reserves, redemption, AML/CFT, sanctions, custody, or issuer eligibility, respond with exactly NOT_RELEVANT and nothing else."
     : "";
-  const system = baseSystem + gate;
+  const system = baseSystem + notRelevantClause;
   const userBlock = body
     ? `Headline: ${headline}\nSource: ${source} (${date})\n\nArticle body (trimmed):\n${body}\n\nWrite a 1–2 sentence neutral summary.`
     : `Headline: ${headline}\nSource: ${source} (${date})\n\nThe article body could not be retrieved. Write one factual sentence based on the headline alone — do not invent specifics.`;
+  if (gate.circuitTripped) return null;
+  if (gate.callsMade >= MAX_HAIKU_CALLS_PER_RUN) return null;
+  gate.callsMade++;
   for (let attempt = 1; attempt <= SUMMARY_MAX_RETRIES; attempt++) {
     await waitForSummarySlot();
     try {
@@ -392,10 +409,19 @@ async function summarize(
       if (text.startsWith("NOT_RELEVANT")) return null;
       return { summary: text, source: body ? "article" : "headline-only" };
     } catch (err) {
-      if (isRateLimitError(err) && attempt < SUMMARY_MAX_RETRIES) {
-        const backoffMs = attempt * 15_000;
+      if (isRateLimitError(err)) {
+        if (!gate.circuitTripped) {
+          gate.circuitTripped = true;
+          console.warn(
+            `  summarize: 429 hit — circuit tripped. Remaining items in this run will skip Haiku.`,
+          );
+        }
+        return null;
+      }
+      if (attempt < SUMMARY_MAX_RETRIES) {
+        const backoffMs = attempt * 5_000;
         console.warn(
-          `  summarize rate-limited; retrying in ${(backoffMs / 1000).toFixed(0)}s ` +
+          `  summarize transient error; retrying in ${(backoffMs / 1000).toFixed(0)}s ` +
             `(attempt ${attempt + 1}/${SUMMARY_MAX_RETRIES})`,
         );
         await sleep(backoffMs);
@@ -536,6 +562,7 @@ async function main() {
     return;
   }
 
+  const summarizeGate: SummarizeGate = { circuitTripped: false, callsMade: 0 };
   let added = 0;
   let layer2Dropped = 0;
   let webSearchAdded = 0;
@@ -548,7 +575,7 @@ async function main() {
     seenUrls.add(parsed.link);
 
     const body = await fetchArticleText(parsed.link);
-    const sum = await summarize(parsed.title, feed.name, parsed.pubDate, body, feed.trustedSource ?? false);
+    const sum = await summarize(parsed.title, feed.name, parsed.pubDate, body, feed.trustedSource ?? false, summarizeGate);
     if (!sum) {
       // Either Haiku failed, returned empty, or returned NOT_RELEVANT.
       // We can't cheaply distinguish here, so count as layer2 drop only
@@ -604,7 +631,9 @@ async function main() {
       `layer1_kept=${layer1Survivors.length} ` +
       `(trusted=${layer1KeptTrusted}, untrusted=${layer1KeptUntrusted}) ` +
       `layer2_dropped=${layer2Dropped} added=${added} ` +
-      `(trusted=${trustedAdded}, webSearch=${webSearchAdded})`,
+      `(trusted=${trustedAdded}, webSearch=${webSearchAdded}) ` +
+      `haiku_calls=${summarizeGate.callsMade}/${MAX_HAIKU_CALLS_PER_RUN}` +
+      `${summarizeGate.circuitTripped ? " circuit_tripped=true" : ""}`,
   );
   news.generatedAt = new Date().toISOString();
   writeFileSync(NEWS_PATH, JSON.stringify(news, null, 2) + "\n");
