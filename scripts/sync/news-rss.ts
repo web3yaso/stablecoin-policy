@@ -3,21 +3,23 @@
  * dedupes against existing items (by URL), summarizes new ones via
  * Haiku, and appends them to `data/news/summaries.json`.
  *
- * Designed to run daily via `.github/workflows/news-rss.yml`. Not safe
- * to run more often than that without raising the rate-limit guards in
- * this file — see CONCURRENCY / SUMMARY_MIN_INTERVAL_MS /
- * MAX_HAIKU_CALLS_PER_RUN below.
+ * Designed to run weekly (Sunday 02:00 UTC) via
+ * `.github/workflows/news-rss.yml`. Not safe to run more often than the
+ * configured interval without raising the rate-limit guards in this file
+ * — see CONCURRENCY / SUMMARY_MIN_INTERVAL_MS / MAX_HAIKU_CALLS_PER_RUN
+ * below.
  *
- * Two-week guard:
+ * Abandonment guard:
  *   The script reads `data/news/.rss-started` (UTC ISO timestamp). When
- *   the file is older than 14 days, the script logs a notice and exits
- *   without making API calls. To restart, bump the timestamp:
+ *   the file is older than MAX_DAYS (60), the script logs a notice and
+ *   exits without making API calls — a safety net against an unattended
+ *   project quietly burning API credit. To restart, bump the timestamp:
  *       npx tsx scripts/sync/news-rss.ts --restart
  *   …or just delete the file and re-run.
  *
- * Cost: ~$0.001 per new item on Haiku. Realistic load is ~30-80
- * new items/day across the curated feeds, i.e. ~$1-3 over the full
- * 14-day window.
+ * Cost: ~$0.001 per new item on Haiku, hard-capped at
+ * MAX_HAIKU_CALLS_PER_RUN per run (≈ $0.08 / run worst case). Weekly
+ * cadence × ~80 calls/run ≈ $0.30/month ceiling for item summaries.
  */
 
 import "../env.js";
@@ -41,7 +43,7 @@ const FEEDS_PATH = join(ROOT, "data/news/feeds.json");
 const STARTED_PATH = join(ROOT, "data/news/.rss-started");
 
 const MODEL = "claude-haiku-4-5-20251001";
-const MAX_DAYS = 14;
+const MAX_DAYS = 60;
 const FETCH_TIMEOUT_MS = 15_000;
 const PER_FEED_LIMIT = 20;
 const CONCURRENCY = 2;
