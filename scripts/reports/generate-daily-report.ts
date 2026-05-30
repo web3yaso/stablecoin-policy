@@ -405,8 +405,10 @@ function compactForPrompt(input: ReportInput): string {
     if (block.recentNews.length > 0) {
       blockLines.push("Recent news (last 7 days):");
       for (const n of block.recentNews) {
-        blockLines.push(`- [${n.date}] ${n.source}: ${n.headline} (${n.url})`);
-        if (n.summary) blockLines.push(`  ${n.summary}`);
+        blockLines.push(
+          `- date=${n.date} outlet="${n.source.replace(/"/g, "'")}" headline="${n.headline.replace(/"/g, "'")}" url=${n.url}`,
+        );
+        if (n.summary) blockLines.push(`  summary: ${n.summary}`);
       }
     }
     if (block.legislation) {
@@ -541,11 +543,11 @@ Return this exact JSON shape:
 }
 
 Sources rules:
-- The "sources" array MUST contain 8 to 15 entries.
-- Every URL in "sources" MUST appear verbatim in the input "Recent news" entries below.
+- The "sources" array MUST contain 8 to 15 entries when the input contains 8+ distinct outlets in the Recent news entries below. Otherwise return as many as exist.
+- The "url" field of each entry MUST be COPIED VERBATIM from the "url=" field of a Recent news entry below. Character for character. Including all query parameters, redirect chains, and tracking suffixes. DO NOT substitute a canonical regulator URL or shortened form even if it looks "cleaner". The URLs in the input ARE the URLs you must return.
+- A URL that does not match an input "url=" value verbatim will be dropped by post-processing and your sources list will be incomplete. So copy carefully.
 - Deduplicate by outlet (one entry per outlet at most).
-- Pick the most consequential items actually relied on across executiveSummary, topDevelopments, regulatorySignalTable, and analystTakeaway.
-- If the input contains fewer than 8 distinct outlets in the last 7 days, return as many as exist (sources may be shorter than 8 in that case).`;
+- Pick the most consequential items actually relied on across executiveSummary, topDevelopments, regulatorySignalTable, and analystTakeaway.`;
 
   const userBody = compactForPrompt(input);
   const user = `Date: ${input.date}

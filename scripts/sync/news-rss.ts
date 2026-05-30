@@ -3,8 +3,10 @@
  * dedupes against existing items (by URL), summarizes new ones via
  * Haiku, and appends them to `data/news/summaries.json`.
  *
- * Designed to be run on a 15-minute cron — see
- * `.github/workflows/news-rss.yml`.
+ * Designed to run daily via `.github/workflows/news-rss.yml`. Not safe
+ * to run more often than that without raising the rate-limit guards in
+ * this file — see CONCURRENCY / SUMMARY_MIN_INTERVAL_MS /
+ * MAX_HAIKU_CALLS_PER_RUN below.
  *
  * Two-week guard:
  *   The script reads `data/news/.rss-started` (UTC ISO timestamp). When
