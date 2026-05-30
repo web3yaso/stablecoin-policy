@@ -751,12 +751,25 @@ async function main() {
     ],
   };
 
-  await fs.mkdir(OUTPUT_DIR_JSON, { recursive: true });
-  await fs.mkdir(OUTPUT_DIR_MD, { recursive: true });
-
   const report = await generateWithAnthropic(input);
   const markdown = reportToMarkdown(report);
   const previewMarkdown = reportToPreviewMarkdown(report);
+
+  if (process.env.REPORT_DRY_RUN === "1") {
+    const dryDir = process.env.TMPDIR ?? "/tmp";
+    const dryJson = path.join(dryDir, `report-dryrun-${date}.json`);
+    const dryMd = path.join(dryDir, `report-dryrun-${date}.md`);
+    await fs.writeFile(dryJson, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+    await fs.writeFile(dryMd, markdown, "utf8");
+    console.log(`report-dryrun: wrote ${dryJson} and ${dryMd}`);
+    console.log(
+      `report-summary: jurisdiction_blocks=${input.jurisdictions.length} sources_returned=${report.sources.length} word_count=${countWords(markdown)}`,
+    );
+    return;
+  }
+
+  await fs.mkdir(OUTPUT_DIR_JSON, { recursive: true });
+  await fs.mkdir(OUTPUT_DIR_MD, { recursive: true });
 
   const jsonPath = path.join(OUTPUT_DIR_JSON, `${date}.json`);
   const mdPath = path.join(OUTPUT_DIR_MD, `${date}.md`);
@@ -793,6 +806,9 @@ async function main() {
   };
   await upsertReportIndex(sellableMeta);
 
+  console.log(
+    `report-summary: jurisdiction_blocks=${input.jurisdictions.length} sources_returned=${report.sources.length} word_count=${countWords(markdown)}`,
+  );
   console.log(`Generated daily report JSON: ${path.relative(ROOT, jsonPath)}`);
   console.log(
     `Generated latest report JSON: ${path.relative(ROOT, latestJsonPath)}`,
@@ -803,8 +819,14 @@ async function main() {
   );
 }
 
-main().catch((error: unknown) => {
-  const message = error instanceof Error ? error.message : "unknown error";
-  console.error(`Daily report generation failed: ${message}`);
-  process.exit(1);
-});
+export async function run(): Promise<void> {
+  await main();
+}
+
+if (process.env.REPORT_SKIP_AUTORUN !== "1") {
+  main().catch((error: unknown) => {
+    const message = error instanceof Error ? error.message : "unknown error";
+    console.error(`Daily report generation failed: ${message}`);
+    process.exit(1);
+  });
+}
