@@ -502,6 +502,40 @@ async function main() {
   );
   if (pending.length === 0) return;
 
+  if (process.env.NEWS_RSS_DRY_RUN === "1") {
+    const dryDir = process.env.TMPDIR ?? "/tmp";
+    const dryPath = `${dryDir}/news-rss-dryrun-${new Date().toISOString().slice(0,10)}.json`;
+    const fsMod = await import("node:fs/promises");
+    const dryOut = {
+      generatedAt: new Date().toISOString(),
+      summary: {
+        candidates: candidates.length,
+        layer1Kept: layer1Survivors.length,
+        layer1KeptTrusted,
+        layer1KeptUntrusted,
+        wouldCallHaiku: pending.length,
+      },
+      candidates: pending.map((c) => ({
+        feed: {
+          name: c.feed.name,
+          entity: c.feed.entity,
+          trustedSource: c.feed.trustedSource ?? false,
+        },
+        parsed: {
+          title: c.parsed.title,
+          link: c.parsed.link,
+          pubDate: c.parsed.pubDate,
+        },
+      })),
+    };
+    await fsMod.writeFile(dryPath, JSON.stringify(dryOut, null, 2) + "\n", "utf8");
+    console.log(`news-rss-dryrun: wrote ${pending.length} candidates to ${dryPath}`);
+    console.log(
+      `news-rss-dryrun: would have called Haiku ${pending.length} time(s). No API calls made. No files written outside /tmp.`,
+    );
+    return;
+  }
+
   let added = 0;
   let layer2Dropped = 0;
   let webSearchAdded = 0;
