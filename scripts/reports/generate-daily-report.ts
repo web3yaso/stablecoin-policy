@@ -421,16 +421,51 @@ function compactForPrompt(input: ReportInput): string {
   return lines.join("\n");
 }
 
+// ─── ARCHIVED: pre-2026-05-28 hardcoded fallback ──────────────────
+// Retained for 7-day paper trail; safe to delete after 2026-06-04.
+// If Sonnet is unavailable for an extended period and the sparse-data
+// fallback feels too thin to ship, restore this body as a temporary
+// measure (be aware it returns boilerplate, not real signal).
+//
+// function fallbackReportLegacy(input: ReportInput): DailyReport {
+//   const regional = input.regionalSummaries;
+//   const executiveSummary = [
+//     regional.na
+//       ? `North America: ${firstLine(regional.na)}`
+//       : "North America remains focused on stablecoin legislation, issuer rules, and implementation risk.",
+//     regional.eu
+//       ? `Europe / UK: ${firstLine(regional.eu)}`
+//       : "Europe and the UK continue to refine stablecoin, custody, and payment-related frameworks.",
+//     regional.asia
+//       ? `Asia-Pacific: ${firstLine(regional.asia)}`
+//       : "Asia-Pacific remains active in stablecoin licensing, payment pilots, and reserve standards.",
+//   ];
+//   return {
+//     date: input.date,
+//     generatedAt: input.generatedAt,
+//     title: `Daily Stablecoin Policy Brief - ${input.date}`,
+//     executiveSummary,
+//     topDevelopments: [/* 3 hardcoded developments */],
+//     regulatorySignalTable: [/* 4 hardcoded rows */],
+//     marketImpact: { /* 4 hardcoded paragraphs */ },
+//     watchlist: [/* 5 hardcoded items */],
+//     analystTakeaway:
+//       "The global stablecoin market is moving from legislative debate to licensing, supervision, and implementation. The commercial opportunity is shifting toward compliance-ready payment infrastructure.",
+//     sourceFiles: buildSourceFiles(input),
+//     sources: [],
+//   };
+// }
+
 function fallbackReport(input: ReportInput): DailyReport {
-  // Placeholder: keeps types valid until Task 11 rewrites this with the
-  // sparse-data behavior. This implementation only fires when
-  // REPORT_FORCE_FALLBACK=1 or when Anthropic is unreachable.
   const regional = input.regionalSummaries;
-  const executiveSummary = [
-    regional.na ? `North America: ${firstLine(regional.na)}` : "North America: insufficient signal.",
-    regional.eu ? `Europe / UK: ${firstLine(regional.eu)}` : "Europe / UK: insufficient signal.",
-    regional.asia ? `Asia-Pacific: ${firstLine(regional.asia)}` : "Asia-Pacific: insufficient signal.",
-  ];
+  const allEmpty = !regional.na && !regional.eu && !regional.asia;
+  const executiveSummary = allEmpty
+    ? ["No new policy signal detected in last 24 hours."]
+    : [
+        regional.na ? `North America: ${firstLine(regional.na)}` : "North America: insufficient signal.",
+        regional.eu ? `Europe / UK: ${firstLine(regional.eu)}` : "Europe / UK: insufficient signal.",
+        regional.asia ? `Asia-Pacific: ${firstLine(regional.asia)}` : "Asia-Pacific: insufficient signal.",
+      ];
   return {
     date: input.date,
     generatedAt: input.generatedAt,
