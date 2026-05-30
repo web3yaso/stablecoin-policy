@@ -92,7 +92,6 @@ const OUTPUT_DIR_MD = path.join(ROOT, "public", "reports", "daily");
 const REPORTS_DIR = path.join(ROOT, "data", "reports");
 const REPORTS_INDEX_PATH = path.join(REPORTS_DIR, "index.json");
 const TODAY = new Date().toISOString().slice(0, 10);
-const PROMPT_INPUT_LIMIT = 120_000;
 
 type EncryptedReportFile = {
   version: 1;
@@ -192,7 +191,11 @@ ${report.executiveSummary.map((item) => `- ${item}`).join("\n")}
 ## Watchlist
 
 ${report.watchlist.map((item) => `- ${item}`).join("\n")}
-`;
+${report.sources.length > 0 ? `\n## Sources\n\n${report.sources
+  .slice()
+  .sort((a, b) => a.outlet.localeCompare(b.outlet))
+  .map((s) => `- [${s.outlet} — ${s.headline}](${s.url}) · ${s.date}`)
+  .join("\n")}\n` : ""}`;
 }
 
 async function pathExists(filePath: string): Promise<boolean> {
@@ -453,71 +456,15 @@ function buildSourceFiles(input: ReportInput): string[] {
   return input.sourceFiles;
 }
 
-async function generateWithAnthropic(input: ReportInput): Promise<DailyReport> {
-  if (process.env.REPORT_FORCE_FALLBACK === "1") {
-    console.warn("REPORT_FORCE_FALLBACK=1. Using deterministic fallback report.");
-    return fallbackReport(input);
-  }
-
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-
-  if (!apiKey) {
-    console.warn(
-      "ANTHROPIC_API_KEY is not set. Using deterministic fallback report.",
-    );
-    return fallbackReport(input);
-  }
-
-  const anthropic = new Anthropic({ apiKey });
-  const message = await anthropic.messages.create({
-    model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5",
-    max_tokens: 5000,
-    temperature: 0.2,
-    messages: [
-      {
-        role: "user",
-        content: buildPrompt(input),
-      },
-    ],
-  });
-
-  const text = message.content
-    .map((block) => (block.type === "text" ? block.text : ""))
-    .join("\n")
-    .trim();
-
-  try {
-    const parsed = JSON.parse(extractJson(text)) as DailyReport;
-
-    return {
-      ...parsed,
-      date: input.date,
-      generatedAt: input.generatedAt,
-      sourceFiles: parsed.sourceFiles?.length
-        ? parsed.sourceFiles
-        : buildSourceFiles(input),
-    };
-  } catch {
-    console.warn("Failed to parse Anthropic JSON output. Using fallback.");
-    return fallbackReport(input);
-  }
-}
-
-function buildPrompt(input: ReportInput): string {
-  return `
-You are a stablecoin policy analyst.
-
-Generate a Daily Stablecoin Policy Brief from the repo data below.
+function buildSystemAndUserPrompts(input: ReportInput): { system: string; user: string } {
+  const system = `You are a stablecoin policy analyst writing the Daily Stablecoin Policy Brief.
 
 Rules:
-- Use only facts supported by the input data.
-- Do not invent dates, laws, bill names, or regulator actions.
+- Use only facts supported by the input data below.
+- Do not invent dates, laws, bill names, regulator actions, or URLs.
 - Separate factual policy signal from business analysis.
-- Keep the report useful for stablecoin issuers, exchanges, wallets, payment companies, compliance teams, and investors.
-- Prioritize developments that affect licensing, reserves, redemption, AML/CFT, sanctions, custody, payment use cases, yield, and issuer eligibility.
-- Output valid JSON only.
-- No markdown.
-- No comments.
+- Each "Top Development" must be tied to a real input news item or legislation entry.
+- Output valid JSON only. No markdown. No comments. No prose outside the JSON.
 
 Return this exact JSON shape:
 
@@ -553,12 +500,85 @@ Return this exact JSON shape:
   },
   "watchlist": ["...", "..."],
   "analystTakeaway": "...",
-  "sourceFiles": ["..."]
+  "sources": [
+    { "outlet": "...", "url": "...", "headline": "...", "date": "YYYY-MM-DD" }
+  ]
 }
 
-Repo data:
-${compactForPrompt(input)}
-`;
+Sources rules:
+- The "sources" array MUST contain 8 to 15 entries.
+- Every URL in "sources" MUST appear verbatim in the input "Recent news" entries below.
+- Deduplicate by outlet (one entry per outlet at most).
+- Pick the most consequential items actually relied on across executiveSummary, topDevelopments, regulatorySignalTable, and analystTakeaway.
+- If the input contains fewer than 8 distinct outlets in the last 7 days, return as many as exist (sources may be shorter than 8 in that case).`;
+
+  const userBody = compactForPrompt(input);
+  const user = `Date: ${input.date}
+
+Repo data follows. Use only this content.
+
+${userBody}
+
+Produce the JSON now.`;
+
+  return { system, user };
+}
+
+async function generateWithAnthropic(input: ReportInput): Promise<DailyReport> {
+  if (process.env.REPORT_FORCE_FALLBACK === "1") {
+    console.warn("REPORT_FORCE_FALLBACK=1. Using deterministic fallback report.");
+    return fallbackReport(input);
+  }
+
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+
+  if (!apiKey) {
+    console.warn(
+      "ANTHROPIC_API_KEY is not set. Using deterministic fallback report.",
+    );
+    return fallbackReport(input);
+  }
+
+  const anthropic = new Anthropic({ apiKey });
+  const prompts = buildSystemAndUserPrompts(input);
+  const message = await anthropic.messages.create({
+    model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5",
+    max_tokens: 6000,
+    temperature: 0.2,
+    system: prompts.system,
+    messages: [{ role: "user", content: prompts.user }],
+  });
+
+  const text = message.content
+    .map((block) => (block.type === "text" ? block.text : ""))
+    .join("\n")
+    .trim();
+
+  try {
+    const parsed = JSON.parse(extractJson(text)) as DailyReport;
+    const inputUrls = new Set<string>();
+    for (const block of input.jurisdictions) {
+      for (const item of block.recentNews) inputUrls.add(item.url);
+    }
+    const validSources = (parsed.sources ?? []).filter((s) => {
+      const ok = typeof s?.url === "string" && inputUrls.has(s.url);
+      if (!ok) {
+        console.warn(`report: dropping fabricated source URL ${s?.url ?? "(missing)"}`);
+      }
+      return ok;
+    });
+
+    return {
+      ...parsed,
+      date: input.date,
+      generatedAt: input.generatedAt,
+      sourceFiles: parsed.sourceFiles?.length ? parsed.sourceFiles : buildSourceFiles(input),
+      sources: validSources,
+    };
+  } catch {
+    console.warn("Failed to parse Anthropic JSON output. Using fallback.");
+    return fallbackReport(input);
+  }
 }
 
 function extractJson(text: string): string {
@@ -592,6 +612,14 @@ function reportToMarkdown(report: DailyReport): string {
         `| ${escapeMd(row.jurisdiction)} | ${escapeMd(row.signal)} | ${escapeMd(row.direction)} | ${row.riskLevel} | ${escapeMd(row.businessImpact)} |`,
     )
     .join("\n");
+
+  const sourcesList = report.sources.length
+    ? report.sources
+        .slice()
+        .sort((a, b) => a.outlet.localeCompare(b.outlet))
+        .map((s) => `- [${s.outlet} — ${s.headline}](${s.url}) · ${s.date}`)
+        .join("\n")
+    : "_No sources cited for this brief._";
 
   return `# ${report.title}
 
@@ -637,9 +665,13 @@ ${report.watchlist.map((item) => `- ${item}`).join("\n")}
 
 ${report.analystTakeaway}
 
-## 7. Source
+## 7. Sources
 
-Compiled from public stablecoin policy and regulatory news tracking at https://stablecoin-policy.vercel.app/
+${sourcesList}
+
+---
+
+_Compiled from public stablecoin policy and regulatory news tracking at https://stablecoin-policy.vercel.app/_
 `;
 }
 
