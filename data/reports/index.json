@@ -44,14 +44,14 @@
   },
   {
     "slug": "global-stablecoin-policy-report",
-    "title": "Daily Stablecoin Policy Brief - 2026-05-26",
-    "summary": "The FDIC proposed AML, BSA, and sanctions compliance rules for stablecoin issuers under the GENIUS Act, deferring certain authority to Treasury, while FinCEN and OFAC simultaneously advanced their own AML/CFT framework for payment stablecoin issuers. Senate passage of the CLARITY",
+    "title": "Daily Stablecoin Policy Brief - 2026-05-31",
+    "summary": "North America: The GENIUS Act is advancing toward implementation as the OCC has proposed rulemaking under the legislation and the FDIC has moved to tighten oversight of payment stablecoins, including a proposal to preclear stablecoin AML actions with FinCEN. Senate passage of the",
     "category": "policy",
     "jurisdiction": [
       "GLOBAL"
     ],
-    "publishedAt": "2026-05-26T18:43:20.971Z",
-    "wordCount": 1966,
+    "publishedAt": "2026-05-31T16:45:13.502Z",
+    "wordCount": 530,
     "priceUSD": 0.1,
     "encryptedContentFile": "global-stablecoin-policy-report.md.enc"
   }
