@@ -3,19 +3,23 @@
  * dedupes against existing items (by URL), summarizes new ones via
  * Haiku, and appends them to `data/news/summaries.json`.
  *
- * Designed to be run on a 15-minute cron — see
- * `.github/workflows/news-rss.yml`.
+ * Designed to run weekly (Sunday 02:00 UTC) via
+ * `.github/workflows/news-rss.yml`. Not safe to run more often than the
+ * configured interval without raising the rate-limit guards in this file
+ * — see CONCURRENCY / SUMMARY_MIN_INTERVAL_MS / MAX_HAIKU_CALLS_PER_RUN
+ * below.
  *
- * Two-week guard:
+ * Abandonment guard:
  *   The script reads `data/news/.rss-started` (UTC ISO timestamp). When
- *   the file is older than 14 days, the script logs a notice and exits
- *   without making API calls. To restart, bump the timestamp:
+ *   the file is older than MAX_DAYS (60), the script logs a notice and
+ *   exits without making API calls — a safety net against an unattended
+ *   project quietly burning API credit. To restart, bump the timestamp:
  *       npx tsx scripts/sync/news-rss.ts --restart
  *   …or just delete the file and re-run.
  *
- * Cost: ~$0.001 per new item on Haiku. Realistic load is ~30-80
- * new items/day across the curated feeds, i.e. ~$1-3 over the full
- * 14-day window.
+ * Cost: ~$0.001 per new item on Haiku, hard-capped at
+ * MAX_HAIKU_CALLS_PER_RUN per run (≈ $0.08 / run worst case). Weekly
+ * cadence × ~80 calls/run ≈ $0.30/month ceiling for item summaries.
  */
 
 import "../env.js";
@@ -29,6 +33,7 @@ import {
   regionForEntity,
   type RegionKey,
 } from "./news-regional-summary.js";
+import { runWebSearch } from "./news-web-search.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
@@ -38,26 +43,35 @@ const FEEDS_PATH = join(ROOT, "data/news/feeds.json");
 const STARTED_PATH = join(ROOT, "data/news/.rss-started");
 
 const MODEL = "claude-haiku-4-5-20251001";
-const MAX_DAYS = 14;
+const MAX_DAYS = 60;
 const FETCH_TIMEOUT_MS = 15_000;
 const PER_FEED_LIMIT = 20;
-const CONCURRENCY = 4;
+const CONCURRENCY = 2;
 const SUMMARY_MAX_TOKENS = 120;
-const SUMMARY_MIN_INTERVAL_MS = 1_500;
+const SUMMARY_MIN_INTERVAL_MS = 3_000;
+// Circuit breaker: on the first 429 of a run, abort remaining summarize()
+// calls instead of retrying. A tight-tier org's rate limit can blow up
+// into a 3x-retry storm without this. SUMMARY_MAX_RETRIES applies only
+// to non-429 transient errors now.
 const SUMMARY_MAX_RETRIES = 3;
+// Hard cap per run. Cron load is well under this; dev-triggered runs
+// (which previously could hit ~500+ calls) are bounded to a survivable
+// number even if invoked accidentally.
+const MAX_HAIKU_CALLS_PER_RUN = 80;
 
-interface FeedConfig {
+export interface FeedConfig {
   url: string;
   name: string;
   entity: string;
   topicHint?: string;
+  trustedSource?: boolean;
 }
 
 interface FeedsFile {
   feeds: FeedConfig[];
 }
 
-interface NewsItem {
+export interface NewsItem {
   id: string;
   headline: string;
   source: string;
@@ -67,13 +81,13 @@ interface NewsItem {
   summarySource?: "article" | "headline-only";
 }
 
-interface NewsFile {
+export interface NewsFile {
   generatedAt: string;
   regional: Record<string, Record<string, unknown>>;
   entities: Record<string, { news: NewsItem[] }>;
 }
 
-interface ParsedItem {
+export interface ParsedItem {
   title: string;
   link: string;
   pubDate: string;
@@ -132,6 +146,30 @@ function decodeEntities(s: string): string {
     .replace(/&amp;/g, "&")
     .trim();
 }
+
+// Wider gate for trusted first-party regulator feeds: their headlines
+// rarely contain "stablecoin" verbatim ("Final rule on payment systems",
+// "Supervisory letter on reserve management") so the strict RELEVANCE_RE
+// would drop almost everything. Layer 2 (the Haiku NOT_RELEVANT gate in
+// summarize()) catches off-topic items that slip through.
+const LAYER_1_RE = new RegExp(
+  [
+    "\\bstable\\b",
+    "stablecoin",
+    "digital asset",
+    "digital currency",
+    "\\bcrypto",
+    "\\btoken",
+    "tokeniz",
+    "payment system",
+    "\\breserve",
+    "supervisory",
+    "virtual asset",
+    "e-money",
+    "asset-referenced",
+  ].join("|"),
+  "i",
+);
 
 // Coarse relevance gate. A new item must mention at least one of these
 // keywords in its headline, otherwise it never makes it to the Haiku
@@ -193,8 +231,8 @@ const RELEVANCE_RE = new RegExp(
   "i",
 );
 
-function isRelevant(headline: string): boolean {
-  return RELEVANCE_RE.test(headline);
+function isRelevant(headline: string, trusted: boolean): boolean {
+  return (trusted ? LAYER_1_RE : RELEVANCE_RE).test(headline);
 }
 
 function pickTag(block: string, tag: string): string | null {
@@ -209,7 +247,7 @@ function pickAtomLink(block: string): string | null {
   return m ? decodeEntities(m[1]) : null;
 }
 
-function parseFeed(xml: string): ParsedItem[] {
+export function parseFeed(xml: string): ParsedItem[] {
   const out: ParsedItem[] = [];
   // RSS 2.0
   const rssRe = /<item\b[\s\S]*?<\/item>/gi;
@@ -234,7 +272,7 @@ function parseFeed(xml: string): ParsedItem[] {
   return out;
 }
 
-async function fetchFeed(url: string): Promise<string | null> {
+export async function fetchFeed(url: string): Promise<string | null> {
   const ctl = new AbortController();
   const t = setTimeout(() => ctl.abort(), FETCH_TIMEOUT_MS);
   try {
@@ -332,17 +370,31 @@ function isRateLimitError(err: unknown): boolean {
   return /\b429\b|rate limit/i.test(message);
 }
 
+type SummarizeGate = {
+  circuitTripped: boolean;
+  callsMade: number;
+};
+
 async function summarize(
   headline: string,
   source: string,
   date: string,
   body: string | null,
+  trusted: boolean,
+  gate: SummarizeGate,
 ): Promise<{ summary: string; source: "article" | "headline-only" } | null> {
-  const system =
+  const baseSystem =
     "You write one- to two-sentence neutral summaries of news stories about stablecoin regulation, issuance, reserves, supervision, and related digital-asset policy. Plain factual prose. No editorializing.";
+  const notRelevantClause = trusted
+    ? " If this story is not about stablecoin / digital-asset payment policy, supervision, reserves, redemption, AML/CFT, sanctions, custody, or issuer eligibility, respond with exactly NOT_RELEVANT and nothing else."
+    : "";
+  const system = baseSystem + notRelevantClause;
   const userBlock = body
     ? `Headline: ${headline}\nSource: ${source} (${date})\n\nArticle body (trimmed):\n${body}\n\nWrite a 1–2 sentence neutral summary.`
     : `Headline: ${headline}\nSource: ${source} (${date})\n\nThe article body could not be retrieved. Write one factual sentence based on the headline alone — do not invent specifics.`;
+  if (gate.circuitTripped) return null;
+  if (gate.callsMade >= MAX_HAIKU_CALLS_PER_RUN) return null;
+  gate.callsMade++;
   for (let attempt = 1; attempt <= SUMMARY_MAX_RETRIES; attempt++) {
     await waitForSummarySlot();
     try {
@@ -358,12 +410,22 @@ async function summarize(
         .join(" ")
         .trim();
       if (!text) return null;
+      if (text.startsWith("NOT_RELEVANT")) return null;
       return { summary: text, source: body ? "article" : "headline-only" };
     } catch (err) {
-      if (isRateLimitError(err) && attempt < SUMMARY_MAX_RETRIES) {
-        const backoffMs = attempt * 15_000;
+      if (isRateLimitError(err)) {
+        if (!gate.circuitTripped) {
+          gate.circuitTripped = true;
+          console.warn(
+            `  summarize: 429 hit — circuit tripped. Remaining items in this run will skip Haiku.`,
+          );
+        }
+        return null;
+      }
+      if (attempt < SUMMARY_MAX_RETRIES) {
+        const backoffMs = attempt * 5_000;
         console.warn(
-          `  summarize rate-limited; retrying in ${(backoffMs / 1000).toFixed(0)}s ` +
+          `  summarize transient error; retrying in ${(backoffMs / 1000).toFixed(0)}s ` +
             `(attempt ${attempt + 1}/${SUMMARY_MAX_RETRIES})`,
         );
         await sleep(backoffMs);
@@ -398,7 +460,7 @@ function slugifyId(name: string, url: string): string {
   return `rss-${slug}-${hash}`;
 }
 
-interface PendingItem {
+export interface PendingItem {
   feed: FeedConfig;
   parsed: ParsedItem;
 }
@@ -443,18 +505,72 @@ async function main() {
     }),
   );
 
-  const candidates = fetched.flat();
-  const pending = candidates.filter(
-    (c) => !seenUrls.has(c.parsed.link) && isRelevant(c.parsed.title),
+  const rssCandidates = fetched.flat();
+
+  let webSearchCandidates: PendingItem[] = [];
+  try {
+    webSearchCandidates = await runWebSearch(news);
+  } catch (err) {
+    console.warn(`web-search top-up failed: ${(err as Error).message} — continuing with RSS only`);
+  }
+
+  const candidates: PendingItem[] = [...rssCandidates, ...webSearchCandidates];
+
+  const layer1Survivors = candidates.filter(
+    (c) =>
+      !seenUrls.has(c.parsed.link) &&
+      isRelevant(c.parsed.title, c.feed.trustedSource ?? false),
   );
+  const pending = layer1Survivors;
+
+  const layer1KeptTrusted = layer1Survivors.filter((c) => c.feed.trustedSource).length;
+  const layer1KeptUntrusted = layer1Survivors.length - layer1KeptTrusted;
   const filteredOut = candidates.length - pending.length;
   console.log(
-    `rss: ${candidates.length} items across ${feedsCfg.feeds.length} feeds; ` +
+    `rss: ${candidates.length} items (rss=${rssCandidates.length} webSearch=${webSearchCandidates.length}); ` +
       `${pending.length} new + relevant (${filteredOut} skipped: dup or off-topic)`,
   );
   if (pending.length === 0) return;
 
+  if (process.env.NEWS_RSS_DRY_RUN === "1") {
+    const dryDir = process.env.TMPDIR ?? "/tmp";
+    const dryPath = `${dryDir}/news-rss-dryrun-${new Date().toISOString().slice(0,10)}.json`;
+    const fsMod = await import("node:fs/promises");
+    const dryOut = {
+      generatedAt: new Date().toISOString(),
+      summary: {
+        candidates: candidates.length,
+        layer1Kept: layer1Survivors.length,
+        layer1KeptTrusted,
+        layer1KeptUntrusted,
+        wouldCallHaiku: pending.length,
+      },
+      candidates: pending.map((c) => ({
+        feed: {
+          name: c.feed.name,
+          entity: c.feed.entity,
+          trustedSource: c.feed.trustedSource ?? false,
+        },
+        parsed: {
+          title: c.parsed.title,
+          link: c.parsed.link,
+          pubDate: c.parsed.pubDate,
+        },
+      })),
+    };
+    await fsMod.writeFile(dryPath, JSON.stringify(dryOut, null, 2) + "\n", "utf8");
+    console.log(`news-rss-dryrun: wrote ${pending.length} candidates to ${dryPath}`);
+    console.log(
+      `news-rss-dryrun: would have called Haiku ${pending.length} time(s). No API calls made. No files written outside /tmp.`,
+    );
+    return;
+  }
+
+  const summarizeGate: SummarizeGate = { circuitTripped: false, callsMade: 0 };
   let added = 0;
+  let layer2Dropped = 0;
+  let webSearchAdded = 0;
+  let trustedAdded = 0;
   const touchedRegions = new Set<RegionKey>();
   await runPool<PendingItem>(pending, async ({ feed, parsed }) => {
     // Don't reprocess the same URL if we've already added it in this run
@@ -463,8 +579,14 @@ async function main() {
     seenUrls.add(parsed.link);
 
     const body = await fetchArticleText(parsed.link);
-    const sum = await summarize(parsed.title, feed.name, parsed.pubDate, body);
-    if (!sum) return;
+    const sum = await summarize(parsed.title, feed.name, parsed.pubDate, body, feed.trustedSource ?? false, summarizeGate);
+    if (!sum) {
+      // Either Haiku failed, returned empty, or returned NOT_RELEVANT.
+      // We can't cheaply distinguish here, so count as layer2 drop only
+      // when the feed was trusted (where NOT_RELEVANT is the gate).
+      if (feed.trustedSource) layer2Dropped++;
+      return;
+    }
 
     const entityBucket = news.entities[feed.entity];
     if (!entityBucket) {
@@ -482,6 +604,8 @@ async function main() {
       summarySource: sum.source,
     });
     added++;
+    if (feed.name.startsWith("WebSearch ")) webSearchAdded++;
+    if (feed.trustedSource) trustedAdded++;
     touchedRegions.add(regionForEntity(feed.entity));
 
     // Checkpoint every few items so a transient crash doesn't lose work.
@@ -506,6 +630,15 @@ async function main() {
     console.log(`rss: regenerated ${updated.length} region summary(ies)`);
   }
 
+  console.log(
+    `rss-summary: candidates=${candidates.length} ` +
+      `layer1_kept=${layer1Survivors.length} ` +
+      `(trusted=${layer1KeptTrusted}, untrusted=${layer1KeptUntrusted}) ` +
+      `layer2_dropped=${layer2Dropped} added=${added} ` +
+      `(trusted=${trustedAdded}, webSearch=${webSearchAdded}) ` +
+      `haiku_calls=${summarizeGate.callsMade}/${MAX_HAIKU_CALLS_PER_RUN}` +
+      `${summarizeGate.circuitTripped ? " circuit_tripped=true" : ""}`,
+  );
   news.generatedAt = new Date().toISOString();
   writeFileSync(NEWS_PATH, JSON.stringify(news, null, 2) + "\n");
   copyFileSync(NEWS_PATH, PUBLIC_NEWS_PATH);
@@ -522,7 +655,13 @@ async function main() {
   }
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+export async function run(): Promise<void> {
+  await main();
+}
+
+if (process.env.NEWS_RSS_SKIP_AUTORUN !== "1") {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}

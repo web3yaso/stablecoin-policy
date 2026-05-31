@@ -294,6 +294,97 @@
       "name": "Google News — Greenland Stablecoin Policy",
       "entity": "Greenland",
       "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+      "name": "Federal Reserve Board — Press Releases",
+      "entity": "United States",
+      "topicHint": "stablecoin-policy",
+      "trustedSource": true
+    },
+    {
+      "url": "https://www.sec.gov/news/pressreleases.rss",
+      "name": "SEC — Press Releases",
+      "entity": "United States",
+      "topicHint": "stablecoin-policy",
+      "trustedSource": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+site%3Acftc.gov&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — CFTC (site-proxy)",
+      "entity": "United States",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://www.fca.org.uk/news/rss.xml",
+      "name": "FCA — News",
+      "entity": "United Kingdom",
+      "topicHint": "stablecoin-policy",
+      "trustedSource": true
+    },
+    {
+      "url": "https://www.bankofengland.co.uk/rss/news",
+      "name": "Bank of England — News",
+      "entity": "United Kingdom",
+      "topicHint": "stablecoin-policy",
+      "trustedSource": true
+    },
+    {
+      "url": "https://www.eba.europa.eu/rss.xml",
+      "name": "EBA — News",
+      "entity": "European Union",
+      "topicHint": "stablecoin-policy",
+      "trustedSource": true
+    },
+    {
+      "url": "https://www.esma.europa.eu/rss.xml",
+      "name": "ESMA — News",
+      "entity": "European Union",
+      "topicHint": "stablecoin-policy",
+      "trustedSource": true
+    },
+    {
+      "url": "https://www.ecb.europa.eu/rss/press.html",
+      "name": "ECB — Press Releases",
+      "entity": "European Union",
+      "topicHint": "stablecoin-policy",
+      "trustedSource": true
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+site%3Amas.gov.sg&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — MAS (site-proxy)",
+      "entity": "Singapore",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+site%3Aocc.gov&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — OCC (site-proxy)",
+      "entity": "United States",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+site%3Afdic.gov&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — FDIC (site-proxy)",
+      "entity": "United States",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+site%3Atreasury.gov&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — US Treasury (site-proxy)",
+      "entity": "United States",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+site%3Ahkma.gov.hk&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — HKMA (site-proxy)",
+      "entity": "Hong Kong",
+      "topicHint": "stablecoin-policy"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=stablecoin+site%3Afsa.go.jp&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — FSA Japan (site-proxy)",
+      "entity": "Japan",
+      "topicHint": "stablecoin-policy"
     }
   ]
 }

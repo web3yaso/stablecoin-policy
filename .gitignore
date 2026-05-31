@@ -49,6 +49,7 @@ next-env.d.ts
 /data/reports/*.txt
 /data/reports/.DS_Store
 /data/reports/private
+/data/news/.site-rotation
 
 # claude code local state
 /.claude

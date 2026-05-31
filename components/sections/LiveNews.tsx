@@ -12,33 +12,38 @@ interface NewsRow {
 
 const PREVIEW_COUNT = 12;
 
-type ScopeFilter = "all" | "us-federal" | "us-states" | "international";
+// "US States" is intentionally absent: news-rss.ts buckets all US news
+// under the single "United States" entity (federal level), so a state
+// chip would always render 0. If per-state news bucketing is ever added,
+// re-introduce the chip and update matchesScope() below.
+type ScopeFilter = "all" | "us-federal" | "international";
 
 const SCOPE_OPTIONS: { key: ScopeFilter; label: string }[] = [
   { key: "all", label: "All" },
   { key: "us-federal", label: "US Federal" },
-  { key: "us-states", label: "US States" },
   { key: "international", label: "International" },
 ];
 
-type TopicFilter = "all" | "policy" | "data-centers" | "protests";
+type TopicFilter = "all" | "policy" | "issuers" | "banking" | "payments";
 
 const TOPIC_OPTIONS: { key: TopicFilter; label: string }[] = [
   { key: "all", label: "All" },
   { key: "policy", label: "Policy" },
-  { key: "data-centers", label: "Data Centers" },
-  { key: "protests", label: "Protests" },
+  { key: "issuers", label: "Issuers" },
+  { key: "banking", label: "Banking" },
+  { key: "payments", label: "Payments" },
 ];
 
 // Topic is derived from headline + summary text — NewsItem doesn't carry
 // a category. Buckets are matched independently (a story can be both
-// Policy and Data Centers); the filter shows rows that match *any* of
-// the picked topic's keywords. Keep keyword lists narrow so the buckets
-// stay meaningful — broad lists collapse everything into "All".
+// Policy and Issuers); the filter shows rows that match *any* of the
+// picked topic's keywords. Keep keyword lists narrow so the buckets stay
+// meaningful — broad lists collapse everything into "All".
 const TOPIC_KEYWORDS: Record<Exclude<TopicFilter, "all">, RegExp> = {
-  policy: /\b(bill|legislation|regulat|act\b|statute|law\b|laws\b|policy|executive order|rule\b|rules\b|framework|signed|vetoed|enacted|introduced|committee|congress|senate|house|parliament|directive|amendment)\b/i,
-  "data-centers": /\b(data\s?cent(?:er|re)s?|hyperscale|gigawatt|\d+\s?(?:m|g)w\b|campus|aws|google|microsoft|meta|oracle|amazon|equinix|stargate|cooling|grid|power\s+demand)\b/i,
-  protests: /\b(protest|rally|opposition|opposed|lawsuit|sued|court|moratorium|block(?:ed|ing)?|reject(?:ed)?|void(?:ed)?|halt(?:ed)?|den(?:y|ied|ying)|appeal(?:ed)?|ruling|challenge|injunction|ban\b|bans\b|restriction|outcry|backlash|residents)\b/i,
+  policy: /\b(bill|legislation|regulat|act\b|statute|law\b|laws\b|policy|executive order|rule\b|rules\b|framework|signed|vetoed|enacted|introduced|committee|congress|senate|house|parliament|directive|amendment|MiCA|GENIUS|CLARITY|STABLE Act)\b/i,
+  issuers: /\b(Tether|USDT|Circle|USDC|Paxos|USDP|First Digital|FDUSD|PayPal|PYUSD|MakerDAO|Maker|DAI|USDS|Ethena|USDe|Frax|FRAX|TrueUSD|TUSD|Ripple|RLUSD|BUSD|issuer|issuance|minted|redeem(?:ed|able|s)?|redemption|reserve(?:s)?|attestation|peg\b|depeg)\b/i,
+  banking: /\b(bank\b|banking|OCC\b|FDIC|deposit|charter|Federal Reserve|FedNow|custodian|custody|trust company|prime broker|wire transfer|institutional|BNY Mellon|JPMorgan|Goldman Sachs|crypto[-\s]?friendly|master account)\b/i,
+  payments: /\b(payment(?:s)?|cross[-\s]?border|remittance|settlement|merchant|on[-\s]?ramp|off[-\s]?ramp|payroll|treasury|Visa|Mastercard|Stripe|PayPal|Shopify|adoption|wallet|payment rail|stablecoin rail)\b/i,
 };
 
 function matchesTopic(item: NewsItem, t: TopicFilter): boolean {
@@ -93,9 +98,9 @@ function matchesScope(entity: Entity, s: ScopeFilter): boolean {
       entity.geoId === "840"
     );
   }
-  if (s === "us-states") {
-    return entity.region === "na" && entity.level === "state";
-  }
+  // "international" — everything except the US federal bucket. State-level
+  // US entities (which carry no news today) are also excluded so the count
+  // matches what's visible.
   return !(
     entity.region === "na" &&
     (entity.level === "state" ||
@@ -272,13 +277,11 @@ export default function LiveNews({ showAll = false }: LiveNewsProps = {}) {
     const counts: Record<ScopeFilter, number> = {
       all: allRows.length,
       "us-federal": 0,
-      "us-states": 0,
       international: 0,
     };
     for (const r of allRows) {
       if (matchesScope(r.entity, "us-federal")) counts["us-federal"] += 1;
-      else if (matchesScope(r.entity, "us-states")) counts["us-states"] += 1;
-      else counts.international += 1;
+      else if (matchesScope(r.entity, "international")) counts.international += 1;
     }
     return counts;
   }, [allRows]);
@@ -293,13 +296,15 @@ export default function LiveNews({ showAll = false }: LiveNewsProps = {}) {
     const counts: Record<TopicFilter, number> = {
       all: scoped.length,
       policy: 0,
-      "data-centers": 0,
-      protests: 0,
+      issuers: 0,
+      banking: 0,
+      payments: 0,
     };
     for (const r of scoped) {
       if (matchesTopic(r.item, "policy")) counts.policy += 1;
-      if (matchesTopic(r.item, "data-centers")) counts["data-centers"] += 1;
-      if (matchesTopic(r.item, "protests")) counts.protests += 1;
+      if (matchesTopic(r.item, "issuers")) counts.issuers += 1;
+      if (matchesTopic(r.item, "banking")) counts.banking += 1;
+      if (matchesTopic(r.item, "payments")) counts.payments += 1;
     }
     return counts;
   }, [allRows, activeScope]);
