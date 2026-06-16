@@ -55,3 +55,6 @@ next-env.d.ts
 /.claude
 /skills-lock.json
 /legiscan-survey.txt
+
+# claude code project instructions — local only
+/CLAUDE.md
