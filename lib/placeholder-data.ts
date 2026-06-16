@@ -2956,7 +2956,7 @@ const NA_ENTITIES: Entity[] = [
     level: "federal",
     stanceDatacenter: "review",
     stanceAI: "review",
-    contextBlurb: "Canada's AIDA (Artificial Intelligence and Data Act) died on the order paper in early 2025. The federal government is now pursuing AI regulation through privacy-law amendments and policy guidance rather than dedicated AI-specific legislation.",
+    contextBlurb: "Canada has no dedicated federal stablecoin statute. Oversight runs mainly through the Canadian Securities Administrators (CSA), which treats fiat-backed stablecoins as \"value-referenced crypto assets\" and requires registered crypto trading platforms to meet reserve-backing, custody, and disclosure conditions before listing them. The Bank of Canada continues to study a retail CBDC but has not committed to issuance.",
     legislation: [],
     keyFigures: [],
     news: [
