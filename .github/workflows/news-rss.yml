@@ -31,7 +31,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          # Full history so the final push can rebase onto the latest main
+          # when another push (e.g. a PR merge) lands mid-run.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -74,12 +76,24 @@ jobs:
 
       - name: Commit if changed
         run: |
-          if [[ -n "$(git status --porcelain data/news/ public/news-summaries.json lib/placeholder-data.ts data/reports/ public/reports/)" ]]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/news/summaries.json data/news/.rss-started public/news-summaries.json lib/placeholder-data.ts data/reports/index.json data/reports/global-stablecoin-policy-report.md.enc data/reports/daily public/reports/daily
-            git commit -m "news+report: daily refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            git push
-          else
+          if [[ -z "$(git status --porcelain data/news/ public/news-summaries.json lib/placeholder-data.ts data/reports/ public/reports/)" ]]; then
             echo "No changes."
+            exit 0
           fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/news/summaries.json data/news/.rss-started public/news-summaries.json lib/placeholder-data.ts data/reports/index.json data/reports/global-stablecoin-policy-report.md.enc data/reports/daily public/reports/daily
+          git commit -m "news+report: daily refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          # The push can race with another push to main (e.g. a PR merge
+          # landing mid-run), which rejects this one as non-fast-forward.
+          # Rebase the daily-refresh commit onto the latest main and retry.
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "Pushed on attempt $attempt."
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt); rebasing onto origin/main and retrying..."
+            git pull --rebase --autostash origin main || { echo "Rebase failed."; exit 1; }
+          done
+          echo "Failed to push after 5 attempts."
+          exit 1
