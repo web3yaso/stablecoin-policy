@@ -57,6 +57,29 @@ TEST_BUYER_PRIVATE_KEY=  # 仅用于 Base Sepolia 测试脚本；绝不要填 ma
 
 报告 API 的 MVP 定价为每篇 `$0.01 USDC`，仅用于 Base Sepolia testnet validation；生产定价待后续版本决定。
 
+### 支付宝「AI 收」端点（人民币）
+
+`GET /api/alipay/reports/latest` 用支付宝 AI 收（A2M）的 HTTP-402 方案返回每日最新可售报告，定价 `0.10 元/次`，与平台「服务注册」处的服务单价必须一致。需要以下服务端环境变量（同样只填在 `.env.local` 或 Vercel，不要提交）：
+
+```
+ALIPAY_APP_ID=           # 应用 APPID
+ALIPAY_PRIVATE_KEY=      # 应用私钥（密钥工具导出的 base64 主体，单行）
+ALIPAY_KEY_TYPE=PKCS1    # 私钥格式：PKCS1（默认）或 PKCS8，须与密钥工具一致
+ALIPAY_PUBLIC_KEY=       # 支付宝公钥，用于 SDK 验签响应
+ALIPAY_SELLER_ID=        # 商户 ID（2088 开头）
+ALIPAY_SERVICE_ID=       # AI 收服务 ID（服务注册后获得）
+ALIPAY_SELLER_NAME=      # 可选；展示用商户名
+ALIPAY_GATEWAY=          # 可选；默认 https://openapi.alipay.com/gateway.do
+ALIPAY_REPORT_PRICE_CNY=0.10  # 可选；必须等于服务注册处的服务单价
+ALIPAY_CURRENCY=CNY      # 可选
+```
+
+AI 收**无沙箱**，完整链路需正式商户密钥。上线前用离线 dry-run 校验 402 构造与签名（不调支付宝）：
+
+```bash
+npx tsx scripts/smoke/alipay-402-dryrun.ts
+```
+
 ## 付费报告内容存储
 
 公开仓库不会提交报告全文明文。报告索引在 `data/reports/index.json`，全文只以 AES-256-GCM 密文 `data/reports/*.md.enc` 存储；本地明文 `.md` 文件会被 `.gitignore` 忽略。

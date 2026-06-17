@@ -12,6 +12,13 @@ export const REPORT_CATEGORIES = [
 
 export type ReportCategory = (typeof REPORT_CATEGORIES)[number];
 
+/**
+ * The daily-refreshed sellable report. `latest` aliases resolve here so a
+ * stable URL (e.g. the Alipay AI-collection endpoint) always returns the
+ * freshest brief without the caller tracking dated slugs.
+ */
+export const LATEST_REPORT_SLUG = "global-stablecoin-policy-report";
+
 export type ReportMeta = {
   slug: string;
   title: string;
