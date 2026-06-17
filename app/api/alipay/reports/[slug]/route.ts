@@ -22,9 +22,15 @@ import {
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-/** Stable resource id the seller_signature commits to. Must match the
- *  registered 服务地址 path so verify-time resource checks line up. */
-const RESOURCE_ID = "/api/alipay/reports/latest";
+/**
+ * Aliases that resolve to the daily-refreshed sellable report. The registered
+ * Alipay 服务地址 uses the full slug; `latest` is kept as a short alias. Both
+ * deliver the same report — extra slugs 404 so only the intended resource is
+ * payable here.
+ */
+const ALLOWED_SLUGS = new Set<string>(["latest", LATEST_REPORT_SLUG]);
+
+type RouteContext = { params: Promise<{ slug: string }> };
 
 function corsHeaders(): Record<string, string> {
   return {
@@ -39,7 +45,16 @@ export async function OPTIONS() {
   return new Response(null, { status: 204, headers: corsHeaders() });
 }
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest, context: RouteContext) {
+  const { slug } = await context.params;
+
+  if (!ALLOWED_SLUGS.has(slug)) {
+    return NextResponse.json(
+      { error: "report-not-found" },
+      { status: 404, headers: corsHeaders() },
+    );
+  }
+
   if (!alipayConfigured()) {
     return NextResponse.json(
       { error: "alipay-not-configured" },
@@ -48,13 +63,17 @@ export async function GET(request: NextRequest) {
   }
 
   const config = getAlipayConfig();
+  // resource_id commits to the path actually called, so it lines up with
+  // whatever Alipay echoes back at verify time (matches the official demo,
+  // where resource_id is the served path).
+  const resourceId = `/api/alipay/reports/${slug}`;
   const proof = request.headers.get("payment-proof");
 
   try {
     if (!proof || proof.trim() === "") {
-      return await paymentRequired(config);
+      return await paymentRequired(config, resourceId);
     }
-    return await verifyAndDeliver(config, proof);
+    return await verifyAndDeliver(config, proof, resourceId);
   } catch (error: unknown) {
     if (error instanceof ReportContentKeyMissingError) {
       return NextResponse.json(
@@ -67,7 +86,7 @@ export async function GET(request: NextRequest) {
 }
 
 /** Scenario 1: no proof → 402 + Payment-Needed. */
-async function paymentRequired(config: AlipayConfig) {
+async function paymentRequired(config: AlipayConfig, resourceId: string) {
   const meta = await getReportMetaBySlug(LATEST_REPORT_SLUG);
   const goodsName = meta?.title ?? "Stablecoin Policy Brief";
   const now = new Date();
@@ -75,7 +94,7 @@ async function paymentRequired(config: AlipayConfig) {
 
   const { header } = buildPaymentNeeded({
     config,
-    resourceId: RESOURCE_ID,
+    resourceId,
     goodsName,
     outTradeNo,
     now,
@@ -98,7 +117,11 @@ async function paymentRequired(config: AlipayConfig) {
 }
 
 /** Scenario 2: proof present → verify, fulfil, confirm, deliver. */
-async function verifyAndDeliver(config: AlipayConfig, proofHeader: string) {
+async function verifyAndDeliver(
+  config: AlipayConfig,
+  proofHeader: string,
+  resourceId: string,
+) {
   let parsed;
   try {
     parsed = parsePaymentProof(proofHeader);
@@ -128,7 +151,7 @@ async function verifyAndDeliver(config: AlipayConfig, proofHeader: string) {
     );
   }
   // Resource-tamper guard: the paid resource must be the one we quoted.
-  if (verify.resourceId && verify.resourceId !== RESOURCE_ID) {
+  if (verify.resourceId && verify.resourceId !== resourceId) {
     return NextResponse.json(
       { code: "RESOURCE_ID_MISMATCH", message: "资源 ID 不匹配" },
       { status: 403, headers: corsHeaders() },
@@ -167,12 +190,12 @@ async function verifyAndDeliver(config: AlipayConfig, proofHeader: string) {
   const validation = buildPaymentValidation({
     tradeNo,
     outTradeNo,
-    resourceId: RESOURCE_ID,
+    resourceId,
   });
 
   return NextResponse.json(
     {
-      resource_id: RESOURCE_ID,
+      resource_id: resourceId,
       slug: report.meta.slug,
       title: report.meta.title,
       word_count: report.meta.wordCount,
