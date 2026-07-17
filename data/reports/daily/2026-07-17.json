@@ -1,22 +1,184 @@
 {
   "date": "2026-07-17",
-  "generatedAt": "2026-07-17T05:24:32.620Z",
+  "generatedAt": "2026-07-17T06:09:58.237Z",
   "title": "Daily Stablecoin Policy Brief - 2026-07-17",
   "executiveSummary": [
-    "North America: Wyoming became the first U.S. state to issue its own stablecoin on June 16, enacting legislation that backs the instrument with state reserves and has made the state a focal point for broader cryptocurrency policy discussions. The same day, the New York Department of Financial Services released a new regulatory framework governing stablecoins, following a June 15 preview of proposed rules designed to align with the GENIUS Act. State Street launched a stablecoin reserve money market fund called SSCXX in partnership with Anchorage, structured to comply with the GENIUS Act and the STABLE Act, marking a significant institutional move into the stablecoin reserve market. A bipartisan group of senators including Cynthia Lummis urged the Treasury Department to preserve state regulatory authority within the GENIUS Act stablecoin process, while North Carolina advanced a bill that would regulate crypto banking and stablecoins at the state level.",
-    "Europe / UK: The European Union delisted Tether's $175 billion USDT stablecoin on June 16, 2026, as a MiCA deadline took effect, even as many EU crypto firms remained unprepared for compliance. The European Commission has simultaneously launched a MiCA review targeting stablecoins, DeFi and staking rules, with a formal consultation underway on what observers are calling MiCA 2.0. Analysis ranks the EU's stablecoin regulation as the most restrictive globally, a posture reinforced by the ECB, which rebuffed proposals to boost euro stablecoins as too risky. Against that backdrop, euro-denominated stablecoins reached record levels under MiCA despite flat retail demand, while AIB and Bank of Ireland backed a euro stablecoin initiative and DefiHash secured MiCA authorization to expand regulated stablecoin infrastructure across Europe. UniCredit warned that Europe may face difficulties containing crypto banking crises under MiCA rules, a concern sharpened by a May 24 incident in which a MiCA-compliant euro stablecoin depegged to $0.85 following a multisignature wallet exploit.",
-    "Asia-Pacific: Japan's Financial Services Agency opens its payment system to foreign trust-type stablecoins from June 1, 2026, having clarified the legal status of foreign trust-based stablecoins and established a qualified regulatory pathway under updated payment services rules. In Hong Kong, the jurisdiction tested its first licensed stablecoin on the Ethereum blockchain in May 2026, while exchange OSL listed USDKG, a gold-backed stablecoin from Kyrgyzstan, expanding the city's regulated digital asset offerings. Australia recorded its first retail payment in an AUD-denominated stablecoin, settled via Base, marking a practical milestone for domestic stablecoin commerce. Meanwhile, the Reserve Bank of India maintained skepticism, arguing that stablecoins fail the 'singleness, elasticity and integrity' test of money, even as a corporate-led blockchain initiative in Japan advanced plans to issue a yen-denominated stablecoin for B2B payments."
+    "Wyoming became the first U.S. state to issue its own stablecoin on June 16, 2026, backed by state reserves under the Wyoming Stable Token Act, positioning the state as a focal point for broader cryptocurrency policy discussions.",
+    "The European Union delisted Tether's $175 billion USDT stablecoin on June 16, 2026, as the MiCA deadline took effect, while the European Commission launched a MiCA review targeting stablecoins, DeFi, and staking rules.",
+    "Japan's Financial Services Agency opened its payment system to foreign trust-type stablecoins from June 1, 2026, clarifying the legal status of foreign trust-based stablecoins under updated payment services rules.",
+    "New York Department of Financial Services released a new regulatory framework governing stablecoins on June 16, 2026, following a June 15 preview of proposed rules designed to align with the GENIUS Act.",
+    "State Street launched a stablecoin reserve money market fund called SSCXX in partnership with Anchorage, structured to comply with the GENIUS Act and the STABLE Act, marking a significant institutional move into the stablecoin reserve market."
   ],
-  "topDevelopments": [],
-  "regulatorySignalTable": [],
+  "topDevelopments": [
+    {
+      "jurisdiction": "United States - Wyoming",
+      "headline": "Wyoming issues first state-backed stablecoin under Wyoming Stable Token Act",
+      "signal": "Wyoming enacted legislation on June 16, 2026, authorizing the issuance of WYST, a USD-backed stable token with reserves held 1:1 in U.S. government securities or cash equivalents, making it the only U.S. state to explicitly authorize government issuance of a stablecoin.",
+      "whyItMatters": "This represents a pioneering state-level approach to stablecoin issuance, creating a government-backed alternative to private stablecoins and potentially setting a precedent for other states to follow. The move positions Wyoming as a leader in digital asset policy and could influence federal stablecoin legislation.",
+      "affectedParties": [
+        "Wyoming Stable Token Commission",
+        "State treasuries considering similar initiatives",
+        "Private stablecoin issuers",
+        "Federal regulators monitoring state-level innovation"
+      ],
+      "riskLevel": "Medium"
+    },
+    {
+      "jurisdiction": "European Union",
+      "headline": "EU delists Tether's $175 billion USDT as MiCA deadline takes effect",
+      "signal": "On June 16, 2026, the European Union delisted Tether's USDT stablecoin as the MiCA compliance deadline took effect, even as many EU crypto firms remained unprepared for compliance. The European Commission simultaneously launched a MiCA review targeting stablecoins, DeFi, and staking rules.",
+      "whyItMatters": "The delisting of the world's largest stablecoin by market capitalization represents the most significant enforcement action under MiCA to date, demonstrating the EU's willingness to exclude non-compliant stablecoins from its market. This creates immediate operational challenges for exchanges, wallets, and DeFi protocols serving EU users.",
+      "affectedParties": [
+        "Tether and USDT holders in the EU",
+        "EU crypto exchanges and trading platforms",
+        "DeFi protocols relying on USDT liquidity",
+        "Competing MiCA-compliant stablecoin issuers"
+      ],
+      "riskLevel": "High"
+    },
+    {
+      "jurisdiction": "Japan",
+      "headline": "Japan opens payment system to foreign trust-type stablecoins from June 1, 2026",
+      "signal": "Japan's Financial Services Agency opened its payment system to foreign trust-type stablecoins from June 1, 2026, having clarified the legal status of foreign trust-based stablecoins and established a qualified regulatory pathway under updated payment services rules.",
+      "whyItMatters": "This marks a significant opening of Japan's highly regulated payment system to foreign stablecoin issuers, potentially allowing major USD-backed stablecoins to operate in one of Asia's largest financial markets. The trust-type structure provides a clear compliance pathway for foreign issuers.",
+      "affectedParties": [
+        "Foreign stablecoin issuers seeking Japan market access",
+        "Japanese payment service providers",
+        "Cross-border payment companies",
+        "Japanese Financial Services Agency"
+      ],
+      "riskLevel": "Medium"
+    },
+    {
+      "jurisdiction": "United States - New York",
+      "headline": "NYDFS releases new stablecoin regulatory framework aligned with GENIUS Act",
+      "signal": "The New York Department of Financial Services released a new regulatory framework governing stablecoins on June 16, 2026, following a June 15 preview of proposed rules designed to align with the federal GENIUS Act.",
+      "whyItMatters": "New York's framework creates a dual-layer regulatory structure where state-level requirements must align with federal standards under the GENIUS Act. This coordination between state and federal authorities provides clarity for issuers operating in the nation's largest financial center.",
+      "affectedParties": [
+        "Stablecoin issuers with BitLicense or seeking NYDFS approval",
+        "New York-based crypto exchanges and custodians",
+        "Federal regulators implementing GENIUS Act",
+        "Other states developing stablecoin frameworks"
+      ],
+      "riskLevel": "Medium"
+    },
+    {
+      "jurisdiction": "United States - Federal",
+      "headline": "State Street launches MiCA-compliant stablecoin reserve fund in partnership with Anchorage",
+      "signal": "State Street launched a stablecoin reserve money market fund called SSCXX in partnership with Anchorage, structured to comply with the GENIUS Act and the STABLE Act, marking a significant institutional move into the stablecoin reserve market.",
+      "whyItMatters": "The entry of a major traditional financial institution into stablecoin reserve management signals growing institutional acceptance and provides a regulated infrastructure solution for compliant stablecoin issuers. This addresses a key operational challenge under the new federal framework.",
+      "affectedParties": [
+        "Stablecoin issuers seeking compliant reserve solutions",
+        "Traditional asset managers entering crypto",
+        "Banking regulators overseeing reserve custody",
+        "Competing reserve management providers"
+      ],
+      "riskLevel": "Low"
+    },
+    {
+      "jurisdiction": "United States - Federal",
+      "headline": "Bipartisan senators urge Treasury to preserve state regulatory authority under GENIUS Act",
+      "signal": "A bipartisan group of senators including Cynthia Lummis urged the Treasury Department to preserve state regulatory authority within the GENIUS Act stablecoin process, while North Carolina advanced a bill that would regulate crypto banking and stablecoins at the state level.",
+      "whyItMatters": "This signals ongoing tension between federal and state regulatory authority over stablecoins, with implications for how the GENIUS Act will be implemented. State-level innovation and regulation may continue alongside federal standards, creating a complex dual-track system.",
+      "affectedParties": [
+        "State financial regulators",
+        "Treasury Department implementing GENIUS Act",
+        "Stablecoin issuers navigating multi-jurisdictional compliance",
+        "State legislatures considering crypto legislation"
+      ],
+      "riskLevel": "Medium"
+    },
+    {
+      "jurisdiction": "European Union",
+      "headline": "Euro-denominated stablecoins reach record levels under MiCA despite flat retail demand",
+      "signal": "Euro-denominated stablecoins reached record levels under MiCA despite flat retail demand, while AIB and Bank of Ireland backed a euro stablecoin initiative and DefiHash secured MiCA authorization to expand regulated stablecoin infrastructure across Europe.",
+      "whyItMatters": "The growth of euro stablecoins under MiCA suggests institutional and wholesale adoption is driving supply, even as retail demand remains muted. This indicates the regulatory framework is enabling institutional use cases while consumer adoption lags.",
+      "affectedParties": [
+        "Euro stablecoin issuers",
+        "European banks entering stablecoin markets",
+        "Institutional treasury and payment users",
+        "Retail crypto platforms"
+      ],
+      "riskLevel": "Low"
+    },
+    {
+      "jurisdiction": "European Union",
+      "headline": "MiCA-compliant euro stablecoin depegs to $0.85 following multisignature wallet exploit",
+      "signal": "On May 24, 2026, a MiCA-compliant euro stablecoin depegged to $0.85 following a multisignature wallet exploit, raising concerns about operational security even within the regulated framework.",
+      "whyItMatters": "This incident demonstrates that regulatory compliance does not eliminate operational and security risks. It highlights the need for robust custody and operational controls beyond reserve requirements, and may prompt additional technical standards under MiCA.",
+      "affectedParties": [
+        "Holders of the affected euro stablecoin",
+        "MiCA-compliant stablecoin issuers",
+        "European regulators reviewing custody standards",
+        "Multisignature wallet providers"
+      ],
+      "riskLevel": "High"
+    }
+  ],
+  "regulatorySignalTable": [
+    {
+      "jurisdiction": "United States - Wyoming",
+      "signal": "State-issued stablecoin backed by government reserves",
+      "direction": "Pioneering state-level innovation in government-backed digital currency",
+      "riskLevel": "Medium",
+      "businessImpact": "Creates competitive pressure on private issuers and potential model for other states; may influence federal policy discussions"
+    },
+    {
+      "jurisdiction": "European Union",
+      "signal": "Enforcement of MiCA compliance through USDT delisting",
+      "direction": "Strict enforcement of regulatory perimeter; non-compliant stablecoins excluded",
+      "riskLevel": "High",
+      "businessImpact": "Forces immediate operational changes for EU-serving platforms; accelerates shift to MiCA-compliant alternatives"
+    },
+    {
+      "jurisdiction": "Japan",
+      "signal": "Opening payment system to foreign trust-type stablecoins",
+      "direction": "Controlled liberalization with clear compliance pathway",
+      "riskLevel": "Medium",
+      "businessImpact": "Expands addressable market for compliant foreign issuers; increases cross-border payment options"
+    },
+    {
+      "jurisdiction": "United States - New York",
+      "signal": "State framework aligned with federal GENIUS Act",
+      "direction": "Coordinated state-federal regulatory approach",
+      "riskLevel": "Medium",
+      "businessImpact": "Provides clarity for dual-layer compliance; sets precedent for state-federal coordination"
+    },
+    {
+      "jurisdiction": "United States - Federal",
+      "signal": "Institutional entry into stablecoin reserve management",
+      "direction": "Traditional finance infrastructure supporting compliant issuance",
+      "riskLevel": "Low",
+      "businessImpact": "Reduces operational barriers for compliant issuers; signals institutional acceptance"
+    },
+    {
+      "jurisdiction": "European Union",
+      "signal": "Security incident in MiCA-compliant stablecoin",
+      "direction": "Operational risk persists despite regulatory compliance",
+      "riskLevel": "High",
+      "businessImpact": "May trigger additional technical and custody standards; highlights need for operational controls beyond reserve requirements"
+    }
+  ],
   "marketImpact": {
-    "stablecoinIssuers": "Insufficient signal — see recent reports.",
-    "exchangesAndWallets": "Insufficient signal — see recent reports.",
-    "paymentCompanies": "Insufficient signal — see recent reports.",
-    "defiProtocols": "Insufficient signal — see recent reports."
+    "stablecoinIssuers": "Issuers face a bifurcating global landscape: the EU's strict MiCA enforcement (USDT delisting) creates immediate compliance pressure, while the U.S. GENIUS Act implementation and state-level innovation (Wyoming, New York) offer multiple pathways but require navigating complex dual-track regulation. Japan's opening to foreign trust-type stablecoins expands addressable markets for compliant issuers. The May 24 depeg incident in a MiCA-compliant euro stablecoin underscores that regulatory approval does not eliminate operational risk, likely prompting enhanced custody and security standards. State Street's entry into reserve management provides critical infrastructure for compliant issuers under the new U.S. framework.",
+    "exchangesAndWallets": "EU-based platforms must immediately delist or restrict USDT following the June 16 MiCA enforcement action, forcing rapid integration of MiCA-compliant alternatives and potentially fragmenting liquidity. Platforms serving multiple jurisdictions face complex compliance matrices as Wyoming launches a state-backed stablecoin, New York aligns with federal standards, and Japan opens to foreign trust-type tokens. The depeg incident highlights custody and operational risk management as critical differentiators. Exchanges must balance regulatory compliance with user demand for diverse stablecoin options.",
+    "paymentCompanies": "Cross-border payment providers gain new opportunities as Japan opens to foreign trust-type stablecoins from June 1, 2026, while facing restrictions in the EU following USDT delisting. State Street's compliant reserve infrastructure enables institutional payment use cases under the GENIUS Act. Wyoming's state-backed stablecoin offers a government-guaranteed settlement option for state-level transactions. Payment companies must navigate fragmented regulatory landscapes while maintaining operational resilience, as demonstrated by the May 24 depeg incident.",
+    "defiProtocols": "DeFi protocols face severe liquidity disruption in the EU following USDT delisting, forcing rapid migration to MiCA-compliant alternatives or geographic restrictions. The May 24 depeg of a MiCA-compliant euro stablecoin demonstrates that regulatory compliance does not eliminate smart contract and operational risks. Protocols must redesign liquidity pools, collateral mechanisms, and user interfaces to accommodate multiple stablecoin standards across jurisdictions. The growth of euro stablecoins under MiCA suggests institutional DeFi use cases may develop separately from retail markets."
   },
-  "watchlist": [],
-  "analystTakeaway": "Data ingestion was sparse or AI generation was unavailable. The next refresh runs at the next scheduled cron tick.",
+  "watchlist": [
+    "Implementation timeline and enforcement approach for GENIUS Act stablecoin provisions at federal level",
+    "Additional state-level stablecoin initiatives following Wyoming's pioneering issuance",
+    "EU MiCA review outcomes targeting stablecoins, DeFi, and staking rules",
+    "Operational and custody standards development following May 24 euro stablecoin depeg incident",
+    "Japan FSA guidance on foreign trust-type stablecoin compliance requirements",
+    "North Carolina crypto banking and stablecoin bill progress",
+    "Treasury Department response to bipartisan Senate request on state regulatory authority",
+    "MiCA Asset-Referenced Token (ART) issuer authorization timeline (none approved as of April 2026)",
+    "UniCredit warnings on EU capacity to contain crypto banking crises under MiCA",
+    "ECB position on euro stablecoin proposals and systemic risk concerns"
+  ],
+  "analystTakeaway": "The global stablecoin regulatory landscape is fragmenting rapidly along three distinct tracks: the EU's strict enforcement-first approach (USDT delisting), the U.S. dual-track federal-state system (GENIUS Act plus state innovation), and Asia's controlled liberalization (Japan's trust-type pathway). Wyoming's state-backed stablecoin represents a novel government-issued alternative that could reshape the competitive landscape and influence federal policy. The May 24 depeg of a MiCA-compliant euro stablecoin is a critical signal that regulatory approval does not eliminate operational risk—expect enhanced custody and technical standards across all jurisdictions. For issuers, the strategic imperative is clear: compliance infrastructure must be jurisdiction-specific, reserve management must meet the highest institutional standards (State Street's entry validates this), and operational security must exceed regulatory minimums. The next 90 days will be decisive as the GENIUS Act implementation details emerge, MiCA enforcement actions continue, and state-level innovation accelerates.",
+  "sources": [],
   "sourceFiles": [
     "data/news/summaries.json",
     "data/legislation/federal.json",
@@ -73,6 +235,5 @@
     "data/international/turkey.json",
     "data/international/united-arab-emirates.json",
     "data/international/united-kingdom.json"
-  ],
-  "sources": []
+  ]
 }

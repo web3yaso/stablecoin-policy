@@ -1,6 +1,6 @@
 # Daily Stablecoin Policy Brief - 2026-07-17
 
-**Generated at:** 2026-07-17T05:24:32.620Z
+**Generated at:** 2026-07-17T06:09:58.237Z
 
 > This is a free preview. The full report — top policy developments, the
 > regulatory signal table, market-impact analysis, and the analyst
@@ -9,10 +9,21 @@
 
 ## Executive Summary
 
-- North America: Wyoming became the first U.S. state to issue its own stablecoin on June 16, enacting legislation that backs the instrument with state reserves and has made the state a focal point for broader cryptocurrency policy discussions. The same day, the New York Department of Financial Services released a new regulatory framework governing stablecoins, following a June 15 preview of proposed rules designed to align with the GENIUS Act. State Street launched a stablecoin reserve money market fund called SSCXX in partnership with Anchorage, structured to comply with the GENIUS Act and the STABLE Act, marking a significant institutional move into the stablecoin reserve market. A bipartisan group of senators including Cynthia Lummis urged the Treasury Department to preserve state regulatory authority within the GENIUS Act stablecoin process, while North Carolina advanced a bill that would regulate crypto banking and stablecoins at the state level.
-- Europe / UK: The European Union delisted Tether's $175 billion USDT stablecoin on June 16, 2026, as a MiCA deadline took effect, even as many EU crypto firms remained unprepared for compliance. The European Commission has simultaneously launched a MiCA review targeting stablecoins, DeFi and staking rules, with a formal consultation underway on what observers are calling MiCA 2.0. Analysis ranks the EU's stablecoin regulation as the most restrictive globally, a posture reinforced by the ECB, which rebuffed proposals to boost euro stablecoins as too risky. Against that backdrop, euro-denominated stablecoins reached record levels under MiCA despite flat retail demand, while AIB and Bank of Ireland backed a euro stablecoin initiative and DefiHash secured MiCA authorization to expand regulated stablecoin infrastructure across Europe. UniCredit warned that Europe may face difficulties containing crypto banking crises under MiCA rules, a concern sharpened by a May 24 incident in which a MiCA-compliant euro stablecoin depegged to $0.85 following a multisignature wallet exploit.
-- Asia-Pacific: Japan's Financial Services Agency opens its payment system to foreign trust-type stablecoins from June 1, 2026, having clarified the legal status of foreign trust-based stablecoins and established a qualified regulatory pathway under updated payment services rules. In Hong Kong, the jurisdiction tested its first licensed stablecoin on the Ethereum blockchain in May 2026, while exchange OSL listed USDKG, a gold-backed stablecoin from Kyrgyzstan, expanding the city's regulated digital asset offerings. Australia recorded its first retail payment in an AUD-denominated stablecoin, settled via Base, marking a practical milestone for domestic stablecoin commerce. Meanwhile, the Reserve Bank of India maintained skepticism, arguing that stablecoins fail the 'singleness, elasticity and integrity' test of money, even as a corporate-led blockchain initiative in Japan advanced plans to issue a yen-denominated stablecoin for B2B payments.
+- Wyoming became the first U.S. state to issue its own stablecoin on June 16, 2026, backed by state reserves under the Wyoming Stable Token Act, positioning the state as a focal point for broader cryptocurrency policy discussions.
+- The European Union delisted Tether's $175 billion USDT stablecoin on June 16, 2026, as the MiCA deadline took effect, while the European Commission launched a MiCA review targeting stablecoins, DeFi, and staking rules.
+- Japan's Financial Services Agency opened its payment system to foreign trust-type stablecoins from June 1, 2026, clarifying the legal status of foreign trust-based stablecoins under updated payment services rules.
+- New York Department of Financial Services released a new regulatory framework governing stablecoins on June 16, 2026, following a June 15 preview of proposed rules designed to align with the GENIUS Act.
+- State Street launched a stablecoin reserve money market fund called SSCXX in partnership with Anchorage, structured to comply with the GENIUS Act and the STABLE Act, marking a significant institutional move into the stablecoin reserve market.
 
 ## Watchlist
 
-
+- Implementation timeline and enforcement approach for GENIUS Act stablecoin provisions at federal level
+- Additional state-level stablecoin initiatives following Wyoming's pioneering issuance
+- EU MiCA review outcomes targeting stablecoins, DeFi, and staking rules
+- Operational and custody standards development following May 24 euro stablecoin depeg incident
+- Japan FSA guidance on foreign trust-type stablecoin compliance requirements
+- North Carolina crypto banking and stablecoin bill progress
+- Treasury Department response to bipartisan Senate request on state regulatory authority
+- MiCA Asset-Referenced Token (ART) issuer authorization timeline (none approved as of April 2026)
+- UniCredit warnings on EU capacity to contain crypto banking crises under MiCA
+- ECB position on euro stablecoin proposals and systemic risk concerns
