@@ -31,13 +31,13 @@ jobs:
       group: news-rss
       cancel-in-progress: false
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # Full history so the final push can rebase onto the latest main
           # when another push (e.g. a PR merge) lands mid-run.
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "20"
           cache: "npm"
