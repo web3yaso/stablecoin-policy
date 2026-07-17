@@ -1,11 +1,10 @@
 import { createHash } from "node:crypto";
 import { kv } from "@vercel/kv";
 import type {
-  DeepReadonly,
   PaymentPayload,
   PaymentRequirements,
   SettleResponse,
-} from "@x402/core/types";
+} from "@okxweb3/x402-core/types";
 
 const PAYMENT_LOG_TTL_SECONDS = 90 * 24 * 60 * 60;
 
@@ -25,7 +24,7 @@ export function paymentLogConfigured(): boolean {
 
 export async function reservePaymentPayload(
   slug: string,
-  paymentPayload: DeepReadonly<PaymentPayload>,
+  paymentPayload: PaymentPayload,
 ): Promise<boolean> {
   if (!paymentLogConfigured()) {
     return false;
@@ -43,8 +42,8 @@ export async function reservePaymentPayload(
 
 export async function writePaymentLog(
   slug: string,
-  requirements: DeepReadonly<PaymentRequirements>,
-  result: DeepReadonly<SettleResponse>,
+  requirements: PaymentRequirements,
+  result: SettleResponse,
 ): Promise<boolean> {
   if (!paymentLogConfigured()) {
     return false;
@@ -70,14 +69,14 @@ export async function writePaymentLog(
 }
 
 export function getReportSlugFromRequirements(
-  requirements: DeepReadonly<PaymentRequirements>,
+  requirements: PaymentRequirements,
 ): string | null {
-  const slug = requirements.extra.reportSlug;
+  const slug = requirements.extra?.reportSlug;
   return typeof slug === "string" ? slug : null;
 }
 
 function hashPaymentPayload(
-  paymentPayload: DeepReadonly<PaymentPayload>,
+  paymentPayload: PaymentPayload,
 ): string {
   return createHash("sha256")
     .update(JSON.stringify(paymentPayload))

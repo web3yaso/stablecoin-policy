@@ -42,20 +42,19 @@ ANTHROPIC_API_KEY=  # 新闻聚合与法案分类
 除上面的数据同步变量外，x402 报告 API 需要以下服务端环境变量。请只在 `.env.local` 或 Vercel 环境变量中填写真实值；不要提交任何密钥。
 
 ```
-CDP_API_KEY_ID=          # Coinbase CDP API Key ID，用于 x402 facilitator
-CDP_API_KEY_SECRET=      # Coinbase CDP API Key Secret
-X402_PAY_TO=             # Base Sepolia 收款地址
-X402_NETWORK=eip155:84532
-X402_FACILITATOR_URL=    # 可选；留空使用 Coinbase 官方 facilitator
+OKX_API_KEY=             # OKX 开发者 API Key，用于 x402 facilitator
+OKX_SECRET_KEY=          # OKX API Secret
+OKX_PASSPHRASE=          # OKX API Passphrase
+OKX_X402_BASE_URL=https://web3.okx.com
+X402_PAY_TO=             # X Layer 收款地址
+X402_NETWORK=eip155:1952 # X Layer Testnet；生产改为 eip155:196
 REPORTS_ENCRYPTION_KEY=  # 报告全文 AES-256-GCM 解密密钥
 KV_REST_API_URL=         # Vercel KV REST URL，用于付款日志
 KV_REST_API_TOKEN=       # Vercel KV REST token
-TEST_BUYER_PRIVATE_KEY=  # 仅用于 Base Sepolia 测试脚本；绝不要填 mainnet 私钥
+TEST_BUYER_PRIVATE_KEY=  # 旧版 Base Sepolia 验证脚本专用；绝不要填 mainnet 私钥
 ```
 
-`X402_FACILITATOR_URL` 仅用于测试或应急覆盖。生产环境应使用官方 facilitator，避免把付款验证交给未审计的第三方服务。
-
-报告 API 的 MVP 定价为每篇 `$0.01 USDC`，仅用于 Base Sepolia testnet validation；生产定价待后续版本决定。
+OKX.AI ASP 使用 OKX 官方 facilitator。代码默认连接 X Layer Testnet (`eip155:1952`)；生产上架时切换到 X Layer Mainnet (`eip155:196`)，由 SDK 使用该网络支持的官方结算稳定币。
 
 ### 支付宝「AI 收」端点（人民币）
 
@@ -107,7 +106,15 @@ npx tsx scripts/reports/add-report.ts \
 
 ## x402 购买流程测试
 
-测试脚本只允许在 Base Sepolia (`eip155:84532`) 运行。先准备一个 testnet 买家钱包，并从 Coinbase Faucet 或 Base Sepolia faucet 领取测试 ETH 和 USDC。不要使用 mainnet 私钥。
+OKX.AI 的付费 A2MCP ASP 使用稳定 endpoint `GET /api/reports/latest`。它始终指向最新一期可售报告；详细上架说明见 [`docs/okx-ai-asp.md`](docs/okx-ai-asp.md)。
+
+未携带付款凭证时，可先检查 x402 v2 challenge：
+
+```bash
+npm run asp:check
+```
+
+`npm run asp:check` 用于 OKX.AI endpoint 自检，需要有效的 OKX facilitator 凭证。旧的 `verify-x402.ts` 仍只用于历史 Base Sepolia 流程，不作为 OKX.AI 上架验收依据。
 
 在 `.env.local` 中配置：
 

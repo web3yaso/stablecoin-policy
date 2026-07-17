@@ -1,8 +1,7 @@
-import { HTTPFacilitatorClient, x402ResourceServer } from "@x402/core/server";
-import type { Network } from "@x402/core/types";
-import { ExactEvmScheme } from "@x402/evm/exact/server";
-import { createFacilitatorConfig } from "@coinbase/x402";
-import { bazaarResourceServerExtension } from "@x402/extensions/bazaar";
+import { OKXFacilitatorClient } from "@okxweb3/x402-core";
+import { x402ResourceServer } from "@okxweb3/x402-core/server";
+import type { Network } from "@okxweb3/x402-core/types";
+import { ExactEvmScheme } from "@okxweb3/x402-evm/exact/server";
 import {
   getReportSlugFromRequirements,
   reservePaymentPayload,
@@ -11,20 +10,16 @@ import {
 
 export const X402_NETWORK = readX402Network();
 
-const facilitatorUrl = process.env.X402_FACILITATOR_URL?.trim();
-
-const facilitatorClient = new HTTPFacilitatorClient(
-  facilitatorUrl
-    ? { url: facilitatorUrl }
-    : createFacilitatorConfig(
-        process.env.CDP_API_KEY_ID,
-        process.env.CDP_API_KEY_SECRET,
-      ),
-);
+const facilitatorClient = new OKXFacilitatorClient({
+  apiKey: process.env.OKX_API_KEY?.trim() ?? "",
+  secretKey: process.env.OKX_SECRET_KEY?.trim() ?? "",
+  passphrase: process.env.OKX_PASSPHRASE?.trim() ?? "",
+  baseUrl: process.env.OKX_X402_BASE_URL?.trim() || "https://web3.okx.com",
+  syncSettle: true,
+});
 
 export const x402Server = new x402ResourceServer(facilitatorClient)
-  .register(X402_NETWORK, new ExactEvmScheme())
-  .registerExtension(bazaarResourceServerExtension);
+  .register(X402_NETWORK, new ExactEvmScheme());
 
 x402Server.onBeforeSettle(async (context) => {
   const slug = getReportSlugFromRequirements(context.requirements);
@@ -56,23 +51,27 @@ x402Server.onAfterSettle(async (context) => {
   }
 });
 
-export const x402FacilitatorReady = x402Server
-  .initialize()
-  .then(() => {
-    console.info("x402 facilitator initialized");
-  })
-  .catch((error: unknown) => {
-    const message =
-      error instanceof Error ? error.message : "unknown initialization error";
-    console.warn(`x402 facilitator initialization warning: ${message}`);
-  });
+let initialization: Promise<void> | undefined;
+
+export function ensureX402FacilitatorReady(): Promise<void> {
+  if (
+    !process.env.OKX_API_KEY?.trim() ||
+    !process.env.OKX_SECRET_KEY?.trim() ||
+    !process.env.OKX_PASSPHRASE?.trim()
+  ) {
+    throw new Error("OKX x402 facilitator credentials are not configured");
+  }
+
+  initialization ??= x402Server.initialize();
+  return initialization;
+}
 
 function readX402Network(): Network {
-  const network = process.env.X402_NETWORK?.trim() || "eip155:84532";
+  const network = process.env.X402_NETWORK?.trim() || "eip155:1952";
 
   if (!network.includes(":")) {
     throw new Error(
-      "X402_NETWORK must use CAIP-2 format, for example eip155:84532",
+      "X402_NETWORK must use CAIP-2 format, for example eip155:1952",
     );
   }
 

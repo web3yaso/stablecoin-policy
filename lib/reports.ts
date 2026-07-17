@@ -72,7 +72,8 @@ export async function getReportMetaBySlug(
   slug: string,
 ): Promise<ReportMeta | null> {
   const reports = await listReports();
-  return reports.find((report) => report.slug === slug) ?? null;
+  const resolvedSlug = slug === "latest" ? LATEST_REPORT_SLUG : slug;
+  return reports.find((report) => report.slug === resolvedSlug) ?? null;
 }
 
 export async function getReportBySlug(slug: string): Promise<Report | null> {

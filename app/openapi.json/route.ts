@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { listReports } from "@/lib/reports";
+import { getReportMetaBySlug, listReports } from "@/lib/reports";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
       readOwnershipProofs(),
       readX402Network(),
       await readPriceInfo(),
+      await readLatestPriceInfo(),
     ),
     {
       headers: {
@@ -51,6 +52,19 @@ async function readPriceInfo(): Promise<PriceInfo> {
   }
 }
 
+async function readLatestPriceInfo(): Promise<PriceInfo> {
+  try {
+    const report = await getReportMetaBySlug("latest");
+    return {
+      mode: "fixed",
+      currency: "USD",
+      amount: (report?.priceUSD ?? 0.1).toFixed(2),
+    };
+  } catch {
+    return { mode: "fixed", currency: "USD", amount: "0.10" };
+  }
+}
+
 function readOwnershipProofs(): string[] {
   return (process.env.X402_OWNERSHIP_PROOFS ?? "")
     .split(",")
@@ -63,12 +77,14 @@ function readOwnershipProofs(): string[] {
 // challenge. Imported indirectly (not from x402-server) to avoid
 // pulling facilitator init into the openapi route.
 function readX402Network(): string {
-  return process.env.X402_NETWORK?.trim() || "eip155:84532";
+  return process.env.X402_NETWORK?.trim() || "eip155:1952";
 }
 
 function networkLabel(network: string): string {
   if (network === "eip155:8453") return "Base mainnet";
   if (network === "eip155:84532") return "Base Sepolia testnet";
+  if (network === "eip155:196") return "X Layer mainnet";
+  if (network === "eip155:1952") return "X Layer testnet";
   return network;
 }
 
@@ -77,6 +93,7 @@ function createOpenApiDocument(
   ownershipProofs: string[],
   network: string,
   price: PriceInfo,
+  latestPrice: PriceInfo,
 ) {
   const label = networkLabel(network);
   return {
@@ -85,7 +102,7 @@ function createOpenApiDocument(
       title: "Web3Law Stablecoin Policy Reports API",
       version: "1.0.0",
       description: `Machine-readable stablecoin regulatory analysis reports. Report metadata is free; full Markdown reports are payable via x402 on ${label}.`,
-      "x-guidance": `Start by calling GET /api/reports to retrieve available reports, summaries, slugs, and prices. Pick a relevant report slug from that response. To retrieve full content, call GET /api/reports/{slug}. If the response is 402 Payment Required, use the x402 payment requirements to create and submit a ${label} USDC payment, then retry the same URL with the X-Payment or Payment-Signature header. Missing slugs return 404 before payment. Do not invent slugs or prices; prices are selected by the server.`,
+      "x-guidance": `Call GET /api/reports/latest to purchase the newest report, or use a slug selected from GET /api/reports. If the response is 402 Payment Required, read PAYMENT-REQUIRED, submit the exact payment requested on ${label}, then retry the same URL with PAYMENT-SIGNATURE. Report content is never returned without payment.`,
     },
     servers: [{ url: origin }],
     tags: [
@@ -95,33 +112,39 @@ function createOpenApiDocument(
       },
     ],
     paths: {
-      "/": {
+      "/api/reports/latest": {
         get: {
-          operationId: "getDiscoveryLanding",
+          operationId: "getLatestPaidStablecoinPolicyReport",
           tags: ["reports"],
-          summary: "Discovery landing",
+          summary: "Purchase the latest stablecoin policy report",
           description:
-            "Human homepage and discovery landing for this server. Agents should use /api/reports for report metadata and /api/reports/{slug} for paid report content.",
-          requestBody: {
-            required: false,
-            content: {
-              "application/json": {
-                schema: {
-                  type: "object",
-                  additionalProperties: false,
-                  properties: {},
+            "Stable ASP endpoint for OKX.AI. Returns the latest full Markdown report after x402 payment. The URL remains unchanged when a new report is published.",
+          "x-payment-info": {
+            protocols: [
+              {
+                x402: {
+                  scheme: "exact",
+                  network,
+                  currency: "USD₮0",
+                  paymentHeaders: ["PAYMENT-SIGNATURE", "Payment-Signature", "X-Payment"],
                 },
               },
-            },
+            ],
+            price: latestPrice,
           },
           responses: {
             "200": {
-              description: "Human-readable homepage",
+              description: "Latest full report in Markdown",
               content: {
-                "text/html": {
-                  schema: {
-                    type: "string",
-                  },
+                "text/markdown": { schema: { type: "string" } },
+              },
+            },
+            "402": { description: "Payment Required; inspect PAYMENT-REQUIRED response header" },
+            "503": {
+              description: "Service unavailable",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
                 },
               },
             },
@@ -213,7 +236,7 @@ function createOpenApiDocument(
                 x402: {
                   scheme: "exact",
                   network,
-                  currency: "USDC",
+                  currency: "USD₮0",
                   paymentHeaders: ["X-Payment", "Payment-Signature"],
                 },
               },

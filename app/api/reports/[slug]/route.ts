@@ -1,16 +1,20 @@
 import { NextResponse, type NextRequest } from "next/server";
 import {
-  withX402FromHTTPServer,
   x402HTTPResourceServer,
+  type HTTPAdapter,
+  type HTTPResponseInstructions,
   type RouteConfig,
-} from "@x402/next";
-import { declareDiscoveryExtension } from "@x402/extensions/bazaar";
+} from "@okxweb3/x402-core/http";
 import {
   getReportBySlug,
   getReportMetaBySlug,
   ReportContentKeyMissingError,
 } from "@/lib/reports";
-import { X402_NETWORK, x402Server } from "@/lib/x402-server";
+import {
+  ensureX402FacilitatorReady,
+  X402_NETWORK,
+  x402Server,
+} from "@/lib/x402-server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -50,38 +54,78 @@ export async function GET(request: NextRequest, context: ReportRouteContext) {
     );
   }
 
-  // Named route pattern so the bazaar discovery extension emits a real
-  // `:slug` path param. withX402() hardcodes the pattern to "*", which
-  // makes discovery metadata fall back to ":var1" and breaks registry
-  // probes that substitute path params.
   const httpServer = new x402HTTPResourceServer(x402Server, {
-    "/api/reports/:slug": createRouteConfig(meta, payTo, request.url),
+    "GET /api/reports/:slug": createRouteConfig(meta, payTo, request.url),
   });
 
-  const paidHandler = withX402FromHTTPServer(async () => {
-    const report = await getReportBySlug(slug);
+  try {
+    await ensureX402FacilitatorReady();
+    const payment = await httpServer.processHTTPRequest({
+      adapter: createNextAdapter(request),
+      path: new URL(request.url).pathname,
+      method: request.method,
+      paymentHeader:
+        request.headers.get("payment-signature") ??
+        request.headers.get("x-payment") ??
+        undefined,
+    });
 
+    if (payment.type === "payment-error") {
+      return responseFromInstructions(payment.response);
+    }
+
+    if (payment.type !== "payment-verified") {
+      return NextResponse.json({ error: "payment-required" }, { status: 402 });
+    }
+
+    const report = await getReportBySlug(slug);
     if (!report) {
       return NextResponse.json({ error: "report-not-found" }, { status: 404 });
     }
 
+    const responseHeaders = {
+      "Content-Type": "text/markdown; charset=utf-8",
+      "Cache-Control": "private, no-store",
+      "X-Report-Slug": report.meta.slug,
+      "X-Word-Count": String(report.meta.wordCount),
+    };
+    const settlement = await httpServer.processSettlement(
+      payment.paymentPayload,
+      payment.paymentRequirements,
+      payment.declaredExtensions,
+      {
+        request: {
+          adapter: createNextAdapter(request),
+          path: new URL(request.url).pathname,
+          method: request.method,
+          paymentHeader: request.headers.get("payment-signature") ?? undefined,
+        },
+        responseBody: Buffer.from(report.content, "utf8"),
+        responseHeaders,
+      },
+    );
+
+    if (!settlement.success) {
+      return responseFromInstructions(settlement.response);
+    }
+
     return new NextResponse(report.content, {
       status: 200,
-      headers: {
-        "Content-Type": "text/markdown; charset=utf-8",
-        "Cache-Control": "private, no-store",
-        "X-Report-Slug": report.meta.slug,
-        "X-Word-Count": String(report.meta.wordCount),
-      },
+      headers: { ...responseHeaders, ...settlement.headers },
     });
-  }, httpServer);
-
-  try {
-    return await paidHandler(request);
   } catch (error: unknown) {
     if (error instanceof ReportContentKeyMissingError) {
       return NextResponse.json(
         { error: "report-content-unavailable" },
+        { status: 503 },
+      );
+    }
+
+    const message = error instanceof Error ? error.message : "unknown error";
+    if (message.includes("facilitator") || message.includes("OKX")) {
+      console.warn(`x402 unavailable: ${message}`);
+      return NextResponse.json(
+        { error: "x402-facilitator-unavailable" },
         { status: 503 },
       );
     }
@@ -108,38 +152,36 @@ function createRouteConfig(
     resource: requestUrl,
     description: meta.title,
     mimeType: "text/markdown",
-    extensions: {
-      ...declareDiscoveryExtension({
-        input: {
-          slug: meta.slug,
-        },
-        inputSchema: {
-          type: "object",
-          properties: {
-            slug: {
-              type: "string",
-              description:
-                "Report slug selected from GET /api/reports. Use this value in the /api/reports/{slug} path.",
-              pattern: "^[a-z0-9][a-z0-9-]{5,80}$",
-            },
-          },
-          required: ["slug"],
-          additionalProperties: false,
-        },
-        output: {
-          example: `# ${meta.title}\n\nFull report Markdown content is returned after payment.`,
-          schema: {
-            type: "string",
-            description: "Full report content in Markdown.",
-          },
-        },
-      }),
-    },
     unpaidResponseBody: () => ({
       contentType: "application/json",
       body: {},
     }),
   };
+}
+
+function createNextAdapter(request: NextRequest): HTTPAdapter {
+  const url = new URL(request.url);
+  return {
+    getHeader: (name) => request.headers.get(name) ?? undefined,
+    getMethod: () => request.method,
+    getPath: () => url.pathname,
+    getUrl: () => request.url,
+    getAcceptHeader: () => request.headers.get("accept") ?? "",
+    getUserAgent: () => request.headers.get("user-agent") ?? "",
+  };
+}
+
+function responseFromInstructions(instructions: HTTPResponseInstructions) {
+  const body =
+    instructions.body === undefined
+      ? null
+      : typeof instructions.body === "string"
+        ? instructions.body
+        : JSON.stringify(instructions.body);
+  return new NextResponse(body, {
+    status: instructions.status,
+    headers: instructions.headers,
+  });
 }
 
 function readPayToAddress(): string | null {
