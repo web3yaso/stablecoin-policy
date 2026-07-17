@@ -8,10 +8,12 @@ name: news-rss
 
 on:
   schedule:
-    # Weekly on Sunday 02:00 UTC. Sunday is chosen so the brief is in
-    # place before the Monday open of US equities markets — readers can
-    # consume it Sunday evening / Monday pre-market.
-    - cron: "0 2 * * 0"
+    # Daily at 03:17 UTC. The OKX.AI ASP sells a *daily* stablecoin policy
+    # report, so the refresh must run every day. An off-peak, non-zero
+    # minute is deliberate: GitHub's scheduler silently drops workflows
+    # queued at congested on-the-hour slots (which killed the previous
+    # schedule after 2026-05-18).
+    - cron: "17 3 * * *"
   workflow_dispatch: # manual trigger from the Actions tab
     inputs:
       restart:
