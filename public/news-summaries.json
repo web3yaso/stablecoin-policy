@@ -1,79 +1,83 @@
 {
-  "generatedAt": "2026-06-16T22:34:22.884Z",
+  "generatedAt": "2026-07-17T06:32:50.677Z",
   "regional": {
     "na": {
-      "summary": "Wyoming became the first U.S. state to issue its own stablecoin on June 16, enacting legislation that backs the instrument with state reserves and has made the state a focal point for broader cryptocurrency policy discussions. The same day, the New York Department of Financial Services released a new regulatory framework governing stablecoins, following a June 15 preview of proposed rules designed to align with the GENIUS Act. State Street launched a stablecoin reserve money market fund called SSCXX in partnership with Anchorage, structured to comply with the GENIUS Act and the STABLE Act, marking a significant institutional move into the stablecoin reserve market. A bipartisan group of senators including Cynthia Lummis urged the Treasury Department to preserve state regulatory authority within the GENIUS Act stablecoin process, while North Carolina advanced a bill that would regulate crypto banking and stablecoins at the state level.",
+      "summary": "The GENIUS Act is driving stablecoin rulemaking activity in Washington, with a deadline prompting regulatory action as the FOMC prepares to meet July 28–29 and the stablecoin market reaches $280 billion. The FDIC's chairman confirmed the agency will not extend deposit insurance to stablecoins under the GENIUS Act, while banks have urged the Senate to tighten stablecoin legislation over concerns about deposit flight risk. On the enforcement side, the U.S. government froze nearly $500 million in Tether stablecoins as part of sanctions measures targeting Iran, demonstrating federal willingness to weaponize stablecoin infrastructure. Circle received OCC approval to operate as a bank, though Mizuho subsequently downgraded Circle to \"Underperform\" and lowered its target price to $50, citing competition from Open USD. Velocity raised a $38 million Series A led by Dragonfly Capital and FirstMark, with backing from Coinbase and Ripple, to build stablecoin treasury and settlement infrastructure for enterprises. Visa launched a platform enabling stablecoin transactions across its network of 200 million merchants without requiring institutions to build their own blockchain infrastructure.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "first U.S. state to issue its own stablecoin",
+          "text": "GENIUS Act is driving stablecoin rulemaking",
           "topic": "legislation"
         },
         {
-          "text": "New York Department of Financial Services released a new regulatory framework governing stablecoins",
+          "text": "FDIC's chairman confirmed the agency will not extend deposit insurance to stablecoins under the GENIUS Act",
           "topic": "legislation"
         },
         {
-          "text": "GENIUS Act",
+          "text": "banks have urged the Senate to tighten stablecoin legislation over concerns about deposit flight risk",
           "topic": "legislation"
         },
         {
-          "text": "SSCXX",
+          "text": "froze nearly $500 million in Tether stablecoins as part of sanctions measures targeting Iran",
+          "topic": "legislation"
+        },
+        {
+          "text": "Circle received OCC approval to operate as a bank",
+          "topic": "legislation"
+        },
+        {
+          "text": "$38 million Series A led by Dragonfly Capital and FirstMark",
           "topic": "infrastructure"
         },
         {
-          "text": "State Street launched a stablecoin reserve money market fund",
+          "text": "stablecoin market reaches $280 billion",
           "topic": "infrastructure"
         },
         {
-          "text": "Cynthia Lummis urged the Treasury Department to preserve state regulatory authority",
-          "topic": "legislation"
-        },
-        {
-          "text": "North Carolina advanced a bill that would regulate crypto banking and stablecoins",
-          "topic": "legislation"
+          "text": "200 million merchants without requiring institutions to build their own blockchain infrastructure",
+          "topic": "infrastructure"
         }
       ],
-      "generatedAt": "2026-06-16T22:34:13.516Z"
+      "generatedAt": "2026-07-17T06:32:39.998Z"
     },
     "eu": {
-      "summary": "The European Union delisted Tether's $175 billion USDT stablecoin on June 16, 2026, as a MiCA deadline took effect, even as many EU crypto firms remained unprepared for compliance. The European Commission has simultaneously launched a MiCA review targeting stablecoins, DeFi and staking rules, with a formal consultation underway on what observers are calling MiCA 2.0. Analysis ranks the EU's stablecoin regulation as the most restrictive globally, a posture reinforced by the ECB, which rebuffed proposals to boost euro stablecoins as too risky. Against that backdrop, euro-denominated stablecoins reached record levels under MiCA despite flat retail demand, while AIB and Bank of Ireland backed a euro stablecoin initiative and DefiHash secured MiCA authorization to expand regulated stablecoin infrastructure across Europe. UniCredit warned that Europe may face difficulties containing crypto banking crises under MiCA rules, a concern sharpened by a May 24 incident in which a MiCA-compliant euro stablecoin depegged to $0.85 following a multisignature wallet exploit.",
+      "summary": "Europe's Markets in Crypto-Assets Regulation (MiCA) has entered full implementation as of July 2026, reshaping the continent's crypto landscape with significant market consolidation—one report estimates MiCA has eliminated roughly 92% of crypto firms operating in Europe. BitPay secured a Dutch MiCA license on July 16, 2026, and plans to expand stablecoin payment services across the EU, while the European Central Bank named 36 firms for a digital euro pilot on July 15. Tether's refusal to obtain a MiCA license has prompted Revolut to delist USDT in Europe, illustrating the regulation's enforcement bite, whereas compliant firms such as Ripple, which received a preliminary MiCA license in Luxembourg, and Crossmint, authorized as a payment institution under MiCA, are positioned to gain. The European Commission is planning a MiCA revision in 2027 to extend coverage to foreign stablecoin issuers and tokenization, while ESMA has already issued guidelines placing non-euro stablecoins under stricter scrutiny, and the EU has launched a rewrite of MiCA's reserve rules after concerns that existing requirements created a competitive advantage for certain issuers. Separately, the UK Financial Conduct Authority reduced capital buffer requirements for stablecoins to 1 percent, undercutting the EU's framework and intensifying the regulatory competition between London and Brussels.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "delisted Tether's $175 billion USDT stablecoin",
+          "text": "full implementation as of July 2026",
           "topic": "legislation"
         },
         {
-          "text": "MiCA deadline took effect",
+          "text": "BitPay secured a Dutch MiCA license",
           "topic": "legislation"
         },
         {
-          "text": "MiCA review targeting stablecoins, DeFi and staking rules",
-          "topic": "legislation"
-        },
-        {
-          "text": "MiCA 2.0",
-          "topic": "legislation"
-        },
-        {
-          "text": "ECB, which rebuffed proposals to boost euro stablecoins as too risky",
-          "topic": "legislation"
-        },
-        {
-          "text": "AIB and Bank of Ireland backed a euro stablecoin initiative",
+          "text": "European Central Bank named 36 firms for a digital euro pilot",
           "topic": "cooperation"
         },
         {
-          "text": "DefiHash secured MiCA authorization to expand regulated stablecoin infrastructure across Europe",
-          "topic": "infrastructure"
+          "text": "Revolut to delist USDT in Europe",
+          "topic": "legislation"
         },
         {
-          "text": "depegged to $0.85 following a multisignature wallet exploit",
-          "topic": "infrastructure"
+          "text": "preliminary MiCA license in Luxembourg",
+          "topic": "legislation"
+        },
+        {
+          "text": "MiCA revision in 2027",
+          "topic": "legislation"
+        },
+        {
+          "text": "non-euro stablecoins under stricter scrutiny",
+          "topic": "legislation"
+        },
+        {
+          "text": "UK Financial Conduct Authority reduced capital buffer requirements for stablecoins to 1 percent",
+          "topic": "legislation"
         }
       ],
-      "generatedAt": "2026-06-16T22:34:22.884Z"
+      "generatedAt": "2026-07-17T06:32:50.677Z"
     },
     "asia": {
       "summary": "Japan's Financial Services Agency opens its payment system to foreign trust-type stablecoins from June 1, 2026, having clarified the legal status of foreign trust-based stablecoins and established a qualified regulatory pathway under updated payment services rules. In Hong Kong, the jurisdiction tested its first licensed stablecoin on the Ethereum blockchain in May 2026, while exchange OSL listed USDKG, a gold-backed stablecoin from Kyrgyzstan, expanding the city's regulated digital asset offerings. Australia recorded its first retail payment in an AUD-denominated stablecoin, settled via Base, marking a practical milestone for domestic stablecoin commerce. Meanwhile, the Reserve Bank of India maintained skepticism, arguing that stablecoins fail the 'singleness, elasticity and integrity' test of money, even as a corporate-led blockchain initiative in Japan advanced plans to issue a yen-denominated stablecoin for B2B payments.",
@@ -722,6 +726,411 @@
     "United States": {
       "news": [
         {
+          "id": "rss-google-news-us-stablecoi-s0wwfo",
+          "headline": "Visa Launches Stablecoin Platform to Help Institutions Move Onchain Without Building New Infrastructure - blockhead.co",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-17",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPRWp0cnQ2VzB5UGkzNEV2MmRWWlVOQ1dmZGVrV0U4SDNwYVdrSUVsSlk4bjhaNmhnSWJsQklVLXVuOFptZFY3TFFvNlI3Q0RDRmdfY2k4YVZ0M0UyU2Rlb000OGNHUW5YeWtiSHJrdndBUHBvckl1Qk54bVoyUXdjUTNmSUxqVmdvNU93QnN1QXNYUVVtNkkxNVFyeDlhNzM2amRweDF3ODJHbmJUOU0wNEVwTmkzUDR3VGhTRnktNm42R1VoSmNucnIyUUhMWXNFaU9kclV1RQ?oc=5",
+          "summary": "Visa has launched a platform designed to enable institutional clients to transact with stablecoins without requiring them to develop their own blockchain infrastructure.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-h2cr39",
+          "headline": "Licensed to Shill: Retail Barely Touches Stablecoins – Treasury & Remittance Are the Real Adoption (Jeannie Lim, Xweave) - blockhead.co",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-16",
+          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxPcDhoa01DS1RRcVJWcmd4MVFkQU5PT1RJbTlOWm9iQXJEYVZaR3FCWFJTOGZtX0FLcGVSa0NYSHJ6M3NRR19JRFRBZW5rTDBQTWJPdGZwV2VGbUg2VWdTaDBQMzV1bFdlUmJQU21fTDh2d1Q5Vl9manpqc25tVy0zbm8yem9Uak05T2RaSkpXTDBON3QtaEFPQVBib0p2aFBVU0NWM1FNVl9QeHdYUlVfUDRBSmh6N1hfRlJZMGptMThwREJLYkNoNmlhMXJsOFdyX1BQX0RaSXp4TmFTMHFFSlktQ3g4dXlD?oc=5",
+          "summary": "A recent analysis suggests that stablecoin adoption among retail consumers remains limited, while use cases in treasury management and remittance services represent more significant areas of current adoption.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-7xby77",
+          "headline": "Visa Expands Stablecoin Push With New Platform Serving 200 Million Merchants - Benzinga",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-16",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPQXItazdFTHRJcEtDQWV4TWNQdXNkNFlzVkQ5Wkxyc0lQOThQaDVtOU1VSVVqWENBR1YwdFFNY2dQY0RoT0VxNTg0YmxYNUNFOHVFcEp5NUVxUHpDVDZ5UWJJcXBXTUE3M1pXRXI1YXJQbW1rd19veXJqQjAxNzNaSmxtVG9pWWdGTVBZcFBDY09GY3RfWDRGb3ZtdlRCYnFFR0sxM3NodDNnczh1NHIzU0kwWHQ2TmlzSkN0amNtdXJNZWxzNHc1a3BUVEhJNERobWdORA?oc=5",
+          "summary": "Visa has launched a new platform intended to enable stablecoin transactions among its merchant network.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-sx77nu",
+          "headline": "Visa launches stablecoin platform - Finextra Research",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-16",
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPV1pDckc3YjFxN1BaWHVpZkROTWllelJCZlMzRGVBb3J3VEVMaThKeG1HWFFEdGtGRkFTeWVBa0RXQmo4WnZ6VlprQ0VoT1hHRk1LVVhxQ1I0VkdGVk9OYlBWNWxYeldER09sUmVCbGRoYjFoajJFa0hMYjNrTTIxcFd3?oc=5",
+          "summary": "Visa has launched a platform for stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-hfybzc",
+          "headline": "The UK’s stablecoin regime: a two-tier framework for non-systemic and systemic issuers - Dentons",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-16",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNWno0bU1CbUtGVURic1hVZWU3azNmemVZd2hkYS15X1VYRWU0OXBYQjd2a09HMndqR1JWVmxjU0RRbHc0V1J6MmYzbHhwbERoMVJHTVkxTnZZVUdsSUdyN25qOE1xUjZqUXBzalNKLWt3Si10aUlDbXZKUDFnQi1DdENweFFEYVFUemI0?oc=5",
+          "summary": "The UK is implementing a regulatory framework for stablecoin issuers that distinguishes between systemic and non-systemic operators.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-9g3tck",
+          "headline": "US turns stablecoin issuer Tether into a financial weapon against Iran, freezing nearly $500 million - CryptoRank",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-15",
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOV3BqaFdIVjFDLWhaTzBWYXVoYzBzeFFldHEzX0UtcVZBV3RqckwwNlJsQ2t1ZTNnVWMtSWVlUGRpdWYxVU45ZTV1Z2xRT2gzdTY0X1dIbUk3OHlnVXdlM2k1TXl1dnBHci1pWk43d2hjMnlnNXJjY0pfOGVfaEItMGxrZjhaZHJVbFpNLXJBWUNaaVhhTnhoLWl1MmM0c3A5cklDYVJUY1I1VC0zLXBQc0QtZEtvWUItUVRhUTFGb1AxaEVBR2o2RDJCWG9ndmVNcWc?oc=5",
+          "summary": "The U.S. government froze approximately $500 million in Tether stablecoins as part of sanctions enforcement against Iran.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-1xmget",
+          "headline": "US turns stablecoin issuer Tether into a financial weapon against Iran, freezing nearly $500 million - CryptoSlate",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-15",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPX2dJMFRQR2d5aFhhelVfVlRWX3ptdWo4azNwLVlKNnNUSFRKTG02ckowOGxtaUdfUjdTS0NUTEJpNTdXZVVpYzRYVFA2b3VQdHBQemdtZnQ0VjRKa1VxeDZocGhBenNHQjB3Z3RQTTNDU3UxMFRKV0luNWR4NlFtSXBCVkRka3VlcGRhVW4tLW9VQTlpcVdrTkpwZzhpOV95VWN2MjV1bWdzZW1OSDdCekJFUUxycXhuLTVYS1N0UnQ?oc=5",
+          "summary": "The US government reportedly froze approximately $500 million in assets held by stablecoin issuer Tether as part of sanctions measures targeting Iran.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-xtr57m",
+          "headline": "GENIUS Act Deadline Puts Stablecoin Rulemaking Back On Washington’s Clock - TradingView",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-15",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNTlFtME5aVXR2cnVFQjNMMV8wWVQ0RFlaNG5OTHFqWXo4STRqbHZDeDByclpJNE5sQXIwSDBTZmNzd0RBQ3VzYWNoeWtJTlpkajlha3h5UzVkVk9UWDJucmgtNmp4Rkt4MVlfTDd3amN3X0V1SndXd0x1LXlEWTJjOEN2N0ExZ2NSZHJicHhSOHNQb2p3Z2prUlRvZ2ZiRGRlNnF6M0U1Y0FWZXd3U3JQb1k4b1pYVjk4ZGItNDZXZ2NtdjhQSTRIZ0RZTQ?oc=5",
+          "summary": "The GENIUS Act has established a deadline that is expected to prompt stablecoin regulatory action in Washington.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-wa54l7",
+          "headline": "FOMC meets July 28–29 as stablecoin rulemaking deadline lands - Kraken Blog",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-15",
+          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFBidlRBczFkWmJnV3JXT24wLXY0TXZMLWxrLUxQb2V0RFkwbU5BcmF3Y0pvR1llZF9kNmg3ZVM3NG0xZlZVSFZIYUw4OHdKcV81NWRvYVQwY093czdHb1E3Xw?oc=5",
+          "summary": "The Federal Open Market Committee is scheduled to meet July 28-29 while a deadline for stablecoin rulemaking under the GENIUS/STABLE Act approaches.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-sxvuk0",
+          "headline": "Velocity raises $38m to push stablecoins into treasury - FinTech Global",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-15",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNeVJRVFRNWjBMU0g4aEpZUEw3aVdOc2VZdGowemcwUEJ4UzB0d2xLZUQyNFhJOTY1XzBPVUdNeV9XaG5YSWdkSEcwRHZqY1FUNUdkY0xJTEVOOFR0amNsZGJiaUludUk4MjFrd3F4UHd1N2tjWDliMUkwTUpOMi11dUtHWmY4QkEwa29ySGJ4SFFhUQ?oc=5",
+          "summary": "Velocity has raised $38 million in funding to develop stablecoin solutions for treasury management purposes.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-p6mzpk",
+          "headline": "Stablecoin treasury start-up Velocity raises $38m Series A - FinTech Futures",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-15",
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxORTNmZlpSU0d2cVd0aFBPaXFtZUgxakducHg3LVc3eDUySENGU3lOWkttVWJVUlR0NHAtZlBVNURKOUUxZWtiaTlUSHlqanFUUWVTMGdxMGVrUERpZDNSeFpSdTlxQVRaWUZSOTVnTWhLMUpFTDdfT2xGaXNJUHRlT1ln?oc=5",
+          "summary": "Velocity, a stablecoin treasury start-up, has raised $38 million in Series A funding.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-hkb7d8",
+          "headline": "Major Rating | Mizuho: Lowers stablecoin issuer Circle's target price to $50, rating downgraded to \"Underperform\" - Bitget",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-14",
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9JZjYyQWREeDlaVlJsUFA3NnBCSzBwbHhTaUpQQW9CQVZ0eUQzS2h2bmZWZE5Ub0phMFdPVFNzTmoxOXhsSFlRZ2V1LU9zZkc3UkhVRmpRS0hmNElIT0hwS1JLNNIBY0FVX3lxTE9JZjYyQWREeDlaVlJsUFA3NnBCSzBwbHhTaUpQQW9CQVZ0eUQzS2h2bmZWZE5Ub0phMFdPVFNzTmoxOXhsSFlRZ2V1LU9zZkc3UkhVRmpRS0hmNElIT0hwS1JLNA?oc=5",
+          "summary": "Mizuho downgraded Circle's rating to \"Underperform\" and lowered its target price to $50.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-q98p5p",
+          "headline": "Mizuho turns bearish on stablecoin issuer Circle, citing Open USD competition - CoinDesk",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-14",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNVTREeDRIS3NfTUpWRDVBRUJqbTZKLXhvbjdYTmRBVDdhWjlOc0g1YnpiVVNUd0duVGlBUnpHRC1PUUZKTUkwSWxFTWNUYmtsWm1qZE9Oel8xbEx5b3hpbklwb3JUSk9NR2FEVnJuTlk2Y2JUUXkxcWRKM3l3VERsWkNLXzJKRkdla2JWaEY2aURrZnJTSXBleWliZ2pDYXVUcVUwLU0tYU04YVVabEk5ZFRNNXlERGN2MXJjdmZ0cWIwOWdTU1NGYy1ENA?oc=5",
+          "summary": "Mizuho has adopted a bearish stance on stablecoin issuer Circle, citing competition from Open USD.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-up44g8",
+          "headline": "FDIC Rules Out Stablecoin Deposit Insurance Under GENIUS Act, Chairman Says - CoinMarketCap",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-14",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOOTMybHNqLTJ0LU5Del9aaGhRTHRSdnk5azFxMkp2T01WMzhzVzRfUm9FV1Fia0EyaXN3M1hENGZVeEM5RlU1YnlXdkQxcnJ5YXVmckRab0h6UUplbXFTUWZic1BDMDZGbDBJc19RZEtlSXk4OGJLMy1iQlVQRUNEMGxMS1kyWWhFUXBBWDFaMGU4Y2MtYy1uMmhrajRrX0dIU1ZZNGszZC15UlduSWIzNWlMeGRMcUE?oc=5",
+          "summary": "The FDIC's chairman stated that the FDIC would not extend deposit insurance coverage to stablecoins under the proposed GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-c4n0a7",
+          "headline": "Velocity Raises $38 Million Series A Led By Dragonfly Capital And FirstMark For Stablecoin Treasury Platform - NewsCord",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-14",
+          "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQdUNZLUVBQW80MFgzSF9vY2htSGx4aDVkN2VLdFlySHBoWUJ5dlk1SERybkRrTXd4NEhWQ2xsZGRieTZTWmxyOWpDSlYxSHpKenZZdkpjVWVKVDlyakJZOHBpRXJxNEh6SmZIRnFyTUlxamlURUJYQVdOdFVCZnlJZGswUkJpSDBXbkpwMGJkdWROcGc0VHFENlcycll6V0F5NE9LM3VXRkFPVF9YYjhtNmoyWnFDeFRrbmEyS25URlBSZ2x4WUNWUGtQTXBSS0s2NEk4T1pGX1prSmlyWTRIVGlGZFUzZHYxZ1E?oc=5",
+          "summary": "Velocity has raised $38 million in Series A funding led by Dragonfly Capital and FirstMark for its stablecoin treasury platform.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-9k7kav",
+          "headline": "Dragonfly, FirstMark lead $38 million Series A for stablecoin startup Velocity with support from Coinbase, Ripple and more - The Block",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-14",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOdTFlRW9rTVlqUURkTGpkOTVnWlZLVkppd0VBR0NDNm9weTFwTWxGaWJHVzF4TGlXQzQzdmM4eFY3ZWZBdk9CZ0hkaDlDTUVXVVo2Zk9RNUZyZ2dCT1Vrc2VhdWxUeU52MXdTZUZqd044SnpVcDFRTWdkOVZoR1EzRlJZUUVTRmcxVTBVWVczS0NMQUJaWDh2N1pyemFxWDd4NlZwTHVldTZRWXRHMmlKV0hnVU1YSWVfZGR4MVh3?oc=5",
+          "summary": "Venture capital investors Dragonfly and FirstMark led a $38 million Series A funding round for stablecoin startup Velocity, with participation from Coinbase, Ripple, and other backers.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-saujz9",
+          "headline": "Velocity raises $38M to build stablecoin treasury infrastructure for enterprises - LCX Exchange",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-14",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOUUdITktISkVKajlZeEZ6QjBrMjNYaFlQMzFjbGstclBPTDh1VlhEUDZ6eDBnZ2t2NHktU0VQVFRaQnY2aXhHV1ZhYlFrQVc4aVNCVkg5REtaMFR3SUQwSkxHX01BTFp2NWVxaXZqVzE4VU43aVNxd1JYbG1qUG9ZYlRaellfTUNsWDZ3LXV5M3R2TEF6R2RHU0dWdjl3R3g3WU5IMWRlZ3ZDWGxFLVE?oc=5",
+          "summary": "Velocity has raised $38 million in funding to develop stablecoin treasury infrastructure services for enterprise customers.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-atwdcu",
+          "headline": "Velocity Raises $38 Million as Stablecoins Reshape Mainstream Business Finance - PYMNTS.com",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-14",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPVjY5dTEtci1oblZiS0x5cXR1SjlUV25RWThiTGpiNV9ocFN0VVkyWHBTdGtoZ3pzWG1mTmZUa2FrREdxTnMtMUdwZndUNTdrVGRoOU1zeEZZV25fOVFTcWdFV0tDS25CM1pkcVNyTkpCTkswdG9iZmROTnoycmNaS2prazBXbFZhRGdTUElUS21MRmpubVhyVlhWV1M2QVZIcUUxVVgzNG1aNFNGS2JUZHE2U1VWTWlxd0lVcGs2QTZkQVZD?oc=5",
+          "summary": "Velocity has raised $38 million in funding as stablecoins gain adoption in business finance applications.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-ba13r8",
+          "headline": "Velocity Raises $38 Million Series A To Scale Enterprise Stablecoin Treasury And Settlement Infrastructure - Pulse 2.0",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-14",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxON1JBNDZRaTVXUDdxRGoyNUFqYnR5Tml4Vkt0WTlhVXcwcm4tdDJOa3dBeDdHOUFKVkM5MDBuWTR2SlZPV3A4T2tTdkRaZjhidktPZHNycFVMTGsxaE56LXMxVXZJRkhKWUdJT1ZMeXZMQXhrYmRuUGI3VEg4Z2pHOF9NTkI1N2Eyb3MwSTF6SGdVZjV2ZzF6azFEcWg1NzlTVzZoelN6NlZaNDY3NGxZZlZqNmdBUnFaeE5wWjBYWEwzMnPSAcgBQVVfeXFMTnVCSkh0cW5xRHItN3l1ZEJqNTZYTzl4RFZEcEVxdGk5a1puMkxjcHdUa0lsS29GZ2RCNG9ndm1ZTjFnVi1vdW4xemswRzF1d2kxT3p3M1JBX2J5V2xCa0c0QlczYzNUN3FXS29HWjZmZWh4b0QwT2E0V1Rndk5YZHhnVVhPMUxNdWNyTjBRVDN5QnN3c0Q3a2tHVEdMN25TTVdOUDB0Q2cyQzc3YmJLb1dtZGNHWi0wZG9ra0IxbG0tSk1seXVQSDU?oc=5",
+          "summary": "Velocity raised $38 million in Series A funding to develop enterprise stablecoin infrastructure for treasury management and settlement services.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-ge0u88",
+          "headline": "Banks Push Senate To Tighten Stablecoin Bill, Warn Of Deposit Flight Risk - CUToday",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-14",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPT3ktb3NtbmhlYzNnd2VBakZmVXktbWVWZDQxZDFLcklzV2pIcEkwOENPcEtnWnNHYjNHZ1NjYklmcTBTLWZIdVplREpjdXhwVW54b2doT3RFYUpUNkcwUGNBcllpQzl4cV9QOFVmZE45STY2eDNQMjFBd3NSdHpDdGljWXpfX19nQk0tREt3SlIyTHFUZm91czRHam1PSk9yNFVPQXpqSjI4SUt5Umc?oc=5",
+          "summary": "Banks have urged Senate lawmakers to strengthen stablecoin legislation, citing concerns that stablecoins could divert deposits away from traditional banking institutions.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-gu96y7",
+          "headline": "Circle's (CRCL) OCC approval fails to ease core concerns, Mizuho says - CoinDesk",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-13",
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNdmlRanRpZEVGZWRGWXVuVFRFYlFsMU5XZUtpWFFTSHk0NDFqdDJ5cEVMZlg5eHhvc1pGaVhzVjBlaWw4WjY1Y3A4YTd6SElVLVo5Q29RV3NTd1plTnpkdWxicXkyeUFiZ2JlMTlhR3FNaDRBaTZLQWQzSjBrZHBuaHFRbEhLX282ZGlUSllFdk9CbmFVQ1BaNUJXMXZFQXZLZnZ3SE5aQWJtQnh6bGJHMlJjMUIxeS1wMHNiQWhramZhcEZ1WHpSSjVSSXo?oc=5",
+          "summary": "Mizuho has expressed concerns about Circle's stablecoin business despite the company receiving approval from the U.S. Office of the Comptroller of the Currency.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-sfpy8i",
+          "headline": "GENIUS Act Mandates Full Backing, Bans Stablecoin Yield - Briefs Finance",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-12",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQOGVKSmZqZS16eXZrcXNKS0ZTOWtrbUxSX1hqalhlR3h2VFUxWVVzQkhPRUZ4NE1XODJPbmhnS2cyNEpHMGZpbkI2X3BGYzJqb01PUjNCMjhjZ1R2UUY3WmlYSUFEdXg2ZEJLR2xuaFA0OEhQSnJRR1JCQ1lsRV92T1NOcUN3NzhDMndLbF9JZUludw?oc=5",
+          "summary": "Proposed legislation would require stablecoins to be fully backed and prohibit stablecoin issuers from offering yield to users.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-d4j60n",
+          "headline": "Stablecoin Market Hits $280B: GENIUS Act Poses Four Regulatory Challenges - Briefs Finance",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-12",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPN1g0Q0U2YmV5SmFhX3Q2T1hCalpXOEIxNEZONWppM2F0eUhkWl9nOWpfbEs4S1M2dHpuQ3pMcUpmRllqQmlGSzdTVUZuSkx1cjhKYVpfUExJRlRrRlB0SVEwWkU4TUVQalVvM2hpblFCNGdVRjM1TC1ycWo5emRUaFZHck5JQU9raXFiUWl6Y1pGUQ?oc=5",
+          "summary": "The stablecoin market has reached $280 billion in value, while proposed legislation known as the GENIUS Act presents regulatory challenges for the sector.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-rvk640",
+          "headline": "Stablecoin issuer Circle was approved to operate as a bank: What to know - Yahoo Finance",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-10",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPcFNTZWhudFp0OTgtM2hDb2RUMV8yZUw1Q21EM0JBaW1SX3RkcEVkQ0ZwUFhtUGE2TTlPZzBHMEwwRUFEU2x5M3pucTJUVUx0TVlUMzFUanFxM0JjWDZKckhmV2FRMHgwRFRURmNlenF2ZXBHbkdlZWptaDQxcllpRlh5WDlZTll3V2tDYW5sR1lsSkctZHhPQmw0c0w2NnNhc0RxZ3NPYUNDQ01HdWNpMVZGUU4yNXRLbVE?oc=5",
+          "summary": "Circle, a stablecoin issuer, has received approval to operate as a bank.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-4xz16s",
+          "headline": "Circle Stock Jumps as Stablecoin Issuer Wins Final Federal Banking Charter Approval - Yahoo Finance",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-10",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNWDMyWDBDZ08tY2RDbGd2VVluN1dBZC1Nd041X2pjZk9qdDNKWTJWajd6NTh2VHhRYlNzbHhFN05kNHFkNjNiaEpyNDlWcDRCeS1zZzJiVHd4V2RBSG1fWm9zeVFSSHV2VU9uZDhxQ29yVzExMkkxaFMzS0tqTFdfWVBHdm8wbDg3UHJ1SDBRN1M1eDJZMWE0MVJxMGdwZVVIM25R?oc=5",
+          "summary": "Circle received final federal banking charter approval, which led to a stock price increase.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-5bxysj",
+          "headline": "Stablecoin-issuer Circle wins approval to operate as a national trust bank - CNBC",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-10",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNaGh6MWRsMHZ5T2preG5ocTFKdzZINWJCai1ER0l3bllvUGptTU1KNjM1emthOGdPQkt4UTNkZmw3SnlfallNd3dOTE9fZ0Z4VmNVbUMzbVdjUmJxTXNxRGlQdkkzQVBYQk5qLVdPUFUycTJ4V1lKNWVtU1dWYXpXNDUyV3BrWUQ4S29kak9uaWJfVEpzcnJrVFVyU0pUdXlFM1g0X0dIREVpNlBaLWRZRTZPalNia1lM?oc=5",
+          "summary": "Circle, a stablecoin issuer, received approval to operate as a national trust bank.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-6mclnu",
+          "headline": "Circle Becomes “First Stablecoin Issuer” to Win US National Trust Bank Approval - TradingView",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-10",
+          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQV2laRTJ6dWVFSlh5RzIzU1VlUEQzWE5XeFcxa1VYWW1YRktrTzRQcTI5ZjhBVUg0b0ZCSUhGRkZRSy1FaVlKUXA0b0lHdlBLM1ZlY0RWYlRaSUlWMjhKT0EwLXFhTEN6aF9NVUR2S1VXczNxTGNTZG1tWVR2WnpRcjRCbmZwZVlIbF8yb2hYUGtkb3dZblVBRGdia3lUTUxKUWlpcnFCUzg3NTc4eXdQaDVCY2N1cVk3SWVubzhCcllPbnVfbVlhamlRM19oYVJUWjBMWmRBSWdodw?oc=5",
+          "summary": "Circle has received approval to operate as a national trust bank in the United States, according to the headline.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-a718e6",
+          "headline": "Federal Banking Regulators and FinCEN Propose New Customer Identification and BSA/Sanctions Compliance Standards for Payment Stablecoin Issuers - Freshfields",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-10",
+          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxONmJOOC1WNlNQT25oTFdfc2xKQU1ZOW5rRXRtc3l2Mm52Q3U4Y253OTlWQ2ZOZXJTZXYwbnR4Yl9CVXdlc0FaX3dwbWd5TEJ4UWd4WW5nSWVSczNZUEFZUUNOT1JKUzZENk5WaGhFMVZmOHhOVXNObWtlM19uRnlHZGdQU3BiNHRXY3puOUpzRDVGVXc3XzdiblU1M2FpZGdrQ2czeFpkUlAxeHdiYUlZc1o0b2FCMEkwQ2E5anQtR1lhaUpkZWFmRDNoN21sTFR5SnNkTVdHWkJadjNjV3Blb2dUcDk5ZlU?oc=5",
+          "summary": "Federal banking regulators and the Financial Crimes Enforcement Network have proposed new customer identification and anti-money laundering standards for payment stablecoin issuers.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-simvil",
+          "headline": "Circle stock pops after stablecoin issuer wins approval to establish a trust bank - Yahoo Finance",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-10",
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPZjZfVjRVd2NTemU0bXJvTkRMWjlaTGFaMzQ5Vk9pZTgzZS1PMkhoSlhXY0xwMEM0NU5VZ1NYWFJ1WkZIWGFESzNKRHM1OVo2ZXBwd19Ga0xkOXFYVDNCQ0o0NVBaRk9Oa2JMTW9EenVLOXJZZERfSDIzckZoWnVNNnZfcm5TSjRkN296eXV6b2ZfcG4yS25qSWhTV1V0ZjR4aXBjZ2dwOGtxMlppSVYzeFo4VVN0YVFfNUNQUkxoek5uelVmTllpaGNuN21aZlJ1VjYtVXczeTE4UXZtLUE?oc=5",
+          "summary": "Circle, a stablecoin issuer, received approval to establish a trust bank, which contributed to a rise in its stock price.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-ckld84",
+          "headline": "Circle Stock Jumps as Stablecoin Issuer Wins Final Federal Banking Charter Approval - Decrypt",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-10",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOWW5jN2tYZkIxVVRGZUVHcnN5MDhHejg2R2dPTTJkd1JoSDB1cUpCVWZUNVllbUhjTHNWaEozQkV6UmF0THp0TUo2bkxnbHdpZVk0Tkx1ejVGTEVQdEgwMzhJd3N6X3VQVEcyM1JtNHpoOUVYcVB2TFRkQVEzSnljZXFJaldVa0lLeGZwcDd3VWJjRlJxRnhR0gGfAUFVX3lxTE4tOW1mMm1xZjdjTTFnQU9GaThXdzdqbGVtQVJOU2RwZ3BqeWxtNGlkbnRKSXFKZGxYTnAtTWZiUy16RmVCei0yY3l4bE1xckUxVWFocURiamx6ZjVmQlo0akxhVHFrMFBlRV81WjlBVVJvM1Z2ZDZFV2lreUs3ZXRhOUt1Z0pqQWVJZU1GTXYzN2lzY1ZIOVdLeldUdDdCWQ?oc=5",
+          "summary": "Circle received final federal banking charter approval, an outcome that caused its stock price to rise.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-hno5r9",
+          "headline": "GENIUS Act deadline puts stablecoin issuers on the clock - CryptoRank",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-10",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQSGRjU1hLa2hrRmFYYmE1TndoVlhPR3otWGxyMzFfeTNkZkc3cm5ZQTgtT0dCOU5Bc0gxaGJtQlU3SHNOZFhQYzAtSlROajBUUEdsRGIzZ1phQVJIdmJsMl8xRF83M1p4eG5GclZJcUYzT1UySmF0RjBUd1dvQi1rMms4Z2Nta3lkVzFrSXBIY0pnNXFCZGttd2R3?oc=5",
+          "summary": "The GENIUS Act has established a deadline that affects stablecoin issuers' compliance obligations.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-y0dx9z",
+          "headline": "GENIUS Act deadline puts stablecoin issuers on the clock - CryptoSlate",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-10",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNWk1Xd3hBanRUcmdjWXFuUzgtU1VOWmp6QWllRDU0UUpFMlJWdktZb0M3dThMdlNRYm9rSm5pSDJHWE0yVHN2U3MzR05ydVNRUG5WemhRN2J5MnFUSldVRFJiOEd2bkw3cVg0Z01oM2N2SWxmR0U2OVlMcklscVEwUkRVelIzUnp2?oc=5",
+          "summary": "The GENIUS Act imposes a deadline for stablecoin issuers to comply with regulatory requirements.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-h78lka",
+          "headline": "Stablecoin issuer Circle just got the greenlight to operate as a bank. The shares are up 5% - CNBC",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-10",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxObzUzcGFST0doNE9XMUlhdzNKdEZCMTJoNHpUcGo3Nl9TdVZET0RFeGRaWXl6OFdFaVVIbnRJblV0QlZ2TTB3elZGWTJqME9FQnBGX1MwREJldzZaQnBvUlpnVE5CeVVwdzRHM3d5SHkxR2h3N1dzdGhNcFpiaENNc2RaYUlvR3c2MVBrZjFRZ05zRUViUnQwc1ZKQVNHN2R2T2VuTFNfSlRaQlJvV1RYcHFwVnViU0trbzJHaXQ2eF9kT2Ft0gHKAUFVX3lxTE1TOEJsNlM3R1dOZV9XdHZpa0NhMmpvMHFsLVNiNDAtVm1NQkZBeFJlM1NiVTRiRGNfZWl1SWxYRzhXcVk5c21MWHZDVFBtci1sQldicmNUa3FwWlpxSkVmY3VrZlFRMHluV1FkZEF1YmowTlNjS1lxT1JJLVJwcVhneUJJc2pUNXVkWHh5T1FnUk9oR0hCQjNZUWJxUVlUbUZkemlvU2xrWmVEMTFlbmVERkFIMlVmZGVTRG0zNjZRZ1BSdHUzUzZGbmc?oc=5",
+          "summary": "Circle, a stablecoin issuer, has received regulatory approval to operate as a bank, according to reporting on the decision.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-cpy1as",
+          "headline": "What Is the GENIUS Act and How Does It Relate to Stablecoins? - Paxos",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-09",
+          "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE4yS2xiQk9aNWZPbmREUkFnU0kyVWx4QlR0cHBYSlpaSXRQS29heXVNTFNXU3pxRkRRT2xUQmd0WFhGc2hhSEpTdHRNOHo3Zw?oc=5",
+          "summary": "The GENIUS Act is proposed legislation that addresses stablecoin regulation and oversight.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-sou0af",
+          "headline": "FinCEN's proposed CIP rule for permitted payment stablecoin issuers: Familiar doctrine, new frontier - JD Supra",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-08",
+          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE8xU1ViYzhnVDFWXzk5MHJKdm5mVEtlNmpQb05RNS1taTVfUllIZUhWQXFVaU8wQzNBeVpiOUEzRG9OQUtPVlVzNVcwWm9GS0dmOU1RcFJlbFkwZU5VY1otVnRBWVZGWFdMdENNUFZyeDd6bjlxV0pOTGhLb2Z2Zw?oc=5",
+          "summary": "FinCEN has proposed a Customer Identification Program rule that would apply to issuers of permitted payment stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-9e6pmi",
+          "headline": "Stablecoin Issuer Looks To Confirm Award Against Investor - Law360",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-07",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPWldYdlJZMXhoaFBhV1ZWSktMNVlaaHAyMUNlcUhManhwdlk3bngtenFnc3ZISzdjX3BwQWxWVzZ5S2F0V0dYUVZBal84TDJTQ2FvLTVMUmNDZS1XY0FSMENtN3U0WThHd0w0R3gwbXdmQjM1eVNIUEFyZHI3eUNsdU5RRjhjNVNCQU1jalZHY1BDbWV5VEVWQXBvaktvZ9IBVkFVX3lxTE1IaE5oVDRIWXo0SU0xM0VTdXVSSG9jaWZfU2xrSTZXY0w0NDVWdWJPZFA1X3c2V01pc2FWTldDcVR2TVkwVDU4Y1BaUkxXblBkRmxfWkRR?oc=5",
+          "summary": "A stablecoin issuer is seeking to confirm an arbitration award or legal judgment against an investor.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-vijvxh",
+          "headline": "Transak CEO says GENIUS Act is forcing boardrooms to have a stablecoin strategy - thestreet.com",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-07",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOV2JmNUVJOUs3RjV3b3E3SW8tMVhMTTA4bmZ1YlJsU2ZnY2xWelFXNUlMWXJfSW5zYWVRRW9YS0I5VHpRM1JMXzBKUGk1MU91N09GZk1sR3R1Z3ZuR2labmtxQkJQY0dtMTRCNVh2ZnNNUkV0YzNUWThpN0RMV3FSWXB3eVBoSWZrZnd6VkdoOV9LUDBWdUpjN2s0UHhHS1FnMUxXUlluVHdkaGp0aklZWWd0UG1DVjNvaUl3?oc=5",
+          "summary": "The CEO of Transak stated that the GENIUS Act is prompting corporate leadership to develop stablecoin strategies.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-dr9kgv",
+          "headline": "Former Tether CIO seeks to sell stake in stablecoin issuer, Bloomberg reports - TradingView",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-07-06",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOc19kNXBIWXlwUkR0eVZOUngwVTh6cmNDazZNSXlpVE5kYmxIUmZ6cUhiVXhSTXN6c3dVeVBXOFE1UDhMbGFTVU1YeS0zcDJaQmV0VjFzdWk4VUZGWGdsUHUzblRKb21iYXBBTEhXRFNxR0VBX1ZwTTZKMlZXQ3U0aFRmLWFDbGxRcnRlYnZYWEtnMC1uWWhGd0ZPLThIbHN0ZGd0aU4yYjJFOXJKVWppS3c3dWhVak9xRHV2aWhKcVpoUXR6aTVrQkVxQXFKZGFHOXRVMUJxZw?oc=5",
+          "summary": "A former chief information officer of Tether is reportedly attempting to sell their stake in the stablecoin issuer.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-7rc7ja",
+          "headline": "The GENIUS ACT in 2026: A strategic inflection point for U.S. banks - Wolters Kluwer",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-01",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOMjFPWGFKWThpSFJOUndoQ2Fnd2JpbkJhOGUwUFBxbFhKal9yLXRXYlhSYWpvMWxWelgzczZEUnRBNUpQb1BLVm9JdWNDRGFhQlVNdjJ0THJJS0FiWTRsWUJPaGlYbExWWE1aSnVGWXVfZU9yTHhNV09VT1doV0FnQ3BEWnBDMnZNa1NSOGgwRVlEWkN4RV9QMnhDSUkxXzF3Tm15bzBKUWtnZURvVFJQODZqdw?oc=5",
+          "summary": "The article discusses the GENIUS ACT as a potential turning point for how U.S. banks will be regulated or operate in 2026.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-stablecoin-i-okis5",
+          "headline": "Customer Identification Requirements Proposed for Payment Stablecoin Issuers - The National Law Review",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-06-25",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPZE9ZTF9SN0dPMDVmbWlQdkJ4cDFGcDFNdFR5YVV2U3JVU2ZuMVZuT1F3WTlWLVNnelFvSDlZMmM4YjF0TzZ6eFFZWWtwN2ZJcExqNzR0c0MtU21YMDg0c1VQTnFkalVTb2E3NUVTS1ZDSjlNLTdXTUVYNEk0UlNEWm12QkFBWXpEOHphNm54UWNWdUJwWFgwVEZPd0UyNE1mcGVaRnZZUGbSAa4BQVVfeXFMTTlkNV9nMUlxcS1vbG1sN0tpX24ySU40MW16Tk4xQjZySWZRelBlTzdDTnJVTGpydEItdU1ya1BuYm9jMlR6Y09wMVFFM3U2YjZ0RE9NcGFkQk5BTVY1T2ZRMENaUExrTlhGOWNUcXo1TGpLWEc2aTJMQUVraEFIeW9UWXZ6S2s1eDBwWDNLc0tKU2YwaFhRaDU4ZVJqak9fT3prNEphd0Y1c1RCc1RB?oc=5",
+          "summary": "Proposed regulatory requirements would mandate that payment stablecoin issuers implement customer identification procedures.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-state-stable-8ywx4k",
+          "headline": "The real cowboys of crypto: Wyoming ropes a $1 stablecoin - Pittsburgh Post-Gazette",
+          "source": "Google News — State Stablecoin Bills",
+          "date": "2026-06-24",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPY2wwclRYeVIySVdldTdsaVFubXFmRUxicUkzSkFLdjV3d1ZYRE5YcFdNVTFDNVFnOGh2aDlOVFFQZzVibUNPVGZqVnR4dW5lZmsxbzloWmpIY0VLM05aWGZPSVBEVm9zaXV4ZmZmMDdkdnRhSHVhZ3NTT2FBUGpTNmxGMjJLWVJxcVVVY1hJUVlmNzZ1ZTl5a2x1UGJLMnVnWTNUdzN0VU01bFhWbjhtRGFwVHo?oc=5",
+          "summary": "Wyoming has enacted legislation permitting the issuance of stablecoins pegged to the U.S. dollar.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-3gbsar",
+          "headline": "Crypto Industry Gets Its Way on GENIUS Act Rulemaking - The American Prospect",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-06-24",
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQRGtLRmVKa244amNNM2dVdTZrRmNTRzlXb2dXYU1QWUZtUWF4UlZyX1U3NDdxRGl2a2doR0R5NTBtMmZBekhsbnVST1d6X1pScm5RcTliNGczTUQ0akhSZ2NRTTg1NllHS2w1WGw2TDNnT2pTLXdpYU1Uc1JKWlBEX1ZudE02STZISnVPVERZdw?oc=5",
+          "summary": "The crypto industry achieved favorable outcomes in the rulemaking process for the GENIUS Act, according to reporting on stablecoin and digital-asset legislation.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-5iyu73",
+          "headline": "Can GENIUS Act stablecoin issuers create money in ways not anticipated? - ledgerinsights.com",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-06-22",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNTzQwc1BLdXR4bE04d0hlWmxUR05uSlNMcWI0eUI3TFFDRFRFajNObHVsVWdRTzVkY1RvODBqYldpNkxwTVEtXzdhOGN6TWNMNnR3YTN1bFBueGVlYzRiQU5HV3JfWWdSdTZkMlNMYkNDWlI2T2pDZDdaSVA0XzhIYXdIUzk0OWh3VVBQbVJTakViUU1vdUphc3ZpT3ZfcVRCSmFXeA?oc=5",
+          "summary": "The GENIUS Act's stablecoin provisions may leave open questions about whether issuers could employ money-creation mechanisms not explicitly contemplated by the legislation.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-tfc4l0",
+          "headline": "GENIUS Act: Anti-Money Laundering/Countering the Financing of Terrorism and Sanctions Compliance: Notice of Proposed Rulemaking - Office of the Comptroller of the Currency (OCC) (.gov)",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-06-22",
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5USXBGUVhmY1ZfcUNaNUJmZnVKZ1NmYWRZZ04xek1OMXNTMzlxZnRiMHZNb3ZadENxX0x6VjEyMFgyYzJPNk5VSWJ4YXZYY1JGWWFHaWhQNW9OdnZ4SUd4NnNLcnhocmVEYUtsNVZqUWFuOEI2R1dTcVB2UQ?oc=5",
+          "summary": "The Office of the Comptroller of the Currency has issued a notice of proposed rulemaking related to anti-money laundering, countering the financing of terrorism, and sanctions compliance under the GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-state-stable-h0uj7a",
+          "headline": "NYDFS releases new stablecoin regulatory framework - State Affairs",
+          "source": "Google News — State Stablecoin Bills",
+          "date": "2026-06-16",
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE96bXBucGladEdNN3Nsb2dNWDBOdEZHdExxbEdwajQwS2VBUEI2blRWbWRYWjJ5bGhReV9xSzdSZDFIZnJOcnU1TlEyRjdRRUVCdHI4aVFqbXBZU1lHbE9uY1ZaeUJ4NmhCWEZZN3JtREtjaFVyLTRTZ3RuQQ?oc=5",
+          "summary": "The New York Department of Financial Services released a new regulatory framework governing stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-state-stable-jmvnit",
           "headline": "The real cowboys of crypto: Wyoming ropes a $1 stablecoin - MSN",
           "source": "Google News — State Stablecoin Bills",
@@ -956,6 +1365,24 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-us-stablecoi-gvm3ef",
+          "headline": "OCC and Treasury Department Issue Requests for Comments on GENIUS Act Proposed Implementation Rulemakings - Stinson LLP",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-06-11",
+          "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPSXFBVHZXSWxGYVAzSVRXZHd3MkhfUG93RmduN0gxTFVMLUtWazh3OGRZaXBQd29ZRHZWeUI1S2J3Z1lWX3k5ci05NlJhbE9pZ244Mk11ZkZPMU14Sy1TTGhhYy1hTTlhbE0xWjRnSTlieTFGd204cGVaUDU1akJlSnNRc19Sd3lPamlnMlBkTEdEVThEM2dRUks5MzlRa0ZNRWFKY0RtS2VENTdQYl9lT3V5Y3FnUGlXdmdEanIwU3RMY3BwcDRBLWQ0cGNIaTk5LWZXQTB4VHdKakprZTlmNzVXNENOQQ?oc=5",
+          "summary": "The U.S. Office of the Comptroller of the Currency and Treasury Department have issued requests for public comment on proposed rules implementing the GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-7zgs7d",
+          "headline": "GENIUS Act: Reporting Forms and Instructions for Permitted Payment Stablecoin Issuers Subject to the Jurisdiction of the Office of the Comptroller of the Currency - Office of the Comptroller of the Currency (OCC) (.gov)",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-06-11",
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE93RGh4ek00R2Zmazh3X0JuNkxERTk0RzQ1NXh4T1NIbkdnYjNhN0JiNDFFN1h1a3lnMllQaWp0WjVvQnhHbTZONDhsZVlONUZaUWxURDdRVTZDVFZLUXVrUGYtdlBaLWlENm5TZ2lUbjdZOEdrMjlNUDl2Zw?oc=5",
+          "summary": "The Office of the Comptroller of the Currency has released reporting forms and instructions for payment stablecoin issuers operating under its jurisdiction pursuant to the GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-state-stable-q4jzoi",
           "headline": "FINANCIAL TECHNOLGY—Proposed New York stablecoin regulation to harmonize with GENIUS Act requirements - VitalLaw.com",
           "source": "Google News — State Stablecoin Bills",
@@ -1061,6 +1488,24 @@
           "date": "2026-06-10",
           "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOdm9GTHkwWS1oZlZYaTZkanpsM0hvYm1lTmljTVlNdWZCbjJ3TzU2SVNoZzM3VkEtV0ZSeGxiQklzM2ZWUjJwVnpKNzZfaGY4UVN1al9jQU9GcG5LQi1WQmh1NjNkdWtJNV9PUk1nNWdrQkdubHRyWkNGaDllckltWUlPZG1VcTNlOXNFLWwzdHZOX2NvZGNjMnN1MXVZRW1raHUzc0U3SQ?oc=5",
           "summary": "Paradigm and the Hyperliquid Policy Center have opposed a stablecoin rule contained in the GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-state-stable-iov8v0",
+          "headline": "NY enhanced Stablecoin Regulations to align with Federal GENIUS Act - Yahoo Finance",
+          "source": "Google News — State Stablecoin Bills",
+          "date": "2026-06-09",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNVE5EOUU0dFdIbHI5Rk5ZNmpELTgxVmF6UjEtcktqckR3YWZYdU1KUDBCY0lreHBGOXhYQTdqYThrRm1uR2RHOGZmbXdPQUFaRDdJakJ1YjR1VkFfZVRPNS04YUN5TjZUSTZHX2NlMFRxM2g5Q2cyUlZEeW50b1ZMeDVtVjhVQ29QeTNQMDNlMFcyU3F4OTlUcE5XM0VwWU9GTVloelVzNnU?oc=5",
+          "summary": "New York has enhanced its stablecoin regulations to align with the federal GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-1f3cuc",
+          "headline": "BPI and CBA Comment on FDIC Stablecoin Rule Under GENIUS Act - Bank Policy Institute",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-06-09",
+          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQcHg0M0hUQTNBdnpxbzBCV2dnanFBSU5POHYycUcxR3ppUXBQWHhfZzdONnR5LTJmamo1VXdTMlB0bjZ4dFNPeW5RRXJTdHlzdE1HanVEMF9HLTVoSnlzcjE0TGhQRHBaX256eTJyd05JZmFnQ1Q0emVyTS14alRKdDNuVQ?oc=5",
+          "summary": "The Bank Policy Institute and CBA provided comments regarding an FDIC stablecoin rule proposal developed under the GENIUS Act.",
           "summarySource": "headline-only"
         },
         {
@@ -5665,6 +6110,159 @@
     "European Union": {
       "news": [
         {
+          "id": "rss-google-news-eu-stablecoi-t1pe10",
+          "headline": "BitPay secures Dutch MiCA license, sets sights on stablecoin expansion across EU - Crypto Briefing",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-16",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5zcTRoVUFCdXFKczdsNVJncjdoTS16SE5VeE1kNkRocmdtNzVUUWdJWUlHMVF1Mmc1SjRMZy1ITDVvMktIUTF0bnNHMGVGMDJna21fVXZsOE5UczRpUHptcXRBZmFXY04tajhiZ0FKM2dMNUFCM2tWSU4yNUxfdWM?oc=5",
+          "summary": "BitPay has obtained a Markets in Crypto-Assets Regulation (MiCA) license in the Netherlands and plans to expand stablecoin operations across the European Union.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-kt0ngb",
+          "headline": "BitPay secures Dutch licensing under MiCA, plans to expand stablecoin payments - Cryptonews.net",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-16",
+          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE1XSXh6UWdwZk5KSmdINU5mYWRybmE2Zm42ZWliRER2Uy0zMFd2MmVJYUdoU0t6VXR0RzRFX2tZckRYWUpNV2ZuWkdoUEFNazRhOTZkV0pxZw?oc=5",
+          "summary": "BitPay has obtained a Dutch license under the Markets in Crypto-assets Regulation (MiCA) and intends to expand its stablecoin payment services.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-n0y9ys",
+          "headline": "BitPay Secures MiCA License to Expand Crypto and Stablecoin Payments Across the EU - FF News",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-16",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOVmVFbHZDN01IcXlVWlFITzlVQmRJVFM2d3VIbFBycnY4WjNSZjRVU3dmczNNLWxfSGtsQVdHZnFHVzBpWi1fQzhwcERrZ2l3QndNQU5kUTlmMWFxSDlyWWVuclRyWFRHRjg0MlFwekswN2RWUk9rQkZPN0VfTGlmV0d1OWFoTjFDNzdVcThhUDh2c0Z2UlVyNHdIWkVsak5qWkNSd1RGd2dCdw?oc=5",
+          "summary": "BitPay has obtained a Markets in Crypto-Assets Regulation (MiCA) license, enabling it to expand cryptocurrency and stablecoin payment services across the European Union.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-xic9fh",
+          "headline": "BitPay Secures MiCA License to Expand Cryptocurrency & Stablecoin Payments Across the EU - Morningstar",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-16",
+          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOa0czYUJvd21QTlVTZk1JZXp2dS1DSjlPNUs0c3dTdElyU2xzMU95Q3JyWDZaVlBMSkEtSkx4ZlVmQlBRMGw4UGtYbzlpbkV1MV9xeklFanBDUGRkVlNxc2d2Qkd2NDdQeW1xa1VrbDYxcXRLWDUtWDk1Vkl1VkQ1MDM2VE12S0pJVm80ZTJYdVpLSjNmeGNXWVpXNV90SVNKVEN6VDVDNzVsU3JZaEVuX3pjd3BMTEJiQVlIUTdiVXl3MVlhR01yaWU2NHI3Wmd0UnREbllxSlE4VXVlUkVTdA?oc=5",
+          "summary": "BitPay has obtained a license under the Markets in Crypto-Assets Regulation (MiCA) to offer cryptocurrency and stablecoin payment services in the European Union.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-vx89kw",
+          "headline": "ECB Names 36 Firms for Digital Euro Pilot as MiCA Left Europe Dollar-Dependent - Tech Times",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-15",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPNXBSY0Rob0J1bmxPY014R19WelNndTN6OENyUHVRN3N3Y2VGNFkzZWJvV3M4MkppUmE1RXNWcjRocmdpbWJOdTQxWVJlTmJBVk9fOEdRS2FvR3QxWThFM2NVd190TENpVDdnYXQyRmFBVmppdTV0eUhVMVVxVThaTnBBMDYtVzZzZkdqMWtDckJNNDBFVFlSSHlXQmJUVXBzS2FNLXUtRTluRW9tMkp3eTcwdGl2R3BYSF9aQlBPeEY0TjRI?oc=5",
+          "summary": "The European Central Bank has selected 36 firms to participate in a pilot program for a digital euro.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-4rojy9",
+          "headline": "Genius Act stablecoin rules conflict with MiCA, frustrating global firms - Crypto Briefing",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-14",
+          "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1EeVdZd3FwdGpfbXFSSjc1SW5rYk9UTmNNSUszNXZZazlaRUlBZWRLQmEwUjhCRzJkNzhLbHdwODMwQ1hPTld5WXZkRi1Bd0x6ZUc0REVsUHhKZDNXTUN6R1pfZzQ0TmE1SEl6SnR5bGk?oc=5",
+          "summary": "The Genius Act's stablecoin regulations create conflicts with the EU's Markets in Crypto-Assets Regulation (MiCA), creating compliance challenges for international firms.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-bb263u",
+          "headline": "EU Launches MiCA Stablecoin Rewrite After Reserve Rules Handed Circle Monopoly - Tech Times",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-09",
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQRXRyUXlEczlPN2lpa291aEt6YlBuWVRVR2dNTzdZQ25abVF4Q195Z2JTbFJQMmZoTXl1S1BtcnFodmRRRFBaRGZOOXk5NFJ5Y0dRc1F4REV0c3lwTzc3VExaUkNZNy1IajR5OWVRdElmSmdoT3NCTlNKRUo3djBibmJvak82cVVFVXN5dGdZNXFJZUdVUlY0UWFpMTlITjgtV3JEYXhtRFFIcG5rTkV6cFVBVEhzaEM0NEFhOEY2WnRveV9hUWZ4SE5WS29Wdw?oc=5",
+          "summary": "The European Union is revisiting its Markets in Crypto-Assets Regulation (MiCA) stablecoin framework following concerns that reserve requirements may have created competitive advantages for certain stablecoin issuers.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-c67vkn",
+          "headline": "ESMA MiCA Stablecoin Guidelines Put Non-Euro Tokens Under A Tighter European Lens - TradingView",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-09",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPbGt2UVVDV2EzVlNBYVc1NlVGbG5CWkRrSUlTdG56al84VjRlMlZOajgwVGdqNHBKSmJBX1ZmNjdYMEFHc1ZFUzlvbHBRSG5va2RudzhvckV3am43UVBDNGExRVFTdWtBeHljbmFUdGlCV2NMZ0g3SFpiS2NWTXhGZDcySFBQTExyaEFrT3BzSXQ5TVpCYUpoQ09yaFZsNXJCbUtzUUxvbWtTRlVPOXphc1RVMkh5SnhNbTBJRlBOdXJRYWJRQkNJZjA2M1gxUnFock9BNWlB?oc=5",
+          "summary": "The European Securities and Markets Authority has issued guidelines under the Markets in Crypto-Assets Regulation (MiCA) that establish stricter requirements for non-euro stablecoins operating in Europe.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-p2yumb",
+          "headline": "EU Set to Revise MiCA in 2027 to Cover Foreign Stablecoin Issuers - Decrypt",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-09",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNb3lKeTlCS2tvdm82MmVYcmZVSEowa2ZoZUlQQkJoQ1Q2dm9lM2xDZDB4bk16RlJDR1AtLU95ZVQ4TmlZWThWaDFodmVoeFk3MTFhTDc1UWlMQ3h2RW9NS0hnRlI3alE5OExGVVZVZEo2emExdVA0dFl5UjJYaHpoU1NhWmhVWG1mdmdjUnFGMEJUNjdreEHSAZ4BQVVfeXFMUHJ3Z29xc3p3TE53OF9MWGY5b3k1MUdvZG93NmxBTktrRHR5RVRBUjN1ZThvZlUwTDJzcDdXTXhZTV9qZXlmRVRyTVVIdTdRNkZvak5FUzJ4eXNfb2llZ01GVk1fY1Nna2YxV2YxeVYtSzUtTGVXWlM4ekZQS2UwRFhLQXJuYWxCTUtRWlBKaXhsdUZkakh1aGFxc2tRMnc?oc=5",
+          "summary": "The European Union is planning to revise its Markets in Crypto-Assets Regulation (MiCA) in 2027, with proposed changes expected to address regulation of stablecoin issuers based outside the EU.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-q4dph4",
+          "headline": "EU Set to Revise MiCA in 2027 to Cover Foreign Stablecoin Issuers - Yahoo Finance",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-09",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQemFFbG9YaHVCX1lZX2wwOUwwdWtkTWkyOWxiQ1dRMHdPSmQ4OXdKa1BKN2t5OFZsVDAzcXliSjc3a0lRTlN0c1MxRENNR1N6QXRVS2VSbmpHZFpRNWNzckk0VlJrVGVSNmo4YjZQSHh0QTVhT19xVjJia3l1T2JzMlA4cXZLNHIxRTFaVHpRTnZOdw?oc=5",
+          "summary": "The European Union is planning to revise its Markets in Crypto-Assets Regulation (MiCA) in 2027 to address foreign stablecoin issuers.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-t0bhs",
+          "headline": "Europe's MiCA crypto regime is fully in force: Here's who wins and loses - The Block",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-08",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOcHhwTzdHeWNpcThGd3pETkFTN0dRUnZ2WlY0eTlxNlQ0UUJ0N1pHcHNpcGxRRVpvQ1hLZkJzcUlwUUZoQUV0dHlfcDFMUERma094RFJpUmYxcDVxZGg4MV90dFBwQzBUeDVzMGtkWENCbkpCZ0ZwQzVsdmZPekxBcFpWR21HU1cxb0J0NDJrbXROTXRVSXZ5MnBQWEJwSXd4T1NYVnV3ZVI?oc=5",
+          "summary": "Europe's Markets in Crypto-assets Regulation (MiCA) has entered its full implementation phase as of July 2026.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-814hug",
+          "headline": "European Commission looks to expand MiCA to cover emergence of tokenization, non-EU stablecoin issuers: report - The Block",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-08",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQWHNZMUhNYkNCdmhwYi1JUWRFQVg4UW90VDFpdDlvTXFYSzlHb3dyd1JpVmFRMU5ndTluVnNQeEd2eUFPUkp3Z21zdkJqdDVYQzMtNDRPNDBoWjVzLVo5V1NfbXRDT2luN3NVOEQyX0RsemlXNVFETXFzTzhZVFZuX2x5T09rb3k3b2p1cWxEdmVuTTFRc1A5cG1selZjUDFUWUpHTTdFOWU?oc=5",
+          "summary": "The European Commission is reportedly considering expanding the Markets in Crypto-Assets Regulation (MiCA) to address tokenization and regulate stablecoin issuers based outside the EU.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-aark5h",
+          "headline": "MiCA Says No Funny Money in Europe’s Stablecoin Basket - PYMNTS.com",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-08",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQZllBckhfUnNaamVMRkpVZzByeGxYNGxyV3FPUC1rRmcxUUxJMUF0MWhDNHRRNFM1Y1d6U0Rtd3UxNE13SFhXYXZYWmx3VXAxLXZZQVJiTDNsNkhKR0w3bG5TWG1ZZ0F5dTNxLWdldUY2OVRTMTF1c1JFTklaTktIYklvMEVVNVpHOWhOVy1JNmRKbE1uZTNsTVU2QkwxUQ?oc=5",
+          "summary": "The EU's Markets in Crypto-Assets (MiCA) regulation is restricting certain types of assets or collateral from being used to back stablecoins in Europe.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-m7q3c9",
+          "headline": "Why Tether Turned Its Back On Europe's MiCA Stablecoin Rulebook - Yellow.com",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-07",
+          "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBpZWJUU3p1WElyNHZRQ2VtSDlJOHQ1cTJVbUJyT2Rkc0hCUmlMbUtJczNUR2kwOFFvb0toYTRtUDE3YUJvcHo4cC1Gak5jT2IyWDBidVRMTE15SUwyajI0WTRHekJNZlJQYTNsR1pkemVQQTh5?oc=5",
+          "summary": "Tether has decided not to comply with the European Union's Markets in Crypto-Assets Regulation (MiCA) framework for stablecoin issuance in Europe.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-nq5ux5",
+          "headline": "How MiCA brings banks closer to controlling Europe’s stablecoin access - CryptoSlate",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-06",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOQVFSSVlPb0xfTFJtdW5yeFkzQ2NxZGVfcXJUc1NyY1R2RjJQS0VyRklOQVR6d1dWYlZnYkxuTlo0aXlvNEYtZ1plbTNZdWkyVHg2MmktVWREOE5PQWdmMVhxUWRFQWRla1RPell3R040MDVvbzZ3Yk1raDRSYnBuRFNLWXBvVTJpNlVubWpGOEM1V1ItV2FKamdB?oc=5",
+          "summary": "The Markets in Crypto-Assets Regulation (MiCA) framework appears to grant banks increased influence over stablecoin distribution and access in Europe.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-ecoxvg",
+          "headline": "Revolut to Delist USDT in Europe as Tether Skipped MiCA License - Yahoo Finance",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-04",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPQUdXYlVMSjhGNDZKZlE4RXlPYlRUNFpVV1AwSTFKNWhKMWtKTUdmdFF1X0pGOWw0TW5uVXJyQ3RTX1FJUmxNN3ZHckN1VkZPT3JWRGdPZEMyMVdzZ0VyYkZ3bjhMUWxOSXlVS19QNi1VOWtJT0dlZUwtT0h4b25HVVZEb09uWHRHR0RTS2Vhb1RLRUo1NWw0Zi0tTGdzeE0?oc=5",
+          "summary": "Revolut is delisting USDT in Europe after Tether failed to obtain a Markets in Crypto-Assets (MiCA) license required under EU regulation.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-s2fu8v",
+          "headline": "AllUnity launches Swedish krona stablecoin SEKAU under MiCA - Crypto News",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-06-19",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOM21ua0R3SVFlcmFUWTMwcDZMaHI0Q0ZERFk2LUZUdEMxUGNiekd4S3Y1R0dPR2NQVnlRaThWQVNROGlXanJwRDlpTDhlQmhLdEM4QTlSNkdQa095QlpIeVZvM3J0WDFLQXNmY0ZrNGpaenJwejdORFVlME5jdzFHOUg0bzJVNzA?oc=5",
+          "summary": "AllUnity has launched a Swedish krona stablecoin called SEKAU under the European Union's Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-eu-stablecoi-iqymhg",
           "headline": "EU Delists Tether’s $175 Billion USDT as MiCA Deadline Reshapes the Stablecoin Market - genfinity.io",
           "source": "Google News — EU Stablecoin Policy",
@@ -6366,6 +6964,78 @@
     "Germany": {
       "news": [
         {
+          "id": "rss-google-news-germany-stab-i1jgx7",
+          "headline": "MiCA zeigt Wirkung: Euro-Stablecoin erlebt Rekordwachstum - BTC-ECHO",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-07-12",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOWnQ4TEI0ZWxFQVBXUmFhSzFyTXB2SW1NeDAtb3BmZ2lmdFRoQW5RVG9JMmxzUDJZZE1Mel9lOGp0N3VSX2E2eGJud2ZpbXlEdkkwOGZQeW5wTVFuYzRRdTBjcjBLbnBDS3RheUJpSDdCTU1XVmwzMVRQMW42WlhvYU5YWm12QThacE1EbDVnaTE?oc=5",
+          "summary": "Euro stablecoins have experienced record growth following the implementation of the Markets in Crypto-Assets Regulation (MiCA) in the European Union.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-e263x2",
+          "headline": "Stablecoins: Mastercard integriert PYUSD und USDC ab sofort - ad-hoc-news.de",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-07-09",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOai1lUnZCYzVtSUtmYm1xaXlGTVpYZmhoX0lyWXgwV0xCb3hoNXpKUWVZMkdldkdlVHhHTEFjUi0zNFAxakpDZUUxeVZiRVk2S1ZoaFdfNlk4RHVFQ3lwbmtBTjFBVTVEdWItWUtYR3VXU3MtaHFBa2tzdXdDSDNLQmJpRU1zS2kxYkRPR19nMWx1VkZGSGNCTTAyd0hRbjNVWjAwM0l6RkdnYUE?oc=5",
+          "summary": "Mastercard has integrated PayPal's PYUSD and Circle's USDC stablecoins into its services.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-2rc7d5",
+          "headline": "MiCA hat 92 % der Krypto-Unternehmen in Europa ausgelöscht – das sind die Gewinner und Verlierer - CryptoTicker",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-07-09",
+          "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1pSUEzT01sTUc2UUtpZG1jbHVzdzVfUW1Dd0NVVlRCQUhmWXEwTko1V0ZZSktXREtELVpoeW5TRlVrcDgtTXZiaGhKang4ZF90d2JvRm1UR2VLUm5kYk04Y2VXbklLbU9weDdzSEpMc0hnQQ?oc=5",
+          "summary": "Europe's Markets in Crypto-Assets Regulation (MiCA) has reportedly resulted in significant consolidation among cryptocurrency companies operating in the region, with some firms exiting the market while others have adapted to the regulatory framework.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-806ra9",
+          "headline": "IRW-News: ACCESS Newswire: Crossmint erhält Zulassung als Zahlungsinstitut und nach MiCA und vervollständigt damit die vollständige regulatorische Infrastruktur der EU für Stablecoin-Zahlungen - boerse.de - boerse.de",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-07-03",
+          "url": "https://news.google.com/rss/articles/CBMi2AJBVV95cUxPMVE3X0RxMjJabnlrbE16TlNGNFhQV1RiaFN6cnNPbUtxRE5RdWdvRkpYQ1ROemxURDhoUnZqTXhmTWM0WVZtQ25FMVh6SHFQY2pNN3NFdHBZZ1RIX0FHUjM2b1E1S0ZDNktZVGoydzJnclNNTW91ZzN0eTQ2djZ3MFNLOVRrNS1HTkM2MHVuUWppOG96N0N6MkpJcmk1VENrNnFPX1lJZ183REVrR21NcUtTMUhQVl92c2UyMHQ3REpXZFJRMV9GaFNmSjRLLUVneG5yS2I3enNmQk1sclBta2R2c09hZFpjVmZhVUN1RVRwYWM0TF9PNTF3U0Z3YXpucmhyVnYyVzdmSGN2UXFucWZEalg2d2xha3VKaGZrOXZJUldvX09RSzN2S2ZIb0JiMHhScW1OR1VzVEhtaFViVlVwMTZHUzJoVnRvaWFCcnJiTHVkU2pxM9IB3gJBVV95cUxPbmZPSWNOVFEza0tMZWZjcVNKM0dEZlUxclBlb0p4YUtnUkFQTWpkZDJxdkRsM2R2OXFoNkpmb1JoTEFlTjhPSGhFamFlSGFnRGpPUmkxaWV5Y2pnTnl6OUVLeEJGaWFnanVMMkhfbDA0SzNTNlllc1VjcjBJQURPcHNHRDNEZTdlMC1DalcxVUh2MFR1dnpkZGtpRzBBZFRXclhsQzJpZHp6LV9qWUloa3o3bmI2VWFEUGNWdnVNRDZaRVJWclBsdld2Mkx3UlFsQ1VmOTQybHpZVjBJVDNvOF9yWjZwWEJ0NlRZcnlnSHJXVTZENERkUjlaS2hjWjRCaFFkM3FHQ3RvRWhYMGpITGNVRFBlUkQ3SXNuZjFhcTI3bnNIVVJOMmJUQ2JJdTRQNDQwdzZ1M05hSkdXc3ZYM2toendaXzhVNURNZ0x4ZHlzUW1WYzhQbmExc0V6UQ?oc=5",
+          "summary": "Crossmint has obtained authorization as a payment institution under the EU's Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-990mvs",
+          "headline": "Die britische FCA senkt die Kapitalpuffer für Stablecoins auf 1 % und unterbietet damit die MiCA der EU - CoinDesk",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-06-30",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNY05YN3NjQThEbEc2TVM3TWtNUjdOeDEtTkMxNnJkeEM2RlJ4Z1JKa2hORHl0czRLSFU5V1lJcUpIcE5Ob1JUOElsYVBZSVZMS2dJYnVxRGRIWWxtWExvUk54eXkxNFNoWDViWERtNElza3Axa0xlMEZSdUVYclU2YVJ4VkgyVWwxMXJHR2FzcnhPRzdtdHgwMnVYM1UtOU9Yc1RFU3FnNTBqQTRrMHgtNnZOSFFsX21QNElXLQ?oc=5",
+          "summary": "The UK Financial Conduct Authority has reduced capital buffer requirements for stablecoins to 1 percent, which is lower than the EU's MiCA framework.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-qyasrx",
+          "headline": "Ripple erhält vorläufige MiCA-Lizenz in Luxemburg - BeInCrypto",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-06-23",
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1xWFNzek50OFVDZkhzNmF6dzVzQ2IzVEszTFBDSzFkN0JKcUwzbUxJeXFyUDdsTGJaN3U1YWVyNVZoTDJId0Z2VG8tdTJRYk5RX1hKVDFzUUtlU05zNkxnbkJBZXE1bXo5NWgtRHFEazM4elRMVkE?oc=5",
+          "summary": "Ripple has obtained preliminary authorization to operate as a stablecoin issuer under the EU's Markets in Crypto-Assets Regulation (MiCA) in Luxembourg.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-yxgab2",
+          "headline": "Ripple erhält vorläufige Genehmigung in der EU durch luxemburgische MiCA-Lizenz - CoinDesk",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-06-23",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQdHRkdGd6RnluUHdPb01WZlh1dlR3T1ZzZExKUUF0aVRSdDhtbHNVWnU0elQzeENYemZjdkNCWkw4VGZGYnRWbHlmTkQzVGZUMzRmX25IV204LURjYy1HRkVuaWJhN1k5V1hKSU4zQUh0dG1vNzZENjNQZTFiRDgta3NDdmtVVmtZbms0UjJrVkV0YjJieUxNbWdtZXpJcmtHTlh5cm4xeUJUd3pXMDdrQk1PWHk4dzN5dFJ5bkxDWi14NDFkLUF1ekR3?oc=5",
+          "summary": "Ripple has received preliminary approval in the EU through a Luxembourg MiCA license.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-dndsql",
+          "headline": "MiCA-Stablecoin-Regulierung: Deadline, Risiken & Maßnahmen für Trader - Phemex",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-06-23",
+          "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9QZFBWWmNFME42VUFnRi1mbm95cW9VV1I0eW52STAyUEN2M0pYYzZuLS0tSFB5d2lDYmwxWjVVRlo3VVU0MHk4blpZVEpyVzJmRjdZSThIcnp1dHNMcEMtZk1HVEZoSTJYdE4yUQ?oc=5",
+          "summary": "The headline references upcoming deadlines and regulatory measures for stablecoin traders under the EU's Markets in Crypto-Assets Regulation (MiCA).",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-germany-stab-h4pmod",
           "headline": "Stablecoins als Zahlungsmittel: Vom Krypto-Tool zum Finanzalltag - Rhein Wied News",
           "source": "Google News — Germany Stablecoin Policy",
@@ -6645,6 +7315,24 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-germany-stab-nxzvpv",
+          "headline": "Bundesbank-Präsident befürwortet Krypto-Stablecoins unter EU-MiCA-Regelwerk - Yahoo Finanzen Deutschland",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-02-17",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQWDQ1bmV2RWhhZ3B1a01LdlFiUzBWaThvdU10THNXUmZSYTQyTlB1R3E5di11NFFyVzd4ZEJyT0JDdjROeUxPOW1mSUhwbzhVUTl6X3FpYzZmNUd3LV96ek1MRnE5UzVkSFlRbGVleTZPeko5cmRYUEFaYVlRUmlsb1BXbTZRU0hvdmh5Z1N6TlgtTjNBSWhzQlNLRGM5Y3c0TzQtVXJnSG4ybWJRN1g2RzNOVlpJQVBI?oc=5",
+          "summary": "The president of Germany's Bundesbank has expressed support for cryptocurrency stablecoins operating under the European Union's Markets in Crypto-Assets (MiCA) regulatory framework.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-zht51f",
+          "headline": "Bundesbank-Chef öffnet Tür für Euro-Stablecoins | Märkte | 17.02.2026 - FONDS professionell",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-02-17",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQTGNjSWVYS3l0Q2NzQjZ6NXNsa1dKMmJoaGxvRm9MUmpZSlBfOUtsS3pSV2dHTDhlQWVySE1nOURUeUNpUkVWMWUzLUFMa3JsdHVMNF9RaWJJejdSMjJVMnhYU2Q2dktPM3BiNnlibGJWMURZNWo2dGpVQ0R4Qld1a1BQWkF2d083MlZoQjFfWVJPaUhxeUhSSEluWVdWODB2Tl9FcnBUZmlROVBqa29ubWZHLXc?oc=5",
+          "summary": "The head of Germany's Bundesbank has indicated openness to the issuance of stablecoins denominated in euros.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-germany-stab-huj5ys",
           "headline": "Der nächste CHF-gedeckte Stablecoin kommt aus Deutschland - MoneyToday",
           "source": "Google News — Germany Stablecoin Policy",
@@ -6678,6 +7366,15 @@
           "date": "2025-12-06",
           "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQTGlrSlN5M19ETEZiUUN6UWpBcEJQbG9PWGVMU2NXZmltMVFPVTh5U2VWVHFHY3Y4ZGtUcENYYndNd1pFQmxXR2c0azBtaFVFTGNmTkkxUnlxNmVFZF9nNWEyMnZuRmlqZkJ3LUUzbUVocmJIUjZaMGRXbTJWU1l4WmRIRTZLQ2RoV0k4dUhyR3h4b2R5eC1XNXJoVmtJS1A0WXI1QWRPSXFjdmtqVjRoVmRXVHExY3V0Vmk4?oc=5",
           "summary": "A new study reports significant growth in euro-denominated stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-rmh68d",
+          "headline": "Aufstieg der Euro-Stablecoins macht Bundesbank nervös - DER PLATOW Brief",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2025-12-05",
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPUWVpcU5qUXhNMldpbXUzaXBTd19YU0xxVnJHX0pIck9TNjRXRkFHcGlQTUxXMGtxTWtjekk4ckEwejFKRXU3ZHFVdWdxTy1BdXdHZUU0MVZvTFZOcFVYLWFRSUhwS1dmOGlXYm5WRHowQXlvbzFyTC1lc3hOVExOR3JfV3pKNC1IeUprLXBLYw?oc=5",
+          "summary": "The rise of euro-denominated stablecoins is causing concern at the Bundesbank, Germany's central bank.",
           "summarySource": "headline-only"
         },
         {

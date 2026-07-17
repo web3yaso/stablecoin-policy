@@ -1,6 +1,6 @@
 # Daily Stablecoin Policy Brief - 2026-07-17
 
-**Generated at:** 2026-07-17T06:09:58.237Z
+**Generated at:** 2026-07-17T06:32:51.945Z
 
 > This is a free preview. The full report — top policy developments, the
 > regulatory signal table, market-impact analysis, and the analyst
@@ -9,21 +9,10 @@
 
 ## Executive Summary
 
-- Wyoming became the first U.S. state to issue its own stablecoin on June 16, 2026, backed by state reserves under the Wyoming Stable Token Act, positioning the state as a focal point for broader cryptocurrency policy discussions.
-- The European Union delisted Tether's $175 billion USDT stablecoin on June 16, 2026, as the MiCA deadline took effect, while the European Commission launched a MiCA review targeting stablecoins, DeFi, and staking rules.
-- Japan's Financial Services Agency opened its payment system to foreign trust-type stablecoins from June 1, 2026, clarifying the legal status of foreign trust-based stablecoins under updated payment services rules.
-- New York Department of Financial Services released a new regulatory framework governing stablecoins on June 16, 2026, following a June 15 preview of proposed rules designed to align with the GENIUS Act.
-- State Street launched a stablecoin reserve money market fund called SSCXX in partnership with Anchorage, structured to comply with the GENIUS Act and the STABLE Act, marking a significant institutional move into the stablecoin reserve market.
+- North America: The GENIUS Act is driving stablecoin rulemaking activity in Washington, with a deadline prompting regulatory action as the FOMC prepares to meet July 28–29 and the stablecoin market reaches $280 billion. The FDIC's chairman confirmed the agency will not extend deposit insurance to stablecoins under the GENIUS Act, while banks have urged the Senate to tighten stablecoin legislation over concerns about deposit flight risk. On the enforcement side, the U.S. government froze nearly $500 million in Tether stablecoins as part of sanctions measures targeting Iran, demonstrating federal willingness to weaponize stablecoin infrastructure. Circle received OCC approval to operate as a bank, though Mizuho subsequently downgraded Circle to "Underperform" and lowered its target price to $50, citing competition from Open USD. Velocity raised a $38 million Series A led by Dragonfly Capital and FirstMark, with backing from Coinbase and Ripple, to build stablecoin treasury and settlement infrastructure for enterprises. Visa launched a platform enabling stablecoin transactions across its network of 200 million merchants without requiring institutions to build their own blockchain infrastructure.
+- Europe / UK: Europe's Markets in Crypto-Assets Regulation (MiCA) has entered full implementation as of July 2026, reshaping the continent's crypto landscape with significant market consolidation—one report estimates MiCA has eliminated roughly 92% of crypto firms operating in Europe. BitPay secured a Dutch MiCA license on July 16, 2026, and plans to expand stablecoin payment services across the EU, while the European Central Bank named 36 firms for a digital euro pilot on July 15. Tether's refusal to obtain a MiCA license has prompted Revolut to delist USDT in Europe, illustrating the regulation's enforcement bite, whereas compliant firms such as Ripple, which received a preliminary MiCA license in Luxembourg, and Crossmint, authorized as a payment institution under MiCA, are positioned to gain. The European Commission is planning a MiCA revision in 2027 to extend coverage to foreign stablecoin issuers and tokenization, while ESMA has already issued guidelines placing non-euro stablecoins under stricter scrutiny, and the EU has launched a rewrite of MiCA's reserve rules after concerns that existing requirements created a competitive advantage for certain issuers. Separately, the UK Financial Conduct Authority reduced capital buffer requirements for stablecoins to 1 percent, undercutting the EU's framework and intensifying the regulatory competition between London and Brussels.
+- Asia-Pacific: Japan's Financial Services Agency opens its payment system to foreign trust-type stablecoins from June 1, 2026, having clarified the legal status of foreign trust-based stablecoins and established a qualified regulatory pathway under updated payment services rules. In Hong Kong, the jurisdiction tested its first licensed stablecoin on the Ethereum blockchain in May 2026, while exchange OSL listed USDKG, a gold-backed stablecoin from Kyrgyzstan, expanding the city's regulated digital asset offerings. Australia recorded its first retail payment in an AUD-denominated stablecoin, settled via Base, marking a practical milestone for domestic stablecoin commerce. Meanwhile, the Reserve Bank of India maintained skepticism, arguing that stablecoins fail the 'singleness, elasticity and integrity' test of money, even as a corporate-led blockchain initiative in Japan advanced plans to issue a yen-denominated stablecoin for B2B payments.
 
 ## Watchlist
 
-- Implementation timeline and enforcement approach for GENIUS Act stablecoin provisions at federal level
-- Additional state-level stablecoin initiatives following Wyoming's pioneering issuance
-- EU MiCA review outcomes targeting stablecoins, DeFi, and staking rules
-- Operational and custody standards development following May 24 euro stablecoin depeg incident
-- Japan FSA guidance on foreign trust-type stablecoin compliance requirements
-- North Carolina crypto banking and stablecoin bill progress
-- Treasury Department response to bipartisan Senate request on state regulatory authority
-- MiCA Asset-Referenced Token (ART) issuer authorization timeline (none approved as of April 2026)
-- UniCredit warnings on EU capacity to contain crypto banking crises under MiCA
-- ECB position on euro stablecoin proposals and systemic risk concerns
+
