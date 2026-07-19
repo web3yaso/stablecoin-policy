@@ -1,20 +1,28 @@
 {
-  "generatedAt": "2026-07-18T05:42:35.370Z",
+  "generatedAt": "2026-07-19T06:16:00.004Z",
   "regional": {
     "na": {
-      "summary": "The GENIUS Act is driving a wave of stablecoin regulatory activity in the United States, with executives alleging that six regulatory agencies missed the Act's rulemaking deadline and the FDIC chairman confirming the agency will not extend deposit insurance to stablecoins under the legislation. The National Credit Union Administration's proposed stablecoin rulemaking has drawn criticism from Better Markets, which argues the proposal could bring crypto's risks into credit unions without adequate guardrails. On the enforcement front, the U.S. government froze nearly $500 million in Tether stablecoins as part of sanctions measures targeting Iran, demonstrating the use of stablecoin infrastructure as a financial policy tool. Delaware enacted a banking, money transmission, and stablecoin modernization package on July 17, updating its state-level regulatory framework, while Visa launched a stablecoin platform for institutional clients covering 200 million merchants, enabling stablecoin minting, movement, and management without requiring proprietary blockchain infrastructure. Stablecoin treasury startup Velocity raised a $38 million Series A led by Dragonfly Capital and FirstMark, with backing from Coinbase and Ripple, to build enterprise stablecoin treasury infrastructure.",
+      "summary": "U.S. regulators missed the GENIUS Act's one-year deadline for finalizing stablecoin rules, with executives warning that six agencies failed to meet the statutory requirement, leaving the rulemaking clock reset as the FOMC prepares to meet July 28–29. The National Credit Union Administration's stablecoin proposal drew pushback from Better Markets, which cautioned that it would bring crypto's risks into credit unions without strong guardrails, while Paradigm separately filed a comment letter on the NCUA's GENIUS Act stablecoin rulemaking. On the enforcement side, the U.S. government froze nearly $500 million in Tether stablecoins as part of sanctions measures targeting Iran, demonstrating stablecoins' emerging role as a tool of financial statecraft. Delaware enacted a banking, money transmission, and stablecoin modernization package, becoming one of the first states to update its framework in the post-GENIUS Act environment. Visa launched the Visa Stablecoin Platform for banks and fintechs using Open USD, targeting a network of 200 million merchants and enabling institutional clients to move onchain without building new infrastructure.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "six regulatory agencies missed the Act's rulemaking deadline",
+          "text": "missed the GENIUS Act's one-year deadline for finalizing stablecoin rules",
           "topic": "legislation"
         },
         {
-          "text": "FDIC chairman confirming the agency will not extend deposit insurance to stablecoins",
+          "text": "six agencies failed to meet the statutory requirement",
           "topic": "legislation"
         },
         {
-          "text": "froze nearly $500 million in Tether stablecoins as part of sanctions measures targeting Iran",
+          "text": "FOMC prepares to meet July 28–29",
+          "topic": "legislation"
+        },
+        {
+          "text": "bring crypto's risks into credit unions without strong guardrails",
+          "topic": "legislation"
+        },
+        {
+          "text": "froze nearly $500 million in Tether stablecoins",
           "topic": "legislation"
         },
         {
@@ -22,23 +30,15 @@
           "topic": "legislation"
         },
         {
-          "text": "Visa launched a stablecoin platform for institutional clients covering 200 million merchants",
+          "text": "Visa Stablecoin Platform for banks and fintechs using Open USD",
           "topic": "infrastructure"
         },
         {
-          "text": "stablecoin minting, movement, and management",
+          "text": "200 million merchants",
           "topic": "infrastructure"
-        },
-        {
-          "text": "$38 million Series A led by Dragonfly Capital and FirstMark",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "bring crypto's risks into credit unions without adequate guardrails",
-          "topic": "legislation"
         }
       ],
-      "generatedAt": "2026-07-18T05:42:26.222Z"
+      "generatedAt": "2026-07-19T06:16:00.004Z"
     },
     "eu": {
       "summary": "Europe's Markets in Crypto-Assets Regulation (MiCA) is reshaping the continent's stablecoin landscape following its full implementation in July 2026, with Tether's non-compliance prompting Revolut to delist USDT in Europe and OKX Europe enabling USDT to USDC conversion to meet regulatory requirements. BitPay secured a Dutch MiCA license and plans to expand stablecoin payments across the EU, while the European Central Bank named 36 firms for a digital euro pilot amid concerns that USD-denominated stablecoins continue to outpace EUR equivalents in market cap growth. The European Securities and Markets Authority has issued MiCA guidelines placing non-euro stablecoins under stricter scrutiny, and the European Commission is planning to revise MiCA in 2027 to cover foreign stablecoin issuers and emerging tokenization use cases, partly because current reserve rules have drawn criticism for handing certain issuers a competitive advantage. Conflicts between MiCA and the U.S. Genius Act are creating compliance challenges for international firms operating across both jurisdictions.",
@@ -726,6 +726,42 @@
     "United States": {
       "news": [
         {
+          "id": "rss-google-news-genius-stabl-s20bo9",
+          "headline": "The GENIUS Act Turns One, but the Stablecoin Gold Rush Is Just Beginning - CoinMarketCap",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-18",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOMEV0bjUzX3FyU2lZYmtXYURtZjd4ZnUxOXF0QW5LSHJiQ2thQWlxVm9OQzVYWVBRZ0xfdmtIMUo4TXA3U1BqRFZkTXVubWhHbGpSUDNYVmZ0QWNBamZ1NW1wUlFoclJLdTJkQkhiRlhkWnA5emswS1RPRjRoYkZYZThOVENpVXlaRmEzSXBR?oc=5",
+          "summary": "The GENIUS Act, legislation related to stablecoin regulation, reached its one-year anniversary as the stablecoin market continues to expand.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-4weyew",
+          "headline": "One year later, GENIUS Act just made stablecoins easier to sell - CryptoRank",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-18",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQUDhZMW5MRzJZWlN0N01DM0REak0wTkI2NlNGamtQbFBDY2dRb2hRalhjeVBhdDd2dHZvMTFrdXpMVm9BRkRjdktZWHBiVmZLZU90cXBHdzlHQkhmMEJaNzJVTE1EN2wtdXc2Zmc2TUNlT3B5OHg5Mnp3c1BBMWxyUlByV1BpeFNaMXM0dnUtMDZnNGItckhmcFRDUDFVdkxiUXc?oc=5",
+          "summary": "The GENIUS Act has made the process of selling stablecoins less restrictive than it was one year prior.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-cwqdmf",
+          "headline": "One year later, GENIUS Act just made stablecoins easier to sell - CryptoSlate",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-18",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxObXFCUFpTZXQ2VXBqYnQ5bkZvMHdMWk5SVEo5bU1lX3RQaDFLbldTdVBOV3F1N3JFY1ZVMGNHWkpQQmFJM05kOFhnU1g5UWVHTE1wcHo3Ty1ROXFVeDJqczlWdkl6eEN3R1l3dHE1V01CMjUyaE03SGN4aVdWN0NOYThsMGdrTzl4UjV0eW1lVFk?oc=5",
+          "summary": "The GENIUS Act or related legislation has apparently made the process of selling stablecoins simpler according to reporting one year after its implementation.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-1i0yg5",
+          "headline": "US regulators miss GENIUS Act's one-year deadline for final stablecoin rules - The Block",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-18",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQSDREWERSOGR4MHAzV29nLWJ2SDlUSWxjRWJjS19qajRMTzlleWdraDJtZHhoWl9ZWUI3NDRfVlhycFhOeEVURzJXYnZHR3RNSHVWX3UtQzBfNUFTY0RLNTU1bFc0bzVCV0FfTjYxbTFCSnRfMmNxOHBZdjBlYjVNNjg5ZU43TjFHemtlOWN2c2hLZXdkdDJ0RzBNdE9IczhwUDZ5VEp0clRhTEFzcUlVeQ?oc=5",
+          "summary": "U.S. regulators did not meet the one-year deadline established by the GENIUS Act to finalize stablecoin rules.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-genius-stabl-cw1142",
           "headline": "Paradigm Files Comment Letter on the NCUA’s GENIUS Act Stablecoin Rulemaking - paradigm.xyz",
           "source": "Google News — GENIUS / STABLE Act",
@@ -777,6 +813,15 @@
           "date": "2026-07-17",
           "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPRWp0cnQ2VzB5UGkzNEV2MmRWWlVOQ1dmZGVrV0U4SDNwYVdrSUVsSlk4bjhaNmhnSWJsQklVLXVuOFptZFY3TFFvNlI3Q0RDRmdfY2k4YVZ0M0UyU2Rlb000OGNHUW5YeWtiSHJrdndBUHBvckl1Qk54bVoyUXdjUTNmSUxqVmdvNU93QnN1QXNYUVVtNkkxNVFyeDlhNzM2amRweDF3ODJHbmJUOU0wNEVwTmkzUDR3VGhTRnktNm42R1VoSmNucnIyUUhMWXNFaU9kclV1RQ?oc=5",
           "summary": "Visa has launched a platform designed to enable institutional clients to transact with stablecoins without requiring them to develop their own blockchain infrastructure.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-hgkdq3",
+          "headline": "Visa Launches Visa Stablecoin Platform for Banks and Fintechs Using Open USD: 17 Sources (Western Alternative: 9) - NewsCord",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-16",
+          "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxObFpxdmNweWYtQVZGYTBwTms2TUlHNnc0bEI3YmhmMVlIdUF5dmx5V3ZOSUZLelMxM0l1MDlSQWc3NGdUN1d0M2IyZnJqVzl2dW8xaHhpSlN4VmUweTZ4VlFhZXlTMUhYNWN4NUJzSUNFcHlOUEpCVW1URHRmUFlHMXctT0ZkNkdMYWMtX2g2ODhVZUNmbWtQaWhsaHZaMnNLUXJVbllXX3h6dV9IVmlsbUhPaUFtWHF3NTBCQXhpWlIxdXdDWWhYOXdIMF9ZbF9INzB1akFobUtqNy05VDRIaklzTzQ?oc=5",
+          "summary": "Visa has launched a stablecoin platform called Visa Stablecoin Platform designed for use by banks and financial technology companies that utilizes a stablecoin called Open USD.",
           "summarySource": "headline-only"
         },
         {
@@ -834,6 +879,24 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-genius-stabl-a9pgg9",
+          "headline": "GENIUS Act Deadline Puts Stablecoin Rulemaking Back On Washington’s Clock - CryptoRank",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-15",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOaFNaVUtUZkRHMW1VYkswZ1EzOGFzaGxnSmtyQjR5Q19IWm5MZHZ4V2NUNWZlSWJsN1IzaDdWTUtELVNLZ0U5QzRWeGhKeGF2TFI3Q3ZlOW9Yc3hIU00tMGxLQ1NrOXBWZkpHRXNLSm96aENiYnk2ZkFsVElwbUtVQllEZTlIMU83NVFtb05LMkhFWFV6QjQzMXVlTkE4aFRVOHNnVW1maDJpVFR3NEtZaw?oc=5",
+          "summary": "A deadline associated with the GENIUS Act has renewed focus on stablecoin regulatory rulemaking in Washington.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-miwjzr",
+          "headline": "Velocity Raises $38 Million Series A to Bring Enterprise-Grade Stablecoin Infrastructure to Global Treasury and Payments - Financial IT",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-15",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQNnp1dVA5ZDFIMDFLT3F1bDlQVnZJRzZad2huTDRtLUtBc3BZNC1FU2MteG1taF9JMEh4YTRnY1VNLUZ2dXpWSERmQ20takoyREZaTmpucEJjbzlLT195S19BcnJCNVZtQU9jYnZ4YVN0NnBtZGdfbV85Zk92cy00aFV0UzkxeHB4ZUFNZURtMHByR0FIOUp5N2JDdG9DazVobFNSVDNOQWdUTjhDMEFxaS1JMA?oc=5",
+          "summary": "Velocity has raised $38 million in Series A funding to develop stablecoin infrastructure for enterprise treasury and payments applications.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-stablecoin-i-9g3tck",
           "headline": "US turns stablecoin issuer Tether into a financial weapon against Iran, freezing nearly $500 million - CryptoRank",
           "source": "Google News — Stablecoin Issuers & Reserves",
@@ -885,6 +948,15 @@
           "date": "2026-07-15",
           "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxORTNmZlpSU0d2cVd0aFBPaXFtZUgxakducHg3LVc3eDUySENGU3lOWkttVWJVUlR0NHAtZlBVNURKOUUxZWtiaTlUSHlqanFUUWVTMGdxMGVrUERpZDNSeFpSdTlxQVRaWUZSOTVnTWhLMUpFTDdfT2xGaXNJUHRlT1ln?oc=5",
           "summary": "Velocity, a stablecoin treasury start-up, has raised $38 million in Series A funding.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-ifwprz",
+          "headline": "Banking Groups Push Senate to Tighten CLARITY Act Stablecoin Yield Rules, Warning of Deposit Flight - unchainedcrypto.com",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-14",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOdVQ1M21udndScGpLOVk2OVNkOFJwMi1rWDk0dGMzWW1SMmI4OVRQeEw3VURTU2ZZUFZ1Y2ZtMHZ3WVhFNjduaUdfbk5iQlczLWhYWEFnQUhhU0VTYWIxS1FzUWxVdHJwQ0FnRV9pa2NmX3hYMTZjazM0ZWl2ZHBTbFQ1WUcyM1J3Zk9MNWpQazVlNDdvemVoZTIwdHV3S2l0OWUyX3RGMFp6UWhZSjBtUzdtR3N2djByOHdicWR3?oc=5",
+          "summary": "Banking groups have urged the Senate to strengthen yield-related provisions in the CLARITY Act regarding stablecoins, citing concerns about potential deposit outflows from traditional banks.",
           "summarySource": "headline-only"
         },
         {
@@ -1005,6 +1077,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-us-stablecoi-m06faf",
+          "headline": "Circle gets OCC’s full trust bank charter nod - Banking Dive",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-10",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQVnNIWDZkNEp4QkxGempCUnNrLU01aUxnYV9ET19pbkd0VTRsTXl6WHVwVUNUVXk4Ui1lNENJT3lUby1MbGt6dy1aamxzaC00bkt6VlpUOV9sMzA0d1hRel9qZ1JjNkIwVURKZ2tnNzVrdWlmcTcyek53enNHMkRaU3lqdUViTmJ5RmlTYmdzMlJzZ21oSEIxejVBNGpKcm11SFVFMFlzZGdzNDlGMFI3U25YWHZpZVZL?oc=5",
+          "summary": "Circle has received full approval for a trust bank charter from the U.S. Office of the Comptroller of the Currency.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-stablecoin-i-rvk640",
           "headline": "Stablecoin issuer Circle was approved to operate as a bank: What to know - Yahoo Finance",
           "source": "Google News — Stablecoin Issuers & Reserves",
@@ -1110,6 +1191,15 @@
           "date": "2026-07-08",
           "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE8xU1ViYzhnVDFWXzk5MHJKdm5mVEtlNmpQb05RNS1taTVfUllIZUhWQXFVaU8wQzNBeVpiOUEzRG9OQUtPVlVzNVcwWm9GS0dmOU1RcFJlbFkwZU5VY1otVnRBWVZGWFdMdENNUFZyeDd6bjlxV0pOTGhLb2Z2Zw?oc=5",
           "summary": "FinCEN has proposed a Customer Identification Program rule that would apply to issuers of permitted payment stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-ul33pp",
+          "headline": "Transak CEO says GENIUS Act is forcing boardrooms to have a stablecoin strategy - Yahoo Finance",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-07",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNNDN2MVZHLUZUNUFZUERtTGc0LWc1WHhRWW1seGlsUzRzZXlNczZuaVh1U2NCU1p3MEI3bTg2WmlPVGo2UHdLMm4xVmlOd2QtQUN0UFVhTWpXNDVUU1BQa2ZpYmQ0TWswUkpsZ2xEWFkyZ0sydWp2MjVnTWllSGduZlJUci1MNmpnOUpGYVZRM0oyejBxdzJn?oc=5",
+          "summary": "The CEO of Transak has stated that the GENIUS Act is prompting companies to develop stablecoin strategies at the executive level.",
           "summarySource": "headline-only"
         },
         {
