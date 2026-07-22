@@ -1,83 +1,71 @@
 {
-  "generatedAt": "2026-07-19T06:16:00.004Z",
+  "generatedAt": "2026-07-22T13:01:54.807Z",
   "regional": {
     "na": {
-      "summary": "U.S. regulators missed the GENIUS Act's one-year deadline for finalizing stablecoin rules, with executives warning that six agencies failed to meet the statutory requirement, leaving the rulemaking clock reset as the FOMC prepares to meet July 28–29. The National Credit Union Administration's stablecoin proposal drew pushback from Better Markets, which cautioned that it would bring crypto's risks into credit unions without strong guardrails, while Paradigm separately filed a comment letter on the NCUA's GENIUS Act stablecoin rulemaking. On the enforcement side, the U.S. government froze nearly $500 million in Tether stablecoins as part of sanctions measures targeting Iran, demonstrating stablecoins' emerging role as a tool of financial statecraft. Delaware enacted a banking, money transmission, and stablecoin modernization package, becoming one of the first states to update its framework in the post-GENIUS Act environment. Visa launched the Visa Stablecoin Platform for banks and fintechs using Open USD, targeting a network of 200 million merchants and enabling institutional clients to move onchain without building new infrastructure.",
+      "summary": "Six regulatory agencies missed the GENIUS Act's statutory one-year deadline for finalizing stablecoin rules, a failure flagged by industry executives and confirmed across multiple reports as of July 19, 2026, while stablecoin issuers now face a July 2028 compliance deadline under the law. The FDIC has proposed reporting forms for stablecoin issuers under the GENIUS Act, and the National Credit Union Administration's stablecoin proposal has drawn support from credit unions but criticism from consumer advocates, with trade groups including Paradigm submitting comment letters on the NCUA's proposed rule. Wyoming launched a state-backed stablecoin on the Solana blockchain on July 18, becoming the first state to do so. On the private-sector side, Augustus raised $180 million to build banking infrastructure for the AI and stablecoin sectors, and Visa launched a stablecoin treasury engine to expand settlement capabilities within institutional finance.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "missed the GENIUS Act's one-year deadline for finalizing stablecoin rules",
+          "text": "Six regulatory agencies missed the GENIUS Act's statutory one-year deadline",
           "topic": "legislation"
         },
         {
-          "text": "six agencies failed to meet the statutory requirement",
+          "text": "July 2028 compliance deadline",
           "topic": "legislation"
         },
         {
-          "text": "FOMC prepares to meet July 28–29",
+          "text": "FDIC has proposed reporting forms for stablecoin issuers",
           "topic": "legislation"
         },
         {
-          "text": "bring crypto's risks into credit unions without strong guardrails",
+          "text": "National Credit Union Administration's stablecoin proposal",
           "topic": "legislation"
         },
         {
-          "text": "froze nearly $500 million in Tether stablecoins",
-          "topic": "legislation"
-        },
-        {
-          "text": "Delaware enacted a banking, money transmission, and stablecoin modernization package",
-          "topic": "legislation"
-        },
-        {
-          "text": "Visa Stablecoin Platform for banks and fintechs using Open USD",
+          "text": "Wyoming launched a state-backed stablecoin on the Solana blockchain",
           "topic": "infrastructure"
         },
         {
-          "text": "200 million merchants",
+          "text": "Augustus raised $180 million",
+          "topic": "infrastructure"
+        },
+        {
+          "text": "Visa launched a stablecoin treasury engine",
           "topic": "infrastructure"
         }
       ],
-      "generatedAt": "2026-07-19T06:16:00.004Z"
+      "generatedAt": "2026-07-22T13:01:46.688Z"
     },
     "eu": {
-      "summary": "Europe's Markets in Crypto-Assets Regulation (MiCA) is reshaping the continent's stablecoin landscape following its full implementation in July 2026, with Tether's non-compliance prompting Revolut to delist USDT in Europe and OKX Europe enabling USDT to USDC conversion to meet regulatory requirements. BitPay secured a Dutch MiCA license and plans to expand stablecoin payments across the EU, while the European Central Bank named 36 firms for a digital euro pilot amid concerns that USD-denominated stablecoins continue to outpace EUR equivalents in market cap growth. The European Securities and Markets Authority has issued MiCA guidelines placing non-euro stablecoins under stricter scrutiny, and the European Commission is planning to revise MiCA in 2027 to cover foreign stablecoin issuers and emerging tokenization use cases, partly because current reserve rules have drawn criticism for handing certain issuers a competitive advantage. Conflicts between MiCA and the U.S. Genius Act are creating compliance challenges for international firms operating across both jurisdictions.",
+      "summary": "The EU's Markets in Crypto-Assets Regulation (MiCA) entered full implementation in July 2026, prompting rapid market restructuring: MiCA has reportedly resulted in significant consolidation among cryptocurrency companies, with some firms exiting the market, while others such as BitPay secured a Dutch MiCA license to expand stablecoin payments across the EU. The European Securities and Markets Authority issued guidelines placing non-euro stablecoins under stricter requirements, and OKX Europe enabled USDT to USDC conversion to bring users into compliance. The European Union is planning to revise MiCA in 2027 to cover foreign stablecoin issuers and tokenization, following concerns that existing reserve rules may have created competitive advantages for certain issuers. In parallel, the European Central Bank selected 36 firms to participate in a digital euro pilot, while also cautioning that stablecoins could potentially draw deposits away from traditional banks even under the current MiCA framework. Regulatory friction with U.S. law has also emerged, as the Genius Act's stablecoin rules conflict with MiCA, creating compliance challenges for international firms.",
       "keyDevelopments": [],
       "highlights": [
         {
-          "text": "full implementation in July 2026",
+          "text": "Markets in Crypto-Assets Regulation (MiCA) entered full implementation",
           "topic": "legislation"
         },
         {
-          "text": "Revolut to delist USDT in Europe",
+          "text": "BitPay secured a Dutch MiCA license to expand stablecoin payments across the EU",
           "topic": "legislation"
         },
         {
-          "text": "OKX Europe enabling USDT to USDC conversion",
+          "text": "non-euro stablecoins under stricter requirements",
           "topic": "legislation"
         },
         {
-          "text": "BitPay secured a Dutch MiCA license",
+          "text": "planning to revise MiCA in 2027 to cover foreign stablecoin issuers",
           "topic": "legislation"
         },
         {
-          "text": "36 firms for a digital euro pilot",
-          "topic": "infrastructure"
-        },
-        {
-          "text": "revise MiCA in 2027 to cover foreign stablecoin issuers",
-          "topic": "legislation"
-        },
-        {
-          "text": "Genius Act are creating compliance challenges for international firms",
+          "text": "European Central Bank selected 36 firms to participate in a digital euro pilot",
           "topic": "cooperation"
         },
         {
-          "text": "non-euro stablecoins under stricter scrutiny",
+          "text": "Genius Act's stablecoin rules conflict with MiCA, creating compliance challenges for international firms",
           "topic": "legislation"
         }
       ],
-      "generatedAt": "2026-07-18T05:42:35.370Z"
+      "generatedAt": "2026-07-22T13:01:54.806Z"
     },
     "asia": {
       "summary": "Japan's Financial Services Agency opens its payment system to foreign trust-type stablecoins from June 1, 2026, having clarified the legal status of foreign trust-based stablecoins and established a qualified regulatory pathway under updated payment services rules. In Hong Kong, the jurisdiction tested its first licensed stablecoin on the Ethereum blockchain in May 2026, while exchange OSL listed USDKG, a gold-backed stablecoin from Kyrgyzstan, expanding the city's regulated digital asset offerings. Australia recorded its first retail payment in an AUD-denominated stablecoin, settled via Base, marking a practical milestone for domestic stablecoin commerce. Meanwhile, the Reserve Bank of India maintained skepticism, arguing that stablecoins fail the 'singleness, elasticity and integrity' test of money, even as a corporate-led blockchain initiative in Japan advanced plans to issue a yen-denominated stablecoin for B2B payments.",
@@ -726,6 +714,159 @@
     "United States": {
       "news": [
         {
+          "id": "rss-google-news-genius-stabl-pkdf3j",
+          "headline": "FINANCIAL TECHNOLOGY—FDIC proposes reporting forms for GENIUS Act stablecoin issuers - VitalLaw.com",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-21",
+          "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxPS0dLUE1VN3dLM1RWY1MzaFd0ODcta2JWTHR2V01BdUdvU09ycVk2RWpUSHNkejllZnJnYzdxSDd1VTc4cFUyMjd4SVgtTlVBNXBYRTdQdmxRVlJKUDU4cVFiVVpRU3EzcnhGcjFuQVhQUVdTS3B6RnlDeGhqWGpvdmlYNnRXWjBsSWNOOVhMUkJKLUk2SVBVNm11Q2RxWHhlZ1gwSUdDUDhHZGFqT1BNUGMzT1NudlNlMGJPLXpHcTlDdkU5OGJ0WlZYOHdKbk5OUTdTejVZeURPQW4zLWJqWWVYTy1BY2s?oc=5",
+          "summary": "The FDIC has proposed reporting forms for stablecoin issuers under the GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-fo2xgc",
+          "headline": "Augustus raises $180 million to build a clearing bank for the AI and stablecoin era - CoinDesk",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-21",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQR2VNdXRSZlJldjlVSFpUMEJscVFJaHY4X1lTN1ktVFlpODJOTkVsb3VWRjltdlI0SlI0bmlvdExJYlJEWHFWaGNUVk1TWHVQemFqOUYzMEUxUC1BMHdHc1ZoNk1IU3EzNXVzTGZsRXhhcnlQaGpob2trZ1Q3Q0xiRWJGbGVNMWhWSmdJcWFFbmxWVm82VHpndzJoRzdjbkZORTlfY0FHQWRPT1E4ZFI2Y2xRUXg2LWQ3NmQtSlhJR3JiTlFhV0pDbXlB?oc=5",
+          "summary": "Augustus has raised $180 million in funding to develop banking infrastructure aimed at serving the artificial intelligence and stablecoin sectors.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-iazkhi",
+          "headline": "Visa Stablecoin Treasury Engine Pushes Settlement Deeper Into Institutional Finance - CryptoRank",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-21",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQcHR5ZDBsRy1TTmVIUUx3S2dRakljUC01UlRpQ2gzeXB4WW5zenlzclMzVUNGSjkzckJaWXA1eS13UHRfQ3dSR1F4TXA2Z0pva1UzWFBrUTR3enkzSlNTWGZ4ZjFEYjhqbmFTcnEtUGl0YnQ0SktKQ18tZjh3SDBtU3FwdVhDN1BNUlh4amprQmtGVU5sT0gyZzJB?oc=5",
+          "summary": "Visa has launched a stablecoin treasury engine designed to expand settlement capabilities within institutional finance sectors.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-n2073f",
+          "headline": "The GENIUS Act turned one by missing its own deadline - Crypto News",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-20",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1DbnNiSFJiUmxsdEtITTd6TXhXWkJIUHlNZkFEa09aTFY4VFMxOW1WR0x2eGMwOVhyUU45NEFaZlJheWVVUm12WWVHNTRDUmY2blk0VWg4WVBnS0c0RkpPOUtZeC1WTlVXd1pVdmM2OWVzQkF6RERmcmFBdGgwSUE?oc=5",
+          "summary": "The GENIUS Act missed its own deadline one year after its introduction.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-alucsq",
+          "headline": "Will the GENIUS Act Split the Stablecoin Market? - CryptoRank",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-20",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxONFM5X3BkVGZhZ0QwRS1CcEtaR0JPeXJ3QVJUQUhlSWplU1k3QVJCNUVHaDI0V19oeU1icmVaaXVOTnlKTVNoaVUtV1RrVFBDb1hNTlc4WGE4aUlNUEZtak9QZjR0TFFZSjhDVzQtQzRBYXBiUF9iTENuVG5PZldEckIyVHVGR0ZqeHJ1VTJ3?oc=5",
+          "summary": "The GENIUS Act has been proposed as stablecoin legislation that could potentially reshape market structure and regulatory treatment.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-xxdnbv",
+          "headline": "One Year of the GENIUS Act: Stablecoin Regulation Remains a Work in Progress - CryptoRank",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-20",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPR0xZSXlZQzFTc3dKcEZ4ZTNCNHFwU2s2WHBwdFlCeEFnVkpWRlQtalM1elIxcjE2YXBEam8wM2JqQ2JQZ2lQTXh2SWFxVmtjaGNtR1IzQlVYUUoydENqblhIRHFSNjgtcXBnLWVmSU41TGVfMEQwbkcyZFB1cVhTRW5LWkVXMHVIVTVSVE03VDJWTkxRRzVvanlFUnZ6V3BUaVNqUjV1U2NVRnR6OHBMSjk4NA?oc=5",
+          "summary": "One year after its introduction, the GENIUS Act has yet to achieve comprehensive stablecoin regulation.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-jgtg3k",
+          "headline": "America's Credit Unions Urges NCUA To Fine-Tune GENIUS Act Stablecoin Rule - CU Today",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-20",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPNHdpOTZfSFNBM3J2bTFqbEs4eU55ZkxDUlZWeWo2Y2JMRHFmZGlSUTlTcWdsODVlSUZYNVo1T1RwajBGOU5UVTQ4ckctcEFKcUFLbG1neW9udExuZ2xGVjdxYjVJaFphZzZsT215UEpxaVFxNllpRTVoVFNScnlaM24zLVVQSEFQU0JlV1JudVZpMUFBSk5hREVzVGpiNDlCTDZOX21Va1lMazZ2N2FRTA?oc=5",
+          "summary": "America's Credit Unions has called on the National Credit Union Administration to adjust its regulatory approach to stablecoins under the GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-uktqov",
+          "headline": "Why US regulators missed the GENIUS Act stablecoin rule deadline - Yahoo Finance",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-20",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQM092TmxKZEJYajNUV0NTZmpmS0dUWE5pUWdkeWRqSW92M29fc09ibWxXcGdzSXlXOVdudlNTTWtvUy04bWliT1A5MHpES3VIaHFxa3pydXJUZDhtazhGQzZHRmFVQ2lJV1VZWXdkbTBQdHNDNEZ4TU4tdi0xckFCSzEyX3U?oc=5",
+          "summary": "The GENIUS Act stablecoin rule was not finalized by a scheduled deadline set by U.S. regulators.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-of2oe4",
+          "headline": "NCUA Stablecoin Proposal Draws Support From Credit Unions, Criticism From Consumer Advocates - CUTimes",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-20",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOZW1tWW81SThwdlkzOFdmc0szb0pHUHZ3c25Nd0xYdWN3V3djaDJfWkJqdHRnN2pTOVk5T2p3Um83eDVVbGNvcThQTVdSNlpOSGtnOTlydDJqb2pDZ0hkUFgwdUJ2cFZ6SWFXaERsdnJnNWJlNjdZU09NQnNlSHZVY3UzOVN1TEhETmVNUGh6VEZ5blF4YVhERE5IV21sUXYtQjJlVllXTDVxUTFVa2VxdkstcEtrMmVOcURxSXRmUXlNb1VVVVE?oc=5",
+          "summary": "The National Credit Union Administration's stablecoin proposal has received backing from credit unions while drawing opposition from consumer advocacy groups.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-4jrn92",
+          "headline": "Stablecoin issuers face July 2028 compliance deadline under GENIUS Act - Crypto Briefing",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-19",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE0ySnU0M0hHRThPeEtOeVNpTTlfeFh5V3ZzalJrZXRXeFV4blRnZm90SjdodHE1QU5PaW1UWm16NWtHMy1pN05uYkNud2xlczl4UlpkWHFMUGFxZXFRVTZ0M1hjbXRxTHFfNk1NSmlKLTAwWEhHMVEzMnRTYXNoWEk?oc=5",
+          "summary": "The GENIUS Act establishes a July 2028 compliance deadline for stablecoin issuers to meet regulatory requirements.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-btb5el",
+          "headline": "US agencies miss GENIUS Act deadline for final stablecoin rules - TradingView",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-19",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQWVNNeHl1OXZ6UkE4U1QzS0ViYVBySGdtSWExTTE3V2tTQkl1TDNMbm81b0VFS2hvdEZCNXcwb3ZzejdoUGt6N3E4bjg3TmxLd0dLTmhlMEozMEdGYUMxbERmN3p4M3EyMjY3enhhYUVuclRzZlJ1NDdoR01lZjNwOEtHOFZNOElHVTNhelZNQ0dPUGNXVE41cDVTM09zbTdkTjJzUXdhNld1Q0ZHSk9DVDdGbzIxWW45dGZHRU9rQ1U4cWxKWmc?oc=5",
+          "summary": "US regulatory agencies failed to meet their deadline for finalizing rules under the GENIUS Act regarding stablecoin oversight.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-r9z5ah",
+          "headline": "One Year After US GENIUS Act, Stablecoin Rules Still Unfinished - bloomingbit",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-19",
+          "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5QalZ1bko3YW9xYTNwTGo4R1BRbUdrb3UxRFdYYTNzN0RFUnpDb1dUWFRIRklId0lTRHhVRGs5X1I3WXJPcHF0RUFEMV95Zmh0Vnh3SA?oc=5",
+          "summary": "One year after the introduction of the US GENIUS Act, comprehensive regulatory rules for stablecoins remain incomplete.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-feswz6",
+          "headline": "US regulators miss GENIUS Act’s one-year deadline for stablecoin rules - Crypto Briefing",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-19",
+          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQa1h4Rnl3WFJZZzJkZExwTGFWRW55Q1U4dnowVWJDNjkzeWZtWDFIam5jZGtLWmlNSXNQai11RDZTT1lMaVpZSUZxNTg0WXlrdEpJQkY1aU9zUm1GV1hSc21RYWI2aV9NLTBEd1lXU2RiTG9sbW50ZkUtV1FiM1M3aVltSQ?oc=5",
+          "summary": "U.S. regulators failed to meet a statutory one-year deadline established by the GENIUS Act to issue rules governing stablecoins.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-37w84f",
+          "headline": "The GENIUS Act turns 1: State of Crypto - CoinDesk",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-19",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxORlUwVTZhOE5nYTdlR1Rpcm1XSjZWcnphRlZla0pyMVlvSFhERWM5TVl1UUpRdU9fbm00NlJ5QUtTdDJIOXNBZkJrZDRjUlBUY2ZUakVBeXctSElBVHFEU1lrckZ0amdQck5IYkhrY1lFSWtibHBoZjRUZDZDRTluaGNnZG13N0h0?oc=5",
+          "summary": "The GENIUS Act, a piece of cryptocurrency legislation, has been in effect for one year as of July 2026.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-edvnu2",
+          "headline": "US regulators miss key GENIUS Act deadline as stablecoin rules stall - Crypto News",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-07-19",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOZ0hKM01mTmxlQ04yNDdFcVJ4Ny1IV3lCVUhKRXZDUXBabE02LXI0QW5wanJUR0NlTTdFQkZwNGUtNlNQWF9vUlBLWGFEaER4d3VxLUk0ZVlIWWNHejg4bUtlLUVLUHpqYUJmYS1zVlpRSnV6YjFJVzVZSWtRNEFuYXBJWktKZGp3NGZ5ZWVsN3BPWmM?oc=5",
+          "summary": "U.S. regulators failed to meet a deadline established under the GENIUS Act related to stablecoin regulations, according to reporting on stalled rulemaking efforts.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-8jee9s",
+          "headline": "US Agencies Miss GENIUS Act Deadline for Stablecoin Rules - Bitbo",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-19",
+          "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1MS1pVeFVpVHluSmxQXzdsa0JWUE9fUlN5Zmt6XzVzTmp6cHhzdF9qZDc5R3llLWNXUHN1SXdSaG42Xzd1cFRubzRzTWlvLWlnNnFIN2RfMVlRZGNxQkE?oc=5",
+          "summary": "US federal agencies failed to meet a deadline established by the GENIUS Act for issuing stablecoin regulatory rules.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-state-stable-emhwiv",
+          "headline": "Wyoming Launches First State-Backed Stablecoin on Solana Blockchain - CoinMarketCap",
+          "source": "Google News — State Stablecoin Bills",
+          "date": "2026-07-18",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPaDJWcmpBXzJUR194MUVMSnBRQjNWZm1DU3JacmsyR21Kc01OS1VFd0tkRjVncFI4bzdZT0I4Ui13YTlZSzQzaGhLZmRGcjdqdEhTamgxaGpULXZWQmxfcHhfbWxOUF83Vldnd2RsaWs5RVowcTRVQlVGc243X2ZpZjdCQ0VJLVEzbXZsY011VjlROE5iM1RYZjNtVnJEb3c?oc=5",
+          "summary": "Wyoming has launched a state-backed stablecoin on the Solana blockchain.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-genius-stabl-s20bo9",
           "headline": "The GENIUS Act Turns One, but the Stablecoin Gold Rush Is Just Beginning - CoinMarketCap",
           "source": "Google News — GENIUS / STABLE Act",
@@ -768,6 +909,15 @@
           "date": "2026-07-18",
           "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOQm9PY3ZXaG1CLXZyUmpZZTdfNHlGSTYyQnlESkNieVN5WWN3Y1c1S1MxeU4tYUJHOTRLUnlwWWg2djh5RERTUXM2aUpBU2Z5WHMzc09RX3VOdC1aQWV2ZnRtdlpKeEJnNnZha2t3anNFWGRQV3BQbS1mN3JRRHJUUGxnTmNET0RYblczOGFrN1ozcXI4dzRtMUNiRmItU0VndXFGQi1RLW15c0tp?oc=5",
           "summary": "Paradigm submitted a comment letter regarding the NCUA's proposed rulemaking related to the GENIUS Act's stablecoin provisions.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-o8xdz6",
+          "headline": "Joint Trades Comment on NCUA’s GENIUS Act Stablecoin Implementation Proposed Rule - Bank Policy Institute",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-07-17",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQTVBqSVNnZG5NSU9GSFlRanA5V0Z1YmZyeWI1TGRwRW9HOXNueHJZaVh3WWpFOGtDenhZWXZZNGFncTJBR3JsLWVwU0VTcmstUERRckd1OFNMcFVmTjNtM2t1ZEkybXlpcGVaaTE2NVhCVjNoQjR6OUJTTjBKX0ZVS2tMdTJFN1IwbFhZMGp1YU1aQi1TcUhNam9DQlI2UQ?oc=5",
+          "summary": "Trade groups have commented on the National Credit Union Administration's proposed rule implementing the GENIUS Act's stablecoin provisions.",
           "summarySource": "headline-only"
         },
         {
@@ -1245,6 +1395,24 @@
           "date": "2026-07-01",
           "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOMjFPWGFKWThpSFJOUndoQ2Fnd2JpbkJhOGUwUFBxbFhKal9yLXRXYlhSYWpvMWxWelgzczZEUnRBNUpQb1BLVm9JdWNDRGFhQlVNdjJ0THJJS0FiWTRsWUJPaGlYbExWWE1aSnVGWXVfZU9yTHhNV09VT1doV0FnQ3BEWnBDMnZNa1NSOGgwRVlEWkN4RV9QMnhDSUkxXzF3Tm15bzBKUWtnZURvVFJQODZqdw?oc=5",
           "summary": "The article discusses the GENIUS ACT as a potential turning point for how U.S. banks will be regulated or operate in 2026.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-genius-stabl-khzly9",
+          "headline": "Banking Regulators Propose Customer Identification Rules Under the GENIUS Act - fintechanddigitalassets.com",
+          "source": "Google News — GENIUS / STABLE Act",
+          "date": "2026-06-30",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNZnFPSEo2dTZ1MDRUMk9ucnE0NGczSXBNTDJGYng1YWF5SGlTbUFKT25pR2RHNnlFNXNQYy1rSVp2TFdvMjVsYmUwMHg4YzRhT3QyOWt6aDZUUGtaZDEwYUFrcWZWSHRvcjBsdEFhNUtfdFhyajFfeHEzS0w1V0tJbUhwUnE1Z1hDbFRpTzctYUp4SU5KTFNXRTU2cXF5SERiVTlvTHJGSkRRNzhLM2hSQ2F3UVQzMGktSUdvTkFodFplWDlL?oc=5",
+          "summary": "Banking regulators have proposed customer identification rules as part of legislative efforts addressing stablecoin regulation under the GENIUS Act.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-state-stable-9k3h6m",
+          "headline": "Gov. DeSantis signs stablecoin framework, new crypto kiosk fraud rules into law - Florida Politics",
+          "source": "Google News — State Stablecoin Bills",
+          "date": "2026-06-27",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQOTQybFdOX2hZemRLTl9IdlRKODhyQjFBRk9yY25FN0xFdDdkZ0hkY1JQY0pKaHRlYUFkTFRySUktS0VNM0RqMzFxWW9mWW9nZDZnVXA3NWJyWG13dGt0VFk0VW9TZUhuTm1lVGw0NVVQcDRPZFhDeGJDdmJRME9jWFpyVTBjNHdManFsc1hBS2l5ZHd6TkZlTndzRVR6Q3pzQ2c?oc=5",
+          "summary": "Governor Ron DeSantis signed legislation establishing a stablecoin regulatory framework for Florida and enacting new rules to prevent fraud at cryptocurrency kiosks.",
           "summarySource": "headline-only"
         },
         {
@@ -3381,6 +3549,15 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-stablecoin-i-4supgk",
+          "headline": "Morgan Stanley launches stablecoin reserve fund tied to money market portfolio - Crypto News",
+          "source": "Google News — Stablecoin Issuers & Reserves",
+          "date": "2026-04-24",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNXzVHYndwWFBMVVRUQm0tQ1JZR0RBMzRXR19NQWM5U2FVWV80YWdKTFF2SVM4Y2Npa29pQ1RKcl96NFhxRXFIQkNVSFVkTGdRUzNTZjJSLUwtT3hlY3AwV0lEVVJrMU9qY1hMb1h2TkFiTlM1YWxnN1FBcjJUN3pJdVlmbjJ5MHlpVTJyRXdKUGY4RzdyZVZ5Mm5idHlTS3JC?oc=5",
+          "summary": "Morgan Stanley has launched a stablecoin reserve fund that is backed by a money market portfolio.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-genius-stabl-w2nkx7",
           "headline": "Morgan Stanley launches stablecoin reserves fund aligned with GENIUS Act requirements - The Block",
           "source": "Google News — GENIUS / STABLE Act",
@@ -3927,6 +4104,15 @@
           "date": "2026-02-27",
           "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOMHBaRDFfeG5qYzJCdE1WZjVtSmFJU1dyNmVpT0FlQng5aXZCd2o0bWlabDNMdTdxM1ZUM01CUVFIQTBfSkY3S1IwYXVqQlgzSy02U3Bzdl9mYW0tNVZMbWRTdERsMG90Wnl0c3NNWEZtWVo2SkFLUEkyQ0tub2twYUtQSmNhR0F6ai1tM1UxY2tqRVZaMlRvUlhPbHlHVGEzcUNxdmE3cEthdGZnY0RObThn?oc=5",
           "summary": "The U.S. Office of the Comptroller of the Currency has proposed a regulation for stablecoin issuers and finalized a rule clarifying the authority of national trust banks.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-us-stablecoi-oggnwh",
+          "headline": "GENIUS Act Regulations: Notice of Proposed Rulemaking - Office of the Comptroller of the Currency (OCC) (.gov)",
+          "source": "Google News — US Stablecoin Policy",
+          "date": "2026-02-25",
+          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5iREhkVldQb0ZMYVFwYzEyREdEajFWMUtzcEotNEljNUNJY3R4ZUhyenpvNDd3dDBBTWFTZ3B3STdMYlVBWkpObXpoTXBJTVhDQjZaUmZJdnBNc09sck1MSUNDUEpHS1NmdVAtdmZmbTJvRHZrNE9qUkd3?oc=5",
+          "summary": "The Office of the Comptroller of the Currency published a notice of proposed rulemaking related to the GENIUS Act, which addresses stablecoin regulation.",
           "summarySource": "headline-only"
         },
         {
@@ -6299,6 +6485,24 @@
     "European Union": {
       "news": [
         {
+          "id": "rss-google-news-eu-stablecoi-nj653q",
+          "headline": "EU vs. Crypto: ECB Warns Stablecoins Could Drain Deposits Despite Europe’s MiCA - Bitcoin Foundation",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-21",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPTEV0U1Y4RGRZTGFIb1llMHVBT3VmRWNzanVCVEJNUXEzcFF2S2hacktxci1JZ2FHalR5UGNXNk5TRVBXVHhMZTVmMUpJNlh4ZUxqekYzSUpEY1VCaFpUWU9MT0U3WEpRYlRhN1dGUFRiY0phS191aFhjUDlNRnhONDQwaUl6SFlveXJyeTV2WmQwSlhOSE4tZjhVZjVYQWNpN0wzNktVUUl0bW9OSnF6eFdqYmhFdw?oc=5",
+          "summary": "The European Central Bank has cautioned that stablecoins could potentially draw deposits away from traditional banks, even with the Markets in Crypto-Assets Regulation (MiCA) framework in place.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-lsg99z",
+          "headline": "OKX Europe Enables USDT to USDC Conversion Under MiCA Stablecoin Rules - FintechNews CH",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-20",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQZ3lTYml4Mk5BX2NzMUpGVEVxNmZkVzBuRGQ3aE94clhLZXVXdzdDekdBLVlFOW9HLUY0R25wVHdxVVhYRWwtQWhQb2tNcktsbzNfZHk4cDI4SUZQNTg3UzBDeFFQQUhvV0FFcy1zZ2lzcWNlZERSeTNxS0dNMS1YdzFDMEFxWmFMbDZteUVR?oc=5",
+          "summary": "OKX Europe has enabled conversion between USDT and USDC stablecoins in response to the Markets in Crypto-Assets Regulation (MiCA) framework for stablecoin supervision.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-eu-stablecoi-t3nwjm",
           "headline": "REGULATIONS | OKX Prompting Users to Convert USDT to USDC Amid MiCA Requirements - BitKE",
           "source": "Google News — EU Stablecoin Policy",
@@ -6395,6 +6599,15 @@
           "date": "2026-07-14",
           "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE1EeVdZd3FwdGpfbXFSSjc1SW5rYk9UTmNNSUszNXZZazlaRUlBZWRLQmEwUjhCRzJkNzhLbHdwODMwQ1hPTld5WXZkRi1Bd0x6ZUc0REVsUHhKZDNXTUN6R1pfZzQ0TmE1SEl6SnR5bGk?oc=5",
           "summary": "The Genius Act's stablecoin regulations create conflicts with the EU's Markets in Crypto-Assets Regulation (MiCA), creating compliance challenges for international firms.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-xsehkr",
+          "headline": "What MiCA Still Doesn’t Solve — Europe’s Biggest Crypto Regulation Problems - Bitcoin Foundation",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-07-09",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQOTdBaFdQbVhFZ1RKMTBwT1F0ekc3eC1NbHA5a0owa1J4VGJTd3FOR0wwd24xUTZEcjl6cXVvdEZxMEdpckg5ZmdUSjdTVGNRWVVTUFJWU0RtR0ZkTFZBZE1JNTcxb1kxQlFlTmwyS2NTTzhWTkx6dTVQWDZaUXZHZ2dJVjVxSjVyWlI5Q29EQ1VEVzV2M2FrUGpOd0g?oc=5",
+          "summary": "The Bitcoin Foundation has identified unresolved regulatory challenges in Europe's Markets in Crypto-Assets (MiCA) framework despite its implementation.",
           "summarySource": "headline-only"
         },
         {
@@ -6530,6 +6743,15 @@
           "date": "2026-06-10",
           "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1pZnVQT0MxaFVFLWJycHo0bUtpM1RCVzhlcGwtSWhmRENUeTN1U2Rnb1BPWWc2SjZSRUplTnlQcE4zeE1BVzV0ejJwUjd1d3V2SkZheDhma0tSNXF0NUZNa0kzTnFtNG0zUDR6TzVtMFhyWjlYYlBrUQ?oc=5",
           "summary": "The European Commission has initiated a review of the Markets in Crypto-Assets Regulation (MiCA) to assess its regulatory effectiveness.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-eu-stablecoi-hs9b6a",
+          "headline": "NYDFS and European Banking Authority agree to share stablecoin supervisory information - JD Supra",
+          "source": "Google News — EU Stablecoin Policy",
+          "date": "2026-06-08",
+          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNWlVvV29sX1hkQjhDSEE3UGRuZzNNdXpMMy1xSkJPZTk1MTRFVS1pd3BNOElrY1VuWVlsU3lPV29Gd2VaN3U1TEVUVWFJSldWVVkyUmlRb0FsMlROOXJ6eE1GVFp5bHFEWC1OTVN1UVNIaUQ1MlJvNGUtdF9Hak9ZYnpuemhIdw?oc=5",
+          "summary": "The New York Department of Financial Services and the European Banking Authority have agreed to share supervisory information regarding stablecoins.",
           "summarySource": "headline-only"
         },
         {
@@ -7207,6 +7429,15 @@
     "Germany": {
       "news": [
         {
+          "id": "rss-google-news-germany-stab-ppnjg",
+          "headline": "XRP: MiCA-Zulassung für 30 europäische Länder - Börse Express",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-07-20",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxONm92Q1R5Z2xsajNMbXJuZ0FMcWJtMnZ3N0EyaE94aWtjVzROelN3MXo2RzBjR2ttbTltVExWYWotZDZoQVJITTFCMGx6bV9wQnRiY3FHaGpaOW9nVjRrcDJyYlBzbExGSjdOTHY4OU5aTHh6MFRGMTVPUFh2UmxCazZYb2UwUm9rOTZvQm8zTnhZMGVaZFNTUEkyck1Bb3J4?oc=5",
+          "summary": "XRP has received authorization under the Markets in Crypto Assets Regulation (MiCA) across 30 European countries.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-germany-stab-i1jgx7",
           "headline": "MiCA zeigt Wirkung: Euro-Stablecoin erlebt Rekordwachstum - BTC-ECHO",
           "source": "Google News — Germany Stablecoin Policy",
@@ -7231,6 +7462,15 @@
           "date": "2026-07-09",
           "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1pSUEzT01sTUc2UUtpZG1jbHVzdzVfUW1Dd0NVVlRCQUhmWXEwTko1V0ZZSktXREtELVpoeW5TRlVrcDgtTXZiaGhKang4ZF90d2JvRm1UR2VLUm5kYk04Y2VXbklLbU9weDdzSEpMc0hnQQ?oc=5",
           "summary": "Europe's Markets in Crypto-Assets Regulation (MiCA) has reportedly resulted in significant consolidation among cryptocurrency companies operating in the region, with some firms exiting the market while others have adapted to the regulatory framework.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-7p68h4",
+          "headline": "Revolut stoppt Stablecoin USDT: Millionen Kunden müssen handeln - Ad-hoc-news.de",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-07-04",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQbnlRdDByZW9OTUJ6TndkRlM0bVloTndLQWNEVS15QWc5U0pXTFRhZl9HakRUQW9vajJwQXVtY2o1SmdQRWN6OUt4Wk8tU01RSno0SHJHRnp0RG5NTnNqVUtpYWhYNGNiX0s2andfeEZ6OVBqZlZVQXJnTzFuY3Jnbkxtd2lfVGYwT3R3ZUg3M0IzOWFmZHFZNGlnR2d2RDE1OXRpNzVOaE1CNDhEZE9SQWtB?oc=5",
+          "summary": "Revolut has discontinued support for the USDT stablecoin, requiring millions of its customers to take action regarding their holdings.",
           "summarySource": "headline-only"
         },
         {
@@ -7279,12 +7519,30 @@
           "summarySource": "headline-only"
         },
         {
+          "id": "rss-google-news-germany-stab-207sgg",
+          "headline": "Was sind Stablecoins » Definition, Arten & Liste (2026) - Bitcoin2Go",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-06-15",
+          "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBuTC1YZHl4UTFCTzlpTVk4UUpvVVFadGxhaExzcmZQYmN6TUo3UXR2RkE5ZWJrZXBlUmxHY3JuTTJVLVk0b0lKNVdPazA0SzRCVS1WOFZrSQ?oc=5",
+          "summary": "The article appears to provide an overview of stablecoin definitions, types, and examples as of 2026.",
+          "summarySource": "headline-only"
+        },
+        {
           "id": "rss-google-news-germany-stab-h4pmod",
           "headline": "Stablecoins als Zahlungsmittel: Vom Krypto-Tool zum Finanzalltag - Rhein Wied News",
           "source": "Google News — Germany Stablecoin Policy",
           "date": "2026-06-08",
           "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFBQTVJrUXQxdE5JOERVZGlaSnM5STRnbTIyekcyZXZzeUhVNm03SVVnaWU2V3FVODZVWXlFVUlyaFc0OXZMaElEM243UFdRVVFUcWtCWVJOSkNyUlJkN25kZ0hmdzNJa2ZUUjVR?oc=5",
           "summary": "The headline discusses the evolving role of stablecoins as they transition from cryptocurrency tools toward broader adoption in everyday financial transactions.",
+          "summarySource": "headline-only"
+        },
+        {
+          "id": "rss-google-news-germany-stab-l8eu3s",
+          "headline": "MiCA und deine Kryptos: Sind deine Assets ab dem 1. Juli 2026 in Gefahr? - CryptoTicker",
+          "source": "Google News — Germany Stablecoin Policy",
+          "date": "2026-06-05",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPN1dwR2ZWOVB4emg2R2lHVE80MWtPcTBIM2NROEJVVkxHLUVCYWtzN0hNNGlrSFhUa04td2NUN0MyNkRnVXpLX29QbW0za2h5bzM3MExCSjc4MEMyb3VnallVUVhxUHZqeXR0VGlyRWFTeG9VQnRXR1Vpb2lzN2dIUDcwRTZ6TzRzdnlMRUphQTJEMzk2S0RMS3d0U3lSUQ?oc=5",
+          "summary": "The headline references the European Union's Markets in Crypto-Assets Regulation (MiCA) and a July 1, 2026 implementation date, suggesting the article discusses potential impacts of the regulation on cryptocurrency holdings.",
           "summarySource": "headline-only"
         },
         {
