@@ -14,7 +14,7 @@
  */
 
 import "../env.js";
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "../../lib/openai-llm.js";
 
 const MODEL = "claude-sonnet-4-6";
 
@@ -107,10 +107,10 @@ interface NewsFile {
 }
 
 function getAnthropicApiKey(): string {
-  const key = process.env.ANTHROPIC_API_KEY?.trim();
+  const key = process.env.OPENAI_API_KEY?.trim();
   if (!key) {
     throw new Error(
-      "ANTHROPIC_API_KEY is missing. Add it to GitHub Actions secrets or .env.local before regenerating news summaries.",
+      "OPENAI_API_KEY is missing. Add it to GitHub Actions secrets or .env.local before regenerating news summaries.",
     );
   }
   return key;

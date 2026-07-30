@@ -3,7 +3,7 @@ import "../env";
 import { createCipheriv, randomBytes } from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "../../lib/openai-llm.js";
 import type { ReportMeta } from "../../lib/reports";
 
 // Fixed-slug sellable report: the daily brief is refreshed in place
@@ -560,11 +560,11 @@ async function generateWithAnthropic(input: ReportInput): Promise<DailyReport> {
     return fallbackReport(input);
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY;
 
   if (!apiKey) {
     console.warn(
-      "ANTHROPIC_API_KEY is not set. Using deterministic fallback report.",
+      "OPENAI_API_KEY is not set. Using deterministic fallback report.",
     );
     return fallbackReport(input);
   }
@@ -572,7 +572,7 @@ async function generateWithAnthropic(input: ReportInput): Promise<DailyReport> {
   const anthropic = new Anthropic({ apiKey });
   const prompts = buildSystemAndUserPrompts(input);
   const message = await anthropic.messages.create({
-    model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5",
+    model: process.env.OPENAI_MODEL || "gpt-5.6-terra",
     max_tokens: 6000,
     temperature: 0.2,
     system: prompts.system,

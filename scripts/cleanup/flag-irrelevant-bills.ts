@@ -17,7 +17,7 @@
 import "../env.js";
 import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "../../lib/openai-llm.js";
 
 const STATE_DIR = "data/legislation/states";
 const FLAGGED_OUT = "data/legislation/_irrelevant.json";

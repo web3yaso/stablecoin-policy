@@ -23,7 +23,7 @@ import {
 } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "../../lib/openai-llm.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
@@ -231,9 +231,9 @@ function stripConfidence(r: ResearchedMunicipality): unknown {
 }
 
 async function main() {
-  const key = process.env.ANTHROPIC_API_KEY;
+  const key = process.env.OPENAI_API_KEY;
   if (!key) {
-    console.error("[muni-research] ANTHROPIC_API_KEY not set");
+    console.error("[muni-research] OPENAI_API_KEY not set");
     process.exit(1);
   }
   const anthropic = new Anthropic({ apiKey: key });

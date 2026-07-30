@@ -27,7 +27,7 @@ import {
 } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "../../lib/openai-llm.js";
 import type {
   ImpactTag,
   LegislationCategory,
@@ -180,9 +180,9 @@ ${bill.description ? `Description: ${bill.description.slice(0, 1800)}` : ""}`;
 }
 
 async function main() {
-  const key = process.env.ANTHROPIC_API_KEY;
+  const key = process.env.OPENAI_API_KEY;
   if (!key) {
-    console.error("[reclassify] ANTHROPIC_API_KEY not set");
+    console.error("[reclassify] OPENAI_API_KEY not set");
     process.exit(1);
   }
   const anthropic = new Anthropic({ apiKey: key });

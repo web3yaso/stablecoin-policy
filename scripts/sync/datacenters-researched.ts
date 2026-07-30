@@ -19,7 +19,7 @@ import "../env.js";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "../../lib/openai-llm.js";
 import type { DataCenter } from "../../types/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -177,9 +177,9 @@ CRITICAL:
 }
 
 async function main() {
-  const key = process.env.ANTHROPIC_API_KEY;
+  const key = process.env.OPENAI_API_KEY;
   if (!key) {
-    console.error("[researched] ANTHROPIC_API_KEY not set");
+    console.error("[researched] OPENAI_API_KEY not set");
     process.exit(1);
   }
   const anthropic = new Anthropic({ apiKey: key });
