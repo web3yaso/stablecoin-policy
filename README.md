@@ -34,7 +34,9 @@ npm run dev
 ```
 CONGRESS_API_KEY=   # Congress.gov，免费注册 https://api.congress.gov/sign-up/
 STATE_API_KEY=      # OpenStates API，免费注册 https://openstates.org/accounts/profile/
-ANTHROPIC_API_KEY=  # 新闻聚合与法案分类
+OPENAI_API_KEY=     # 新闻聚合与法案分类
+OPENAI_MODEL=gpt-5.6-terra       # 日报和高质量分析
+OPENAI_FAST_MODEL=gpt-5.6-luna   # 高频新闻摘要
 ```
 
 ## 环境变量
