@@ -5,9 +5,11 @@ export function getAllMunicipalities(): MunicipalEntity[] {
 }
 
 export function getMunicipalityByFips(fips: string): MunicipalEntity | undefined {
+  void fips;
   return undefined;
 }
 
 export function getMunicipalitiesByState(state: string): MunicipalEntity[] {
+  void state;
   return [];
 }

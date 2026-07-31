@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stablecoin-policy.citely.info/contracts/v1/report-list-response.schema.json",
+  "title": "ReportListResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "reports", "total", "lastUpdated"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "reports": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/publicReport" }
+    },
+    "total": { "type": "integer", "minimum": 0 },
+    "lastUpdated": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "publicReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slug",
+        "title",
+        "summary",
+        "category",
+        "jurisdiction",
+        "publishedAt",
+        "wordCount",
+        "priceUSD",
+        "fullContentUrl"
+      ],
+      "properties": {
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{5,80}$"
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "title_en": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string", "minLength": 1 },
+        "category": {
+          "type": "string",
+          "enum": ["enforcement", "policy", "licensing", "sanctions", "analysis"]
+        },
+        "jurisdiction": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "publishedAt": { "type": "string", "format": "date-time" },
+        "wordCount": { "type": "integer", "minimum": 0 },
+        "priceUSD": { "type": "number", "exclusiveMinimum": 0 },
+        "fullContentUrl": { "type": "string", "format": "uri" }
+      }
+    }
+  }
+}

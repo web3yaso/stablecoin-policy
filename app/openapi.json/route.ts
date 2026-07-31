@@ -295,9 +295,10 @@ function createOpenApiDocument(
       schemas: {
         ReportListResponse: {
           type: "object",
-          required: ["reports", "total", "lastUpdated"],
+          required: ["schemaVersion", "reports", "total", "lastUpdated"],
           additionalProperties: false,
           properties: {
+            schemaVersion: { type: "string", const: "1.0.0" },
             reports: {
               type: "array",
               items: { $ref: "#/components/schemas/ReportMeta" },

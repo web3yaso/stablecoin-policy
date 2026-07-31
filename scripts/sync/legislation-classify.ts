@@ -221,7 +221,7 @@ function classifyTags(text: string): ImpactTag[] {
   return tags.slice(0, 5); // keep display manageable
 }
 
-function deriveStance(bill: RawBill, stage: Stage, category: LegislationCategory, tags: ImpactTag[]): StanceType {
+function deriveStance(bill: RawBill, stage: Stage, category: LegislationCategory): StanceType {
   const text = `${bill.title} ${bill.description ?? ""}`.toLowerCase();
   const isMoratorium = /moratorium|prohibit|ban\b/.test(text);
   const isIncentive = /incentive|exempt|credit|fast.?track/.test(text);
@@ -413,7 +413,7 @@ function toLegislation(bill: RawBill): Legislation {
   // the heuristic `deriveStance` which considers stage, category, and
   // moratorium/incentive cues.
   const stance: StanceType =
-    claude?.stance ?? deriveStance(bill, stage, category, tags);
+    claude?.stance ?? deriveStance(bill, stage, category);
 
   const dimensionStances = dimStanceCache[String(bill.bill_id)];
 

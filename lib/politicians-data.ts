@@ -377,12 +377,10 @@ export const BILLS_BY_ID: Record<string, BillLookupEntry> = buildBillLookup();
 
 // ── Sponsorship lookup ──────────────────────────────────────────────
 //
-// Builds an index from (last-name + first-initial) to bills sponsored.
+// Builds an index from sponsor last names to bills sponsored.
 // Bills only carry sponsor *names* as strings ("Sen. Van Hollen", "Schiff
 // (D-CA)"), so we anchor on last name like KeyFigures already does and
-// require ≥3 chars to keep false positives down. First-initial check
-// distinguishes Adam Schiff from Brad Schneider when both have a last
-// name match.
+// require ≥3 chars to keep false positives down.
 
 interface SponsoredBill extends BillLookupEntry {
   id: string;
@@ -395,13 +393,6 @@ function lastTokenOf(name: string): string {
     .trim();
   const parts = cleaned.split(/\s+/);
   return (parts[parts.length - 1] ?? "").toLowerCase();
-}
-
-function firstInitialOf(name: string): string {
-  const cleaned = name
-    .replace(/^(sen|rep|representative|senator)\.?\s+/i, "")
-    .trim();
-  return (cleaned[0] ?? "").toLowerCase();
 }
 
 function buildSponsorshipIndex(): Map<string, SponsoredBill[]> {
@@ -434,15 +425,9 @@ export function sponsoredBillsForPolitician(p: Legislator): SponsoredBill[] {
   if (last.length < 3) return [];
   const candidates = SPONSOR_INDEX.get(last) ?? [];
   if (candidates.length === 0) return [];
-  // Disambiguate by first-initial when possible; otherwise return all
-  // candidates (last-name-only matches can over-collect, but for our
-  // narrow AI/DC tracked set the false-positive risk is small).
-  const fi = firstInitialOf(p.name);
-  const filtered = candidates.filter((b) => {
-    // Re-resolve original sponsor strings from each entity to test
-    // first-initial. Cheap because we only have a handful per politician.
-    return true;
-  });
+  // The source index only exposes sponsor names, so candidates are matched
+  // by last name and de-duplicated below.
+  const filtered = candidates;
   // De-dupe by bill id (a bill can have a name listed multiple times).
   const seen = new Set<string>();
   return filtered.filter((b) => {

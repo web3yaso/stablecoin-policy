@@ -6,7 +6,6 @@ import {
   useRef,
   useState,
   type CSSProperties,
-  type ReactNode,
 } from "react";
 import { motion, MotionConfig } from "framer-motion";
 import type {
@@ -78,7 +77,6 @@ type Layer =
   | "local"
   | "energy";
 type Position = "left" | "right" | "bottom";
-type Size = "min" | "md";
 
 const LEGISLATION_PREVIEW = 5;
 const FIGURES_PREVIEW = 3;
@@ -137,27 +135,6 @@ function SeeAllLink({
   );
 }
 
-function ToolbarButton({
-  onClick,
-  ariaLabel,
-  children,
-}: {
-  onClick: () => void;
-  ariaLabel: string;
-  children: ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={ariaLabel}
-      className="w-6 h-6 flex items-center justify-center rounded-full text-muted hover:text-ink hover:bg-black/[.04] transition-colors flex-shrink-0"
-    >
-      {children}
-    </button>
-  );
-}
-
 export default function SidePanel({
   entity,
   showViewStatesButton = false,
@@ -198,7 +175,8 @@ export default function SidePanel({
   const toggleExpand = (layer: Layer) =>
     setExpandedSections((prev) => {
       const next = new Set(prev);
-      next.has(layer) ? next.delete(layer) : next.add(layer);
+      if (next.has(layer)) next.delete(layer);
+      else next.add(layer);
       return next;
     });
   const setSize = onSizeChange;

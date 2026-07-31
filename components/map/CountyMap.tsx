@@ -51,7 +51,6 @@ const COUNTIES_URL =
 const STATES_URL =
   "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
-type CountyFeature = Feature<Geometry, { name?: string }>;
 type CountyCollection = FeatureCollection<Geometry, { name?: string }>;
 
 // Module-level cache so multiple mounts share one fetch.

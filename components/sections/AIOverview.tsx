@@ -207,16 +207,15 @@ export default function AIOverview() {
     };
   }, []);
 
-  const regional = (newsSummaries.regional ?? {}) as Record<
-    string,
-    {
-      summary?: string;
-      highlights?: Highlight[];
-      generatedAt?: string;
-    } | undefined
-  >;
-
   const allRegions: RegionalSummary[] = useMemo(() => {
+    const regional = (newsSummaries.regional ?? {}) as Record<
+      string,
+      {
+        summary?: string;
+        highlights?: Highlight[];
+        generatedAt?: string;
+      } | undefined
+    >;
     const out: RegionalSummary[] = [];
     for (const k of TAB_ORDER) {
       const block = regional[k];
@@ -231,7 +230,7 @@ export default function AIOverview() {
       });
     }
     return out;
-  }, [regional]);
+  }, [newsSummaries.regional]);
 
   // Prefer the ACTIVE region's regeneration timestamp so the label tracks
   // the thing being read; fall back to the file-level generatedAt.

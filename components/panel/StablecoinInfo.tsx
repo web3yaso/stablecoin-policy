@@ -4,9 +4,7 @@ import type {
   StablecoinMeta,
   LegalStatusEnum,
   RegimeStatusEnum,
-  ClassificationEnum,
   PractitionerQA,
-  PractitionerStatus,
 } from "@/types";
 import { useLocale } from "@/contexts/LocaleContext";
 import { t } from "@/lib/i18n";

@@ -1,0 +1,4 @@
+{"caseId":"object-key-parent-traversal","kind":"object-key","input":"../secret.txt","expected":"REJECT"}
+{"caseId":"object-key-nested-parent-traversal","kind":"object-key","input":"reports/../../secret.txt","expected":"REJECT"}
+{"caseId":"object-key-windows-separator","kind":"object-key","input":"reports\\secret.txt","expected":"REJECT"}
+{"caseId":"object-key-valid-versioned-artifact","kind":"object-key","input":"reports/2026-07-31/report.md.enc","expected":"ACCEPT"}

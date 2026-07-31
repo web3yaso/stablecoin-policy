@@ -1,0 +1,5 @@
+# API contracts
+
+Versioned JSON Schemas live under `contracts/v{major}` and are the wire-contract source for REST, MCP adapters, and Citely consumer fixtures.
+
+Phase 0 starts with the existing report compatibility surface. New domain schemas must use JSON Schema 2020-12, reject unknown properties by default, define explicit null behavior, and remain immutable after publication. Breaking changes require a new major directory.

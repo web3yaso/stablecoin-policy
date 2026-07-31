@@ -11,5 +11,6 @@ export function facilitiesForEntity(entity: {
   region: string;
   name: string;
 }): { facilities: DataCenter[]; groupBy: "state" | "country" | null } {
+  void entity;
   return { facilities: [], groupBy: null };
 }

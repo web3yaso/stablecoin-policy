@@ -62,7 +62,6 @@ export default function USStatesMap({
   onDoubleClickEntity,
   selectedGeoId,
   setTooltip,
-  dimension = "overall",
   lens = "datacenter",
   showDataCenters = false,
   drillingTo = null,

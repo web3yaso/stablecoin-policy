@@ -178,11 +178,13 @@ class Anthropic {
   };
 }
 
+/* eslint-disable @typescript-eslint/no-namespace -- Declaration merging preserves the legacy Anthropic.Messages type API. */
 namespace Anthropic {
   export namespace Messages {
     export type Message = import("./openai-llm.js").Message;
     export type TextBlock = import("./openai-llm.js").TextBlock;
   }
 }
+/* eslint-enable @typescript-eslint/no-namespace */
 
 export default Anthropic;

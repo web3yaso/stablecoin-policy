@@ -1,0 +1,12 @@
+{
+  "manifestVersion": "1.0.0",
+  "release": "phase0-foundation-1",
+  "datasets": [
+    {
+      "path": "security-cases.jsonl",
+      "purpose": "Deterministic storage-boundary regression cases",
+      "split": "regression",
+      "reviewState": "REVIEWED"
+    }
+  ]
+}
