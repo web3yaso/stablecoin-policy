@@ -1,13 +1,13 @@
 // scripts/smoke/news-rss-dryrun.ts
 /**
- * Exercise the full news-rss.ts pipeline (RSS fetch → web-search top-up
- * → Layer-1 filter → dedupe) WITHOUT making any Haiku call or writing
+ * Exercise the full news-rss.ts pipeline (official feeds + professional
+ * APIs → Layer-1 filter → version-aware dedupe) WITHOUT making any LLM call or writing
  * any tracked file. Sets NEWS_RSS_DRY_RUN=1 and NEWS_RSS_SKIP_AUTORUN=1
  * before importing news-rss.ts, then explicitly invokes the exported
  * run() function.
  *
  * Use this to verify the news pipeline end-to-end during development
- * without burning Haiku budget or risking rate-limit spirals.
+ * without burning model budget.
  */
 import "./skip-autorun.js";
 import "../env.js";

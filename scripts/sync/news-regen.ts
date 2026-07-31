@@ -1,5 +1,5 @@
 /**
- * One-shot helper: regenerate all three regional AI overview summaries
+ * One-shot helper: regenerate all three regional stablecoin-policy summaries
  * from the current state of data/news/summaries.json, without polling
  * any feeds. Useful when you've hand-added news items and want the
  * prose to catch up.

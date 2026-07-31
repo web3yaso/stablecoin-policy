@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import AboutContent from "./AboutContent";
 
 export const metadata: Metadata = {
   title: "About · Stablecoin Policy",
@@ -14,54 +13,76 @@ export default function AboutPage() {
           href="/"
           className="inline-flex items-center gap-1.5 text-xs text-muted hover:text-ink transition-colors mb-16"
         >
-          ← 返回
+          ← Back
         </Link>
 
         <div className="text-[13px] font-medium text-muted tracking-tight mb-3">
-          关于
+          About
         </div>
         <h1 className="text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-[1.05] mb-10">
-          这个网站是做什么的
+          What this site tracks
         </h1>
 
         <div className="text-base text-ink/80 leading-relaxed space-y-5">
           <p>
-            稳定币正在重塑全球支付体系，而各国政府对它的态度却大相径庭——有的积极立法推动，有的设置重重门槛，有的则明令禁止。我搭建这个网站，是因为我想要一个直接的答案：某个国家或地区，对稳定币究竟持什么立场？
+            Stablecoins are reshaping global payments, but governments are
+            taking very different approaches. Some are building dedicated
+            licensing regimes, some are imposing strict guardrails, and others
+            are restricting private stablecoins outright. This site exists to
+            answer one direct question: what is each jurisdiction actually
+            doing?
           </p>
           <p>
-            要回答这个问题，原本需要逐一翻阅各国议会网站、监管公告和行业简报。没有人把这些信息汇集到一个地方，于是我来做这件事。
+            Answering that question usually means reading scattered
+            parliamentary records, regulatory announcements, and official
+            publications. I built this atlas to bring those signals together
+            in one place.
           </p>
           <p>
-            地图覆盖全球主要司法管辖区，包括美国各州、欧盟成员国、英国、亚洲各国等。点击任意国家或地区，可以看到当前正在推进的立法、监管机构、关键政策人物，以及最新资讯。每个司法管辖区都有一个立场评级，从“支持”到“限制”，基于其实际的法规和议案现状。
+            The map covers major jurisdictions worldwide, including US states,
+            the European Union, the United Kingdom, and key Asian markets.
+            Select any country or region to review legislation, regulators,
+            policy figures, and recent developments. Each jurisdiction is
+            rated from supportive to restrictive based on its current legal
+            and regulatory posture.
           </p>
           <p>
-            稳定币监管是当下全球金融政策中变动最快的领域之一。欧盟 MiCA 已全面生效，美国《GENIUS 法案》正在国会推进，香港、新加坡、日本也各自建立了本地框架。与此同时，印度、俄罗斯等国仍对私人稳定币持谨慎甚至禁止态度。这张地图试图把这些分散的信息变成一幅可以纵览全局的图景。
+            Stablecoin regulation is one of the fastest-moving areas of global
+            financial policy. The EU has implemented MiCA, the United States
+            has advanced federal payment-stablecoin legislation, and Hong Kong,
+            Singapore, and Japan have developed local frameworks. Other
+            jurisdictions remain more cautious. The goal is to turn fragmented
+            developments into a picture that can be understood at a glance.
           </p>
           <p>
-            这个网站不为任何立场站台。它的目标是如实呈现：哪些法案正在审议、走到了哪个阶段、通过后会带来什么影响——让关心这个议题的人能够基于真实信息形成自己的判断。
+            This site does not advocate for a particular policy outcome. It
+            aims to show which proposals are active, how far they have
+            progressed, and what their practical effects may be, so readers can
+            form their own view from verifiable information.
           </p>
 
           <div className="pt-5 mt-5 border-t border-black/[.06]">
             <p className="text-muted">
-              数据持续更新中，欢迎反馈与建议。如有问题或补充，请{" "}
+              Data is updated continuously. For corrections or additions,
+              please{" "}
               <Link
                 href="/contact"
                 className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
               >
-                联系我
+                get in touch
               </Link>
-              。
+              .
             </p>
           </div>
         </div>
 
         <div className="mt-16 pt-10 border-t border-black/[.06]">
           <div className="text-[13px] font-medium text-muted tracking-tight mb-4">
-            数据来源
+            Sources
           </div>
           <ul className="text-sm text-ink/80 leading-relaxed space-y-2">
             <li>
-              本站 fork 自{" "}
+              This site is forked from{" "}
               <a
                 href="https://github.com/web3yaso/stablecoin-policy"
                 target="_blank"
@@ -70,10 +91,12 @@ export default function AboutPage() {
               >
                 web3yaso/stablecoin-policy
               </a>{" "}
-              的开源项目 Track Policy，在其基础上专注于稳定币政策方向
+              , an open-source Track Policy project, and refocused on
+              stablecoin policy.
             </li>
             <li>
-              立法数据参考各国议会官网、监管机构公告及{" "}
+              Legislative data references official parliamentary sources,
+              regulator publications, and{" "}
               <a
                 href="https://legiscan.com"
                 target="_blank"
@@ -84,7 +107,7 @@ export default function AboutPage() {
               </a>
             </li>
             <li>
-              地图灵感来源于{" "}
+              Map inspiration comes from{" "}
               <a
                 href="https://datacenterbans.com"
                 target="_blank"
@@ -95,7 +118,7 @@ export default function AboutPage() {
               </a>
             </li>
             <li>
-              图标来自{" "}
+              Icons are from{" "}
               <a
                 href="https://streamlinehq.com"
                 target="_blank"
@@ -106,14 +129,14 @@ export default function AboutPage() {
               </a>
             </li>
             <li className="pt-2 text-muted">
-              完整数据来源详见{" "}
+              See the{" "}
               <Link
                 href="/methodology"
                 className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
               >
-                方法论
+                methodology
               </Link>{" "}
-              页面。
+              {" "}page for full data notes.
             </li>
           </ul>
         </div>

@@ -1,4 +1,12 @@
 /**
+ * LEGACY — DO NOT USE FOR STABLECOIN POLICY DISCOVERY.
+ *
+ * This one-off AI/data-center research script predates the professional
+ * stablecoin source pipeline. It is retained only so the existing map dataset
+ * can still be reproduced; the daily news/report workflow does not invoke it.
+ * New stablecoin policy ingestion belongs in news-professional-sources.ts or an
+ * official first-party feed adapter.
+ *
  * Research EU / Asia / Canada-province entities via Claude with web_search.
  * Writes one JSON file per entity under data/international/{slug}.json.
  *

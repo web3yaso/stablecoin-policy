@@ -50,6 +50,7 @@ next-env.d.ts
 /data/reports/.DS_Store
 /data/reports/private
 /data/news/.site-rotation
+/data/operations/llm-cost.jsonl
 
 # claude code local state
 /.claude

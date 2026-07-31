@@ -1,0 +1,54 @@
+{
+  "_comment": "Structured first-party sources used by scripts/sync/news-professional-sources.ts. Optional keyed sources are skipped when their key is unavailable.",
+  "version": 1,
+  "sources": [
+    {
+      "id": "federal-register",
+      "enabled": true,
+      "queryTerms": [
+        "stablecoin"
+      ],
+      "lookbackDays": 180,
+      "maxItems": 30
+    },
+    {
+      "id": "regulations-gov",
+      "enabled": true,
+      "queryTerms": [
+        "stablecoin"
+      ],
+      "lookbackDays": 180,
+      "maxItems": 30
+    },
+    {
+      "id": "us-congress",
+      "enabled": true,
+      "queryTerms": [
+        "stablecoin"
+      ],
+      "lookbackDays": 730,
+      "maxItems": 25
+    },
+    {
+      "id": "uk-legislation",
+      "enabled": true,
+      "queryTerms": [
+        "stablecoin",
+        "digital settlement asset"
+      ],
+      "lookbackDays": 1825,
+      "maxItems": 25
+    },
+    {
+      "id": "japan-fsa",
+      "enabled": true,
+      "queryTerms": [
+        "stablecoin",
+        "electronic payment instrument",
+        "travel rule"
+      ],
+      "lookbackDays": 30,
+      "maxItems": 20
+    }
+  ]
+}

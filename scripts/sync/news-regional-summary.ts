@@ -6,7 +6,7 @@
  *
  * Each region's summary + a handful of key-phrase highlights (used by
  * the UI for `highlight-sweep` underlines) are written into
- *     news.regional[region].{summary, highlights, generatedAt}
+ *     news.regional[region].{summary, highlights, generatedAt, sourcePolicy}
  *
  * Budget: one Sonnet call per region on demand. Typical run touches
  * only the region(s) with new items this poll, so cost is ~$0.02–0.05
@@ -31,6 +31,9 @@ export interface RegionalSummaryBody {
   summary: string;
   highlights: RegionalHighlight[];
   generatedAt: string;
+  sourcePolicy: "official-only";
+  sourceCount: number;
+  sourceIds: string[];
 }
 
 // Entity-name → region mapping. Anything not here is treated as "na",
@@ -95,12 +98,14 @@ interface NewsItem {
   date: string;
   url: string;
   summary?: string;
+  sourceId?: string;
+  sourceType?: "official-api" | "official-feed";
 }
 
 interface NewsFile {
   generatedAt: string;
   // Kept loose since the file mixes regenerated + legacy fields. The
-  // regenerator only writes known keys (summary, highlights, generatedAt)
+  // regenerator only writes known keys and preserves legacy display fields.
   // and preserves everything else via object spread.
   regional: Record<string, Record<string, unknown>>;
   entities: Record<string, { news: NewsItem[] }>;
@@ -118,10 +123,9 @@ function getAnthropicApiKey(): string {
 
 const client = new Anthropic({ apiKey: getAnthropicApiKey() });
 
-// Only feed the summarizer items from the last ~30 days so the prose
-// stays grounded in recent developments. If the region is quiet we fall
-// back to the 10 most-recent items regardless of age so the summary
-// isn't empty — but that's the exception, not the default.
+// Only feed the summarizer official-source items from the last 30 days.
+// A quiet region stays empty; old policy events must not be repackaged as a
+// newly generated regional signal.
 const RECENT_WINDOW_DAYS = 30;
 
 function collectRecentForRegion(
@@ -133,6 +137,12 @@ function collectRecentForRegion(
   for (const [entity, body] of Object.entries(news.entities)) {
     if (regionForEntity(entity) !== region) continue;
     for (const item of body.news) {
+      if (
+        item.sourceType !== "official-api" &&
+        item.sourceType !== "official-feed"
+      ) {
+        continue;
+      }
       rows.push({ entity, item });
     }
   }
@@ -142,8 +152,7 @@ function collectRecentForRegion(
     const d = new Date(r.item.date ?? "").getTime();
     return Number.isFinite(d) && d >= cutoff;
   });
-  const pool = recent.length >= 6 ? recent : rows.slice(0, 10);
-  return pool.slice(0, limit);
+  return recent.slice(0, limit);
 }
 
 function formatContext(
@@ -160,12 +169,13 @@ function formatContext(
     .join("\n\n");
 }
 
-const SYSTEM_PROMPT = `You write neutral, factual regional policy overviews for a government-tracking product that covers AI regulation and data-center development. Your output is a 4–6 sentence paragraph that weaves the most important developments from the provided news items into flowing prose. Then you return 4–8 short key phrases that appear EXACTLY in your summary prose (verbatim substrings) so a UI can highlight them.
+const SYSTEM_PROMPT = `You write neutral, factual regional policy overviews for a stablecoin regulatory-intelligence product. Your output is a 4–6 sentence paragraph that weaves the most important developments from the provided first-party regulator, legislature, and official-publication records into flowing prose. Then you return 4–8 short key phrases that appear EXACTLY in your summary prose (verbatim substrings) so a UI can highlight them.
 
 Constraints:
 - Plain factual prose. No hedging, no editorializing, no "This week's developments show…"
 - Lead with what's new and most consequential.
 - Specific: use real bill numbers, jurisdiction names, dates, and amounts where the news supports it.
+- Prioritize licensing, issuer eligibility, reserves, redemption, AML/CFT, sanctions, custody, distribution, and implementation deadlines.
 - Do not invent specifics.
 - Respond as strict JSON with shape:
   {
@@ -177,7 +187,7 @@ Constraints:
 - highlight.text MUST be a literal substring of summary (case-sensitive). If you can't place a highlight verbatim, omit it.
 - topic choices:
     legislation    — bills, laws, rulings, regulatory action
-    infrastructure — data centers, grid, power, moratoriums, siting
+    infrastructure — payment rails, reserve operations, custody, technical implementation
     cooperation    — multilateral frameworks, agreements, joint statements`;
 
 async function summarizeRegion(
@@ -196,6 +206,7 @@ Produce the JSON now.`;
   try {
     const res = await client.messages.create({
       model: MODEL,
+      cost_label: `regional-summary:${region}`,
       max_tokens: 1400,
       system: SYSTEM_PROMPT,
       messages: [{ role: "user", content: user }],
@@ -220,7 +231,20 @@ Produce the JSON now.`;
         summary.includes(h.text) &&
         ["legislation", "infrastructure", "cooperation"].includes(h.topic),
     );
-    return { summary, highlights, generatedAt: new Date().toISOString() };
+    return {
+      summary,
+      highlights,
+      generatedAt: new Date().toISOString(),
+      sourcePolicy: "official-only",
+      sourceCount: rows.length,
+      sourceIds: [
+        ...new Set(
+          rows
+            .map(({ item }) => item.sourceId)
+            .filter((sourceId): sourceId is string => Boolean(sourceId)),
+        ),
+      ].sort(),
+    };
   } catch (err) {
     console.error(`  regional summary failed for ${region}:`, (err as Error).message);
     return null;
@@ -238,6 +262,19 @@ export async function regenerateRegions(
   const updated: RegionKey[] = [];
   for (const region of regions) {
     const rows = collectRecentForRegion(news, region);
+    if (rows.length === 0) {
+      news.regional[region] = {
+        ...(news.regional[region] ?? {}),
+        summary: "",
+        highlights: [],
+        generatedAt: new Date().toISOString(),
+        sourcePolicy: "official-only",
+        sourceCount: 0,
+        sourceIds: [],
+      };
+      updated.push(region);
+      continue;
+    }
     const body = await summarizeRegion(region, rows);
     if (!body) continue;
     news.regional[region] = { ...(news.regional[region] ?? {}), ...body };

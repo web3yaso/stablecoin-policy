@@ -1,8 +1,8 @@
 /**
- * Sync US federal stablecoin bills from Congress.gov.
+ * Sync US federal stablecoin bills from GovInfo + Congress.gov.
  *
  * Flow:
- *   1. Search Congress 119 for stablecoin keywords.
+ *   1. Discover official bill-text packages with GovInfo full-text search.
  *   2. Fetch details + actions for each bill.
  *   3. Map to the app's Legislation shape (heuristic stage + stance).
  *   4. Write data/raw/congress/bills.json  (raw cache)
@@ -10,7 +10,7 @@
  *
  * Environment:
  *   CONGRESS_API_KEY  (required) — get one at https://api.congress.gov/sign-up/
- *   BILLS_FORCE_REFRESH=1        — re-fetch bills already cached
+ *   GOVINFO_API_KEY   (optional) — falls back to CONGRESS_API_KEY
  *
  * Run:
  *   npx tsx scripts/sync/bills-federal.ts
@@ -20,7 +20,7 @@ import "../env.js";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { fetchCongress, fetchCongressPaged, ensureBudgetOk, runCount } from "./congress.js";
+import { fetchCongress, ensureBudgetOk, runCount } from "./congress.js";
 import type { Legislation, Stage, StanceType } from "../../types/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -28,14 +28,12 @@ const ROOT = join(__dirname, "../..");
 const RAW_DIR = join(ROOT, "data/raw/congress");
 const RAW_BILLS_PATH = join(RAW_DIR, "bills.json");
 const OUT_PATH = join(ROOT, "data/legislation/federal.json");
-const FORCE = process.env.BILLS_FORCE_REFRESH === "1";
 
 const CURRENT_CONGRESS = 119; // 2025–2026
 
 // Known stablecoin bills to always fetch directly by number.
 // Format: { congress?, type, number } — congress defaults to CURRENT_CONGRESS.
-// Congress.gov search is full-text and drowns in procedural resolutions,
-// so direct fetch by bill number is the only reliable approach.
+// Direct references provide a safety net if an upstream search is unavailable.
 // Add new bills here as they're introduced.
 const KNOWN_BILLS: Array<{ congress?: number; type: string; number: string }> = [
   { type: "s",  number: "394"  },         // GENIUS Act of 2025 — original Senate bill (119th)
@@ -46,20 +44,7 @@ const KNOWN_BILLS: Array<{ congress?: number; type: string; number: string }> = 
   // TODO: add STABLE Act Senate companion and GENIUS Act House companion once confirmed
 ];
 
-// Title must contain at least one stablecoin-related term (used for discovery fallback).
-const TITLE_RELEVANCE = /stablecoin|genius act|stable act|payment stablecoin|digital payment token|e-money token/i;
-
 // ─── Congress.gov response shapes ────────────────────────────────────────────
-
-interface CongressBillSummary {
-  congress: number;
-  type: string;       // "S", "HR", "HJRES", etc.
-  number: string;
-  title: string;
-  latestAction?: { actionDate: string; text: string };
-  updateDate?: string;
-  url?: string;
-}
 
 interface CongressBillDetail {
   bill: {
@@ -91,6 +76,87 @@ interface CongressAction {
   actionCode?: string;
   sourceSystem?: { code: number; name: string };
   committees?: Array<{ name: string; systemCode: string }>;
+}
+
+interface GovInfoSearchResult {
+  packageId?: string;
+  title?: string;
+}
+
+interface GovInfoSearchResponse {
+  results?: GovInfoSearchResult[];
+}
+
+interface DiscoveredBill {
+  congress: number;
+  type: string;
+  number: string;
+  packageId: string;
+}
+
+const GOVINFO_DISCOVERY_TERMS = ["stablecoin"];
+
+async function discoverBillsViaGovInfo(): Promise<DiscoveredBill[]> {
+  const apiKey =
+    process.env.GOVINFO_API_KEY?.trim() ||
+    process.env.CONGRESS_API_KEY?.trim() ||
+    process.env.REGULATIONS_API_KEY?.trim();
+  if (!apiKey) {
+    throw new Error(
+      "GovInfo discovery requires an api.data.gov key (GOVINFO_API_KEY or CONGRESS_API_KEY)",
+    );
+  }
+
+  const outputs = await Promise.all(
+    GOVINFO_DISCOVERY_TERMS.map(async (term) => {
+      const escapedTerm = term.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+      const queryTerm = /\s/.test(escapedTerm)
+        ? `"${escapedTerm}"`
+        : escapedTerm;
+      const response = await fetch("https://api.govinfo.gov/search", {
+        method: "POST",
+        signal: AbortSignal.timeout(15_000),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-Api-Key": apiKey,
+        },
+        body: JSON.stringify({
+          query:
+            `collection:(BILLS) and congress:${CURRENT_CONGRESS} and ` +
+            queryTerm,
+          pageSize: "100",
+          offsetMark: "*",
+          sorts: [{ field: "publishdate", sortOrder: "DESC" }],
+          resultLevel: "package",
+          historical: true,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(
+          `GovInfo search for "${term}" failed: ${response.status} ${response.statusText}`,
+        );
+      }
+      return (await response.json() as GovInfoSearchResponse).results ?? [];
+    }),
+  );
+
+  const discovered = new Map<string, DiscoveredBill>();
+  for (const result of outputs.flat()) {
+    const packageId = result.packageId?.trim();
+    const match = packageId?.match(
+      /^BILLS-(\d+)(hconres|sconres|hjres|sjres|hres|sres|hr|s)(\d+)[a-z0-9]+$/i,
+    );
+    if (!packageId || !match) continue;
+    const bill = {
+      congress: Number(match[1]),
+      type: match[2].toUpperCase(),
+      number: match[3],
+      packageId,
+    };
+    discovered.set(`${bill.congress}/${bill.type}/${bill.number}`, bill);
+  }
+  return [...discovered.values()];
 }
 
 // ─── Stage mapping ────────────────────────────────────────────────────────────
@@ -172,7 +238,16 @@ function billCode(type: string, number: string): string {
 }
 
 function billUrl(congress: number, type: string, number: string): string {
-  return `https://www.congress.gov/bill/${congress}th-congress/${type.toLowerCase()}-bill/${number}`;
+  const pathByType: Record<string, string> = {
+    HR: "house-bill",
+    S: "senate-bill",
+    HJRES: "house-joint-resolution",
+    SJRES: "senate-joint-resolution",
+    HRES: "house-resolution",
+    SRES: "senate-resolution",
+  };
+  const path = pathByType[type.toUpperCase()] ?? type.toLowerCase();
+  return `https://www.congress.gov/bill/${congress}th-congress/${path}/${number}`;
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
@@ -186,7 +261,18 @@ interface RawCache {
 
 function loadRawCache(): RawCache {
   if (existsSync(RAW_BILLS_PATH)) {
-    return JSON.parse(readFileSync(RAW_BILLS_PATH, "utf8")) as RawCache;
+    const parsed = JSON.parse(
+      readFileSync(RAW_BILLS_PATH, "utf8"),
+    ) as RawCache;
+    const bills: Record<string, CachedBill> = {};
+    // Older caches used "TYPE/number" keys. Canonicalize in memory so the
+    // first run after this migration refreshes rather than duplicating them.
+    for (const bill of Object.values(parsed.bills ?? {})) {
+      const congress = bill.congress ?? CURRENT_CONGRESS;
+      const key = `${congress}/${bill.type.toUpperCase()}/${bill.number}`;
+      bills[key] = bill;
+    }
+    return { fetchedAt: parsed.fetchedAt ?? "", bills };
   }
   return { fetchedAt: "", bills: {} };
 }
@@ -208,42 +294,38 @@ async function main() {
   mkdirSync(dirname(OUT_PATH), { recursive: true });
 
   const cache = loadRawCache();
-  const seen = new Set<string>(); // "type/number"
+  const seen = new Set<string>(); // "congress/type/number"
 
-  // 1. Fetch known bills directly by number — most reliable approach.
-  //    Congress.gov search returns full-text matches including procedural
-  //    resolutions that happen to mention "stablecoin" in floor debates.
+  // 1. Seed known bills directly by number as an upstream-failure safety net.
   console.log(`[bills-federal] fetching ${KNOWN_BILLS.length} known bills directly...`);
   for (const bill of KNOWN_BILLS) {
     const congress = bill.congress ?? CURRENT_CONGRESS;
     seen.add(`${congress}/${bill.type.toUpperCase()}/${bill.number}`);
   }
 
-  // 2. Discovery: generic search with title filter to catch newly introduced bills.
-  //    Searches the top-level /bill endpoint (only one supporting query param),
-  //    then filters to S/HR types with stablecoin in the title.
-  console.log("[bills-federal] running discovery search...");
-  const discovered = await fetchCongressPaged<CongressBillSummary>(
-    "/bill",
-    { query: "stablecoin", congress: CURRENT_CONGRESS, limit: 50 },
-    10, // fetch up to 500 results to get past the procedural-resolution noise
-  );
-  let discoveryMatched = 0;
-  for (const b of discovered) {
-    if (!["S", "HR"].includes(b.type ?? "")) continue;
-    if (!TITLE_RELEVANCE.test(b.title ?? "")) continue;
-    seen.add(`${CURRENT_CONGRESS}/${b.type}/${b.number}`);
-    discoveryMatched++;
+  // 2. GovInfo performs the keyword search over official bill text. The
+  //    Congress.gov /bill list has no keyword parameter.
+  console.log("[bills-federal] running GovInfo full-text discovery...");
+  let discovered: DiscoveredBill[] = [];
+  try {
+    discovered = await discoverBillsViaGovInfo();
+  } catch (error) {
+    console.warn(
+      `[bills-federal] GovInfo discovery unavailable; continuing with known bills: ${(error as Error).message}`,
+    );
   }
-  console.log(`[bills-federal] discovery: ${discovered.length} results scanned, ${discoveryMatched} new bills found`);
+  for (const bill of discovered) {
+    if (!["S", "HR"].includes(bill.type)) continue;
+    seen.add(`${bill.congress}/${bill.type}/${bill.number}`);
+  }
+  console.log(
+    `[bills-federal] discovery: ${discovered.length} unique official bill(s) found`,
+  );
 
   console.log(`[bills-federal] ${seen.size} unique bills to process`);
 
-  // 2. Fetch details + actions for each bill
+  // 3. Fetch details + actions for each bill
   for (const key of seen) {
-    if (!FORCE && cache.bills[key]) {
-      continue; // already cached
-    }
     const [congress, type, number] = key.split("/");
     try {
       const detailRes = await fetchCongress<CongressBillDetail>(
@@ -270,14 +352,14 @@ async function main() {
   writeFileSync(RAW_BILLS_PATH, JSON.stringify(cache, null, 2) + "\n");
   console.log(`[bills-federal] raw cache written to ${RAW_BILLS_PATH}`);
 
-  // 3. Map to Legislation shape and merge into federal.json
+  // 4. Map to Legislation shape and merge into federal.json
   const existing = loadExisting();
   const existingById = new Map(existing.legislation.map((l) => [l.id, l]));
 
   let added = 0;
   let updated = 0;
 
-  for (const [key, bill] of Object.entries(cache.bills)) {
+  for (const bill of Object.values(cache.bills)) {
     const code = billCode(bill.type, bill.number);
     const congressNum = bill.congress ?? CURRENT_CONGRESS;
     const id = `federal-${congressNum}-${bill.type.toLowerCase()}-${bill.number}`;

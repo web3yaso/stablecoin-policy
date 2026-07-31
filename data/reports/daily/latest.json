@@ -1,187 +1,141 @@
 {
   "date": "2026-07-31",
-  "generatedAt": "2026-07-31T03:45:54.173Z",
+  "generatedAt": "2026-07-31T16:53:39.747Z",
   "title": "Daily Stablecoin Policy Brief - 2026-07-31",
   "executiveSummary": [
-    "U.S. implementation of the enacted GENIUS Act is advancing through the FDIC's proposed weekly and quarterly issuer reporting, a New York proposal to align state oversight, and Florida licensing and payment-pilot activity.",
-    "U.S. bank and trade-group engagement is concentrating on the implementation details of federal payment-stablecoin supervision, including committee procedures and proposed limits on stablecoin yield in the CLARITY Act.",
-    "Europe's MiCA framework continues to shape product availability and issuance plans, including Xryma's planned September launch of the euro-denominated XREUR stablecoin."
+    "U.S. implementation of the GENIUS Act is advancing through OCC and interagency proposals, including OCC rules for issuers under its jurisdiction and customer-identification requirements for permitted payment stablecoin issuers.",
+    "The interagency customer-identification proposal is open for comment through 2026-08-22 and would treat permitted payment stablecoin issuers as financial institutions under the Bank Secrecy Act.",
+    "The United Kingdom's Financial Services and Markets Act 2000 identifies issuance of qualifying stablecoins as a regulated activity when specified conditions are carried out in the United Kingdom."
   ],
   "topDevelopments": [
     {
       "jurisdiction": "United States",
-      "headline": "FDIC proposes weekly and quarterly reporting for stablecoin issuers under the GENIUS Act",
-      "signal": "The FDIC has proposed recurring weekly and quarterly reporting requirements for stablecoin issuers under the enacted GENIUS Act.",
-      "whyItMatters": "The proposal signals a move from federal statutory enactment toward ongoing supervisory reporting expectations for issuers.",
+      "headline": "OCC proposal advances GENIUS Act implementation for entities under OCC jurisdiction",
+      "signal": "The OCC proposed regulations to implement the GENIUS Act for payment stablecoin issuance and related activities by entities under OCC jurisdiction. The proposal clarifies that permitted payment stablecoin issuers established in U.S. territories are excluded from the definition of foreign payment stablecoin issuers.",
+      "whyItMatters": "The proposal provides a direct federal implementation path for OCC-regulated issuers under a framework that limits payment stablecoin issuance to permitted issuers and includes reserve, redemption, disclosure, reserve-reuse, and Bank Secrecy Act requirements.",
       "affectedParties": [
-        "Stablecoin issuers",
-        "FDIC-supervised institutions",
-        "Reserve and compliance teams"
+        "OCC-regulated payment stablecoin issuers",
+        "Stablecoin issuers established in U.S. territories",
+        "Banks providing stablecoin-related services"
       ],
       "riskLevel": "Medium-High"
     },
     {
-      "jurisdiction": "New York, United States",
-      "headline": "NYDFS files proposal to align stablecoin oversight with the GENIUS Act",
-      "signal": "The New York Department of Financial Services filed a formal proposal to align its stablecoin oversight framework with the GENIUS Act.",
-      "whyItMatters": "New York already maintains stablecoin requirements covering 1:1 reserves, independent monthly audits, and unconditional redemption at par; alignment activity may increase the importance of coordinated federal-state compliance.",
+      "jurisdiction": "United States",
+      "headline": "Federal agencies propose customer-identification standards for permitted payment stablecoin issuers",
+      "signal": "FinCEN, the OCC, the Federal Reserve, the FDIC, and the NCUA proposed a rule requiring permitted payment stablecoin issuers to maintain effective customer identification programs. The proposal is open for comment through 2026-08-22.",
+      "whyItMatters": "The proposal would operationalize the GENIUS Act treatment of permitted payment stablecoin issuers as financial institutions under the Bank Secrecy Act, increasing onboarding and compliance-control expectations for issuers.",
       "affectedParties": [
-        "New York-authorized stablecoin issuers",
-        "Virtual currency businesses",
-        "Custodians and exchanges serving New York customers"
+        "Permitted payment stablecoin issuers",
+        "Stablecoin customers",
+        "Banks and compliance service providers"
+      ],
+      "riskLevel": "High"
+    },
+    {
+      "jurisdiction": "United Kingdom",
+      "headline": "UK statute identifies qualifying stablecoin issuance as a regulated activity",
+      "signal": "The Financial Services and Markets Act 2000 identifies issuance of qualifying stablecoins as a regulated activity where specified conditions are carried out in the United Kingdom and addresses jurisdiction for certain regulated cryptoasset activities involving consumer sales or subscriptions.",
+      "whyItMatters": "Issuers and firms serving UK-facing consumer activity need to assess whether their stablecoin issuance and related cryptoasset activities fall within the stated regulated-activity and jurisdiction provisions.",
+      "affectedParties": [
+        "Qualifying stablecoin issuers",
+        "Cryptoasset platforms",
+        "Firms offering cryptoassets to UK consumers"
       ],
       "riskLevel": "Medium-High"
-    },
-    {
-      "jurisdiction": "Florida, United States",
-      "headline": "Florida creates stablecoin issuer licensing regime and payment-fee pilot",
-      "signal": "Florida has created a licensing framework for stablecoin issuers and launched a pilot permitting fees to be paid with stablecoins.",
-      "whyItMatters": "The development combines issuer licensing with a state-level payment-use case, creating a practical implementation environment alongside Florida's virtual-currency money-transmission framework.",
-      "affectedParties": [
-        "Stablecoin issuers",
-        "Money transmitters",
-        "Payment companies"
-      ],
-      "riskLevel": "Medium"
-    },
-    {
-      "jurisdiction": "European Union",
-      "headline": "Xryma plans September launch of euro-denominated XREUR stablecoin",
-      "signal": "Xryma plans to launch XREUR, a euro-denominated stablecoin, on 3 September.",
-      "whyItMatters": "The planned launch is a market signal that euro stablecoin issuance is proceeding within the MiCA environment, where e-money tokens require authorization and are subject to reserve, redemption, transparency, and consumer-protection requirements.",
-      "affectedParties": [
-        "Euro stablecoin issuers",
-        "European exchanges and wallets",
-        "Payment companies"
-      ],
-      "riskLevel": "Medium"
     }
   ],
   "regulatorySignalTable": [
     {
       "jurisdiction": "United States",
-      "signal": "FDIC proposed weekly and quarterly reporting requirements for stablecoin issuers under the GENIUS Act.",
-      "direction": "Toward operational federal supervision and recurring issuer reporting.",
+      "signal": "OCC proposed GENIUS Act implementation rules for payment stablecoin issuance by entities under OCC jurisdiction.",
+      "direction": "Toward federal operationalization of a permitted-issuer framework.",
       "riskLevel": "Medium-High",
-      "businessImpact": "Issuers should assess reporting-data availability, reserve operations, and governance capacity for recurring federal submissions."
+      "businessImpact": "OCC-regulated issuers should assess alignment with the GENIUS Act framework, including one-to-one reserves, redemption procedures, monthly reserve disclosures, limits on reserve reuse, and Bank Secrecy Act requirements."
     },
     {
-      "jurisdiction": "New York, United States",
-      "signal": "NYDFS filed a proposal to align state stablecoin oversight with the GENIUS Act.",
-      "direction": "Toward federal-state alignment of stablecoin supervision.",
+      "jurisdiction": "United States",
+      "signal": "Interagency customer-identification proposal for permitted payment stablecoin issuers is open for comment through 2026-08-22.",
+      "direction": "Toward explicit Bank Secrecy Act customer-identification obligations for permitted issuers.",
+      "riskLevel": "High",
+      "businessImpact": "Issuers may need to build or enhance customer-identification governance, controls, onboarding processes, and related compliance operations."
+    },
+    {
+      "jurisdiction": "United States",
+      "signal": "Federal Reserve proposals would create special-purpose Payment Accounts for certain payment activity, potentially including eligible nonbank entities; the accounts would have zero reserve requirements and would not earn interest.",
+      "direction": "Toward a potential specialized Federal Reserve account-access category with defined limitations.",
+      "riskLevel": "Medium",
+      "businessImpact": "Eligible stablecoin providers and payment firms may monitor potential account-access eligibility, while accounting for the absence of interest and discount-window eligibility under the related proposals."
+    },
+    {
+      "jurisdiction": "United Kingdom",
+      "signal": "The Financial Services and Markets Act 2000 identifies issuance of qualifying stablecoins as a regulated activity when specified UK conditions are met.",
+      "direction": "Toward statutory treatment of qualifying stablecoin issuance within regulated financial-services activity.",
       "riskLevel": "Medium-High",
-      "businessImpact": "Firms operating in New York may need to monitor how existing state reserve, audit, and redemption requirements interact with federal implementation."
+      "businessImpact": "Issuers and platforms should evaluate UK activity, consumer-facing distribution, and related disclosure or advertising exposure under the applicable cryptoasset framework."
     },
     {
-      "jurisdiction": "Florida, United States",
-      "signal": "Florida created a stablecoin issuer licensing regime and began a pilot for stablecoin fee payments.",
-      "direction": "Toward licensed issuer activity and limited public-sector payment experimentation.",
+      "jurisdiction": "United States",
+      "signal": "The Digital Commodity Intermediaries Act would define permitted payment stablecoins by reference to the GENIUS Act and limit CFTC jurisdiction over them; it has been placed on the Senate Legislative Calendar.",
+      "direction": "Toward delineating CFTC treatment of permitted payment stablecoins.",
       "riskLevel": "Medium",
-      "businessImpact": "Issuers and payment providers may evaluate Florida licensing obligations and the operational scope of the fee-payment pilot."
-    },
-    {
-      "jurisdiction": "European Union",
-      "signal": "A euro-denominated stablecoin launch is planned while MiCA remains the governing framework for EMTs and ARTs.",
-      "direction": "Toward regulated euro stablecoin product expansion under MiCA.",
-      "riskLevel": "Medium",
-      "businessImpact": "Issuers, exchanges, and payment firms need to prioritize MiCA-authorized products, including applicable reserve, redemption, disclosure, and authorization requirements."
+      "businessImpact": "Firms involved in digital commodity transactions involving permitted payment stablecoins should monitor potential jurisdictional and transaction-treatment changes."
     }
   ],
   "marketImpact": {
-    "stablecoinIssuers": "U.S. issuers face a stronger prospective reporting burden under the FDIC proposal, while New York and Florida developments reinforce the importance of state-specific licensing and compliance. In Europe, MiCA-compliant euro product launches remain a key route to market access.",
-    "exchangesAndWallets": "Platforms should monitor which stablecoins can be supported under MiCA requirements and assess state-level implications of issuer licensing and federal reporting-driven compliance expectations in the United States.",
-    "paymentCompanies": "Florida's stablecoin fee-payment pilot provides a public-sector payment-use signal, while MiCA-compliant euro stablecoin launches may expand regulated payment options in Europe.",
-    "defiProtocols": "Protocols remain indirectly affected by the availability and distribution of regulated stablecoins, particularly where issuer reporting, licensing, and MiCA authorization requirements affect supported assets."
+    "stablecoinIssuers": "The principal near-term policy impact is heightened federal compliance preparation: OCC implementation rules and the proposed customer-identification requirement reinforce the permitted-issuer, reserve, redemption, disclosure, and Bank Secrecy Act framework. UK qualifying stablecoin issuers also face a regulated-activity signal where specified UK conditions apply.",
+    "exchangesAndWallets": "Platforms and wallet providers should monitor the UK treatment of regulated cryptoasset activities involving consumer sales or subscriptions, and assess how issuer customer-identification obligations could affect stablecoin onboarding and transaction relationships.",
+    "paymentCompanies": "The Federal Reserve's proposed special-purpose Payment Accounts may be relevant to certain payment activity and potentially eligible nonbank entities, but the proposals describe zero reserve requirements, no interest on account balances, and no discount-window eligibility.",
+    "defiProtocols": "The provided materials focus on issuer regulation, payment-account access, and regulated cryptoasset activities rather than protocol-specific requirements. Protocols with exposure to permitted payment stablecoins should monitor issuer compliance changes and potential CFTC jurisdictional delineation."
   },
   "watchlist": [
-    "FDIC next steps on proposed weekly and quarterly stablecoin issuer reporting under the GENIUS Act.",
-    "NYDFS consultation and finalization activity on alignment of state stablecoin oversight with the GENIUS Act.",
-    "Florida implementation of its issuer licensing regime and stablecoin fee-payment pilot.",
-    "Xryma's planned 3 September launch of XREUR and its MiCA compliance positioning.",
-    "Senate consideration of requests from U.S. banks to prohibit stablecoin yield provisions in the CLARITY Act."
+    "Comments on the permitted payment stablecoin issuer customer-identification proposal close on 2026-08-22.",
+    "Further OCC implementation measures for the GENIUS Act, including treatment of issuer licensing, foreign-issuer registration, AML/CFT, sanctions compliance, redemption access, and reporting.",
+    "Federal Reserve decisions following closed comments on special-purpose Payment Accounts, Regulation A, and Regulation D proposals.",
+    "Progress of the Digital Commodity Intermediaries Act on the Senate Legislative Calendar.",
+    "Application of UK qualifying-stablecoin regulated-activity provisions to issuer and consumer-facing cryptoasset activity."
   ],
-  "analystTakeaway": "The principal policy signal is implementation rather than new framework creation: the United States is translating the enacted GENIUS Act into reporting, state-alignment, and licensing activity, while the European market continues to organize product access around MiCA authorization. Business planning should distinguish confirmed regulatory actions from industry requests, particularly on stablecoin yield restrictions.",
+  "analystTakeaway": "The clearest current policy signal is implementation rather than a new statutory framework: U.S. agencies are translating the GENIUS Act into issuer supervision and customer-identification requirements, while the UK statutory framework identifies qualifying stablecoin issuance as regulated activity under specified conditions. Compliance planning should prioritize issuer eligibility, customer identification, reserve and redemption controls, and jurisdiction-specific distribution analysis.",
   "sources": [
     {
-      "outlet": "Google News — US Stablecoin Policy",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNT2ZEbmc2RXNEUERJbVg1cHlhaXdtNFNDdXFtUHZDWHRVVjZ1bTVDaGJIeVhwQ2E3TkpaOVdwQkdMa0MxTDN3b0pIU3ZSZHVwTndYTi02dnphd2RiT0tPdkliZERqdDlzOFJLc2Y2REp0LW0yS0IzS1B1TFE5R1NVeA?oc=5",
-      "headline": "FDIC unveils proposed weekly and quarterly reports for stablecoin issuers under GENIUS Act - JD Supra",
+      "outlet": "Federal Register — Treasury Department, Comptroller of the Currency",
+      "url": "https://www.federalregister.gov/documents/2026/03/02/2026-04089/implementing-the-guiding-and-establishing-national-innovation-for-us-stablecoins-act-for-the",
+      "headline": "Implementing the Guiding and Establishing National Innovation for U.S. Stablecoins Act for the Issuance of Stablecoins by Entities Subject to the Jurisdiction of the Office of the Comptroller of the Currency",
+      "date": "2026-07-29"
+    },
+    {
+      "outlet": "Regulations.gov — OCC",
+      "url": "https://www.regulations.gov/document/OCC-2026-0331-0001",
+      "headline": "Permitted Payment Stablecoin Issuer Customer Identification Program",
+      "date": "2026-07-29"
+    },
+    {
+      "outlet": "Federal Register — Treasury Department, Financial Crimes Enforcement Network",
+      "url": "https://www.federalregister.gov/documents/2026/06/22/2026-12460/permitted-payment-stablecoin-issuer-customer-identification-program",
+      "headline": "Permitted Payment Stablecoin Issuer Customer Identification Program",
       "date": "2026-07-27"
     },
     {
-      "outlet": "Google News — GENIUS / STABLE Act",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPZ2g2Q0NNTkFNQ09ZalpRVnRVTjJoNVFCR0hkY19VRWhndTAtZGJ3RFM0enZ4a3hLMmdsaHpkRzU2aDJxTktkNmhzcjltQ0Q5WUJKRmRGVThreU9aNmEwNTNlS1pqTTZndWpvempRa3JNb2dkVXg1aVh3Wk1qeW8zUWFhVnh2UQ?oc=5",
-      "headline": "NYDFS files formal proposal to align stablecoin oversight with GENIUS Act - JD Supra",
+      "outlet": "Federal Register — Federal Reserve System",
+      "url": "https://www.federalregister.gov/documents/2026/05/26/2026-10375/proposed-revisions-to-the-federal-reserve-policy-on-payment-system-risk-and-the-guidelines-for",
+      "headline": "Proposed Revisions to the Federal Reserve Policy on Payment System Risk and the Guidelines for Account and Services Requests",
       "date": "2026-07-27"
     },
     {
-      "outlet": "Google News — Stablecoin Issuers & Reserves",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNYUN0bW9VTzVZWlpPdTRZcnpPVjJ0RG54TUtIcERvOF9xdXhOLVRnc0hEX05KeGgtVk9zanhQYUpGa3ROb1c3T1o1ZFhWODc5MDVkY3N5ZW84UHhtSmVuVUtoQXM3YzdQd0tKRUpXY01wNEJ2ZW1qc2htV24zaEdkWnRaTW84QQ?oc=5",
-      "headline": "Florida creates licensing regime for stablecoin issuers, pilot allowing stablecoin fee payments - JD Supra",
-      "date": "2026-07-27"
+      "outlet": "GovInfo + Congress.gov",
+      "url": "https://www.govinfo.gov/app/details/BILLS-119s1582enr",
+      "headline": "Guiding and Establishing National Innovation for U.S. Stablecoins Act; GENIUS Act",
+      "date": "2026-07-29"
     },
     {
-      "outlet": "Google News — Germany Stablecoin Policy",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPcUhCdF9TdHpvVnNtcFpZc0w3U3dQZnp0d0lNSDBQM0toRm1FT3FkMVg3MXIzQ19mRDNJZmFnZGNXMlFpYjdiZnJHdnJRN1NZUzdoNkFnZkdXclBmeXV2dlVTNm9rWm5ES3hvamVscGxXMUdnWlRNQUpwN1JBQkFrMVFUREdoaVVJVzlIYnVXM0hiejVudE5ZZFFBS3VjZExq?oc=5",
-      "headline": "Euro-Stablecoin: Xryma startet XREUR am 3. September - AD HOC NEWS",
+      "outlet": "legislation.gov.uk",
+      "url": "https://www.legislation.gov.uk/ukpga/2000/8/2026-07-15",
+      "headline": "Financial Services and Markets Act 2000",
       "date": "2026-07-30"
     }
   ],
   "sourceFiles": [
     "data/news/summaries.json",
-    "data/legislation/federal.json",
-    "data/legislation/states/arizona.json",
-    "data/legislation/states/california.json",
-    "data/legislation/states/colorado.json",
-    "data/legislation/states/florida.json",
-    "data/legislation/states/illinois.json",
-    "data/legislation/states/new-jersey.json",
-    "data/legislation/states/new-york.json",
-    "data/legislation/states/texas.json",
-    "data/legislation/states/washington.json",
-    "data/legislation/states/wyoming.json",
-    "data/international/algeria.json",
-    "data/international/argentina.json",
-    "data/international/australia.json",
-    "data/international/austria.json",
-    "data/international/belgium.json",
-    "data/international/brazil.json",
-    "data/international/bulgaria.json",
-    "data/international/china.json",
-    "data/international/croatia.json",
-    "data/international/cyprus.json",
-    "data/international/czechia.json",
-    "data/international/denmark.json",
-    "data/international/egypt.json",
-    "data/international/estonia.json",
-    "data/international/finland.json",
-    "data/international/france.json",
-    "data/international/germany.json",
-    "data/international/greece.json",
-    "data/international/greenland.json",
-    "data/international/hong-kong.json",
-    "data/international/hungary.json",
-    "data/international/india.json",
-    "data/international/indonesia.json",
-    "data/international/ireland.json",
-    "data/international/italy.json",
-    "data/international/japan.json",
-    "data/international/latvia.json",
-    "data/international/lithuania.json",
-    "data/international/malaysia.json",
-    "data/international/mexico.json",
-    "data/international/netherlands.json",
-    "data/international/philippines.json",
-    "data/international/russia.json",
-    "data/international/saudi-arabia.json",
-    "data/international/singapore.json",
-    "data/international/south-korea.json",
-    "data/international/spain.json",
-    "data/international/switzerland.json",
-    "data/international/taiwan.json",
-    "data/international/thailand.json",
-    "data/international/turkey.json",
-    "data/international/united-arab-emirates.json",
-    "data/international/united-kingdom.json"
+    "data/news/source-health.json"
   ]
 }

@@ -17,24 +17,26 @@ const SELLABLE_JURISDICTION = ["GLOBAL"];
 type JsonValue = unknown;
 type RiskLevel = "Low" | "Medium" | "Medium-High" | "High";
 
-type JsonFileInput = {
-  id: string;
-  file: string;
-  data: JsonValue;
-};
-
 type RecentNewsItem = {
   headline: string;
   date: string;
   source: string;
   url: string;
   summary?: string;
+  sourceId?: string;
+  sourceType?: "official-api" | "official-feed";
+  sourceAuthority?: string;
+  officialDocumentId?: string;
+  sourceVersion?: string;
+  documentType?: string;
+  officialPdfUrl?: string;
+  commentCloseDate?: string;
+  openForComment?: boolean;
 };
 
 type JurisdictionBlock = {
   jurisdiction: string;
   recentNews: RecentNewsItem[];
-  legislation?: JsonValue;
 };
 
 type ReportInput = {
@@ -80,10 +82,29 @@ type DailyReport = {
 
 type RegionalSummary = {
   regional?: {
-    na?: { summary?: string };
-    eu?: { summary?: string };
-    asia?: { summary?: string };
+    na?: RegionalSummaryEntry;
+    eu?: RegionalSummaryEntry;
+    asia?: RegionalSummaryEntry;
   };
+};
+
+type RegionalSummaryEntry = {
+  summary?: string;
+  generatedAt?: string;
+  sourcePolicy?: string;
+  sourceCount?: number;
+};
+
+type SourceHealthFile = {
+  version?: number;
+  checkedAt?: string;
+  status?: "healthy" | "degraded" | "failed";
+  officialFeeds?: {
+    succeeded?: number;
+  };
+  professionalSources?: Array<{
+    status?: "ok" | "partial" | "skipped" | "failed";
+  }>;
 };
 
 const ROOT = process.cwd();
@@ -92,6 +113,8 @@ const OUTPUT_DIR_MD = path.join(ROOT, "public", "reports", "daily");
 const REPORTS_DIR = path.join(ROOT, "data", "reports");
 const REPORTS_INDEX_PATH = path.join(REPORTS_DIR, "index.json");
 const TODAY = new Date().toISOString().slice(0, 10);
+const SOURCE_HEALTH_MAX_AGE_MS = 36 * 60 * 60 * 1000;
+const REGIONAL_SUMMARY_MAX_AGE_MS = 36 * 60 * 60 * 1000;
 
 type EncryptedReportFile = {
   version: 1;
@@ -219,51 +242,54 @@ async function readJsonIfExists<T = JsonValue>(
   return JSON.parse(raw) as T;
 }
 
-async function readJsonDir(relativeDir: string): Promise<JsonFileInput[]> {
-  const fullDir = path.join(ROOT, relativeDir);
-
-  if (!(await pathExists(fullDir))) {
-    return [];
+export function assertPublishableSourceState(
+  sourceHealth: SourceHealthFile | null,
+  now: number,
+): void {
+  if (
+    process.env.REPORT_ALLOW_UNVERIFIED_SOURCES === "1" &&
+    process.env.REPORT_DRY_RUN === "1"
+  ) {
+    console.warn(
+      "REPORT_ALLOW_UNVERIFIED_SOURCES=1: bypassing official-source health gate for dry-run only.",
+    );
+    return;
   }
-
-  const entries = await fs.readdir(fullDir, { withFileTypes: true });
-  const files = entries
-    .filter((entry) => entry.isFile() && entry.name.endsWith(".json"))
-    .map((entry) => entry.name)
-    .sort();
-
-  const results: JsonFileInput[] = [];
-
-  for (const file of files) {
-    const relativePath = path.join(relativeDir, file);
-    const data = await readJsonIfExists(relativePath);
-
-    results.push({
-      id: file.replace(/\.json$/, ""),
-      file: relativePath,
-      data,
-    });
+  if (!sourceHealth || sourceHealth.version !== 1) {
+    throw new Error(
+      "Missing data/news/source-health.json. Run the official-source poller before publishing a report.",
+    );
   }
-
-  return results;
+  const checkedAt = Date.parse(sourceHealth.checkedAt ?? "");
+  if (
+    !Number.isFinite(checkedAt) ||
+    now - checkedAt > SOURCE_HEALTH_MAX_AGE_MS
+  ) {
+    throw new Error(
+      "Official-source health checkpoint is missing or older than 36 hours; refusing to publish a paid report.",
+    );
+  }
+  const successfulProfessionalSources = (
+    sourceHealth.professionalSources ?? []
+  ).filter(
+    (source) => source.status === "ok" || source.status === "partial",
+  ).length;
+  const successfulSources =
+    Number(sourceHealth.officialFeeds?.succeeded ?? 0) +
+    successfulProfessionalSources;
+  if (
+    (sourceHealth.status !== "healthy" &&
+      sourceHealth.status !== "degraded") ||
+    successfulSources < 1
+  ) {
+    throw new Error(
+      "No official source completed successfully in the latest poll; refusing to publish a paid report.",
+    );
+  }
 }
 
 const RECENT_DAYS = 7;
 const MAX_NEWS_PER_BLOCK = 10;
-
-// Region tagging mirrors news-regional-summary.ts. Kept local so we do
-// not pull a runtime import from a sync script with its own .env logic.
-const EU_ENTITIES_FOR_REPORT = new Set([
-  "Netherlands", "Ireland", "Sweden", "Finland", "Germany", "France",
-  "United Kingdom", "Spain", "Italy", "Poland", "Denmark", "Norway",
-  "Belgium", "Austria", "Portugal", "Greece", "Czech Republic", "Czechia",
-  "Switzerland", "Luxembourg", "European Union",
-]);
-const ASIA_ENTITIES_FOR_REPORT = new Set([
-  "Japan", "China", "South Korea", "Republic of Korea", "Singapore",
-  "India", "Taiwan", "Indonesia", "Australia", "Malaysia", "Thailand",
-  "Vietnam", "Philippines", "Hong Kong",
-]);
 
 function recentNewsFor(
   newsSummary: JsonValue | null,
@@ -277,6 +303,15 @@ function recentNewsFor(
   const cutoff = now - RECENT_DAYS * 24 * 60 * 60 * 1000;
   return items
     .filter((it) => {
+      // A new paid report may only use records that passed through a
+      // first-party feed or structured official-source adapter. This excludes
+      // all legacy Google/third-party rows without relying on outlet naming.
+      if (
+        it.sourceType !== "official-api" &&
+        it.sourceType !== "official-feed"
+      ) {
+        return false;
+      }
       const t = Date.parse(it?.date ?? "");
       return Number.isFinite(t) && t >= cutoff;
     })
@@ -288,97 +323,88 @@ function recentNewsFor(
       source: it.source,
       url: it.url,
       summary: it.summary,
+      sourceId: it.sourceId,
+      sourceType: it.sourceType,
+      sourceAuthority: it.sourceAuthority,
+      officialDocumentId: it.officialDocumentId,
+      sourceVersion: it.sourceVersion,
+      documentType: it.documentType,
+      officialPdfUrl: it.officialPdfUrl,
+      commentCloseDate: it.commentCloseDate,
+      openForComment: it.openForComment,
     }));
 }
 
-function countRecentItems(items: RecentNewsItem[]): number {
-  return items.length;
-}
-
-function jurisdictionFromStateFile(file: JsonFileInput): string {
-  // e.g. data/legislation/states/california.json → "US-California"
-  const base = file.id.replace(/[-_]/g, " ");
-  const titled = base
-    .split(" ")
-    .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1) : w))
-    .join(" ");
-  return `US-${titled}`;
-}
-
-function jurisdictionFromInternationalFile(file: JsonFileInput): string {
-  return file.id
-    .split(/[-_]/)
-    .map((w) => (w.length ? w[0].toUpperCase() + w.slice(1) : w))
-    .join(" ");
-}
-
-function buildJurisdictionBlocks(args: {
+export function buildJurisdictionBlocks(args: {
   newsSummary: JsonValue | null;
-  federalLegislation: JsonValue | null;
-  stateLegislation: JsonFileInput[];
-  international: JsonFileInput[];
   now: number;
 }): JurisdictionBlock[] {
-  const { newsSummary, federalLegislation, stateLegislation, international, now } = args;
-  const blocks: JurisdictionBlock[] = [];
+  const { newsSummary, now } = args;
+  if (
+    !newsSummary ||
+    typeof newsSummary !== "object" ||
+    Array.isArray(newsSummary)
+  ) {
+    return [];
+  }
+  const entities = (
+    newsSummary as {
+      entities?: Record<string, { news?: unknown[] }>;
+    }
+  ).entities;
+  if (!entities || typeof entities !== "object") return [];
 
-  // 1. US-Federal: news bucket is "United States"; federal legislation JSON.
-  blocks.push({
-    jurisdiction: "US-Federal",
-    recentNews: recentNewsFor(newsSummary, "United States", now),
-    legislation: federalLegislation ?? undefined,
-  });
-
-  // 2. US-States: per-state legislation, no per-state news bucket exists
-  //    (news-rss.ts files everything under the single "United States" entity).
-  //    Rank by legislation file size as a recent-activity proxy and only
-  //    surface states that actually have entries.
-  const stateBlocks: JurisdictionBlock[] = stateLegislation
-    .filter((f) => Array.isArray((f.data as { legislation?: unknown[] })?.legislation) &&
-                   ((f.data as { legislation: unknown[] }).legislation.length > 0))
-    .map((f) => ({
-      jurisdiction: jurisdictionFromStateFile(f),
-      recentNews: [],
-      legislation: f.data,
+  return Object.keys(entities)
+    .map((entity) => ({
+      jurisdiction: entity === "United States" ? "US-Federal" : entity,
+      recentNews: recentNewsFor(newsSummary, entity, now),
     }))
-    .sort((a, b) => {
-      const al = ((a.legislation as { legislation?: unknown[] })?.legislation ?? []).length;
-      const bl = ((b.legislation as { legislation?: unknown[] })?.legislation ?? []).length;
-      return bl - al;
+    .filter((block) => block.recentNews.length > 0)
+    .sort((left, right) => {
+      const priority = (jurisdiction: string) =>
+        jurisdiction === "US-Federal"
+          ? 0
+          : jurisdiction === "European Union"
+            ? 1
+            : jurisdiction === "United Kingdom"
+              ? 2
+              : 3;
+      const priorityDelta =
+        priority(left.jurisdiction) - priority(right.jurisdiction);
+      if (priorityDelta !== 0) return priorityDelta;
+      const itemDelta = right.recentNews.length - left.recentNews.length;
+      return itemDelta || left.jurisdiction.localeCompare(right.jurisdiction);
     });
-  blocks.push(...stateBlocks);
-
-  // 3. International: each file becomes a block; news bucket name matches
-  //    the file id title-cased (best effort) OR — for the EU — "European Union".
-  const international_blocks: JurisdictionBlock[] = international.map((f) => {
-    let entityGuess = jurisdictionFromInternationalFile(f);
-    if (entityGuess === "European Union" || f.id === "european-union") entityGuess = "European Union";
-    return {
-      jurisdiction: entityGuess,
-      recentNews: recentNewsFor(newsSummary, entityGuess, now),
-      legislation: f.data,
-    };
-  });
-
-  // Rank: EU first, UK second, then by recent-news count desc, others last.
-  international_blocks.sort((a, b) => {
-    const rank = (j: string) => (j === "European Union" ? 0 : j === "United Kingdom" ? 1 : 2);
-    const ra = rank(a.jurisdiction);
-    const rb = rank(b.jurisdiction);
-    if (ra !== rb) return ra - rb;
-    return countRecentItems(b.recentNews) - countRecentItems(a.recentNews);
-  });
-
-  blocks.push(...international_blocks);
-  return blocks;
 }
 
-function buildRegionalSummaries(newsSummary: JsonValue | null): { na?: string; eu?: string; asia?: string } {
+function officialRegionalSummary(
+  entry: RegionalSummaryEntry | undefined,
+  now: number,
+): string | undefined {
+  if (
+    entry?.sourcePolicy !== "official-only" ||
+    !entry.summary?.trim() ||
+    Number(entry.sourceCount ?? 0) < 1
+  ) {
+    return undefined;
+  }
+  const generatedAt = Date.parse(entry.generatedAt ?? "");
+  const cutoff = now - REGIONAL_SUMMARY_MAX_AGE_MS;
+  if (!Number.isFinite(generatedAt) || generatedAt < cutoff) {
+    return undefined;
+  }
+  return entry.summary.trim();
+}
+
+export function buildRegionalSummaries(
+  newsSummary: JsonValue | null,
+  now: number,
+): { na?: string; eu?: string; asia?: string } {
   const regional = readRegionalSummary(newsSummary).regional ?? {};
   return {
-    na: regional.na?.summary,
-    eu: regional.eu?.summary,
-    asia: regional.asia?.summary,
+    na: officialRegionalSummary(regional.na, now),
+    eu: officialRegionalSummary(regional.eu, now),
+    asia: officialRegionalSummary(regional.asia, now),
   };
 }
 
@@ -398,15 +424,26 @@ function compactForPrompt(input: ReportInput): string {
     if (block.recentNews.length > 0) {
       blockLines.push("Recent news (last 7 days):");
       for (const n of block.recentNews) {
+        const provenance = [
+          n.sourceType ? `source_type=${n.sourceType}` : null,
+          n.sourceId ? `source_id=${n.sourceId}` : null,
+          n.sourceAuthority
+            ? `authority="${n.sourceAuthority.replace(/"/g, "'")}"`
+            : null,
+          n.officialDocumentId ? `document_id=${n.officialDocumentId}` : null,
+          n.sourceVersion ? `version=${n.sourceVersion}` : null,
+          n.documentType ? `document_type=${n.documentType}` : null,
+          n.commentCloseDate ? `comment_close=${n.commentCloseDate}` : null,
+          typeof n.openForComment === "boolean"
+            ? `open_for_comment=${String(n.openForComment)}`
+            : null,
+        ].filter(Boolean);
         blockLines.push(
-          `- date=${n.date} outlet="${n.source.replace(/"/g, "'")}" headline="${n.headline.replace(/"/g, "'")}" url=${n.url}`,
+          `- date=${n.date} outlet="${n.source.replace(/"/g, "'")}" headline="${n.headline.replace(/"/g, "'")}" url=${n.url}${provenance.length > 0 ? ` ${provenance.join(" ")}` : ""}`,
         );
+        if (n.officialPdfUrl) blockLines.push(`  official_pdf=${n.officialPdfUrl}`);
         if (n.summary) blockLines.push(`  summary: ${n.summary}`);
       }
-    }
-    if (block.legislation) {
-      blockLines.push("Legislation:");
-      blockLines.push(JSON.stringify(block.legislation, null, 2));
     }
     const blockText = blockLines.join("\n");
     if (used + blockText.length > BUDGET) break;
@@ -492,8 +529,10 @@ function buildSystemAndUserPrompts(input: ReportInput): { system: string; user: 
 Rules:
 - Use only facts supported by the input data below.
 - Do not invent dates, laws, bill names, regulator actions, or URLs.
+- Prefer official-api and official-feed records over derived regional prose.
+- Treat document_id, version, comment_close, and open_for_comment as source facts; never infer a deadline that is absent.
 - Separate factual policy signal from business analysis.
-- Each "Top Development" must be tied to a real input news item or legislation entry.
+- Each "Top Development" must be tied to a Recent news item.
 - Output valid JSON only. No markdown. No comments. No prose outside the JSON.
 
 Return this exact JSON shape:
@@ -537,7 +576,7 @@ Return this exact JSON shape:
 
 Sources rules:
 - The "sources" array MUST contain 8 to 15 entries when the input contains 8+ distinct outlets in the Recent news entries below. Otherwise return as many as exist.
-- The "url" field of each entry MUST be COPIED VERBATIM from the "url=" field of a Recent news entry below. Character for character. Including all query parameters, redirect chains, and tracking suffixes. DO NOT substitute a canonical regulator URL or shortened form even if it looks "cleaner". The URLs in the input ARE the URLs you must return.
+- The "url" field of each entry MUST be COPIED VERBATIM from the "url=" field of a Recent news entry below. Character for character. Do not substitute the separate official_pdf URL.
 - A URL that does not match an input "url=" value verbatim will be dropped by post-processing and your sources list will be incomplete. So copy carefully.
 - Deduplicate by outlet (one entry per outlet at most).
 - Pick the most consequential items actually relied on across executiveSummary, topDevelopments, regulatorySignalTable, and analystTakeaway.`;
@@ -554,7 +593,20 @@ Produce the JSON now.`;
   return { system, user };
 }
 
-async function generateWithAnthropic(input: ReportInput): Promise<DailyReport> {
+export async function generateWithAnthropic(
+  input: ReportInput,
+): Promise<DailyReport> {
+  const currentEvidenceCount = input.jurisdictions.reduce(
+    (count, block) => count + block.recentNews.length,
+    0,
+  );
+  if (currentEvidenceCount === 0) {
+    console.log(
+      "report: official sources were healthy but yielded no recent policy event; publishing deterministic no-signal brief.",
+    );
+    return fallbackReport({ ...input, regionalSummaries: {} });
+  }
+
   if (process.env.REPORT_FORCE_FALLBACK === "1") {
     console.warn("REPORT_FORCE_FALLBACK=1. Using deterministic fallback report.");
     return fallbackReport(input);
@@ -573,6 +625,7 @@ async function generateWithAnthropic(input: ReportInput): Promise<DailyReport> {
   const prompts = buildSystemAndUserPrompts(input);
   const message = await anthropic.messages.create({
     model: process.env.OPENAI_MODEL || "gpt-5.6-terra",
+    cost_label: "daily-policy-report",
     max_tokens: 6000,
     temperature: 0.2,
     system: prompts.system,
@@ -726,27 +779,23 @@ async function main() {
   const generatedAt = new Date().toISOString();
 
   const newsSummary = await readJsonIfExists("data/news/summaries.json");
-  const federalLegislation = await readJsonIfExists("data/legislation/federal.json");
-  const stateLegislation = await readJsonDir("data/legislation/states");
-  const international = await readJsonDir("data/international");
+  const sourceHealth = await readJsonIfExists<SourceHealthFile>(
+    "data/news/source-health.json",
+  );
   const now = Date.now();
+  assertPublishableSourceState(sourceHealth, now);
 
   const input: ReportInput = {
     generatedAt,
     date,
-    regionalSummaries: buildRegionalSummaries(newsSummary),
+    regionalSummaries: buildRegionalSummaries(newsSummary, now),
     jurisdictions: buildJurisdictionBlocks({
       newsSummary,
-      federalLegislation,
-      stateLegislation,
-      international,
       now,
     }),
     sourceFiles: [
       "data/news/summaries.json",
-      "data/legislation/federal.json",
-      ...stateLegislation.map((item) => item.file),
-      ...international.map((item) => item.file),
+      "data/news/source-health.json",
     ],
   };
 

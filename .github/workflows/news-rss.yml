@@ -1,10 +1,9 @@
 name: news-rss
 
-# Polls the curated RSS feeds and appends new items to data/news/summaries.json.
-# Self-throttling: scripts/sync/news-rss.ts no-ops 14 days after the
-# `data/news/.rss-started` timestamp. To restart the window, run
-#     npx tsx scripts/sync/news-rss.ts --restart
-# locally and commit the updated `.rss-started` file.
+# Polls first-party regulator feeds and structured government APIs, then
+# appends versioned official-source items to data/news/summaries.json.
+# Continuous monitoring is the default. NEWS_POLL_MAX_DAYS can opt a
+# temporary evaluation deployment into a bounded run window.
 
 on:
   schedule:
@@ -17,7 +16,7 @@ on:
   workflow_dispatch: # manual trigger from the Actions tab
     inputs:
       restart:
-        description: "Restart the 14-day window"
+        description: "Restart NEWS_POLL_MAX_DAYS evaluation window"
         required: false
         default: "false"
 
@@ -53,27 +52,30 @@ jobs:
             exit 1
           fi
 
-      - name: Restart window (manual only)
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.restart == 'true' }}
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_MODEL: gpt-5.6-terra
-          OPENAI_FAST_MODEL: gpt-5.6-luna
-        run: npx tsx scripts/sync/news-rss.ts --restart
-
       - name: Poll feeds
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: gpt-5.6-terra
           OPENAI_FAST_MODEL: gpt-5.6-luna
-        run: npx tsx scripts/sync/news-rss.ts
+          NEWS_POLL_MAX_DAYS: ${{ vars.NEWS_POLL_MAX_DAYS }}
+          NEWS_POLL_RESTART: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.restart == 'true' && '1' || '0' }}
+          # Optional api.data.gov keys. Federal Register and legislation.gov.uk
+          # remain active when these are absent.
+          CONGRESS_API_KEY: ${{ secrets.CONGRESS_API_KEY }}
+          GOVINFO_API_KEY: ${{ secrets.GOVINFO_API_KEY }}
+          REGULATIONS_API_KEY: ${{ secrets.REGULATIONS_API_KEY }}
+        run: |
+          if [[ "$NEWS_POLL_RESTART" == "1" ]]; then
+            npx tsx scripts/sync/news-rss.ts --restart
+          else
+            npx tsx scripts/sync/news-rss.ts
+          fi
 
       - name: Sync public news summaries
         run: cp data/news/summaries.json public/news-summaries.json
 
-      # Always runs (independent of the news poll's 14-day throttle):
-      # regenerates the daily brief and refreshes the sellable
-      # global-stablecoin-policy-report in place.
+      # Regenerates the daily brief and refreshes the sellable
+      # global-stablecoin-policy-report in place, including on a quiet poll.
       - name: Generate & publish daily sellable report
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -89,7 +91,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/news/summaries.json data/news/.rss-started public/news-summaries.json lib/placeholder-data.ts data/reports/index.json data/reports/global-stablecoin-policy-report.md.enc data/reports/daily public/reports/daily
+          git add data/news/summaries.json data/news/source-health.json data/news/.rss-started public/news-summaries.json lib/placeholder-data.ts data/reports/index.json data/reports/global-stablecoin-policy-report.md.enc data/reports/daily public/reports/daily
           git commit -m "news+report: daily refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           # The push can race with another push to main (e.g. a PR merge
           # landing mid-run), which rejects this one as non-fast-forward.

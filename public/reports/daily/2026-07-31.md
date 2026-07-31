@@ -1,6 +1,6 @@
 # Daily Stablecoin Policy Brief - 2026-07-31
 
-**Generated at:** 2026-07-31T03:45:54.173Z
+**Generated at:** 2026-07-31T16:53:39.747Z
 
 > This is a free preview. The full report — top policy developments, the
 > regulatory signal table, market-impact analysis, and the analyst
@@ -9,21 +9,23 @@
 
 ## Executive Summary
 
-- U.S. implementation of the enacted GENIUS Act is advancing through the FDIC's proposed weekly and quarterly issuer reporting, a New York proposal to align state oversight, and Florida licensing and payment-pilot activity.
-- U.S. bank and trade-group engagement is concentrating on the implementation details of federal payment-stablecoin supervision, including committee procedures and proposed limits on stablecoin yield in the CLARITY Act.
-- Europe's MiCA framework continues to shape product availability and issuance plans, including Xryma's planned September launch of the euro-denominated XREUR stablecoin.
+- U.S. implementation of the GENIUS Act is advancing through OCC and interagency proposals, including OCC rules for issuers under its jurisdiction and customer-identification requirements for permitted payment stablecoin issuers.
+- The interagency customer-identification proposal is open for comment through 2026-08-22 and would treat permitted payment stablecoin issuers as financial institutions under the Bank Secrecy Act.
+- The United Kingdom's Financial Services and Markets Act 2000 identifies issuance of qualifying stablecoins as a regulated activity when specified conditions are carried out in the United Kingdom.
 
 ## Watchlist
 
-- FDIC next steps on proposed weekly and quarterly stablecoin issuer reporting under the GENIUS Act.
-- NYDFS consultation and finalization activity on alignment of state stablecoin oversight with the GENIUS Act.
-- Florida implementation of its issuer licensing regime and stablecoin fee-payment pilot.
-- Xryma's planned 3 September launch of XREUR and its MiCA compliance positioning.
-- Senate consideration of requests from U.S. banks to prohibit stablecoin yield provisions in the CLARITY Act.
+- Comments on the permitted payment stablecoin issuer customer-identification proposal close on 2026-08-22.
+- Further OCC implementation measures for the GENIUS Act, including treatment of issuer licensing, foreign-issuer registration, AML/CFT, sanctions compliance, redemption access, and reporting.
+- Federal Reserve decisions following closed comments on special-purpose Payment Accounts, Regulation A, and Regulation D proposals.
+- Progress of the Digital Commodity Intermediaries Act on the Senate Legislative Calendar.
+- Application of UK qualifying-stablecoin regulated-activity provisions to issuer and consumer-facing cryptoasset activity.
 
 ## Sources
 
-- [Google News — GENIUS / STABLE Act — NYDFS files formal proposal to align stablecoin oversight with GENIUS Act - JD Supra](https://news.google.com/rss/articles/CBMihgFBVV95cUxPZ2g2Q0NNTkFNQ09ZalpRVnRVTjJoNVFCR0hkY19VRWhndTAtZGJ3RFM0enZ4a3hLMmdsaHpkRzU2aDJxTktkNmhzcjltQ0Q5WUJKRmRGVThreU9aNmEwNTNlS1pqTTZndWpvempRa3JNb2dkVXg1aVh3Wk1qeW8zUWFhVnh2UQ?oc=5) · 2026-07-27
-- [Google News — Germany Stablecoin Policy — Euro-Stablecoin: Xryma startet XREUR am 3. September - AD HOC NEWS](https://news.google.com/rss/articles/CBMioAFBVV95cUxPcUhCdF9TdHpvVnNtcFpZc0w3U3dQZnp0d0lNSDBQM0toRm1FT3FkMVg3MXIzQ19mRDNJZmFnZGNXMlFpYjdiZnJHdnJRN1NZUzdoNkFnZkdXclBmeXV2dlVTNm9rWm5ES3hvamVscGxXMUdnWlRNQUpwN1JBQkFrMVFUREdoaVVJVzlIYnVXM0hiejVudE5ZZFFBS3VjZExq?oc=5) · 2026-07-30
-- [Google News — Stablecoin Issuers & Reserves — Florida creates licensing regime for stablecoin issuers, pilot allowing stablecoin fee payments - JD Supra](https://news.google.com/rss/articles/CBMihgFBVV95cUxNYUN0bW9VTzVZWlpPdTRZcnpPVjJ0RG54TUtIcERvOF9xdXhOLVRnc0hEX05KeGgtVk9zanhQYUpGa3ROb1c3T1o1ZFhWODc5MDVkY3N5ZW84UHhtSmVuVUtoQXM3YzdQd0tKRUpXY01wNEJ2ZW1qc2htV24zaEdkWnRaTW84QQ?oc=5) · 2026-07-27
-- [Google News — US Stablecoin Policy — FDIC unveils proposed weekly and quarterly reports for stablecoin issuers under GENIUS Act - JD Supra](https://news.google.com/rss/articles/CBMigAFBVV95cUxNT2ZEbmc2RXNEUERJbVg1cHlhaXdtNFNDdXFtUHZDWHRVVjZ1bTVDaGJIeVhwQ2E3TkpaOVdwQkdMa0MxTDN3b0pIU3ZSZHVwTndYTi02dnphd2RiT0tPdkliZERqdDlzOFJLc2Y2REp0LW0yS0IzS1B1TFE5R1NVeA?oc=5) · 2026-07-27
+- [Federal Register — Federal Reserve System — Proposed Revisions to the Federal Reserve Policy on Payment System Risk and the Guidelines for Account and Services Requests](https://www.federalregister.gov/documents/2026/05/26/2026-10375/proposed-revisions-to-the-federal-reserve-policy-on-payment-system-risk-and-the-guidelines-for) · 2026-07-27
+- [Federal Register — Treasury Department, Comptroller of the Currency — Implementing the Guiding and Establishing National Innovation for U.S. Stablecoins Act for the Issuance of Stablecoins by Entities Subject to the Jurisdiction of the Office of the Comptroller of the Currency](https://www.federalregister.gov/documents/2026/03/02/2026-04089/implementing-the-guiding-and-establishing-national-innovation-for-us-stablecoins-act-for-the) · 2026-07-29
+- [Federal Register — Treasury Department, Financial Crimes Enforcement Network — Permitted Payment Stablecoin Issuer Customer Identification Program](https://www.federalregister.gov/documents/2026/06/22/2026-12460/permitted-payment-stablecoin-issuer-customer-identification-program) · 2026-07-27
+- [GovInfo + Congress.gov — Guiding and Establishing National Innovation for U.S. Stablecoins Act; GENIUS Act](https://www.govinfo.gov/app/details/BILLS-119s1582enr) · 2026-07-29
+- [legislation.gov.uk — Financial Services and Markets Act 2000](https://www.legislation.gov.uk/ukpga/2000/8/2026-07-15) · 2026-07-30
+- [Regulations.gov — OCC — Permitted Payment Stablecoin Issuer Customer Identification Program](https://www.regulations.gov/document/OCC-2026-0331-0001) · 2026-07-29
