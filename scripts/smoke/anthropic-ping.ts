@@ -1,10 +1,10 @@
 /** Confirms the Anthropic key and the web_search tool work end-to-end. */
 import "../env.js";
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "../../lib/openai-llm.js";
 
 async function main() {
-  const key = process.env.ANTHROPIC_API_KEY;
-  if (!key) throw new Error("ANTHROPIC_API_KEY missing");
+  const key = process.env.OPENAI_API_KEY;
+  if (!key) throw new Error("OPENAI_API_KEY missing");
   const client = new Anthropic({ apiKey: key });
   console.log("[smoke] calling Claude with web_search tool...");
   const msg = await client.messages.create({

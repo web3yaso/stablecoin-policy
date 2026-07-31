@@ -39,29 +39,33 @@ jobs:
 
       - uses: actions/setup-node@v7
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
 
       - run: npm ci --no-audit --no-fund
 
-      - name: Check Anthropic API key
+      - name: Check OpenAI API key
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          if [[ -z "$ANTHROPIC_API_KEY" ]]; then
-            echo "ANTHROPIC_API_KEY is missing. Add it in GitHub: Settings → Secrets and variables → Actions → Repository secrets."
+          if [[ -z "$OPENAI_API_KEY" ]]; then
+            echo "OPENAI_API_KEY is missing. Add it in GitHub: Settings → Secrets and variables → Actions → Repository secrets."
             exit 1
           fi
 
       - name: Restart window (manual only)
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.restart == 'true' }}
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.6-terra
+          OPENAI_FAST_MODEL: gpt-5.6-luna
         run: npx tsx scripts/sync/news-rss.ts --restart
 
       - name: Poll feeds
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.6-terra
+          OPENAI_FAST_MODEL: gpt-5.6-luna
         run: npx tsx scripts/sync/news-rss.ts
 
       - name: Sync public news summaries
@@ -72,7 +76,8 @@ jobs:
       # global-stablecoin-policy-report in place.
       - name: Generate & publish daily sellable report
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.6-terra
           REPORTS_ENCRYPTION_KEY: ${{ secrets.REPORTS_ENCRYPTION_KEY }}
         run: npx tsx scripts/reports/generate-daily-report.ts
 

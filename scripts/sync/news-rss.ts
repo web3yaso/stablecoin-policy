@@ -27,7 +27,7 @@ import { execSync } from "node:child_process";
 import { copyFileSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "../../lib/openai-llm.js";
 import {
   regenerateRegions,
   regionForEntity,
@@ -334,10 +334,10 @@ function stripBoilerplate(html: string): string | null {
 }
 
 function getAnthropicApiKey(): string {
-  const key = process.env.ANTHROPIC_API_KEY?.trim();
+  const key = process.env.OPENAI_API_KEY?.trim();
   if (!key) {
     throw new Error(
-      "ANTHROPIC_API_KEY is missing. Add it to GitHub Actions secrets or .env.local before running news polling.",
+      "OPENAI_API_KEY is missing. Add it to GitHub Actions secrets or .env.local before running news polling.",
     );
   }
   return key;

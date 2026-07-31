@@ -32,7 +32,7 @@ import {
 } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "../../lib/openai-llm.js";
 import type {
   Dimension,
   ImpactTag,
@@ -241,9 +241,9 @@ Return stances for exactly these dimensions.`;
 }
 
 async function main() {
-  const key = process.env.ANTHROPIC_API_KEY;
+  const key = process.env.OPENAI_API_KEY;
   if (!key) {
-    console.error("[dim-stance] ANTHROPIC_API_KEY not set");
+    console.error("[dim-stance] OPENAI_API_KEY not set");
     process.exit(1);
   }
   const anthropic = new Anthropic({ apiKey: key });

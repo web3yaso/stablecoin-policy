@@ -25,7 +25,7 @@ import {
 } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "../../lib/openai-llm.js";
 import type { StanceType } from "../../types/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -231,9 +231,9 @@ Use this context plus your knowledge of major international AI & data-center pol
 }
 
 async function main() {
-  const key = process.env.ANTHROPIC_API_KEY;
+  const key = process.env.OPENAI_API_KEY;
   if (!key) {
-    console.error("[intl-stance] ANTHROPIC_API_KEY not set");
+    console.error("[intl-stance] OPENAI_API_KEY not set");
     process.exit(1);
   }
   const anthropic = new Anthropic({ apiKey: key });

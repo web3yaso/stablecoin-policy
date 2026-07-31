@@ -23,7 +23,7 @@ import "../env.js";
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic from "../../lib/openai-llm.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
@@ -237,9 +237,9 @@ function pickTopEntities(): string[] {
 }
 
 async function main() {
-  const key = process.env.ANTHROPIC_API_KEY;
+  const key = process.env.OPENAI_API_KEY;
   if (!key) {
-    console.error("[news] ANTHROPIC_API_KEY not set");
+    console.error("[news] OPENAI_API_KEY not set");
     process.exit(1);
   }
   const anthropic = new Anthropic({ apiKey: key });
