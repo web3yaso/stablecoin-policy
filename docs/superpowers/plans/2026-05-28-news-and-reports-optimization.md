@@ -1,5 +1,11 @@
 # News Sourcing and Daily Report Optimization Implementation Plan
 
+> **Historical plan:** its Google News/web-search tasks are no longer active.
+> **DO NOT EXECUTE THE INSTRUCTIONS BELOW.** They are retained only as an
+> implementation record and reference files that have since been deleted.
+> The 2026-07-30 replacement is documented in
+> [`../../professional-source-migration.md`](../../professional-source-migration.md).
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Widen free news sourcing (regulator RSS + dynamic Google News top-up + two-layer relevance gate) and rewrite the daily sellable report with per-jurisdiction prompt blocks and a Sources list — zero incremental API cost.

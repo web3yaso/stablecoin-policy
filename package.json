@@ -12,7 +12,9 @@
     "blurbs:refresh": "tsx scripts/cleanup/refresh-blurbs.ts --force",
     "data:rebuild": "tsx scripts/build-placeholder.ts",
     "news:poll": "tsx scripts/sync/news-rss.ts",
-    "news:regen": "tsx scripts/sync/news-regen.ts && cp data/news/summaries.json public/news-summaries.json"
+    "news:sources:check": "tsx scripts/smoke/professional-sources-dryrun.ts",
+    "news:regen": "tsx scripts/sync/news-regen.ts && cp data/news/summaries.json public/news-summaries.json",
+    "cost:summary": "tsx scripts/reports/summarize-llm-cost.ts"
   },
   "dependencies": {
     "@number-flow/react": "^0.6.0",

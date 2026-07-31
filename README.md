@@ -18,7 +18,7 @@
 - **Next.js 16** + **React 19** + **TypeScript**
 - **Tailwind CSS v4**
 - **react-simple-maps** + **d3-geo** + **topojson-client**
-- 新闻数据通过 **Anthropic API** 聚合
+- 政策发现来自监管机构一手 feed 与政府结构化 API；**OpenAI API** 仅用于摘要和分析
 
 ## 本地运行
 
@@ -34,7 +34,9 @@ npm run dev
 ```
 CONGRESS_API_KEY=   # Congress.gov，免费注册 https://api.congress.gov/sign-up/
 STATE_API_KEY=      # OpenStates API，免费注册 https://openstates.org/accounts/profile/
-OPENAI_API_KEY=     # 新闻聚合与法案分类
+GOVINFO_API_KEY=    # GovInfo 全文检索；可留空并复用任一 api.data.gov key
+REGULATIONS_API_KEY= # Regulations.gov；可留空并复用任一 api.data.gov key
+OPENAI_API_KEY=     # 官方来源摘要、区域分析与日报生成
 OPENAI_MODEL=gpt-5.6-terra       # 日报和高质量分析
 OPENAI_FAST_MODEL=gpt-5.6-luna   # 高频新闻摘要
 ```
@@ -147,12 +149,14 @@ REPORTS_API_BASE_URL=https://stablecoin-policy.vercel.app npx tsx scripts/report
 | 脚本 | 说明 |
 |------|------|
 | `npx tsx scripts/smoke/congress-ping.ts` | 测试 Congress.gov 连通性 |
-| `npx tsx scripts/sync/bills-federal.ts` | 同步美国联邦稳定币法案（Congress.gov） |
+| `npx tsx scripts/sync/bills-federal.ts` | 用 GovInfo 全文发现并同步 Congress.gov 法案状态 |
 | `npx tsx scripts/sync/bills-states.ts` | 同步美国各州稳定币法案（OpenStates，NY/CA/TX等） |
 | `npx tsx scripts/sync/votes-congress.ts` | 同步联邦法案投票记录 |
-| `npx tsx scripts/sync/news-rss.ts` | 拉取最新新闻 |
-| `npx tsx scripts/sync/international.ts` | 更新国际数据 |
+| `npm run news:sources:check` | 只读检查 Federal Register、Regulations.gov、GovInfo + Congress.gov、legislation.gov.uk adapters |
+| `npx tsx scripts/sync/news-rss.ts` | 同步一手监管 feed 与政府结构化来源 |
 
 ## 数据来源
 
-美国联邦立法数据来自 [Congress.gov API](https://api.congress.gov/)；州级数据来自 [OpenStates API](https://openstates.org/)；国际数据来自各国议会官网及监管机构公告。完整来源见站内方法论页面。
+美国联邦立法发现与原文来自 [GovInfo Search API](https://www.govinfo.gov/features/search-service-overview)，状态和动作来自 [Congress.gov API](https://api.congress.gov/)；美国监管文档来自 Federal Register 与 Regulations.gov；州级数据来自 [OpenStates API](https://openstates.org/)；英国正式法律正文来自 legislation.gov.uk 的全文检索 feed 与 XML；其他国际更新来自各国议会、央行及监管机构一手 feed。
+
+活跃发现链路不使用 Google News。每次同步都会写入来源健康检查；日报只接受近期且至少有一个成功官方来源的检查结果，以及带 `official-api` / `official-feed` 标记的数据。迁移策略、版本字段、当前覆盖和下一批来源见 [`docs/professional-source-migration.md`](docs/professional-source-migration.md)。

@@ -129,10 +129,13 @@ export default function MethodologyPage() {
           </h2>
           <p>
             The homepage overview and entity news tabs are generated from
-            curated RSS feeds in{" "}
-            <code className="text-ink">data/news/feeds.json</code>. The
-            poller fetches feed items, filters for stablecoin relevance,
-            summarizes article text, and writes the results to{" "}
+            first-party feeds in{" "}
+            <code className="text-ink">data/news/feeds.json</code> and
+            government APIs configured in{" "}
+            <code className="text-ink">data/news/professional-sources.json</code>.
+            The poller retrieves official documents, preserves document IDs
+            and versions, filters for stablecoin relevance, and writes the
+            results to{" "}
             <code className="text-ink">data/news/summaries.json</code>.
           </p>
           <p>

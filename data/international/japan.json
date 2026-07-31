@@ -7,8 +7,20 @@
   "stance": "concerning",
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
-  "contextBlurb": "Japan operates a clear, conservative stablecoin regime. Fiat-pegged, par-redeemable stablecoins are regulated as electronic payment instruments (EPIs) under amendments to the Payment Services Act (PSA). Issuance and handling are limited to licensed entities under the FSA framework, with strong AML/CFT and consumer-protection rules. The core regime has applied since June 2023, and authorities refined it through 2024–2025. On 27 January 2026, the FSA published strict collateral requirements for stablecoin reserves, mandating top-grade credit ratings for foreign bonds held by stablecoin issuers, further tightening reserve asset standards. Commercial roll-out is gradual: JPYC was authorised as the first licensed issuer in August 2025, while Circle–SBI are advancing USDC distribution via banking and market partnerships under Japan's rules.",
+  "contextBlurb": "Japan operates a clear, conservative stablecoin regime. Fiat-pegged, par-redeemable stablecoins are regulated as electronic payment instruments (EPIs) under amendments to the Payment Services Act (PSA). Issuance and handling are limited to licensed entities under the FSA framework, with strong AML/CFT and consumer-protection rules. The core regime has applied since June 2023, and authorities refined it through 2024–2026. On 7 July 2026, the FSA finalized an amendment expanding the foreign jurisdictions covered by Japan's travel-rule requirements for cryptoasset and stablecoin transfers; the amendment takes effect on 3 August 2026.",
   "legislation": [
+    {
+      "id": "japan-leg-2026-travel-rule",
+      "billCode": "2026-07-07",
+      "title": "FSA finalized an amendment expanding the jurisdictions covered by Japan's travel rule for cryptoasset and stablecoin transfers.",
+      "summary": "The amendment adds five jurisdictions to the scope of Japan's originator and beneficiary information requirements for transfers involving foreign virtual-asset service providers. It takes effect on August 3, 2026.",
+      "stage": "Enacted",
+      "stance": "concerning",
+      "impactTags": [],
+      "category": "stablecoin-regulation",
+      "updatedDate": "2026-07-07",
+      "sourceUrl": "https://www.fsa.go.jp/en/news/2026/20260707/20260707.html"
+    },
     {
       "id": "japan-leg-1",
       "billCode": "2026-01-27",
@@ -108,8 +120,8 @@
     "code": "JP",
     "nameZh": "日本",
     "flagImg": "https://flagcdn.com/w320/jp.png",
-    "lastUpdated": "Jan 27, 2026",
-    "summaryEn": "Japan operates a clear, conservative stablecoin regime. Fiat-pegged, par-redeemable stablecoins are regulated as electronic payment instruments (EPIs) under amendments to the Payment Services Act (PSA). Issuance and handling are limited to licensed entities under the FSA framework, with strong AML/CFT and consumer-protection rules. The core regime has applied since June 2023, and authorities refined it through 2024–2025. On 27 January 2026, the FSA published strict collateral requirements for stablecoin reserves, mandating top-grade credit ratings for foreign bonds held by stablecoin issuers, further tightening reserve asset standards. Commercial roll-out is gradual: JPYC was authorised as the first licensed issuer in August 2025, while Circle–SBI are advancing USDC distribution via banking and market partnerships under Japan's rules.",
+    "lastUpdated": "Jul 7, 2026",
+    "summaryEn": "Japan regulates fiat-pegged, par-redeemable stablecoins as electronic payment instruments under the Payment Services Act. Issuance and handling are limited to licensed entities under the FSA framework, with strong reserve, AML/CFT and consumer-protection requirements. On 7 July 2026, the FSA finalized an amendment adding five foreign jurisdictions to the scope of Japan's travel-rule requirements for cryptoasset and stablecoin transfers. The amendment takes effect on 3 August 2026.",
     "tags": [
       "bank-only",
       "licensing-required",

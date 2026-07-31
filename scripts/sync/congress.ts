@@ -13,7 +13,7 @@
  *
  * Usage:
  *   import { fetchCongress } from "./congress.js";
- *   const data = await fetchCongress("/bill", { query: "stablecoin", limit: 20 });
+ *   const data = await fetchCongress("/bill/119/s/1582");
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";

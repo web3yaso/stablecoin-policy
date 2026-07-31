@@ -490,6 +490,18 @@ export interface NewsItem {
    *  = source was paywalled/unreachable so the summary was drafted from the
    *  headline alone. Used by the UI to show a "from headline" chip. */
   summarySource?: "article" | "headline-only";
+  /** Machine-readable provenance for first-party feeds and government APIs. */
+  sourceId?: string;
+  sourceType?: "official-api" | "official-feed";
+  sourceAuthority?: string;
+  officialDocumentId?: string;
+  sourceVersion?: string;
+  documentType?: string;
+  officialPdfUrl?: string;
+  commentCloseDate?: string;
+  openForComment?: boolean;
+  retrievedAt?: string;
+  relatedDocumentIds?: string[];
 }
 
 export type LegalStatusEnum =

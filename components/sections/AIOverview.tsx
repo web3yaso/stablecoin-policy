@@ -282,7 +282,9 @@ export default function AIOverview() {
 
       {!visibleRegion ? (
         <p className="text-sm text-muted mt-6">
-          No overview available yet. Run scripts/sync/news.ts to generate one.
+          No new {REGION_LABEL[activeTab]} stablecoin policy signals were
+          identified in the monitored official sources during the last 30
+          days.
         </p>
       ) : (
         <div key={activeTab} className="mt-5 animate-fade-rise">

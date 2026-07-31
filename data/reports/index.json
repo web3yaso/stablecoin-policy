@@ -44,14 +44,14 @@
   },
   {
     "slug": "global-stablecoin-policy-report",
-    "title": "Daily Stablecoin Policy Brief - 2026-07-26",
-    "summary": "North America: The GENIUS Act remains the dominant regulatory framework shaping U.S. stablecoin policy, though it missed its own implementation deadline one year after introduction, leaving comprehensive rules still a work in progress. The New York Department of Financial Service",
+    "title": "Daily Stablecoin Policy Brief - 2026-07-31",
+    "summary": "U.S. implementation of the GENIUS Act is advancing through OCC and interagency proposals, including OCC rules for issuers under its jurisdiction and customer-identification requirements for permitted payment stablecoin issuers. The interagency customer-identification proposal is ",
     "category": "policy",
     "jurisdiction": [
       "GLOBAL"
     ],
-    "publishedAt": "2026-07-26T06:20:48.974Z",
-    "wordCount": 574,
+    "publishedAt": "2026-07-31T16:53:39.747Z",
+    "wordCount": 1177,
     "priceUSD": 0.1,
     "encryptedContentFile": "global-stablecoin-policy-report.md.enc"
   }

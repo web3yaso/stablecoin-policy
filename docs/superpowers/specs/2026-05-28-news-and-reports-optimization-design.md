@@ -1,5 +1,11 @@
 # News Sourcing and Daily Report Optimization — Design
 
+> **Superseded for source discovery (2026-07-30):** Google News and dynamic
+> web-search described below have been removed from the active pipeline.
+> **DO NOT IMPLEMENT OR RE-ENABLE THOSE INSTRUCTIONS.** This document is an
+> architectural history, not the current source specification.
+> See [`../../professional-source-migration.md`](../../professional-source-migration.md).
+
 **Date:** 2026-05-28
 **Scope:** `scripts/sync/news-rss.ts`, `data/news/feeds.json`, new `scripts/sync/news-web-search.ts`, `scripts/reports/generate-daily-report.ts`, three new smoke scripts under `scripts/smoke/`.
 **Out of scope:** UI changes (`AIOverview.tsx`, `LiveNews.tsx`), x402 server, payment logs, regional summarizer (`news-regional-summary.ts`), placeholder rebuild script, sellable slug / pricing / encryption / index upsert semantics.

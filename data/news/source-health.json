@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "checkedAt": "2026-07-31T17:29:01.010Z",
+  "status": "healthy",
+  "officialFeeds": {
+    "configured": 17,
+    "succeeded": 17,
+    "failed": 0,
+    "failedSourceIds": [],
+    "candidateCount": 162
+  },
+  "professionalSources": [
+    {
+      "sourceId": "federal-register",
+      "status": "ok",
+      "queryCount": 1,
+      "rawItemCount": 30,
+      "candidateCount": 30,
+      "mergedIntoOtherSources": 0,
+      "durationMs": 322,
+      "errors": []
+    },
+    {
+      "sourceId": "regulations-gov",
+      "status": "ok",
+      "queryCount": 1,
+      "rawItemCount": 12,
+      "candidateCount": 12,
+      "mergedIntoOtherSources": 8,
+      "durationMs": 1719,
+      "errors": []
+    },
+    {
+      "sourceId": "us-congress",
+      "status": "ok",
+      "queryCount": 1,
+      "rawItemCount": 35,
+      "candidateCount": 25,
+      "mergedIntoOtherSources": 0,
+      "durationMs": 2370,
+      "errors": []
+    },
+    {
+      "sourceId": "uk-legislation",
+      "status": "ok",
+      "queryCount": 2,
+      "rawItemCount": 49,
+      "candidateCount": 25,
+      "mergedIntoOtherSources": 0,
+      "durationMs": 5352,
+      "errors": []
+    },
+    {
+      "sourceId": "japan-fsa",
+      "status": "ok",
+      "queryCount": 3,
+      "rawItemCount": 36,
+      "candidateCount": 1,
+      "mergedIntoOtherSources": 0,
+      "durationMs": 1580,
+      "errors": []
+    }
+  ],
+  "candidateCounts": {
+    "feeds": 162,
+    "professional": 85,
+    "total": 247,
+    "relevantNew": 49
+  }
+}

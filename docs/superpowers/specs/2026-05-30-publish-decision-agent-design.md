@@ -1,5 +1,12 @@
 # Publish-Decision Agent — Design
 
+> **Source-discovery note (2026-07-30):** the dynamic Google News top-up
+> assumed by this historical design is no longer active. The current discovery
+> architecture is documented in
+> [`../../professional-source-migration.md`](../../professional-source-migration.md).
+> **DO NOT EXECUTE OR RESTORE THE GOOGLE DISCOVERY STEPS BELOW.** They are
+> preserved solely for historical context.
+
 **Date:** 2026-05-30
 **Scope:** New `scripts/agents/publish-decision-agent.ts` + workflow integration to gate the existing weekly sellable report on an LLM publish/skip decision; agent uses Anthropic's native `web_search` tool to verify high-impact claims before deciding.
 

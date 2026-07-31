@@ -95,6 +95,17 @@ interface NewsItem {
   url: string;
   summary?: string;
   summarySource?: "article" | "headline-only";
+  sourceId?: string;
+  sourceType?: "official-api" | "official-feed";
+  sourceAuthority?: string;
+  officialDocumentId?: string;
+  sourceVersion?: string;
+  documentType?: string;
+  officialPdfUrl?: string;
+  commentCloseDate?: string;
+  openForComment?: boolean;
+  retrievedAt?: string;
+  relatedDocumentIds?: string[];
 }
 
 interface NewsFile {
