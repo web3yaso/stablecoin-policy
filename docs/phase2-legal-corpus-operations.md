@@ -129,6 +129,13 @@ existing tracker and report endpoints are unaffected.
 - Cap. 656 remains blocked and absent from the corpus due to the embedded
   identity mismatch. Public lookup for Cap. 656A returns `404`, and Hong Kong
   coverage remains `IN_PROGRESS`, `0%`, and `UNKNOWN`.
+- The SSO Payment Services Act 2019 PDF pinned to `ValidDate=20250309` was
+  ingested as `OBSERVED` with SHA-256
+  `6644db515eb0e28046f9726b6244907e8817e6eb05592ada2d12249326c2d9b7`
+  and 148 provisions at ordinals 0 through 147. Idempotent replay returned the
+  same version ID. The status RPC reports no verification time; Singapore
+  coverage remains `IN_PROGRESS` with zero reviewed claims, and no published
+  changes or source evidence were exposed.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
