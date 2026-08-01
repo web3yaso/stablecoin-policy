@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stablecoin-policy.citely.info/contracts/v1/report-metadata.schema.json",
+  "title": "ReportMetadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "slug",
+    "title",
+    "summary",
+    "category",
+    "jurisdiction",
+    "publishedAt",
+    "wordCount",
+    "priceUSD",
+    "encryptedContentFile"
+  ],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{5,80}$"
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "title_en": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string", "minLength": 1 },
+    "category": {
+      "type": "string",
+      "enum": ["enforcement", "policy", "licensing", "sanctions", "analysis"]
+    },
+    "jurisdiction": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "publishedAt": { "type": "string", "format": "date-time" },
+    "wordCount": { "type": "integer", "minimum": 0 },
+    "priceUSD": { "type": "number", "exclusiveMinimum": 0 },
+    "encryptedContentFile": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*\\.md\\.enc$"
+    },
+    "artifactKey": { "$ref": "#/$defs/objectKey" },
+    "artifactChecksumSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sourceUrl": { "type": "string", "format": "uri" }
+  },
+  "$defs": {
+    "objectKey": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?(?:/|$))(?!.*\\\\).+$"
+    }
+  }
+}

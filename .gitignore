@@ -37,6 +37,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# Supabase CLI local link and runtime metadata
+/supabase/.temp/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
@@ -59,3 +62,7 @@ next-env.d.ts
 
 # claude code project instructions — local only
 /CLAUDE.md
+
+# local product context — intentionally not published
+/docs/PROJECT_CONTEXT.md
+/docs/superpowers/specs/2026-07-30-stablecoin-pre-listing-check-design.md

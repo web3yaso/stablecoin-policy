@@ -4,16 +4,23 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "cp data/news/summaries.json public/news-summaries.json",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "eval:phase0": "node --import tsx scripts/evals/run-phase0.ts",
+    "eval:phase1": "node --import tsx scripts/evals/run-phase1.ts",
+    "storage:publish": "node --import tsx scripts/migrate/publish-phase1-data.ts",
+    "storage:restore": "node --import tsx scripts/migrate/restore-release.ts",
+    "data:check": "node --import tsx scripts/ci/check-repository-data.ts",
+    "audit:deps": "npm audit --audit-level=low",
     "asp:check": "tsx scripts/asp/check-paid-endpoint.ts",
     "blurbs:refresh": "tsx scripts/cleanup/refresh-blurbs.ts --force",
     "data:rebuild": "tsx scripts/build-placeholder.ts",
     "news:poll": "tsx scripts/sync/news-rss.ts",
     "news:sources:check": "tsx scripts/smoke/professional-sources-dryrun.ts",
-    "news:regen": "tsx scripts/sync/news-regen.ts && cp data/news/summaries.json public/news-summaries.json",
+    "news:regen": "tsx scripts/sync/news-regen.ts",
     "cost:summary": "tsx scripts/reports/summarize-llm-cost.ts"
   },
   "dependencies": {
@@ -29,13 +36,13 @@
     "d3-geo": "^3.1.1",
     "framer-motion": "^12.38.0",
     "maplibre-gl": "^5.23.0",
-    "next": "16.2.3",
+    "next": "16.2.12",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-grab": "^0.1.31",
     "react-simple-maps": "^1.0.0",
     "topojson-client": "^3.1.0",
-    "viem": "^2.48.11"
+    "viem": "^2.55.10"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -45,12 +52,18 @@
     "@types/react-dom": "^19",
     "@types/react-simple-maps": "^3.0.6",
     "@types/topojson-client": "^3.1.5",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "dotenv": "^17.4.1",
     "eslint": "^9",
-    "eslint-config-next": "16.2.3",
+    "eslint-config-next": "16.2.12",
     "openai": "^7.1.0",
     "tailwindcss": "^4",
-    "tsx": "^4.21.0",
+    "tsx": "^4.23.1",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "8.5.25",
+    "sharp": "0.35.3"
   }
 }

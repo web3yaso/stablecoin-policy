@@ -134,7 +134,6 @@ export function DataCenterRow() {
  */
 export default function MobileLegend({
   dimension,
-  showDataCenters,
   visibility,
 }: MobileLegendProps) {
   const showDimension = dimension !== "overall";

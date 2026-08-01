@@ -9,6 +9,7 @@ import MapShell from "@/components/map/MapShell";
 import FadeInOnView from "@/components/ui/FadeInOnView";
 import { useScrollProgress } from "@/lib/use-scroll-progress";
 import { useLocale } from "@/contexts/LocaleContext";
+import { PolicyDataProvider } from "@/contexts/PolicyDataContext";
 import { t as tr } from "@/lib/i18n";
 
 // Below-fold sections — lazy-loaded so the initial JS bundle only
@@ -60,7 +61,7 @@ export default function Page() {
   };
 
   return (
-    <>
+    <PolicyDataProvider>
       <Header />
       <MapShell
         revealProgress={progress}
@@ -178,6 +179,6 @@ export default function Page() {
           </span>
         </div>
       </section>
-    </>
+    </PolicyDataProvider>
   );
 }

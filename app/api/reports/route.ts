@@ -1,5 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { createReportListResponse } from "@/lib/contracts/report-list";
 import { listReports } from "@/lib/reports";
+import {
+  DataIntegrityError,
+  ExternalStorageError,
+} from "@/lib/data/external-storage-errors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -7,19 +12,6 @@ export const dynamic = "force-dynamic";
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const RATE_LIMIT_MAX = 30;
 const rateLimitBuckets = new Map<string, { count: number; resetAt: number }>();
-
-type PublicReport = {
-  slug: string;
-  title: string;
-  title_en?: string;
-  summary: string;
-  category: string;
-  jurisdiction: string[];
-  publishedAt: string;
-  wordCount: number;
-  priceUSD: number;
-  fullContentUrl: string;
-};
 
 export async function OPTIONS() {
   return new Response(null, {
@@ -45,33 +37,31 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const reports = await listReports();
-  const baseUrl = new URL(request.url);
-  const publicReports: PublicReport[] = reports.map((report) => ({
-    slug: report.slug,
-    title: report.title,
-    ...(report.title_en ? { title_en: report.title_en } : {}),
-    summary: report.summary,
-    category: report.category,
-    jurisdiction: report.jurisdiction,
-    publishedAt: report.publishedAt,
-    wordCount: report.wordCount,
-    priceUSD: report.priceUSD,
-    fullContentUrl: `${baseUrl.origin}/api/reports/${report.slug}`,
-  }));
-
-  const lastUpdated =
-    reports
-      .map((report) => Date.parse(report.publishedAt))
-      .filter(Number.isFinite)
-      .sort((a, b) => b - a)[0] ?? Date.now();
+  let reports;
+  try {
+    reports = await listReports();
+  } catch (error: unknown) {
+    if (
+      error instanceof ExternalStorageError ||
+      error instanceof DataIntegrityError
+    ) {
+      return NextResponse.json(
+        { error: "report-catalog-unavailable" },
+        {
+          status: 503,
+          headers: { ...corsHeaders(), "Cache-Control": "no-store" },
+        },
+      );
+    }
+    throw error;
+  }
+  const response = createReportListResponse(
+    reports,
+    new URL(request.url).origin,
+  );
 
   return NextResponse.json(
-    {
-      reports: publicReports,
-      total: publicReports.length,
-      lastUpdated: new Date(lastUpdated).toISOString(),
-    },
+    response,
     {
       headers: {
         ...corsHeaders(),

@@ -135,9 +135,6 @@ async function main() {
 
   console.log(`[fill-tags] ${pending.length} untagged bills to process`);
 
-  // Track which files need saving
-  const dirtyFiles = new Set<string>();
-
   for (let i = 0; i < pending.length; i += BATCH_SIZE) {
     const batch = pending.slice(i, i + BATCH_SIZE);
     const batchNum = Math.floor(i / BATCH_SIZE) + 1;
@@ -150,7 +147,6 @@ async function main() {
         const tags = results[j];
         if (tags && tags.length > 0) {
           batch[j].bill.impactTags = tags;
-          dirtyFiles.add(batch[j].filePath);
           console.log(`  ${batch[j].stateName} ${batch[j].bill.billCode}: ${tags.join(", ")}`);
         } else {
           console.log(`  ${batch[j].stateName} ${batch[j].bill.billCode}: (no tags)`);
@@ -161,16 +157,7 @@ async function main() {
     }
   }
 
-  // Save dirty files
-  for (const filePath of dirtyFiles) {
-    const data = JSON.parse(readFileSync(filePath, "utf8"));
-    // Re-read to get the bill references we mutated
-    // Actually the bill objects are the same references, so just re-serialize
-    // We need to re-read because we mutated bill objects in-memory
-    // but the file still has the old data on disk
-  }
-
-  // Actually we need to save properly — re-read all files and update bills
+  // Re-read all files and persist the tagged bills.
   for (const filePath of allFiles) {
     const data = JSON.parse(readFileSync(filePath, "utf8")) as StateFile;
     let changed = false;

@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState, Fragment } from "react";
+import { useMemo, useState, Fragment } from "react";
+import { usePolicyData } from "@/contexts/PolicyDataContext";
 
-// Fetched at runtime from /news-summaries.json (copied from
-// data/news/summaries.json by the `prebuild` script). Static-importing
+// Fetched at runtime from the provider-neutral public dataset route.
+// Static-importing
 // this file used to inline ~298 KB of JSON into the homepage bundle for
 // every visitor. Runtime fetch lets the browser cache it separately and
 // keeps the JS chunk lean.
@@ -190,33 +191,18 @@ interface RegionalSummary {
 
 export default function AIOverview() {
   const [activeTab, setActiveTab] = useState<RegionKey>("na");
-  const [newsSummaries, setNewsSummaries] = useState<NewsSummariesShape>({});
-
-  // One-shot fetch on mount. Use no-store so regenerated summaries are
-  // reflected immediately instead of sticking to a stale browser cache.
-  useEffect(() => {
-    let cancelled = false;
-    fetch("/news-summaries.json", { cache: "no-store" })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => {
-        if (!cancelled && data) setNewsSummaries(data as NewsSummariesShape);
-      })
-      .catch(() => {});
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const regional = (newsSummaries.regional ?? {}) as Record<
-    string,
-    {
-      summary?: string;
-      highlights?: Highlight[];
-      generatedAt?: string;
-    } | undefined
-  >;
+  const { newsDataset, newsStatus } = usePolicyData();
+  const newsSummaries = (newsDataset ?? {}) as NewsSummariesShape;
 
   const allRegions: RegionalSummary[] = useMemo(() => {
+    const regional = (newsSummaries.regional ?? {}) as Record<
+      string,
+      {
+        summary?: string;
+        highlights?: Highlight[];
+        generatedAt?: string;
+      } | undefined
+    >;
     const out: RegionalSummary[] = [];
     for (const k of TAB_ORDER) {
       const block = regional[k];
@@ -231,7 +217,7 @@ export default function AIOverview() {
       });
     }
     return out;
-  }, [regional]);
+  }, [newsSummaries.regional]);
 
   // Prefer the ACTIVE region's regeneration timestamp so the label tracks
   // the thing being read; fall back to the file-level generatedAt.
@@ -257,6 +243,7 @@ export default function AIOverview() {
             <path d="M7 0L8.27 5.73L14 7L8.27 8.27L7 14L5.73 8.27L0 7L5.73 5.73Z" />
           </svg>
           AI overview · Updated {updated}
+          {newsStatus === "stale" ? " · Cached snapshot" : ""}
         </div>
 
         <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/[.04]">
@@ -280,7 +267,16 @@ export default function AIOverview() {
         </div>
       </div>
 
-      {!visibleRegion ? (
+      {newsStatus === "loading" ? (
+        <p className="text-sm text-muted mt-6">
+          Loading the latest official-source snapshot…
+        </p>
+      ) : newsStatus === "unavailable" ? (
+        <p className="text-sm text-muted mt-6">
+          The live policy dataset is temporarily unavailable. No new
+          regulatory conclusion is being generated from missing data.
+        </p>
+      ) : !visibleRegion ? (
         <p className="text-sm text-muted mt-6">
           No new {REGION_LABEL[activeTab]} stablecoin policy signals were
           identified in the monitored official sources during the last 30

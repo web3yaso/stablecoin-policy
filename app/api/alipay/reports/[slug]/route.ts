@@ -3,8 +3,13 @@ import {
   getReportBySlug,
   getReportMetaBySlug,
   LATEST_REPORT_SLUG,
+  ReportArtifactMissingError,
   ReportContentKeyMissingError,
 } from "@/lib/reports";
+import {
+  DataIntegrityError,
+  ExternalStorageError,
+} from "@/lib/data/external-storage-errors";
 import {
   alipayConfigured,
   buildPaymentNeeded,
@@ -75,7 +80,12 @@ export async function GET(request: NextRequest, context: RouteContext) {
     }
     return await verifyAndDeliver(config, proof, resourceId);
   } catch (error: unknown) {
-    if (error instanceof ReportContentKeyMissingError) {
+    if (
+      error instanceof ReportContentKeyMissingError ||
+      error instanceof ReportArtifactMissingError ||
+      error instanceof DataIntegrityError ||
+      error instanceof ExternalStorageError
+    ) {
       return NextResponse.json(
         { error: "report-content-unavailable" },
         { status: 503, headers: corsHeaders() },
@@ -161,6 +171,16 @@ async function verifyAndDeliver(
   const tradeNo = verify.tradeNo ?? parsed.tradeNo;
   const outTradeNo = verify.outTradeNo ?? "";
 
+  // Resolve and decrypt the artifact before reserving fulfilment. A temporary
+  // storage outage must not consume a valid payment proof without delivery.
+  const report = await getReportBySlug(LATEST_REPORT_SLUG);
+  if (!report) {
+    return NextResponse.json(
+      { code: "RESOURCE_NOT_FOUND", message: "report not found" },
+      { status: 404, headers: corsHeaders() },
+    );
+  }
+
   // Replay guard: a given trade_no fulfils at most once.
   const fresh = await reserveFulfillment(tradeNo);
   if (!fresh) {
@@ -173,14 +193,6 @@ async function verifyAndDeliver(
         out_trade_no: outTradeNo,
       },
       { status: 200, headers: corsHeaders() },
-    );
-  }
-
-  const report = await getReportBySlug(LATEST_REPORT_SLUG);
-  if (!report) {
-    return NextResponse.json(
-      { code: "RESOURCE_NOT_FOUND", message: "report not found" },
-      { status: 404, headers: corsHeaders() },
     );
   }
 

@@ -39,7 +39,6 @@ interface Props {
 }
 
 const LOD_ENTER = 3;
-const LOD_EXIT = 2.7;
 
 const BLOB_STYLE = {
   fill: NEUTRAL_FILL,

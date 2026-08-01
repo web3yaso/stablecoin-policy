@@ -22,7 +22,7 @@ import {
   type Region,
   type ViewTarget,
 } from "@/types";
-import { getEntity, getOverviewEntity, ENTITIES } from "@/lib/placeholder-data";
+import { usePolicyData } from "@/contexts/PolicyDataContext";
 import { STANCE_HEX, type SetTooltip, type TooltipState } from "@/lib/map-utils";
 import {
   DIMENSION_TAGS,
@@ -316,6 +316,7 @@ export default function MapShell({
   navigateRef,
 }: Omit<MapShellProps, "dimension" | "lens">) {
   const { locale } = useLocale();
+  const { entities, getEntity, getOverviewEntity } = usePolicyData();
   // Stablecoin issuance is the primary view for this tracker.
   const [activeDimension, setActiveDimension] = useState<Dimension>("overall");
   const [activeLens, setActiveLens] = useState<DimensionLens>("stablecoin");
@@ -411,7 +412,10 @@ export default function MapShell({
   const selectedStateName = current.selectedStateName ?? null;
   const selectedCountyFips = current.selectedCountyFips ?? null;
 
-  const overviewEntity = useMemo(() => getOverviewEntity(region), [region]);
+  const overviewEntity = useMemo(
+    () => getOverviewEntity(region),
+    [getOverviewEntity, region],
+  );
 
   const selectedEntity = useMemo((): Entity | null => {
     // In county view, synthesize an Entity from the MunicipalEntity so the
@@ -428,7 +432,7 @@ export default function MapShell({
     }
     if (!selectedGeoId) return overviewEntity;
     const found = getEntity(selectedGeoId, region);
-    return found ?? ENTITIES.find((e) => e.geoId === selectedGeoId) ?? overviewEntity;
+    return found ?? entities.find((e) => e.geoId === selectedGeoId) ?? overviewEntity;
   }, [
     selectedGeoId,
     region,
@@ -436,6 +440,8 @@ export default function MapShell({
     selectedStateName,
     selectedCountyFips,
     overviewEntity,
+    entities,
+    getEntity,
   ]);
 
   // ─── Browser-history sync ──────────────────────────────────────────
@@ -480,26 +486,29 @@ export default function MapShell({
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
-  const navigateTo = (next: ViewState) => {
-    const normalized = normalizeViewState(next);
-    if (viewsEqual(current, normalized)) return;
-    // Any navigation invalidates the current hover state — the geography
-    // the tooltip was anchored to may no longer be on screen, so the
-    // tooltip would otherwise stick in place until the user happens to
-    // mouse over a fresh path.
-    setTooltipInternal(null);
-    setHoveredFacility(null);
-    const newHistory = [...history.slice(0, historyIdx + 1), normalized];
-    setHistory(newHistory);
-    setHistoryIdx(newHistory.length - 1);
-    if (typeof window !== "undefined") {
-      window.history.pushState(
-        { __govNavId: newHistory.length - 1 },
-        "",
-        window.location.href,
-      );
-    }
-  };
+  const navigateTo = useCallback(
+    (next: ViewState) => {
+      const normalized = normalizeViewState(next);
+      if (viewsEqual(current, normalized)) return;
+      // Any navigation invalidates the current hover state — the geography
+      // the tooltip was anchored to may no longer be on screen, so the
+      // tooltip would otherwise stick in place until the user happens to
+      // mouse over a fresh path.
+      setTooltipInternal(null);
+      setHoveredFacility(null);
+      const newHistory = [...history.slice(0, historyIdx + 1), normalized];
+      setHistory(newHistory);
+      setHistoryIdx(newHistory.length - 1);
+      if (typeof window !== "undefined") {
+        window.history.pushState(
+          { __govNavId: newHistory.length - 1 },
+          "",
+          window.location.href,
+        );
+      }
+    },
+    [current, history, historyIdx],
+  );
 
   // Expose navigateTo to the parent (page.tsx) so the legislation table
   // can drive map navigation when the user clicks a row.
@@ -544,7 +553,6 @@ export default function MapShell({
   useEffect(() => {
     setUserZoom(1);
     setUserPan({ x: 0, y: 0 });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [region, naView, selectedStateName]);
 
   // iOS Safari fallback — WebKit fires native `gesture*` events for
@@ -601,23 +609,28 @@ export default function MapShell({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleRegionChange = (next: Region) => {
-    const updated: ViewState = {
-      region: normalizeRegion(next),
-      naView: "countries",
-      selectedGeoId: null,
-    };
-    if (viewsEqual(current, updated)) return;
-    setSelectedFacility(null);
-    setHistory((h) => {
-      const copy = [...h];
-      copy[historyIdx] = updated;
-      return copy;
-    });
-  };
+  const handleRegionChange = useCallback(
+    (next: Region) => {
+      const updated: ViewState = {
+        region: normalizeRegion(next),
+        naView: "countries",
+        selectedGeoId: null,
+      };
+      if (viewsEqual(current, updated)) return;
+      setSelectedFacility(null);
+      setHistory((h) => {
+        const copy = [...h];
+        copy[historyIdx] = updated;
+        return copy;
+      });
+    },
+    [current, historyIdx],
+  );
 
-  const handleResetRegion = () =>
-    navigateTo({ region, naView: "countries", selectedGeoId: null });
+  const handleResetRegion = useCallback(
+    () => navigateTo({ region, naView: "countries", selectedGeoId: null }),
+    [navigateTo, region],
+  );
 
   const handleResetStates = () =>
     navigateTo({ ...current, selectedGeoId: null });
@@ -629,25 +642,6 @@ export default function MapShell({
     // looked like it opened a white screen. Collapse back to the
     // island so the new view is the first thing they see.
     if (isMobileViewport) setExplicitPanelSize("min");
-  };
-
-  // Clicking a US state from the continental (countries) view drills into
-  // the states view with that state preselected. Keeps a single click flow.
-  const handleSelectUsState = (stateName: string) => {
-    setSelectedFacility(null);
-    navigateTo({
-      region: "na",
-      naView: "states",
-      selectedGeoId: stateName,
-    });
-  };
-
-  const handleDoubleClickUsState = (stateName: string) => {
-    if (getMunicipalitiesByState(stateName).length > 0) {
-      stageCountyDrill(stateName);
-    } else {
-      handleSelectUsState(stateName);
-    }
   };
 
   // Two-phase drill: first lift the target state in USStatesMap, then
@@ -696,7 +690,7 @@ export default function MapShell({
       selectedCountyFips: null,
     });
 
-  const handleDoubleClickEntity = (_geoId: string) => {
+  const handleDoubleClickEntity = () => {
     // State/county drill-down disabled for stablecoin policy view
   };
 
@@ -795,7 +789,16 @@ export default function MapShell({
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [region, naView, selectedGeoId, selectedFacility, history.length, historyIdx]);
+  }, [
+    region,
+    naView,
+    selectedGeoId,
+    selectedFacility,
+    history.length,
+    historyIdx,
+    handleRegionChange,
+    handleResetRegion,
+  ]);
 
   const breadcrumbItems: BreadcrumbItem[] = useMemo(() => {
     const items: BreadcrumbItem[] = [

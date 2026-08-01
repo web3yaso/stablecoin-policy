@@ -8,8 +8,13 @@ import {
 import {
   getReportBySlug,
   getReportMetaBySlug,
+  ReportArtifactMissingError,
   ReportContentKeyMissingError,
 } from "@/lib/reports";
+import {
+  DataIntegrityError,
+  ExternalStorageError,
+} from "@/lib/data/external-storage-errors";
 import {
   ensureX402FacilitatorReady,
   X402_NETWORK,
@@ -39,10 +44,24 @@ export async function OPTIONS() {
 
 export async function GET(request: NextRequest, context: ReportRouteContext) {
   const { slug } = await context.params;
-  const meta = await getReportMetaBySlug(slug);
+  let meta;
+  try {
+    meta = await getReportMetaBySlug(slug);
+    if (!meta) await getReportMetaBySlug("missing-report-dummy");
+  } catch (error: unknown) {
+    if (
+      error instanceof DataIntegrityError ||
+      error instanceof ExternalStorageError
+    ) {
+      return NextResponse.json(
+        { error: "report-catalog-unavailable" },
+        { status: 503, headers: { "Cache-Control": "no-store" } },
+      );
+    }
+    throw error;
+  }
 
   if (!meta) {
-    await getReportMetaBySlug("missing-report-dummy");
     return NextResponse.json({ error: "report-not-found" }, { status: 404 });
   }
 
@@ -114,7 +133,12 @@ export async function GET(request: NextRequest, context: ReportRouteContext) {
       headers: { ...responseHeaders, ...settlement.headers },
     });
   } catch (error: unknown) {
-    if (error instanceof ReportContentKeyMissingError) {
+    if (
+      error instanceof ReportContentKeyMissingError ||
+      error instanceof ReportArtifactMissingError ||
+      error instanceof DataIntegrityError ||
+      error instanceof ExternalStorageError
+    ) {
       return NextResponse.json(
         { error: "report-content-unavailable" },
         { status: 503 },

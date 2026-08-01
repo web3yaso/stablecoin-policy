@@ -1,0 +1,38 @@
+name: quality
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci --no-audit --no-fund
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run eval:phase0
+      - run: npm run eval:phase1
+      - name: Check repository data limits (pull request)
+        if: github.event_name == 'pull_request'
+        env:
+          DATA_DIFF_BASE: origin/${{ github.base_ref }}
+        run: npm run data:check
+      - name: Check repository data limits (push)
+        if: github.event_name == 'push'
+        run: npm run data:check
+      - run: npm run build

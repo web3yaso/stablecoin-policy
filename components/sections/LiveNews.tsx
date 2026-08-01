@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ENTITIES } from "@/lib/placeholder-data";
+import { usePolicyData } from "@/contexts/PolicyDataContext";
 import type { Entity, NewsItem } from "@/types";
 
 interface NewsRow {
@@ -108,9 +108,9 @@ function matchesScope(entity: Entity, s: ScopeFilter): boolean {
   );
 }
 
-function buildNewsRows(): NewsRow[] {
+function buildNewsRows(entities: Entity[]): NewsRow[] {
   const rows: NewsRow[] = [];
-  for (const entity of ENTITIES) {
+  for (const entity of entities) {
     for (const item of entity.news) {
       rows.push({ item, entity });
     }
@@ -259,12 +259,13 @@ interface LiveNewsProps {
 }
 
 export default function LiveNews({ showAll = false }: LiveNewsProps = {}) {
+  const { entities, newsStatus } = usePolicyData();
   const [query, setQuery] = useState("");
   const [activeScope, setActiveScope] = useState<ScopeFilter>("all");
   const [activeTopic, setActiveTopic] = useState<TopicFilter>("all");
   const [sortKey, setSortKey] = useState<SortKey>("latest");
 
-  const allRows = useMemo(() => buildNewsRows(), []);
+  const allRows = useMemo(() => buildNewsRows(entities), [entities]);
   const lastUpdated = useMemo(
     () => formatLastUpdated(allRows[0]?.item.date),
     [allRows],
@@ -333,9 +334,16 @@ export default function LiveNews({ showAll = false }: LiveNewsProps = {}) {
 
   return (
     <div>
+      {newsStatus === "unavailable" && (
+        <p className="text-xs text-muted -mt-6 mb-8">
+          Live official-source updates are temporarily unavailable; showing
+          the last bundled fallback only.
+        </p>
+      )}
       {lastUpdated && (
         <p className="text-xs text-muted -mt-6 mb-8" suppressHydrationWarning>
           Last updated {lastUpdated}
+          {newsStatus === "stale" ? " · cached snapshot" : ""}
         </p>
       )}
 

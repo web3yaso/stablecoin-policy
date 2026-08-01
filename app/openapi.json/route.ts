@@ -107,11 +107,73 @@ function createOpenApiDocument(
     servers: [{ url: origin }],
     tags: [
       {
+        name: "datasets",
+        description: "Public versioned policy datasets.",
+      },
+      {
         name: "reports",
         description: "Stablecoin policy reports and paid Markdown content.",
       },
     ],
     paths: {
+      "/api/public/datasets/{datasetId}": {
+        get: {
+          operationId: "getPublicPolicyDataset",
+          tags: ["datasets"],
+          summary: "Get an active public dataset release",
+          description:
+            "Returns the active checksum-verified dataset. Responses identify the immutable release and explicitly mark a stale-cache fallback.",
+          parameters: [
+            {
+              name: "datasetId",
+              in: "path",
+              required: true,
+              schema: {
+                type: "string",
+                enum: ["news-summaries", "news-source-health"],
+              },
+            },
+          ],
+          responses: {
+            "200": {
+              description: "Active public dataset",
+              headers: {
+                ETag: { schema: { type: "string" } },
+                "X-Dataset-Release": { schema: { type: "string" } },
+                "X-Data-Generated-At": {
+                  schema: { type: "string", format: "date-time" },
+                },
+                "X-Data-Cache-State": {
+                  schema: {
+                    type: "string",
+                    enum: ["origin", "fresh-cache", "stale-cache"],
+                  },
+                },
+              },
+              content: {
+                "application/json": { schema: { type: "object" } },
+              },
+            },
+            "304": { description: "Not Modified" },
+            "404": {
+              description: "Dataset not found",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+            "503": {
+              description: "Dataset origin and acceptable stale cache unavailable",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+          },
+        },
+      },
       "/api/reports/latest": {
         get: {
           operationId: "getLatestPaidStablecoinPolicyReport",
@@ -295,9 +357,10 @@ function createOpenApiDocument(
       schemas: {
         ReportListResponse: {
           type: "object",
-          required: ["reports", "total", "lastUpdated"],
+          required: ["schemaVersion", "reports", "total", "lastUpdated"],
           additionalProperties: false,
           properties: {
+            schemaVersion: { type: "string", const: "1.0.0" },
             reports: {
               type: "array",
               items: { $ref: "#/components/schemas/ReportMeta" },
