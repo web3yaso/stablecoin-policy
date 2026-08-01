@@ -1,0 +1,6 @@
+{"caseId":"approval-ready","citationCount":2,"contradictionCount":0,"unverifiedSourceCount":0,"unknownPermissionCount":0,"unauthorizedExcerptCount":0,"directOfficialSupportCount":1,"expected":"PASS"}
+{"caseId":"missing-citations","citationCount":0,"contradictionCount":0,"unverifiedSourceCount":0,"unknownPermissionCount":0,"unauthorizedExcerptCount":0,"directOfficialSupportCount":0,"expected":"BLOCK"}
+{"caseId":"contradictory-evidence","citationCount":2,"contradictionCount":1,"unverifiedSourceCount":0,"unknownPermissionCount":0,"unauthorizedExcerptCount":0,"directOfficialSupportCount":1,"expected":"BLOCK"}
+{"caseId":"unverified-source","citationCount":1,"contradictionCount":0,"unverifiedSourceCount":1,"unknownPermissionCount":0,"unauthorizedExcerptCount":0,"directOfficialSupportCount":0,"expected":"BLOCK"}
+{"caseId":"unknown-permission","citationCount":1,"contradictionCount":0,"unverifiedSourceCount":0,"unknownPermissionCount":1,"unauthorizedExcerptCount":0,"directOfficialSupportCount":1,"expected":"BLOCK"}
+{"caseId":"link-only-with-excerpt","citationCount":1,"contradictionCount":0,"unverifiedSourceCount":0,"unknownPermissionCount":0,"unauthorizedExcerptCount":1,"directOfficialSupportCount":1,"expected":"BLOCK"}

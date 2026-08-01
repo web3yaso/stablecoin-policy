@@ -151,6 +151,39 @@ time. `OFFICIAL_BYTE_AND_LOCATOR_REVIEW` is for an authoritative official copy;
 An AI agent, LLM, system, automation identity, or unknown reviewer cannot approve
 a source. Running or deploying this workflow never verifies a source by itself.
 
+## Legal claim review workflow
+
+Migration `0011` separates drafting, review submission, and named-human legal
+claim approval. A deterministic service-only manifest binds the proposition,
+legal status, effective interval, knowledge cutoff, actor/activity scopes, and
+every citation to its provision locator, text checksum, source-version checksum,
+authority, support relation, excerpt, and effective excerpt permission.
+
+Claims and citations are editable only in `DRAFT`. Submission requires at least
+one citation and moves the claim to `IN_REVIEW`, freezing its reviewed content.
+Approval then requires the freshly recomputed manifest SHA-256, an identified
+human reviewer, no contradictory evidence, no unknown/unauthorized excerpt use,
+and at least one direct official citation whose source version is `VERIFIED` by
+an approved source-verification record. The review record and transition to
+`REVIEWED` occur atomically. `CHANGES_REQUESTED` returns the claim to `DRAFT`;
+`REJECTED` moves it to immutable `RETRACTED`.
+
+The service role can read but cannot directly insert, update, or delete review
+records; the fixed-search-path `SECURITY DEFINER` RPC is the only write path.
+The corpus publication trigger independently recomputes the approved manifest
+fingerprint and applies the same verified-evidence gates to every legal status,
+not only permissions. No claim is created or approved by deploying the workflow.
+
+The CLI defaults to a read-only manifest:
+
+```bash
+npm run legal:claims:review -- --claim <claim-id>
+```
+
+Use `--submit-for-review` only after draft citations are complete. Final review
+submission additionally requires `--submit`, `--confirm-human-review`, the exact
+manifest SHA-256, outcome, reviewer role/reference, and review time.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage

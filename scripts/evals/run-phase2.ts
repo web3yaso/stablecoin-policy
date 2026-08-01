@@ -9,6 +9,10 @@ import {
   sourceVerificationReadinessErrors,
   type SourceVerificationManifestEnvelope,
 } from "../../lib/legal-corpus/verification";
+import {
+  claimEvidenceReadinessErrors,
+  type ClaimEvidenceReadinessInput,
+} from "../../lib/legal-corpus/claim-review";
 import type {
   ClaimLegalStatus,
   ClaimReviewState,
@@ -76,6 +80,11 @@ type SourceVerificationCase = {
   storageRights: SourceVerificationManifestEnvelope["manifest"]["storageRights"];
   rightsReviewed: boolean;
   permissions: Array<"ALLOWED" | "LINK_ONLY" | "UNKNOWN">;
+  expected: "PASS" | "BLOCK";
+};
+
+type ClaimReviewCase = ClaimEvidenceReadinessInput & {
+  caseId: string;
   expected: "PASS" | "BLOCK";
 };
 
@@ -210,8 +219,23 @@ async function main() {
       `phase2 source-verification eval failed: ${verificationFailures.length}/${verificationCases.length} cases`,
     );
   }
+  const claimReviewCases = await readJsonLines<ClaimReviewCase>(
+    "evals/phase2-claim-review-cases.jsonl",
+  );
+  const claimReviewFailures = claimReviewCases.filter((evalCase) => {
+    const actual = claimEvidenceReadinessErrors(evalCase).length === 0 ? "PASS" : "BLOCK";
+    if (actual === evalCase.expected) return false;
+    console.error(`${evalCase.caseId}: expected=${evalCase.expected} actual=${actual}`);
+    return true;
+  });
+  if (claimReviewFailures.length > 0) {
+    throw new Error(
+      `phase2 claim-review eval failed: ${claimReviewFailures.length}/${claimReviewCases.length} cases`,
+    );
+  }
   const total = cases.length + ingestionCases.length + hkelCases.length
-    + ssoCases.length + rightsCases.length + verificationCases.length;
+    + ssoCases.length + rightsCases.length + verificationCases.length
+    + claimReviewCases.length;
   console.log(
     `phase2 eval passed: ${total}/${total} cases`,
   );
