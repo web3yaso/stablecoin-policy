@@ -2,9 +2,9 @@
 
 ## Current checkpoint
 
-Migration `supabase/migrations/0003_phase2_legal_corpus_foundation.sql` was
-applied to the linked Supabase project on 2026-07-31. It is never applied by
-application startup and creates two ownership layers:
+Migrations `0003` through `0005` are applied to the linked Supabase project.
+They are never applied by application startup. Migration `0003` creates two
+ownership layers:
 
 - `regulatory`: cross-domain official authorities, logical documents,
   immutable source versions, addressable provisions, and regulatory events;
@@ -82,6 +82,15 @@ existing tracker and report endpoints are unaffected.
   `8c59bdee123b4b75c68cb8d104fe3abb910b24d7a1317bdc3b4f7cf371212017`.
 - `0003` completed as one transaction; migration history now matches local
   versions `0001`, `0002`, and `0003`.
+- `0004` and `0005` were applied on 2026-08-01 UTC after linked-project
+  dry-runs. They add service-only ingestion and health-check RPCs.
+- The MiCA CELLAR manifestation was ingested with SHA-256
+  `c694819af2efbd715735cacf4bb65eade4685f88b30787197658122ff04c26fb`.
+  Remote verification reports one `OBSERVED` version, no verification time,
+  and 149 provisions with ordinals 0 through 148. A repeated publish was
+  idempotent.
+- Public source lookup still returns `404` for MiCA and EEA coverage remains
+  `IN_PROGRESS`, `0%`, and `UNKNOWN`, as required before source and claim review.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
