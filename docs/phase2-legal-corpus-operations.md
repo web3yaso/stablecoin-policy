@@ -20,6 +20,23 @@ scenarios, and samples five invariants plus four lifecycle witnesses. It does
 not use `quint verify`; a clean simulation reports that no counterexample was
 found in the sampled traces, not that the database is formally proven correct.
 
+The database counterpart is
+`supabase/tests/phase2_publication_workflow_test.sql`. It starts from all local
+migrations, uses sanitized rows inside a transaction, and executes the complete
+source-verification, claim-review, release-review/publication, and
+coverage-review RPC chain. Its 34 pgTAP assertions also cover stale manifests,
+automated-reviewer rejection, zero partial audit writes, service-role table
+grants, and reviewed-only public views. Run it with:
+
+```bash
+npm run db:phase2:start
+npm run test:db:phase2
+npm run db:phase2:stop
+```
+
+The GitHub quality workflow runs this in an isolated database job. The fixture
+does not authorize a real source, claim, corpus release, or coverage scope.
+
 The initial coverage rows are EEA, Hong Kong, and Singapore. They intentionally
 start as `IN_PROGRESS`, `0%`, and `UNKNOWN`; existing jurisdiction summaries do
 not count as reviewed baseline claims.

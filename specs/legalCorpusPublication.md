@@ -43,7 +43,15 @@ generation, notification delivery, or the legal substance of a baseline.
 
 ```bash
 npm run spec:phase2
+npm run db:phase2:start
+npm run test:db:phase2
+npm run db:phase2:stop
 ```
+
+The PostgreSQL test applies every migration to an isolated local Supabase
+database, runs 34 pgTAP assertions inside a rolled-back transaction, and maps
+the executable model to the real RPCs and grants. Its fixtures are sanitized;
+they never represent production legal conclusions or named production users.
 
 The simulation is bounded random sampling, not exhaustive model checking. A
 clean run means no counterexample was found in the sampled traces; it is not a

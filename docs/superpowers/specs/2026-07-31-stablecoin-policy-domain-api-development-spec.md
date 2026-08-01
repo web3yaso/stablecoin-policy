@@ -650,6 +650,14 @@ eval suite. The model contains sanitized state only and does not define legal
 claims, private decision rules, or playbook actions. It is sampled executable
 specification, not an exhaustive proof or a replacement for human legal review.
 
+Database-integration checkpoint (2026-08-01): an isolated Supabase PostgreSQL
+job now applies migrations `0001` through `0014` from zero and runs 34 pgTAP
+assertions against the real Phase 2 RPCs, triggers, grants, manifests, and public
+views. A sanitized transaction reaches the complete reviewed-publication path;
+stale fingerprints and automated reviewers are rejected without partial audit
+writes; direct service-role coverage and review-table writes remain denied. The
+test rolls back all fixtures and does not approve production evidence.
+
 ### Phase 3 — Evidence RAG
 
 - implement `EvidenceChunk`, `EmbeddingRecord`, `RetrievalIndexRelease`, and `RagRetrievalRun` storage;

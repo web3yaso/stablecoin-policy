@@ -41,3 +41,23 @@ jobs:
           POLICY_STORAGE_CUTOVER: ${{ vars.POLICY_STORAGE_CUTOVER }}
         run: npm run data:check
       - run: npm run build
+
+  phase2-database:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Start isolated Supabase services and apply migrations
+        run: npm run db:phase2:start
+
+      - name: Run Phase 2 PostgreSQL transaction tests
+        run: npm run test:db:phase2
+
+      - name: Stop isolated Supabase services
+        if: always()
+        run: npm run db:phase2:stop
