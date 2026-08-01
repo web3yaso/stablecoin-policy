@@ -642,7 +642,7 @@ rows, and the post-migration snapshot confirms no business-data change.
 Executable-specification checkpoint (2026-08-01): the Phase 2 publication
 lifecycle now has a pinned Quint 0.32.0 model covering source verification,
 claim review, corpus review/publication, coverage review, atomic rejection, and
-the service-role coverage boundary. Eleven deterministic scenarios exercise the
+the service-role coverage boundary. Twelve deterministic scenarios exercise the
 happy path, automated-review rejection, stale fingerprints at every review
 layer, missing publication, and denied direct coverage mutation. Five safety
 invariants and four reachability witnesses run in CI together with the Phase 2
@@ -651,7 +651,7 @@ claims, private decision rules, or playbook actions. It is sampled executable
 specification, not an exhaustive proof or a replacement for human legal review.
 
 Database-integration checkpoint (2026-08-01): an isolated Supabase PostgreSQL
-job now applies migrations `0001` through `0014` from zero and runs 34 pgTAP
+job now applies migrations `0001` through `0016` from zero and runs 55 pgTAP
 assertions against the real Phase 2 RPCs, triggers, grants, manifests, and public
 views. A sanitized transaction reaches the complete reviewed-publication path;
 stale fingerprints and automated reviewers are rejected without partial audit
@@ -664,6 +664,15 @@ CLI atomically import human-prepared baseline claim/citation bundles as private
 reject changed reuse; review/publication fields, partial batches, automatic
 submission, approval, release, and coverage changes are forbidden. Sanitized
 pgTAP cases cover success, replay, conflict, privacy, and rollback.
+
+Baseline-readiness checkpoint (2026-08-01): migration `0016` adds a private,
+service-only, read-only jurisdiction workflow report over source verification,
+claim review, corpus publication, checklist, and coverage state. It returns
+deterministic stages and blocker codes without claim content or reviewer data,
+performs no state transition, and always states that legal completeness was not
+assessed. Nine sanitized pgTAP assertions and seven eval cases cover empty and
+partially progressed workflows, permission boundaries, ordering, and zero
+automatic approval authority.
 
 ### Phase 3 — Evidence RAG
 

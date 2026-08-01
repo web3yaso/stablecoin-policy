@@ -21,6 +21,11 @@ import {
   coverageReadinessErrors,
   type CoverageReadinessInput,
 } from "../../lib/legal-corpus/coverage-review";
+import {
+  baselineWorkflowStage,
+  type BaselineReadinessInput,
+  type BaselineWorkflowStage,
+} from "../../lib/legal-corpus/baseline-readiness";
 import type {
   ClaimLegalStatus,
   ClaimReviewState,
@@ -103,6 +108,10 @@ type CorpusReleaseCase = CorpusReleaseReadinessInput & {
 type CoverageReviewCase = CoverageReadinessInput & {
   caseId: string;
   expected: "PASS" | "BLOCK";
+};
+type BaselineReadinessCase = BaselineReadinessInput & {
+  caseId: string;
+  expectedStage: BaselineWorkflowStage;
 };
 
 async function main() {
@@ -276,9 +285,24 @@ async function main() {
       `phase2 coverage-review eval failed: ${coverageFailures.length}/${coverageCases.length} cases`,
     );
   }
+  const baselineCases = await readJsonLines<BaselineReadinessCase>(
+    "evals/phase2-baseline-readiness-cases.jsonl",
+  );
+  const baselineFailures = baselineCases.filter((evalCase) => {
+    const actual = baselineWorkflowStage(evalCase);
+    if (actual === evalCase.expectedStage) return false;
+    console.error(`${evalCase.caseId}: expected=${evalCase.expectedStage} actual=${actual}`);
+    return true;
+  });
+  if (baselineFailures.length > 0) {
+    throw new Error(
+      `phase2 baseline-readiness eval failed: ${baselineFailures.length}/${baselineCases.length} cases`,
+    );
+  }
   const total = cases.length + ingestionCases.length + hkelCases.length
     + ssoCases.length + rightsCases.length + verificationCases.length
-    + claimReviewCases.length + releaseCases.length + coverageCases.length;
+    + claimReviewCases.length + releaseCases.length + coverageCases.length
+    + baselineCases.length;
   console.log(
     `phase2 eval passed: ${total}/${total} cases`,
   );
