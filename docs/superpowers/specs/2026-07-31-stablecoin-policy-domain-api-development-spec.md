@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-31
 
-**Status:** Phase 1 complete — Phase 2 next
+**Status:** Phase 2 in progress — legal-corpus foundation implemented locally
 
 **Code baseline:** GitHub `main` after PR #16; controlled outage rehearsal added in this revision
 **Scope:** Convert Stablecoin Policy from a public tracker plus paid-report service into the public Stablecoin Policy subsite and the authenticated domain backend for Citely playbooks.
@@ -535,6 +535,18 @@ Exit achieved: the Storage-only workflow completed without changing `main`, prod
 
 Exit: each launch baseline claim has reviewed provision-level evidence and can be reproduced at an `as_of` date.
 
+Implementation checkpoint (2026-07-31): migration `0003` defines a shared
+`regulatory` schema for authorities, documents, immutable versions, provisions,
+and events, while the `policy` schema owns Stablecoin-specific claims,
+citations, review records, corpus releases, and coverage scopes. Public views
+exclude reviewer identity and private notes and admit only reviewed evidence in
+a published, `as_of`-pinned corpus. Versioned contracts and server-side public
+routes now cover `/v1/coverage`, `/v1/sources/{id}`, and `/v1/changes`.
+Publication gates block unreviewed claims, missing provision citations,
+contradictions, and permissions without direct official support. The migration
+has not yet been applied to production, and no launch-market claim is treated
+as reviewed merely because a legacy summary or news item exists.
+
 ### Phase 3 — Evidence RAG
 
 - implement `EvidenceChunk`, `EmbeddingRecord`, `RetrievalIndexRelease`, and `RagRetrievalRun` storage;
@@ -708,6 +720,9 @@ Before implementation, read the relevant Next.js 16 documentation in `node_modul
 - The first paid workflow is the human-reviewed Pre-listing & Product Launch playbook.
 - Eval gates are part of the product contract, not an optional post-launch exercise.
 - Git history rewrite is outside the initial migration.
+- Cross-domain official evidence lives in the shared `regulatory` database
+  schema; Stablecoin-specific interpretation and review records live in
+  `policy`. Public endpoints read allowlisted views rather than base tables.
 
 ## 22. Remaining implementation choices
 

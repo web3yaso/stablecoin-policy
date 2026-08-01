@@ -11,6 +11,7 @@
     "test": "node --import tsx --test tests/*.test.ts",
     "eval:phase0": "node --import tsx scripts/evals/run-phase0.ts",
     "eval:phase1": "node --import tsx scripts/evals/run-phase1.ts",
+    "eval:phase2": "node --import tsx scripts/evals/run-phase2.ts",
     "storage:publish": "node --import tsx scripts/migrate/publish-phase1-data.ts",
     "storage:restore": "node --import tsx scripts/migrate/restore-release.ts",
     "data:check": "node --import tsx scripts/ci/check-repository-data.ts",

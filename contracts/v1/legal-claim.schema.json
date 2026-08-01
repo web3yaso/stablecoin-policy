@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stablecoin-policy.citely.info/contracts/v1/legal-claim.schema.json",
+  "title": "ReviewedLegalClaim",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "claimId",
+    "jurisdictionCode",
+    "topic",
+    "proposition",
+    "legalStatus",
+    "reviewState",
+    "effectiveFrom",
+    "knowledgeCutoff",
+    "citations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "claimId": { "$ref": "#/$defs/id" },
+    "jurisdictionCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9-]{1,15}$" },
+    "topic": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "proposition": { "type": "string", "minLength": 1, "maxLength": 4000 },
+    "legalStatus": {
+      "enum": ["REQUIREMENT", "PERMISSION", "PROHIBITION", "EXEMPTION", "GUIDANCE", "UNDETERMINED"]
+    },
+    "reviewState": { "enum": ["REVIEWED", "PUBLISHED"] },
+    "effectiveFrom": { "type": "string", "format": "date-time" },
+    "effectiveTo": { "type": "string", "format": "date-time" },
+    "knowledgeCutoff": { "type": "string", "format": "date-time" },
+    "citations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/citation" }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,160}$" },
+    "checksum": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["citationId", "relation", "evidence"],
+      "properties": {
+        "citationId": { "$ref": "#/$defs/id" },
+        "relation": { "enum": ["DIRECT_SUPPORT", "INDIRECT_SUPPORT", "CONTRADICTS"] },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provisionId",
+        "sourceVersionId",
+        "authorityId",
+        "locator",
+        "canonicalUrl",
+        "evidenceLayer",
+        "evidenceUse",
+        "versionChecksumSha256"
+      ],
+      "properties": {
+        "provisionId": { "$ref": "#/$defs/id" },
+        "sourceVersionId": { "$ref": "#/$defs/id" },
+        "authorityId": { "$ref": "#/$defs/id" },
+        "locator": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "canonicalUrl": { "type": "string", "format": "uri" },
+        "evidenceLayer": { "const": "OFFICIAL_SOURCE" },
+        "evidenceUse": { "const": "LEGAL_AUTHORITY" },
+        "versionChecksumSha256": { "$ref": "#/$defs/checksum" }
+      }
+    }
+  }
+}

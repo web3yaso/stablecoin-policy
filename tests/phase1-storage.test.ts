@@ -377,6 +377,7 @@ function createClient(fetchImpl: FetchLike) {
       serviceRoleKey: "test-service-role-key",
       reportsBucket: "policy-reports",
       datasetsBucket: "policy-datasets",
+      sourcesBucket: "policy-sources",
       requestTimeoutMs: 1000,
     },
     fetchImpl,

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stablecoin-policy.citely.info/contracts/v1/coverage-response.schema.json",
+  "title": "CoverageResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "dataAsOf", "markets"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "dataAsOf": { "type": ["string", "null"], "format": "date-time" },
+    "markets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["jurisdictionCode", "displayName", "coverageState", "completenessPercent", "freshnessState", "reviewedAt", "publicNote", "corpusReleaseId", "asOf", "knowledgeCutoff", "reviewedClaimCount", "sourceDocumentCount", "lastVerifiedAt"],
+        "properties": {
+          "jurisdictionCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9-]{1,15}$" },
+          "displayName": { "type": "string", "minLength": 1 },
+          "coverageState": { "enum": ["UNSUPPORTED", "IN_PROGRESS", "REVIEWED"] },
+          "completenessPercent": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "freshnessState": { "enum": ["CURRENT", "STALE", "UNKNOWN"] },
+          "reviewedAt": { "type": ["string", "null"], "format": "date-time" },
+          "publicNote": { "type": ["string", "null"] },
+          "corpusReleaseId": { "type": ["string", "null"] },
+          "asOf": { "type": ["string", "null"], "format": "date-time" },
+          "knowledgeCutoff": { "type": ["string", "null"], "format": "date-time" },
+          "reviewedClaimCount": { "type": "integer", "minimum": 0 },
+          "sourceDocumentCount": { "type": "integer", "minimum": 0 },
+          "lastVerifiedAt": { "type": ["string", "null"], "format": "date-time" }
+        }
+      }
+    }
+  }
+}

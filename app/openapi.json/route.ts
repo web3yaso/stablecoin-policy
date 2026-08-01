@@ -99,13 +99,18 @@ function createOpenApiDocument(
   return {
     openapi: "3.1.0",
     info: {
-      title: "Web3Law Stablecoin Policy Reports API",
+      title: "Citely Stablecoin Policy Domain API",
       version: "1.0.0",
-      description: `Machine-readable stablecoin regulatory analysis reports. Report metadata is free; full Markdown reports are payable via x402 on ${label}.`,
+      description: `Reviewed stablecoin regulatory intelligence, public policy datasets, and analysis reports. Report metadata is free; full Markdown reports are payable via x402 on ${label}.`,
       "x-guidance": `Call GET /api/reports/latest to purchase the newest report, or use a slug selected from GET /api/reports. If the response is 402 Payment Required, read PAYMENT-REQUIRED, submit the exact payment requested on ${label}, then retry the same URL with PAYMENT-SIGNATURE. Report content is never returned without payment.`,
     },
     servers: [{ url: origin }],
     tags: [
+      {
+        name: "legal-corpus",
+        description:
+          "Reviewed official-source coverage, citations, and regulatory changes. News and research remain discovery/context only.",
+      },
       {
         name: "datasets",
         description: "Public versioned policy datasets.",
@@ -116,6 +121,116 @@ function createOpenApiDocument(
       },
     ],
     paths: {
+      "/v1/coverage": {
+        get: {
+          operationId: "getLegalCorpusCoverage",
+          tags: ["legal-corpus"],
+          summary: "Inspect reviewed legal-corpus coverage",
+          description:
+            "Returns explicit completeness and freshness for launch markets. IN_PROGRESS is not a legal permission or a paid-check result.",
+          responses: {
+            "200": {
+              description: "Coverage by market",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/CoverageResponse" },
+                },
+              },
+            },
+            "503": {
+              description: "Legal corpus unavailable",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+          },
+        },
+      },
+      "/v1/sources/{id}": {
+        get: {
+          operationId: "getReviewedLegalSource",
+          tags: ["legal-corpus"],
+          summary: "Get a source from the latest published corpus",
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              required: true,
+              schema: { type: "string", pattern: "^[a-z0-9][a-z0-9._:-]{2,160}$" },
+            },
+          ],
+          responses: {
+            "200": {
+              description: "Reviewed document, provision locators, and claims",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/PublicSourceResponse" },
+                },
+              },
+            },
+            "304": { description: "Not Modified" },
+            "404": {
+              description: "Source is absent from the published corpus",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+            "503": {
+              description: "Legal corpus unavailable",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+          },
+        },
+      },
+      "/v1/changes": {
+        get: {
+          operationId: "listReviewedRegulatoryChanges",
+          tags: ["legal-corpus"],
+          summary: "Read reviewed changes using an opaque cursor",
+          parameters: [
+            {
+              name: "after_cursor",
+              in: "query",
+              required: false,
+              schema: { type: "string", maxLength: 512 },
+            },
+          ],
+          responses: {
+            "200": {
+              description: "Reviewed changes affecting published claims",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ChangesResponse" },
+                },
+              },
+            },
+            "400": {
+              description: "Invalid cursor",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+            "503": {
+              description: "Legal corpus unavailable",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+          },
+        },
+      },
       "/api/public/datasets/{datasetId}": {
         get: {
           operationId: "getPublicPolicyDataset",
@@ -355,6 +470,65 @@ function createOpenApiDocument(
     },
     components: {
       schemas: {
+        CoverageResponse: {
+          type: "object",
+          required: ["schemaVersion", "dataAsOf", "markets"],
+          additionalProperties: false,
+          properties: {
+            schemaVersion: { type: "string", const: "1.0.0" },
+            dataAsOf: { type: ["string", "null"], format: "date-time" },
+            markets: {
+              type: "array",
+              items: {
+                type: "object",
+                required: [
+                  "jurisdictionCode", "displayName", "coverageState",
+                  "completenessPercent", "freshnessState", "reviewedAt",
+                  "publicNote", "corpusReleaseId", "asOf", "knowledgeCutoff",
+                  "reviewedClaimCount", "sourceDocumentCount", "lastVerifiedAt",
+                ],
+                additionalProperties: false,
+                properties: {
+                  jurisdictionCode: { type: "string" },
+                  displayName: { type: "string" },
+                  coverageState: { enum: ["UNSUPPORTED", "IN_PROGRESS", "REVIEWED"] },
+                  completenessPercent: { type: "integer", minimum: 0, maximum: 100 },
+                  freshnessState: { enum: ["CURRENT", "STALE", "UNKNOWN"] },
+                  reviewedAt: { type: ["string", "null"], format: "date-time" },
+                  publicNote: { type: ["string", "null"] },
+                  corpusReleaseId: { type: ["string", "null"] },
+                  asOf: { type: ["string", "null"], format: "date-time" },
+                  knowledgeCutoff: { type: ["string", "null"], format: "date-time" },
+                  reviewedClaimCount: { type: "integer", minimum: 0 },
+                  sourceDocumentCount: { type: "integer", minimum: 0 },
+                  lastVerifiedAt: { type: ["string", "null"], format: "date-time" },
+                },
+              },
+            },
+          },
+        },
+        PublicSourceResponse: {
+          type: "object",
+          required: ["schemaVersion", "corpusReleaseId", "authority", "document", "evidence"],
+          additionalProperties: false,
+          properties: {
+            schemaVersion: { type: "string", const: "1.0.0" },
+            corpusReleaseId: { type: "string" },
+            authority: { type: "object" },
+            document: { type: "object" },
+            evidence: { type: "array", items: { type: "object" } },
+          },
+        },
+        ChangesResponse: {
+          type: "object",
+          required: ["schemaVersion", "changes", "nextCursor"],
+          additionalProperties: false,
+          properties: {
+            schemaVersion: { type: "string", const: "1.0.0" },
+            changes: { type: "array", items: { type: "object" } },
+            nextCursor: { type: ["string", "null"] },
+          },
+        },
         ReportListResponse: {
           type: "object",
           required: ["schemaVersion", "reports", "total", "lastUpdated"],
