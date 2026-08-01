@@ -31,8 +31,11 @@ jobs:
         if: github.event_name == 'pull_request'
         env:
           DATA_DIFF_BASE: origin/${{ github.base_ref }}
+          POLICY_STORAGE_CUTOVER: ${{ vars.POLICY_STORAGE_CUTOVER }}
         run: npm run data:check
       - name: Check repository data limits (push)
         if: github.event_name == 'push'
+        env:
+          POLICY_STORAGE_CUTOVER: ${{ vars.POLICY_STORAGE_CUTOVER }}
         run: npm run data:check
       - run: npm run build
