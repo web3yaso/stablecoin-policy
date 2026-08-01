@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migrations `0003` through `0011` are applied to the linked Supabase project.
+Migrations `0003` through `0012` are applied to the linked Supabase project.
 They are never applied by application startup. Migration `0003` creates two
 ownership layers:
 
@@ -184,6 +184,34 @@ Use `--submit-for-review` only after draft citations are complete. Final review
 submission additionally requires `--submit`, `--confirm-human-review`, the exact
 manifest SHA-256, outcome, reviewer role/reference, and review time.
 
+## Corpus release workflow
+
+Migration `0012` makes corpus assembly and publication a separate reviewed
+state machine: `DRAFT` membership is editable, `IN_REVIEW` freezes membership,
+`REVIEWED` records a named-human approval, and only the exact approved manifest
+may become `PUBLISHED`. Release rows are created and transitioned only through
+fixed-search-path service RPCs; the service role cannot insert, update, or delete
+them directly.
+
+The deterministic release manifest binds `as_of`, `knowledge_cutoff`, sorted
+claim membership, and each complete claim-review manifest and SHA-256. Approval
+fails on empty membership, unreviewed claims, missing/stale claim approvals,
+claims outside the release's half-open effective interval, or claim knowledge
+newer than the release cutoff. Publication recomputes the release manifest,
+requires an immutable matching release-review record, and reruns both release
+and claim evidence gates. Deployment never creates or publishes a release.
+
+The CLI is read-only by default:
+
+```bash
+npm run legal:corpus:release -- --release <release-id>
+```
+
+Creation, review submission, named-human review, and publication require
+separate explicit flags. Coverage does not advance automatically when a release
+is published; baseline completeness and freshness remain a separate reviewed
+checkpoint.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage
@@ -333,6 +361,18 @@ existing tracker and report endpoints are unaffected.
   evidence or coverage change. The post-`0011` snapshot retained zero claim,
   citation, review, corpus, and impact rows and has SHA-256
   `371e1441fa17f44aa8403ddaa203c1b55114ef6f19a4dd1f8ee9e427c7bc555c`.
+- Before migration `0012`, backup format `1.2.0` recorded the migration-pending
+  release-review table as empty and captured all existing metadata and four
+  source statuses at `/private/tmp/stablecoin-policy-pre0012-metadata.json`,
+  mode `0600`, with SHA-256
+  `6b73a02ece7cfbb81a5efb2aa268fb620bd5f2ffceb78dc462efd5529f7529d6`.
+- Migration `0012` was applied on 2026-08-01 UTC after a linked-project dry-run.
+  Database lint reports no schema errors. Negative-path smoke confirmed the
+  service role cannot insert corpus releases directly and the create RPC rejects
+  an invalid release ID without writing data. Phase 2 public-boundary smoke
+  remains unchanged. The post-`0012` snapshot contains zero claim, review,
+  corpus, membership, release-review, and impact rows and has SHA-256
+  `72fcf9a9ab2662f0860e863d8c7d1b509828d617275e60eae293017494b40de9`.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
@@ -344,9 +384,11 @@ existing tracker and report endpoints are unaffected.
 - When a managed backup or local Docker-backed `db dump` is unavailable, run
   `npm run storage:backup-metadata`; keep its private JSON output and SHA-256
   checksum outside the repository. This supplements, but does not replace,
-  immutable Storage objects and their existing restore procedure. Format `1.1.0`
+  immutable Storage objects and their existing restore procedure. Format `1.2.0`
   includes claim, citation, review, corpus-membership, impact, and coverage rows
-  in addition to Phase 1 metadata and explicitly requested source statuses.
+  in addition to Phase 1 metadata and explicitly requested source statuses. A
+  migration-pending table on the explicit optional allowlist is exported as an
+  empty array before creation; every other table or transport error fails closed.
 - Confirm migration `0003` created the private `policy-sources` Storage bucket.
   If `SUPABASE_SOURCES_BUCKET` overrides that default, create the configured
   private bucket separately before ingestion.

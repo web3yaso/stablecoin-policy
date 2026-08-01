@@ -20,9 +20,13 @@ const TABLES = [
   "review_records",
   "corpus_releases",
   "corpus_release_claims",
+  "corpus_release_review_records",
   "event_claim_impacts",
   "coverage_scopes",
 ] as const;
+const OPTIONAL_PENDING_TABLES = new Set<string>([
+  "corpus_release_review_records",
+]);
 
 async function main() {
   const args = process.argv.slice(2);
@@ -33,7 +37,15 @@ async function main() {
   const tables: Record<string, unknown[]> = {};
 
   for (const table of TABLES) {
-    tables[table] = await client.rest<unknown[]>(`${table}?select=*`);
+    try {
+      tables[table] = await client.rest<unknown[]>(`${table}?select=*`);
+    } catch (error: unknown) {
+      const missingPendingTable = OPTIONAL_PENDING_TABLES.has(table)
+        && error instanceof Error
+        && /PGRST205|could not find|does not exist/i.test(error.message);
+      if (!missingPendingTable) throw error;
+      tables[table] = [];
+    }
   }
   const sourceVersions = await Promise.all(
     sourceVersionIds.map((versionId) =>
@@ -45,7 +57,7 @@ async function main() {
   );
 
   const backup = {
-    formatVersion: "1.1.0",
+    formatVersion: "1.2.0",
     exportedAt: new Date().toISOString(),
     projectHost: new URL(config.url).hostname,
     tables,

@@ -13,6 +13,10 @@ import {
   claimEvidenceReadinessErrors,
   type ClaimEvidenceReadinessInput,
 } from "../../lib/legal-corpus/claim-review";
+import {
+  corpusReleaseReadinessErrors,
+  type CorpusReleaseReadinessInput,
+} from "../../lib/legal-corpus/corpus-release";
 import type {
   ClaimLegalStatus,
   ClaimReviewState,
@@ -84,6 +88,11 @@ type SourceVerificationCase = {
 };
 
 type ClaimReviewCase = ClaimEvidenceReadinessInput & {
+  caseId: string;
+  expected: "PASS" | "BLOCK";
+};
+
+type CorpusReleaseCase = CorpusReleaseReadinessInput & {
   caseId: string;
   expected: "PASS" | "BLOCK";
 };
@@ -233,9 +242,23 @@ async function main() {
       `phase2 claim-review eval failed: ${claimReviewFailures.length}/${claimReviewCases.length} cases`,
     );
   }
+  const releaseCases = await readJsonLines<CorpusReleaseCase>(
+    "evals/phase2-corpus-release-cases.jsonl",
+  );
+  const releaseFailures = releaseCases.filter((evalCase) => {
+    const actual = corpusReleaseReadinessErrors(evalCase).length === 0 ? "PASS" : "BLOCK";
+    if (actual === evalCase.expected) return false;
+    console.error(`${evalCase.caseId}: expected=${evalCase.expected} actual=${actual}`);
+    return true;
+  });
+  if (releaseFailures.length > 0) {
+    throw new Error(
+      `phase2 corpus-release eval failed: ${releaseFailures.length}/${releaseCases.length} cases`,
+    );
+  }
   const total = cases.length + ingestionCases.length + hkelCases.length
     + ssoCases.length + rightsCases.length + verificationCases.length
-    + claimReviewCases.length;
+    + claimReviewCases.length + releaseCases.length;
   console.log(
     `phase2 eval passed: ${total}/${total} cases`,
   );
