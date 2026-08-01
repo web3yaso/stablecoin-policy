@@ -169,12 +169,12 @@ export default function Page() {
           <span>
             {tr(locale, "footer.built_by")}{" "}
             <a
-              href="https://x.com/web3law_tech"
+              href="https://x.com/builder_sophie"
               target="_blank"
               rel="noopener noreferrer"
               className="underline decoration-muted/40 decoration-[0.5px] underline-offset-4 hover:decoration-ink hover:text-ink transition-colors"
             >
-              @web3law_tech
+              @builder_sophie
             </a>
           </span>
         </div>
