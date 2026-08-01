@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migrations `0003` through `0012` are applied to the linked Supabase project.
+Migrations `0003` through `0014` are applied to the linked Supabase project.
 They are never applied by application startup. Migration `0003` creates two
 ownership layers:
 
@@ -212,6 +212,49 @@ separate explicit flags. Coverage does not advance automatically when a release
 is published; baseline completeness and freshness remain a separate reviewed
 checkpoint.
 
+## Coverage review workflow
+
+Migration `0013` makes a versioned jurisdiction checklist, complete claim
+support, source freshness, a published corpus release, and a named-human review
+mandatory before coverage can become `REVIEWED`, `100%`, and `CURRENT`. A
+checklist item names its supporting claim IDs; every supporting claim must be a
+reviewed member of the selected published release for the same jurisdiction.
+The reviewer supplies an explicit freshness cutoff, and every cited source
+version for that jurisdiction must have been retrieved on or after it.
+
+The deterministic manifest binds the checklist contents and checksum, public
+coverage note, freshness cutoff, complete corpus-release manifest, and release
+checksum. Review submits that exact fingerprint and records reviewer identity
+and private notes separately. Migrations `0013` and `0014` make the service role
+read-only on coverage rows: it cannot insert, update, or delete them or write
+review records directly. Deploying the migration, publishing a corpus, or
+creating a checklist never changes coverage by itself.
+
+Create a versioned checklist only after its legal scope has been agreed and its
+claim IDs are reviewed. The checklist JSON file must be an array of objects with
+unique `itemId`, `title`, and non-empty `supportingClaimIds` fields:
+
+```bash
+npm run legal:coverage:review -- --create-checklist \
+  --jurisdiction <code> --checklist <checklist-id> \
+  --version-label <version> --items-file <absolute-json-path>
+```
+
+The normal command is read-only and reports all readiness failures:
+
+```bash
+npm run legal:coverage:review -- --jurisdiction <code> \
+  --checklist <checklist-id> --release <release-id> \
+  --freshness-cutoff <timestamp> --public-note <note>
+```
+
+Submitting review additionally requires `--submit`,
+`--confirm-human-review`, the exact manifest SHA-256, a review ID, named
+reviewer role/reference, and review time. The review time cannot precede the
+freshness cutoff. No launch-jurisdiction checklist has yet been approved or
+created, so EEA, Hong Kong, and Singapore remain `IN_PROGRESS`, `0%`, and
+`UNKNOWN`.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage
@@ -373,6 +416,31 @@ existing tracker and report endpoints are unaffected.
   remains unchanged. The post-`0012` snapshot contains zero claim, review,
   corpus, membership, release-review, and impact rows and has SHA-256
   `72fcf9a9ab2662f0860e863d8c7d1b509828d617275e60eae293017494b40de9`.
+- Before migration `0013`, backup format `1.3.0` recorded both migration-pending
+  coverage workflow tables as empty and captured all existing metadata and four
+  source statuses at `/private/tmp/stablecoin-policy-pre0013-metadata.json`,
+  mode `0600`, with SHA-256
+  `6d62e7e3632c51d1651891bdbb57a88d2071423544b8541ff6e40ae31ae17d45`.
+- The first `0013` push was rejected while parsing the checklist function and
+  its transaction made no changes. The validation was simplified, all local
+  gates were rerun, and the corrected migration was then applied on 2026-08-01
+  UTC. Negative-path smoke confirmed direct coverage updates are denied and an
+  invalid checklist ID cannot write data. Public-boundary smoke and database
+  lint pass. The post-`0013` snapshot contains zero claims, releases,
+  checklists, or coverage-review records; all three coverage scopes remain
+  `IN_PROGRESS`. Its SHA-256 is
+  `272aa891d4fb34c7dc0714eb093dfcbe6bda4600fa319953bb2ec14f9307da8c`.
+- Before migration `0014`, the metadata snapshot at
+  `/private/tmp/stablecoin-policy-pre0014-metadata.json` had SHA-256
+  `5d36670b514d953d5d7e74d6f2c81b213ec7143d1c5aa13edef56a2ebee483b9`.
+  Migration `0014` closes the remaining Phase 2 foundation `INSERT` grant and
+  makes coverage scopes fully read-only to the service role. Production smoke
+  confirms direct `INSERT`, `UPDATE`, and `DELETE` are all denied, while the
+  human-review RPC remains the sole advancement path. Database lint and the
+  reviewed-only public boundary pass. The post-`0014` snapshot retained three
+  `IN_PROGRESS` scopes and zero claims, releases, checklists, or coverage-review
+  records; its SHA-256 is
+  `9b315fbe12d9e26d326387328852da9c4b6b18edbea6bb4354c965ef18a29893`.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
@@ -384,9 +452,10 @@ existing tracker and report endpoints are unaffected.
 - When a managed backup or local Docker-backed `db dump` is unavailable, run
   `npm run storage:backup-metadata`; keep its private JSON output and SHA-256
   checksum outside the repository. This supplements, but does not replace,
-  immutable Storage objects and their existing restore procedure. Format `1.2.0`
+  immutable Storage objects and their existing restore procedure. Format `1.3.0`
   includes claim, citation, review, corpus-membership, impact, and coverage rows
-  in addition to Phase 1 metadata and explicitly requested source statuses. A
+  plus coverage checklists and coverage-review records, in addition to Phase 1
+  metadata and explicitly requested source statuses. A
   migration-pending table on the explicit optional allowlist is exported as an
   empty array before creation; every other table or transport error fails closed.
 - Confirm migration `0003` created the private `policy-sources` Storage bucket.
