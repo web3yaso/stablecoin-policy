@@ -4,7 +4,7 @@
 
 **Status:** Phase 2 in progress — EEA source and HK subsidiary source observed; HK core source blocked
 
-**Code baseline:** GitHub `main` after PR #23
+**Code baseline:** GitHub `main` after PR #24
 **Scope:** Convert Stablecoin Policy from a public tracker plus paid-report service into the public Stablecoin Policy subsite and the authenticated domain backend for Citely playbooks.
 
 ## 1. Executive summary
@@ -612,6 +612,15 @@ fingerprint and applies the verified-evidence rule to every legal status. The
 workflow creates no baseline claims and grants no automated approval authority.
 Migration `0011` is applied to production; permission-denial and missing-claim
 smokes pass, and claim, citation, review, corpus, and impact tables remain empty.
+
+Corpus-release workflow checkpoint (2026-08-01): migration `0012` adds
+`IN_REVIEW`, immutable named-human release-review records, deterministic release
+manifests that embed every claim-review manifest, and controlled create, submit,
+review, and publish RPCs. Approval fails closed on empty/unreviewed/stale claim
+membership and `as_of` or knowledge-cutoff violations. Publication recomputes
+the approved manifest and reruns claim evidence gates. The service role cannot
+mutate release rows directly, deployment creates no release, and coverage
+advancement remains a separate reviewed step.
 
 ### Phase 3 — Evidence RAG
 

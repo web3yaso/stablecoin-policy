@@ -184,6 +184,34 @@ Use `--submit-for-review` only after draft citations are complete. Final review
 submission additionally requires `--submit`, `--confirm-human-review`, the exact
 manifest SHA-256, outcome, reviewer role/reference, and review time.
 
+## Corpus release workflow
+
+Migration `0012` makes corpus assembly and publication a separate reviewed
+state machine: `DRAFT` membership is editable, `IN_REVIEW` freezes membership,
+`REVIEWED` records a named-human approval, and only the exact approved manifest
+may become `PUBLISHED`. Release rows are created and transitioned only through
+fixed-search-path service RPCs; the service role cannot insert, update, or delete
+them directly.
+
+The deterministic release manifest binds `as_of`, `knowledge_cutoff`, sorted
+claim membership, and each complete claim-review manifest and SHA-256. Approval
+fails on empty membership, unreviewed claims, missing/stale claim approvals,
+claims outside the release's half-open effective interval, or claim knowledge
+newer than the release cutoff. Publication recomputes the release manifest,
+requires an immutable matching release-review record, and reruns both release
+and claim evidence gates. Deployment never creates or publishes a release.
+
+The CLI is read-only by default:
+
+```bash
+npm run legal:corpus:release -- --release <release-id>
+```
+
+Creation, review submission, named-human review, and publication require
+separate explicit flags. Coverage does not advance automatically when a release
+is published; baseline completeness and freshness remain a separate reviewed
+checkpoint.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage
@@ -344,9 +372,11 @@ existing tracker and report endpoints are unaffected.
 - When a managed backup or local Docker-backed `db dump` is unavailable, run
   `npm run storage:backup-metadata`; keep its private JSON output and SHA-256
   checksum outside the repository. This supplements, but does not replace,
-  immutable Storage objects and their existing restore procedure. Format `1.1.0`
+  immutable Storage objects and their existing restore procedure. Format `1.2.0`
   includes claim, citation, review, corpus-membership, impact, and coverage rows
-  in addition to Phase 1 metadata and explicitly requested source statuses.
+  in addition to Phase 1 metadata and explicitly requested source statuses. A
+  migration-pending table on the explicit optional allowlist is exported as an
+  empty array before creation; every other table or transport error fails closed.
 - Confirm migration `0003` created the private `policy-sources` Storage bucket.
   If `SUPABASE_SOURCES_BUCKET` overrides that default, create the configured
   private bucket separately before ingestion.

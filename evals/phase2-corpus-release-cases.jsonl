@@ -1,0 +1,6 @@
+{"caseId":"release-ready","claimCount":3,"unreviewedClaimCount":0,"staleClaimApprovalCount":0,"outsideAsOfCount":0,"afterKnowledgeCutoffCount":0,"expected":"PASS"}
+{"caseId":"empty-release","claimCount":0,"unreviewedClaimCount":0,"staleClaimApprovalCount":0,"outsideAsOfCount":0,"afterKnowledgeCutoffCount":0,"expected":"BLOCK"}
+{"caseId":"unreviewed-claim","claimCount":1,"unreviewedClaimCount":1,"staleClaimApprovalCount":0,"outsideAsOfCount":0,"afterKnowledgeCutoffCount":0,"expected":"BLOCK"}
+{"caseId":"stale-claim-review","claimCount":1,"unreviewedClaimCount":0,"staleClaimApprovalCount":1,"outsideAsOfCount":0,"afterKnowledgeCutoffCount":0,"expected":"BLOCK"}
+{"caseId":"wrong-as-of","claimCount":1,"unreviewedClaimCount":0,"staleClaimApprovalCount":0,"outsideAsOfCount":1,"afterKnowledgeCutoffCount":0,"expected":"BLOCK"}
+{"caseId":"future-knowledge","claimCount":1,"unreviewedClaimCount":0,"staleClaimApprovalCount":0,"outsideAsOfCount":0,"afterKnowledgeCutoffCount":1,"expected":"BLOCK"}
