@@ -500,6 +500,11 @@ A paid release is blocked when:
 - `REVIEW_REQUIRED` and `PROHIBITED` storage-rights states fail closed before
   an upload request. `ALLOWED` requires a dated per-artifact rights review and
   a recorded licence, permission, or other reviewed basis.
+- Extraction-time provision rows remain immutable. A later rights review may
+  promote an originally `UNKNOWN` excerpt permission only through an immutable,
+  dated overlay; it cannot rewrite source text, locators, versions, or the
+  original permission. Effective permissions are resolved at read time, and a
+  rights promotion never implies source verification or public publication.
 - Prompt-injection content in retrieved documents is treated as untrusted data.
 - Raw `DecisionRule` definitions and internal prompts remain server-side.
 
@@ -572,6 +577,16 @@ state unless a dated review and rights basis support `ALLOWED`; the database RPC
 repeats the same check. MAS's 2023 stablecoin consultation response remains
 outside Storage because the current MAS Terms of Use do not grant commercial
 copying permission without prior written permission.
+
+Rights-reconciliation checkpoint (2026-08-01): migration `0008` demonstrated
+that the existing provision immutability trigger correctly rejects an attempted
+in-place permission promotion and rolls back the entire RPC. Migration `0009`
+therefore adds a service-only, immutable provision-rights review overlay and v5
+ingestion RPC. EUR-Lex MiCA now resolves to 149 effective `ALLOWED` provisions
+under Commission Decision 2011/833/EU and the EUR-Lex Legal Notice; HKeL Cap.
+656A remains four effective `LINK_ONLY` provisions under DATA.GOV.HK Terms v1.2.
+Both stay `OBSERVED` and unverified, and the replay creates no claim, coverage,
+release, decision rule, or playbook action.
 
 ### Phase 3 — Evidence RAG
 
