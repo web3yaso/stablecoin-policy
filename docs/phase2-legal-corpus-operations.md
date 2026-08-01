@@ -11,6 +11,15 @@ ownership layers:
 - `policy`: Stablecoin-specific legal claims, citations, private review
   records, reproducible corpus releases, change impacts, and coverage scopes.
 
+The executable workflow model lives in `specs/legalCorpusPublication.qnt`,
+with scenario tests and a requirement map alongside it. Run
+`npm run spec:phase2` before changing migrations `0010` through `0014` or any
+successor that changes review states, fingerprints, freshness gates, atomicity,
+or service-role grants. The command typechecks the model and tests, runs eleven
+scenarios, and samples five invariants plus four lifecycle witnesses. It does
+not use `quint verify`; a clean simulation reports that no counterexample was
+found in the sampled traces, not that the database is formally proven correct.
+
 The initial coverage rows are EEA, Hong Kong, and Singapore. They intentionally
 start as `IN_PROGRESS`, `0%`, and `UNKNOWN`; existing jurisdiction summaries do
 not count as reviewed baseline claims.

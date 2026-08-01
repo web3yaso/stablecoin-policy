@@ -639,6 +639,17 @@ Migration `0014` closes the inherited direct `INSERT` grant; production smoke
 now proves the service role cannot directly insert, update, or delete coverage
 rows, and the post-migration snapshot confirms no business-data change.
 
+Executable-specification checkpoint (2026-08-01): the Phase 2 publication
+lifecycle now has a pinned Quint 0.32.0 model covering source verification,
+claim review, corpus review/publication, coverage review, atomic rejection, and
+the service-role coverage boundary. Eleven deterministic scenarios exercise the
+happy path, automated-review rejection, stale fingerprints at every review
+layer, missing publication, and denied direct coverage mutation. Five safety
+invariants and four reachability witnesses run in CI together with the Phase 2
+eval suite. The model contains sanitized state only and does not define legal
+claims, private decision rules, or playbook actions. It is sampled executable
+specification, not an exhaustive proof or a replacement for human legal review.
+
 ### Phase 3 — Evidence RAG
 
 - implement `EvidenceChunk`, `EmbeddingRecord`, `RetrievalIndexRelease`, and `RagRetrievalRun` storage;
