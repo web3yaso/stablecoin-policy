@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-31
 
-**Status:** Phase 2 in progress — EEA source ingested; Hong Kong source adapter under validation
+**Status:** Phase 2 in progress — EEA source and HK subsidiary source observed; HK core source blocked
 
 **Code baseline:** GitHub `main` after PR #19
 **Scope:** Convert Stablecoin Policy from a public tracker plus paid-report service into the public Stablecoin Policy subsite and the authenticated domain backend for Citely playbooks.
@@ -550,7 +550,9 @@ adapter consumes Department of Justice HKeL archives with ZIP integrity,
 archive-entry provenance, embedded-document identity, and structured section
 locators. Cap. 656 is blocked because its current official XML entry embeds
 Cap. 155 identifiers; Cap. 656A is independently parseable but remains
-reference-only and cannot make Hong Kong baseline coverage complete.
+reference-only and cannot make Hong Kong baseline coverage complete. Migration
+`0006` is applied and Cap. 656A is stored as one `OBSERVED` version with four
+provisions; no Hong Kong claim or coverage completion is published.
 Publication gates block unreviewed claims, missing provision citations,
 contradictions, and permissions without direct official support. Migration
 `0003` is applied to the linked Supabase project and its private source bucket

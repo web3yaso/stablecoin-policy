@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migrations `0003` through `0005` are applied to the linked Supabase project.
+Migrations `0003` through `0006` are applied to the linked Supabase project.
 They are never applied by application startup. Migration `0003` creates two
 ownership layers:
 
@@ -104,6 +104,13 @@ existing tracker and report endpoints are unaffected.
   idempotent.
 - Public source lookup still returns `404` for MiCA and EEA coverage remains
   `IN_PROGRESS`, `0%`, and `UNKNOWN`, as required before source and claim review.
+- `0006` was applied on 2026-08-01 UTC after a linked-project dry-run. Cap.
+  656A was ingested as `OBSERVED` with extracted XML SHA-256
+  `35f7df127b58c173f678f4052d627a1dc088cf65feb64ac5a6ff136a89b6d952`
+  and four provisions at ordinals 0 through 3. Idempotent replay passed.
+- Cap. 656 remains blocked and absent from the corpus due to the embedded
+  identity mismatch. Public lookup for Cap. 656A returns `404`, and Hong Kong
+  coverage remains `IN_PROGRESS`, `0%`, and `UNKNOWN`.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
