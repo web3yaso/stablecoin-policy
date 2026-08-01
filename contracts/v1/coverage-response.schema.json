@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://stablecoin-policy.citely.info/contracts/v1/coverage-response.schema.json",
+  "$id": "https://policy.citely.info/contracts/v1/coverage-response.schema.json",
   "title": "CoverageResponse",
   "type": "object",
   "additionalProperties": false,
