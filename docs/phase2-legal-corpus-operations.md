@@ -13,7 +13,7 @@ ownership layers:
 
 The executable workflow model lives in `specs/legalCorpusPublication.qnt`,
 with scenario tests and a requirement map alongside it. Run
-`npm run spec:phase2` before changing migrations `0010` through `0015` or any
+`npm run spec:phase2` before changing migrations `0010` through `0016` or any
 successor that changes review states, fingerprints, freshness gates, atomicity,
 or service-role grants. The command typechecks the model and tests, runs eleven
 core lifecycle scenarios plus the draft-import scenario, and samples five
@@ -24,8 +24,8 @@ found in the sampled traces, not that the database is formally proven correct.
 The database counterparts are the files in `supabase/tests`. They start from
 all local migrations, use sanitized rows inside transactions, and execute the
 complete source-verification, draft-import, claim-review,
-release-review/publication, and coverage-review RPC chains. Their 46 pgTAP
-assertions also cover stale manifests,
+release-review/publication, coverage-review, and readiness-query RPC chains.
+Their 55 pgTAP assertions also cover stale manifests,
 automated-reviewer rejection, zero partial audit writes, service-role table
 grants, and reviewed-only public views. Run it with:
 
@@ -491,6 +491,24 @@ used; database constraints and the atomic RPC reject the whole batch on any
 invalid citation, duplicate ID, forbidden review field, or batch-manifest
 conflict. Imported drafts remain private until the independent claim, release,
 and coverage review workflows complete.
+
+## Jurisdiction baseline readiness
+
+Migration `0016` adds a private, read-only workflow report for operators who
+are preparing a jurisdiction baseline. It aggregates source-version,
+verification, claim-review, corpus-release, checklist, and coverage counts into
+one deterministic stage and ordered blocker list:
+
+```bash
+npm run legal:baseline:readiness -- --jurisdiction <code>
+npm run legal:baseline:readiness -- --jurisdiction <code> --summary
+```
+
+The report is service-role only and contains no claim proposition or reviewer
+data. It cannot write, submit, approve, publish, or advance coverage. The field
+`legalCompletenessAssessed` is always `false`: `COMPLETE` means only that the
+existing named-human publication workflow reached reviewed coverage, not that
+the software independently determined legal completeness.
 
 ## Required pre-production checks
 

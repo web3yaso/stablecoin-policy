@@ -32,6 +32,7 @@
     "legal:sources:verify": "tsx scripts/review/legal-source-verification.ts",
     "legal:claims:review": "tsx scripts/review/legal-claim-review.ts",
     "legal:claims:draft": "tsx scripts/review/legal-claim-draft-import.ts",
+    "legal:baseline:readiness": "tsx scripts/review/legal-baseline-readiness.ts",
     "legal:corpus:release": "tsx scripts/review/legal-corpus-release.ts",
     "legal:coverage:review": "tsx scripts/review/legal-coverage-review.ts",
     "news:sources:check": "tsx scripts/smoke/professional-sources-dryrun.ts",
