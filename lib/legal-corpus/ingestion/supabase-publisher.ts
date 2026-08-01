@@ -10,7 +10,7 @@ export class SupabaseOfficialSourcePublisher {
   }
 
   async publish(snapshot: OfficialSourceSnapshot): Promise<string> {
-    const stored = await this.objects.putObject({
+    await this.objects.putObject({
       key: snapshot.objectKey,
       body: snapshot.body,
       contentType: snapshot.contentType,
@@ -21,8 +21,10 @@ export class SupabaseOfficialSourcePublisher {
       p_bucket: this.client.config.sourcesBucket,
       p_object_key: snapshot.objectKey,
       p_checksum_sha256: snapshot.checksumSha256,
-      p_byte_size: stored.byteSize,
-      p_content_type: stored.contentType,
+      // Storage may decorate Content-Type on a duplicate-object GET. Database
+      // identity must use the validated upstream snapshot in every run.
+      p_byte_size: snapshot.body.byteLength,
+      p_content_type: snapshot.contentType,
       p_authority: {
         authorityId: snapshot.source.authorityId,
         name: snapshot.source.authorityName,

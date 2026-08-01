@@ -4,6 +4,8 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { extractEurLexArticles, fetchEurLexSource } from "../lib/legal-corpus/ingestion/eurlex";
 import type { OfficialSourceRegistryEntry } from "../lib/legal-corpus/ingestion/types";
+import { SupabaseOfficialSourcePublisher } from "../lib/legal-corpus/ingestion/supabase-publisher";
+import { SupabaseHttpClient, type FetchLike } from "../lib/data/supabase-client";
 
 const SOURCE: OfficialSourceRegistryEntry = {
   sourceId: "fixture",
@@ -98,6 +100,37 @@ test("ingestion migration remains service-role-only and never creates claims", a
   assert.match(sql, /revoke all on function policy\.ingest_official_source[\s\S]*from public, anon, authenticated/);
   assert.doesNotMatch(sql, /insert into policy\.legal_claims/i);
   assert.doesNotMatch(sql, /insert into policy\.citations/i);
+});
+
+test("duplicate Storage response headers cannot change ingestion metadata", async () => {
+  const sourceSnapshot = await snapshot(HTML);
+  let rpcBody: Record<string, unknown> | undefined;
+  const fetchImpl: FetchLike = async (input, init) => {
+    if (String(input).includes("/storage/v1/object/")) {
+      if (init?.method === "POST") return new Response("exists", { status: 409 });
+      return new Response(HTML, {
+        status: 200,
+        headers: { "content-type": "application/xhtml+xml; charset=utf-8" },
+      });
+    }
+    rpcBody = JSON.parse(String(init?.body)) as Record<string, unknown>;
+    return Response.json(sourceSnapshot.versionId);
+  };
+  const client = new SupabaseHttpClient(
+    {
+      url: "https://example.supabase.co",
+      serviceRoleKey: "test-service-role",
+      reportsBucket: "policy-reports",
+      datasetsBucket: "policy-datasets",
+      sourcesBucket: "policy-sources",
+      requestTimeoutMs: 1000,
+    },
+    fetchImpl,
+  );
+
+  await new SupabaseOfficialSourcePublisher(client).publish(sourceSnapshot);
+  assert.equal(rpcBody?.p_content_type, sourceSnapshot.contentType);
+  assert.equal(rpcBody?.p_byte_size, sourceSnapshot.body.byteLength);
 });
 
 async function snapshot(html: string) {
