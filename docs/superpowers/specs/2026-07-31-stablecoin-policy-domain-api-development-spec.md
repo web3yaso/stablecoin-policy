@@ -621,6 +621,8 @@ membership and `as_of` or knowledge-cutoff violations. Publication recomputes
 the approved manifest and reruns claim evidence gates. The service role cannot
 mutate release rows directly, deployment creates no release, and coverage
 advancement remains a separate reviewed step.
+Migration `0012` is applied to production; direct-insert denial, invalid-create,
+database-lint, public-boundary, and zero-row metadata checks pass.
 
 ### Phase 3 — Evidence RAG
 

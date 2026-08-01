@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migrations `0003` through `0011` are applied to the linked Supabase project.
+Migrations `0003` through `0012` are applied to the linked Supabase project.
 They are never applied by application startup. Migration `0003` creates two
 ownership layers:
 
@@ -361,6 +361,18 @@ existing tracker and report endpoints are unaffected.
   evidence or coverage change. The post-`0011` snapshot retained zero claim,
   citation, review, corpus, and impact rows and has SHA-256
   `371e1441fa17f44aa8403ddaa203c1b55114ef6f19a4dd1f8ee9e427c7bc555c`.
+- Before migration `0012`, backup format `1.2.0` recorded the migration-pending
+  release-review table as empty and captured all existing metadata and four
+  source statuses at `/private/tmp/stablecoin-policy-pre0012-metadata.json`,
+  mode `0600`, with SHA-256
+  `6b73a02ece7cfbb81a5efb2aa268fb620bd5f2ffceb78dc462efd5529f7529d6`.
+- Migration `0012` was applied on 2026-08-01 UTC after a linked-project dry-run.
+  Database lint reports no schema errors. Negative-path smoke confirmed the
+  service role cannot insert corpus releases directly and the create RPC rejects
+  an invalid release ID without writing data. Phase 2 public-boundary smoke
+  remains unchanged. The post-`0012` snapshot contains zero claim, review,
+  corpus, membership, release-review, and impact rows and has SHA-256
+  `72fcf9a9ab2662f0860e863d8c7d1b509828d617275e60eae293017494b40de9`.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false

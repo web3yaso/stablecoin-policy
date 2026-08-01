@@ -29,6 +29,7 @@
     "smoke:phase2": "node --import tsx scripts/smoke/phase2-corpus.ts",
     "smoke:source-verification": "tsx scripts/smoke/source-verification.ts",
     "smoke:claim-review": "tsx scripts/smoke/claim-review.ts",
+    "smoke:corpus-release": "tsx scripts/smoke/corpus-release.ts",
     "news:regen": "tsx scripts/sync/news-regen.ts",
     "cost:summary": "tsx scripts/reports/summarize-llm-cost.ts"
   },
