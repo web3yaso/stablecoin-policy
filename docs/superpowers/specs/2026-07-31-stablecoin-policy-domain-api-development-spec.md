@@ -4,7 +4,7 @@
 
 **Status:** Phase 2 in progress — EEA source and HK subsidiary source observed; HK core source blocked
 
-**Code baseline:** GitHub `main` after PR #19
+**Code baseline:** GitHub `main` after PR #22
 **Scope:** Convert Stablecoin Policy from a public tracker plus paid-report service into the public Stablecoin Policy subsite and the authenticated domain backend for Citely playbooks.
 
 ## 1. Executive summary
@@ -587,6 +587,17 @@ under Commission Decision 2011/833/EU and the EUR-Lex Legal Notice; HKeL Cap.
 656A remains four effective `LINK_ONLY` provisions under DATA.GOV.HK Terms v1.2.
 Both stay `OBSERVED` and unverified, and the replay creates no claim, coverage,
 release, decision rule, or playbook action.
+
+Source-verification workflow checkpoint (2026-08-01): migration `0010` adds an
+immutable private `SourceVerificationRecord`, a deterministic manifest over the
+source object/version and provision locator/checksum/rights metadata, and an
+atomic service-only human-review RPC. Approval requires an exact freshly
+computed manifest fingerprint, an identified non-automated reviewer, reviewed
+commercial storage rights, at least one provision, no unknown effective excerpt
+permissions, and an `OBSERVED` source. The approval record and transition to
+`VERIFIED` commit together; rejection leaves the source `OBSERVED`. The workflow
+does not create claims or make evidence public, and deployment alone never
+verifies a production source.
 
 ### Phase 3 — Evidence RAG
 

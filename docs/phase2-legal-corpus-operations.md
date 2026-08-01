@@ -116,13 +116,46 @@ parsed into stored provisions, or added to the registry as ingestible evidence.
 Obtain and record permission, or use a separately licensed official channel,
 before implementing a MAS PDF adapter.
 
+## Source verification workflow
+
+Source verification is a distinct named-human review after ingestion and rights
+review. Migration `0010` adds private immutable
+`regulatory.source_verification_records`, a deterministic service-only manifest,
+and an atomic review RPC. The manifest fingerprints the immutable object and
+version metadata plus every provision ID, locator, text checksum, ordinal, and
+effective excerpt permission; it never returns provision text or reviewer data.
+
+An approval fails closed unless the source is still `OBSERVED`, the freshly
+computed manifest SHA-256 matches the reviewer's submitted SHA-256, commercial
+storage rights are reviewed and `ALLOWED`, at least one provision exists, every
+effective excerpt permission is known, and the review time follows retrieval.
+The approval record and `OBSERVED` to `VERIFIED` transition occur in one database
+transaction. Rejections create an immutable record but leave the version
+`OBSERVED`. The review table is read-only to the service role; its only write
+path is the fixed-search-path `SECURITY DEFINER` RPC.
+
+Generate a read-only review manifest with:
+
+```bash
+npm run legal:sources:verify -- --source-version <version-id>
+```
+
+After independently checking the official artifact and locators, submit the
+exact displayed manifest fingerprint with `--submit`, `--confirm-human-review`,
+an explicit outcome, verification method, reviewer role/reference, and review
+time. `OFFICIAL_BYTE_AND_LOCATOR_REVIEW` is for an authoritative official copy;
+`REFERENCE_COPY_CROSS_CHECK` requires comparison against the authoritative copy.
+An AI agent, LLM, system, automation identity, or unknown reviewer cannot approve
+a source. Running or deploying this workflow never verifies a source by itself.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage
    object and record its checksum.
 2. Create or resolve the authority and logical document.
 3. Insert a `SourceVersion` in `OBSERVED`, extract addressable provisions, then
-   verify the source version.
+   generate its deterministic verification manifest and complete a named-human
+   source review before moving it to `VERIFIED`.
 4. Create a draft domain claim and its exact provision citations.
 5. Record the human review result. Reviewer references and notes stay private.
 6. Move the approved claim to `REVIEWED`.

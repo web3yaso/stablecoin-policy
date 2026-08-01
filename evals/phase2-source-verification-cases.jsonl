@@ -1,0 +1,5 @@
+{"caseId":"approval-ready","lifecycleState":"OBSERVED","verifiedAt":null,"storageRights":"ALLOWED","rightsReviewed":true,"permissions":["ALLOWED","LINK_ONLY"],"expected":"PASS"}
+{"caseId":"already-verified","lifecycleState":"VERIFIED","verifiedAt":"2026-07-31T00:00:00.000Z","storageRights":"ALLOWED","rightsReviewed":true,"permissions":["ALLOWED"],"expected":"BLOCK"}
+{"caseId":"storage-review-required","lifecycleState":"OBSERVED","verifiedAt":null,"storageRights":"REVIEW_REQUIRED","rightsReviewed":false,"permissions":["ALLOWED"],"expected":"BLOCK"}
+{"caseId":"unknown-excerpt-permission","lifecycleState":"OBSERVED","verifiedAt":null,"storageRights":"ALLOWED","rightsReviewed":true,"permissions":["UNKNOWN"],"expected":"BLOCK"}
+{"caseId":"missing-provisions","lifecycleState":"OBSERVED","verifiedAt":null,"storageRights":"ALLOWED","rightsReviewed":true,"permissions":[],"expected":"BLOCK"}
