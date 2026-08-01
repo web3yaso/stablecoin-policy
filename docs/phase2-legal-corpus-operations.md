@@ -51,11 +51,22 @@ the Hong Kong baseline complete.
 The Singapore adapter pins an explicit SSO `ValidDate`, obtains the supported
 complete HTML print export for structure, and stores the separately downloaded,
 byte-stable official PDF as the immutable source artifact. The registry pins
-that PDF's expected SHA-256 and any byte change fails closed for manual review. It records a
-deterministic checksum over the extracted provision set instead of treating the
-print page's changing CSRF token, timestamp, or CSP nonce as a legal change. The
-adapter fails closed on title, document-number, valid-date, host, content-type,
-PDF-signature, duplicate-section, and provision-count mismatches.
+that PDF's expected SHA-256 and any byte change fails closed for manual review.
+It records a deterministic checksum over the extracted provision set instead of
+treating the print page's changing CSRF token, timestamp, or CSP nonce as a legal
+change. Registry entries also declare the official provision kind so Acts use
+`Section` locators while subsidiary legislation can use `Regulation` or
+`Paragraph` locators. Subsidiary-legislation entries fail closed when that kind
+is missing. The adapter fails closed on title, document-number, valid-date, host,
+content-type, PDF-signature, duplicate-provision, and provision-count mismatches.
+
+The registered Singapore source set currently contains the Payment Services Act
+2019 and the Payment Services Regulations 2019. The Regulations are pinned to
+the 2025 Revised Edition dated 17 December 2025. A read-only dry-run verified the
+PDF SHA-256
+`1757d0a6755d05714007c8a709b7d51a32227ce201edfe9122839c514e671951`
+across two downloads and extracted 47 regulations, including regulations 18A
+through 18J. This does not make their contents reviewed or publishable.
 
 SSO is maintained by Singapore's Attorney-General's Chambers, but its Terms of
 Use describe the consolidated legislation as an unofficial version that is not

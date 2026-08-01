@@ -31,6 +31,7 @@ export type OfficialSourceRegistryEntry = {
   expectedEmbeddedIdentifier?: string;
   ssoDocumentType?: "Act" | "SL";
   ssoDocumentNumber?: string;
+  ssoProvisionKind?: "section" | "regulation" | "paragraph";
   ssoValidDate?: string;
   ssoPdfUrl?: string;
   ssoExpectedPdfChecksumSha256?: string;

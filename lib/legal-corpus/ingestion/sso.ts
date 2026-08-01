@@ -91,6 +91,7 @@ export async function fetchSsoSource(
     versionId,
     source.languageCode,
     source.redistributionRights === "FULL_TEXT" ? "ALLOWED" : "UNKNOWN",
+    source.ssoProvisionKind ?? "section",
   );
   if (provisions.length < source.minimumProvisionCount) {
     throw new Error(
@@ -154,6 +155,7 @@ export function extractSsoSections(
   versionId: string,
   languageCode = "en",
   excerptPermission: "ALLOWED" | "UNKNOWN" = "UNKNOWN",
+  provisionKind: "section" | "regulation" | "paragraph" = "section",
 ): ProvisionCandidate[] {
   const openings = [
     ...html.matchAll(/<div\b[^>]*class="[^"]*\b(prov1|prov1Rep)\b[^"]*"[^>]*>/gi),
@@ -165,20 +167,24 @@ export function extractSsoSections(
       /<td\b[^>]*class="[^"]*\bprov1Hdr\b[^"]*"[^>]*id="pr([0-9]+[A-Z]*)-"[^>]*>/i,
     )?.[1];
     const inactiveNumber = opening[0].match(/\bid="pr([0-9]+[A-Z]*)-"/i)?.[1];
-    const sectionNumber = standardNumber ?? inactiveNumber;
-    if (!sectionNumber) throw new Error("SSO section is missing its official identifier");
-    if (seen.has(sectionNumber)) throw new Error(`SSO section identity is duplicated: ${sectionNumber}`);
-    seen.add(sectionNumber);
+    const provisionNumber = standardNumber ?? inactiveNumber;
+    if (!provisionNumber) throw new Error("SSO provision is missing its official identifier");
+    if (seen.has(provisionNumber)) {
+      throw new Error(`SSO provision identity is duplicated: ${provisionNumber}`);
+    }
+    seen.add(provisionNumber);
     const provisionText = htmlToText(block);
     const heading = standardNumber
       ? firstClassText(block, "prov1Hdr")
-      : provisionText.replace(new RegExp(`^${sectionNumber}\\.\\s*`), "").trim();
-    if (!heading || !provisionText.includes(`${sectionNumber}.`)) {
-      throw new Error(`SSO section ${sectionNumber} is missing its official heading or number`);
+      : provisionText.replace(new RegExp(`^${provisionNumber}\\.\\s*`), "").trim();
+    if (!heading || !provisionText.includes(`${provisionNumber}.`)) {
+      throw new Error(
+        `SSO ${provisionKind} ${provisionNumber} is missing its official heading or number`,
+      );
     }
     return {
-      provisionId: `${versionId}:section:${sectionNumber.toLowerCase()}`,
-      locator: `Section ${sectionNumber}`,
+      provisionId: `${versionId}:${provisionKind}:${provisionNumber.toLowerCase()}`,
+      locator: `${capitalize(provisionKind)} ${provisionNumber}`,
       heading,
       languageCode,
       provisionText,
@@ -187,6 +193,10 @@ export function extractSsoSections(
       excerptPermission,
     };
   });
+}
+
+function capitalize(value: string): string {
+  return value[0].toUpperCase() + value.slice(1);
 }
 
 function assertSsoRegistry(source: OfficialSourceRegistryEntry): {
@@ -199,6 +209,7 @@ function assertSsoRegistry(source: OfficialSourceRegistryEntry): {
   if (
     !source.ssoDocumentType ||
     !source.ssoDocumentNumber ||
+    (source.ssoDocumentType === "SL" && !source.ssoProvisionKind) ||
     !source.ssoValidDate ||
     !/^\d{8}$/.test(source.ssoValidDate) ||
     !source.ssoPdfUrl ||

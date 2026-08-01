@@ -99,6 +99,34 @@
       "redistributionRights": "FULL_TEXT",
       "licenceIdentifier": "SSO Terms of Use clause 13 (updated 2026-07-21)",
       "minimumProvisionCount": 148
+    },
+    {
+      "sourceId": "sg-payment-services-regulations-2019-en",
+      "provider": "sso",
+      "ingestionState": "ACTIVE",
+      "authorityId": "authority:sg:attorney-generals-chambers",
+      "authorityName": "Attorney-General's Chambers, Singapore",
+      "authorityType": "OFFICIAL_REGISTER",
+      "jurisdictionCode": "SG",
+      "officialDomains": ["sso.agc.gov.sg"],
+      "documentId": "document:sg:sl:psa2019-rg2",
+      "officialDocumentId": "PSA2019-RG2",
+      "documentType": "SUBSIDIARY_LEGISLATION",
+      "title": "Payment Services Regulations 2019",
+      "canonicalUrl": "https://sso.agc.gov.sg/SL/PSA2019-RG2?ValidDate=20251217",
+      "fetchUrl": "https://sso.agc.gov.sg/SL/PSA2019-RG2?ValidDate=20251217&ViewType=Print",
+      "ssoDocumentType": "SL",
+      "ssoDocumentNumber": "PSA2019-RG2",
+      "ssoProvisionKind": "regulation",
+      "ssoValidDate": "20251217",
+      "ssoPdfUrl": "https://sso.agc.gov.sg/SL/PSA2019-RG2?ValidDate=20251217&ViewType=Pdf",
+      "ssoExpectedPdfChecksumSha256": "1757d0a6755d05714007c8a709b7d51a32227ce201edfe9122839c514e671951",
+      "languageCode": "en",
+      "versionLabel": "2025-12-17",
+      "effectiveFrom": "2025-12-17T00:00:00.000Z",
+      "redistributionRights": "FULL_TEXT",
+      "licenceIdentifier": "SSO Terms of Use clause 13 (updated 2026-07-21)",
+      "minimumProvisionCount": 47
     }
   ]
 }

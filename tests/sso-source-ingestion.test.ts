@@ -57,6 +57,21 @@ test("SSO extraction preserves alphanumeric section locators and nested text", (
   assert.equal(provisions[1].excerptPermission, "ALLOWED");
 });
 
+test("SSO extraction uses regulation identity for subsidiary legislation", () => {
+  const provisions = extractSsoSections(
+    EXPORT_HTML,
+    "version:fixture",
+    "en",
+    "ALLOWED",
+    "regulation",
+  );
+  assert.deepEqual(
+    provisions.map((item) => item.locator),
+    ["Regulation 1", "Regulation 21A", "Regulation 22"],
+  );
+  assert.match(provisions[1].provisionId, /:regulation:21a$/);
+});
+
 test("SSO identity guard pins title, document number and valid date", () => {
   assert.doesNotThrow(() => assertSsoIdentity(EXPORT_HTML, SOURCE));
   assert.throws(
@@ -113,6 +128,18 @@ test("SSO adapter rejects incomplete registry entries before the network", async
     /registry entry is incomplete/,
   );
   assert.equal(called, false);
+});
+
+test("SSO subsidiary legislation requires an explicit provision kind", async () => {
+  await assert.rejects(
+    fetchSsoSource({
+      ...SOURCE,
+      ssoDocumentType: "SL",
+      ssoDocumentNumber: "PSA2019-RG2",
+      ssoProvisionKind: undefined,
+    }),
+    /registry entry is incomplete/,
+  );
 });
 
 test("SSO adapter fails closed when the pinned PDF bytes change", async () => {

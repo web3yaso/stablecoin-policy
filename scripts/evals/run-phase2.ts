@@ -50,6 +50,10 @@ type SsoIngestionCase = {
   expectedLocators: string[];
   expectedError: boolean;
   expectedIdentityError: boolean;
+  title?: string;
+  documentNumber?: string;
+  validDate?: string;
+  provisionKind?: "section" | "regulation" | "paragraph";
 };
 
 async function main() {
@@ -120,15 +124,16 @@ async function main() {
   const ssoFailures = ssoCases.filter((evalCase) => {
     try {
       assertSsoIdentity(evalCase.html, {
-        title: "Payment Services Act 2019",
-        ssoDocumentNumber: "PSA2019",
-        ssoValidDate: "20250309",
+        title: evalCase.title ?? "Payment Services Act 2019",
+        ssoDocumentNumber: evalCase.documentNumber ?? "PSA2019",
+        ssoValidDate: evalCase.validDate ?? "20250309",
       });
       const provisions = extractSsoSections(
         evalCase.html,
         `version:${evalCase.caseId}`,
         "en",
         "ALLOWED",
+        evalCase.provisionKind ?? "section",
       );
       const locators = provisions.map((provision) => provision.locator);
       return (
