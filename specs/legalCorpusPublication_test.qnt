@@ -1,6 +1,14 @@
 module legalCorpusPublication_test {
   import legalCorpusPublication.* from "./legalCorpusPublication"
 
+  run draftImportStartsUnreviewedTest =
+    init.expect(and {
+      state.claimState == DraftClaim,
+      not(state.claimHumanReviewRecorded),
+      state.releaseState == NoRelease,
+      state.coverageState == CoverageInProgress,
+    })
+
   run completeReviewedBaselineTest =
     init
       .then(verifySource(true))

@@ -48,8 +48,8 @@ npm run test:db:phase2
 npm run db:phase2:stop
 ```
 
-The PostgreSQL test applies every migration to an isolated local Supabase
-database, runs 34 pgTAP assertions inside a rolled-back transaction, and maps
+The PostgreSQL tests apply every migration to an isolated local Supabase
+database, run 46 pgTAP assertions inside rolled-back transactions, and map
 the executable model to the real RPCs and grants. Its fixtures are sanitized;
 they never represent production legal conclusions or named production users.
 
@@ -67,5 +67,6 @@ transitive dependency.
 ## Maintenance triggers
 
 Update this model and its requirement map whenever a migration changes any
-review state, publication gate, manifest/freshness rule, atomicity boundary, or
-service-role grant in migrations `0010` through `0014` or their successors.
+review state, draft-import boundary, publication gate, manifest/freshness rule,
+atomicity boundary, or service-role grant in migrations `0010` through `0015`
+or their successors.

@@ -658,6 +658,13 @@ stale fingerprints and automated reviewers are rejected without partial audit
 writes; direct service-role coverage and review-table writes remain denied. The
 test rolls back all fixtures and does not approve production evidence.
 
+Draft-import checkpoint (2026-08-01): migration `0015` and a default-dry-run
+CLI atomically import human-prepared baseline claim/citation bundles as private
+`DRAFT` rows. Immutable batch fingerprints make identical replay idempotent and
+reject changed reuse; review/publication fields, partial batches, automatic
+submission, approval, release, and coverage changes are forbidden. Sanitized
+pgTAP cases cover success, replay, conflict, privacy, and rollback.
+
 ### Phase 3 — Evidence RAG
 
 - implement `EvidenceChunk`, `EmbeddingRecord`, `RetrievalIndexRelease`, and `RagRetrievalRun` storage;
