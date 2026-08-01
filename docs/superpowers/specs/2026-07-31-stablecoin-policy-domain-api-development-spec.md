@@ -2,9 +2,9 @@
 
 **Date:** 2026-07-31
 
-**Status:** In implementation — Phase 1
+**Status:** Phase 1 complete — Phase 2 next
 
-**Code baseline:** GitHub `main` at `0ac1ef89dea46287b50974c94eb87cc579b20717`
+**Code baseline:** GitHub `main` after PR #16; controlled outage rehearsal added in this revision
 **Scope:** Convert Stablecoin Policy from a public tracker plus paid-report service into the public Stablecoin Policy subsite and the authenticated domain backend for Citely playbooks.
 
 ## 1. Executive summary
@@ -60,7 +60,6 @@ The first paid vertical slice is the **Stablecoin Pre-listing & Product Launch**
 
 ### 4.2 Known gaps
 
-- production datasets are still committed to Git and duplicated across `data/`, `public/`, and `lib/placeholder-data.ts`;
 - official events are not yet a canonical `SourceDocument → SourceVersion → Provision` corpus;
 - historical jurisdiction blurbs and legislation often lack provision-level citations and effective-date semantics;
 - there is no asset/issuer/deployment dossier layer sufficient for Pre-listing;
@@ -68,7 +67,7 @@ The first paid vertical slice is the **Stablecoin Pre-listing & Product Launch**
 - the API currently focuses on report listing and purchase rather than structured policy and playbook packages;
 - monitoring does not yet trace a source change through claims and decisions to affected customer packages;
 - legacy AI, data-center, politician, donor, and broad policy code remains in the stablecoin repository;
-- automated coverage protects the Phase 0 storage boundary and Phase 1 cache, immutable publication, checksum, historical replay, privacy-allowlist, and dual-read behavior; a live restore rehearsal remains a deployment gate.
+- automated coverage protects the Phase 0 storage boundary and Phase 1 cache, immutable publication, checksum, historical replay, privacy allowlist, dual-read behavior, and controlled origin-outage behavior for public datasets and paid reports.
 
 ### 4.3 Phase 0 completion checkpoint — 2026-07-31
 
@@ -80,13 +79,13 @@ The first compatibility slice is complete locally:
 - the initial PostgreSQL migration defines queryable report-release metadata and immutable object references with row-level security enabled;
 - versioned JSON Schemas cover report metadata, list responses, and problem details;
 - Node test, typecheck, and Phase 0 security-eval commands are present and passing;
-- no production Supabase migration or data cutover has occurred yet.
+- at this Phase 0 checkpoint, no production Supabase migration or data cutover had occurred.
 
-### 4.4 Phase 1 implementation focus — 2026-07-31
+### 4.4 Phase 1 completion — 2026-07-31
 
-The repository has entered the Issue #14 external-storage phase. Work now proceeds through canonical-owner and duplicate-file inventory, Supabase PostgreSQL and Storage adapters, versioned backfill, cached server-side loaders, dual-read equality checks, workflow cutover, CI size limits, and restore verification. Production reads remain on the file compatibility adapters until the equality, degradation, and rollback gates in Phase 1 pass.
+The Issue #14 external-storage phase is complete. Canonical-owner and duplicate-file inventory, Supabase PostgreSQL and Storage adapters, versioned backfill, cached server-side loaders, dual-read equality checks, workflow cutover, CI size limits, restore verification, production read cutover, and controlled outage behavior have passed their gates.
 
-The local Phase 1 implementation now includes the data inventory and no-growth baselines; Supabase REST/Storage adapters; immutable report and dataset publication functions; checksum-verified runtime modes for `file`, `dual`, and `supabase`; bounded stale-cache behavior; a public dataset API; report and dataset backfill plus dry-run restore commands; workflow feature flags; CI data-size/diff limits; and Phase 1 unit/eval cases. Runtime news is no longer duplicated into `public/news-summaries.json` or baked into the generated entity bundle. The linked Supabase project has the Phase 0 and Phase 1 migrations applied, the `policy` schema exposed to PostgREST, both required buckets provisioned as private, and an initial backfill of four encrypted report releases plus sixteen dataset releases. A strict live dual-read passed for all four reports and all three active datasets. The `daily-report` rollback drill activated the prior release and restored the latest release successfully. Scheduled-ingestion observation, deployment environment configuration, and workflow cutover remain outstanding deployment steps.
+The deployed Phase 1 implementation includes the data inventory and no-growth baselines; Supabase REST/Storage adapters; immutable report and dataset publication functions; checksum-verified runtime modes for `file`, `dual`, and `supabase`; bounded stale-cache behavior; a public dataset API; report and dataset backfill plus dry-run restore commands; workflow feature flags; CI data-size/diff limits; and Phase 1 unit/eval cases. Runtime news is no longer duplicated into `public/news-summaries.json` or baked into the generated entity bundle. The linked Supabase project has both migrations applied, the `policy` schema exposed to PostgREST, and both required buckets provisioned as private. Strict live dual-read passed for all four reports and all three active datasets. The `daily-report` rollback drill activated the prior release and restored the latest release successfully. A Storage-only ingestion published new releases without changing `main`; `POLICY_STORAGE_PUBLISH_ENABLED` and `POLICY_STORAGE_CUTOVER` are enabled; Vercel production reads from Supabase. Controlled fault injection verified checksum-validated stale dataset and paid-report delivery inside the allowed window, plus fail-closed behavior on cold start and after maximum stale expiry.
 
 ## 5. Target architecture
 
@@ -523,6 +522,8 @@ Exit: existing site and report APIs pass tests through the compatibility layer.
 - add CI file-size and data-diff limits.
 
 Exit: daily ingestion creates no large Git commit, current routes survive temporary storage failure according to documented cache policy, and a previous dataset can be restored.
+
+Exit achieved: the Storage-only workflow completed without changing `main`, production reads use Supabase, rollback and reactivation succeeded, and the controlled outage rehearsal passed for warm, cold, and expired-cache states.
 
 ### Phase 2 — canonical legal corpus
 

@@ -1,9 +1,15 @@
 import assert from "node:assert/strict";
+import { createCipheriv } from "node:crypto";
 import test from "node:test";
 import type {
   DatasetReleaseRepository,
   ImmutableObjectStore,
+  ReportMetadataRepository,
 } from "../lib/data/contracts";
+import {
+  CachedObjectStore,
+  CachedReportMetadataRepository,
+} from "../lib/data/cached-adapters";
 import {
   DatasetService,
   DualReadDatasetService,
@@ -11,10 +17,16 @@ import {
 } from "../lib/data/dataset-service";
 import type { DatasetRelease, DatasetSnapshot } from "../lib/data/dataset-types";
 import { isPublicDatasetId } from "../lib/data/dataset-types";
-import { DataIntegrityError, DataParityError } from "../lib/data/external-storage-errors";
+import {
+  DataIntegrityError,
+  DataParityError,
+  ExternalStorageError,
+} from "../lib/data/external-storage-errors";
 import { ImmutableObjectConflictError } from "../lib/data/file-object-store";
 import { sha256 } from "../lib/data/integrity";
 import { ResilientCache } from "../lib/data/resilient-cache";
+import { ReportService } from "../lib/data/report-service";
+import type { EncryptedReportFile, ReportMeta } from "../lib/data/report-types";
 import { SupabaseHttpClient, type FetchLike } from "../lib/data/supabase-client";
 import { SupabaseDatasetReleaseRepository } from "../lib/data/supabase-dataset-repository";
 import { SupabaseObjectStore } from "../lib/data/supabase-object-store";
@@ -50,6 +62,124 @@ test("resilient cache serves verified stale data only inside the configured wind
         throw new Error("continued outage");
       }),
     /continued outage/,
+  );
+});
+
+test("dataset outage rehearsal serves a verified snapshot, then fails after max stale", async () => {
+  let now = 0;
+  let originDown = false;
+  const item = release("release-live", "datasets/news/live.json", { value: "verified" });
+  const repository: DatasetReleaseRepository = {
+    findActiveRelease: async () => {
+      if (originDown) throw new ExternalStorageError("simulated dataset outage");
+      return item.meta;
+    },
+    findRelease: async () => item.meta,
+  };
+  const store: ImmutableObjectStore = {
+    getObject: async () => {
+      if (originDown) throw new ExternalStorageError("simulated object outage");
+      return {
+        key: item.meta.objectKey,
+        body: item.body,
+        contentType: item.meta.contentType,
+        byteSize: item.body.byteLength,
+        checksumSha256: item.meta.checksumSha256,
+      };
+    },
+    putObject: async () => {
+      throw new Error("not used");
+    },
+  };
+  const service = new DatasetService(repository, store, {
+    freshForMs: 10,
+    maxStaleMs: 100,
+    now: () => now,
+  });
+
+  const warm = await service.getActiveDataset<{ value: string }>("news-summaries");
+  assert.equal(warm?.cacheState, "origin");
+  assert.equal(warm?.data.value, "verified");
+
+  originDown = true;
+  now = 20;
+  const stale = await service.getActiveDataset<{ value: string }>("news-summaries");
+  assert.equal(stale?.cacheState, "stale-cache");
+  assert.equal(stale?.data.value, "verified");
+  assert.match(stale?.staleReason ?? "", /simulated dataset outage/);
+
+  now = 101;
+  await assert.rejects(
+    () => service.getActiveDataset("news-summaries"),
+    ExternalStorageError,
+  );
+});
+
+test("paid report outage rehearsal uses warm verified caches and fails closed when cold or expired", async () => {
+  let now = 0;
+  let originDown = false;
+  const key = Buffer.alloc(32, 9);
+  const artifactBody = Buffer.from(
+    JSON.stringify(encryptReport("# Verified paid report\n", key)),
+    "utf8",
+  );
+  const checksum = sha256(artifactBody);
+  const meta = reportMeta(checksum);
+  const metadataOrigin: ReportMetadataRepository = {
+    listReports: async () => {
+      if (originDown) throw new ExternalStorageError("simulated report outage");
+      return [meta];
+    },
+    findReportBySlug: async (slug) => (slug === meta.slug ? meta : null),
+  };
+  const objectOrigin: ImmutableObjectStore = {
+    getObject: async () => {
+      if (originDown) throw new ExternalStorageError("simulated artifact outage");
+      return {
+        key: meta.artifactKey!,
+        body: artifactBody,
+        contentType: "application/json",
+        byteSize: artifactBody.byteLength,
+        checksumSha256: checksum,
+      };
+    },
+    putObject: async () => {
+      throw new Error("not used");
+    },
+  };
+  const issues: Error[] = [];
+  const cacheOptions = {
+    freshForMs: 10,
+    maxStaleMs: 100,
+    now: () => now,
+    onStale: (_cacheKey: string, error: Error) => issues.push(error),
+  };
+  const service = new ReportService(
+    new CachedReportMetadataRepository(metadataOrigin, cacheOptions),
+    new CachedObjectStore(objectOrigin, cacheOptions),
+    () => key.toString("base64"),
+  );
+
+  const warm = await service.getReportBySlug(meta.slug);
+  assert.equal(warm?.content, "# Verified paid report\n");
+
+  originDown = true;
+  now = 20;
+  const stale = await service.getReportBySlug(meta.slug);
+  assert.equal(stale?.content, "# Verified paid report\n");
+  assert.equal(issues.length, 2);
+
+  now = 101;
+  await assert.rejects(() => service.getReportBySlug(meta.slug), ExternalStorageError);
+
+  const coldService = new ReportService(
+    new CachedReportMetadataRepository(metadataOrigin, cacheOptions),
+    new CachedObjectStore(objectOrigin, cacheOptions),
+    () => key.toString("base64"),
+  );
+  await assert.rejects(
+    () => coldService.getReportBySlug(meta.slug),
+    ExternalStorageError,
   );
 });
 
@@ -279,5 +409,37 @@ function fixedDatasetReader(data: unknown): DatasetReader {
   return {
     getActiveDataset: async <T>() => snapshot as DatasetSnapshot<T>,
     getDatasetRelease: async <T>() => snapshot as DatasetSnapshot<T>,
+  };
+}
+
+function reportMeta(checksum: string): ReportMeta {
+  return {
+    slug: "global-stablecoin-policy-report",
+    title: "Verified report",
+    summary: "Controlled outage rehearsal fixture.",
+    category: "policy",
+    jurisdiction: ["GLOBAL"],
+    publishedAt: GENERATED_AT,
+    wordCount: 4,
+    priceUSD: 0.1,
+    encryptedContentFile: "global-stablecoin-policy-report.md.enc",
+    artifactKey: "reports/global/release.md.enc",
+    artifactChecksumSha256: checksum,
+  };
+}
+
+function encryptReport(content: string, key: Buffer): EncryptedReportFile {
+  const iv = Buffer.alloc(12, 5);
+  const cipher = createCipheriv("aes-256-gcm", key, iv);
+  const ciphertext = Buffer.concat([
+    cipher.update(Buffer.from(content, "utf8")),
+    cipher.final(),
+  ]);
+  return {
+    version: 1,
+    algorithm: "aes-256-gcm",
+    iv: iv.toString("base64"),
+    authTag: cipher.getAuthTag().toString("base64"),
+    ciphertext: ciphertext.toString("base64"),
   };
 }
