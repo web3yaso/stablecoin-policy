@@ -11,13 +11,13 @@ ownership layers:
 - `policy`: Stablecoin-specific legal claims, citations, private review
   records, reproducible corpus releases, change impacts, and coverage scopes.
 
-The executable workflow model lives in `specs/legalCorpusPublication.qnt`,
-with scenario tests and a requirement map alongside it. Run
-`npm run spec:phase2` before changing migrations `0010` through `0018` or any
+The executable workflow models live in `specs/legalCorpusPublication.qnt` and
+`specs/regulatoryChangePublication.qnt`, with scenario tests and requirement
+maps alongside them. Run `npm run spec:phase2` before changing migrations
+`0010` through `0019` or any
 successor that changes review states, fingerprints, freshness gates, atomicity,
-or service-role grants. The command typechecks the model and tests, runs eleven
-core lifecycle scenarios plus the draft-import scenario, and samples five
-invariants plus four lifecycle witnesses. It does
+or service-role grants. The command typechecks both models and tests, runs 20
+scenarios, and samples nine invariants plus six lifecycle witnesses. It does
 not use `quint verify`; a clean simulation reports that no counterexample was
 found in the sampled traces, not that the database is formally proven correct.
 
@@ -25,7 +25,7 @@ The database counterparts are the files in `supabase/tests`. They start from
 all local migrations, use sanitized rows inside transactions, and execute the
 complete source-verification, draft-import, claim-review,
 release-review/publication, coverage-review, and readiness-query RPC chains.
-Their 88 pgTAP assertions also cover stale manifests,
+Their 120 pgTAP assertions also cover stale manifests,
 automated-reviewer rejection, zero partial audit writes, service-role table
 grants, and reviewed-only public views. Run it with:
 
@@ -555,15 +555,44 @@ and private notes. `humanReviewRequired=true` and
 `automaticApprovalAllowed=false` are fixed contract fields; operators must use
 the independent, fingerprint-bound review commands to make any transition.
 
+## Regulatory event and claim-impact pipeline
+
+Migration `0019` compares two immutable versions of the same official document
+by provision locator, language, and checksum. Its manifest lists added,
+modified, and removed provisions plus reviewed claims that cite the before
+version. It contains no proposition or reviewer-private content and always sets
+`legalImpactAssessed=false`.
+
+```bash
+# Read-only diff and candidate manifest
+npm run legal:changes:review -- --before <version-id> --after <version-id> --summary
+
+# Read-only event and impact review inventory
+npm run legal:changes:review -- --event <event-id> --summary
+```
+
+An explicit `--create` can write only a `CANDIDATE` event and
+`MAY_AFFECT / PENDING` suggestions. `--review-event` and `--review-impact` each
+require `--confirm-human-review`, a named reviewer, and the exact current
+manifest fingerprint. `--publish` fails while any impact is pending or no
+reviewed impact exists. The service role has no direct event/impact write grant,
+and the RPCs never update claims, citations, releases, or coverage.
+
+The metadata backup format is `1.4.0`. Before migration `0019` it records empty
+pending change-audit collections; after migration it exports private regulatory
+event and event-review metadata through a service-only RPC, alongside impact
+and impact-review tables. Keep this file outside Git with mode `0600`.
+
 ## Required pre-production checks
 
 - Take and verify a Supabase backup before applying the migration.
 - When a managed backup or local Docker-backed `db dump` is unavailable, run
   `npm run storage:backup-metadata`; keep its private JSON output and SHA-256
   checksum outside the repository. This supplements, but does not replace,
-  immutable Storage objects and their existing restore procedure. Format `1.3.0`
+  immutable Storage objects and their existing restore procedure. Format `1.4.0`
   includes claim, citation, review, corpus-membership, impact, and coverage rows
-  plus coverage checklists and coverage-review records, in addition to Phase 1
+  plus coverage checklists, coverage-review records, event/impact reviews, and
+  private regulatory event audit metadata, in addition to Phase 1
   metadata and explicitly requested source statuses. A
   migration-pending table on the explicit optional allowlist is exported as an
   empty array before creation; every other table or transport error fails closed.

@@ -39,6 +39,12 @@ import {
   type ReviewQueueActionInput,
   type ReviewQueueNextAction,
 } from "../../lib/legal-corpus/review-queue";
+import {
+  changeCandidateReadinessErrors,
+  changePublicationReadinessErrors,
+  type ChangeCandidateReadinessInput,
+  type ChangePublicationReadinessInput,
+} from "../../lib/legal-corpus/regulatory-change";
 import type {
   ClaimLegalStatus,
   ClaimReviewState,
@@ -139,6 +145,10 @@ type ReviewQueueCase = ReviewQueueActionInput & {
   caseId: string;
   expectedAction: ReviewQueueNextAction;
 };
+type RegulatoryChangeCase = (
+  | ({ kind: "CANDIDATE" } & ChangeCandidateReadinessInput)
+  | ({ kind: "PUBLICATION" } & ChangePublicationReadinessInput)
+) & { caseId: string; expectedErrors: string[] };
 
 async function main() {
   const cases = (await readFile(
@@ -357,10 +367,27 @@ async function main() {
       `phase2 review-queue eval failed: ${reviewQueueFailures.length}/${reviewQueueCases.length} cases`,
     );
   }
+  const regulatoryChangeCases = await readJsonLines<RegulatoryChangeCase>(
+    "evals/phase2-regulatory-change-cases.jsonl",
+  );
+  const regulatoryChangeFailures = regulatoryChangeCases.filter((evalCase) => {
+    const actual = evalCase.kind === "CANDIDATE"
+      ? changeCandidateReadinessErrors(evalCase)
+      : changePublicationReadinessErrors(evalCase);
+    const passed = JSON.stringify(actual) === JSON.stringify(evalCase.expectedErrors);
+    if (!passed) console.error(`${evalCase.caseId}: unexpected regulatory-change blockers`);
+    return !passed;
+  });
+  if (regulatoryChangeFailures.length > 0) {
+    throw new Error(
+      `phase2 regulatory-change eval failed: ${regulatoryChangeFailures.length}/${regulatoryChangeCases.length} cases`,
+    );
+  }
   const total = cases.length + ingestionCases.length + hkelCases.length
     + ssoCases.length + rightsCases.length + verificationCases.length
     + claimReviewCases.length + releaseCases.length + coverageCases.length
-    + baselineCases.length + draftPreflightCases.length + reviewQueueCases.length;
+    + baselineCases.length + draftPreflightCases.length + reviewQueueCases.length
+    + regulatoryChangeCases.length;
   console.log(
     `phase2 eval passed: ${total}/${total} cases`,
   );
