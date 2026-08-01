@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ENTITIES } from "@/lib/placeholder-data";
+import { getDatasetService } from "@/lib/data/dataset-runtime";
+import { applyNewsDataset, type NewsDataset } from "@/lib/news-dataset";
 import NewsSection from "@/components/panel/NewsSection";
 import StanceBadge from "@/components/ui/StanceBadge";
+
+export const dynamic = "force-dynamic";
 
 export default async function NewsPage({
   params,
@@ -11,8 +15,20 @@ export default async function NewsPage({
 }) {
   const { id } = await params;
   const decodedId = decodeURIComponent(id);
-  const entity = ENTITIES.find((e) => e.id === decodedId);
-  if (!entity) notFound();
+  const baseEntity = ENTITIES.find((e) => e.id === decodedId);
+  if (!baseEntity) notFound();
+
+  let entity = baseEntity;
+  try {
+    const snapshot = await getDatasetService().getActiveDataset<NewsDataset>(
+      "news-summaries",
+    );
+    entity = applyNewsDataset([baseEntity], snapshot?.data)[0];
+  } catch (error: unknown) {
+    console.warn(
+      `news page dataset fallback (${decodedId}): ${error instanceof Error ? error.message : error}`,
+    );
+  }
 
   const total = entity.news.length;
 
@@ -69,8 +85,4 @@ export default async function NewsPage({
       </div>
     </main>
   );
-}
-
-export function generateStaticParams() {
-  return ENTITIES.filter((e) => e.news.length > 0).map((e) => ({ id: e.id }));
 }

@@ -20,8 +20,7 @@
  */
 
 import "../env.js";
-import { execSync } from "node:child_process";
-import { copyFileSync, existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import Anthropic from "../../lib/openai-llm.js";
@@ -35,7 +34,6 @@ import { runProfessionalSources } from "./news-professional-sources.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
 const NEWS_PATH = join(ROOT, "data/news/summaries.json");
-const PUBLIC_NEWS_PATH = join(ROOT, "public/news-summaries.json");
 const FEEDS_PATH = join(ROOT, "data/news/feeds.json");
 const STARTED_PATH = join(ROOT, "data/news/.rss-started");
 const SOURCE_HEALTH_PATH = join(ROOT, "data/news/source-health.json");
@@ -986,18 +984,7 @@ async function main() {
   );
   news.generatedAt = new Date().toISOString();
   writeFileSync(NEWS_PATH, JSON.stringify(news, null, 2) + "\n");
-  copyFileSync(NEWS_PATH, PUBLIC_NEWS_PATH);
   console.log(`rss: added ${added} new item(s)`);
-  console.log("rss: synced public/news-summaries.json");
-
-  // The UI reads ENTITIES from lib/placeholder-data.ts (generated), not
-  // from data/news/summaries.json directly — so the new items have to be
-  // baked back in for them to actually reach the page. Skip when nothing
-  // new landed (rebuild is fast but pointless on quiet polls).
-  if (added > 0) {
-    console.log("rss: rebuilding placeholder-data.ts so new items reach the UI");
-    execSync("npx tsx scripts/build-placeholder.ts", { stdio: "inherit" });
-  }
 }
 
 export async function run(): Promise<void> {

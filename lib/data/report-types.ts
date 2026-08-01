@@ -20,6 +20,7 @@ export type ReportMeta = {
   priceUSD: number;
   encryptedContentFile: string;
   artifactKey?: string;
+  artifactChecksumSha256?: string;
   sourceUrl?: string;
 };
 
@@ -59,10 +60,20 @@ export function parseReportMeta(value: unknown): ReportMeta {
 
   const titleEn = readOptionalString(value, "title_en");
   const artifactKey = readOptionalString(value, "artifactKey");
+  const artifactChecksumSha256 = readOptionalString(
+    value,
+    "artifactChecksumSha256",
+  );
   const sourceUrl = readOptionalString(value, "sourceUrl");
 
   if (titleEn) meta.title_en = titleEn;
   if (artifactKey) meta.artifactKey = artifactKey;
+  if (artifactChecksumSha256) {
+    if (!/^[0-9a-f]{64}$/.test(artifactChecksumSha256)) {
+      throw new Error(`invalid artifactChecksumSha256 for report ${meta.slug}`);
+    }
+    meta.artifactChecksumSha256 = artifactChecksumSha256;
+  }
   if (sourceUrl) meta.sourceUrl = sourceUrl;
 
   if (!REPORT_SLUG_PATTERN.test(meta.slug)) {

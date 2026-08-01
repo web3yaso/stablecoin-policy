@@ -40,6 +40,10 @@
       "pattern": "^[a-z0-9][a-z0-9-]*\\.md\\.enc$"
     },
     "artifactKey": { "$ref": "#/$defs/objectKey" },
+    "artifactChecksumSha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
     "sourceUrl": { "type": "string", "format": "uri" }
   },
   "$defs": {

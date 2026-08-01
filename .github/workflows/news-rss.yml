@@ -71,9 +71,6 @@ jobs:
             npx tsx scripts/sync/news-rss.ts
           fi
 
-      - name: Sync public news summaries
-        run: cp data/news/summaries.json public/news-summaries.json
-
       # Regenerates the daily brief and refreshes the sellable
       # global-stablecoin-policy-report in place, including on a quiet poll.
       - name: Generate & publish daily sellable report
@@ -83,15 +80,25 @@ jobs:
           REPORTS_ENCRYPTION_KEY: ${{ secrets.REPORTS_ENCRYPTION_KEY }}
         run: npx tsx scripts/reports/generate-daily-report.ts
 
-      - name: Commit if changed
+      - name: Publish immutable external-storage releases
+        if: vars.POLICY_STORAGE_PUBLISH_ENABLED == '1'
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_REPORTS_BUCKET: ${{ vars.SUPABASE_REPORTS_BUCKET || 'policy-reports' }}
+          SUPABASE_DATASETS_BUCKET: ${{ vars.SUPABASE_DATASETS_BUCKET || 'policy-datasets' }}
+        run: npm run storage:publish
+
+      - name: Commit if changed (legacy migration fallback)
+        if: vars.POLICY_STORAGE_PUBLISH_ENABLED != '1'
         run: |
-          if [[ -z "$(git status --porcelain data/news/ public/news-summaries.json lib/placeholder-data.ts data/reports/ public/reports/)" ]]; then
+          if [[ -z "$(git status --porcelain data/news/ data/reports/ public/reports/)" ]]; then
             echo "No changes."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/news/summaries.json data/news/source-health.json data/news/.rss-started public/news-summaries.json lib/placeholder-data.ts data/reports/index.json data/reports/global-stablecoin-policy-report.md.enc data/reports/daily public/reports/daily
+          git add data/news/summaries.json data/news/source-health.json data/news/.rss-started data/reports/index.json data/reports/global-stablecoin-policy-report.md.enc data/reports/daily public/reports/daily
           git commit -m "news+report: daily refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           # The push can race with another push to main (e.g. a PR merge
           # landing mid-run), which rejects this one as non-fast-forward.

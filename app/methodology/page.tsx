@@ -140,9 +140,12 @@ export default function MethodologyPage() {
           </p>
           <p>
             Regional homepage summaries are then regenerated from those
-            entity news buckets and copied to{" "}
-            <code className="text-ink">public/news-summaries.json</code>,
-            which the homepage reads at runtime. News is useful for
+            entity news buckets, published as an immutable dataset release,
+            and read through{" "}
+            <code className="text-ink">
+              /api/public/datasets/news-summaries
+            </code>.
+            News is useful for
             recency, but it is not the authoritative legal source for a
             jurisdiction&rsquo;s status.
           </p>

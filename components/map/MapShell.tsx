@@ -22,7 +22,7 @@ import {
   type Region,
   type ViewTarget,
 } from "@/types";
-import { getEntity, getOverviewEntity, ENTITIES } from "@/lib/placeholder-data";
+import { usePolicyData } from "@/contexts/PolicyDataContext";
 import { STANCE_HEX, type SetTooltip, type TooltipState } from "@/lib/map-utils";
 import {
   DIMENSION_TAGS,
@@ -316,6 +316,7 @@ export default function MapShell({
   navigateRef,
 }: Omit<MapShellProps, "dimension" | "lens">) {
   const { locale } = useLocale();
+  const { entities, getEntity, getOverviewEntity } = usePolicyData();
   // Stablecoin issuance is the primary view for this tracker.
   const [activeDimension, setActiveDimension] = useState<Dimension>("overall");
   const [activeLens, setActiveLens] = useState<DimensionLens>("stablecoin");
@@ -411,7 +412,10 @@ export default function MapShell({
   const selectedStateName = current.selectedStateName ?? null;
   const selectedCountyFips = current.selectedCountyFips ?? null;
 
-  const overviewEntity = useMemo(() => getOverviewEntity(region), [region]);
+  const overviewEntity = useMemo(
+    () => getOverviewEntity(region),
+    [getOverviewEntity, region],
+  );
 
   const selectedEntity = useMemo((): Entity | null => {
     // In county view, synthesize an Entity from the MunicipalEntity so the
@@ -428,7 +432,7 @@ export default function MapShell({
     }
     if (!selectedGeoId) return overviewEntity;
     const found = getEntity(selectedGeoId, region);
-    return found ?? ENTITIES.find((e) => e.geoId === selectedGeoId) ?? overviewEntity;
+    return found ?? entities.find((e) => e.geoId === selectedGeoId) ?? overviewEntity;
   }, [
     selectedGeoId,
     region,
@@ -436,6 +440,8 @@ export default function MapShell({
     selectedStateName,
     selectedCountyFips,
     overviewEntity,
+    entities,
+    getEntity,
   ]);
 
   // ─── Browser-history sync ──────────────────────────────────────────

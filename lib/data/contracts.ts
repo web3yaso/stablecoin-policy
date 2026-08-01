@@ -1,3 +1,4 @@
+import type { DatasetRelease } from "./dataset-types";
 import type { ReportMeta } from "./report-types";
 
 export type StoredObject = {
@@ -23,4 +24,12 @@ export interface ImmutableObjectStore {
 export interface ReportMetadataRepository {
   listReports(): Promise<ReportMeta[]>;
   findReportBySlug(slug: string): Promise<ReportMeta | null>;
+}
+
+export interface DatasetReleaseRepository {
+  findActiveRelease(datasetId: string): Promise<DatasetRelease | null>;
+  findRelease(
+    datasetId: string,
+    releaseId: string,
+  ): Promise<DatasetRelease | null>;
 }

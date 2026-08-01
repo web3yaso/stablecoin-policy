@@ -7,6 +7,12 @@
       "purpose": "Deterministic storage-boundary regression cases",
       "split": "regression",
       "reviewState": "REVIEWED"
+    },
+    {
+      "path": "phase1-storage-cases.jsonl",
+      "purpose": "External storage degradation, parity, integrity, and rollback policy cases",
+      "split": "regression",
+      "reviewState": "REVIEWED"
     }
   ]
 }

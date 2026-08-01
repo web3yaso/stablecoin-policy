@@ -7,6 +7,13 @@ import {
   type Report,
   type ReportMeta,
 } from "./report-types";
+import { DataIntegrityError } from "./external-storage-errors";
+
+export interface ReportReader {
+  listReports(): Promise<ReportMeta[]>;
+  getReportMetaBySlug(slug: string): Promise<ReportMeta | null>;
+  getReportBySlug(slug: string): Promise<Report | null>;
+}
 
 export class ReportContentKeyMissingError extends Error {
   constructor() {
@@ -22,7 +29,7 @@ export class ReportArtifactMissingError extends Error {
   }
 }
 
-export class ReportService {
+export class ReportService implements ReportReader {
   constructor(
     private readonly metadata: ReportMetadataRepository,
     private readonly objects: ImmutableObjectStore,
@@ -48,6 +55,14 @@ export class ReportService {
     const artifact = await this.objects.getObject(artifactKey);
     if (!artifact) {
       throw new ReportArtifactMissingError(artifactKey);
+    }
+    if (
+      meta.artifactChecksumSha256 &&
+      artifact.checksumSha256 !== meta.artifactChecksumSha256
+    ) {
+      throw new DataIntegrityError(
+        `report artifact checksum mismatch: ${artifactKey}`,
+      );
     }
 
     const encrypted = parseEncryptedReportFile(

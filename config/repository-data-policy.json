@@ -1,0 +1,29 @@
+{
+  "policyVersion": "1.0.0",
+  "defaultMaxTrackedBytes": 1500000,
+  "legacyFileMaxBytes": {
+    "data/crosswalk/legislators-current.json": 1471448,
+    "data/donors/politicians.json": 4807106,
+    "data/politicians/suspicious-votes-cleaned.json": 1989938,
+    "data/politicians/us-enriched.json": 4317177
+  },
+  "generatedPaths": [
+    "data/news/",
+    "data/reports/daily/",
+    "public/news-summaries.json",
+    "public/reports/daily/",
+    "lib/placeholder-data.ts"
+  ],
+  "maxGeneratedPatchBytes": 500000,
+  "largeDeletionRemainingRatio": 0.25,
+  "cutoverProtectedPaths": [
+    "data/news/summaries.json",
+    "data/news/source-health.json",
+    "data/reports/index.json",
+    "data/reports/global-stablecoin-policy-report.md.enc",
+    "data/reports/daily/",
+    "public/news-summaries.json",
+    "public/reports/daily/",
+    "lib/placeholder-data.ts"
+  ]
+}

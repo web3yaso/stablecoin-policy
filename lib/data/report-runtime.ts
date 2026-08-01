@@ -1,26 +1,55 @@
 import path from "node:path";
+import {
+  CachedObjectStore,
+  CachedReportMetadataRepository,
+} from "./cached-adapters";
+import {
+  readCacheOptions,
+  readDataBackend,
+  readDualReadStrict,
+} from "./data-backend-config";
+import { DualReadReportService } from "./dual-read-report-service";
 import { FileObjectStore } from "./file-object-store";
 import { JsonReportRepository } from "./json-report-repository";
-import { ReportService } from "./report-service";
+import { ReportService, type ReportReader } from "./report-service";
+import { SupabaseHttpClient, readSupabaseConfig } from "./supabase-client";
+import { SupabaseObjectStore } from "./supabase-object-store";
+import { SupabaseReportRepository } from "./supabase-report-repository";
 
-const FILE_BACKEND = "file";
-let reportService: ReportService | undefined;
+let reportService: ReportReader | undefined;
 
-export function getReportService(): ReportService {
+export function getReportService(): ReportReader {
   reportService ??= createReportService();
   return reportService;
 }
 
-function createReportService(): ReportService {
-  const backend =
-    process.env.STABLECOIN_POLICY_DATA_BACKEND?.trim() || FILE_BACKEND;
+function createReportService(): ReportReader {
+  const backend = readDataBackend();
+  const file = createFileReportService();
+  if (backend === "file") return file;
 
-  if (backend !== FILE_BACKEND) {
-    throw new Error(
-      `unsupported STABLECOIN_POLICY_DATA_BACKEND: ${backend}; only file is available before Phase 1`,
-    );
-  }
+  const config = readSupabaseConfig();
+  const client = new SupabaseHttpClient(config);
+  const cacheOptions = readCacheOptions();
+  const external = new ReportService(
+    new CachedReportMetadataRepository(
+      new SupabaseReportRepository(client),
+      cacheOptions,
+    ),
+    new CachedObjectStore(
+      new SupabaseObjectStore(client, config.reportsBucket),
+      cacheOptions,
+    ),
+  );
 
+  return backend === "supabase"
+    ? external
+    : new DualReadReportService(file, external, {
+        strict: readDualReadStrict(),
+      });
+}
+
+function createFileReportService(): ReportService {
   const reportsDirectory = path.join(process.cwd(), "data", "reports");
   return new ReportService(
     new JsonReportRepository(path.join(reportsDirectory, "index.json")),

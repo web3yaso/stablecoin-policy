@@ -1,0 +1,11 @@
+{"caseId":"cache-outage-within-window","kind":"stale-cache","cached":true,"ageSeconds":3600,"maxStaleSeconds":86400,"expected":"SERVE_STALE"}
+{"caseId":"cache-outage-beyond-window","kind":"stale-cache","cached":true,"ageSeconds":90000,"maxStaleSeconds":86400,"expected":"BLOCK"}
+{"caseId":"cache-outage-cold-start","kind":"stale-cache","cached":false,"ageSeconds":0,"maxStaleSeconds":86400,"expected":"BLOCK"}
+{"caseId":"checksum-match","kind":"checksum","expectedChecksum":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","actualChecksum":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","expected":"ACCEPT"}
+{"caseId":"checksum-mismatch","kind":"checksum","expectedChecksum":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","actualChecksum":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","expected":"BLOCK"}
+{"caseId":"dual-observation-mismatch","kind":"dual-read","equal":false,"strict":false,"expected":"SERVE_PRIMARY"}
+{"caseId":"dual-strict-mismatch","kind":"dual-read","equal":false,"strict":true,"expected":"BLOCK"}
+{"caseId":"dual-strict-equal","kind":"dual-read","equal":true,"strict":true,"expected":"ACCEPT"}
+{"caseId":"rollback-known-verified","kind":"rollback","known":true,"verified":true,"expected":"ACCEPT"}
+{"caseId":"rollback-unknown","kind":"rollback","known":false,"verified":false,"expected":"BLOCK"}
+{"caseId":"rollback-known-unverified","kind":"rollback","known":true,"verified":false,"expected":"BLOCK"}

@@ -33,7 +33,6 @@ const FEDERAL_LEG = join(ROOT, "data/legislation/federal.json");
 const STATES_LEG_DIR = join(ROOT, "data/legislation/states");
 const FEDERAL_FIGURES = join(ROOT, "data/figures/federal.json");
 const STATES_FIGURES_DIR = join(ROOT, "data/figures/states");
-const NEWS_PATH = join(ROOT, "data/news/summaries.json");
 const OUT = join(ROOT, "lib/placeholder-data.ts");
 
 interface JsonLegFile {
@@ -87,59 +86,6 @@ function loadFigures(path: string, limit: number): ReturnType<typeof toLegislato
   return arr.slice(0, limit).map(toLegislator);
 }
 
-interface NewsItem {
-  id: string;
-  headline: string;
-  source: string;
-  date: string;
-  url: string;
-  summary?: string;
-  summarySource?: "article" | "headline-only";
-  sourceId?: string;
-  sourceType?: "official-api" | "official-feed";
-  sourceAuthority?: string;
-  officialDocumentId?: string;
-  sourceVersion?: string;
-  documentType?: string;
-  officialPdfUrl?: string;
-  commentCloseDate?: string;
-  openForComment?: boolean;
-  retrievedAt?: string;
-  relatedDocumentIds?: string[];
-}
-
-interface NewsFile {
-  entities?: Record<string, { news: NewsItem[] }>;
-}
-
-const newsData: NewsFile = existsSync(NEWS_PATH)
-  ? (readJson(NEWS_PATH) as NewsFile)
-  : {};
-
-function loadEntityNews(entityName: string): NewsItem[] {
-  return newsData.entities?.[entityName]?.news ?? [];
-}
-
-/**
- * News buckets for international entities, keyed by entity `name`.
- * INTERNATIONAL_ENTITIES is hand-curated (lib/international-entities.ts) so we
- * can't rebuild those entities from JSON the way we do for NA — instead we
- * pass through the curated entity and overwrite its `news` field at module-load
- * time with the freshest items the RSS poller has collected. Only buckets that
- * (a) aren't already claimed by an NA entity and (b) actually carry items are
- * emitted, so most rows in summaries.json stay out of the bundle.
- */
-function collectInternationalNews(naNames: Set<string>): Record<string, NewsItem[]> {
-  const out: Record<string, NewsItem[]> = {};
-  for (const [entityName, bucket] of Object.entries(newsData.entities ?? {})) {
-    if (naNames.has(entityName)) continue;
-    const items = bucket?.news ?? [];
-    if (items.length === 0) continue;
-    out[entityName] = items;
-  }
-  return out;
-}
-
 /** JSON.stringify that emits TS-style identifier keys where possible. */
 function toTs(value: unknown, indent = 2, level = 0): string {
   const pad = " ".repeat(level * indent);
@@ -186,7 +132,7 @@ function buildFederalEntity() {
     contextBlurb: leg.contextBlurb,
     legislation: leg.legislation,
     keyFigures: figures,
-    news: loadEntityNews("United States"),
+    news: [],
   };
 }
 
@@ -210,7 +156,7 @@ function buildStateEntities() {
       contextBlurb: leg.contextBlurb,
       legislation: leg.legislation,
       keyFigures: figures,
-      news: loadEntityNews(stateName),
+      news: [],
     });
   }
   // Stable alphabetical order
@@ -231,7 +177,7 @@ function buildCanadaEntity() {
       "Canada has no dedicated federal stablecoin statute. Oversight runs mainly through the Canadian Securities Administrators (CSA), which treats fiat-backed stablecoins as \"value-referenced crypto assets\" and requires registered crypto trading platforms to meet reserve-backing, custody, and disclosure conditions before listing them. The Bank of Canada continues to study a retail CBDC but has not committed to issuance.",
     legislation: [],
     keyFigures: [],
-    news: loadEntityNews("Canada"),
+    news: [],
   };
 }
 
@@ -241,13 +187,7 @@ function main() {
   na.push(buildCanadaEntity());
   na.push(...buildStateEntities());
 
-  const naNames = new Set<string>(
-    na.map((e) => (e as { name: string }).name),
-  );
-  const internationalNews = collectInternationalNews(naNames);
-  const internationalNewsCount = Object.keys(internationalNews).length;
-
-  const body = `import type { Entity, NewsItem, Region } from "@/types";
+  const body = `import type { Entity, Region } from "@/types";
 import { INTERNATIONAL_ENTITIES } from "./international-entities";
 
 /**
@@ -256,30 +196,15 @@ import { INTERNATIONAL_ENTITIES } from "./international-entities";
  * on the next sync run. Edit data/*.json or the sync scripts instead.
  *
  * EU + Asia + Canada-adjacent entities live in lib/international-entities.ts
- * and are hand-curated. Their news field is overlaid here from
- * data/news/summaries.json so the RSS poller's items actually reach the UI
- * (the entity objects themselves stay hand-curated for context blurbs,
- * legislation, and key figures).
+ * and are hand-curated. Runtime official-source news is loaded through the
+ * public dataset API and is deliberately not baked into this generated file.
  */
 
 const NA_ENTITIES: Entity[] = ${toTs(na, 2, 0)};
 
-const INTERNATIONAL_NEWS_OVERRIDES: Record<string, NewsItem[]> = ${toTs(internationalNews, 2, 0)};
-
-function applyInternationalNews(entity: Entity): Entity {
-  const fresh = INTERNATIONAL_NEWS_OVERRIDES[entity.name];
-  if (!fresh || fresh.length === 0) return entity;
-  // Merge fresh RSS items with the hand-curated tail, deduping by URL so a
-  // hand-written entry that later appears in the feed isn't shown twice. The
-  // UI sorts by date desc, so chronology survives regardless of provenance.
-  const seen = new Set(fresh.map((n) => n.url));
-  const tail = entity.news.filter((n) => !seen.has(n.url));
-  return { ...entity, news: [...fresh, ...tail] };
-}
-
 export const ENTITIES: Entity[] = [
   ...NA_ENTITIES,
-  ...INTERNATIONAL_ENTITIES.map(applyInternationalNews),
+  ...INTERNATIONAL_ENTITIES,
 ];
 
 export function getEntity(geoId: string, region: Region): Entity | null {
@@ -297,7 +222,7 @@ export function getEntitiesByRegion(region: Region): Entity[] {
 
   writeFileSync(OUT, body);
   console.log(
-    `[build-placeholder] wrote ${na.length} NA entities + ${internationalNewsCount} international news overrides → lib/placeholder-data.ts`,
+    `[build-placeholder] wrote ${na.length} NA entities; runtime news stays external → lib/placeholder-data.ts`,
   );
 }
 

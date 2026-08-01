@@ -1,6 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createReportListResponse } from "@/lib/contracts/report-list";
 import { listReports } from "@/lib/reports";
+import {
+  DataIntegrityError,
+  ExternalStorageError,
+} from "@/lib/data/external-storage-errors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -33,7 +37,24 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const reports = await listReports();
+  let reports;
+  try {
+    reports = await listReports();
+  } catch (error: unknown) {
+    if (
+      error instanceof ExternalStorageError ||
+      error instanceof DataIntegrityError
+    ) {
+      return NextResponse.json(
+        { error: "report-catalog-unavailable" },
+        {
+          status: 503,
+          headers: { ...corsHeaders(), "Cache-Control": "no-store" },
+        },
+      );
+    }
+    throw error;
+  }
   const response = createReportListResponse(
     reports,
     new URL(request.url).origin,
