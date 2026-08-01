@@ -48,6 +48,24 @@ The adapter fails closed on this identity mismatch. Cap. 656A has internally
 consistent identifiers and may be ingested independently, but it does not make
 the Hong Kong baseline complete.
 
+The Singapore adapter pins an explicit SSO `ValidDate`, obtains the supported
+complete HTML print export for structure, and stores the separately downloaded,
+byte-stable official PDF as the immutable source artifact. The registry pins
+that PDF's expected SHA-256 and any byte change fails closed for manual review. It records a
+deterministic checksum over the extracted provision set instead of treating the
+print page's changing CSRF token, timestamp, or CSP nonce as a legal change. The
+adapter fails closed on title, document-number, valid-date, host, content-type,
+PDF-signature, duplicate-section, and provision-count mismatches.
+
+SSO is maintained by Singapore's Attorney-General's Chambers, but its Terms of
+Use describe the consolidated legislation as an unofficial version that is not
+the authoritative text. Clause 13 permits reproduction of Singapore legislation
+subject to conditions. Registry entries therefore record the permission and the
+source-version provenance records `OFFICIAL_UNOFFICIAL_CONSOLIDATION`; ingestion
+still stops at `OBSERVED`. Any later public full-text rendering must display the
+Singapore Government copyright/AGC permission notice, link users to SSO for the
+latest version, and pass an accuracy review before publication.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage

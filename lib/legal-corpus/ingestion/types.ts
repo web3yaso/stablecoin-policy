@@ -1,6 +1,6 @@
 export type OfficialSourceRegistryEntry = {
   sourceId: string;
-  provider: "eur-lex" | "hkel";
+  provider: "eur-lex" | "hkel" | "sso";
   ingestionState?: "ACTIVE" | "BLOCKED";
   blocker?: string;
   authorityId: string;
@@ -29,6 +29,11 @@ export type OfficialSourceRegistryEntry = {
   archiveEntry?: string;
   expectedEmbeddedDocumentId?: string;
   expectedEmbeddedIdentifier?: string;
+  ssoDocumentType?: "Act" | "SL";
+  ssoDocumentNumber?: string;
+  ssoValidDate?: string;
+  ssoPdfUrl?: string;
+  ssoExpectedPdfChecksumSha256?: string;
 };
 
 export type ProvisionCandidate = {
