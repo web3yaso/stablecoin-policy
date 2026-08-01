@@ -66,6 +66,11 @@ public download link, open-access label, or personal-use download permission is
 not sufficient. Ingestion must fail before upload unless a dated rights review
 records a commercial storage basis.
 
+An `ALLOWED` storage decision does not automatically expand public display or
+evidentiary authority. For example, a licensed structured legal dataset may
+still be `LINK_ONLY` and reference-only when the publisher distinguishes it
+from the authoritative instrument.
+
 The minimum `ResearchPublication` record should include:
 
 - title, authors, canonical URL, persistent identifier, publication date, and version;

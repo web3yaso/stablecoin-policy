@@ -89,10 +89,14 @@ repeats this validation in the service-only ingestion RPC and records the review
 on the immutable source version.
 
 The Payment Services Act and Payment Services Regulations SSO entries are
-`ALLOWED` under the recorded clause 13 conditions. EUR-Lex and HKeL entries are
-temporarily `REVIEW_REQUIRED`: their existing production versions are retained
-for audit, but the publisher refuses new uploads until their commercial
-internal-copy rights are explicitly reviewed. This is a non-destructive hold.
+`ALLOWED` under the recorded clause 13 conditions. The EUR-Lex MiCA artifact is
+`ALLOWED` under the EUR-Lex Legal Notice and Commission Decision 2011/833/EU,
+which permit legal-document reuse for commercial and non-commercial purposes
+subject to the recorded conditions. HKeL dataset artifacts are `ALLOWED` under
+DATA.GOV.HK Terms and Conditions v1.2, which permit commercial download and
+reproduction with source and ownership attribution. HKeL provision excerpts
+remain `LINK_ONLY` because storage permission does not change the structured
+copy's reference-only legal status.
 
 MAS's 15 August 2023 response on the finalised stablecoin framework is an
 important official policy source, but the current MAS Terms of Use allow one

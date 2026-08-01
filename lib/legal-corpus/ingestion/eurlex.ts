@@ -34,7 +34,15 @@ export async function fetchEurLexSource(
   }
   const checksumSha256 = sha256(body);
   const versionId = `${source.documentId}:en:${checksumSha256.slice(0, 24)}`;
-  const provisions = extractEurLexArticles(html, versionId, source.languageCode);
+  const provisions = extractEurLexArticles(
+    html,
+    versionId,
+    source.languageCode,
+    source.redistributionRights === "FULL_TEXT" ||
+      source.redistributionRights === "EXCERPT"
+      ? "ALLOWED"
+      : "UNKNOWN",
+  );
   if (provisions.length < source.minimumProvisionCount) {
     throw new Error(
       `EUR-Lex provision count below registry floor: ${provisions.length}/${source.minimumProvisionCount}`,
@@ -59,6 +67,7 @@ export function extractEurLexArticles(
   html: string,
   versionId: string,
   languageCode = "en",
+  excerptPermission: "ALLOWED" | "UNKNOWN" = "UNKNOWN",
 ): ProvisionCandidate[] {
   const openings = [...html.matchAll(/<div\b[^>]*\bid="art_(\d+)"[^>]*>/gi)];
   return openings.map((opening, ordinal) => {
@@ -79,7 +88,7 @@ export function extractEurLexArticles(
       provisionText,
       textChecksumSha256,
       ordinal,
-      excerptPermission: "UNKNOWN",
+      excerptPermission,
     };
   });
 }

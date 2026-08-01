@@ -17,7 +17,7 @@ export class SupabaseOfficialSourcePublisher {
       contentType: snapshot.contentType,
       expectedChecksumSha256: snapshot.checksumSha256,
     });
-    return this.client.rpc<string>("ingest_official_source_v3", {
+    return this.client.rpc<string>("ingest_official_source_v4", {
       p_object_id: snapshot.objectId,
       p_bucket: this.client.config.sourcesBucket,
       p_object_key: snapshot.objectKey,

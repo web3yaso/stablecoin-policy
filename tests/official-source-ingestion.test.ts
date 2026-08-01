@@ -26,8 +26,8 @@ const SOURCE: OfficialSourceRegistryEntry = {
   fetchUrl: "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32023R1114",
   languageCode: "en",
   versionLabel: "OJ-2023-06-09",
-  redistributionRights: "UNKNOWN",
-  licenceIdentifier: null,
+  redistributionRights: "FULL_TEXT",
+  licenceIdentifier: "Fixture commercial reuse terms",
   storageRights: "ALLOWED",
   rightsReviewedAt: "2026-07-31T00:00:00.000Z",
   rightsBasis: "Fixture rights review",
@@ -59,6 +59,7 @@ test("same official body produces the same immutable IDs", async () => {
   assert.equal(first.checksumSha256, second.checksumSha256);
   assert.equal(first.versionId, second.versionId);
   assert.equal(first.objectKey, second.objectKey);
+  assert.ok(first.provisions.every((provision) => provision.excerptPermission === "ALLOWED"));
 });
 
 test("changed official body creates a new version identity", async () => {
@@ -132,6 +133,20 @@ test("storage-rights migration fails closed in the database and stays service-on
   assert.match(sql, /from public, anon, authenticated/);
   assert.doesNotMatch(sql, /insert into policy\.legal_claims/i);
   assert.doesNotMatch(sql, /insert into policy\.citations/i);
+});
+
+test("rights reconciliation only promotes observed unknown permissions", async () => {
+  const sql = await readFile(
+    path.join(process.cwd(), "supabase/migrations/0008_source_rights_reconciliation.sql"),
+    "utf8",
+  );
+  assert.match(sql, /v_document\.redistribution_rights not in \('UNKNOWN', v_redistribution_rights\)/);
+  assert.match(sql, /v_version\.lifecycle_state <> 'OBSERVED'/);
+  assert.match(sql, /existing\.excerpt_permission = 'UNKNOWN'/);
+  assert.match(sql, /source provision excerpt-permission conflict/);
+  assert.match(sql, /grant execute on function policy\.ingest_official_source_v4[\s\S]*to service_role/);
+  assert.match(sql, /from public, anon, authenticated/);
+  assert.doesNotMatch(sql, /insert into policy\.legal_claims/i);
 });
 
 test("duplicate Storage response headers cannot change ingestion metadata", async () => {
