@@ -708,6 +708,17 @@ eval cases cover diffing, fingerprints, permissions, privacy, audit
 immutability, safe publication, and domain-state isolation. Backup format
 `1.4.0` captures the new private audit metadata without exposing it publicly.
 
+Production cutover checkpoint (2026-08-01): linked migration history now
+matches `0001` through `0019`. A private `1.4.0` pre-cutover metadata backup and
+post-cutover snapshot preserve all four source statuses and identical business
+data: zero claims, releases, events, and impacts, with EEA, Hong Kong, and
+Singapore still `IN_PROGRESS`, `0%`, and `UNKNOWN`. Linked database lint,
+reviewed-only public-boundary smoke, read-only bundle preflight, jurisdiction
+readiness, review queue, and the Vercel production coverage/change routes pass.
+The separately configured canonical hostname still returns `404` for `/v1/*`
+and requires domain mapping review; this does not affect the successful
+database migration or justify rollback.
+
 ### Phase 3 — Evidence RAG
 
 - implement `EvidenceChunk`, `EmbeddingRecord`, `RetrievalIndexRelease`, and `RagRetrievalRun` storage;

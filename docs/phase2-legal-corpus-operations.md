@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migrations `0003` through `0014` are applied to the linked Supabase project.
+Migrations `0003` through `0019` are applied to the linked Supabase project.
 They are never applied by application startup. Migration `0003` creates two
 ownership layers:
 
@@ -468,6 +468,31 @@ existing tracker and report endpoints are unaffected.
   `IN_PROGRESS` scopes and zero claims, releases, checklists, or coverage-review
   records; its SHA-256 is
   `9b315fbe12d9e26d326387328852da9c4b6b18edbea6bb4354c965ef18a29893`.
+- Before migrations `0015` through `0019`, the linked dry-run listed exactly
+  those five migrations. Private backup format `1.4.0` was written outside Git
+  to `/private/tmp/stablecoin-policy-pre0015-0019-metadata.json`, mode `0600`,
+  with SHA-256
+  `c194a04cb87e6ecd2f0873938226961b478dd0d3f510285829d978ce7df71cb8`.
+  It captured all four source statuses, 32 Storage objects, 4 reports, 6 report
+  releases, 3 datasets, 22 dataset releases, three `IN_PROGRESS` coverage
+  scopes, and zero claim, corpus, event, or impact rows.
+- Migrations `0015` through `0019` were applied together on 2026-08-01 UTC.
+  Migration history now matches local `0001` through `0019`, and linked
+  database lint reports no schema errors. The sanitized claim-draft preflight
+  correctly returned `provision_missing` without writing, while baseline
+  readiness reported `SOURCE_REVIEW` for EEA, Hong Kong, and Singapore. The EEA
+  review queue returned one `SOURCE_VERIFICATION` task and made no transition.
+  Existing Phase 2 smoke retained the private source bucket, zero public
+  evidence/changes, and all three `IN_PROGRESS`, `0%`, `UNKNOWN` scopes.
+- The post-cutover snapshot at
+  `/private/tmp/stablecoin-policy-post0019-metadata.json` has mode `0600` and
+  SHA-256
+  `2a4fb94db634d1a36f7d26451fc05a03e3ed46458afcaeb5a2d0877642bc1624`.
+  Its normalized tables, four source statuses, and regulatory-change metadata
+  are byte-identical to the pre-cutover snapshot. The Vercel production
+  `/v1/coverage` and `/v1/changes` endpoints pass; the metadata canonical host
+  `stablecoin.web3law.tech` currently returns `404` for those routes and needs
+  separate domain mapping/DNS review rather than a database rollback.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
