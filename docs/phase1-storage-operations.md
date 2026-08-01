@@ -47,6 +47,18 @@ Publishing is idempotent. Object keys include the logical asset, timestamp, and 
 8. Set the GitHub variable `POLICY_STORAGE_PUBLISH_ENABLED=1`. The daily job will upload releases instead of committing generated files.
 9. Set `POLICY_STORAGE_CUTOVER=1` in CI and stop tracking migrated generated files without rewriting history.
 
+## Controlled outage rehearsal record
+
+Completed on 2026-08-01 UTC without interrupting production:
+
+- warmed a checksum-verified dataset snapshot, simulated origin failure, and confirmed `stale-cache` delivery inside the maximum stale window;
+- advanced the controlled clock beyond maximum stale and confirmed the dataset read fails closed;
+- warmed report metadata and encrypted-artifact caches, simulated origin failure, and confirmed the verified report still decrypts inside the stale window;
+- confirmed paid report reads fail closed both on a cold cache and after cache expiry, before fulfillment reservation can occur;
+- reran the full suite (15/15) and the Phase 1 storage eval (11/11).
+
+The exercise uses injected origin failures and a controlled clock so it is deterministic and does not revoke credentials, alter immutable objects, or interrupt production. A real outage is handled by the same `ResilientCache`, `DatasetService`, cached report repositories, and API error mappings exercised here.
+
 ## Rollback
 
 Application rollback changes `STABLECOIN_POLICY_DATA_BACKEND` from `supabase` to `dual` or `file`. Data rollback moves only the active release pointer; it never overwrites or deletes an immutable object. The restore command is a dry-run unless `--apply` is explicitly supplied.
