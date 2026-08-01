@@ -1,6 +1,6 @@
 import { SupabaseHttpClient } from "../../data/supabase-client";
 import { SupabaseObjectStore } from "../../data/supabase-object-store";
-import type { OfficialSourceSnapshot } from "./types";
+import type { OfficialSourceRegistryEntry, OfficialSourceSnapshot } from "./types";
 
 export class SupabaseOfficialSourcePublisher {
   private readonly objects: SupabaseObjectStore;
@@ -10,13 +10,14 @@ export class SupabaseOfficialSourcePublisher {
   }
 
   async publish(snapshot: OfficialSourceSnapshot): Promise<string> {
+    assertSourceStorageRights(snapshot.source);
     await this.objects.putObject({
       key: snapshot.objectKey,
       body: snapshot.body,
       contentType: snapshot.contentType,
       expectedChecksumSha256: snapshot.checksumSha256,
     });
-    return this.client.rpc<string>("ingest_official_source_v2", {
+    return this.client.rpc<string>("ingest_official_source_v3", {
       p_object_id: snapshot.objectId,
       p_bucket: this.client.config.sourcesBucket,
       p_object_key: snapshot.objectKey,
@@ -51,10 +52,34 @@ export class SupabaseOfficialSourcePublisher {
         publishedAt: snapshot.source.publishedAt ?? null,
         observedAt: snapshot.retrievedAt,
         retrievedAt: snapshot.retrievedAt,
+        storageRights: snapshot.source.storageRights,
+        rightsReviewedAt: snapshot.source.rightsReviewedAt,
+        rightsBasis: snapshot.source.rightsBasis,
       },
       p_provisions: snapshot.provisions,
       p_effective_from: snapshot.source.effectiveFrom ?? null,
       p_retrieval_metadata: snapshot.retrievalMetadata,
     });
+  }
+}
+
+export function assertSourceStorageRights(
+  source: Pick<
+    OfficialSourceRegistryEntry,
+    "sourceId" | "storageRights" | "rightsReviewedAt" | "rightsBasis"
+  >,
+): void {
+  if (source.storageRights !== "ALLOWED") {
+    throw new Error(
+      `source storage rights do not permit upload: ${source.sourceId}/${source.storageRights}`,
+    );
+  }
+  if (
+    !source.rightsReviewedAt ||
+    !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(source.rightsReviewedAt) ||
+    !Number.isFinite(Date.parse(source.rightsReviewedAt)) ||
+    !source.rightsBasis?.trim()
+  ) {
+    throw new Error(`source storage rights review is incomplete: ${source.sourceId}`);
   }
 }

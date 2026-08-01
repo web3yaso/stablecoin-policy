@@ -77,6 +77,31 @@ still stops at `OBSERVED`. Any later public full-text rendering must display the
 Singapore Government copyright/AGC permission notice, link users to SSO for the
 latest version, and pass an accuracy review before publication.
 
+## Commercial storage-rights gate
+
+Commercial internal storage and public redistribution are separate rights.
+`redistributionRights` controls later excerpt and public rendering behavior;
+`storageRights` controls whether the source bytes may enter Citely's private
+commercial object storage at all. `REVIEW_REQUIRED` and `PROHIBITED` block
+publication before any Storage request. `ALLOWED` also requires a dated review
+and a recorded licence, permission, or other reviewed basis. Migration `0007`
+repeats this validation in the service-only ingestion RPC and records the review
+on the immutable source version.
+
+The Payment Services Act and Payment Services Regulations SSO entries are
+`ALLOWED` under the recorded clause 13 conditions. EUR-Lex and HKeL entries are
+temporarily `REVIEW_REQUIRED`: their existing production versions are retained
+for audit, but the publisher refuses new uploads until their commercial
+internal-copy rights are explicitly reviewed. This is a non-destructive hold.
+
+MAS's 15 August 2023 response on the finalised stablecoin framework is an
+important official policy source, but the current MAS Terms of Use allow one
+personal non-commercial download and otherwise require prior written permission
+for reproduction or distribution. The response is therefore not mirrored,
+parsed into stored provisions, or added to the registry as ingestible evidence.
+Obtain and record permission, or use a separately licensed official channel,
+before implementing a MAS PDF adapter.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage

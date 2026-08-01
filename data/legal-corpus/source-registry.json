@@ -20,6 +20,7 @@
       "publishedAt": "2023-06-09T00:00:00.000Z",
       "redistributionRights": "UNKNOWN",
       "licenceIdentifier": null,
+      "storageRights": "REVIEW_REQUIRED",
       "minimumProvisionCount": 149
     },
     {
@@ -46,6 +47,7 @@
       "effectiveFrom": "2025-08-01T00:00:00.000Z",
       "redistributionRights": "LINK_ONLY",
       "licenceIdentifier": null,
+      "storageRights": "REVIEW_REQUIRED",
       "minimumProvisionCount": 269
     },
     {
@@ -71,6 +73,7 @@
       "effectiveFrom": "2025-08-01T00:00:00.000Z",
       "redistributionRights": "LINK_ONLY",
       "licenceIdentifier": null,
+      "storageRights": "REVIEW_REQUIRED",
       "minimumProvisionCount": 4
     },
     {
@@ -98,6 +101,9 @@
       "effectiveFrom": "2025-03-09T00:00:00.000Z",
       "redistributionRights": "FULL_TEXT",
       "licenceIdentifier": "SSO Terms of Use clause 13 (updated 2026-07-21)",
+      "storageRights": "ALLOWED",
+      "rightsReviewedAt": "2026-08-01T00:00:00.000Z",
+      "rightsBasis": "SSO Terms of Use clause 13 permits reproduction subject to the recorded copyright, permission, accuracy and latest-version conditions.",
       "minimumProvisionCount": 148
     },
     {
@@ -126,6 +132,9 @@
       "effectiveFrom": "2025-12-17T00:00:00.000Z",
       "redistributionRights": "FULL_TEXT",
       "licenceIdentifier": "SSO Terms of Use clause 13 (updated 2026-07-21)",
+      "storageRights": "ALLOWED",
+      "rightsReviewedAt": "2026-08-01T00:00:00.000Z",
+      "rightsBasis": "SSO Terms of Use clause 13 permits reproduction subject to the recorded copyright, permission, accuracy and latest-version conditions.",
       "minimumProvisionCount": 47
     }
   ]

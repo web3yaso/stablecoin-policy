@@ -4,7 +4,10 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { extractEurLexArticles, fetchEurLexSource } from "../lib/legal-corpus/ingestion/eurlex";
 import type { OfficialSourceRegistryEntry } from "../lib/legal-corpus/ingestion/types";
-import { SupabaseOfficialSourcePublisher } from "../lib/legal-corpus/ingestion/supabase-publisher";
+import {
+  assertSourceStorageRights,
+  SupabaseOfficialSourcePublisher,
+} from "../lib/legal-corpus/ingestion/supabase-publisher";
 import { SupabaseHttpClient, type FetchLike } from "../lib/data/supabase-client";
 
 const SOURCE: OfficialSourceRegistryEntry = {
@@ -25,6 +28,9 @@ const SOURCE: OfficialSourceRegistryEntry = {
   versionLabel: "OJ-2023-06-09",
   redistributionRights: "UNKNOWN",
   licenceIdentifier: null,
+  storageRights: "ALLOWED",
+  rightsReviewedAt: "2026-07-31T00:00:00.000Z",
+  rightsBasis: "Fixture rights review",
   minimumProvisionCount: 2,
 };
 
@@ -114,6 +120,20 @@ test("ingestion status RPC is service-only and exposes no provision text", async
   assert.doesNotMatch(sql, /review_records/i);
 });
 
+test("storage-rights migration fails closed in the database and stays service-only", async () => {
+  const sql = await readFile(
+    path.join(process.cwd(), "supabase/migrations/0007_source_storage_rights_gate.sql"),
+    "utf8",
+  );
+  assert.match(sql, /storage_rights <> 'ALLOWED'/);
+  assert.match(sql, /rights_reviewed_at is not null/);
+  assert.match(sql, /official source storage rights do not permit ingestion/);
+  assert.match(sql, /grant execute on function policy\.ingest_official_source_v3[\s\S]*to service_role/);
+  assert.match(sql, /from public, anon, authenticated/);
+  assert.doesNotMatch(sql, /insert into policy\.legal_claims/i);
+  assert.doesNotMatch(sql, /insert into policy\.citations/i);
+});
+
 test("duplicate Storage response headers cannot change ingestion metadata", async () => {
   const sourceSnapshot = await snapshot(HTML);
   let rpcBody: Record<string, unknown> | undefined;
@@ -143,6 +163,50 @@ test("duplicate Storage response headers cannot change ingestion metadata", asyn
   await new SupabaseOfficialSourcePublisher(client).publish(sourceSnapshot);
   assert.equal(rpcBody?.p_content_type, sourceSnapshot.contentType);
   assert.equal(rpcBody?.p_byte_size, sourceSnapshot.body.byteLength);
+  assert.equal(rpcBody?.p_version && (rpcBody.p_version as Record<string, unknown>).storageRights, "ALLOWED");
+});
+
+test("publisher rejects unreviewed storage rights before Storage or RPC calls", async () => {
+  const sourceSnapshot = await snapshot(HTML);
+  let calls = 0;
+  const client = new SupabaseHttpClient(
+    {
+      url: "https://example.supabase.co",
+      serviceRoleKey: "test-service-role",
+      reportsBucket: "policy-reports",
+      datasetsBucket: "policy-datasets",
+      sourcesBucket: "policy-sources",
+      requestTimeoutMs: 1000,
+    },
+    async () => {
+      calls += 1;
+      return new Response(null, { status: 500 });
+    },
+  );
+
+  await assert.rejects(
+    new SupabaseOfficialSourcePublisher(client).publish({
+      ...sourceSnapshot,
+      source: {
+        ...sourceSnapshot.source,
+        storageRights: "REVIEW_REQUIRED",
+        rightsReviewedAt: undefined,
+        rightsBasis: undefined,
+      },
+    }),
+    /storage rights do not permit upload/,
+  );
+  assert.equal(calls, 0);
+});
+
+test("allowed storage rights require a dated review and recorded basis", () => {
+  assert.throws(
+    () => assertSourceStorageRights({
+      sourceId: "missing-review",
+      storageRights: "ALLOWED",
+    }),
+    /rights review is incomplete/,
+  );
 });
 
 async function snapshot(html: string) {

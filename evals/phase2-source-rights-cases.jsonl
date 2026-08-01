@@ -1,0 +1,5 @@
+{"caseId":"rights-reviewed-allowed","storageRights":"ALLOWED","rightsReviewedAt":"2026-08-01T00:00:00.000Z","rightsBasis":"Official licence permits commercial storage.","expected":"PASS"}
+{"caseId":"rights-review-required","storageRights":"REVIEW_REQUIRED","expected":"BLOCK"}
+{"caseId":"rights-prohibited","storageRights":"PROHIBITED","rightsReviewedAt":"2026-08-01T00:00:00.000Z","rightsBasis":"Terms prohibit commercial copying.","expected":"BLOCK"}
+{"caseId":"rights-allowed-missing-basis","storageRights":"ALLOWED","rightsReviewedAt":"2026-08-01T00:00:00.000Z","expected":"BLOCK"}
+{"caseId":"rights-allowed-invalid-review-date","storageRights":"ALLOWED","rightsReviewedAt":"not-a-date","rightsBasis":"Fixture basis","expected":"BLOCK"}

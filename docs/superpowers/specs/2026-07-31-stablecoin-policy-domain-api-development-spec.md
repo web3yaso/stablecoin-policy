@@ -146,7 +146,7 @@ The choice minimizes initial operational work by using one managed platform. App
 | playbook releases, runs, normalized inputs, results, actions | PostgreSQL | customer access controlled |
 | evidence references, artifact references, watchlists | PostgreSQL | object keys and relations |
 | report metadata, price, status, versions | PostgreSQL | replaces `data/reports/index.json` |
-| raw HTML, XML, JSON, PDF, and normalized text | Supabase Storage | immutable source objects |
+| raw HTML, XML, JSON, PDF, and normalized text | Supabase Storage | immutable source objects; commercial internal-storage rights required before upload |
 | report Markdown, JSON, and PDF | Supabase Storage | private or explicitly public |
 | complete `PlaybookPackage` JSON snapshots | Supabase Storage | immutable reproducibility artifact |
 | Evidence Packs and exports | Supabase Storage | private signed delivery |
@@ -493,7 +493,13 @@ A paid release is blocked when:
 - Service logs never contain complete customer fact payloads, decrypted reports, private package bodies, or secrets.
 - Object buckets default private; public artifacts are explicitly designated.
 - Signed download URLs are short lived and scoped to one artifact.
-- Research, issuer documents, and legal sources record redistribution/excerpt rights.
+- Research, issuer documents, and legal sources separately record commercial
+  internal-storage rights and public redistribution/excerpt rights. Public
+  availability or permission to download one personal copy does not authorize
+  ingestion into Citely's commercial object storage.
+- `REVIEW_REQUIRED` and `PROHIBITED` storage-rights states fail closed before
+  an upload request. `ALLOWED` requires a dated per-artifact rights review and
+  a recorded licence, permission, or other reviewed basis.
 - Prompt-injection content in retrieved documents is treated as untrusted data.
 - Raw `DecisionRule` definitions and internal prompts remain server-side.
 
@@ -558,6 +564,14 @@ contradictions, and permissions without direct official support. Migration
 `0003` is applied to the linked Supabase project and its private source bucket
 and reviewed-only views pass production smoke checks. No launch-market claim is
 treated as reviewed merely because a legacy summary or news item exists.
+
+Source-rights checkpoint (2026-08-01): migration `0007` and the publisher add
+a two-layer commercial storage-rights gate that is independent of public
+redistribution and excerpt permissions. Registry entries default to a blocking
+state unless a dated review and rights basis support `ALLOWED`; the database RPC
+repeats the same check. MAS's 2023 stablecoin consultation response remains
+outside Storage because the current MAS Terms of Use do not grant commercial
+copying permission without prior written permission.
 
 ### Phase 3 — Evidence RAG
 

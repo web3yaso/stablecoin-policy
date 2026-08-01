@@ -35,6 +35,9 @@ const SOURCE: OfficialSourceRegistryEntry = {
   effectiveFrom: "2025-03-09T00:00:00.000Z",
   redistributionRights: "FULL_TEXT",
   licenceIdentifier: "SSO Terms of Use clause 13",
+  storageRights: "ALLOWED",
+  rightsReviewedAt: "2026-08-01T00:00:00.000Z",
+  rightsBasis: "Fixture rights review",
   minimumProvisionCount: 2,
 };
 
