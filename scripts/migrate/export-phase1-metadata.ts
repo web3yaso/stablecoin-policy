@@ -15,6 +15,13 @@ const TABLES = [
   "report_releases",
   "datasets",
   "dataset_releases",
+  "legal_claims",
+  "citations",
+  "review_records",
+  "corpus_releases",
+  "corpus_release_claims",
+  "event_claim_impacts",
+  "coverage_scopes",
 ] as const;
 
 async function main() {
@@ -38,7 +45,7 @@ async function main() {
   );
 
   const backup = {
-    formatVersion: "1.0.0",
+    formatVersion: "1.1.0",
     exportedAt: new Date().toISOString(),
     projectHost: new URL(config.url).hostname,
     tables,

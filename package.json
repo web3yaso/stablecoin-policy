@@ -23,9 +23,11 @@
     "news:poll": "tsx scripts/sync/news-rss.ts",
     "legal:sources:ingest": "tsx scripts/sync/legal-official-sources.ts",
     "legal:sources:verify": "tsx scripts/review/legal-source-verification.ts",
+    "legal:claims:review": "tsx scripts/review/legal-claim-review.ts",
     "news:sources:check": "tsx scripts/smoke/professional-sources-dryrun.ts",
     "smoke:phase2": "node --import tsx scripts/smoke/phase2-corpus.ts",
     "smoke:source-verification": "tsx scripts/smoke/source-verification.ts",
+    "smoke:claim-review": "tsx scripts/smoke/claim-review.ts",
     "news:regen": "tsx scripts/sync/news-regen.ts",
     "cost:summary": "tsx scripts/reports/summarize-llm-cost.ts"
   },

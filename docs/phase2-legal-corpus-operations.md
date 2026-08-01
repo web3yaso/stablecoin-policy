@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migrations `0003` through `0010` are applied to the linked Supabase project.
+Migrations `0003` through `0011` are applied to the linked Supabase project.
 They are never applied by application startup. Migration `0003` creates two
 ownership layers:
 
@@ -151,6 +151,39 @@ time. `OFFICIAL_BYTE_AND_LOCATOR_REVIEW` is for an authoritative official copy;
 An AI agent, LLM, system, automation identity, or unknown reviewer cannot approve
 a source. Running or deploying this workflow never verifies a source by itself.
 
+## Legal claim review workflow
+
+Migration `0011` separates drafting, review submission, and named-human legal
+claim approval. A deterministic service-only manifest binds the proposition,
+legal status, effective interval, knowledge cutoff, actor/activity scopes, and
+every citation to its provision locator, text checksum, source-version checksum,
+authority, support relation, excerpt, and effective excerpt permission.
+
+Claims and citations are editable only in `DRAFT`. Submission requires at least
+one citation and moves the claim to `IN_REVIEW`, freezing its reviewed content.
+Approval then requires the freshly recomputed manifest SHA-256, an identified
+human reviewer, no contradictory evidence, no unknown/unauthorized excerpt use,
+and at least one direct official citation whose source version is `VERIFIED` by
+an approved source-verification record. The review record and transition to
+`REVIEWED` occur atomically. `CHANGES_REQUESTED` returns the claim to `DRAFT`;
+`REJECTED` moves it to immutable `RETRACTED`.
+
+The service role can read but cannot directly insert, update, or delete review
+records; the fixed-search-path `SECURITY DEFINER` RPC is the only write path.
+The corpus publication trigger independently recomputes the approved manifest
+fingerprint and applies the same verified-evidence gates to every legal status,
+not only permissions. No claim is created or approved by deploying the workflow.
+
+The CLI defaults to a read-only manifest:
+
+```bash
+npm run legal:claims:review -- --claim <claim-id>
+```
+
+Use `--submit-for-review` only after draft citations are complete. Final review
+submission additionally requires `--submit`, `--confirm-human-review`, the exact
+manifest SHA-256, outcome, reviewer role/reference, and review time.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage
@@ -286,6 +319,20 @@ existing tracker and report endpoints are unaffected.
   Database lint and the existing reviewed-only Phase 2 smoke passed. The
   post-`0010` metadata snapshot has SHA-256
   `baad49fb2039378e085879993756408c4b239da95f80e5829c2d6c274438ea7b`.
+- Before migration `0011`, backup format `1.1.0` captured Phase 1 metadata,
+  claim/citation/review/corpus/impact/coverage tables, and all four source status
+  snapshots at `/private/tmp/stablecoin-policy-pre0011-metadata.json`, mode
+  `0600`, with SHA-256
+  `d78eb43d0e88a48c02998aa54f13dcfca79999dd512cbf33e76ad311622a71f0`.
+  Claim, citation, review, corpus, and impact tables were empty; three coverage
+  rows remained `IN_PROGRESS`.
+- Migration `0011` was applied on 2026-08-01 UTC after a linked-project dry-run.
+  Production database lint reports no schema errors. A negative-path smoke
+  confirmed the service role cannot insert `review_records` directly and a
+  missing claim cannot enter review. Existing Phase 2 smoke confirmed no public
+  evidence or coverage change. The post-`0011` snapshot retained zero claim,
+  citation, review, corpus, and impact rows and has SHA-256
+  `371e1441fa17f44aa8403ddaa203c1b55114ef6f19a4dd1f8ee9e427c7bc555c`.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
@@ -297,7 +344,9 @@ existing tracker and report endpoints are unaffected.
 - When a managed backup or local Docker-backed `db dump` is unavailable, run
   `npm run storage:backup-metadata`; keep its private JSON output and SHA-256
   checksum outside the repository. This supplements, but does not replace,
-  immutable Storage objects and their existing restore procedure.
+  immutable Storage objects and their existing restore procedure. Format `1.1.0`
+  includes claim, citation, review, corpus-membership, impact, and coverage rows
+  in addition to Phase 1 metadata and explicitly requested source statuses.
 - Confirm migration `0003` created the private `policy-sources` Storage bucket.
   If `SUPABASE_SOURCES_BUCKET` overrides that default, create the configured
   private bucket separately before ingestion.
