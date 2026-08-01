@@ -106,4 +106,3 @@ function isDateTime(value: string): boolean {
 function assertDateTime(value: string, field: string): void {
   if (!isDateTime(value)) throw new Error(`${field} must be a valid date-time`);
 }
-

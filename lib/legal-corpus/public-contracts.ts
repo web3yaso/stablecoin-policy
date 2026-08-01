@@ -76,4 +76,3 @@ export type ChangesResponse = {
   changes: PublicChange[];
   nextCursor: string | null;
 };
-

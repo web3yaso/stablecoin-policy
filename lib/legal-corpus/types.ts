@@ -85,4 +85,3 @@ export type PublicationDecision =
         | "NON_AUTHORITATIVE_PERMISSION_EVIDENCE"
         | "INVALID_EFFECTIVE_INTERVAL";
     };
-

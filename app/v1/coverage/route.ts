@@ -35,4 +35,3 @@ function corsHeaders(): Record<string, string> {
     "Access-Control-Allow-Headers": "Accept, Content-Type",
   };
 }
-

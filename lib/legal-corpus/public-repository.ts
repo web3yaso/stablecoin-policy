@@ -9,4 +9,3 @@ export interface PublicLegalCorpusRepository {
   findSource(documentId: string): Promise<PublicSourceResponse | null>;
   listChanges(afterCursor?: string): Promise<ChangesResponse>;
 }
-
