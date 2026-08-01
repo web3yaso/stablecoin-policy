@@ -4,6 +4,7 @@ import registryJson from "../../data/legal-corpus/source-registry.json";
 import { readSupabaseConfig, SupabaseHttpClient } from "../../lib/data/supabase-client.js";
 import { fetchEurLexSource } from "../../lib/legal-corpus/ingestion/eurlex.js";
 import { fetchHkelSource } from "../../lib/legal-corpus/ingestion/hkel.js";
+import { fetchSsoSource } from "../../lib/legal-corpus/ingestion/sso.js";
 import { SupabaseOfficialSourcePublisher } from "../../lib/legal-corpus/ingestion/supabase-publisher.js";
 import type { OfficialSourceRegistryEntry } from "../../lib/legal-corpus/ingestion/types.js";
 
@@ -34,6 +35,8 @@ async function main() {
       ? await fetchEurLexSource(source)
       : source.provider === "hkel"
         ? await fetchHkelSource(source)
+        : source.provider === "sso"
+          ? await fetchSsoSource(source)
         : (() => { throw new Error(`unsupported source provider: ${source.provider}`); })();
     console.log(
       `${publish ? "publish" : "dry-run"} ${source.sourceId}: checksum=${snapshot.checksumSha256} provisions=${snapshot.provisions.length} object=${snapshot.objectKey}`,

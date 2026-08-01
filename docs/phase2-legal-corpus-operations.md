@@ -48,6 +48,35 @@ The adapter fails closed on this identity mismatch. Cap. 656A has internally
 consistent identifiers and may be ingested independently, but it does not make
 the Hong Kong baseline complete.
 
+The Singapore adapter pins an explicit SSO `ValidDate`, obtains the supported
+complete HTML print export for structure, and stores the separately downloaded,
+byte-stable official PDF as the immutable source artifact. The registry pins
+that PDF's expected SHA-256 and any byte change fails closed for manual review.
+It records a deterministic checksum over the extracted provision set instead of
+treating the print page's changing CSRF token, timestamp, or CSP nonce as a legal
+change. Registry entries also declare the official provision kind so Acts use
+`Section` locators while subsidiary legislation can use `Regulation` or
+`Paragraph` locators. Subsidiary-legislation entries fail closed when that kind
+is missing. The adapter fails closed on title, document-number, valid-date, host,
+content-type, PDF-signature, duplicate-provision, and provision-count mismatches.
+
+The registered Singapore source set currently contains the Payment Services Act
+2019 and the Payment Services Regulations 2019. The Regulations are pinned to
+the 2025 Revised Edition dated 17 December 2025. A read-only dry-run verified the
+PDF SHA-256
+`1757d0a6755d05714007c8a709b7d51a32227ce201edfe9122839c514e671951`
+across two downloads and extracted 47 regulations, including regulations 18A
+through 18J. This does not make their contents reviewed or publishable.
+
+SSO is maintained by Singapore's Attorney-General's Chambers, but its Terms of
+Use describe the consolidated legislation as an unofficial version that is not
+the authoritative text. Clause 13 permits reproduction of Singapore legislation
+subject to conditions. Registry entries therefore record the permission and the
+source-version provenance records `OFFICIAL_UNOFFICIAL_CONSOLIDATION`; ingestion
+still stops at `OBSERVED`. Any later public full-text rendering must display the
+Singapore Government copyright/AGC permission notice, link users to SSO for the
+latest version, and pass an accuracy review before publication.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage
@@ -111,6 +140,20 @@ existing tracker and report endpoints are unaffected.
 - Cap. 656 remains blocked and absent from the corpus due to the embedded
   identity mismatch. Public lookup for Cap. 656A returns `404`, and Hong Kong
   coverage remains `IN_PROGRESS`, `0%`, and `UNKNOWN`.
+- The SSO Payment Services Act 2019 PDF pinned to `ValidDate=20250309` was
+  ingested as `OBSERVED` with SHA-256
+  `6644db515eb0e28046f9726b6244907e8817e6eb05592ada2d12249326c2d9b7`
+  and 148 provisions at ordinals 0 through 147. Idempotent replay returned the
+  same version ID. The status RPC reports no verification time; Singapore
+  coverage remains `IN_PROGRESS` with zero reviewed claims, and no published
+  changes or source evidence were exposed.
+- The SSO Payment Services Regulations 2019 PDF pinned to
+  `ValidDate=20251217` was ingested as `OBSERVED` with SHA-256
+  `1757d0a6755d05714007c8a709b7d51a32227ce201edfe9122839c514e671951`
+  and 47 regulations at ordinals 0 through 46. Idempotent replay returned the
+  same version ID. The status RPC reports no verification time, the actual
+  document ID is absent from reviewed-only public source lookup, and Singapore
+  coverage and published-change results remain unchanged.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false

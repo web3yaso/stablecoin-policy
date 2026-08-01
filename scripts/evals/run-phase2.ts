@@ -3,6 +3,7 @@ import path from "node:path";
 import { evaluateClaimPublication } from "../../lib/legal-corpus/policy";
 import { extractEurLexArticles } from "../../lib/legal-corpus/ingestion/eurlex";
 import { assertHkelIdentity, extractHkelSections } from "../../lib/legal-corpus/ingestion/hkel";
+import { assertSsoIdentity, extractSsoSections } from "../../lib/legal-corpus/ingestion/sso";
 import type {
   ClaimLegalStatus,
   ClaimReviewState,
@@ -41,6 +42,18 @@ type HkelIngestionCase = {
   xml: string;
   expectedLocators: string[];
   expectedIdentityError: boolean;
+};
+
+type SsoIngestionCase = {
+  caseId: string;
+  html: string;
+  expectedLocators: string[];
+  expectedError: boolean;
+  expectedIdentityError: boolean;
+  title?: string;
+  documentNumber?: string;
+  validDate?: string;
+  provisionKind?: "section" | "regulation" | "paragraph";
 };
 
 async function main() {
@@ -105,8 +118,40 @@ async function main() {
   if (hkelFailures.length > 0) {
     throw new Error(`phase2 HKeL eval failed: ${hkelFailures.length}/${hkelCases.length} cases`);
   }
+  const ssoCases = await readJsonLines<SsoIngestionCase>(
+    "evals/phase2-sso-ingestion-cases.jsonl",
+  );
+  const ssoFailures = ssoCases.filter((evalCase) => {
+    try {
+      assertSsoIdentity(evalCase.html, {
+        title: evalCase.title ?? "Payment Services Act 2019",
+        ssoDocumentNumber: evalCase.documentNumber ?? "PSA2019",
+        ssoValidDate: evalCase.validDate ?? "20250309",
+      });
+      const provisions = extractSsoSections(
+        evalCase.html,
+        `version:${evalCase.caseId}`,
+        "en",
+        "ALLOWED",
+        evalCase.provisionKind ?? "section",
+      );
+      const locators = provisions.map((provision) => provision.locator);
+      return (
+        evalCase.expectedError ||
+        evalCase.expectedIdentityError ||
+        JSON.stringify(locators) !== JSON.stringify(evalCase.expectedLocators) ||
+        provisions.some((provision) => provision.excerptPermission !== "ALLOWED")
+      );
+    } catch (error) {
+      const identityError = error instanceof Error && /identity mismatch/.test(error.message);
+      return identityError ? !evalCase.expectedIdentityError : !evalCase.expectedError;
+    }
+  });
+  if (ssoFailures.length > 0) {
+    throw new Error(`phase2 SSO eval failed: ${ssoFailures.length}/${ssoCases.length} cases`);
+  }
   console.log(
-    `phase2 eval passed: ${cases.length + ingestionCases.length + hkelCases.length}/${cases.length + ingestionCases.length + hkelCases.length} cases`,
+    `phase2 eval passed: ${cases.length + ingestionCases.length + hkelCases.length + ssoCases.length}/${cases.length + ingestionCases.length + hkelCases.length + ssoCases.length} cases`,
   );
 }
 
