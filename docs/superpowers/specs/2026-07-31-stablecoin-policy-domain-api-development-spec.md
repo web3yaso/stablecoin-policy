@@ -635,6 +635,9 @@ Singapore baseline definitions are independently agreed and populated with
 reviewed evidence, all three scopes remain `IN_PROGRESS`, `0%`, and `UNKNOWN`.
 Migration `0013` is applied to production; direct-update denial, invalid-ID,
 database-lint, public-boundary, and zero-row metadata checks pass.
+Migration `0014` closes the inherited direct `INSERT` grant; production smoke
+now proves the service role cannot directly insert, update, or delete coverage
+rows, and the post-migration snapshot confirms no business-data change.
 
 ### Phase 3 — Evidence RAG
 

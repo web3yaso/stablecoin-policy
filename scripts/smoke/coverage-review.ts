@@ -3,6 +3,26 @@ import { readSupabaseConfig, SupabaseHttpClient } from "../../lib/data/supabase-
 
 async function main() {
   const client = new SupabaseHttpClient(readSupabaseConfig());
+  let directInsertDenied = false;
+  try {
+    await client.rest("coverage_scopes", {
+      method: "POST",
+      headers: { Prefer: "return=minimal" },
+      body: JSON.stringify({
+        jurisdiction_code: "invalid",
+        display_name: "must not persist",
+        coverage_state: "REVIEWED",
+        completeness_percent: 100,
+        freshness_state: "CURRENT",
+        reviewed_at: new Date().toISOString(),
+      }),
+    });
+  } catch (error: unknown) {
+    directInsertDenied = error instanceof Error && /permission denied|42501/i.test(error.message);
+    if (!directInsertDenied) throw error;
+  }
+  if (!directInsertDenied) throw new Error("service role directly inserted a coverage scope");
+
   let directUpdateDenied = false;
   try {
     await client.rest("coverage_scopes?jurisdiction_code=eq.ZZ", {
@@ -15,6 +35,18 @@ async function main() {
     if (!directUpdateDenied) throw error;
   }
   if (!directUpdateDenied) throw new Error("service role directly updated coverage scopes");
+
+  let directDeleteDenied = false;
+  try {
+    await client.rest("coverage_scopes?jurisdiction_code=eq.ZZ", {
+      method: "DELETE",
+      headers: { Prefer: "return=minimal" },
+    });
+  } catch (error: unknown) {
+    directDeleteDenied = error instanceof Error && /permission denied|42501/i.test(error.message);
+    if (!directDeleteDenied) throw error;
+  }
+  if (!directDeleteDenied) throw new Error("service role directly deleted coverage scopes");
 
   let invalidChecklistRejected = false;
   try {
@@ -31,7 +63,12 @@ async function main() {
   }
   if (!invalidChecklistRejected) throw new Error("invalid coverage checklist ID was accepted");
 
-  console.log(JSON.stringify({ directUpdateDenied, invalidChecklistRejected }));
+  console.log(JSON.stringify({
+    directInsertDenied,
+    directUpdateDenied,
+    directDeleteDenied,
+    invalidChecklistRejected,
+  }));
 }
 
 main().catch((error: unknown) => {

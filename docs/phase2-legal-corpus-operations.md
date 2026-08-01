@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migrations `0003` through `0013` are applied to the linked Supabase project.
+Migrations `0003` through `0014` are applied to the linked Supabase project.
 They are never applied by application startup. Migration `0003` creates two
 ownership layers:
 
@@ -225,9 +225,10 @@ version for that jurisdiction must have been retrieved on or after it.
 The deterministic manifest binds the checklist contents and checksum, public
 coverage note, freshness cutoff, complete corpus-release manifest, and release
 checksum. Review submits that exact fingerprint and records reviewer identity
-and private notes separately. The service role cannot update coverage rows or
-write review records directly. Deploying the migration, publishing a corpus,
-or creating a checklist never changes coverage by itself.
+and private notes separately. Migrations `0013` and `0014` make the service role
+read-only on coverage rows: it cannot insert, update, or delete them or write
+review records directly. Deploying the migration, publishing a corpus, or
+creating a checklist never changes coverage by itself.
 
 Create a versioned checklist only after its legal scope has been agreed and its
 claim IDs are reviewed. The checklist JSON file must be an array of objects with
@@ -429,6 +430,17 @@ existing tracker and report endpoints are unaffected.
   checklists, or coverage-review records; all three coverage scopes remain
   `IN_PROGRESS`. Its SHA-256 is
   `272aa891d4fb34c7dc0714eb093dfcbe6bda4600fa319953bb2ec14f9307da8c`.
+- Before migration `0014`, the metadata snapshot at
+  `/private/tmp/stablecoin-policy-pre0014-metadata.json` had SHA-256
+  `5d36670b514d953d5d7e74d6f2c81b213ec7143d1c5aa13edef56a2ebee483b9`.
+  Migration `0014` closes the remaining Phase 2 foundation `INSERT` grant and
+  makes coverage scopes fully read-only to the service role. Production smoke
+  confirms direct `INSERT`, `UPDATE`, and `DELETE` are all denied, while the
+  human-review RPC remains the sole advancement path. Database lint and the
+  reviewed-only public boundary pass. The post-`0014` snapshot retained three
+  `IN_PROGRESS` scopes and zero claims, releases, checklists, or coverage-review
+  records; its SHA-256 is
+  `9b315fbe12d9e26d326387328852da9c4b6b18edbea6bb4354c965ef18a29893`.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
