@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migrations `0003` through `0006` are applied to the linked Supabase project.
+Migrations `0003` through `0007` are applied to the linked Supabase project.
 They are never applied by application startup. Migration `0003` creates two
 ownership layers:
 
@@ -179,6 +179,22 @@ existing tracker and report endpoints are unaffected.
   same version ID. The status RPC reports no verification time, the actual
   document ID is absent from reviewed-only public source lookup, and Singapore
   coverage and published-change results remain unchanged.
+- Before migration `0007`, a full regulatory `db dump` was attempted but was
+  unavailable because the local Supabase CLI requires Docker. The documented
+  metadata fallback was written outside the repository to
+  `/private/tmp/stablecoin-policy-pre0007-metadata.json` with mode `0600` and
+  SHA-256
+  `5c70ed95357b6e82fd3caa618690ce4671cee2c40a64d1ec8947ce8222196b05`.
+  It contains the Phase 1 metadata tables plus status snapshots for all four
+  ingested official source versions; it is not represented as a full backup.
+- Migration `0007` was applied on 2026-08-01 UTC after a linked-project dry-run.
+  Production database lint reports no schema errors. EUR-Lex MiCA and HKeL Cap.
+  656A now report `storageRights=REVIEW_REQUIRED` and reject publish commands
+  before retrieval or Storage access. The two SSO versions report
+  `storageRights=ALLOWED`, the recorded 2026-08-01 review time, and retained
+  their existing version IDs and provision counts after v3 idempotent replay.
+  The post-migration metadata snapshot has SHA-256
+  `2811af69b0b185b36cdde06f55d5bf5bf821521a0084ffb62644c64a16737ea0`.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
