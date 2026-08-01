@@ -13,7 +13,7 @@ ownership layers:
 
 The executable workflow model lives in `specs/legalCorpusPublication.qnt`,
 with scenario tests and a requirement map alongside it. Run
-`npm run spec:phase2` before changing migrations `0010` through `0017` or any
+`npm run spec:phase2` before changing migrations `0010` through `0018` or any
 successor that changes review states, fingerprints, freshness gates, atomicity,
 or service-role grants. The command typechecks the model and tests, runs eleven
 core lifecycle scenarios plus the draft-import scenario, and samples five
@@ -25,7 +25,7 @@ The database counterparts are the files in `supabase/tests`. They start from
 all local migrations, use sanitized rows inside transactions, and execute the
 complete source-verification, draft-import, claim-review,
 release-review/publication, coverage-review, and readiness-query RPC chains.
-Their 71 pgTAP assertions also cover stale manifests,
+Their 88 pgTAP assertions also cover stale manifests,
 automated-reviewer rejection, zero partial audit writes, service-role table
 grants, and reviewed-only public views. Run it with:
 
@@ -535,6 +535,25 @@ direct official support. Evidence blockers do not prevent storing a private
 draft, but remain mandatory before named-human approval. The envelope always
 sets `legalValidityAssessed` to `false` and never writes review or publication
 state.
+
+## Human review queue
+
+Migration `0018` adds a private, service-role-only projection of outstanding
+source, claim, corpus-release, and coverage-preparation work. It derives every
+task from canonical state and does not create task rows, review records, or
+state transitions:
+
+```bash
+npm run legal:review:queue -- --jurisdiction <code>
+npm run legal:review:queue -- --jurisdiction <code> --limit 25 --summary
+```
+
+Tasks are ordered by workflow priority and stable subject order. Each task
+contains blocker codes, required inputs, the next human action, and a structured
+CLI command. It deliberately excludes claim propositions, reviewer references,
+and private notes. `humanReviewRequired=true` and
+`automaticApprovalAllowed=false` are fixed contract fields; operators must use
+the independent, fingerprint-bound review commands to make any transition.
 
 ## Required pre-production checks
 

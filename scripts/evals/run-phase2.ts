@@ -34,6 +34,11 @@ import {
   type ClaimDraftImportReadinessInput,
   type ClaimDraftReviewReadinessInput,
 } from "../../lib/legal-corpus/claim-draft-import";
+import {
+  reviewQueueNextAction,
+  type ReviewQueueActionInput,
+  type ReviewQueueNextAction,
+} from "../../lib/legal-corpus/review-queue";
 import type {
   ClaimLegalStatus,
   ClaimReviewState,
@@ -130,6 +135,10 @@ type ClaimDraftPreflightCase = ClaimDraftBundleReadinessInput
     expectedImportErrors: string[];
     expectedReviewErrors: string[];
   };
+type ReviewQueueCase = ReviewQueueActionInput & {
+  caseId: string;
+  expectedAction: ReviewQueueNextAction;
+};
 
 async function main() {
   const cases = (await readFile(
@@ -334,10 +343,24 @@ async function main() {
       `phase2 claim-draft-preflight eval failed: ${draftPreflightFailures.length}/${draftPreflightCases.length} cases`,
     );
   }
+  const reviewQueueCases = await readJsonLines<ReviewQueueCase>(
+    "evals/phase2-review-queue-cases.jsonl",
+  );
+  const reviewQueueFailures = reviewQueueCases.filter((evalCase) => {
+    const actual = reviewQueueNextAction(evalCase);
+    if (actual === evalCase.expectedAction) return false;
+    console.error(`${evalCase.caseId}: expected=${evalCase.expectedAction} actual=${actual}`);
+    return true;
+  });
+  if (reviewQueueFailures.length > 0) {
+    throw new Error(
+      `phase2 review-queue eval failed: ${reviewQueueFailures.length}/${reviewQueueCases.length} cases`,
+    );
+  }
   const total = cases.length + ingestionCases.length + hkelCases.length
     + ssoCases.length + rightsCases.length + verificationCases.length
     + claimReviewCases.length + releaseCases.length + coverageCases.length
-    + baselineCases.length + draftPreflightCases.length;
+    + baselineCases.length + draftPreflightCases.length + reviewQueueCases.length;
   console.log(
     `phase2 eval passed: ${total}/${total} cases`,
   );

@@ -1,0 +1,8 @@
+{"caseId":"blocked-source","taskType":"SOURCE_VERIFICATION","subjectState":"OBSERVED","hasReadinessErrors":true,"expectedAction":"RESOLVE_SOURCE_EVIDENCE"}
+{"caseId":"ready-source","taskType":"SOURCE_VERIFICATION","subjectState":"OBSERVED","hasReadinessErrors":false,"expectedAction":"REVIEW_SOURCE"}
+{"caseId":"blocked-claim","taskType":"CLAIM_REVIEW","subjectState":"IN_REVIEW","hasReadinessErrors":true,"expectedAction":"RESOLVE_CLAIM_EVIDENCE"}
+{"caseId":"draft-claim","taskType":"CLAIM_REVIEW","subjectState":"DRAFT","hasReadinessErrors":false,"expectedAction":"SUBMIT_CLAIM_FOR_REVIEW"}
+{"caseId":"review-claim","taskType":"CLAIM_REVIEW","subjectState":"IN_REVIEW","hasReadinessErrors":false,"expectedAction":"REVIEW_CLAIM"}
+{"caseId":"blocked-release","taskType":"CORPUS_RELEASE_REVIEW","subjectState":"DRAFT","hasReadinessErrors":true,"expectedAction":"RESOLVE_RELEASE_EVIDENCE"}
+{"caseId":"publish-release","taskType":"CORPUS_RELEASE_REVIEW","subjectState":"REVIEWED","hasReadinessErrors":false,"expectedAction":"PUBLISH_RELEASE"}
+{"caseId":"coverage-checklist","taskType":"COVERAGE_REVIEW_PREPARATION","subjectState":"IN_PROGRESS","hasReadinessErrors":false,"hasCoverageChecklist":false,"expectedAction":"DEFINE_COVERAGE_CHECKLIST"}
