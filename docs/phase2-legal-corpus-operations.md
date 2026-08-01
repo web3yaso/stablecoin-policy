@@ -52,6 +52,10 @@ report endpoints are unaffected.
 ## Required pre-production checks
 
 - Take and verify a Supabase backup before applying the migration.
+- When a managed backup or local Docker-backed `db dump` is unavailable, run
+  `npm run storage:backup-metadata`; keep its private JSON output and SHA-256
+  checksum outside the repository. This supplements, but does not replace,
+  immutable Storage objects and their existing restore procedure.
 - Confirm migration `0003` created the private `policy-sources` Storage bucket.
   If `SUPABASE_SOURCES_BUCKET` overrides that default, create the configured
   private bucket separately before ingestion.

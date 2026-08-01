@@ -14,6 +14,7 @@
     "eval:phase2": "node --import tsx scripts/evals/run-phase2.ts",
     "storage:publish": "node --import tsx scripts/migrate/publish-phase1-data.ts",
     "storage:restore": "node --import tsx scripts/migrate/restore-release.ts",
+    "storage:backup-metadata": "node --import tsx scripts/migrate/export-phase1-metadata.ts",
     "data:check": "node --import tsx scripts/ci/check-repository-data.ts",
     "audit:deps": "npm audit --audit-level=low",
     "asp:check": "tsx scripts/asp/check-paid-endpoint.ts",
