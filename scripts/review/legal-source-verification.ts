@@ -16,7 +16,26 @@ async function main() {
 
   if (!args.includes("--submit")) {
     const envelope = await verifier.prepare(versionId);
-    console.log(JSON.stringify(envelope, null, 2));
+    if (args.includes("--summary")) {
+      const permissions = envelope.manifest.provisions.reduce(
+        (counts, provision) => {
+          counts[provision.effectiveExcerptPermission] += 1;
+          return counts;
+        },
+        { ALLOWED: 0, LINK_ONLY: 0, UNKNOWN: 0 },
+      );
+      console.log(JSON.stringify({
+        versionId: envelope.manifest.versionId,
+        lifecycleState: envelope.lifecycleState,
+        verifiedAt: envelope.verifiedAt,
+        manifestSha256: envelope.manifestSha256,
+        objectChecksumSha256: envelope.manifest.checksumSha256,
+        provisionCount: envelope.manifest.provisions.length,
+        effectiveExcerptPermissions: permissions,
+      }, null, 2));
+    } else {
+      console.log(JSON.stringify(envelope, null, 2));
+    }
     console.error(
       "read-only manifest generated; inspect the official artifact and locators before using --submit",
     );

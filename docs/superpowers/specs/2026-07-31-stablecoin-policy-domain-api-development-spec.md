@@ -597,7 +597,9 @@ commercial storage rights, at least one provision, no unknown effective excerpt
 permissions, and an `OBSERVED` source. The approval record and transition to
 `VERIFIED` commit together; rejection leaves the source `OBSERVED`. The workflow
 does not create claims or make evidence public, and deployment alone never
-verifies a production source.
+verifies a production source. Migration `0010` is applied to production;
+read-only manifests and the stale-fingerprint rollback smoke confirm all four
+current source versions remain `OBSERVED` and unverified.
 
 ### Phase 3 — Evidence RAG
 
