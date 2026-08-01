@@ -330,7 +330,9 @@ existing tracker and report endpoints are unaffected.
 - When a managed backup or local Docker-backed `db dump` is unavailable, run
   `npm run storage:backup-metadata`; keep its private JSON output and SHA-256
   checksum outside the repository. This supplements, but does not replace,
-  immutable Storage objects and their existing restore procedure.
+  immutable Storage objects and their existing restore procedure. Format `1.1.0`
+  includes claim, citation, review, corpus-membership, impact, and coverage rows
+  in addition to Phase 1 metadata and explicitly requested source statuses.
 - Confirm migration `0003` created the private `policy-sources` Storage bucket.
   If `SUPABASE_SOURCES_BUCKET` overrides that default, create the configured
   private bucket separately before ingestion.
