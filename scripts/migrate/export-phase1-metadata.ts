@@ -23,9 +23,13 @@ const TABLES = [
   "corpus_release_review_records",
   "event_claim_impacts",
   "coverage_scopes",
+  "coverage_baseline_checklists",
+  "coverage_review_records",
 ] as const;
 const OPTIONAL_PENDING_TABLES = new Set<string>([
   "corpus_release_review_records",
+  "coverage_baseline_checklists",
+  "coverage_review_records",
 ]);
 
 async function main() {
@@ -57,7 +61,7 @@ async function main() {
   );
 
   const backup = {
-    formatVersion: "1.2.0",
+    formatVersion: "1.3.0",
     exportedAt: new Date().toISOString(),
     projectHost: new URL(config.url).hostname,
     tables,

@@ -4,7 +4,7 @@
 
 **Status:** Phase 2 in progress — EEA source and HK subsidiary source observed; HK core source blocked
 
-**Code baseline:** GitHub `main` after PR #24
+**Code baseline:** GitHub `main` after PR #25
 **Scope:** Convert Stablecoin Policy from a public tracker plus paid-report service into the public Stablecoin Policy subsite and the authenticated domain backend for Citely playbooks.
 
 ## 1. Executive summary
@@ -623,6 +623,16 @@ mutate release rows directly, deployment creates no release, and coverage
 advancement remains a separate reviewed step.
 Migration `0012` is applied to production; direct-insert denial, invalid-create,
 database-lint, public-boundary, and zero-row metadata checks pass.
+
+Coverage-review workflow checkpoint (2026-08-01): migration `0013` requires an
+immutable versioned jurisdiction checklist, explicit supporting reviewed claim
+IDs, a selected published corpus release, a freshness cutoff satisfied by every
+cited source version, and an exact deterministic manifest approved by a named
+human. The service role loses direct coverage update authority; its only
+advancement path is the atomic review RPC. Deployment and corpus publication do
+not create a checklist or advance coverage. Until the EEA, Hong Kong, and
+Singapore baseline definitions are independently agreed and populated with
+reviewed evidence, all three scopes remain `IN_PROGRESS`, `0%`, and `UNKNOWN`.
 
 ### Phase 3 — Evidence RAG
 

@@ -17,6 +17,10 @@ import {
   corpusReleaseReadinessErrors,
   type CorpusReleaseReadinessInput,
 } from "../../lib/legal-corpus/corpus-release";
+import {
+  coverageReadinessErrors,
+  type CoverageReadinessInput,
+} from "../../lib/legal-corpus/coverage-review";
 import type {
   ClaimLegalStatus,
   ClaimReviewState,
@@ -93,6 +97,10 @@ type ClaimReviewCase = ClaimEvidenceReadinessInput & {
 };
 
 type CorpusReleaseCase = CorpusReleaseReadinessInput & {
+  caseId: string;
+  expected: "PASS" | "BLOCK";
+};
+type CoverageReviewCase = CoverageReadinessInput & {
   caseId: string;
   expected: "PASS" | "BLOCK";
 };
@@ -256,9 +264,21 @@ async function main() {
       `phase2 corpus-release eval failed: ${releaseFailures.length}/${releaseCases.length} cases`,
     );
   }
+  const coverageCases = await readJsonLines<CoverageReviewCase>(
+    "evals/phase2-coverage-review-cases.jsonl",
+  );
+  const coverageFailures = coverageCases.filter((evalCase) => {
+    const actual = coverageReadinessErrors(evalCase).length === 0 ? "PASS" : "BLOCK";
+    return actual !== evalCase.expected;
+  });
+  if (coverageFailures.length > 0) {
+    throw new Error(
+      `phase2 coverage-review eval failed: ${coverageFailures.length}/${coverageCases.length} cases`,
+    );
+  }
   const total = cases.length + ingestionCases.length + hkelCases.length
     + ssoCases.length + rightsCases.length + verificationCases.length
-    + claimReviewCases.length + releaseCases.length;
+    + claimReviewCases.length + releaseCases.length + coverageCases.length;
   console.log(
     `phase2 eval passed: ${total}/${total} cases`,
   );

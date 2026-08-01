@@ -212,6 +212,48 @@ separate explicit flags. Coverage does not advance automatically when a release
 is published; baseline completeness and freshness remain a separate reviewed
 checkpoint.
 
+## Coverage review workflow
+
+Migration `0013` makes a versioned jurisdiction checklist, complete claim
+support, source freshness, a published corpus release, and a named-human review
+mandatory before coverage can become `REVIEWED`, `100%`, and `CURRENT`. A
+checklist item names its supporting claim IDs; every supporting claim must be a
+reviewed member of the selected published release for the same jurisdiction.
+The reviewer supplies an explicit freshness cutoff, and every cited source
+version for that jurisdiction must have been retrieved on or after it.
+
+The deterministic manifest binds the checklist contents and checksum, public
+coverage note, freshness cutoff, complete corpus-release manifest, and release
+checksum. Review submits that exact fingerprint and records reviewer identity
+and private notes separately. The service role cannot update coverage rows or
+write review records directly. Deploying the migration, publishing a corpus,
+or creating a checklist never changes coverage by itself.
+
+Create a versioned checklist only after its legal scope has been agreed and its
+claim IDs are reviewed. The checklist JSON file must be an array of objects with
+unique `itemId`, `title`, and non-empty `supportingClaimIds` fields:
+
+```bash
+npm run legal:coverage:review -- --create-checklist \
+  --jurisdiction <code> --checklist <checklist-id> \
+  --version-label <version> --items-file <absolute-json-path>
+```
+
+The normal command is read-only and reports all readiness failures:
+
+```bash
+npm run legal:coverage:review -- --jurisdiction <code> \
+  --checklist <checklist-id> --release <release-id> \
+  --freshness-cutoff <timestamp> --public-note <note>
+```
+
+Submitting review additionally requires `--submit`,
+`--confirm-human-review`, the exact manifest SHA-256, a review ID, named
+reviewer role/reference, and review time. The review time cannot precede the
+freshness cutoff. No launch-jurisdiction checklist has yet been approved or
+created, so EEA, Hong Kong, and Singapore remain `IN_PROGRESS`, `0%`, and
+`UNKNOWN`.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage
@@ -384,9 +426,10 @@ existing tracker and report endpoints are unaffected.
 - When a managed backup or local Docker-backed `db dump` is unavailable, run
   `npm run storage:backup-metadata`; keep its private JSON output and SHA-256
   checksum outside the repository. This supplements, but does not replace,
-  immutable Storage objects and their existing restore procedure. Format `1.2.0`
+  immutable Storage objects and their existing restore procedure. Format `1.3.0`
   includes claim, citation, review, corpus-membership, impact, and coverage rows
-  in addition to Phase 1 metadata and explicitly requested source statuses. A
+  plus coverage checklists and coverage-review records, in addition to Phase 1
+  metadata and explicitly requested source statuses. A
   migration-pending table on the explicit optional allowlist is exported as an
   empty array before creation; every other table or transport error fails closed.
 - Confirm migration `0003` created the private `policy-sources` Storage bucket.
