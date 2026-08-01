@@ -633,6 +633,8 @@ advancement path is the atomic review RPC. Deployment and corpus publication do
 not create a checklist or advance coverage. Until the EEA, Hong Kong, and
 Singapore baseline definitions are independently agreed and populated with
 reviewed evidence, all three scopes remain `IN_PROGRESS`, `0%`, and `UNKNOWN`.
+Migration `0013` is applied to production; direct-update denial, invalid-ID,
+database-lint, public-boundary, and zero-row metadata checks pass.
 
 ### Phase 3 — Evidence RAG
 

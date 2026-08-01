@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migrations `0003` through `0012` are applied to the linked Supabase project.
+Migrations `0003` through `0013` are applied to the linked Supabase project.
 They are never applied by application startup. Migration `0003` creates two
 ownership layers:
 
@@ -415,6 +415,20 @@ existing tracker and report endpoints are unaffected.
   remains unchanged. The post-`0012` snapshot contains zero claim, review,
   corpus, membership, release-review, and impact rows and has SHA-256
   `72fcf9a9ab2662f0860e863d8c7d1b509828d617275e60eae293017494b40de9`.
+- Before migration `0013`, backup format `1.3.0` recorded both migration-pending
+  coverage workflow tables as empty and captured all existing metadata and four
+  source statuses at `/private/tmp/stablecoin-policy-pre0013-metadata.json`,
+  mode `0600`, with SHA-256
+  `6d62e7e3632c51d1651891bdbb57a88d2071423544b8541ff6e40ae31ae17d45`.
+- The first `0013` push was rejected while parsing the checklist function and
+  its transaction made no changes. The validation was simplified, all local
+  gates were rerun, and the corrected migration was then applied on 2026-08-01
+  UTC. Negative-path smoke confirmed direct coverage updates are denied and an
+  invalid checklist ID cannot write data. Public-boundary smoke and database
+  lint pass. The post-`0013` snapshot contains zero claims, releases,
+  checklists, or coverage-review records; all three coverage scopes remain
+  `IN_PROGRESS`. Its SHA-256 is
+  `272aa891d4fb34c7dc0714eb093dfcbe6bda4600fa319953bb2ec14f9307da8c`.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
