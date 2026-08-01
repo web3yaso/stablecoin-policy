@@ -651,7 +651,7 @@ claims, private decision rules, or playbook actions. It is sampled executable
 specification, not an exhaustive proof or a replacement for human legal review.
 
 Database-integration checkpoint (2026-08-01): an isolated Supabase PostgreSQL
-job now applies migrations `0001` through `0018` from zero and runs 88 pgTAP
+job now applies migrations `0001` through `0019` from zero and runs 120 pgTAP
 assertions against the real Phase 2 RPCs, triggers, grants, manifests, and public
 views. A sanitized transaction reaches the complete reviewed-publication path;
 stale fingerprints and automated reviewers are rejected without partial audit
@@ -693,6 +693,20 @@ rows, cannot transition or approve a subject, and permanently reports that
 human review is required and automatic approval is forbidden. Seventeen pgTAP
 assertions and eight deterministic eval cases cover permissions, ordering,
 limits, blockers, privacy, zero writes, and next-action routing.
+
+Regulatory-change checkpoint (2026-08-01): migration `0019` completes the
+event/impact write pipeline behind the existing `/v1/changes` read API. A
+deterministic provision-level before/after manifest identifies added, modified,
+and removed locators and suggests only `MAY_AFFECT / PENDING` impacts for
+reviewed claims citing the before version. Named-human event approval and
+named-human disposition of every impact are independently audited; publication
+requires the current manifest, no pending impacts, and at least one reviewed
+impact. Direct service-role writes are removed, and no RPC can alter claim,
+citation, release, or coverage state. A companion Quint model adds eight
+scenarios, four invariants, and two witnesses; 32 pgTAP assertions and eleven
+eval cases cover diffing, fingerprints, permissions, privacy, audit
+immutability, safe publication, and domain-state isolation. Backup format
+`1.4.0` captures the new private audit metadata without exposing it publicly.
 
 ### Phase 3 — Evidence RAG
 

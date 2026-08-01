@@ -22,6 +22,7 @@ const TABLES = [
   "corpus_release_claims",
   "corpus_release_review_records",
   "event_claim_impacts",
+  "event_claim_impact_review_records",
   "coverage_scopes",
   "coverage_baseline_checklists",
   "coverage_review_records",
@@ -30,6 +31,7 @@ const OPTIONAL_PENDING_TABLES = new Set<string>([
   "corpus_release_review_records",
   "coverage_baseline_checklists",
   "coverage_review_records",
+  "event_claim_impact_review_records",
 ]);
 
 async function main() {
@@ -59,13 +61,28 @@ async function main() {
       )
     ),
   );
+  let regulatoryChange: Record<string, unknown> = {
+    regulatoryEvents: [],
+    regulatoryEventReviewRecords: [],
+  };
+  try {
+    regulatoryChange = await client.rpc<Record<string, unknown>>(
+      "get_regulatory_change_backup_metadata",
+      {},
+    );
+  } catch (error: unknown) {
+    const migrationPending = error instanceof Error
+      && /PGRST202|could not find|does not exist/i.test(error.message);
+    if (!migrationPending) throw error;
+  }
 
   const backup = {
-    formatVersion: "1.3.0",
+    formatVersion: "1.4.0",
     exportedAt: new Date().toISOString(),
     projectHost: new URL(config.url).hostname,
     tables,
     sourceVersions,
+    regulatoryChange,
   };
   const body = `${JSON.stringify(backup, null, 2)}\n`;
   await writeFile(outputPath, body, { encoding: "utf8", mode: 0o600 });

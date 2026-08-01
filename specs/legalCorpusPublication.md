@@ -8,6 +8,10 @@ chain implemented by Supabase migrations `0010` through `0014`:
 It is a design and regression model, not legal analysis and not a substitute
 for the named-human reviews required by the production workflow.
 
+Regulatory event and claim-impact publication is modeled separately in
+`specs/regulatoryChangePublication.qnt` so monitoring state cannot weaken the
+legal-corpus publication invariants.
+
 ## Scope and assumptions
 
 - PostgreSQL is shared state; there is no message-passing protocol, so this is
@@ -49,7 +53,7 @@ npm run db:phase2:stop
 ```
 
 The PostgreSQL tests apply every migration to an isolated local Supabase
-database, run 88 pgTAP assertions inside rolled-back transactions, and map
+database, run 120 pgTAP assertions inside rolled-back transactions, and map
 the executable model to the real RPCs and grants. Its fixtures are sanitized;
 they never represent production legal conclusions or named production users.
 
@@ -68,5 +72,5 @@ transitive dependency.
 
 Update this model and its requirement map whenever a migration changes any
 review state, draft-import boundary, publication gate, manifest/freshness rule,
-atomicity boundary, or service-role grant in migrations `0010` through `0018`
+atomicity boundary, or service-role grant in migrations `0010` through `0019`
 or their successors.
