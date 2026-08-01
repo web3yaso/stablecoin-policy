@@ -11,8 +11,10 @@
     "test": "node --import tsx --test tests/*.test.ts",
     "eval:phase0": "node --import tsx scripts/evals/run-phase0.ts",
     "eval:phase1": "node --import tsx scripts/evals/run-phase1.ts",
+    "eval:phase2": "node --import tsx scripts/evals/run-phase2.ts",
     "storage:publish": "node --import tsx scripts/migrate/publish-phase1-data.ts",
     "storage:restore": "node --import tsx scripts/migrate/restore-release.ts",
+    "storage:backup-metadata": "node --import tsx scripts/migrate/export-phase1-metadata.ts",
     "data:check": "node --import tsx scripts/ci/check-repository-data.ts",
     "audit:deps": "npm audit --audit-level=low",
     "asp:check": "tsx scripts/asp/check-paid-endpoint.ts",
@@ -20,6 +22,7 @@
     "data:rebuild": "tsx scripts/build-placeholder.ts",
     "news:poll": "tsx scripts/sync/news-rss.ts",
     "news:sources:check": "tsx scripts/smoke/professional-sources-dryrun.ts",
+    "smoke:phase2": "node --import tsx scripts/smoke/phase2-corpus.ts",
     "news:regen": "tsx scripts/sync/news-regen.ts",
     "cost:summary": "tsx scripts/reports/summarize-llm-cost.ts"
   },

@@ -11,6 +11,7 @@ export type SupabaseConfig = {
   serviceRoleKey: string;
   reportsBucket: string;
   datasetsBucket: string;
+  sourcesBucket: string;
   requestTimeoutMs: number;
 };
 
@@ -113,6 +114,7 @@ export function readSupabaseConfig(
     serviceRoleKey: env.SUPABASE_SERVICE_ROLE_KEY?.trim() ?? "",
     reportsBucket: env.SUPABASE_REPORTS_BUCKET?.trim() || "policy-reports",
     datasetsBucket: env.SUPABASE_DATASETS_BUCKET?.trim() || "policy-datasets",
+    sourcesBucket: env.SUPABASE_SOURCES_BUCKET?.trim() || "policy-sources",
     requestTimeoutMs: Number(env.POLICY_STORAGE_TIMEOUT_MS ?? "8000"),
   });
 }
@@ -133,6 +135,7 @@ function validateSupabaseConfig(config: SupabaseConfig): SupabaseConfig {
   for (const [name, bucket] of [
     ["SUPABASE_REPORTS_BUCKET", config.reportsBucket],
     ["SUPABASE_DATASETS_BUCKET", config.datasetsBucket],
+    ["SUPABASE_SOURCES_BUCKET", config.sourcesBucket],
   ] as const) {
     if (!/^[a-z0-9][a-z0-9._-]{2,62}$/.test(bucket)) {
       throw new Error(`${name} is invalid`);

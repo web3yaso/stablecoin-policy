@@ -13,6 +13,12 @@
       "purpose": "External storage degradation, parity, integrity, and rollback policy cases",
       "split": "regression",
       "reviewState": "REVIEWED"
+    },
+    {
+      "path": "phase2-legal-corpus-cases.jsonl",
+      "purpose": "Reviewed-evidence publication gates and legal-authority separation cases",
+      "split": "regression",
+      "reviewState": "REVIEWED"
     }
   ]
 }
