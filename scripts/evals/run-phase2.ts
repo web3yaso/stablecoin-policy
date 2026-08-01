@@ -26,6 +26,14 @@ import {
   type BaselineReadinessInput,
   type BaselineWorkflowStage,
 } from "../../lib/legal-corpus/baseline-readiness";
+import {
+  claimDraftBundleErrors,
+  claimDraftImportErrors,
+  claimDraftReviewReadinessErrors,
+  type ClaimDraftBundleReadinessInput,
+  type ClaimDraftImportReadinessInput,
+  type ClaimDraftReviewReadinessInput,
+} from "../../lib/legal-corpus/claim-draft-import";
 import type {
   ClaimLegalStatus,
   ClaimReviewState,
@@ -113,6 +121,15 @@ type BaselineReadinessCase = BaselineReadinessInput & {
   caseId: string;
   expectedStage: BaselineWorkflowStage;
 };
+type ClaimDraftPreflightCase = ClaimDraftBundleReadinessInput
+  & ClaimDraftImportReadinessInput
+  & ClaimDraftReviewReadinessInput
+  & {
+    caseId: string;
+    expectedBundleErrors: string[];
+    expectedImportErrors: string[];
+    expectedReviewErrors: string[];
+  };
 
 async function main() {
   const cases = (await readFile(
@@ -299,10 +316,28 @@ async function main() {
       `phase2 baseline-readiness eval failed: ${baselineFailures.length}/${baselineCases.length} cases`,
     );
   }
+  const draftPreflightCases = await readJsonLines<ClaimDraftPreflightCase>(
+    "evals/phase2-claim-draft-preflight-cases.jsonl",
+  );
+  const draftPreflightFailures = draftPreflightCases.filter((evalCase) => {
+    const bundleErrors = claimDraftBundleErrors(evalCase);
+    const importErrors = claimDraftImportErrors(evalCase);
+    const reviewErrors = claimDraftReviewReadinessErrors(evalCase);
+    const passed = JSON.stringify(bundleErrors) === JSON.stringify(evalCase.expectedBundleErrors)
+      && JSON.stringify(importErrors) === JSON.stringify(evalCase.expectedImportErrors)
+      && JSON.stringify(reviewErrors) === JSON.stringify(evalCase.expectedReviewErrors);
+    if (!passed) console.error(`${evalCase.caseId}: unexpected preflight blockers`);
+    return !passed;
+  });
+  if (draftPreflightFailures.length > 0) {
+    throw new Error(
+      `phase2 claim-draft-preflight eval failed: ${draftPreflightFailures.length}/${draftPreflightCases.length} cases`,
+    );
+  }
   const total = cases.length + ingestionCases.length + hkelCases.length
     + ssoCases.length + rightsCases.length + verificationCases.length
     + claimReviewCases.length + releaseCases.length + coverageCases.length
-    + baselineCases.length;
+    + baselineCases.length + draftPreflightCases.length;
   console.log(
     `phase2 eval passed: ${total}/${total} cases`,
   );
