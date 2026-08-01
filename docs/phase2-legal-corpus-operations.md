@@ -147,6 +147,13 @@ existing tracker and report endpoints are unaffected.
   same version ID. The status RPC reports no verification time; Singapore
   coverage remains `IN_PROGRESS` with zero reviewed claims, and no published
   changes or source evidence were exposed.
+- The SSO Payment Services Regulations 2019 PDF pinned to
+  `ValidDate=20251217` was ingested as `OBSERVED` with SHA-256
+  `1757d0a6755d05714007c8a709b7d51a32227ce201edfe9122839c514e671951`
+  and 47 regulations at ordinals 0 through 46. Idempotent replay returned the
+  same version ID. The status RPC reports no verification time, the actual
+  document ID is absent from reviewed-only public source lookup, and Singapore
+  coverage and published-change results remain unchanged.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
