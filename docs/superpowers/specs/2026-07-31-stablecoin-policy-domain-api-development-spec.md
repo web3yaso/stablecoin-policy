@@ -651,7 +651,7 @@ claims, private decision rules, or playbook actions. It is sampled executable
 specification, not an exhaustive proof or a replacement for human legal review.
 
 Database-integration checkpoint (2026-08-01): an isolated Supabase PostgreSQL
-job now applies migrations `0001` through `0016` from zero and runs 55 pgTAP
+job now applies migrations `0001` through `0017` from zero and runs 71 pgTAP
 assertions against the real Phase 2 RPCs, triggers, grants, manifests, and public
 views. A sanitized transaction reaches the complete reviewed-publication path;
 stale fingerprints and automated reviewers are rejected without partial audit
@@ -673,6 +673,16 @@ performs no state transition, and always states that legal completeness was not
 assessed. Nine sanitized pgTAP assertions and seven eval cases cover empty and
 partially progressed workflows, permission boundaries, ordering, and zero
 automatic approval authority.
+
+Claim-draft preflight checkpoint (2026-08-01): migration `0017` adds a
+service-only `STABLE` preflight over an unimported claim/citation bundle. It
+separates database import blockers from later evidence-review blockers, returns
+no proposition or reviewer data, performs no writes, and always states that
+legal validity was not assessed. The CLI runs it before explicit import and
+still permits private DRAFT storage when only review evidence remains
+incomplete. Sixteen pgTAP assertions and seven deterministic eval cases cover
+permissions, missing references, ID conflicts, excerpt rights, evidence gates,
+idempotent replay, manifest conflicts, and zero side effects.
 
 ### Phase 3 — Evidence RAG
 

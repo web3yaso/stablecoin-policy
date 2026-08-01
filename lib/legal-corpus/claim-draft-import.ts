@@ -7,6 +7,50 @@ export type ClaimDraftBundle = {
   claims: Array<Record<string, unknown> & { citations: Array<Record<string, unknown>> }>;
 };
 
+export type ClaimDraftPreflightEnvelope = {
+  schemaVersion: "1.0.0";
+  batchId: string;
+  jurisdictionCode: string;
+  manifestSha256: string;
+  claimCount: number;
+  citationCount: number;
+  importReady: boolean;
+  idempotentReplay: boolean;
+  bundleErrors: string[];
+  reviewEvidenceReady: boolean;
+  legalValidityAssessed: false;
+  claims: Array<{
+    claimId: string;
+    importReady: boolean;
+    reviewEvidenceReady: boolean;
+    importErrors: string[];
+    reviewReadinessErrors: string[];
+  }>;
+};
+
+export type ClaimDraftImportReadinessInput = {
+  duplicateClaimIdCount: number;
+  existingClaimIdCount: number;
+  missingSupersedesCount: number;
+  duplicateCitationIdCount: number;
+  existingCitationIdCount: number;
+  missingProvisionCount: number;
+  unauthorizedExcerptCount: number;
+};
+
+export type ClaimDraftReviewReadinessInput = {
+  missingProvisionCount: number;
+  contradictionCount: number;
+  unverifiedSourceCount: number;
+  unknownPermissionCount: number;
+  unauthorizedExcerptCount: number;
+  directOfficialSupportCount: number;
+};
+
+export type ClaimDraftBundleReadinessInput = {
+  batchManifestConflictCount: number;
+};
+
 const ID = /^[a-z0-9][a-z0-9._:-]{2,160}$/;
 const PROVISION_ID = /^[a-z0-9][a-z0-9._:-]{2,200}$/;
 const JURISDICTION = /^[A-Z][A-Z0-9-]{1,15}$/;
@@ -43,8 +87,41 @@ function isString(value: unknown): value is string {
   return typeof value === "string" && value.trim().length > 0;
 }
 
+export function claimDraftImportErrors(input: ClaimDraftImportReadinessInput): string[] {
+  const errors: string[] = [];
+  if (input.duplicateClaimIdCount > 0) errors.push("duplicate_claim_id");
+  if (input.existingClaimIdCount > 0) errors.push("claim_id_exists");
+  if (input.missingSupersedesCount > 0) errors.push("supersedes_claim_missing");
+  if (input.duplicateCitationIdCount > 0) errors.push("duplicate_citation_id");
+  if (input.existingCitationIdCount > 0) errors.push("citation_id_exists");
+  if (input.missingProvisionCount > 0) errors.push("provision_missing");
+  if (input.unauthorizedExcerptCount > 0) errors.push("unauthorized_excerpt");
+  return errors;
+}
+
+export function claimDraftBundleErrors(input: ClaimDraftBundleReadinessInput): string[] {
+  return input.batchManifestConflictCount > 0 ? ["batch_manifest_conflict"] : [];
+}
+
+export function claimDraftReviewReadinessErrors(
+  input: ClaimDraftReviewReadinessInput,
+): string[] {
+  const errors: string[] = [];
+  if (input.missingProvisionCount > 0) errors.push("provision_missing");
+  if (input.contradictionCount > 0) errors.push("contradictory_evidence");
+  if (input.unverifiedSourceCount > 0) errors.push("unverified_source");
+  if (input.unknownPermissionCount > 0) errors.push("unknown_excerpt_permission");
+  if (input.unauthorizedExcerptCount > 0) errors.push("unauthorized_excerpt");
+  if (input.directOfficialSupportCount === 0) errors.push("direct_official_support_missing");
+  return errors;
+}
+
 export class ClaimDraftImportClient {
   constructor(private readonly client: SupabaseHttpClient) {}
+  async preflight(bundle: unknown): Promise<ClaimDraftPreflightEnvelope> {
+    assertClaimDraftBundle(bundle);
+    return this.client.rpc("preflight_legal_claim_draft_bundle", { p_bundle: bundle });
+  }
   async import(bundle: unknown): Promise<Record<string, unknown>> {
     assertClaimDraftBundle(bundle);
     return this.client.rpc("import_legal_claim_draft_bundle", { p_bundle: bundle });

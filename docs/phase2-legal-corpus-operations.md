@@ -13,7 +13,7 @@ ownership layers:
 
 The executable workflow model lives in `specs/legalCorpusPublication.qnt`,
 with scenario tests and a requirement map alongside it. Run
-`npm run spec:phase2` before changing migrations `0010` through `0016` or any
+`npm run spec:phase2` before changing migrations `0010` through `0017` or any
 successor that changes review states, fingerprints, freshness gates, atomicity,
 or service-role grants. The command typechecks the model and tests, runs eleven
 core lifecycle scenarios plus the draft-import scenario, and samples five
@@ -25,7 +25,7 @@ The database counterparts are the files in `supabase/tests`. They start from
 all local migrations, use sanitized rows inside transactions, and execute the
 complete source-verification, draft-import, claim-review,
 release-review/publication, coverage-review, and readiness-query RPC chains.
-Their 55 pgTAP assertions also cover stale manifests,
+Their 71 pgTAP assertions also cover stale manifests,
 automated-reviewer rejection, zero partial audit writes, service-role table
 grants, and reviewed-only public views. Run it with:
 
@@ -509,6 +509,32 @@ data. It cannot write, submit, approve, publish, or advance coverage. The field
 `legalCompletenessAssessed` is always `false`: `COMPLETE` means only that the
 existing named-human publication workflow reached reviewed coverage, not that
 the software independently determined legal completeness.
+
+## Claim draft bundle preflight
+
+Migration `0017` adds a private, read-only database preflight before draft
+import. The three CLI modes now have distinct boundaries:
+
+```bash
+# JSON structure only; no database call
+npm run legal:claims:draft -- --file <bundle.json>
+
+# Database references and evidence gates; no writes
+npm run legal:claims:draft -- --file <bundle.json> --preflight
+
+# Preflight first, then atomic private-DRAFT import if importReady=true
+npm run legal:claims:draft -- --file <bundle.json> --import
+```
+
+`importErrors` identify conditions that would make the database reject the
+bundle, including ID conflicts, missing provisions, missing predecessor claims,
+unauthorized excerpts, and changed reuse of an imported batch ID. Identical
+batch-manifest replay remains idempotent. `reviewReadinessErrors` separately report
+unverified sources, unknown permissions, contradictory evidence, and missing
+direct official support. Evidence blockers do not prevent storing a private
+draft, but remain mandatory before named-human approval. The envelope always
+sets `legalValidityAssessed` to `false` and never writes review or publication
+state.
 
 ## Required pre-production checks
 
