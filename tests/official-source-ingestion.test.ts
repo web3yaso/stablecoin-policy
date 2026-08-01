@@ -149,6 +149,20 @@ test("rights reconciliation only promotes observed unknown permissions", async (
   assert.doesNotMatch(sql, /insert into policy\.legal_claims/i);
 });
 
+test("provision rights reviews overlay immutable extraction-time permissions", async () => {
+  const sql = await readFile(
+    path.join(process.cwd(), "supabase/migrations/0009_provision_rights_review_overlay.sql"),
+    "utf8",
+  );
+  assert.match(sql, /create table regulatory\.provision_rights_reviews/);
+  assert.match(sql, /existing\.excerpt_permission = 'UNKNOWN'/);
+  assert.match(sql, /coalesce\(review\.excerpt_permission, provision\.excerpt_permission\)/);
+  assert.match(sql, /reject_immutable_row_change/);
+  assert.match(sql, /grant execute on function policy\.ingest_official_source_v5[\s\S]*to service_role/);
+  assert.doesNotMatch(sql, /update regulatory\.provisions/i);
+  assert.doesNotMatch(sql, /insert into policy\.legal_claims/i);
+});
+
 test("duplicate Storage response headers cannot change ingestion metadata", async () => {
   const sourceSnapshot = await snapshot(HTML);
   let rpcBody: Record<string, unknown> | undefined;
