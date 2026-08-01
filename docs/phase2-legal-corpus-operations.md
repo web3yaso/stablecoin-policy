@@ -35,6 +35,19 @@ Because the shared `regulatory` schema is not exposed through PostgREST, the
 service-role-only `policy.get_official_source_ingestion_status` RPC from `0005`
 provides count and lifecycle health checks without returning provision text.
 
+The Hong Kong adapter reads the Department of Justice weekly HKeL archive and
+pins both the container checksum and the exact XML archive entry. Migration
+`0006` records this retrieval provenance without exposing it publicly. HKeL
+states that HTML and structured reference copies are informational; verified
+PDF copies are required for legal-status verification. Consequently HKeL XML
+provisions remain `LINK_ONLY` candidates and source versions remain `OBSERVED`.
+
+Cap. 656 is explicitly blocked in the registry because the official archive
+entry named for Cap. 656 currently embeds `/hk/cap155!en` and `docNumber 155`.
+The adapter fails closed on this identity mismatch. Cap. 656A has internally
+consistent identifiers and may be ingested independently, but it does not make
+the Hong Kong baseline complete.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage

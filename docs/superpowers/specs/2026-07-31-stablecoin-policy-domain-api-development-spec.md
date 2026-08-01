@@ -2,9 +2,9 @@
 
 **Date:** 2026-07-31
 
-**Status:** Phase 2 in progress — legal-corpus foundation implemented locally
+**Status:** Phase 2 in progress — EEA source ingested; Hong Kong source adapter under validation
 
-**Code baseline:** GitHub `main` after PR #16; controlled outage rehearsal added in this revision
+**Code baseline:** GitHub `main` after PR #19
 **Scope:** Convert Stablecoin Policy from a public tracker plus paid-report service into the public Stablecoin Policy subsite and the authenticated domain backend for Citely playbooks.
 
 ## 1. Executive summary
@@ -542,6 +542,15 @@ citations, review records, corpus releases, and coverage scopes. Public views
 exclude reviewer identity and private notes and admit only reviewed evidence in
 a published, `as_of`-pinned corpus. Versioned contracts and server-side public
 routes now cover `/v1/coverage`, `/v1/sources/{id}`, and `/v1/changes`.
+
+Source-ingestion checkpoint (2026-08-01): migrations `0004` and `0005` add
+service-only source ingestion and health checks. MiCA is stored as one
+`OBSERVED` CELLAR version with 149 article provisions. The next Hong Kong
+adapter consumes Department of Justice HKeL archives with ZIP integrity,
+archive-entry provenance, embedded-document identity, and structured section
+locators. Cap. 656 is blocked because its current official XML entry embeds
+Cap. 155 identifiers; Cap. 656A is independently parseable but remains
+reference-only and cannot make Hong Kong baseline coverage complete.
 Publication gates block unreviewed claims, missing provision citations,
 contradictions, and permissions without direct official support. Migration
 `0003` is applied to the linked Supabase project and its private source bucket

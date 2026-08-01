@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { evaluateClaimPublication } from "../../lib/legal-corpus/policy";
 import { extractEurLexArticles } from "../../lib/legal-corpus/ingestion/eurlex";
+import { assertHkelIdentity, extractHkelSections } from "../../lib/legal-corpus/ingestion/hkel";
 import type {
   ClaimLegalStatus,
   ClaimReviewState,
@@ -33,6 +34,13 @@ type IngestionCase = {
   html: string;
   expectedCount: number;
   expectedLocators: string[];
+};
+
+type HkelIngestionCase = {
+  caseId: string;
+  xml: string;
+  expectedLocators: string[];
+  expectedIdentityError: boolean;
 };
 
 async function main() {
@@ -75,8 +83,30 @@ async function main() {
       `phase2 ingestion eval failed: ${ingestionFailures.length}/${ingestionCases.length} cases`,
     );
   }
+  const hkelCases = await readJsonLines<HkelIngestionCase>(
+    "evals/phase2-hkel-ingestion-cases.jsonl",
+  );
+  const hkelFailures = hkelCases.filter((evalCase) => {
+    try {
+      assertHkelIdentity(evalCase.xml, {
+        expectedEmbeddedDocumentId: "656A",
+        expectedEmbeddedIdentifier: "/hk/cap656A!en",
+        versionLabel: "2025-08-01",
+      });
+      const locators = extractHkelSections(
+        evalCase.xml,
+        `version:${evalCase.caseId}`,
+      ).map((provision) => provision.locator);
+      return evalCase.expectedIdentityError || JSON.stringify(locators) !== JSON.stringify(evalCase.expectedLocators);
+    } catch {
+      return !evalCase.expectedIdentityError;
+    }
+  });
+  if (hkelFailures.length > 0) {
+    throw new Error(`phase2 HKeL eval failed: ${hkelFailures.length}/${hkelCases.length} cases`);
+  }
   console.log(
-    `phase2 eval passed: ${cases.length + ingestionCases.length}/${cases.length + ingestionCases.length} cases`,
+    `phase2 eval passed: ${cases.length + ingestionCases.length + hkelCases.length}/${cases.length + ingestionCases.length + hkelCases.length} cases`,
   );
 }
 

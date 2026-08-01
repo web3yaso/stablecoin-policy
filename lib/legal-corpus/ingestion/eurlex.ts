@@ -51,6 +51,7 @@ export async function fetchEurLexSource(
     objectId: `object:source:${checksumSha256.slice(0, 32)}`,
     versionId,
     provisions,
+    retrievalMetadata: {},
   };
 }
 
