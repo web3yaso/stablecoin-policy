@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0.0",
+  "sources": [
+    {
+      "sourceId": "eu-mica-2023-1114-en",
+      "provider": "eur-lex",
+      "authorityId": "authority:eu:publications-office",
+      "authorityName": "Publications Office of the European Union",
+      "authorityType": "OFFICIAL_REGISTER",
+      "jurisdictionCode": "EEA",
+      "officialDomains": ["eur-lex.europa.eu", "publications.europa.eu"],
+      "documentId": "document:eu:celex:32023r1114",
+      "officialDocumentId": "CELEX:32023R1114",
+      "documentType": "REGULATION",
+      "title": "Regulation (EU) 2023/1114 on markets in crypto-assets",
+      "canonicalUrl": "https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng",
+      "fetchUrl": "https://publications.europa.eu/resource/cellar/01d55833-0660-11ee-b12e-01aa75ed71a1.0006.03/DOC_1",
+      "languageCode": "en",
+      "versionLabel": "OJ-2023-06-09",
+      "publishedAt": "2023-06-09T00:00:00.000Z",
+      "redistributionRights": "UNKNOWN",
+      "licenceIdentifier": null,
+      "minimumProvisionCount": 149
+    }
+  ]
+}

@@ -15,6 +15,23 @@ The initial coverage rows are EEA, Hong Kong, and Singapore. They intentionally
 start as `IN_PROGRESS`, `0%`, and `UNKNOWN`; existing jurisdiction summaries do
 not count as reviewed baseline claims.
 
+## Official-source ingestion
+
+The checked-in registry is `data/legal-corpus/source-registry.json`. The first
+adapter covers the English Official Journal version of MiCA through its exact
+EUR-Lex/CELLAR XHTML manifestation. The manifestation is byte-stable across
+repeated fetches, unlike the dynamically rendered `legal-content` page. Run
+`npm run legal:sources:ingest` for a read-only fetch and parse: it prints the
+source checksum, article count, and immutable object key without writing data.
+Only an explicit `--publish` uploads the raw response and calls the service-role
+only `policy.ingest_official_source` RPC introduced by migration `0004`.
+
+The RPC registers the source version as `OBSERVED` and inserts provision
+candidates with `UNKNOWN` excerpt permission. It cannot create claims,
+citations, reviews, corpus releases, or playbook data. Verification and legal
+interpretation remain separate human-review steps. A repeated identical body is
+idempotent; changed bytes produce a new checksum-derived version and object key.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage
