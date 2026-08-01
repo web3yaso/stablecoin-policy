@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migrations `0003` through `0009` are applied to the linked Supabase project.
+Migrations `0003` through `0010` are applied to the linked Supabase project.
 They are never applied by application startup. Migration `0003` creates two
 ownership layers:
 
@@ -116,13 +116,49 @@ parsed into stored provisions, or added to the registry as ingestible evidence.
 Obtain and record permission, or use a separately licensed official channel,
 before implementing a MAS PDF adapter.
 
+## Source verification workflow
+
+Source verification is a distinct named-human review after ingestion and rights
+review. Migration `0010` adds private immutable
+`regulatory.source_verification_records`, a deterministic service-only manifest,
+and an atomic review RPC. The manifest fingerprints the immutable object and
+version metadata plus every provision ID, locator, text checksum, ordinal, and
+effective excerpt permission; it never returns provision text or reviewer data.
+
+An approval fails closed unless the source is still `OBSERVED`, the freshly
+computed manifest SHA-256 matches the reviewer's submitted SHA-256, commercial
+storage rights are reviewed and `ALLOWED`, at least one provision exists, every
+effective excerpt permission is known, and the review time follows retrieval.
+The approval record and `OBSERVED` to `VERIFIED` transition occur in one database
+transaction. Rejections create an immutable record but leave the version
+`OBSERVED`. The review table is read-only to the service role; its only write
+path is the fixed-search-path `SECURITY DEFINER` RPC.
+
+Generate a read-only review manifest with:
+
+```bash
+npm run legal:sources:verify -- --source-version <version-id>
+```
+
+Add `--summary` for an operational status/fingerprint check that omits the full
+provision metadata array.
+
+After independently checking the official artifact and locators, submit the
+exact displayed manifest fingerprint with `--submit`, `--confirm-human-review`,
+an explicit outcome, verification method, reviewer role/reference, and review
+time. `OFFICIAL_BYTE_AND_LOCATOR_REVIEW` is for an authoritative official copy;
+`REFERENCE_COPY_CROSS_CHECK` requires comparison against the authoritative copy.
+An AI agent, LLM, system, automation identity, or unknown reviewer cannot approve
+a source. Running or deploying this workflow never verifies a source by itself.
+
 ## Publication sequence
 
 1. Upload the raw official response or document as a new immutable Storage
    object and record its checksum.
 2. Create or resolve the authority and logical document.
 3. Insert a `SourceVersion` in `OBSERVED`, extract addressable provisions, then
-   verify the source version.
+   generate its deterministic verification manifest and complete a named-human
+   source review before moving it to `VERIFIED`.
 4. Create a draft domain claim and its exact provision citations.
 5. Record the human review result. Reviewer references and notes stay private.
 6. Move the approved claim to `REVIEWED`.
@@ -231,6 +267,25 @@ existing tracker and report endpoints are unaffected.
   `ALLOWED` provisions respectively. No claims or coverage were created.
   The post-`0009` metadata snapshot has SHA-256
   `5b317c570791ca89f84c908e827eddb8a80b621e72e295e37a0dd0a9a6ec3f6d`.
+- Before migration `0010`, a private metadata snapshot was written outside the
+  repository to `/private/tmp/stablecoin-policy-pre0010-metadata.json`, mode
+  `0600`, with SHA-256
+  `8f5925babf3607fb10016041ab799baaf8e42d8cedea8c0891d3227bd350329f`.
+- Migration `0010` was applied on 2026-08-01 UTC after a linked-project dry-run.
+  Read-only production manifests report all four source versions remain
+  `OBSERVED` with `verifiedAt=null`. Their manifest SHA-256 fingerprints are
+  `362b24ecc7785d1790955c3bac6ffc631df03eb09de170ee883ff0cda036169d`
+  (MiCA),
+  `602384c4fae8204c48eff40d0f4e149a2bb725dd53c2cca654d5ad8a472c35f1`
+  (HKeL Cap. 656A),
+  `84761e6fe3bd5dbafafdc8f6680950a46f57d5d8db74f7bdd54c181e5808c872`
+  (Payment Services Act), and
+  `5b3f88f643a6b1d43a6fc12d4efac61cd6c4f6a05076e944c2d43cb0c902d2d7`
+  (Payment Services Regulations). A deliberately stale fingerprint was rejected
+  by the production RPC and a second manifest check confirmed no state change.
+  Database lint and the existing reviewed-only Phase 2 smoke passed. The
+  post-`0010` metadata snapshot has SHA-256
+  `baad49fb2039378e085879993756408c4b239da95f80e5829c2d6c274438ea7b`.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false

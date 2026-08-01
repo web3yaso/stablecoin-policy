@@ -5,6 +5,10 @@ import { extractEurLexArticles } from "../../lib/legal-corpus/ingestion/eurlex";
 import { assertHkelIdentity, extractHkelSections } from "../../lib/legal-corpus/ingestion/hkel";
 import { assertSsoIdentity, extractSsoSections } from "../../lib/legal-corpus/ingestion/sso";
 import { assertSourceStorageRights } from "../../lib/legal-corpus/ingestion/supabase-publisher";
+import {
+  sourceVerificationReadinessErrors,
+  type SourceVerificationManifestEnvelope,
+} from "../../lib/legal-corpus/verification";
 import type {
   ClaimLegalStatus,
   ClaimReviewState,
@@ -62,6 +66,16 @@ type SourceRightsCase = {
   storageRights: "ALLOWED" | "REVIEW_REQUIRED" | "PROHIBITED";
   rightsReviewedAt?: string;
   rightsBasis?: string;
+  expected: "PASS" | "BLOCK";
+};
+
+type SourceVerificationCase = {
+  caseId: string;
+  lifecycleState: SourceVerificationManifestEnvelope["lifecycleState"];
+  verifiedAt: string | null;
+  storageRights: SourceVerificationManifestEnvelope["manifest"]["storageRights"];
+  rightsReviewed: boolean;
+  permissions: Array<"ALLOWED" | "LINK_ONLY" | "UNKNOWN">;
   expected: "PASS" | "BLOCK";
 };
 
@@ -180,8 +194,26 @@ async function main() {
       `phase2 source-rights eval failed: ${rightsFailures.length}/${rightsCases.length} cases`,
     );
   }
+  const verificationCases = await readJsonLines<SourceVerificationCase>(
+    "evals/phase2-source-verification-cases.jsonl",
+  );
+  const verificationFailures = verificationCases.filter((evalCase) => {
+    const actual = sourceVerificationReadinessErrors(
+      verificationEnvelope(evalCase),
+    ).length === 0 ? "PASS" : "BLOCK";
+    if (actual === evalCase.expected) return false;
+    console.error(`${evalCase.caseId}: expected=${evalCase.expected} actual=${actual}`);
+    return true;
+  });
+  if (verificationFailures.length > 0) {
+    throw new Error(
+      `phase2 source-verification eval failed: ${verificationFailures.length}/${verificationCases.length} cases`,
+    );
+  }
+  const total = cases.length + ingestionCases.length + hkelCases.length
+    + ssoCases.length + rightsCases.length + verificationCases.length;
   console.log(
-    `phase2 eval passed: ${cases.length + ingestionCases.length + hkelCases.length + ssoCases.length + rightsCases.length}/${cases.length + ingestionCases.length + hkelCases.length + ssoCases.length + rightsCases.length} cases`,
+    `phase2 eval passed: ${total}/${total} cases`,
   );
 }
 
@@ -217,6 +249,43 @@ function toClaim(evalCase: CorpusCase): LegalClaim {
         versionChecksumSha256: "a".repeat(64),
       },
     })),
+  };
+}
+
+function verificationEnvelope(
+  evalCase: SourceVerificationCase,
+): SourceVerificationManifestEnvelope {
+  return {
+    manifestSha256: "a".repeat(64),
+    lifecycleState: evalCase.lifecycleState,
+    verifiedAt: evalCase.verifiedAt,
+    manifest: {
+      schemaVersion: "1.0.0",
+      versionId: `version:${evalCase.caseId}`,
+      documentId: `document:${evalCase.caseId}`,
+      versionLabel: "fixture",
+      rawObjectId: `object:${evalCase.caseId}`,
+      checksumSha256: "b".repeat(64),
+      officialUrl: "https://example.gov/legal",
+      publishedAt: null,
+      effectiveFrom: null,
+      effectiveTo: null,
+      observedAt: "2026-07-30T00:00:00.000Z",
+      retrievedAt: "2026-07-30T00:00:00.000Z",
+      storageRights: evalCase.storageRights,
+      rightsReviewedAt: evalCase.rightsReviewed ? "2026-07-30T00:00:00.000Z" : null,
+      rightsBasis: evalCase.rightsReviewed ? "Reviewed fixture basis" : null,
+      redistributionRights: "FULL_TEXT",
+      licenceIdentifier: "Fixture licence",
+      provisions: evalCase.permissions.map((permission, ordinal) => ({
+        provisionId: `provision:${evalCase.caseId}:${ordinal}`,
+        locator: `Article ${ordinal + 1}`,
+        languageCode: "en",
+        textChecksumSha256: "c".repeat(64),
+        ordinal,
+        effectiveExcerptPermission: permission,
+      })),
+    },
   };
 }
 
