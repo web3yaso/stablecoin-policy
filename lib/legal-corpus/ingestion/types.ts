@@ -1,6 +1,8 @@
 export type OfficialSourceRegistryEntry = {
   sourceId: string;
-  provider: "eur-lex";
+  provider: "eur-lex" | "hkel";
+  ingestionState?: "ACTIVE" | "BLOCKED";
+  blocker?: string;
   authorityId: string;
   authorityName: string;
   authorityType:
@@ -20,9 +22,13 @@ export type OfficialSourceRegistryEntry = {
   languageCode: string;
   versionLabel: string;
   publishedAt?: string;
+  effectiveFrom?: string;
   redistributionRights: "FULL_TEXT" | "EXCERPT" | "LINK_ONLY" | "UNKNOWN";
   licenceIdentifier: string | null;
   minimumProvisionCount: number;
+  archiveEntry?: string;
+  expectedEmbeddedDocumentId?: string;
+  expectedEmbeddedIdentifier?: string;
 };
 
 export type ProvisionCandidate = {
@@ -46,4 +52,5 @@ export type OfficialSourceSnapshot = {
   objectId: string;
   versionId: string;
   provisions: ProvisionCandidate[];
+  retrievalMetadata: Record<string, unknown>;
 };

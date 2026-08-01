@@ -16,7 +16,7 @@ export class SupabaseOfficialSourcePublisher {
       contentType: snapshot.contentType,
       expectedChecksumSha256: snapshot.checksumSha256,
     });
-    return this.client.rpc<string>("ingest_official_source", {
+    return this.client.rpc<string>("ingest_official_source_v2", {
       p_object_id: snapshot.objectId,
       p_bucket: this.client.config.sourcesBucket,
       p_object_key: snapshot.objectKey,
@@ -53,6 +53,8 @@ export class SupabaseOfficialSourcePublisher {
         retrievedAt: snapshot.retrievedAt,
       },
       p_provisions: snapshot.provisions,
+      p_effective_from: snapshot.source.effectiveFrom ?? null,
+      p_retrieval_metadata: snapshot.retrievalMetadata,
     });
   }
 }

@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migrations `0003` through `0005` are applied to the linked Supabase project.
+Migrations `0003` through `0006` are applied to the linked Supabase project.
 They are never applied by application startup. Migration `0003` creates two
 ownership layers:
 
@@ -34,6 +34,19 @@ idempotent; changed bytes produce a new checksum-derived version and object key.
 Because the shared `regulatory` schema is not exposed through PostgREST, the
 service-role-only `policy.get_official_source_ingestion_status` RPC from `0005`
 provides count and lifecycle health checks without returning provision text.
+
+The Hong Kong adapter reads the Department of Justice weekly HKeL archive and
+pins both the container checksum and the exact XML archive entry. Migration
+`0006` records this retrieval provenance without exposing it publicly. HKeL
+states that HTML and structured reference copies are informational; verified
+PDF copies are required for legal-status verification. Consequently HKeL XML
+provisions remain `LINK_ONLY` candidates and source versions remain `OBSERVED`.
+
+Cap. 656 is explicitly blocked in the registry because the official archive
+entry named for Cap. 656 currently embeds `/hk/cap155!en` and `docNumber 155`.
+The adapter fails closed on this identity mismatch. Cap. 656A has internally
+consistent identifiers and may be ingested independently, but it does not make
+the Hong Kong baseline complete.
 
 ## Publication sequence
 
@@ -91,6 +104,13 @@ existing tracker and report endpoints are unaffected.
   idempotent.
 - Public source lookup still returns `404` for MiCA and EEA coverage remains
   `IN_PROGRESS`, `0%`, and `UNKNOWN`, as required before source and claim review.
+- `0006` was applied on 2026-08-01 UTC after a linked-project dry-run. Cap.
+  656A was ingested as `OBSERVED` with extracted XML SHA-256
+  `35f7df127b58c173f678f4052d627a1dc088cf65feb64ac5a6ff136a89b6d952`
+  and four provisions at ordinals 0 through 3. Idempotent replay passed.
+- Cap. 656 remains blocked and absent from the corpus due to the embedded
+  identity mismatch. Public lookup for Cap. 656A returns `404`, and Hong Kong
+  coverage remains `IN_PROGRESS`, `0%`, and `UNKNOWN`.
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
