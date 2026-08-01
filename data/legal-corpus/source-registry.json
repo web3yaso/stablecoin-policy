@@ -18,8 +18,11 @@
       "languageCode": "en",
       "versionLabel": "OJ-2023-06-09",
       "publishedAt": "2023-06-09T00:00:00.000Z",
-      "redistributionRights": "UNKNOWN",
-      "licenceIdentifier": null,
+      "redistributionRights": "FULL_TEXT",
+      "licenceIdentifier": "Commission Decision 2011/833/EU and EUR-Lex Legal Notice",
+      "storageRights": "ALLOWED",
+      "rightsReviewedAt": "2026-08-01T00:00:00.000Z",
+      "rightsBasis": "EUR-Lex Legal Notice permits commercial and non-commercial reuse of legal documents unless otherwise specified, subject to source acknowledgement, preservation of meaning and applicable third-party rights.",
       "minimumProvisionCount": 149
     },
     {
@@ -45,7 +48,10 @@
       "versionLabel": "2025-08-01",
       "effectiveFrom": "2025-08-01T00:00:00.000Z",
       "redistributionRights": "LINK_ONLY",
-      "licenceIdentifier": null,
+      "licenceIdentifier": "DATA.GOV.HK Terms and Conditions of Use v1.2 (2025-05-26)",
+      "storageRights": "ALLOWED",
+      "rightsReviewedAt": "2026-08-01T00:00:00.000Z",
+      "rightsBasis": "DATA.GOV.HK Terms v1.2 permit commercial downloading, reproduction and distribution with source, Government, provider-ownership and DATA.GOV.HK attribution; HKeL structured text remains reference-only.",
       "minimumProvisionCount": 269
     },
     {
@@ -70,7 +76,10 @@
       "versionLabel": "2025-08-01",
       "effectiveFrom": "2025-08-01T00:00:00.000Z",
       "redistributionRights": "LINK_ONLY",
-      "licenceIdentifier": null,
+      "licenceIdentifier": "DATA.GOV.HK Terms and Conditions of Use v1.2 (2025-05-26)",
+      "storageRights": "ALLOWED",
+      "rightsReviewedAt": "2026-08-01T00:00:00.000Z",
+      "rightsBasis": "DATA.GOV.HK Terms v1.2 permit commercial downloading, reproduction and distribution with source, Government, provider-ownership and DATA.GOV.HK attribution; HKeL structured text remains reference-only.",
       "minimumProvisionCount": 4
     },
     {
@@ -98,6 +107,9 @@
       "effectiveFrom": "2025-03-09T00:00:00.000Z",
       "redistributionRights": "FULL_TEXT",
       "licenceIdentifier": "SSO Terms of Use clause 13 (updated 2026-07-21)",
+      "storageRights": "ALLOWED",
+      "rightsReviewedAt": "2026-08-01T00:00:00.000Z",
+      "rightsBasis": "SSO Terms of Use clause 13 permits reproduction subject to the recorded copyright, permission, accuracy and latest-version conditions.",
       "minimumProvisionCount": 148
     },
     {
@@ -126,6 +138,9 @@
       "effectiveFrom": "2025-12-17T00:00:00.000Z",
       "redistributionRights": "FULL_TEXT",
       "licenceIdentifier": "SSO Terms of Use clause 13 (updated 2026-07-21)",
+      "storageRights": "ALLOWED",
+      "rightsReviewedAt": "2026-08-01T00:00:00.000Z",
+      "rightsBasis": "SSO Terms of Use clause 13 permits reproduction subject to the recorded copyright, permission, accuracy and latest-version conditions.",
       "minimumProvisionCount": 47
     }
   ]

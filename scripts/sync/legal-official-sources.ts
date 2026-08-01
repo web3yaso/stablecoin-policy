@@ -5,7 +5,10 @@ import { readSupabaseConfig, SupabaseHttpClient } from "../../lib/data/supabase-
 import { fetchEurLexSource } from "../../lib/legal-corpus/ingestion/eurlex.js";
 import { fetchHkelSource } from "../../lib/legal-corpus/ingestion/hkel.js";
 import { fetchSsoSource } from "../../lib/legal-corpus/ingestion/sso.js";
-import { SupabaseOfficialSourcePublisher } from "../../lib/legal-corpus/ingestion/supabase-publisher.js";
+import {
+  assertSourceStorageRights,
+  SupabaseOfficialSourcePublisher,
+} from "../../lib/legal-corpus/ingestion/supabase-publisher.js";
 import type { OfficialSourceRegistryEntry } from "../../lib/legal-corpus/ingestion/types.js";
 
 const publish = process.argv.includes("--publish");
@@ -31,6 +34,7 @@ async function main() {
     : null;
 
   for (const source of selected) {
+    if (publisher) assertSourceStorageRights(source);
     const snapshot = source.provider === "eur-lex"
       ? await fetchEurLexSource(source)
       : source.provider === "hkel"

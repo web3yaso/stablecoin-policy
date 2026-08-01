@@ -25,6 +25,9 @@ export type OfficialSourceRegistryEntry = {
   effectiveFrom?: string;
   redistributionRights: "FULL_TEXT" | "EXCERPT" | "LINK_ONLY" | "UNKNOWN";
   licenceIdentifier: string | null;
+  storageRights: "ALLOWED" | "REVIEW_REQUIRED" | "PROHIBITED";
+  rightsReviewedAt?: string;
+  rightsBasis?: string;
   minimumProvisionCount: number;
   archiveEntry?: string;
   expectedEmbeddedDocumentId?: string;

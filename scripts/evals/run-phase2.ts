@@ -4,6 +4,7 @@ import { evaluateClaimPublication } from "../../lib/legal-corpus/policy";
 import { extractEurLexArticles } from "../../lib/legal-corpus/ingestion/eurlex";
 import { assertHkelIdentity, extractHkelSections } from "../../lib/legal-corpus/ingestion/hkel";
 import { assertSsoIdentity, extractSsoSections } from "../../lib/legal-corpus/ingestion/sso";
+import { assertSourceStorageRights } from "../../lib/legal-corpus/ingestion/supabase-publisher";
 import type {
   ClaimLegalStatus,
   ClaimReviewState,
@@ -54,6 +55,14 @@ type SsoIngestionCase = {
   documentNumber?: string;
   validDate?: string;
   provisionKind?: "section" | "regulation" | "paragraph";
+};
+
+type SourceRightsCase = {
+  caseId: string;
+  storageRights: "ALLOWED" | "REVIEW_REQUIRED" | "PROHIBITED";
+  rightsReviewedAt?: string;
+  rightsBasis?: string;
+  expected: "PASS" | "BLOCK";
 };
 
 async function main() {
@@ -150,8 +159,29 @@ async function main() {
   if (ssoFailures.length > 0) {
     throw new Error(`phase2 SSO eval failed: ${ssoFailures.length}/${ssoCases.length} cases`);
   }
+  const rightsCases = await readJsonLines<SourceRightsCase>(
+    "evals/phase2-source-rights-cases.jsonl",
+  );
+  const rightsFailures = rightsCases.filter((evalCase) => {
+    try {
+      assertSourceStorageRights({
+        sourceId: evalCase.caseId,
+        storageRights: evalCase.storageRights,
+        rightsReviewedAt: evalCase.rightsReviewedAt,
+        rightsBasis: evalCase.rightsBasis,
+      });
+      return evalCase.expected !== "PASS";
+    } catch {
+      return evalCase.expected !== "BLOCK";
+    }
+  });
+  if (rightsFailures.length > 0) {
+    throw new Error(
+      `phase2 source-rights eval failed: ${rightsFailures.length}/${rightsCases.length} cases`,
+    );
+  }
   console.log(
-    `phase2 eval passed: ${cases.length + ingestionCases.length + hkelCases.length + ssoCases.length}/${cases.length + ingestionCases.length + hkelCases.length + ssoCases.length} cases`,
+    `phase2 eval passed: ${cases.length + ingestionCases.length + hkelCases.length + ssoCases.length + rightsCases.length}/${cases.length + ingestionCases.length + hkelCases.length + ssoCases.length + rightsCases.length} cases`,
   );
 }
 

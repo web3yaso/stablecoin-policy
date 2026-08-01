@@ -60,6 +60,17 @@ Research is a distinct evidence class from legal authority:
 
 Rights are assessed per version and per artifact. A paper's licence does not automatically cover third-party figures, datasets, trademarks, photographs, or linked supplements. Commercial use must also be checked: content under a non-commercial licence cannot be reused inside a commercial Citely publication unless separate permission or a legal exception applies.
 
+Rights to place source bytes in Citely's private commercial object storage are
+also distinct from rights to display excerpts or republish the artifact. A
+public download link, open-access label, or personal-use download permission is
+not sufficient. Ingestion must fail before upload unless a dated rights review
+records a commercial storage basis.
+
+An `ALLOWED` storage decision does not automatically expand public display or
+evidentiary authority. For example, a licensed structured legal dataset may
+still be `LINK_ONLY` and reference-only when the publisher distinguishes it
+from the authoritative instrument.
+
 The minimum `ResearchPublication` record should include:
 
 - title, authors, canonical URL, persistent identifier, publication date, and version;

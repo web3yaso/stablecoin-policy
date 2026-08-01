@@ -43,6 +43,9 @@ const SOURCE: OfficialSourceRegistryEntry = {
   effectiveFrom: "2025-08-01T00:00:00.000Z",
   redistributionRights: "LINK_ONLY",
   licenceIdentifier: null,
+  storageRights: "ALLOWED",
+  rightsReviewedAt: "2026-08-01T00:00:00.000Z",
+  rightsBasis: "Fixture rights review",
   minimumProvisionCount: 2,
 };
 
