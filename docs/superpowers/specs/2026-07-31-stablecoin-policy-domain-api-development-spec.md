@@ -610,6 +610,8 @@ support, known excerpt rights, and no contradictory or unauthorized evidence.
 The corpus publication trigger independently rechecks the current approved
 fingerprint and applies the verified-evidence rule to every legal status. The
 workflow creates no baseline claims and grants no automated approval authority.
+Migration `0011` is applied to production; permission-denial and missing-claim
+smokes pass, and claim, citation, review, corpus, and impact tables remain empty.
 
 ### Phase 3 — Evidence RAG
 

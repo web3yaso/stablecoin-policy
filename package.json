@@ -27,6 +27,7 @@
     "news:sources:check": "tsx scripts/smoke/professional-sources-dryrun.ts",
     "smoke:phase2": "node --import tsx scripts/smoke/phase2-corpus.ts",
     "smoke:source-verification": "tsx scripts/smoke/source-verification.ts",
+    "smoke:claim-review": "tsx scripts/smoke/claim-review.ts",
     "news:regen": "tsx scripts/sync/news-regen.ts",
     "cost:summary": "tsx scripts/reports/summarize-llm-cost.ts"
   },
