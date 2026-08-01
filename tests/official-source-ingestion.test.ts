@@ -102,6 +102,18 @@ test("ingestion migration remains service-role-only and never creates claims", a
   assert.doesNotMatch(sql, /insert into policy\.citations/i);
 });
 
+test("ingestion status RPC is service-only and exposes no provision text", async () => {
+  const sql = await readFile(
+    path.join(process.cwd(), "supabase/migrations/0005_official_source_ingestion_status.sql"),
+    "utf8",
+  );
+  assert.match(sql, /grant execute on function policy\.get_official_source_ingestion_status\(text\)[\s\S]*to service_role/);
+  assert.match(sql, /revoke all on function policy\.get_official_source_ingestion_status\(text\)[\s\S]*from public, anon, authenticated/);
+  assert.doesNotMatch(sql, /provision_text/i);
+  assert.doesNotMatch(sql, /legal_claims/i);
+  assert.doesNotMatch(sql, /review_records/i);
+});
+
 test("duplicate Storage response headers cannot change ingestion metadata", async () => {
   const sourceSnapshot = await snapshot(HTML);
   let rpcBody: Record<string, unknown> | undefined;

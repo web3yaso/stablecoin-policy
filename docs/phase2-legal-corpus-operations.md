@@ -31,6 +31,9 @@ candidates with `UNKNOWN` excerpt permission. It cannot create claims,
 citations, reviews, corpus releases, or playbook data. Verification and legal
 interpretation remain separate human-review steps. A repeated identical body is
 idempotent; changed bytes produce a new checksum-derived version and object key.
+Because the shared `regulatory` schema is not exposed through PostgREST, the
+service-role-only `policy.get_official_source_ingestion_status` RPC from `0005`
+provides count and lifecycle health checks without returning provision text.
 
 ## Publication sequence
 
