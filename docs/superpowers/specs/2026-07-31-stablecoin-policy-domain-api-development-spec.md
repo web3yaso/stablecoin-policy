@@ -543,9 +543,10 @@ exclude reviewer identity and private notes and admit only reviewed evidence in
 a published, `as_of`-pinned corpus. Versioned contracts and server-side public
 routes now cover `/v1/coverage`, `/v1/sources/{id}`, and `/v1/changes`.
 Publication gates block unreviewed claims, missing provision citations,
-contradictions, and permissions without direct official support. The migration
-has not yet been applied to production, and no launch-market claim is treated
-as reviewed merely because a legacy summary or news item exists.
+contradictions, and permissions without direct official support. Migration
+`0003` is applied to the linked Supabase project and its private source bucket
+and reviewed-only views pass production smoke checks. No launch-market claim is
+treated as reviewed merely because a legacy summary or news item exists.
 
 ### Phase 3 — Evidence RAG
 

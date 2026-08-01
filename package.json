@@ -22,6 +22,7 @@
     "data:rebuild": "tsx scripts/build-placeholder.ts",
     "news:poll": "tsx scripts/sync/news-rss.ts",
     "news:sources:check": "tsx scripts/smoke/professional-sources-dryrun.ts",
+    "smoke:phase2": "node --import tsx scripts/smoke/phase2-corpus.ts",
     "news:regen": "tsx scripts/sync/news-regen.ts",
     "cost:summary": "tsx scripts/reports/summarize-llm-cost.ts"
   },
