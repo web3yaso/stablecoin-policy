@@ -13,18 +13,19 @@ ownership layers:
 
 The executable workflow model lives in `specs/legalCorpusPublication.qnt`,
 with scenario tests and a requirement map alongside it. Run
-`npm run spec:phase2` before changing migrations `0010` through `0014` or any
+`npm run spec:phase2` before changing migrations `0010` through `0015` or any
 successor that changes review states, fingerprints, freshness gates, atomicity,
 or service-role grants. The command typechecks the model and tests, runs eleven
-scenarios, and samples five invariants plus four lifecycle witnesses. It does
+core lifecycle scenarios plus the draft-import scenario, and samples five
+invariants plus four lifecycle witnesses. It does
 not use `quint verify`; a clean simulation reports that no counterexample was
 found in the sampled traces, not that the database is formally proven correct.
 
-The database counterpart is
-`supabase/tests/phase2_publication_workflow_test.sql`. It starts from all local
-migrations, uses sanitized rows inside a transaction, and executes the complete
-source-verification, claim-review, release-review/publication, and
-coverage-review RPC chain. Its 34 pgTAP assertions also cover stale manifests,
+The database counterparts are the files in `supabase/tests`. They start from
+all local migrations, use sanitized rows inside transactions, and execute the
+complete source-verification, draft-import, claim-review,
+release-review/publication, and coverage-review RPC chains. Their 46 pgTAP
+assertions also cover stale manifests,
 automated-reviewer rejection, zero partial audit writes, service-role table
 grants, and reviewed-only public views. Run it with:
 
@@ -471,6 +472,25 @@ existing tracker and report endpoints are unaffected.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
   claim of baseline completion.
+
+## Baseline claim draft import
+
+Migration `0015` adds an atomic, idempotent importer for human-prepared claim
+and citation drafts. It accepts schema version `1.0.0`, writes every claim as
+`DRAFT`, records an immutable private batch fingerprint, and never submits,
+reviews, publishes, or creates coverage. The CLI validates without writing by
+default:
+
+```bash
+npm run legal:claims:draft -- --file <bundle.json>
+npm run legal:claims:draft -- --file <bundle.json> --import
+```
+
+Only the second command writes. Existing source/provision identifiers must be
+used; database constraints and the atomic RPC reject the whole batch on any
+invalid citation, duplicate ID, forbidden review field, or batch-manifest
+conflict. Imported drafts remain private until the independent claim, release,
+and coverage review workflows complete.
 
 ## Required pre-production checks
 
