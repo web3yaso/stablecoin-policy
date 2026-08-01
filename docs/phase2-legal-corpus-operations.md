@@ -2,7 +2,7 @@
 
 ## Current checkpoint
 
-Migration `db/migrations/0003_phase2_legal_corpus_foundation.sql` is prepared
+Migration `supabase/migrations/0003_phase2_legal_corpus_foundation.sql` is prepared
 but is not applied automatically. It creates two ownership layers:
 
 - `regulatory`: cross-domain official authorities, logical documents,
@@ -52,8 +52,9 @@ report endpoints are unaffected.
 ## Required pre-production checks
 
 - Take and verify a Supabase backup before applying the migration.
-- Create a private `policy-sources` Storage bucket (or configure
-  `SUPABASE_SOURCES_BUCKET`) for immutable official-source bodies.
+- Confirm migration `0003` created the private `policy-sources` Storage bucket.
+  If `SUPABASE_SOURCES_BUCKET` overrides that default, create the configured
+  private bucket separately before ingestion.
 - Apply `0003` in a preview or staging environment first and inspect all RLS
   and view behavior using the service role and an anonymous client.
 - Confirm `regulatory` and `policy` are exposed only as required by the

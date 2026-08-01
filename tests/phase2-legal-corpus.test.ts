@@ -87,7 +87,10 @@ test("reviewed legal claim wire payload satisfies the v1 contract", async () => 
 
 test("phase2 migration keeps reviewer data out of public views", async () => {
   const sql = await readFile(
-    path.join(process.cwd(), "db/migrations/0003_phase2_legal_corpus_foundation.sql"),
+    path.join(
+      process.cwd(),
+      "supabase/migrations/0003_phase2_legal_corpus_foundation.sql",
+    ),
     "utf8",
   );
   const publicViews = sql.slice(sql.indexOf("create view policy.public_legal_evidence"));

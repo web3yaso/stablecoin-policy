@@ -1,5 +1,9 @@
 begin;
 
+insert into storage.buckets (id, name, public)
+values ('policy-sources', 'policy-sources', false)
+on conflict (id) do update set public = false;
+
 -- Cross-domain official evidence. AI Policy and Web3 Policy can reuse this
 -- schema without copying official documents or provisions.
 create schema if not exists regulatory;

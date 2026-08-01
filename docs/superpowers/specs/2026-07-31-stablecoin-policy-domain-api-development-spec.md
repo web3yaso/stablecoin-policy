@@ -604,7 +604,7 @@ Exit: the repository has a stablecoin-focused domain model and no production dep
 
 ```text
 contracts/                 versioned JSON Schema and OpenAPI fragments
-db/migrations/             PostgreSQL migrations
+supabase/migrations/       PostgreSQL migrations (canonical Supabase CLI path)
 evals/                     small gold datasets and eval runner
 lib/data/                  database repositories and storage adapters
 lib/regulatory/            source, provision, claim, citation services
