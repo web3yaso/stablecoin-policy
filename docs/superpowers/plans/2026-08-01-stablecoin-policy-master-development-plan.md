@@ -719,9 +719,10 @@ intermediate sellable milestone, not a replacement for them.
 
 1. ~~commit the master plan and policy-feed plan as a documentation
    checkpoint~~ — done 2026-08-01;
-2. ~~implement the simple `/v1/policy-feed` quick win~~ — implemented on
-   `codex/policy-feed` (Quint model, 20 tests, full gate green); production
-   deploy and smoke pending;
+2. ~~implement and deploy the simple `/v1/policy-feed` quick win~~ — merged
+   as PR #36 and deployed 2026-08-02; production smoke passed: schemaVersion
+   `1.0.0`, `generatedAt` equals the active `news-summaries` release
+   (`2026-08-01T06:14:09.810Z`), 77 official items, ETag/304 verified;
 3. ~~write the Phase 2B provisional-assurance spec delta and Quint model~~ —
    `specs/machineAssurance.qnt` and spec §8.4 revision awaiting approval;
 4. implement machine-validation records and provisional publication paths
