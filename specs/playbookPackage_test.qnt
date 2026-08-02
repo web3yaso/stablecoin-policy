@@ -80,6 +80,22 @@ module playbookPackage_test {
         state.supersededBy == 1,
       })
 
+  // direct fresh prohibition evidence yields PROHIBITED
+  run prohibitionYieldsProhibitedTest =
+    initFrom({ ...initialPackage, evidenceProhibits: true })
+      .then(confirmInputs)
+      .then(evaluate)
+      .then(assembleEvidence)
+      .then(seal)
+      .expect(and { state.sealed, state.conclusion == Prohibited })
+
+  // a stale prohibition escalates to counsel review instead of asserting it
+  run staleProhibitionEscalatesTest =
+    initFrom({ ...initialPackage, evidenceProhibits: true, evidenceFresh: false })
+      .then(confirmInputs)
+      .then(evaluate)
+      .expect(state.conclusion == CounselReview)
+
   // non-provisional evidence (future human-reviewed corpus) seals a
   // non-provisional package - the flag is propagated, never invented
   run reviewedEvidenceSealsNonProvisionalTest =

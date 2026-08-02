@@ -24,7 +24,7 @@
 module playbookPackage {
   type Phase = Requested | InputsConfirmed | Evaluated | EvidenceAssembled | Sealed
 
-  type Conclusion = NotEvaluated | Permitted | Conditional | Undetermined | CounselReview
+  type Conclusion = NotEvaluated | Permitted | Conditional | Undetermined | CounselReview | Prohibited
 
   type PackageState = {
     phase: Phase,
@@ -33,6 +33,7 @@ module playbookPackage {
     hasDirectEvidence: bool,
     evidenceFresh: bool,
     evidenceConflicting: bool,
+    evidenceProhibits: bool,
     evidenceProvisional: bool,
     conclusion: Conclusion,
     // sealing artifacts
@@ -50,6 +51,7 @@ module playbookPackage {
     hasDirectEvidence: true,
     evidenceFresh: true,
     evidenceConflicting: false,
+    evidenceProhibits: false,
     evidenceProvisional: true,
     conclusion: NotEvaluated,
     versionsPinned: false,
@@ -63,6 +65,8 @@ module playbookPackage {
     if (not(s.inputProvided)) Undetermined
     else if (s.evidenceConflicting) CounselReview
     else if (not(s.hasDirectEvidence)) Undetermined
+    else if (s.evidenceProhibits and not(s.evidenceFresh)) CounselReview
+    else if (s.evidenceProhibits) Prohibited
     else if (not(s.evidenceFresh)) Conditional
     else Permitted
 
@@ -159,6 +163,14 @@ module playbookPackage {
   // certainty requires everything: inputs, direct fresh uncontradicted evidence
   val permittedRequiresFullSupport: bool =
     state.conclusion == Permitted implies and {
+      state.inputProvided,
+      state.hasDirectEvidence,
+    }
+
+  // a prohibition finding also demands direct evidence and inputs - stale or
+  // missing evidence escalates instead of asserting a confident prohibition
+  val prohibitedRequiresDirectEvidence: bool =
+    state.conclusion == Prohibited implies and {
       state.inputProvided,
       state.hasDirectEvidence,
     }

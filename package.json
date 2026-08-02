@@ -53,7 +53,7 @@
     "assurance:crosscheck": "tsx scripts/assurance/cross-check-claims.ts",
     "assurance:release": "tsx scripts/assurance/provisional-release.ts",
     "smoke:machine-pipeline": "node --import tsx scripts/smoke/machine-pipeline-dryrun.ts",
-    "spec:playbook": "npx --yes @informalsystems/quint@0.32.0 typecheck specs/playbookPackage.qnt && npx --yes @informalsystems/quint@0.32.0 typecheck specs/playbookPackage_test.qnt && npx --yes @informalsystems/quint@0.32.0 test specs/playbookPackage_test.qnt --main playbookPackage_test --match '.*Test$' && npx --yes @informalsystems/quint@0.32.0 run specs/playbookPackage.qnt --main playbookPackage --invariants permittedRequiresFullSupport sealedPackagePinsVersions provisionalNeverHidden conclusionsComeFromEvaluation --witnesses sealedPermittedWitness sealedCounselReviewWitness degradedBeforeAssemblyWitness supersededWitness --max-steps 20"
+    "spec:playbook": "npx --yes @informalsystems/quint@0.32.0 typecheck specs/playbookPackage.qnt && npx --yes @informalsystems/quint@0.32.0 typecheck specs/playbookPackage_test.qnt && npx --yes @informalsystems/quint@0.32.0 test specs/playbookPackage_test.qnt --main playbookPackage_test --match '.*Test$' && npx --yes @informalsystems/quint@0.32.0 run specs/playbookPackage.qnt --main playbookPackage --invariants permittedRequiresFullSupport prohibitedRequiresDirectEvidence sealedPackagePinsVersions provisionalNeverHidden conclusionsComeFromEvaluation --witnesses sealedPermittedWitness sealedCounselReviewWitness degradedBeforeAssemblyWitness supersededWitness --max-steps 20"
   },
   "dependencies": {
     "@number-flow/react": "^0.6.0",
