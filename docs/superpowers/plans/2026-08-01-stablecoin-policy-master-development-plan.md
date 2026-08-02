@@ -732,10 +732,18 @@ intermediate sellable milestone, not a replacement for them.
 6. keep Hong Kong truthfully blocked; defer the Cap. 656 resolution;
 7. **Phase 4 Mini:** only the USDC issuer/deployment dossier fields the EEA
    Pre-listing decision actually consumes — no USDT, no full dossier catalog;
-8. **Phase 5 MVP:** only the Stablecoin Pre-listing & Product Launch playbook
-   — deterministic evaluation over the EEA baseline plus the USDC mini-dossier,
-   producing the first immutable `PlaybookPackage` + `EvidenceBundle` for
-   Citely, visibly provisional, without RAG;
+8. **Phase 5 MVP:** the Stablecoin Pre-listing & Product Launch playbook plus
+   the Stablecoin Business Model Regulatory Boundary playbook (decision
+   2026-08-02: they share the EEA baseline and the common runtime, and the
+   boundary playbook needs no asset dossier, so both are prepared together).
+   The EEA checklist must cover both playbooks' topics: MiCA scope and
+   definitions (Articles 2-3), ART/EMT issuance boundaries (Titles III-IV),
+   and CASP activity perimeter (Title V) in addition to the Pre-listing
+   topics. Deterministic evaluation runs over the EEA baseline (plus the USDC
+   mini-dossier for Pre-listing only), producing immutable `PlaybookPackage`
+   + `EvidenceBundle` payloads for Citely, visibly provisional, without RAG.
+   Release order: Pre-listing ships first; Business Boundary follows within
+   days and must not delay the first sellable package;
 9. fix the canonical API hostname or select and document the permanent base
    URL (required before Citely integration goes live);
 10. **widen after first sale:** Singapore baseline, USDT dossier, Phase 3
