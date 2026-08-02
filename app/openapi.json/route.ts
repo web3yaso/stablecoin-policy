@@ -231,6 +231,78 @@ function createOpenApiDocument(
           },
         },
       },
+      "/v1/claims/{id}": {
+        get: {
+          operationId: "getProvisionalClaim",
+          tags: ["legal-corpus"],
+          summary: "Get a provisionally published machine-assured claim",
+          description:
+            "Returns a claim published through the provisional machine-assurance lane. Every response carries assuranceLevel, reviewStatus, confidence, asOf, exact source version and citations, limitations, and counsel triggers. reviewStatus is HUMAN_REVIEWED only when a named-human review record exists; machine output is never presented as reviewed legal advice.",
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              required: true,
+              schema: { type: "string", pattern: "^[a-z0-9][a-z0-9._:-]{2,160}$" },
+            },
+          ],
+          responses: {
+            "200": {
+              description: "Provisional claim with the mandatory assurance envelope",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ProvisionalClaimResponse" },
+                },
+              },
+            },
+            "404": {
+              description: "Claim is not provisionally published",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+            "503": {
+              description: "Provisional corpus unavailable",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+          },
+        },
+      },
+      "/v1/provisional/coverage": {
+        get: {
+          operationId: "getProvisionalCoverage",
+          tags: ["legal-corpus"],
+          summary: "Inspect provisional machine-assured coverage",
+          description:
+            "Latest provisional release per jurisdiction. Deliberately has no completenessPercent: machine publication can never claim reviewed completeness, which remains owned by the named-human coverage workflow at /v1/coverage.",
+          responses: {
+            "200": {
+              description: "Provisional coverage by market",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/ProvisionalCoverageResponse",
+                  },
+                },
+              },
+            },
+            "503": {
+              description: "Provisional corpus unavailable",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+          },
+        },
+      },
       "/v1/policy-feed": {
         get: {
           operationId: "getPolicyFeed",
@@ -550,6 +622,100 @@ function createOpenApiDocument(
                   reviewedClaimCount: { type: "integer", minimum: 0 },
                   sourceDocumentCount: { type: "integer", minimum: 0 },
                   lastVerifiedAt: { type: ["string", "null"], format: "date-time" },
+                },
+              },
+            },
+          },
+        },
+        ProvisionalClaimResponse: {
+          type: "object",
+          required: [
+            "schemaVersion", "claim", "releaseId", "assuranceLevel",
+            "reviewStatus", "confidence", "asOf", "knowledgeCutoff",
+            "sourceVersion", "citations", "limitations", "counselTriggers",
+          ],
+          additionalProperties: false,
+          properties: {
+            schemaVersion: { type: "string", const: "1.0.0" },
+            claim: {
+              type: "object",
+              required: [
+                "claimId", "jurisdictionCode", "topic", "proposition",
+                "legalStatus", "effectiveFrom", "effectiveTo",
+              ],
+              additionalProperties: false,
+              properties: {
+                claimId: { type: "string" },
+                jurisdictionCode: { type: "string" },
+                topic: { type: "string" },
+                proposition: { type: "string" },
+                legalStatus: {
+                  enum: [
+                    "REQUIREMENT", "PERMISSION", "PROHIBITION",
+                    "EXEMPTION", "GUIDANCE", "UNDETERMINED",
+                  ],
+                },
+                effectiveFrom: { type: "string", format: "date-time" },
+                effectiveTo: { type: ["string", "null"], format: "date-time" },
+              },
+            },
+            releaseId: { type: "string" },
+            assuranceLevel: { type: "string", const: "PROVISIONAL_PUBLISHED" },
+            reviewStatus: { enum: ["PROVISIONAL", "HUMAN_REVIEWED"] },
+            confidence: { type: ["number", "null"], minimum: 0, maximum: 1 },
+            asOf: { type: "string", format: "date-time" },
+            knowledgeCutoff: { type: "string", format: "date-time" },
+            sourceVersion: {
+              type: "object",
+              required: ["id", "checksumSha256", "retrievedAt", "officialUrl"],
+              additionalProperties: false,
+              properties: {
+                id: { type: "string" },
+                checksumSha256: { type: "string" },
+                retrievedAt: { type: "string", format: "date-time" },
+                officialUrl: { type: "string" },
+              },
+            },
+            citations: {
+              type: "array",
+              minItems: 1,
+              items: {
+                type: "object",
+                required: ["provisionId", "locator"],
+                additionalProperties: false,
+                properties: {
+                  provisionId: { type: "string" },
+                  locator: { type: "string" },
+                },
+              },
+            },
+            limitations: { type: "array", items: { type: "string" } },
+            counselTriggers: { type: "array", items: { type: "string" } },
+          },
+        },
+        ProvisionalCoverageResponse: {
+          type: "object",
+          required: ["schemaVersion", "markets"],
+          additionalProperties: false,
+          properties: {
+            schemaVersion: { type: "string", const: "1.0.0" },
+            markets: {
+              type: "array",
+              items: {
+                type: "object",
+                required: [
+                  "jurisdictionCode", "reviewStatus", "provisionalClaimCount",
+                  "latestReleaseId", "asOf", "knowledgeCutoff", "publishedAt",
+                ],
+                additionalProperties: false,
+                properties: {
+                  jurisdictionCode: { type: "string" },
+                  reviewStatus: { type: "string", const: "PROVISIONAL" },
+                  provisionalClaimCount: { type: "integer", minimum: 0 },
+                  latestReleaseId: { type: "string" },
+                  asOf: { type: "string", format: "date-time" },
+                  knowledgeCutoff: { type: "string", format: "date-time" },
+                  publishedAt: { type: "string", format: "date-time" },
                 },
               },
             },

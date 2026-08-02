@@ -3,7 +3,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set search_path = public, extensions, policy, regulatory;
 
-select plan(15);
+select plan(19);
 
 -- ---------------------------------------------------------------------------
 -- sanitized fixture: validated source, two DRAFT claims, one at
@@ -270,6 +270,46 @@ select is(
   (select count(*)::integer from policy.corpus_releases),
   0,
   'reviewed corpus releases remain untouched by provisional publication'
+);
+
+-- ---------------------------------------------------------------------------
+-- migration 0022: presentation-safe provisional views
+-- ---------------------------------------------------------------------------
+
+select columns_are(
+  'policy', 'public_provisional_claims',
+  array[
+    'claim_id', 'jurisdiction_code', 'topic', 'proposition', 'legal_status',
+    'effective_from', 'effective_to', 'release_id', 'as_of',
+    'knowledge_cutoff', 'published_at', 'assurance_level', 'human_reviewed',
+    'confidence', 'limitations', 'counsel_triggers', 'source_version_id',
+    'source_checksum_sha256', 'source_retrieved_at', 'source_official_url',
+    'citations'
+  ],
+  'provisional claim view exposes no reviewer, prompt, model, or private columns'
+);
+
+select is(
+  (select assurance_level || ':' || human_reviewed::text || ':'
+      || (confidence is not null)::text
+   from policy.public_provisional_claims
+   where claim_id = 'claim:prov-test:1'),
+  'PROVISIONAL_PUBLISHED:false:true',
+  'published claim appears provisional with confidence and no human review'
+);
+
+select is(
+  (select count(*)::integer from policy.public_provisional_claims
+   where claim_id = 'claim:prov-test:2'),
+  0,
+  'unpublished claims never appear in the provisional view'
+);
+
+select is(
+  (select jurisdiction_code || ':' || provisional_claim_count::text
+   from policy.public_provisional_coverage),
+  'EEA:1',
+  'provisional coverage reports the latest release without completeness claims'
 );
 
 select * from finish();
