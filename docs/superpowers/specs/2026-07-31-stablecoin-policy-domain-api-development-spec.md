@@ -2,10 +2,19 @@
 
 **Date:** 2026-07-31
 
-**Status:** Phase 2 in progress — EEA source and HK subsidiary source observed; HK core source blocked
+**Revised:** 2026-08-01
 
-**Code baseline:** GitHub `main` after PR #25
+**Status:** Phase 2 infrastructure deployed through migration `0019`; provisional-assurance baseline work pending
+
+**Code baseline:** GitHub `main` after production cutover PR #34
 **Scope:** Convert Stablecoin Policy from a public tracker plus paid-report service into the public Stablecoin Policy subsite and the authenticated domain backend for Citely playbooks.
+**Execution plan:** `docs/superpowers/plans/2026-08-01-stablecoin-policy-master-development-plan.md`
+
+**Bootstrap policy revision (2026-08-01):** Initial operation does not require a
+human review team. Machine-validated evidence may be published and sold only
+through an explicitly provisional assurance lane with exact citations,
+limitations, and counsel triggers. Existing named-human review workflows remain
+a separate higher-assurance path and are not weakened or relabeled.
 
 ## 1. Executive summary
 
@@ -20,7 +29,12 @@ The next development cycle adds four missing product layers:
 
 Citely remains the customer-facing paid surface. It owns authentication, subscription, entitlement, domain routing, and generic rendering. Stablecoin Policy owns all stablecoin-specific data, playbook schemas, private `DecisionRule` execution, `PlaybookAction` generation, evidence, package versions, and monitoring impact.
 
-The first paid vertical slice is the **Stablecoin Pre-listing & Product Launch** playbook. It begins as a concierge, human-reviewed workflow. Broad self-service is not released until the evaluation gates in this spec are satisfied.
+The first paid vertical slice is the **Stablecoin Pre-listing & Product Launch**
+playbook. It begins as an evidence-backed, explicitly provisional workflow that
+may be delivered without human review. A later human-reviewed tier upgrades
+assurance but is not a bootstrap dependency. Broad self-service is released
+only for jurisdiction, asset, and capability combinations that pass the
+applicable evaluation gates in this spec.
 
 ## 2. Goals
 
@@ -41,7 +55,8 @@ The first paid vertical slice is the **Stablecoin Pre-listing & Product Launch**
 - Rebuilding KYC, KYT, sanctions screening, Travel Rule messaging, custody, reserve accounting, or market-data products.
 - Claiming global asset-level coverage at launch.
 - Returning a single asset-wide “compliant/non-compliant” label.
-- Allowing an LLM to make an unreviewed final legal status decision.
+- Allowing an LLM to present an unreviewed output as definitive legal
+  permission, compliance clearance, legal advice, or human-reviewed work.
 - Rewriting existing Git history during the first storage migration.
 - Providing legal advice or replacing qualified counsel.
 
@@ -104,13 +119,18 @@ flowchart LR
 
 Source adapters ingest official material into immutable Supabase Storage objects and normalize `SourceDocument`, `SourceVersion`, and `Provision` records in PostgreSQL before reviewed claims and citations enter the evidence library.
 
-Public pages and public APIs use reviewed public views of the same source-backed data. They never expose raw rules, private decision graphs, customer facts, paid packages, or private reviewer records.
+Public pages and public APIs use assurance-filtered, allowlisted views of the
+same source-backed data. Every non-raw output exposes its assurance and review
+state. They never expose raw rules, private decision graphs, customer facts,
+paid packages, or private reviewer records.
 
 ### 5.1 Evidence RAG boundary
 
 Evidence RAG is an evidence retrieval and explanation layer, not a decision authority:
 
-- it searches only reviewed, versioned provisions and claims that are permitted for the caller;
+- it searches only versioned provisions and claims permitted for the caller's
+  requested assurance tier; provisional and human-reviewed evidence remain
+  distinguishable;
 - it retrieves, ranks, groups, and explains evidence for the shared Playbook Runtime;
 - the deterministic engine alone assigns capability statuses and reason codes;
 - RAG cannot create or approve a `LegalClaim`, change a `DecisionRule`, or override a `DecisionResult`;
@@ -198,6 +218,7 @@ Citely should store only the minimum shared commercial data it owns, such as acc
 | `Citation` | claim-to-provision edge | support type, exact locator, allowed excerpt |
 | `RegulatoryEvent` | change/deadline | before/after versions, observed/effective time, affected claims |
 | `ReviewRecord` | human approval/audit | reviewer role, outcome, time, evidence version |
+| `MachineAssuranceRecord` | reproducible automated validation | validator/model versions, fingerprints, confidence, blockers, outcome |
 | `EvidenceChunk` | provision-aligned retrieval unit | immutable text/reference, provision ID, source version, rights and review state |
 | `EmbeddingRecord` | vector representation of a chunk | embedding model/version, dimensions, checksum, created time |
 | `RetrievalIndexRelease` | reproducible searchable corpus | corpus manifest, filters, FTS/vector configuration, release state |
@@ -251,16 +272,27 @@ source registry
 → provision extraction
 → candidate claim/event generation
 → deterministic validation
-→ human review
-→ reviewed corpus release
+→ machine cross-check and provisional assurance
+→ optional human review and assurance upgrade
+→ assurance-scoped corpus release
 → provision-aligned chunking and hybrid RAG indexing
 → public view and private rule availability
 → change cursor
 ```
 
-LLMs may classify, summarize, translate, and propose claims. They cannot directly approve a material claim, change a final decision status, or substitute a generated summary for official text.
+LLMs may classify, summarize, translate, propose claims, and produce a
+reproducible cross-check record. They cannot label their own work as
+`HUMAN_REVIEWED`, change a deterministic decision status, or substitute a
+generated summary for official text.
 
-Only reviewed evidence enters a production retrieval index. A correction or new `SourceVersion` creates a new corpus and index release; it never silently changes historical retrieval results. Chunking follows legal structure such as article, section, paragraph, schedule, or official page locator before applying bounded text windows. It must not merge provisions from different versions or authorities into one chunk.
+Only evidence admitted by an explicit assurance policy enters a production
+retrieval index. Provisional and human-reviewed corpus/index releases remain
+identifiable and filterable. A correction or new `SourceVersion` creates a new
+corpus and index release; it never silently changes historical retrieval
+results. Chunking follows legal structure such as article, section, paragraph,
+schedule, or official page locator before applying bounded text windows. It
+must not merge provisions from different versions or authorities into one
+chunk.
 
 ### 8.2 Initial coverage priority
 
@@ -281,6 +313,59 @@ The next adapter priorities are EUR-Lex/CELLAR, Hong Kong e-Legislation/LegCo, S
 - Paid evaluation returns `UNDETERMINED`, `UNSUPPORTED_SCOPE`, or `REVIEW_REQUIRED` when required evidence is stale, missing, or conflicting.
 - `PERMITTED` requires direct authoritative support.
 - News and research remain discovery/context and cannot independently support `PERMITTED`.
+
+### 8.4 Assurance levels and bootstrap publication
+
+The machine-assurance ladder (accepted 2026-08-01) is a strictly ordered
+sequence of machine states:
+
+- `SOURCE_OBSERVED`: immutable official material acquired;
+- `SOURCE_VALIDATED`: source identity, version, checksum, locator, rights, and
+  freshness checks passed;
+- `AI_EXTRACTED`: a machine-generated structured claim has exact citations;
+- `AI_CROSS_CHECKED`: an independent model pass plus deterministic validation
+  found no unresolved contradiction or scope blocker;
+- `PROVISIONAL_PUBLISHED`: the terminal machine state — `AI_CROSS_CHECKED`
+  evidence published through an explicit atomic path with every deterministic
+  check passing and zero blockers.
+
+`HUMAN_REVIEWED` is deliberately **not** a machine state. It is a separate
+upgrade path that can be applied on top of any machine state, is the only
+action that may set a human-review flag, and always requires a named human
+reviewer. No machine transition, record, or publication may set, imply, or
+satisfy it; existing `VERIFIED`, review, and published-release states retain
+their named-human meaning. A machine assurance record cannot satisfy a
+human-only invariant, mutate a human review record, or advance reviewed
+coverage.
+
+The executable model is `specs/machineAssurance.qnt` (gated in
+`npm run spec:phase2`). Its invariants are normative: machine states can never
+impersonate human review; `PROVISIONAL_PUBLISHED` requires every deterministic
+check (identity/checksum, storage rights, citation locator, freshness,
+no-contradiction, independent cross-check agreement) plus a written assurance
+record; and evidence with any failed check is unreachable for publication.
+Database implementation must map these states through forward-only schema
+changes that preserve the model's transition guards.
+
+Bootstrap publication is permitted for `AI_CROSS_CHECKED` evidence only
+through the `PROVISIONAL_PUBLISHED` path, and every published response must be
+labeled provisional and include assurance level, review status, confidence,
+blockers, source versions, `as_of`, knowledge cutoff, citations, limitations,
+and counsel triggers. Missing, stale, conflicting, or rights-blocked material
+produces a typed blocking or undetermined state — it can never yield a
+deterministic conclusion.
+
+Phase 2 exit conditions (revised 2026-08-01):
+
+1. EEA and Singapore publish reproducible provisional baselines with explicit
+   completeness and limitations;
+2. every claim traces to a specific provision locator and pinned source
+   version;
+3. machine data is never labeled `HUMAN_REVIEWED`, enforced in the Quint
+   model, the database write path, and the public views;
+4. missing, conflicting, stale, or rights-restricted evidence automatically
+   blocks deterministic conclusions;
+5. Hong Kong truthfully reports its incomplete, blocked state.
 
 ## 9. Decision engine and first playbook
 
@@ -335,8 +420,19 @@ Each material action includes an ID, label, description, priority, owner type, d
 - `GET /v1/deployments/{id}`
 - `GET /v1/sources/{id}`
 - `GET /v1/changes?after_cursor=`
+- `GET /v1/policy-feed`
 
 Public endpoints contain public intelligence and citations. They never return raw rules, customer data, paid packages, or private reviewer information.
+
+`GET /v1/policy-feed` is a thin projection of the active, checksum-verified
+`news-summaries` release. Its v1 response requires top-level `schemaVersion`,
+the immutable release `generatedAt`, and flat `items`. Every item requires
+`date`, `jurisdiction`, one compact `summary`, and HTTPS `sourceUrl`, with an
+optional subsite-owned `playbookId`. Request time must never replace
+`generatedAt`. Citely rejects an unsupported schema or any invalid item as a
+whole and may fall back to its last known-good snapshot while retaining the
+snapshot time. The implementation plan is
+`docs/superpowers/plans/2026-08-01-citely-policy-feed.md`.
 
 ### 10.2 Authenticated Citely endpoints
 
@@ -360,6 +456,8 @@ Every package includes:
 - corpus, rule-set, playbook-template, source-snapshot, and response-schema versions;
 - `as_of`, `knowledge_cutoff`, and `evaluated_at`;
 - coverage, freshness, uncertainty, blocking, and human-review state;
+- assurance level, provisional status, confidence, limitations, and counsel
+  triggers;
 - immutable artifact reference and integrity metadata.
 
 It excludes raw rules, private decision graphs, secrets, unrelated customer facts, hidden prompts, and model chain-of-thought.
@@ -454,19 +552,29 @@ Small reviewed gold fixtures live in Git. Production-scale eval corpora live in 
 | monitoring | known affected-package recall | ≥95% |
 | monitoring severity | known critical change missed | 0 |
 
-### 13.3 Human review
+### 13.3 Assurance and human review
 
-- Every launch baseline claim and critical decision case has a qualified reviewer.
-- Critical golden cases receive dual-review sampling with adjudication of disagreements.
-- Review records identify reviewer role, evidence version, outcome, time, and severity.
-- LLM-as-judge may assist style and triage evaluation but cannot approve legal correctness.
-- The first 20–30 real Pre-listing cases remain human reviewed and feed the self-service readiness decision.
+- Human review is an assurance upgrade, not an initial publication dependency.
+- Machine validation records identify the models, templates, parameters, input
+  and output fingerprints, evidence versions, confidence, blockers, and time.
+- Machine outputs can never approve or impersonate `HUMAN_REVIEWED` evidence.
+- When human review is used, records identify reviewer role, evidence version,
+  outcome, time, and severity.
+- Critical human-reviewed golden cases may receive dual-review sampling with
+  adjudication of disagreements after a reviewer program exists.
+- LLM-as-judge may assist style, triage, and reproducible cross-checking but
+  cannot establish human legal approval.
+- Self-service readiness is measured per supported scope using deterministic,
+  grounding, retrieval, monitoring, privacy, and assurance-label gates; it does
+  not depend on an arbitrary count of human-reviewed cases during bootstrap.
 
 ### 13.4 Eval execution
 
 - **PR CI:** deterministic unit, schema, contract, golden-rule, privacy, and replay tests without live network dependency.
 - **Nightly:** live adapter health, source discovery, retrieval, monitoring replay, and drift metrics.
-- **Release:** full regression plus holdout eval, versioned eval report, and human sign-off.
+- **Release:** full regression plus holdout eval, versioned eval report, and the
+  approvals required by the advertised assurance tier. Provisional releases do
+  not claim human sign-off.
 
 ### 13.5 Blocking failures
 
@@ -477,7 +585,8 @@ A paid release is blocked when:
 - any critical rule case returns the wrong status;
 - missing material facts still produce a definitive permission;
 - a required source is stale or failed without a blocking state;
-- retrieval crosses the pinned corpus/index boundary or cites unreviewed evidence;
+- retrieval crosses the pinned corpus/index boundary or cites evidence not
+  authorized for the advertised assurance tier;
 - a material RAG explanation is unsupported by its cited provisions;
 - disabling RAG changes a deterministic status or reason code;
 - a package cannot be reproduced from pinned versions;
@@ -544,7 +653,11 @@ Exit achieved: the Storage-only workflow completed without changing `main`, prod
 - expose public coverage, source, and change APIs;
 - migrate launch-market baseline claims.
 
-Exit: each launch baseline claim has reviewed provision-level evidence and can be reproduced at an `as_of` date.
+Exit: each launch baseline claim has provision-level evidence, an explicit
+assurance level, and reproducible `as_of` state. EEA and Singapore may launch as
+provisional baselines; reviewed completeness remains separate. Hong Kong must
+retain an explicit incomplete/blocking state until its core authority is
+resolved.
 
 Implementation checkpoint (2026-07-31): migration `0003` defines a shared
 `regulatory` schema for authorities, documents, immutable versions, provisions,
@@ -719,15 +832,26 @@ The separately configured canonical hostname still returns `404` for `/v1/*`
 and requires domain mapping review; this does not affect the successful
 database migration or justify rollback.
 
+Bootstrap-assurance decision checkpoint (2026-08-01): the existing human-only
+publication workflow remains deployed and unchanged, but it is no longer the
+planned sole bootstrap path. The next Phase 2 work adds a separate, formally
+modeled provisional lane for `SOURCE_VALIDATED`, `AI_EXTRACTED`,
+`AI_CROSS_CHECKED`, and `PROVISIONAL_PUBLISHED` evidence. The machine-lane
+state machine is modeled in `specs/machineAssurance.qnt` (section 8.4); its
+invariants must be approved before any provisional database transition is
+implemented. Reviewer Registry remains deferred under GitHub Issue #35.
+
 ### Phase 3 — Evidence RAG
 
 - implement `EvidenceChunk`, `EmbeddingRecord`, `RetrievalIndexRelease`, and `RagRetrievalRun` storage;
 - enable PostgreSQL full-text search and Supabase PostgreSQL `pgvector` through provider-neutral retrieval interfaces;
-- create provision-aligned chunking that preserves source, locator, version, jurisdiction, topic, effective interval, rights, and review metadata;
+- create provision-aligned chunking that preserves source, locator, version, jurisdiction, topic, effective interval, rights, assurance, and review metadata;
 - build immutable, versioned corpus manifests and retrieval-index releases;
 - implement hybrid lexical/vector retrieval, structured filters, reranking, deduplication, and citation assembly;
 - add `POST /v1/evidence/search` and internal retrieval contracts for the Playbook Runtime;
-- allow explanation synthesis only from returned reviewed evidence and require sentence-level citation references for material statements;
+- allow explanation synthesis only from returned evidence authorized for the
+  requested assurance tier and require sentence-level citation references for
+  material statements;
 - implement low-confidence, stale-index, conflicting-evidence, unauthorized-evidence, and retrieval-outage behavior;
 - add retrieval, version-isolation, faithfulness, prompt-injection, rights, and safe-degradation evals.
 
@@ -740,7 +864,9 @@ Exit: gold provision Recall@10 is at least 95%, MRR@10 is at least 0.90, citatio
 - expose catalog and dossier APIs;
 - add dossier evals and freshness gates.
 
-Exit: initial assets and markets have sufficient evidence to run a human-reviewed Pre-listing case.
+Exit: initial assets and markets have sufficient versioned evidence and
+assurance metadata to run a provisional Pre-listing case without inventing
+missing facts; human review remains an optional higher-assurance path.
 
 ### Phase 5 — concierge PlaybookPackage API
 
@@ -749,7 +875,9 @@ Exit: initial assets and markets have sufficient evidence to run a human-reviewe
 - compose deterministic results and Evidence RAG output in the shared Playbook Runtime without allowing retrieval output to override results;
 - implement authenticated idempotent package endpoints;
 - provide Citely consumer fixtures;
-- run all results through human review.
+- label every result with its evidence assurance and review state; bootstrap
+  provisional packages do not require human approval, while a
+  `HUMAN_REVIEWED` package requires the existing human-review gates.
 
 Exit: Citely can submit confirmed facts and render a complete package without stablecoin-specific main-site logic.
 
@@ -757,8 +885,10 @@ Exit: Citely can submit confirmed facts and render a complete package without st
 
 - implement change cursors and impact graph;
 - reopen affected packages and expose review states;
-- add notifications/webhooks after review;
-- evaluate 20–30 reviewed cases;
+- add notifications/webhooks with the assurance and review state of each
+  impact;
+- evaluate enough deterministic, retrieval, monitoring, and production-error
+  cases to satisfy the per-scope quality gates;
 - enable self-service only for combinations passing all quality gates.
 
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
@@ -831,6 +961,8 @@ Before implementation, read the relevant Next.js 16 documentation in `node_modul
 1. Every material paid claim has an exact official source version and provision locator.
 2. News and research cannot independently establish a legal permission.
 3. Historical versions and corrections remain retrievable.
+4. Machine-assisted claims expose their assurance and can never be labeled as
+   human reviewed without the existing named-human workflow.
 
 ### Decisions
 
@@ -840,9 +972,12 @@ Before implementation, read the relevant Next.js 16 documentation in `node_modul
 
 ### Evidence RAG
 
-1. Production retrieval indexes contain only reviewed, permitted provisions and preserve exact source/version/locator metadata.
+1. Production retrieval indexes contain only evidence permitted for the
+   advertised assurance tier and preserve exact source/version/locator and
+   assurance metadata.
 2. Every material explanatory statement links to evidence returned from the pinned corpus and retrieval-index releases.
-3. Retrieval filters and version isolation pass at 100%; stale, unreviewed, unauthorized, or superseded evidence cannot leak into a pinned run.
+3. Retrieval filters and version isolation pass at 100%; stale, unauthorized,
+   superseded, or out-of-tier evidence cannot leak into a pinned run.
 4. Low-confidence, missing, conflicting, or unavailable retrieval produces a typed insufficient/degraded state, never an invented conclusion.
 5. Disabling or losing RAG can reduce explanation quality but cannot change deterministic statuses or reason codes.
 
@@ -851,12 +986,19 @@ Before implementation, read the relevant Next.js 16 documentation in `node_modul
 1. Citely renders a complete package without implementing stablecoin rules or evidence assembly.
 2. Raw rules, private graphs, and unnecessary customer facts never leave the domain backend.
 3. Package creation is authenticated, idempotent, versioned, and replayable.
+4. Citely can consume the versioned policy feed without understanding the
+   nested `news-summaries` schema, and a schema mismatch rejects the whole feed.
+5. Policy-feed `generatedAt` comes from the immutable dataset release and makes
+   stale data visible.
 
 ### Quality
 
 1. All thresholds in Section 13 pass.
-2. At least 20 reviewed cases are recorded before broad self-service.
-3. Every release publishes a versioned eval report and required human approvals.
+2. Broad self-service is enabled only for jurisdiction, asset, and capability
+   combinations that pass every applicable quality gate.
+3. Every release publishes a versioned eval report and the approvals required
+   by its advertised assurance tier; provisional releases never imply human
+   approval.
 
 ## 20. Risks and mitigations
 
@@ -867,8 +1009,8 @@ Before implementation, read the relevant Next.js 16 documentation in `node_modul
 | object storage becomes an unqueryable dumping ground | PostgreSQL metadata, canonical IDs, manifests, retention rules |
 | database becomes a report blob store | bodies/artifacts remain in Storage; DB stores metadata and relations |
 | rules drift from evidence | claim IDs, pinned versions, change-impact invalidation, eval gates |
-| LLM introduces unsupported legal conclusions | deterministic rules, citations, human review, zero contradiction gate |
-| RAG retrieves stale or wrong-version evidence | reviewed-only indexes, structured filters, pinned releases, version-isolation evals |
+| LLM introduces unsupported legal conclusions | deterministic rules, citations, assurance labels, counsel triggers, optional human review, zero contradiction gate |
+| RAG retrieves stale or wrong-version evidence | assurance-scoped indexes, structured filters, pinned releases, version-isolation evals |
 | retrieved text injects instructions into the model | treat documents as data, strict context boundaries, allowlisted output schema, adversarial evals |
 | embedding/model upgrade changes historical output | immutable index releases, model/version metadata, retrieval audit, historical replay |
 | customer data leaks to public APIs | separate auth surfaces, schema allowlists, privacy evals |
@@ -889,7 +1031,9 @@ Before implementation, read the relevant Next.js 16 documentation in `node_modul
 - Corpus and retrieval-index releases are immutable and pinned in each paid package.
 - Existing official-source adapters are extended rather than rewritten.
 - Existing paid-report routes remain compatible during migration.
-- The first paid workflow is the human-reviewed Pre-listing & Product Launch playbook.
+- The first paid workflow is the explicitly provisional, evidence-backed
+  Pre-listing & Product Launch playbook; human review is a later assurance
+  upgrade rather than a bootstrap prerequisite.
 - Eval gates are part of the product contract, not an optional post-launch exercise.
 - Git history rewrite is outside the initial migration.
 - Cross-domain official evidence lives in the shared `regulatory` database
@@ -901,5 +1045,8 @@ Before implementation, read the relevant Next.js 16 documentation in `node_modul
 - Confirm production Supabase project, regions, backup, and data-residency requirements.
 - Confirm launch coverage: EEA, Hong Kong, Singapore, USDC, and USDT.
 - Finalize Citely-to-domain service authentication and entitlement assertion format.
-- Appoint reviewers and define the approval SLA for baseline claims and critical cases.
+- Finalize machine-assurance database state names and publication gates through
+  an approved Quint spec delta.
+- Define reviewer roles and approval SLAs only when the `HUMAN_REVIEWED` tier or
+  Issue #35 activation criteria are introduced.
 - Select the first notification channel after monitoring is operational.

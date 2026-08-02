@@ -35,6 +35,11 @@ import {
   type ClaimDraftReviewReadinessInput,
 } from "../../lib/legal-corpus/claim-draft-import";
 import {
+  compareCrossCheck,
+  runDeterministicChecks,
+  type ExtractedClaimDraft,
+} from "../../lib/legal-corpus/machine-pipeline";
+import {
   reviewQueueNextAction,
   type ReviewQueueActionInput,
   type ReviewQueueNextAction,
@@ -383,11 +388,25 @@ async function main() {
       `phase2 regulatory-change eval failed: ${regulatoryChangeFailures.length}/${regulatoryChangeCases.length} cases`,
     );
   }
+  const machinePipelineCases = await readJsonLines<MachinePipelineCase>(
+    "evals/phase2b-machine-pipeline-cases.jsonl",
+  );
+  const machinePipelineFailures = machinePipelineCases.filter((evalCase) => {
+    const actual = machinePipelineOutcome(evalCase);
+    if (actual === evalCase.expected) return false;
+    console.error(`${evalCase.caseId}: expected=${evalCase.expected} actual=${actual}`);
+    return true;
+  });
+  if (machinePipelineFailures.length > 0) {
+    throw new Error(
+      `phase2b machine-pipeline eval failed: ${machinePipelineFailures.length}/${machinePipelineCases.length} cases`,
+    );
+  }
   const total = cases.length + ingestionCases.length + hkelCases.length
     + ssoCases.length + rightsCases.length + verificationCases.length
     + claimReviewCases.length + releaseCases.length + coverageCases.length
     + baselineCases.length + draftPreflightCases.length + reviewQueueCases.length
-    + regulatoryChangeCases.length;
+    + regulatoryChangeCases.length + machinePipelineCases.length;
   console.log(
     `phase2 eval passed: ${total}/${total} cases`,
   );
@@ -463,6 +482,93 @@ function verificationEnvelope(
       })),
     },
   };
+}
+
+type MachinePipelineCase = {
+  caseId: string;
+  citationProvision: "known" | "fabricated";
+  citationLocator: "exact" | "wrong";
+  excerptPermission: "ALLOWED" | "LINK_ONLY" | "UNKNOWN";
+  storageRights: "ALLOWED" | "REVIEW_REQUIRED" | "PROHIBITED";
+  sourceAgeDays: number;
+  jurisdiction: string;
+  effectiveFrom: "in-range" | "out-of-range";
+  crossCheck: "agrees" | "contradicts" | "missing" | "diverges";
+  expected: "PASS" | "BLOCK";
+};
+
+function machinePipelineOutcome(evalCase: MachinePipelineCase): "PASS" | "BLOCK" {
+  const now = Date.parse("2026-08-02T00:00:00.000Z");
+  const retrievedAt = new Date(
+    now - evalCase.sourceAgeDays * 24 * 60 * 60 * 1000,
+  ).toISOString();
+  const provisionId = `provision:${evalCase.caseId}:1`;
+  const draft: ExtractedClaimDraft = {
+    claimId: `claim:${evalCase.caseId}`,
+    jurisdictionCode: evalCase.jurisdiction,
+    topic: "eval-topic",
+    proposition: "Sanitized eval proposition.",
+    legalStatus: "REQUIREMENT",
+    effectiveFrom: evalCase.effectiveFrom === "in-range"
+      ? "2024-06-30T00:00:00.000Z"
+      : "2020-01-01T00:00:00.000Z",
+    citations: [{
+      provisionId: evalCase.citationProvision === "known"
+        ? provisionId
+        : "provision:attacker:1",
+      locator: evalCase.citationLocator === "exact" ? "Article 1" : "Article 999",
+    }],
+    confidence: 0.9,
+  };
+  const deterministic = runDeterministicChecks({
+    manifest: {
+      schemaVersion: "1.0.0",
+      versionId: `version:${evalCase.caseId}`,
+      documentId: `document:${evalCase.caseId}`,
+      versionLabel: "fixture",
+      rawObjectId: `object:${evalCase.caseId}`,
+      checksumSha256: "b".repeat(64),
+      officialUrl: "https://example.gov/legal",
+      publishedAt: null,
+      effectiveFrom: "2024-06-01T00:00:00.000Z",
+      effectiveTo: null,
+      observedAt: retrievedAt,
+      retrievedAt,
+      storageRights: evalCase.storageRights,
+      rightsReviewedAt: retrievedAt,
+      rightsBasis: "Reviewed fixture basis",
+      redistributionRights: "FULL_TEXT",
+      licenceIdentifier: "Fixture licence",
+      provisions: [{
+        provisionId,
+        locator: "Article 1",
+        languageCode: "en",
+        textChecksumSha256: "c".repeat(64),
+        ordinal: 0,
+        effectiveExcerptPermission: evalCase.excerptPermission,
+      }],
+    },
+    draft,
+    expectedJurisdiction: "EEA",
+    now: "2026-08-02T00:00:00.000Z",
+    freshnessMaxDays: 45,
+  });
+  const independent: ExtractedClaimDraft | undefined =
+    evalCase.crossCheck === "missing" ? undefined : {
+      ...draft,
+      legalStatus: evalCase.crossCheck === "contradicts"
+        ? "PROHIBITION"
+        : draft.legalStatus,
+      citations: evalCase.crossCheck === "diverges"
+        ? [{ provisionId, locator: "Article 2" }]
+        : draft.citations,
+      confidence: 0.8,
+    };
+  const comparison = compareCrossCheck(draft, independent);
+  const blocked = deterministic.blockers.length > 0
+    || comparison.blockers.length > 0
+    || !comparison.agreed;
+  return blocked ? "BLOCK" : "PASS";
 }
 
 main().catch((error: unknown) => {

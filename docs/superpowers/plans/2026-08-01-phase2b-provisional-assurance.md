@@ -10,7 +10,13 @@
 
 ## Global Constraints
 
-- Order of delivery is fixed: policy-feed → Quint spec delta → migration `0020`+records → pipeline → provisional API → EEA baseline → SG baseline → HK blocked reporting → exit-condition docs.
+- **Vertical-slice reprioritization (2026-08-01):** delivery order is
+  policy-feed → Quint spec delta → migration `0020`+records → pipeline →
+  provisional API → **EEA baseline (Task 6) → HK blocked reporting (Task 8) →
+  Phase 4 Mini (USDC×EEA dossier) → Phase 5 MVP (Pre-listing package)**.
+  Task 7 (Singapore) and full RAG run **after** the first sellable
+  `PlaybookPackage`; Task 9's exit-condition docs update still closes Phase 2B
+  when Singapore lands.
 - Spec first: the formal spec (`docs/superpowers/specs/2026-07-31-...-development-spec.md`) and Quint model must be updated and green **before** any migration or API code for the same behavior (master plan §1, §7).
 - Machine states must never impersonate `HUMAN_REVIEWED`: no machine transition may set any `*HumanReviewRecorded` flag, satisfy a named-human RPC gate, or appear in reviewed-only views. Existing `VERIFIED`/reviewed semantics stay intact.
 - Missing, contradictory, stale, or rights-blocked evidence must fail closed: it blocks deterministic conclusions and provisional publication automatically.
@@ -200,7 +206,12 @@ export interface MachineAssuranceRecord {
 - [ ] **Step 3:** Write migration `0020`:
   - enum `policy.machine_assurance_level`; table `policy.machine_assurance_record` with the columns above (checks as `jsonb` validated by a `CHECK` against the six keys and three values; `blockers`/`limitations` as `text[]`), RLS enabled, no direct service-role `INSERT/UPDATE/DELETE` (same denial pattern as migrations `0011`–`0019`);
   - immutability trigger rejecting `UPDATE`/`DELETE`;
-  - column `policy.claim.machine_assurance_level` (nullable) — machine level lives beside, never inside, `ClaimLegalStatus` or review fields;
+  - machine level stored beside, never inside, `ClaimLegalStatus` or review
+    fields. **Implemented (2026-08-02) as a separate RPC-only
+    `policy.machine_assurance_states` table instead of a column on
+    `policy.legal_claims`** — stronger lane separation, no ALTER on a
+    production human-lane table, and uniform handling for source versions
+    (the shared `regulatory` schema stays free of stablecoin machine state);
   - fixed-search-path `SECURITY DEFINER` RPC `policy.record_machine_assurance(...)` that atomically inserts the record and advances the subject's machine level **only** when every check is `PASS` and `blockers = '{}'`; on any failure it inserts the record with the failure captured and does not advance;
   - RPC rejects any attempt to write reviewer identities, `verified_at`, or claim review fields (machine lane cannot touch the human lane).
 - [ ] **Step 4:** Implement `lib/legal-corpus/machine-assurance.ts` + types; make Step 1 tests pass: `node --import tsx --test tests/machine-assurance.test.ts` → PASS.
@@ -321,7 +332,7 @@ git commit -m "feat: expose provisional assurance data through public v1 APIs (m
 - Consumes: MiCA source version (checksum `c694819a…`, 149 provisions, `ALLOWED` rights) via `assurance:extract` / `assurance:crosscheck` / `assurance:release` CLIs.
 - Produces: a published EEA provisional release fingerprint recorded in the runbook; provisional coverage visible on `/v1/coverage`.
 
-- [ ] **Step 1:** Define the EEA checklist: enumerate the MiCA topics a stablecoin baseline must answer (issuance authorization, reserve requirements, redemption rights, EMT/ART classification, whitepaper, marketing, significant-token thresholds, transitional provisions), each item keyed to expected provision ranges. Commit the checklist before extraction so completeness is measured against a fixed target.
+- [ ] **Step 1:** Define the EEA checklist: enumerate the MiCA topics a stablecoin baseline must answer (issuance authorization, reserve requirements, redemption rights, EMT/ART classification, whitepaper, marketing, significant-token thresholds, transitional provisions), each item keyed to expected provision ranges. **Also include the Business Model Regulatory Boundary topics (decision 2026-08-02): MiCA scope and definitions (Articles 2-3), ART/EMT issuance boundaries (Titles III-IV), and the CASP activity perimeter (Title V)** — one extraction run feeds both MVP playbooks. Commit the checklist before extraction so completeness is measured against a fixed target.
 - [ ] **Step 2:** Dry-run the pipeline: `npm run assurance:extract -- --source <mica-version-id>` (no `--execute`); review the printed bundle, prompt/template versions, and cost estimate. This is an operator step — get the user's go-ahead before the live `--execute` run (live LLM, real cost, per repo policy do not run casually).
 - [ ] **Step 3:** After user approval, execute extract → crosscheck → release with `--execute`. Every claim must trace to a provision locator and the pinned source version; blocked claims stay unpublished with recorded blockers.
 - [ ] **Step 4:** Verify reproducibility: rerun crosscheck deterministic checks against the same fingerprints (`--replay`) and confirm identical checksums; record release fingerprint, claim counts, checklist coverage %, and open blockers in `docs/phase2-legal-corpus-operations.md`.
@@ -331,7 +342,9 @@ git commit -m "feat: expose provisional assurance data through public v1 APIs (m
 
 ### Task 7: Singapore PSA + Regulations provisional baseline
 
-Same structure as Task 6, run after EEA completes.
+**Deferred until after the Phase 5 MVP ships the first EEA/USDC
+`PlaybookPackage` (vertical-slice decision 2026-08-01).** Same structure as
+Task 6.
 
 - [ ] **Step 1:** Checklist `data/legal-corpus/baselines/sg-psa-checklist.json` covering PSA 2019 (pinned 2025-03-09, 148 sections, checksum `6644db51…`) and PS Regulations 2019 (2025 Rev Ed, 47 regulations incl. 18A–18J, checksum `1757d0a6…`): licensing classes, DPT/e-money boundary, stablecoin (SCS) framework items, reserve/redemption obligations, exemptions.
 - [ ] **Step 2:** Respect SSO terms captured in the rights overlay: SSO consolidations are officially unofficial/non-authoritative — every SG claim must carry a limitation string noting the consolidation status and a counsel trigger for authoritative-text confirmation. Verify Task 4's deterministic checks emit these from the rights metadata; if not, fix Task 4.

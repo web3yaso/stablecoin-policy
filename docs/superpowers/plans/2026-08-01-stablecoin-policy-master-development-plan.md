@@ -709,25 +709,53 @@ public site or shared data needed by AI Policy.
 
 ## 11. Immediate execution order
 
-Unless the user reprioritizes, the next work should proceed as follows:
+**Vertical-slice decision (2026-08-01):** the fastest path to the first
+sellable playbook takes priority over full phase completion. Do not wait for
+all of Phase 3 and Phase 4; build one minimal vertical slice — EEA provisional
+baseline → USDC×EEA mini-dossier → Pre-listing MVP → first `PlaybookPackage` +
+`EvidenceBundle` delivered to Citely — then widen. The Phase 2B exit
+conditions in section 7 still define full phase completion; the slice is an
+intermediate sellable milestone, not a replacement for them.
 
-1. commit the master plan and policy-feed plan as a documentation checkpoint;
-2. implement and deploy the simple `/v1/policy-feed` quick win;
-3. fix the canonical API hostname or select and document the permanent base URL;
-4. write the Phase 2B provisional-assurance spec delta and Quint model;
-5. implement machine-validation records and provisional publication paths;
-6. build and publish reproducible EEA and Singapore provisional baselines;
-7. resolve or explicitly defer the Hong Kong Cap. 656 source blocker;
-8. implement Phase 3 Evidence RAG;
-9. build Phase 4 USDC and USDT dossiers;
-10. implement the Phase 5 Pre-listing Playbook Runtime and Citely package API;
+1. ~~commit the master plan and policy-feed plan as a documentation
+   checkpoint~~ — done 2026-08-01;
+2. ~~implement and deploy the simple `/v1/policy-feed` quick win~~ — merged
+   as PR #36 and deployed 2026-08-02; production smoke passed: schemaVersion
+   `1.0.0`, `generatedAt` equals the active `news-summaries` release
+   (`2026-08-01T06:14:09.810Z`), 77 official items, ETag/304 verified;
+3. ~~write the Phase 2B provisional-assurance spec delta and Quint model~~ —
+   `specs/machineAssurance.qnt` and spec §8.4 revision awaiting approval;
+4. implement machine-validation records and provisional publication paths
+   (migrations `0020`–`0022`);
+5. build and publish the reproducible **EEA MiCA** provisional baseline (first
+   and only baseline before the MVP);
+6. keep Hong Kong truthfully blocked; defer the Cap. 656 resolution;
+7. **Phase 4 Mini:** only the USDC issuer/deployment dossier fields the EEA
+   Pre-listing decision actually consumes — no USDT, no full dossier catalog;
+8. **Phase 5 MVP:** the Stablecoin Pre-listing & Product Launch playbook plus
+   the Stablecoin Business Model Regulatory Boundary playbook (decision
+   2026-08-02: they share the EEA baseline and the common runtime, and the
+   boundary playbook needs no asset dossier, so both are prepared together).
+   The EEA checklist must cover both playbooks' topics: MiCA scope and
+   definitions (Articles 2-3), ART/EMT issuance boundaries (Titles III-IV),
+   and CASP activity perimeter (Title V) in addition to the Pre-listing
+   topics. Deterministic evaluation runs over the EEA baseline (plus the USDC
+   mini-dossier for Pre-listing only), producing immutable `PlaybookPackage`
+   + `EvidenceBundle` payloads for Citely, visibly provisional, without RAG.
+   Release decision (2026-08-02): both playbooks launch together in the same
+   release — the MVP ships when Pre-listing AND Business Boundary packages
+   both pass their acceptance fixtures;
+9. fix the canonical API hostname or select and document the permanent base
+   URL (required before Citely integration goes live);
+10. **widen after first sale:** Singapore baseline, USDT dossier, Phase 3
+    Evidence RAG, remaining playbooks;
 11. connect packages to Phase 6 monitoring and delivery;
 12. extract unrelated legacy modules in Phase 7.
 
 Parallel work is allowed only when contracts and database ownership do not
-overlap. Policy-feed implementation can run independently from the Phase 2B
-state-machine design. RAG, dossiers, and playbook runtime should not begin their
-production implementation before their upstream contracts are stable.
+overlap. RAG must not begin production implementation before the MVP package
+contract is stable; the MVP explicitly does not depend on RAG — evidence
+assembly uses direct claim/citation lookups from the provisional corpus.
 
 ## 12. Decisions required before their dependent phase
 

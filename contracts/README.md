@@ -12,3 +12,12 @@ Phase 2C adds the `policy-feed.schema.json` contract for `GET /v1/policy-feed`,
 a thin projection of the active `news-summaries` release consumed by the Citely
 main site; see [`policy-feed.md`](./policy-feed.md). Consumers validate the
 whole response and reject unsupported or invalid payloads atomically.
+
+Phase 2B adds provisional machine-assurance contracts:
+`provisional-claim.schema.json` and `provisional-coverage-response.schema.json`
+for `GET /v1/claims/{id}` and `GET /v1/provisional/coverage`. Every provisional
+payload carries the mandatory assurance envelope (assuranceLevel, reviewStatus,
+confidence, asOf, source version + citations, limitations, counselTriggers);
+`reviewStatus` upgrades to `HUMAN_REVIEWED` only through a named-human review
+record, and provisional coverage deliberately has no completeness percentage.
+The reviewed-only coverage/source/change contracts remain unchanged.

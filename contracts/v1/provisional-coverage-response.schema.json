@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/provisional-coverage-response.schema.json",
+  "title": "ProvisionalCoverageResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "markets"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "markets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["jurisdictionCode", "reviewStatus", "provisionalClaimCount", "latestReleaseId", "asOf", "knowledgeCutoff", "publishedAt"],
+        "properties": {
+          "jurisdictionCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9-]{1,15}$" },
+          "reviewStatus": { "const": "PROVISIONAL" },
+          "provisionalClaimCount": { "type": "integer", "minimum": 0 },
+          "latestReleaseId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,160}$" },
+          "asOf": { "type": "string", "format": "date-time" },
+          "knowledgeCutoff": { "type": "string", "format": "date-time" },
+          "publishedAt": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  }
+}
