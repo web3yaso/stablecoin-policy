@@ -231,6 +231,54 @@ function createOpenApiDocument(
           },
         },
       },
+      "/v1/policy-feed": {
+        get: {
+          operationId: "getPolicyFeed",
+          tags: ["datasets"],
+          summary: "Get the flat policy-update feed",
+          description:
+            "Thin versioned projection of the active news-summaries release for the Citely main site. Items come only from official first-party sources; generatedAt is the immutable release's generation time, never the request time. Consumers must validate the whole response against the v1 schema and reject it atomically on mismatch.",
+          responses: {
+            "200": {
+              description: "Flat policy feed",
+              headers: {
+                ETag: { schema: { type: "string" } },
+                "X-Policy-Feed-Schema-Version": {
+                  schema: { type: "string", const: "1.0.0" },
+                },
+                "X-Data-Generated-At": {
+                  schema: { type: "string", format: "date-time" },
+                },
+                "X-Data-Cache-State": {
+                  schema: {
+                    type: "string",
+                    enum: ["origin", "fresh-cache", "stale-cache"],
+                  },
+                },
+                "X-Data-Stale": {
+                  description: "Present and true when serving an allowed stale snapshot",
+                  schema: { type: "string", enum: ["true"] },
+                },
+              },
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/PolicyFeedResponse" },
+                },
+              },
+            },
+            "304": { description: "Not Modified" },
+            "503": {
+              description:
+                "Source dataset missing, unsupported, expired, or the projection failed; no partial feed is ever returned",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+          },
+        },
+      },
       "/api/public/datasets/{datasetId}": {
         get: {
           operationId: "getPublicPolicyDataset",
@@ -502,6 +550,41 @@ function createOpenApiDocument(
                   reviewedClaimCount: { type: "integer", minimum: 0 },
                   sourceDocumentCount: { type: "integer", minimum: 0 },
                   lastVerifiedAt: { type: ["string", "null"], format: "date-time" },
+                },
+              },
+            },
+          },
+        },
+        PolicyFeedResponse: {
+          type: "object",
+          required: ["schemaVersion", "generatedAt", "items"],
+          additionalProperties: false,
+          properties: {
+            schemaVersion: { type: "string", const: "1.0.0" },
+            generatedAt: { type: "string", format: "date-time" },
+            items: {
+              type: "array",
+              items: {
+                type: "object",
+                required: ["date", "jurisdiction", "summary", "sourceUrl"],
+                additionalProperties: false,
+                properties: {
+                  date: { type: "string", pattern: "^\\d{4}-\\d{2}-\\d{2}$" },
+                  jurisdiction: { type: "string", minLength: 1 },
+                  summary: { type: "string", minLength: 1 },
+                  sourceUrl: { type: "string", pattern: "^https://" },
+                  playbookId: {
+                    enum: [
+                      "business-model-regulatory-boundary",
+                      "first-jurisdiction-selection",
+                      "entity-licence-landing-path",
+                      "stablecoin-pre-listing",
+                      "issue-vs-white-label-vs-integrate",
+                      "funding-due-diligence-room",
+                      "multi-jurisdiction-expansion",
+                      "listing-lifecycle-monitor",
+                    ],
+                  },
                 },
               },
             },
