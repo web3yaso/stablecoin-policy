@@ -3,7 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { LocaleProvider } from "@/contexts/LocaleContext";
 import "./globals.css";
 
-const SITE_URL = "https://stablecoin.web3law.tech";
+const SITE_URL = "https://policy.citely.info";
 const PARENT_SITE = "https://web3law.tech";
 const PARENT_BRAND = "Web3Law Intelligence";
 

@@ -153,7 +153,7 @@ export default function Image() {
           </div>
 
           <div style={{ fontSize: 24, color: COLORS.ink, fontWeight: 600 }}>
-            stablecoin.web3law.tech
+            policy.citely.info
           </div>
         </div>
       </div>

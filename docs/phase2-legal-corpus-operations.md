@@ -490,9 +490,11 @@ existing tracker and report endpoints are unaffected.
   `2a4fb94db634d1a36f7d26451fc05a03e3ed46458afcaeb5a2d0877642bc1624`.
   Its normalized tables, four source statuses, and regulatory-change metadata
   are byte-identical to the pre-cutover snapshot. The Vercel production
-  `/v1/coverage` and `/v1/changes` endpoints pass; the metadata canonical host
-  `stablecoin.web3law.tech` currently returns `404` for those routes and needs
-  separate domain mapping/DNS review rather than a database rollback.
+  `/v1/coverage` and `/v1/changes` endpoints pass. (Resolved 2026-08-02: the
+  former metadata canonical host `stablecoin.web3law.tech` was never attached
+  to the Vercel project and returned `404` everywhere; the canonical site and
+  API host is now `policy.citely.info`, and the web3law.tech subdomain is
+  retired without any DNS change.)
 - Pre- and post-migration database lint reported no schema errors.
 - `npm run smoke:phase2` verified the private `policy-sources` bucket, EEA/HK/SG
   launch coverage rows, empty reviewed-only source/change views, and no false
