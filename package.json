@@ -48,7 +48,11 @@
     "smoke:corpus-release": "tsx scripts/smoke/corpus-release.ts",
     "smoke:coverage-review": "tsx scripts/smoke/coverage-review.ts",
     "news:regen": "tsx scripts/sync/news-regen.ts",
-    "cost:summary": "tsx scripts/reports/summarize-llm-cost.ts"
+    "cost:summary": "tsx scripts/reports/summarize-llm-cost.ts",
+    "assurance:extract": "tsx scripts/assurance/extract-claims.ts",
+    "assurance:crosscheck": "tsx scripts/assurance/cross-check-claims.ts",
+    "assurance:release": "tsx scripts/assurance/provisional-release.ts",
+    "smoke:machine-pipeline": "node --import tsx scripts/smoke/machine-pipeline-dryrun.ts"
   },
   "dependencies": {
     "@number-flow/react": "^0.6.0",

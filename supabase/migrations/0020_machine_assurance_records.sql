@@ -44,6 +44,7 @@ create table policy.machine_assurance_records (
   subject_id text not null
     check (subject_id ~ '^[a-z0-9][a-z0-9._:-]{2,160}$'),
   assurance_level text not null
+    constraint machine_assurance_records_level_check
     check (assurance_level in ('SOURCE_VALIDATED', 'AI_EXTRACTED', 'AI_CROSS_CHECKED')),
   source_version_fingerprint text not null
     check (source_version_fingerprint ~ '^[0-9a-f]{64}$'),
@@ -65,7 +66,7 @@ create table policy.machine_assurance_records (
   outcome text not null check (outcome in ('ADVANCED', 'BLOCKED')),
   created_at timestamptz not null default now(),
   -- deterministic levels carry no model provenance; AI levels require it all
-  check (
+  constraint machine_assurance_records_provenance_check check (
     (
       assurance_level = 'SOURCE_VALIDATED'
       and model is null
@@ -83,7 +84,7 @@ create table policy.machine_assurance_records (
     )
   ),
   -- subject type, level, and claim fingerprint agree
-  check (
+  constraint machine_assurance_records_subject_check check (
     (
       subject_type = 'SOURCE_VERSION'
       and assurance_level = 'SOURCE_VALIDATED'
@@ -111,6 +112,7 @@ create table policy.machine_assurance_states (
   subject_id text not null
     check (subject_id ~ '^[a-z0-9][a-z0-9._:-]{2,160}$'),
   assurance_level text not null
+    constraint machine_assurance_states_level_check
     check (assurance_level in ('SOURCE_VALIDATED', 'AI_EXTRACTED', 'AI_CROSS_CHECKED')),
   advanced_by_record_id text not null
     references policy.machine_assurance_records(record_id),

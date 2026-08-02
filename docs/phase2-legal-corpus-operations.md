@@ -25,12 +25,16 @@ The database counterparts are the files in `supabase/tests`. They start from
 all local migrations, use sanitized rows inside transactions, and execute the
 complete source-verification, draft-import, claim-review,
 release-review/publication, coverage-review, and readiness-query RPC chains.
-Their 137 pgTAP assertions also cover stale manifests,
+Their 152 pgTAP assertions also cover stale manifests,
 automated-reviewer rejection, zero partial audit writes, service-role table
 grants, reviewed-only public views, and the migration `0020` machine-assurance
 lane (direct-write denial, stale-fingerprint fail-closed, ladder ordering,
 BLOCKED records never advancing, and machine records never touching
-`lifecycle_state`, `verified_at`, or claim review fields). Run it with:
+`lifecycle_state`, `verified_at`, or claim review fields), plus the migration
+`0021` provisional-release path (membership gates, jurisdiction and
+AI_CROSS_CHECKED enforcement, deterministic manifests, PROVISIONAL_PUBLISHED
+audit records, and proof that provisional publication leaves claim
+review_state and reviewed corpus releases untouched). Run it with:
 
 ```bash
 npm run db:phase2:start
