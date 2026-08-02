@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/playbook-package-response.schema.json",
+  "title": "PlaybookPackageResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["package", "evidenceBundle"],
+  "properties": {
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion", "packageId", "playbookId", "playbookName",
+        "profileFingerprint", "conclusions", "assurance", "versions",
+        "evaluatedAt", "integritySha256"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "1.0.0" },
+        "packageId": { "type": "string", "pattern": "^package:[a-z0-9-]+:[0-9a-f]{16}$" },
+        "playbookId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "playbookName": { "type": "string", "minLength": 1 },
+        "profileFingerprint": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "conclusions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "capabilityId", "title", "conclusion", "reasonCodes",
+              "actions", "evidenceClaimIds", "dossierFacts", "limitations"
+            ],
+            "properties": {
+              "capabilityId": { "type": "string", "minLength": 1 },
+              "title": { "type": "string", "minLength": 1 },
+              "conclusion": {
+                "enum": ["PERMITTED", "CONDITIONAL", "UNDETERMINED", "COUNSEL_REVIEW", "PROHIBITED"]
+              },
+              "reasonCodes": { "type": "array", "items": { "type": "string" } },
+              "actions": { "type": "array", "items": { "type": "string" } },
+              "evidenceClaimIds": { "type": "array", "items": { "type": "string" } },
+              "dossierFacts": { "type": "array", "items": { "type": "string" } },
+              "limitations": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "assurance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reviewStatus", "humanReviewed", "limitations", "counselTriggers"],
+          "properties": {
+            "reviewStatus": { "enum": ["PROVISIONAL", "HUMAN_REVIEWED"] },
+            "humanReviewed": { "type": "boolean" },
+            "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+            "counselTriggers": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+          }
+        },
+        "versions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "corpusReleaseId", "corpusAsOf", "knowledgeCutoff", "dossierId",
+            "dossierCuratedAt", "rulesVersion", "templateVersion", "schemaVersion"
+          ],
+          "properties": {
+            "corpusReleaseId": { "type": ["string", "null"] },
+            "corpusAsOf": { "type": ["string", "null"], "format": "date-time" },
+            "knowledgeCutoff": { "type": ["string", "null"], "format": "date-time" },
+            "dossierId": { "type": ["string", "null"] },
+            "dossierCuratedAt": { "type": ["string", "null"], "format": "date-time" },
+            "rulesVersion": { "type": "string", "minLength": 1 },
+            "templateVersion": { "type": "string", "minLength": 1 },
+            "schemaVersion": { "const": "1.0.0" }
+          }
+        },
+        "evaluatedAt": { "type": "string", "format": "date-time" },
+        "integritySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "evidenceBundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "packageId", "claims", "dossierFacts"],
+      "properties": {
+        "schemaVersion": { "const": "1.0.0" },
+        "packageId": { "type": "string" },
+        "claims": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claimId", "topic", "legalStatus", "proposition", "citations",
+              "releaseId", "asOf", "knowledgeCutoff", "confidence", "limitations"
+            ],
+            "properties": {
+              "claimId": { "type": "string" },
+              "topic": { "type": "string" },
+              "legalStatus": { "type": "string" },
+              "proposition": { "type": "string" },
+              "citations": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["provisionId", "locator"],
+                  "properties": {
+                    "provisionId": { "type": "string" },
+                    "locator": { "type": "string" }
+                  }
+                }
+              },
+              "releaseId": { "type": "string" },
+              "asOf": { "type": "string", "format": "date-time" },
+              "knowledgeCutoff": { "type": "string", "format": "date-time" },
+              "confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+              "limitations": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "dossierFacts": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

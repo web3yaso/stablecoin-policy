@@ -6,6 +6,7 @@ import {
   preListingPlaybook,
 } from "../lib/playbooks/definitions";
 import {
+  assembleEvidenceBundle,
   evaluatePlaybook,
   sealPlaybookPackage,
   type EvaluationEvidence,
@@ -230,4 +231,38 @@ test("the MVP registry exposes exactly the two launch playbooks", () => {
     MVP_PLAYBOOKS.map((playbook) => playbook.playbookId).sort(),
     ["business-model-regulatory-boundary", "stablecoin-pre-listing"],
   );
+});
+
+// --- contract: the POST /v1/playbook-packages response validates ---
+
+test("runtime output validates against the committed package schema", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const path = await import("node:path");
+  const Ajv2020 = (await import("ajv/dist/2020")).default;
+  const addFormats = (await import("ajv-formats")).default;
+
+  const schema = JSON.parse(
+    await readFile(
+      path.join(process.cwd(), "contracts", "v1", "playbook-package-response.schema.json"),
+      "utf8",
+    ),
+  );
+  const ajv = new Ajv2020({ strict: true });
+  addFormats(ajv);
+  const validate = ajv.compile(schema);
+
+  const ev = await evidence();
+  const profile = preListingProfile(["base"]);
+  const conclusions = evaluatePlaybook(preListingPlaybook, profile, ev);
+  const pkg = sealPlaybookPackage(preListingPlaybook, profile, conclusions, ev);
+  const bundle = assembleEvidenceBundle(pkg, ev);
+
+  const response = { package: pkg, evidenceBundle: bundle };
+  assert.equal(validate(response), true, JSON.stringify(validate.errors));
+
+  const smuggled = {
+    package: { ...pkg, internalRules: "secret" },
+    evidenceBundle: bundle,
+  };
+  assert.equal(validate(smuggled), false);
 });

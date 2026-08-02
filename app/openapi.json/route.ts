@@ -119,6 +119,11 @@ function createOpenApiDocument(
         name: "reports",
         description: "Stablecoin policy reports and paid Markdown content.",
       },
+      {
+        name: "playbooks",
+        description:
+          "Deterministic capability-level playbook evaluations over provisional machine-assured evidence. Visibly provisional; never legal advice.",
+      },
     ],
     paths: {
       "/v1/coverage": {
@@ -227,6 +232,89 @@ function createOpenApiDocument(
                   schema: { $ref: "#/components/schemas/ErrorResponse" },
                 },
               },
+            },
+          },
+        },
+      },
+      "/v1/playbooks": {
+        get: {
+          operationId: "listPlaybooks",
+          tags: ["playbooks"],
+          summary: "List available playbooks",
+          description:
+            "Presentation-safe catalog of the launch playbooks: names, versions, descriptions, and capability titles. Raw decision rules are never exposed. Evaluations run on provisional machine-assured evidence and are research, not legal advice.",
+          responses: {
+            "200": {
+              description: "Playbook catalog",
+              content: { "application/json": { schema: { type: "object" } } },
+            },
+          },
+        },
+      },
+      "/v1/playbook-packages": {
+        post: {
+          operationId: "createPlaybookPackage",
+          tags: ["playbooks"],
+          summary: "Create a PlaybookPackage and EvidenceBundle",
+          description:
+            "Evaluates a business profile against a playbook's deterministic rules over the provisional corpus and asset dossier. Returns a reproducible, version-pinned package with capability-level conclusions (PERMITTED | CONDITIONAL | UNDETERMINED | COUNSEL_REVIEW | PROHIBITED), reason codes, actions, exact citations, and the provisional assurance envelope. Requires service bearer authentication (Citely backend); the response is visibly provisional and is never legal advice.",
+          security: [{ playbookServiceKey: [] }],
+          requestBody: {
+            required: true,
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  required: ["playbookId", "profile"],
+                  additionalProperties: false,
+                  properties: {
+                    playbookId: {
+                      enum: [
+                        "stablecoin-pre-listing",
+                        "business-model-regulatory-boundary",
+                      ],
+                    },
+                    profile: {
+                      type: "object",
+                      required: [
+                        "operatorJurisdiction", "targetJurisdiction", "activities",
+                      ],
+                      additionalProperties: false,
+                      properties: {
+                        operatorJurisdiction: { type: "string" },
+                        targetJurisdiction: { const: "EEA" },
+                        activities: {
+                          type: "array",
+                          minItems: 1,
+                          items: { type: "string" },
+                        },
+                        asset: {
+                          type: ["object", "null"],
+                          required: ["symbol", "networks"],
+                          additionalProperties: false,
+                          properties: {
+                            symbol: { type: "string" },
+                            networks: { type: "array", items: { type: "string" } },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          responses: {
+            "201": {
+              description:
+                "Package and evidence bundle (contracts/v1/playbook-package-response.schema.json)",
+              content: { "application/json": { schema: { type: "object" } } },
+            },
+            "400": { description: "Invalid profile or JSON" },
+            "401": { description: "Missing or invalid service key" },
+            "404": { description: "Unknown playbook" },
+            "503": {
+              description: "Runtime unconfigured or evidence unavailable",
             },
           },
         },
