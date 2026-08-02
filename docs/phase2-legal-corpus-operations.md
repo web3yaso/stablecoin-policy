@@ -615,6 +615,26 @@ pending change-audit collections; after migration it exports private regulatory
 event and event-review metadata through a service-only RPC, alongside impact
 and impact-review tables. Keep this file outside Git with mode `0600`.
 
+## Migration 0020-0022 production cutover (2026-08-02)
+
+- Migrations `0020` (machine-assurance records/states), `0021` (provisional
+  releases + extraction feed), and `0022` (provisional public views) were
+  applied to the linked production project on 2026-08-02 after an exact
+  dry-run listing and a verified private `1.5.0` metadata backup
+  (SHA-256 `f1666d335402db37f8490ab75380289644ac9a243ee17d0acbf37e53f031905b`).
+- Migration history matches `0001`-`0022` local/remote. Linked lint reports
+  only one informational warning (`v_version` "never read" in
+  `record_machine_assurance` - the SELECT ... FOR UPDATE exists for row
+  locking and existence checking).
+- Read-only production smoke: `public_provisional_claims` and
+  `public_provisional_coverage` are empty, `get_machine_assurance_chain`
+  returns an empty array for unknown subjects, direct service-role inserts
+  into `machine_assurance_states` are denied (42501), and the reviewed-only
+  `/v1/coverage` response is unchanged (EEA/HK/SG remain `IN_PROGRESS`, 0%).
+- The post-cutover normalized snapshot is identical to the pre-cutover
+  snapshot for every business table; the new machine-lane tables are empty.
+  No claims, releases, or machine records exist in production yet.
+
 ## Required pre-production checks
 
 - Take and verify a Supabase backup before applying the migration.
