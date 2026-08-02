@@ -637,6 +637,35 @@ and impact-review tables. Keep this file outside Git with mode `0600`.
   snapshot for every business table; the new machine-lane tables are empty.
   No claims, releases, or machine records exist in production yet.
 
+## EEA provisional baseline run (2026-08-02)
+
+- The committed checklist `data/legal-corpus/baselines/eea-mica-checklist.json`
+  (12 topics for the Pre-listing and Business Model Boundary playbooks) was
+  fixed before extraction.
+- Extraction: `gpt-5.6-terra` over all 149 MiCA provisions produced 37 claim
+  drafts; every citation locator matched an official provision exactly and
+  the deterministic checks blocked none. Claim IDs are assigned
+  deterministically by the CLI; model-provided identifiers are ignored.
+- Import: preflight manifest
+  `dce5a243213756546315ae80c9ad658d622b5e9e77a42667b29fb39e2d469e42`,
+  37 claims imported as private DRAFT rows.
+- Cross-check: `gpt-5.6-luna` independently re-derived the claims (the
+  `resolveModel` fix guarantees the requested model is actually called);
+  37/37 advanced to AI_CROSS_CHECKED with zero blockers. The independent
+  derivations are cached beside the bundle for replay.
+- Release: `provisional:eea:mica:2026-08-02`, 37 claims, manifest
+  `fd5c1a2636de676221a44f3be37f75d6a2f4c84bc89ef9cfc17be53a3d5644f7`,
+  published 2026-08-02T20:00:06Z. Production `/v1/provisional/coverage`
+  reports EEA with 37 provisional claims; `/v1/claims/{id}` serves the full
+  assurance envelope. Reviewed coverage remains `IN_PROGRESS`, `0%`.
+- Known coverage gap, reported honestly: the checklist topic
+  `significant-token-thresholds` produced no claim in this run (11/12 topics
+  covered); a targeted follow-up extraction is planned. Provisional coverage
+  never claims completeness by design.
+- Measured model cost for the full run including two failed intermediate
+  attempts: about USD 1.44 (extraction 2x $0.40, cross-check $0.42 + $0.17
+  failed, $0.05 final cached run).
+
 ## Required pre-production checks
 
 - Take and verify a Supabase backup before applying the migration.

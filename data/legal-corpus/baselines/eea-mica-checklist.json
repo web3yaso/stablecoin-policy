@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0.0",
+  "checklistId": "eea-mica-baseline",
+  "version": "1.0.0",
+  "jurisdictionCode": "EEA",
+  "sourceDocumentId": "document:eu:celex:32023r1114",
+  "sourceName": "Regulation (EU) 2023/1114 (MiCA), English Official Journal version",
+  "committedBeforeExtraction": true,
+  "playbooks": [
+    "stablecoin-pre-listing",
+    "business-model-regulatory-boundary"
+  ],
+  "notes": [
+    "Committed before any extraction run so completeness is measured against a fixed target, not against whatever the model happened to produce.",
+    "expectedLocatorRange values are deliberately broad title/chapter ranges; exact article alignment is produced and checked by the extraction pipeline itself.",
+    "Coverage against this checklist is provisional machine assurance only; it never claims reviewed completeness."
+  ],
+  "topics": [
+    {
+      "topicId": "scope-and-definitions",
+      "playbooks": ["business-model-regulatory-boundary"],
+      "title": "Regulation scope, exclusions, and definitions",
+      "expectedLocatorRange": "Articles 1-3",
+      "question": "Which activities, instruments, and persons fall inside or outside MiCA, and how are ART, EMT, and crypto-asset services defined?"
+    },
+    {
+      "topicId": "other-crypto-asset-offers",
+      "playbooks": ["business-model-regulatory-boundary"],
+      "title": "Offers of crypto-assets other than ART/EMT",
+      "expectedLocatorRange": "Title II (Articles 4-15)",
+      "question": "When does offering or seeking admission to trading of a non-ART/non-EMT crypto-asset trigger obligations, and which exemptions apply?"
+    },
+    {
+      "topicId": "art-issuance-boundary",
+      "playbooks": ["business-model-regulatory-boundary", "stablecoin-pre-listing"],
+      "title": "Asset-referenced token issuance authorization boundary",
+      "expectedLocatorRange": "Title III (Articles 16-47)",
+      "question": "Who may offer or seek admission to trading of an ART in the Union, and which authorization or credit-institution conditions apply?"
+    },
+    {
+      "topicId": "emt-issuance-boundary",
+      "playbooks": ["business-model-regulatory-boundary", "stablecoin-pre-listing"],
+      "title": "E-money token issuance boundary",
+      "expectedLocatorRange": "Title IV (Articles 48-58)",
+      "question": "Who may issue an EMT, and how do credit-institution / e-money-institution requirements gate issuance?"
+    },
+    {
+      "topicId": "casp-activity-perimeter",
+      "playbooks": ["business-model-regulatory-boundary"],
+      "title": "Crypto-asset service provider activity perimeter",
+      "expectedLocatorRange": "Title V (Articles 59-83)",
+      "question": "Which services (custody, exchange, execution, transfer, advice, portfolio management) require CASP authorization, and under what conditions?"
+    },
+    {
+      "topicId": "issuance-authorization-process",
+      "playbooks": ["stablecoin-pre-listing"],
+      "title": "Authorization application and approval process",
+      "expectedLocatorRange": "Title III (Articles 16-25)",
+      "question": "What must an ART issuer's authorization application contain and how is it assessed?"
+    },
+    {
+      "topicId": "whitepaper-obligations",
+      "playbooks": ["stablecoin-pre-listing"],
+      "title": "Crypto-asset white paper obligations",
+      "expectedLocatorRange": "Titles III-IV (white paper articles)",
+      "question": "What white paper content, notification, and publication duties apply to ART and EMT issuers?"
+    },
+    {
+      "topicId": "reserve-requirements",
+      "playbooks": ["stablecoin-pre-listing"],
+      "title": "Reserve of assets and safeguarding",
+      "expectedLocatorRange": "Title III (reserve articles, Articles 36-40 region)",
+      "question": "What reserve composition, custody, and investment rules apply to ART issuers, and what safeguarding applies to EMT funds?"
+    },
+    {
+      "topicId": "redemption-rights",
+      "playbooks": ["stablecoin-pre-listing"],
+      "title": "Holder redemption rights",
+      "expectedLocatorRange": "Titles III-IV (redemption articles)",
+      "question": "What redemption rights do ART/EMT holders have, at what value, and under which conditions?"
+    },
+    {
+      "topicId": "marketing-communications",
+      "playbooks": ["stablecoin-pre-listing"],
+      "title": "Marketing communication rules",
+      "expectedLocatorRange": "Titles II-IV (marketing articles)",
+      "question": "What fairness, clarity, and consistency duties govern marketing communications for token offers?"
+    },
+    {
+      "topicId": "significant-token-thresholds",
+      "playbooks": ["stablecoin-pre-listing"],
+      "title": "Significant ART/EMT classification and added obligations",
+      "expectedLocatorRange": "Titles III-IV (significance articles, Articles 43-45 and 56-58 regions)",
+      "question": "When is a token classified significant and which enhanced obligations and EBA supervision follow?"
+    },
+    {
+      "topicId": "transitional-provisions",
+      "playbooks": ["stablecoin-pre-listing", "business-model-regulatory-boundary"],
+      "title": "Transitional measures and application dates",
+      "expectedLocatorRange": "Title IX (final and transitional provisions)",
+      "question": "Which transitional windows and grandfathering rules affect issuers and service providers already operating?"
+    }
+  ]
+}
