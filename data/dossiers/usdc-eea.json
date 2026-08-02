@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0.0",
+  "dossierId": "usdc-eea",
+  "jurisdictionCode": "EEA",
+  "curatedAt": "2026-08-02T20:30:00.000Z",
+  "asset": {
+    "symbol": "USDC",
+    "name": "USD Coin",
+    "classification": "E_MONEY_TOKEN",
+    "classificationBasis": "ISSUER_CLAIM"
+  },
+  "issuer": {
+    "legalName": "Circle Internet Financial Europe SAS",
+    "countryOfIncorporation": "FR",
+    "groupParent": "Circle Internet Group"
+  },
+  "authorizations": [
+    {
+      "authority": "ACPR (Autorité de Contrôle Prudentiel et de Résolution)",
+      "jurisdictionCode": "FR",
+      "authorizationType": "ELECTRONIC_MONEY_INSTITUTION",
+      "reference": null,
+      "grantedAt": "2024-07-01",
+      "scopeNote": "EMI authorization enabling MiCA-conformant EMT issuance of USDC and EURC in the EU; passporting across the EEA under the e-money framework. Authorization scope does not automatically extend to every activity, chain, or customer type.",
+      "basis": "ISSUER_CLAIM",
+      "evidence": [
+        {
+          "label": "Circle press release: first global stablecoin issuer to comply with MiCA",
+          "sourceUrl": "https://www.circle.com/pressroom/circle-is-first-global-stablecoin-issuer-to-comply-with-mica-eus-landmark-crypto-law",
+          "retrievedAt": "2026-08-02T20:20:00.000Z",
+          "rights": "LINK_ONLY"
+        },
+        {
+          "label": "ACPR Regafi register (authoritative EMI register; verify entry directly)",
+          "sourceUrl": "https://www.regafi.fr/",
+          "retrievedAt": "2026-08-02T20:20:00.000Z",
+          "rights": "LINK_ONLY"
+        }
+      ]
+    },
+    {
+      "authority": "AMF (Autorité des Marchés Financiers)",
+      "jurisdictionCode": "FR",
+      "authorizationType": "MICA_CASP_LICENCE",
+      "reference": "N2026-005",
+      "grantedAt": "2026-04-23",
+      "scopeNote": "MiCA licence covering custody and transfer services for the crypto-assets Circle France issues (USDC, EURC). Listed on the AMF whitelist.",
+      "basis": "OFFICIAL_REGISTER",
+      "evidence": [
+        {
+          "label": "Circle blog: Circle France receives approval to offer crypto-asset services under MiCA",
+          "sourceUrl": "https://www.circle.com/blog/circle-france-receives-approval-to-offer-crypto-asset-services-under-mica",
+          "retrievedAt": "2026-08-02T20:20:00.000Z",
+          "rights": "LINK_ONLY"
+        }
+      ]
+    }
+  ],
+  "deployments": [
+    {
+      "network": "ethereum",
+      "addressFormat": "evm",
+      "contractAddress": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "native": true,
+      "basis": "ISSUER_CLAIM",
+      "evidence": {
+        "label": "Circle developer docs: USDC contract addresses",
+        "sourceUrl": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+        "retrievedAt": "2026-08-02T20:25:00.000Z",
+        "rights": "LINK_ONLY"
+      }
+    },
+    {
+      "network": "base",
+      "addressFormat": "evm",
+      "contractAddress": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "native": true,
+      "basis": "ISSUER_CLAIM",
+      "evidence": {
+        "label": "Circle developer docs: USDC contract addresses",
+        "sourceUrl": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+        "retrievedAt": "2026-08-02T20:25:00.000Z",
+        "rights": "LINK_ONLY"
+      }
+    },
+    {
+      "network": "arbitrum",
+      "addressFormat": "evm",
+      "contractAddress": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+      "native": true,
+      "basis": "ISSUER_CLAIM",
+      "evidence": {
+        "label": "Circle developer docs: USDC contract addresses",
+        "sourceUrl": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+        "retrievedAt": "2026-08-02T20:25:00.000Z",
+        "rights": "LINK_ONLY"
+      }
+    },
+    {
+      "network": "solana",
+      "addressFormat": "base58",
+      "contractAddress": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "native": true,
+      "basis": "ISSUER_CLAIM",
+      "evidence": {
+        "label": "Circle developer docs: USDC contract addresses",
+        "sourceUrl": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+        "retrievedAt": "2026-08-02T20:25:00.000Z",
+        "rights": "LINK_ONLY"
+      }
+    },
+    {
+      "network": "avalanche",
+      "addressFormat": "evm",
+      "contractAddress": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+      "native": true,
+      "basis": "ISSUER_CLAIM",
+      "evidence": {
+        "label": "Circle developer docs: USDC contract addresses",
+        "sourceUrl": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+        "retrievedAt": "2026-08-02T20:25:00.000Z",
+        "rights": "LINK_ONLY"
+      }
+    },
+    {
+      "network": "polygon-pos",
+      "addressFormat": "evm",
+      "contractAddress": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
+      "native": true,
+      "basis": "ISSUER_CLAIM",
+      "evidence": {
+        "label": "Circle developer docs: USDC contract addresses",
+        "sourceUrl": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+        "retrievedAt": "2026-08-02T20:25:00.000Z",
+        "rights": "LINK_ONLY"
+      }
+    }
+  ],
+  "redemption": {
+    "summary": "As a MiCA e-money token, USDC holders have a claim redeemable at par value at any time against the issuer; MiCA prohibits granting interest on EMTs. Operational redemption terms are set by Circle's EEA terms and MiCA USDC white paper.",
+    "basis": "REGULATORY_OBLIGATION",
+    "evidence": [
+      {
+        "label": "Circle MiCA USDC white paper",
+        "sourceUrl": "https://www.circle.com/legal/mica-usdc-whitepaper",
+        "retrievedAt": "2026-08-02T20:20:00.000Z",
+        "rights": "LINK_ONLY"
+      },
+      {
+        "label": "Circle EEA terms of use",
+        "sourceUrl": "https://www.circle.com/legal/eea-terms",
+        "retrievedAt": "2026-08-02T20:20:00.000Z",
+        "rights": "LINK_ONLY"
+      }
+    ]
+  },
+  "reserves": {
+    "summary": "Circle publishes reserve attestations; MiCA imposes safeguarding requirements on EMT issuers. Attestation cadence and contents are issuer-published and not independently verified here.",
+    "basis": "ISSUER_CLAIM",
+    "evidence": [
+      {
+        "label": "Circle transparency page",
+        "sourceUrl": "https://www.circle.com/transparency",
+        "retrievedAt": "2026-08-02T20:20:00.000Z",
+        "rights": "LINK_ONLY"
+      }
+    ]
+  },
+  "assurance": {
+    "reviewStatus": "PROVISIONAL",
+    "humanReviewed": false,
+    "limitations": [
+      "Operator-curated provisional dossier; facts are sourced from linked pages at the recorded retrieval times and are not independently verified.",
+      "Issuer claims (basis ISSUER_CLAIM) are not regulatory authority; the ACPR Regafi register entry should be confirmed directly before reliance.",
+      "Authorization scope is not assumed to extend to every token, chain, deployment, activity, or customer type.",
+      "Nothing in this dossier is legal advice."
+    ],
+    "counselTriggers": [
+      "CONFIRM_REGAFI_REGISTER_ENTRY",
+      "CONFIRM_AMF_WHITELIST_ENTRY",
+      "PROVISIONAL_EVIDENCE_REVIEW_RECOMMENDED"
+    ]
+  }
+}
