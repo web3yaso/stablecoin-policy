@@ -99,8 +99,10 @@ test("change migration closes direct writes and cannot mutate domain decisions",
     path.join(process.cwd(), "scripts/migrate/export-phase1-metadata.ts"),
     "utf8",
   );
-  assert.match(backup, /formatVersion: "1\.4\.0"/);
+  assert.match(backup, /formatVersion: "1\.5\.0"/);
   assert.match(backup, /get_regulatory_change_backup_metadata/);
+  assert.match(backup, /machine_assurance_records/);
+  assert.match(backup, /machine_assurance_states/);
 });
 
 function candidateEnvelope(): RegulatoryChangeCandidateEnvelope {

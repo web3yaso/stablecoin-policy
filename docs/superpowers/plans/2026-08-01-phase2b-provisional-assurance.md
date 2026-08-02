@@ -206,7 +206,12 @@ export interface MachineAssuranceRecord {
 - [ ] **Step 3:** Write migration `0020`:
   - enum `policy.machine_assurance_level`; table `policy.machine_assurance_record` with the columns above (checks as `jsonb` validated by a `CHECK` against the six keys and three values; `blockers`/`limitations` as `text[]`), RLS enabled, no direct service-role `INSERT/UPDATE/DELETE` (same denial pattern as migrations `0011`–`0019`);
   - immutability trigger rejecting `UPDATE`/`DELETE`;
-  - column `policy.claim.machine_assurance_level` (nullable) — machine level lives beside, never inside, `ClaimLegalStatus` or review fields;
+  - machine level stored beside, never inside, `ClaimLegalStatus` or review
+    fields. **Implemented (2026-08-02) as a separate RPC-only
+    `policy.machine_assurance_states` table instead of a column on
+    `policy.legal_claims`** — stronger lane separation, no ALTER on a
+    production human-lane table, and uniform handling for source versions
+    (the shared `regulatory` schema stays free of stablecoin machine state);
   - fixed-search-path `SECURITY DEFINER` RPC `policy.record_machine_assurance(...)` that atomically inserts the record and advances the subject's machine level **only** when every check is `PASS` and `blockers = '{}'`; on any failure it inserts the record with the failure captured and does not advance;
   - RPC rejects any attempt to write reviewer identities, `verified_at`, or claim review fields (machine lane cannot touch the human lane).
 - [ ] **Step 4:** Implement `lib/legal-corpus/machine-assurance.ts` + types; make Step 1 tests pass: `node --import tsx --test tests/machine-assurance.test.ts` → PASS.
