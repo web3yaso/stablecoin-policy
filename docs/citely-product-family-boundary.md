@@ -134,6 +134,18 @@ Official sources
 
 `ResearchPublication` and its versioned artifacts are also reusable across domains, but remain typed as research context rather than legal authority. A research brief may link to relevant provisions and official sources without changing that evidence boundary.
 
+Each subsite also exposes a thin, versioned public policy-update feed that the
+Citely main site renders without domain-specific transformation logic. The
+Stablecoin Policy implementation is `GET /v1/policy-feed`
+(contract: `contracts/policy-feed.md`): a projection of the active
+`news-summaries` release with `schemaVersion`, the immutable release
+`generatedAt`, and flat items limited to official first-party sources. Optional
+`playbookId` values come only from an explicit subsite-owned mapping; the main
+site must never infer them, must validate the whole response against the
+versioned schema, and must reject an unsupported or invalid response
+atomically, falling back to its last known-good snapshot while showing that
+snapshot's `generatedAt`.
+
 Shared infrastructure should include:
 
 - official-source adapters, provenance, versioning, and source health;
