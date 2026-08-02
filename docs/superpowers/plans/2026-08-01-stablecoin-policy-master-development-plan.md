@@ -742,8 +742,9 @@ intermediate sellable milestone, not a replacement for them.
    topics. Deterministic evaluation runs over the EEA baseline (plus the USDC
    mini-dossier for Pre-listing only), producing immutable `PlaybookPackage`
    + `EvidenceBundle` payloads for Citely, visibly provisional, without RAG.
-   Release order: Pre-listing ships first; Business Boundary follows within
-   days and must not delay the first sellable package;
+   Release decision (2026-08-02): both playbooks launch together in the same
+   release — the MVP ships when Pre-listing AND Business Boundary packages
+   both pass their acceptance fixtures;
 9. fix the canonical API hostname or select and document the permanent base
    URL (required before Citely integration goes live);
 10. **widen after first sale:** Singapore baseline, USDT dossier, Phase 3
