@@ -104,6 +104,10 @@ function textFromContent(
 }
 
 function resolveModel(legacyModel?: string): string {
+  // explicit OpenAI model names are respected verbatim — required for the
+  // machine-assurance cross-check, whose independence depends on actually
+  // calling a different model than extraction
+  if (legacyModel?.startsWith("gpt-")) return legacyModel;
   if (legacyModel?.includes("haiku")) {
     return (
       process.env.OPENAI_FAST_MODEL ||
