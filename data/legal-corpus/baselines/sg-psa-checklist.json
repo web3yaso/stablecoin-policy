@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0.0",
+  "checklistId": "sg-psa-baseline",
+  "version": "1.0.0",
+  "jurisdictionCode": "SG",
+  "sourceDocumentId": "document:sg:act:psa2019",
+  "additionalSourceDocumentIds": ["document:sg:sl:psa2019-rg2"],
+  "sourceName": "Payment Services Act 2019 (2025-03-09 consolidation) and Payment Services Regulations 2019 (2025 Rev Ed)",
+  "committedBeforeExtraction": true,
+  "playbooks": [
+    "stablecoin-pre-listing",
+    "business-model-regulatory-boundary"
+  ],
+  "notes": [
+    "Committed before extraction so completeness is measured against a fixed target.",
+    "SSO is maintained by the AGC but its Terms of Use classify the consolidation as unofficial and non-authoritative; every claim from these sources must carry that limitation and a confirm-authoritative-text counsel trigger.",
+    "expectedLocatorRange values are broad Part/section ranges; exact alignment is produced by the pipeline."
+  ],
+  "topics": [
+    {
+      "topicId": "licensing-perimeter",
+      "playbooks": ["business-model-regulatory-boundary"],
+      "title": "Payment service licensing perimeter and licence classes",
+      "expectedLocatorRange": "Part 2 (Sections 5-12 region)",
+      "question": "Which payment services require a licence, and what distinguishes money-changing, standard, and major payment institution licences?"
+    },
+    {
+      "topicId": "dpt-service-boundary",
+      "playbooks": ["business-model-regulatory-boundary", "stablecoin-pre-listing"],
+      "title": "Digital payment token service boundary",
+      "expectedLocatorRange": "Section 2 definitions and First Schedule region",
+      "question": "Which activities constitute digital payment token services, and how are DPTs defined?"
+    },
+    {
+      "topicId": "e-money-boundary",
+      "playbooks": ["business-model-regulatory-boundary"],
+      "title": "E-money issuance boundary",
+      "expectedLocatorRange": "Section 2 definitions and e-money issuance service provisions",
+      "question": "When does issuing a stablecoin constitute an e-money issuance service, and what obligations follow?"
+    },
+    {
+      "topicId": "licence-conditions-conduct",
+      "playbooks": ["business-model-regulatory-boundary"],
+      "title": "Licensee conduct and ongoing conditions",
+      "expectedLocatorRange": "Parts 2-3 conduct provisions",
+      "question": "What ongoing conduct, notification, and business-restriction obligations apply to licensees?"
+    },
+    {
+      "topicId": "safeguarding-customer-assets",
+      "playbooks": ["stablecoin-pre-listing", "business-model-regulatory-boundary"],
+      "title": "Safeguarding of customer money and DPTs",
+      "expectedLocatorRange": "Section 23 region and Regulations safeguarding provisions",
+      "question": "What segregation and safeguarding duties apply to customer money and digital payment tokens?"
+    },
+    {
+      "topicId": "aml-cft-obligations",
+      "playbooks": ["business-model-regulatory-boundary"],
+      "title": "AML/CFT user-protection duties under the Act",
+      "expectedLocatorRange": "Part 2 conditions and ministerial direction provisions",
+      "question": "Which anti-money-laundering and terrorism-financing duties does the Act impose on payment service providers?"
+    },
+    {
+      "topicId": "exemptions",
+      "playbooks": ["business-model-regulatory-boundary"],
+      "title": "Exemptions and excluded activities",
+      "expectedLocatorRange": "Section 13 region and Regulations exemption provisions",
+      "question": "Which persons and activities are exempt from licensing, and under what conditions?"
+    },
+    {
+      "topicId": "stablecoin-regulatory-hooks",
+      "playbooks": ["stablecoin-pre-listing"],
+      "title": "Regulatory hooks applicable to single-currency stablecoins",
+      "expectedLocatorRange": "Regulations 18A-18J and related Act provisions",
+      "question": "Which specific requirements attach to stablecoin-related payment services under the Regulations (including 18A-18J)?"
+    },
+    {
+      "topicId": "solvency-capital",
+      "playbooks": ["stablecoin-pre-listing"],
+      "title": "Financial and capital requirements",
+      "expectedLocatorRange": "Regulations capital/security provisions",
+      "question": "What base capital and security requirements apply to licensees?"
+    },
+    {
+      "topicId": "enforcement-powers",
+      "playbooks": ["business-model-regulatory-boundary"],
+      "title": "MAS supervision and enforcement powers",
+      "expectedLocatorRange": "Parts 4-6 region",
+      "question": "What inspection, direction, and enforcement powers does MAS hold over payment service providers?"
+    }
+  ]
+}

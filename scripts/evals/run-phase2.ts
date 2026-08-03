@@ -511,7 +511,7 @@ function machinePipelineOutcome(evalCase: MachinePipelineCase): "PASS" | "BLOCK"
     legalStatus: "REQUIREMENT",
     effectiveFrom: evalCase.effectiveFrom === "in-range"
       ? "2024-06-30T00:00:00.000Z"
-      : "2020-01-01T00:00:00.000Z",
+      : "2030-01-01T00:00:00.000Z",
     citations: [{
       provisionId: evalCase.citationProvision === "known"
         ? provisionId
@@ -531,7 +531,7 @@ function machinePipelineOutcome(evalCase: MachinePipelineCase): "PASS" | "BLOCK"
       officialUrl: "https://example.gov/legal",
       publishedAt: null,
       effectiveFrom: "2024-06-01T00:00:00.000Z",
-      effectiveTo: null,
+      effectiveTo: "2026-12-31T00:00:00.000Z",
       observedAt: retrievedAt,
       retrievedAt,
       storageRights: evalCase.storageRights,

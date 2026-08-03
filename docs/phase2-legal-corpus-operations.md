@@ -672,6 +672,35 @@ and impact-review tables. Keep this file outside Git with mode `0600`.
   attempts: about USD 1.44 (extraction 2x $0.40, cross-check $0.42 + $0.17
   failed, $0.05 final cached run).
 
+## Singapore provisional baseline run (2026-08-03)
+
+- Committed checklist `data/legal-corpus/baselines/sg-psa-checklist.json`
+  (10 topics for both MVP playbooks) fixed before extraction.
+- Sources: Payment Services Act 2019 (148 sections) and Payment Services
+  Regulations 2019 (47 regulations). Every claim carries the SSO
+  unofficial-consolidation limitation and, where a provision-level
+  commencement date was unavailable, an effectiveFrom-defaulted note.
+- Pipeline fixes from this run: the effective-date check now enforces only
+  the upper bound (laws routinely commence before a consolidation snapshot);
+  null model-provided effectiveFrom falls back to the consolidation date;
+  unparsable independent derivations are dropped per entry so their
+  candidates end CROSS_CHECK_MISSING/BLOCKED instead of force-mapped.
+- Releases: `provisional:sg:psa:2026-08-03` (74 claims: PSA 32/32 advanced,
+  PSR 42/46 - two licence-lapsing claims, one e-money-account-limits claim,
+  and one regulatory-offences claim BLOCKED on cross-model divergence or
+  missing counterparts) and `provisional:sg:psa:2026-08-03-gaps` (24 claims
+  covering Regulations 18A-18J customer-asset protections and AML/user
+  protection hooks; 24/24 advanced).
+- Production: SG reports 98 distinct provisional claims; EEA remains 47.
+- Checklist coverage 10/10 with one recorded scope note: a dedicated MAS
+  single-currency-stablecoin framework lives in the 15 August 2023
+  consultation response, which remains un-ingested because MAS Terms of Use
+  require prior written permission; Regulations 18A-18J cover customer-asset
+  protection, and SCS-framework specifics stay outside the corpus until that
+  rights question is resolved.
+- Model cost for the Singapore runs: about USD 1.6 including two recoverable
+  format failures.
+
 ## Required pre-production checks
 
 - Take and verify a Supabase backup before applying the migration.

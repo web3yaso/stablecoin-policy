@@ -194,11 +194,27 @@ test("a jurisdiction mismatch fails the jurisdiction check", () => {
   assert.equal(result.checks.jurisdiction, "FAIL");
 });
 
-test("an effective date outside the source window fails the effective-dates check", () => {
-  const result = runDeterministicChecks(
+test("an effective date after the version window fails; earlier laws pass", () => {
+  // laws routinely take effect long before a consolidation snapshot: earlier
+  // effectiveFrom is normal and must PASS
+  const earlier = runDeterministicChecks(
     checkInput({ draft: draft({ effectiveFrom: "2020-01-01T00:00:00+00:00" }) }),
   );
-  assert.equal(result.checks.effectiveDates, "FAIL");
+  assert.equal(earlier.checks.effectiveDates, "PASS");
+
+  // but a claim cannot take effect after the version's window closes
+  const late = runDeterministicChecks(
+    checkInput({
+      manifest: manifest({ effectiveTo: "2025-01-01T00:00:00+00:00" }),
+      draft: draft({ effectiveFrom: "2025-06-01T00:00:00+00:00" }),
+    }),
+  );
+  assert.equal(late.checks.effectiveDates, "FAIL");
+
+  const unparsable = runDeterministicChecks(
+    checkInput({ draft: draft({ effectiveFrom: "not-a-date" }) }),
+  );
+  assert.equal(unparsable.checks.effectiveDates, "FAIL");
 });
 
 // --- independent cross-check comparison ---
