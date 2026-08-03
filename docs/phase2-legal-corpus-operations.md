@@ -658,10 +658,16 @@ and impact-review tables. Keep this file outside Git with mode `0600`.
   published 2026-08-02T20:00:06Z. Production `/v1/provisional/coverage`
   reports EEA with 37 provisional claims; `/v1/claims/{id}` serves the full
   assurance envelope. Reviewed coverage remains `IN_PROGRESS`, `0%`.
-- Known coverage gap, reported honestly: the checklist topic
-  `significant-token-thresholds` produced no claim in this run (11/12 topics
-  covered); a targeted follow-up extraction is planned. Provisional coverage
-  never claims completeness by design.
+- Checklist coverage completed 2026-08-03: a focused follow-up extraction
+  (`--focus` on significance criteria) produced 12 candidate claims for
+  `significant-token-thresholds` (Articles 43-45, 56-58, 117). The
+  independent cross-check BLOCKED two voluntary-classification claims on
+  CROSS_CHECK_CITATION_DIVERGENCE (the two models cited different article
+  sets); the 10 agreed claims were published as
+  `provisional:eea:mica:2026-08-03-significance` (manifest `c458c66a...`).
+  Migration `0023` makes provisional coverage aggregate distinct claims
+  across releases: production reports EEA 47 claims, 12/12 checklist topics.
+  Provisional coverage still never claims reviewed completeness.
 - Measured model cost for the full run including two failed intermediate
   attempts: about USD 1.44 (extraction 2x $0.40, cross-check $0.42 + $0.17
   failed, $0.05 final cached run).

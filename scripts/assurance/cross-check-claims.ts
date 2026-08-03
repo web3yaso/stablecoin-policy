@@ -207,8 +207,10 @@ async function main() {
     const runStamp = now.toLowerCase().replace(/[^a-z0-9]/g, "");
 
     // extraction-level record first (ladder position), then the independent
-    // cross-check record; the RPC decides ADVANCED vs BLOCKED
-    await assurance.record({
+    // cross-check record; the RPC decides ADVANCED vs BLOCKED. A BLOCKED
+    // extraction is already audited - skip the cross-check record (the
+    // ladder would reject it) and move on to the next claim.
+    const extractionRecord = await assurance.record({
       recordId: `${primary.claimId}:extracted:${runStamp}`,
       subjectType: "CLAIM_DRAFT",
       subjectId: primary.claimId,
@@ -223,9 +225,16 @@ async function main() {
       checks,
       inputChecksumSha256: replayChecksum(provisions),
       outputChecksumSha256: claimFingerprint,
-      blockers: deterministic.blockers,
+      blockers,
       limitations: deterministic.limitations,
     });
+    if (extractionRecord.outcome === "BLOCKED") {
+      summary.blocked += 1;
+      console.log(
+        `${primary.claimId}: BLOCKED at extraction (${blockers.join(", ")})`,
+      );
+      continue;
+    }
     const result = await assurance.record({
       recordId: `${primary.claimId}:crosschecked:${runStamp}`,
       subjectType: "CLAIM_DRAFT",

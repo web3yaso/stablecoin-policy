@@ -51,6 +51,7 @@ async function main() {
   const jurisdiction = readValue(args, "--jurisdiction");
   const outPath = readValue(args, "--out", `data/legal-corpus/extractions/${jurisdiction.toLowerCase()}-bundle.json`);
   const model = readValue(args, "--model", process.env.OPENAI_MODEL || "gpt-5.6-terra");
+  const focus = readValue(args, "--focus", "");
   const execute = args.includes("--execute");
 
   const config = readSupabaseConfig();
@@ -94,7 +95,9 @@ async function main() {
   const response = await anthropic.messages.create({
     model,
     max_tokens: 16000,
-    system: EXTRACTION_SYSTEM_PROMPT,
+    system: focus.length > 0
+      ? `${EXTRACTION_SYSTEM_PROMPT} FOCUS: extract ONLY claims about the following themes and skip everything else: ${focus}`
+      : EXTRACTION_SYSTEM_PROMPT,
     messages: [
       {
         role: "user",
