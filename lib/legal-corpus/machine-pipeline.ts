@@ -217,15 +217,14 @@ export function runDeterministicChecks(
   const jurisdictionOk = draft.jurisdictionCode === input.expectedJurisdiction;
   if (!jurisdictionOk) blockers.push("JURISDICTION_MISMATCH");
 
+  // a consolidation snapshot's effectiveFrom is the version date, not the
+  // law's commencement: claims routinely take effect earlier, so only the
+  // upper bound is checked (a claim cannot start after the version's window)
   const effectiveFromMs = Date.parse(draft.effectiveFrom);
-  const lowerOk =
-    manifest.effectiveFrom === null ||
-    effectiveFromMs >= Date.parse(manifest.effectiveFrom);
   const upperOk =
     manifest.effectiveTo === null ||
     effectiveFromMs <= Date.parse(manifest.effectiveTo);
-  const effectiveDatesOk =
-    Number.isFinite(effectiveFromMs) && lowerOk && upperOk;
+  const effectiveDatesOk = Number.isFinite(effectiveFromMs) && upperOk;
   if (!effectiveDatesOk) blockers.push("EFFECTIVE_DATE_OUT_OF_RANGE");
 
   return {

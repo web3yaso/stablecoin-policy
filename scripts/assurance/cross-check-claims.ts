@@ -37,6 +37,7 @@ async function main() {
   const args = process.argv.slice(2);
   const bundlePath = readValue(args, "--bundle");
   const model = readValue(args, "--model");
+  const extraLimitation = readValue(args, "--limitation", "");
   const execute = args.includes("--execute");
 
   const artifact = JSON.parse(await readFile(path.resolve(bundlePath), "utf8")) as {
@@ -137,7 +138,31 @@ async function main() {
   const { writeFile } = await import("node:fs/promises");
   await writeFile(independentsPath, rawText, "utf8");
   }
-  const independents = parseExtractionOutput(extractJsonArray(rawText));
+  const rawIndependents = extractJsonArray(rawText);
+  if (!Array.isArray(rawIndependents)) {
+    throw new Error("cross-check model did not return a JSON array");
+  }
+  const effectiveFromFallback =
+    envelope.manifest.effectiveFrom ?? envelope.manifest.retrievedAt;
+  // parse independents one by one, failing closed per entry: an unparsable
+  // independent derivation is dropped, so its candidate ends CROSS_CHECK_MISSING
+  // and BLOCKED rather than being force-mapped into false agreement
+  const independents = rawIndependents.flatMap((entry) => {
+    try {
+      return parseExtractionOutput([
+        {
+          ...(entry as Record<string, unknown>),
+          effectiveFrom:
+            (entry as Record<string, unknown>).effectiveFrom ?? effectiveFromFallback,
+        },
+      ]);
+    } catch (error: unknown) {
+      console.log(
+        `dropping unparsable independent derivation: ${error instanceof Error ? error.message : "unknown"}`,
+      );
+      return [];
+    }
+  });
   const independentsById = new Map(
     independents.map((draft) => [draft.claimId, draft]),
   );
@@ -203,6 +228,9 @@ async function main() {
       contradiction: comparison.agreed ? ("PASS" as const) : ("FAIL" as const),
     };
     const blockers = [...deterministic.blockers, ...comparison.blockers];
+    const limitations = extraLimitation
+      ? [...deterministic.limitations, extraLimitation]
+      : deterministic.limitations;
     const claimFingerprint = replayChecksum(primary);
     const runStamp = now.toLowerCase().replace(/[^a-z0-9]/g, "");
 
@@ -226,7 +254,7 @@ async function main() {
       inputChecksumSha256: replayChecksum(provisions),
       outputChecksumSha256: claimFingerprint,
       blockers,
-      limitations: deterministic.limitations,
+      limitations,
     });
     if (extractionRecord.outcome === "BLOCKED") {
       summary.blocked += 1;
@@ -251,7 +279,7 @@ async function main() {
       inputChecksumSha256: replayChecksum({ provisions, candidate: primary }),
       outputChecksumSha256: replayChecksum(independentsById.get(primary.claimId) ?? null),
       blockers,
-      limitations: deterministic.limitations,
+      limitations,
     });
     if (result.outcome === "ADVANCED") summary.advanced += 1;
     else summary.blocked += 1;

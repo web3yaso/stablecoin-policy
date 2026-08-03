@@ -52,6 +52,8 @@ async function main() {
   const outPath = readValue(args, "--out", `data/legal-corpus/extractions/${jurisdiction.toLowerCase()}-bundle.json`);
   const model = readValue(args, "--model", process.env.OPENAI_MODEL || "gpt-5.6-terra");
   const focus = readValue(args, "--focus", "");
+  const slug = readValue(args, "--slug", "mica");
+  const extraLimitation = readValue(args, "--limitation", "");
   const execute = args.includes("--execute");
 
   const config = readSupabaseConfig();
@@ -114,12 +116,22 @@ async function main() {
   }
   // claim IDs are assigned deterministically here; model-provided IDs are
   // untrusted and ignored
-  const withIds = rawDrafts.map((entry, index) => ({
-    ...(entry as Record<string, unknown>),
-    claimId: `claim:${jurisdiction.toLowerCase()}:mica:${slugify(
-      String((entry as Record<string, unknown>).topic ?? "topic"),
-    )}:${index + 1}`,
-  }));
+  await writeFile(`${path.resolve(outPath)}.raw.json`, rawText, "utf8");
+  // a null effectiveFrom (common for subsidiary legislation where the model
+  // cannot date individual provisions) falls back to the version's
+  // consolidation date; the defaulting is recorded as a limitation
+  const effectiveFromFallback =
+    envelope.manifest.effectiveFrom ?? envelope.manifest.retrievedAt;
+  const withIds = rawDrafts.map((entry, index) => {
+    const record = entry as Record<string, unknown>;
+    return {
+      ...record,
+      effectiveFrom: record.effectiveFrom ?? effectiveFromFallback,
+      claimId: `claim:${jurisdiction.toLowerCase()}:${slug}:${slugify(
+        String(record.topic ?? "topic"),
+      )}:${index + 1}`,
+    };
+  });
   const drafts = parseExtractionOutput(withIds);
 
   const run: ExtractionRun = {
@@ -134,6 +146,7 @@ async function main() {
   const now = new Date().toISOString();
   const checkResults = drafts.map((draft) => ({
     claimId: draft.claimId,
+    extraLimitations: extraLimitation ? [extraLimitation] : [],
     ...runDeterministicChecks({
       manifest: envelope.manifest,
       draft,
