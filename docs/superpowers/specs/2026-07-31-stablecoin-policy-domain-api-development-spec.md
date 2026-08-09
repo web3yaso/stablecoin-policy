@@ -895,6 +895,11 @@ Exit: a material source change can identify affected packages and produce a revi
 
 ### Phase 7 — legacy-domain extraction
 
+Implementation checkpoint (2026-08-08): complete and locally verified on
+`codex/legacy-domain-cleanup`, pending pull-request review and deployment. The
+canonical disposition inventory, redirect plan, measurements, and verification
+record are in `docs/phase7-legacy-domain-cleanup.md`.
+
 - inventory AI, data-center, politician, donor, energy, and unrelated components;
 - migrate reusable AI material to AI Policy through shared data interfaces;
 - remove or archive unrelated routes after redirects and dependency checks;
