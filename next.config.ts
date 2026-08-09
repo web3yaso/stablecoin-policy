@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
+import { RETIRED_ROUTES } from "./lib/retired-routes";
 
 const nextConfig: NextConfig = {
-  // Strip console.* in production builds (keeps console.error / warn for
-  // genuine problems). Removes the lone bioguide-mismatch warn that ships
-  // from lib/politicians-data.ts.
+  // Strip console.* in production builds while retaining operational errors.
   compiler: {
     removeConsole: { exclude: ["error", "warn"] },
   },
@@ -16,31 +15,14 @@ const nextConfig: NextConfig = {
       "framer-motion",
       "d3-geo",
       "react-simple-maps",
-      "@number-flow/react",
-      "topojson-client",
     ],
     // Turbopack: persist compiler artifacts on disk between `next dev`
     // restarts. Free cold-start speedup.
     turbopackFileSystemCacheForDev: true,
   },
 
-  // Allow next/image to optimize politician portraits and any other
-  // remote portraits referenced via `photoUrl`. Any host added here is
-  // explicitly trusted — keep the list tight.
-  images: {
-    // Prefer AVIF — ~20% smaller than WebP for photographic content
-    // (politician portraits). Falls back to WebP for unsupported clients.
-    formats: ["image/avif", "image/webp"],
-    remotePatterns: [
-      // unitedstates.github.io serves the Congressional bioguide portraits
-      // used for every US politician's photoUrl in data/politicians/*.json.
-      { protocol: "https", hostname: "unitedstates.github.io" },
-      { protocol: "https", hostname: "bioguide.congress.gov" },
-      { protocol: "https", hostname: "www.congress.gov" },
-      { protocol: "https", hostname: "upload.wikimedia.org" },
-      { protocol: "https", hostname: "**.europarl.europa.eu" },
-      { protocol: "https", hostname: "members-api.parliament.uk" },
-    ],
+  async redirects() {
+    return [...RETIRED_ROUTES];
   },
 };
 

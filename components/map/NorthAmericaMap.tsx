@@ -7,7 +7,7 @@ import {
   type ProjectionFunction,
 } from "react-simple-maps";
 import { naProjection } from "@/lib/projections";
-import { getEntity } from "@/lib/placeholder-data";
+import { getEntity } from "@/lib/policy-entities";
 import { getEntityColorForDimension } from "@/lib/dimensions";
 import {
   NEUTRAL_FILL,
@@ -15,30 +15,16 @@ import {
   STANCE_HEX,
   type SetTooltip,
 } from "@/lib/map-utils";
-import { ALL_FACILITIES } from "@/lib/datacenters";
-import type { DataCenter, Dimension, DimensionLens } from "@/types";
-import DataCenterDots from "./DataCenterDots";
+import type { Dimension } from "@/types";
 
 interface NorthAmericaMapProps {
   onSelectEntity: (geoId: string) => void;
   onDoubleClickEntity?: (geoId: string) => void;
   /** Click handler for a specific US state — navigates to the states view. */
   onSelectUsState?: (stateName: string) => void;
-  /** Double-click on a US state — drill directly into counties. */
-  onDoubleClickUsState?: (stateName: string) => void;
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
   dimension?: Dimension;
-  lens?: DimensionLens;
-  showDataCenters?: boolean;
-  onHoverFacility?: (
-    dc: DataCenter,
-    x: number,
-    y: number,
-    clusterSize: number,
-  ) => void;
-  onLeaveFacility?: () => void;
-  onSelectFacility?: (dc: DataCenter) => void;
 }
 
 const naProj = naProjection as unknown as ProjectionFunction;
@@ -82,15 +68,9 @@ export default function NorthAmericaMap({
   onSelectEntity,
   onDoubleClickEntity,
   onSelectUsState,
-  onDoubleClickUsState,
   selectedGeoId,
   setTooltip,
   dimension = "overall",
-  lens = "datacenter",
-  showDataCenters = false,
-  onHoverFacility,
-  onLeaveFacility,
-  onSelectFacility,
 }: NorthAmericaMapProps) {
   return (
     <div
@@ -109,10 +89,7 @@ export default function NorthAmericaMap({
         style={{
           width: "100%",
           height: "100%",
-          // Force high-quality vector rendering. Without this, mobile
-          // WebKit may pick optimizeSpeed for small primitives like the
-          // data-center dots, which is what makes them look pixelated
-          // when the parent layer is CSS-scaled for pinch-zoom.
+          // Force high-quality vector rendering while the map is scaled.
           shapeRendering: "geometricPrecision",
         }}
       >
@@ -160,7 +137,7 @@ export default function NorthAmericaMap({
               const ent = getEntity(id, COUNTRY_REGION[id] ?? "na");
               if (!ent) return null;
               const isSelected = selectedGeoId === id;
-              const fill = getEntityColorForDimension(ent, dimension, lens);
+              const fill = getEntityColorForDimension(ent, dimension);
               const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
               const strokeWidth = isSelected ? 4 : 1.5;
               const base = {
@@ -223,69 +200,34 @@ export default function NorthAmericaMap({
                 const ent = getEntity(name, "na");
                 const isSelected = selectedGeoId === name;
                 if (!ent) {
-                  if (lens === "stablecoin") {
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        style={{
-                          default: {
-                            fill: US_FEDERAL_FILL,
-                            stroke: NEUTRAL_STROKE,
-                            strokeWidth: 0.6,
-                            outline: "none",
-                            pointerEvents: "none",
-                          },
-                          hover: {
-                            fill: US_FEDERAL_FILL,
-                            outline: "none",
-                            pointerEvents: "none",
-                          },
-                          pressed: {
-                            fill: US_FEDERAL_FILL,
-                            outline: "none",
-                          },
-                        }}
-                      />
-                    );
-                  }
-                  // Unmapped states (e.g. territories) render as neutral fill
                   return (
                     <Geography
                       key={geo.rsmKey}
                       geography={geo}
                       style={{
                         default: {
-                          fill: NEUTRAL_FILL,
+                          fill: US_FEDERAL_FILL,
                           stroke: NEUTRAL_STROKE,
                           strokeWidth: 0.5,
                           outline: "none",
                           pointerEvents: "none",
                         },
                         hover: {
-                          fill: NEUTRAL_FILL,
+                          fill: US_FEDERAL_FILL,
                           outline: "none",
                           pointerEvents: "none",
                         },
                         pressed: {
-                          fill: NEUTRAL_FILL,
+                          fill: US_FEDERAL_FILL,
                           outline: "none",
                         },
                       }}
                     />
                   );
                 }
-                const isTrackedStablecoinState =
-                  lens === "stablecoin" &&
-                  ent.legislation.some((bill) => bill.category.startsWith("stablecoin-"));
-                const fill =
-                  lens === "stablecoin"
-                    ? isTrackedStablecoinState
-                      ? `url(#${US_TRACKED_PATTERN_ID})`
-                      : US_FEDERAL_FILL
-                    : ent
-                      ? STANCE_HEX[ent.stance ?? ent.stanceDatacenter ?? "none"]
-                      : NEUTRAL_FILL;
+                const fill = ent.legislation.length
+                  ? `url(#${US_TRACKED_PATTERN_ID})`
+                  : US_FEDERAL_FILL;
                 const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
                 const strokeWidth = isSelected ? 3 : 0.6;
                 const base = {
@@ -314,7 +256,6 @@ export default function NorthAmericaMap({
                     }
                     onMouseLeave={() => setTooltip(null)}
                     onClick={() => onSelectUsState?.(name)}
-                    onDoubleClick={() => onDoubleClickUsState?.(name)}
                     style={{
                       default: base,
                       hover: { ...base, filter: hoverFilter },
@@ -326,14 +267,6 @@ export default function NorthAmericaMap({
           }}
         </Geographies>
 
-        {showDataCenters && onHoverFacility && onLeaveFacility && (
-          <DataCenterDots projection={naProjection as unknown as (c: [number, number]) => [number, number] | null}
-            facilities={ALL_FACILITIES}
-            onHoverFacility={onHoverFacility}
-            onLeaveFacility={onLeaveFacility}
-            onSelectFacility={onSelectFacility}
-          />
-        )}
       </ComposableMap>
     </div>
   );

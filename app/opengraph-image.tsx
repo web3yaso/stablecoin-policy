@@ -94,7 +94,7 @@ export default function Image() {
           }}
         >
           154 bills across US federal, US states, EU, and Asia-Pacific — with
-          key politicians and live news.
+          official-source updates, evidence, and jurisdiction coverage.
         </div>
 
         <div style={{ flex: 1 }} />

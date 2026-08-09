@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ENTITIES } from "@/lib/placeholder-data";
+import { ENTITIES } from "@/lib/policy-entities";
 import LegislationList from "@/components/panel/LegislationList";
 import StanceBadge from "@/components/ui/StanceBadge";
 
@@ -42,18 +42,9 @@ export default async function LegislationPage({
           <div className="mt-3 flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-1.5">
               <span className="text-[11px] text-muted tracking-tight">
-                Data centers
+                Stablecoins
               </span>
-              <StanceBadge
-                stance={entity.stanceDatacenter ?? entity.stance ?? "none"}
-                size="md"
-              />
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-[11px] text-muted tracking-tight">
-                AI
-              </span>
-              <StanceBadge stance={entity.stanceAI ?? entity.stance ?? "none"} size="md" />
+              <StanceBadge stance={entity.stance ?? "none"} size="md" />
             </div>
             <span className="text-sm text-muted">
               {total} {total === 1 ? "bill" : "bills"}
@@ -62,10 +53,7 @@ export default async function LegislationPage({
         </div>
 
         {total > 0 ? (
-          <LegislationList
-            legislation={entity.legislation}
-            stateCode={entity.level === "federal" ? "US" : undefined}
-          />
+          <LegislationList legislation={entity.legislation} />
         ) : (
           <p className="text-sm text-muted">
             No legislation on file for {entity.name}.

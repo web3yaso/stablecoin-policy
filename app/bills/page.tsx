@@ -32,10 +32,10 @@ export default function BillsPage() {
           Back to map
         </Link>
         <h1 className="text-4xl font-semibold text-ink tracking-tight leading-[1.05] mb-2">
-          Every bill we&rsquo;re tracking
+          Stablecoin rules we&rsquo;re tracking
         </h1>
         <p className="text-sm text-muted mb-10">
-          Filter, sort, and search the full legislative record.
+          Search the public jurisdiction layer and follow each official source.
         </p>
         <LegislationTable
           dimension="overall"

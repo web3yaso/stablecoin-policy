@@ -19,8 +19,8 @@ export default function Header() {
         <Link href="/bills" className="hover:text-ink transition-colors">
           {t(locale, "nav.bills")}
         </Link>
-        <Link href="/politicians" className="hover:text-ink transition-colors">
-          {t(locale, "nav.politicians")}
+        <Link href="/news" className="hover:text-ink transition-colors">
+          {t(locale, "nav.news")}
         </Link>
         <Link href="/about" className="hover:text-ink transition-colors">
           {t(locale, "nav.about")}

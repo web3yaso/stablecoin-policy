@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ENTITIES } from "@/lib/placeholder-data";
+import { ENTITIES } from "@/lib/policy-entities";
 import { getDatasetService } from "@/lib/data/dataset-runtime";
 import { applyNewsDataset, type NewsDataset } from "@/lib/news-dataset";
 import NewsSection from "@/components/panel/NewsSection";
@@ -57,17 +57,8 @@ export default async function NewsPage({
           </h1>
           <div className="mt-3 flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] text-muted tracking-tight">
-                Data centers
-              </span>
-              <StanceBadge
-                stance={entity.stanceDatacenter ?? entity.stance ?? "none"}
-                size="md"
-              />
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-[11px] text-muted tracking-tight">AI</span>
-              <StanceBadge stance={entity.stanceAI ?? entity.stance ?? "none"} size="md" />
+              <span className="text-[11px] text-muted tracking-tight">Stablecoins</span>
+              <StanceBadge stance={entity.stance ?? "none"} size="md" />
             </div>
             <span className="text-sm text-muted">
               {total} {total === 1 ? "article" : "articles"}

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import NuanceLegend from "@/components/sections/NuanceLegend";
 
 export const metadata: Metadata = {
-  title: "Methodology · Track Policy",
+  title: "Methodology · Stablecoin Policy",
 };
 
 export default function MethodologyPage() {
@@ -40,17 +40,17 @@ export default function MethodologyPage() {
             What powers this tracker
           </h2>
           <p>
-            This project combines hand-reviewed jurisdiction files,
-            official legislation links, public political datasets, and a
-            curated RSS news pipeline. The goal is not to mirror one
-            vendor feed. It is to assemble a stablecoin-policy map that
-            can be traced back to public documents.
+            This project combines normalized jurisdiction records, official
+            legislation links, a versioned legal corpus, and an official-source
+            update pipeline. The goal is to assemble a Stablecoin policy map
+            that can be traced back to public documents.
           </p>
           <p>
-            At a high level, there are five source layers: US legislation,
-            international country files, news feeds, politician data, and
-            map/geography assets. Individual bills and news cards keep
-            their own source links in the UI; this page is the rollup.
+            The public tracker uses four source layers: official legal and
+            regulatory documents, normalized jurisdiction files, first-party
+            update feeds, and map assets. Individual rules and update cards
+            retain source links; paid playbooks pin versioned claims and
+            evidence through the authenticated domain API.
           </p>
 
           <h2 className="text-xl font-semibold text-ink tracking-tight pt-4">
@@ -67,14 +67,14 @@ export default function MethodologyPage() {
               Congress.gov
             </a>
             . US state bills are sourced from official legislature links
-            and normalized through{" "}
+            and discovered through{" "}
             <a
-              href="https://legiscan.com"
+              href="https://openstates.org"
               target="_blank"
               rel="noopener noreferrer"
               className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
             >
-              LegiScan
+              Open States
             </a>
             {" "}when available. International stablecoin frameworks are
             stored country by country in{" "}
@@ -119,9 +119,9 @@ export default function MethodologyPage() {
             committee counts more than filed bills.
           </p>
           <p>
-            Some of these classifications will age badly as rules move. If
-            you work on one of these jurisdictions and think the read is
-            off, please reach out.
+            Editorial classifications can become stale as rules move. The
+            generated timestamp and source links make that limitation visible;
+            corrections are welcome.
           </p>
 
           <h2 className="text-xl font-semibold text-ink tracking-tight pt-4">
@@ -159,10 +159,8 @@ export default function MethodologyPage() {
         </h2>
         <p className="text-base text-ink/80 leading-relaxed mb-8">
           The primary taxonomy in this project is the stablecoin-policy
-          lens. The legend below shows the dimensions and issuance color
-          logic that drive the current map. Some legacy data-center and AI
-          tags still exist in the codebase, but they are no longer the
-          main analytical frame of the site.
+          lens. The legend below shows the five dimensions and issuance color
+          logic that drive the current map.
         </p>
         <NuanceLegend />
       </div>

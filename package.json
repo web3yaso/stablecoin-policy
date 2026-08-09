@@ -56,7 +56,6 @@
     "spec:playbook": "npx --yes @informalsystems/quint@0.32.0 typecheck specs/playbookPackage.qnt && npx --yes @informalsystems/quint@0.32.0 typecheck specs/playbookPackage_test.qnt && npx --yes @informalsystems/quint@0.32.0 test specs/playbookPackage_test.qnt --main playbookPackage_test --match '.*Test$' && npx --yes @informalsystems/quint@0.32.0 run specs/playbookPackage.qnt --main playbookPackage --invariants permittedRequiresFullSupport prohibitedRequiresDirectEvidence sealedPackagePinsVersions provisionalNeverHidden conclusionsComeFromEvaluation --witnesses sealedPermittedWitness sealedCounselReviewWitness degradedBeforeAssemblyWitness supersededWitness --max-steps 20"
   },
   "dependencies": {
-    "@number-flow/react": "^0.6.0",
     "@okxweb3/x402-core": "^0.1.0",
     "@okxweb3/x402-evm": "^0.2.1",
     "@vercel/analytics": "^2.0.1",
@@ -64,16 +63,12 @@
     "@x402/core": "^2.11.0",
     "@x402/evm": "^2.11.0",
     "alipay-sdk": "^4.14.0",
-    "cobe": "^2.0.1",
     "d3-geo": "^3.1.1",
     "framer-motion": "^12.38.0",
-    "maplibre-gl": "^5.23.0",
     "next": "16.2.12",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "react-grab": "^0.1.31",
     "react-simple-maps": "^1.0.0",
-    "topojson-client": "^3.1.0",
     "viem": "^2.55.10"
   },
   "devDependencies": {
@@ -83,7 +78,6 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-simple-maps": "^3.0.6",
-    "@types/topojson-client": "^3.1.5",
     "ajv": "^8.20.0",
     "ajv-formats": "^3.0.1",
     "dotenv": "^17.4.1",

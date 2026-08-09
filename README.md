@@ -151,7 +151,6 @@ REPORTS_API_BASE_URL=https://stablecoin-policy.vercel.app npx tsx scripts/report
 | `npx tsx scripts/smoke/congress-ping.ts` | 测试 Congress.gov 连通性 |
 | `npx tsx scripts/sync/bills-federal.ts` | 用 GovInfo 全文发现并同步 Congress.gov 法案状态 |
 | `npx tsx scripts/sync/bills-states.ts` | 同步美国各州稳定币法案（OpenStates，NY/CA/TX等） |
-| `npx tsx scripts/sync/votes-congress.ts` | 同步联邦法案投票记录 |
 | `npm run news:sources:check` | 只读检查 Federal Register、Regulations.gov、GovInfo + Congress.gov、legislation.gov.uk adapters |
 | `npx tsx scripts/sync/news-rss.ts` | 同步一手监管 feed 与政府结构化来源 |
 

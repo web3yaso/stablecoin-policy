@@ -5,7 +5,7 @@ const translations = {
     // ── Header ────────────────────────────────────────────────────
     "nav.map": "Map",
     "nav.bills": "Bills",
-    "nav.politicians": "Politicians",
+    "nav.news": "News",
     "nav.about": "About",
     "nav.toggle": "中文",
 
@@ -99,11 +99,8 @@ const translations = {
     "panel.primary_regulator": "Primary Regulator",
     "panel.tab.bills": "Bills",
     "panel.tab.local": "Local",
-    "panel.tab.figures": "Figures",
     "panel.tab.regulators": "Regulators",
     "panel.tab.news": "News",
-    "panel.tab.centers": "Centers",
-    "panel.tab.energy": "Energy",
     "panel.hint.title": "Click anywhere to explore",
     "panel.hint.body": "Click a country or map pin to open its detail.",
     "panel.hint.shortcuts": "Press",
@@ -121,10 +118,7 @@ const translations = {
     "page.s1.title": "What happened this week",
     "page.s2.label": "02 · The full record",
     "page.s2.title": "Every bill we're tracking",
-    "page.s3.label": "03 · Key players",
-    "page.s3.title": "Stablecoin Figures",
-    "page.s3.sub": "The legislators, regulators, and institutions shaping the rules for stablecoin issuance, reserves, and payments.",
-    "page.s4.label": "04 · From the wire",
+    "page.s4.label": "03 · From the wire",
     "page.s4.title": "Live news",
 
     // ── Footer ────────────────────────────────────────────────────
@@ -139,7 +133,7 @@ const translations = {
     // ── Header ────────────────────────────────────────────────────
     "nav.map": "地图",
     "nav.bills": "法案",
-    "nav.politicians": "政要",
+    "nav.news": "新闻",
     "nav.about": "关于",
     "nav.toggle": "EN",
 
@@ -233,11 +227,8 @@ const translations = {
     "panel.primary_regulator": "主要监管机构",
     "panel.tab.bills": "法案",
     "panel.tab.local": "地方",
-    "panel.tab.figures": "人物",
     "panel.tab.regulators": "监管机构",
     "panel.tab.news": "新闻",
-    "panel.tab.centers": "数据中心",
-    "panel.tab.energy": "能源",
     "panel.hint.title": "点击任意位置探索",
     "panel.hint.body": "点击国家或地图标记查看详情。",
     "panel.hint.shortcuts": "按下",
@@ -255,10 +246,7 @@ const translations = {
     "page.s1.title": "本周发生了什么",
     "page.s2.label": "02 · 完整记录",
     "page.s2.title": "我们追踪的每一项法案",
-    "page.s3.label": "03 · 谁在主导规则",
-    "page.s3.title": "关键人物",
-    "page.s3.sub": "正在塑造稳定币发行、储备与支付规则的立法者、监管者与关键机构。",
-    "page.s4.label": "04 · 实时资讯",
+    "page.s4.label": "03 · 实时资讯",
     "page.s4.title": "实时新闻",
 
     // ── Footer ────────────────────────────────────────────────────

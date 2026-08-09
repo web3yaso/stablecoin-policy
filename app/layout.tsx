@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | Stablecoin Policy Tracker",
   },
   description:
-    "Track stablecoin policy worldwide — 154 bills across US federal, US states, EU, and Asia-Pacific, with key politicians and live news. Part of Web3Law Intelligence.",
+    "Track Stablecoin policy worldwide with official-source updates, jurisdiction records, evidence, and versioned playbooks. A Citely policy subsite.",
   keywords: [
     "stablecoin policy",
     "stablecoin regulation",
@@ -37,14 +37,14 @@ export const metadata: Metadata = {
     siteName: "Stablecoin Policy Tracker",
     title: "Stablecoin Policy Tracker — Web3Law Intelligence",
     description:
-      "Track stablecoin policy worldwide. 154 bills, key politicians, live news.",
+      "Track Stablecoin policy worldwide with official-source updates and jurisdiction evidence.",
   },
 
   twitter: {
     card: "summary_large_image",
     title: "Stablecoin Policy Tracker — Web3Law Intelligence",
     description:
-      "Track stablecoin policy worldwide. 154 bills, key politicians, live news.",
+      "Track Stablecoin policy worldwide with official-source updates and jurisdiction evidence.",
     site: "@web3law_tech",
     creator: "@web3law_tech",
   },

@@ -15,9 +15,8 @@ import { t as tr } from "@/lib/i18n";
 // Below-fold sections — lazy-loaded so the initial JS bundle only
 // includes Hero + MapShell + Section 1. Each dynamic import creates a
 // separate chunk that loads on demand as the user scrolls.
-const AIOverview = dynamic(() => import("@/components/sections/AIOverview"));
+const PolicyOverview = dynamic(() => import("@/components/sections/PolicyOverview"));
 const LegislationTable = dynamic(() => import("@/components/sections/LegislationTable"));
-const PoliticiansOverview = dynamic(() => import("@/components/sections/PoliticiansOverview"));
 const LiveNews = dynamic(() => import("@/components/sections/LiveNews"));
 import type {
   Region,
@@ -80,7 +79,7 @@ export default function Page() {
             {tr(locale, "page.s1.title")}
           </h2>
           <FadeInOnView>
-            <AIOverview />
+            <PolicyOverview />
           </FadeInOnView>
         </div>
       </section>
@@ -106,28 +105,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Section 3 — Who voted how */}
-      <section
-        id="politicians"
-        className="relative z-10 bg-bg border-t border-black/[.06] scroll-mt-20"
-      >
-        <div className="max-w-5xl mx-auto px-8 pt-20 pb-24">
-          <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
-            {tr(locale, "page.s3.label")}
-          </div>
-          <h2 className="text-3xl md:text-4xl font-semibold text-ink tracking-tight leading-[1.1] mb-2">
-            {tr(locale, "page.s3.title")}
-          </h2>
-          <p className="text-sm text-muted mb-10 max-w-xl">
-            {tr(locale, "page.s3.sub")}
-          </p>
-          <FadeInOnView>
-            <PoliticiansOverview />
-          </FadeInOnView>
-        </div>
-      </section>
-
-      {/* Section 4 — Live news feed */}
+      {/* Section 3 — Live news feed */}
       <section
         id="news"
         className="relative z-10 bg-white border-t border-black/[.06] scroll-mt-20"

@@ -7,32 +7,20 @@ import {
   type ProjectionFunction,
 } from "react-simple-maps";
 import { euProjection } from "@/lib/projections";
-import { getEntity } from "@/lib/placeholder-data";
+import { getEntity } from "@/lib/policy-entities";
 import { getEntityColorForDimension } from "@/lib/dimensions";
 import {
   NEUTRAL_FILL,
   NEUTRAL_STROKE,
   type SetTooltip,
 } from "@/lib/map-utils";
-import { EU_FACILITIES } from "@/lib/datacenters";
-import type { DataCenter, Dimension, DimensionLens } from "@/types";
-import DataCenterDots from "./DataCenterDots";
+import type { Dimension } from "@/types";
 
 interface EuropeMapProps {
   onSelectEntity: (geoId: string) => void;
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
   dimension?: Dimension;
-  lens?: DimensionLens;
-  showDataCenters?: boolean;
-  onHoverFacility?: (
-    dc: DataCenter,
-    x: number,
-    y: number,
-    clusterSize: number,
-  ) => void;
-  onLeaveFacility?: () => void;
-  onSelectFacility?: (dc: DataCenter) => void;
 }
 
 const euProj = euProjection as unknown as ProjectionFunction;
@@ -68,11 +56,6 @@ export default function EuropeMap({
   selectedGeoId,
   setTooltip,
   dimension = "overall",
-  lens = "datacenter",
-  showDataCenters = false,
-  onHoverFacility,
-  onLeaveFacility,
-  onSelectFacility,
 }: EuropeMapProps) {
   return (
     <div
@@ -128,11 +111,10 @@ export default function EuropeMap({
                 // For the stablecoin lens, EU is a single regulatory bloc (MiCA)
                 // so all member states share the eu-bloc entity's coloring.
                 const isEUMember = EU_MEMBER_CODES.has(parseInt(id, 10));
-                const colorEnt =
-                  lens === "stablecoin" && isEUMember
-                    ? (getEntity("eu-bloc", "eu") ?? ent)
-                    : ent;
-                const fill = getEntityColorForDimension(colorEnt, dimension, lens);
+                const colorEnt = isEUMember
+                  ? (getEntity("eu-bloc", "eu") ?? ent)
+                  : ent;
+                const fill = getEntityColorForDimension(colorEnt, dimension);
                 // Non-EU countries get a darker border so UK / Russia / Turkey
                 // remain visually distinct from the MiCA bloc even when they
                 // share the same fill color.
@@ -177,14 +159,6 @@ export default function EuropeMap({
               })
           }
         </Geographies>
-        {showDataCenters && onHoverFacility && onLeaveFacility && (
-          <DataCenterDots projection={euProjection as unknown as (c: [number, number]) => [number, number] | null}
-            facilities={EU_FACILITIES}
-            onHoverFacility={onHoverFacility}
-            onLeaveFacility={onLeaveFacility}
-            onSelectFacility={onSelectFacility}
-          />
-        )}
       </ComposableMap>
     </div>
   );

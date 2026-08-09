@@ -1,97 +1,47 @@
 "use client";
 
-import { useState } from "react";
-import type { DataCenter, Legislation } from "@/types";
+import type { Legislation } from "@/types";
 import BillTimeline from "@/components/ui/BillTimeline";
-import BillExpanded from "./BillExpanded";
-
-interface LegislationListProps {
-  legislation: Legislation[];
-  /** Two-letter state code ("US", "VA", ...) for donor lookup. */
-  stateCode?: string;
-  /** Forwarded to BillExpanded — enables clickable "Related facilities"
-   *  chips that open the facility detail panel. */
-  onSelectFacility?: (f: DataCenter) => void;
-}
 
 export default function LegislationList({
   legislation,
-  stateCode,
-  onSelectFacility,
-}: LegislationListProps) {
-  const [openId, setOpenId] = useState<string | null>(null);
+}: {
+  legislation: Legislation[];
+}) {
+  if (legislation.length === 0) {
+    return (
+      <p className="text-sm text-muted">
+        No dedicated Stablecoin legislation is listed for this jurisdiction.
+      </p>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-3">
-      {legislation.map((bill) => {
-        const isOpen = openId === bill.id;
-        return (
-          <button
-            key={bill.id}
-            type="button"
-            onClick={() => setOpenId(isOpen ? null : bill.id)}
-            className={`w-full text-left rounded-2xl p-4 transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-              isOpen
-                ? "bg-bg shadow-[0_6px_18px_rgba(0,0,0,0.05),0_1px_4px_rgba(0,0,0,0.03)]"
-                : "bg-bg/60 hover:bg-bg hover:shadow-[0_8px_22px_rgba(0,0,0,0.06),0_2px_6px_rgba(0,0,0,0.03)] hover:-translate-y-0.5"
-            }`}
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-1.5 text-xs text-muted">
-                  <span>{bill.billCode}</span>
-                  {bill.updatedDate && bill.updatedDate > new Date().toISOString().slice(0, 10) && (
-                    <span className="inline-flex items-center rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 leading-none">
-                      Upcoming
-                    </span>
-                  )}
-                </div>
-                <div className="text-sm font-medium mt-1 text-ink tracking-tight">
-                  {bill.title}
-                </div>
-              </div>
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                className={`flex-shrink-0 mt-1.5 text-muted transition-transform duration-300 ${
-                  isOpen ? "rotate-180" : ""
-                }`}
-                aria-hidden
-              >
-                <path
-                  d="M3 4.5l3 3 3-3"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            <p className="text-xs text-muted mt-1.5 leading-relaxed">
+      {legislation.map((bill) => (
+        <article key={bill.id} className="rounded-2xl bg-bg/70 p-4">
+          <div className="text-xs text-muted">{bill.billCode}</div>
+          <h3 className="mt-1 text-sm font-medium tracking-tight text-ink">
+            {bill.title}
+          </h3>
+          {bill.summary && (
+            <p className="mt-1.5 text-xs leading-relaxed text-muted">
               {bill.summary}
             </p>
-            <BillTimeline stage={bill.stage} />
-
-            {/* Smooth expand — grid-template-rows 0fr → 1fr trick */}
-            <div
-              className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
-              style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+          )}
+          <BillTimeline stage={bill.stage} />
+          {bill.sourceUrl && (
+            <a
+              href={bill.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex text-xs font-medium text-ink hover:underline"
             >
-              <div className="overflow-hidden">
-                {isOpen && (
-                  <BillExpanded
-                    bill={bill}
-                    stateCode={stateCode}
-                    onSelectFacility={onSelectFacility}
-                  />
-                )}
-              </div>
-            </div>
-          </button>
-        );
-      })}
+              Official source →
+            </a>
+          )}
+        </article>
+      ))}
     </div>
   );
 }
