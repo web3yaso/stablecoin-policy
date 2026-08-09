@@ -5,19 +5,18 @@
   "region": "na",
   "level": "federal",
   "stance": "review",
-  "stanceDatacenter": "review",
-  "stanceAI": "review",
-  "contextBlurb": "Greenland does not have a dedicated private stablecoin regime. Financial regulation is closely connected to the Kingdom of Denmark, but EU MiCA does not automatically apply to Greenland as it does in Denmark. In practice, stablecoin activity is best treated as unclear and subject to general financial, AML and payment-law constraints rather than a bespoke issuer framework.",
+  "contextBlurb": "Greenland has no dedicated stablecoin framework. MiCA does not automatically apply as it does in Denmark, so private stablecoin issuance and payment use remain unclear and would be assessed under general financial, payments and AML rules.",
   "legislation": [],
-  "keyFigures": [],
-  "news": [],
   "stablecoinMeta": {
     "code": "GL",
     "nameZh": "格陵兰",
     "flagImg": "https://flagcdn.com/w320/gl.png",
     "lastUpdated": "2025-01-01",
     "summaryEn": "Greenland has no dedicated stablecoin framework. MiCA does not automatically apply as it does in Denmark, so private stablecoin issuance and payment use remain unclear and would be assessed under general financial, payments and AML rules.",
-    "tags": ["aml-kyc", "travel-rule"],
+    "tags": [
+      "aml-kyc",
+      "travel-rule"
+    ],
     "legalStatus": "unclear",
     "regulatoryClarity": 1,
     "regimeStatus": "none",
@@ -35,5 +34,6 @@
         "isPrimary": true
       }
     ]
-  }
+  },
+  "news": []
 }

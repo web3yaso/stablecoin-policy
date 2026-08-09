@@ -42,7 +42,7 @@ export default function AboutPage() {
             The map covers major jurisdictions worldwide, including US states,
             the European Union, the United Kingdom, and key Asian markets.
             Select any country or region to review legislation, regulators,
-            policy figures, and recent developments. Each jurisdiction is
+            evidence links, and recent developments. Each jurisdiction is
             rated from supportive to restrictive based on its current legal
             and regulatory posture.
           </p>
@@ -96,26 +96,7 @@ export default function AboutPage() {
             </li>
             <li>
               Legislative data references official parliamentary sources,
-              regulator publications, and{" "}
-              <a
-                href="https://legiscan.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-              >
-                LegiScan
-              </a>
-            </li>
-            <li>
-              Map inspiration comes from{" "}
-              <a
-                href="https://datacenterbans.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-              >
-                datacenterbans.com
-              </a>
+              regulator publications, and first-party government feeds.
             </li>
             <li>
               Icons are from{" "}

@@ -175,8 +175,6 @@ interface StateFile {
   stateCode: string;
   region: string;
   stance?: string;
-  stanceDatacenter: string;
-  stanceAI: string;
   lastUpdated: string;
   contextBlurb: string;
   legislation: Legislation[];
@@ -243,7 +241,7 @@ async function syncState(state: (typeof TARGET_STATES)[number]) {
     if (!FORCE && cache.bills[id]) continue;
     try {
       const detail = await fetchOpenStates<OSBillDetail>(`/bills/${encodeURIComponent(id)}`, {
-        include: "actions,sources,sponsors",
+        include: "actions,sources",
       });
       cache.bills[id] = detail;
     } catch (e) {
@@ -273,10 +271,6 @@ async function syncState(state: (typeof TARGET_STATES)[number]) {
     const stance = deriveStance(bill.title, bill.latest_action_description);
     const sourceUrl = bill.sources?.[0]?.url ?? bill.openstates_url;
     const updatedDate = (bill.latest_action_date ?? bill.updated_at ?? "").slice(0, 10);
-    const sponsors = (bill.sponsors ?? [])
-      .filter((s) => s.primary)
-      .map((s) => s.name);
-
     const leg: Legislation = {
       id,
       billCode: bill.identifier,
@@ -284,12 +278,10 @@ async function syncState(state: (typeof TARGET_STATES)[number]) {
       summary: "",
       stage,
       stance,
-      impactTags: [],
       stablecoinTags: [],
       category: "stablecoin-regulation",
       updatedDate,
       sourceUrl,
-      sponsors: sponsors.length > 0 ? sponsors : undefined,
     };
 
     if (existingById.has(id)) {
@@ -299,7 +291,6 @@ async function syncState(state: (typeof TARGET_STATES)[number]) {
         stage: leg.stage,
         updatedDate: leg.updatedDate,
         sourceUrl: leg.sourceUrl,
-        sponsors: leg.sponsors ?? prev.sponsors,
       });
       updated++;
     } else {

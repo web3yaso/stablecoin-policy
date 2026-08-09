@@ -5,12 +5,8 @@
   "region": "asia",
   "level": "federal",
   "stance": "concerning",
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning",
-  "contextBlurb": "Malaysia's Securities Commission (SC) regulates digital assets under the Capital Markets and Services (Prescription of Securities) (Digital Currency and Digital Token) Order 2019. Crypto exchanges must be registered with the SC. Stablecoins are treated as digital assets; specific stablecoin issuance rules have not yet been finalized. Bank Negara Malaysia (BNM) oversees payment-related aspects.",
+  "contextBlurb": "Malaysia's Securities Commission (SC) regulates digital assets under the Capital Markets and Services Order 2019. Crypto exchanges must be registered with the SC. Stablecoins are treated as digital assets; specific stablecoin issuance rules have not yet been finalized.",
   "legislation": [],
-  "keyFigures": [],
-  "news": [],
   "stablecoinMeta": {
     "code": "MY",
     "nameZh": "马来西亚",
@@ -46,5 +42,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }

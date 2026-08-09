@@ -23,7 +23,7 @@ export type RegionKey = "na" | "eu" | "asia";
 export interface RegionalHighlight {
   /** Exact substring to highlight in the summary. Case-sensitive. */
   text: string;
-  /** Topic color bucket — matches TOPIC_COLOR in AIOverview. */
+  /** Topic color bucket used by the public policy-update presentation. */
   topic: "legislation" | "infrastructure" | "cooperation";
 }
 

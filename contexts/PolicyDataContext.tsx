@@ -9,7 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { ENTITIES } from "@/lib/placeholder-data";
+import { ENTITIES } from "@/lib/policy-entities";
 import { applyNewsDataset, type NewsDataset } from "@/lib/news-dataset";
 import type { Entity, Region } from "@/types";
 

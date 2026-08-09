@@ -5,94 +5,8 @@
   "region": "eu",
   "level": "federal",
   "stance": "concerning",
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning",
   "contextBlurb": "As of 2025, the Netherlands applies the EU Markets in Crypto-Assets Regulation (MiCA). Retail users may lawfully buy, hold, and redeem MiCA-compliant stablecoins (EMTs/ARTs). Conduct supervision and CASP (crypto-asset service provider) licensing are handled by the AFM; prudential supervision of token issuers (e.g., reserves, own funds) sits with De Nederlandsche Bank (DNB) under the Netherlands' twin-peaks model. Stablecoins are not legal tender and carry issuer/operational risk.",
-  "legislation": [
-    {
-      "id": "netherlands-leg-1",
-      "billCode": "REG-1",
-      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": ""
-    },
-    {
-      "id": "netherlands-leg-2",
-      "billCode": "2025-09-25",
-      "title": "Nine major European banks, including ING, announced plans to launch a MiCA-compliant euro-denominated stablecoin, supervised by DNB, expected in 2026.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-09-25"
-    },
-    {
-      "id": "netherlands-leg-3",
-      "billCode": "2025-06-30",
-      "title": "Netherlands-specific transitional period ends (six months); from 2025-07-01 providers must be MiCA-authorised or passported.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-06-30"
-    },
-    {
-      "id": "netherlands-leg-4",
-      "billCode": "2025-06-27",
-      "title": "Bitvavo announces MiCA authorisation in NL.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-06-27"
-    }
-  ],
-  "keyFigures": [
-    {
-      "id": "netherlands-fig-1",
-      "name": "AFM (Autoriteit Financiële Markten)",
-      "role": "First point of contact for MiCA CASP licensing and conduct supervision; coordinates with DNB.",
-      "party": "N/A",
-      "stance": "review"
-    },
-    {
-      "id": "netherlands-fig-2",
-      "name": "DNB (De Nederlandsche Bank)",
-      "role": "Prudential supervisor for MiCA issuers (EMTs/ARTs), capital/own funds and certain prudential topics; continues to superv",
-      "party": "N/A",
-      "stance": "review"
-    }
-  ],
-  "news": [
-    {
-      "id": "netherlands-news-1",
-      "headline": "AFM – Contact & FAQ for CASP licensing, transitional period and AFM/DNB split",
-      "source": "afm.nl",
-      "date": "2026-04-01",
-      "url": "https://www.afm.nl/en/sector/cryptopartijen/contact-qa"
-    },
-    {
-      "id": "netherlands-news-2",
-      "headline": "DNB – Cryptos and supervision: what you need to know",
-      "source": "dnb.nl",
-      "date": "2026-04-01",
-      "url": "https://www.dnb.nl/en/payments/cryptos-and-supervision-what-you-need-to-know/"
-    },
-    {
-      "id": "netherlands-news-3",
-      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
-      "source": "dig.watch",
-      "date": "2026-04-01",
-      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
-    }
-  ],
+  "legislation": [],
   "stablecoinMeta": {
     "code": "NL",
     "nameZh": "荷兰",
@@ -134,5 +48,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }

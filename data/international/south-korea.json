@@ -5,76 +5,8 @@
   "region": "asia",
   "level": "federal",
   "stance": "none",
-  "stanceDatacenter": "none",
-  "stanceAI": "none",
   "contextBlurb": "As of September 2025, South Korea is moving toward a won-backed stablecoin regime but the final statutory/technical standards are pending. A KRW-pegged token (KRW1) has been launched in a pilot/PoC phase with bank-held reserves, while lawmakers and regulators finalize the framework that will govern issuance, reserves, and supervision.",
-  "legislation": [
-    {
-      "id": "south-korea-leg-1",
-      "billCode": "2025-09-18",
-      "title": "KRW1 launched by BDACS on Avalanche with Woori Bank reserves – described as PoC/pilot",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-09-18"
-    },
-    {
-      "id": "south-korea-leg-2",
-      "billCode": "2025-08-18",
-      "title": "Reports indicate stablecoin bill to be submitted around October 2025 as part of Phase-2",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-08-18"
-    },
-    {
-      "id": "south-korea-leg-3",
-      "billCode": "2025-06-10",
-      "title": "DABA introduced to the National Assembly (ruling party initiative)",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "none",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-06-10"
-    }
-  ],
-  "keyFigures": [
-    {
-      "id": "south-korea-fig-1",
-      "name": "Financial Services Commission (FSC)",
-      "role": "Policy lead and licensing/supervision for virtual-asset businesses under the new framework",
-      "party": "N/A",
-      "stance": "review"
-    },
-    {
-      "id": "south-korea-fig-2",
-      "name": "Bank of Korea (BOK)",
-      "role": "Central bank; advocates for strong role (even veto/backstop) given monetary/FX stability concerns",
-      "party": "N/A",
-      "stance": "review"
-    }
-  ],
-  "news": [
-    {
-      "id": "south-korea-news-1",
-      "headline": "Shin & Kim – Korea's emerging stablecoin framework",
-      "source": "law.asia",
-      "date": "2025-11-11",
-      "url": "https://law.asia/korea-stablecoin-regulation-framework/"
-    },
-    {
-      "id": "south-korea-news-2",
-      "headline": "Korean central bank gets role in won stablecoin supervision",
-      "source": "Ledger Insights",
-      "date": "2025-11-11",
-      "url": "https://www.ledgerinsights.com/korean-central-bank-wont-oppose-won-stablecoin-gets-role-in-supervision/"
-    }
-  ],
+  "legislation": [],
   "stablecoinMeta": {
     "code": "KR",
     "nameZh": "韩国",
@@ -113,5 +45,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }

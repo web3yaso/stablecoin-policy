@@ -13,24 +13,14 @@ import {
   NEUTRAL_STROKE,
   type SetTooltip,
 } from "@/lib/map-utils";
-import { getEntity } from "@/lib/placeholder-data";
-import type { DataCenter, Dimension, DimensionLens } from "@/types";
+import { getEntity } from "@/lib/policy-entities";
+import type { Dimension } from "@/types";
 
 interface AfricaMapProps {
   onSelectEntity: (geoId: string) => void;
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
   dimension?: Dimension;
-  lens?: DimensionLens;
-  showDataCenters?: boolean;
-  onHoverFacility?: (
-    dc: DataCenter,
-    x: number,
-    y: number,
-    clusterSize: number,
-  ) => void;
-  onLeaveFacility?: () => void;
-  onSelectFacility?: (dc: DataCenter) => void;
 }
 
 const africaProj = geoMercator()
@@ -61,7 +51,6 @@ export default function AfricaMap({
   selectedGeoId,
   setTooltip,
   dimension = "overall",
-  lens = "datacenter",
 }: AfricaMapProps) {
   return (
     <div
@@ -113,7 +102,7 @@ export default function AfricaMap({
                   );
                 }
 
-                const fill = getEntityColorForDimension(ent, dimension, lens);
+                const fill = getEntityColorForDimension(ent, dimension);
                 const base = {
                   fill,
                   stroke: isSelected ? "#FFFFFF" : NEUTRAL_STROKE,

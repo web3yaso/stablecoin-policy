@@ -61,7 +61,7 @@ const SORT_OPTIONS: { key: SortKey; label: string }[] = [
 
 // Signal-weighted terms for the relevance score. High-signal words
 // (lawsuit, moratorium, executive order) outweigh generic ones so a
-// story about a court ruling beats a generic "AI policy" explainer.
+// A concrete rulemaking or court decision outranks a generic explainer.
 const HIGH_SIGNAL = /\b(lawsuit|moratorium|executive order|injunction|ruling|court|passed|enacted|vetoed|signed|blocked|voided|halted|rejected|anthropic|openai|stargate|gigawatt|\d+\s?gw\b|referendum)\b/gi;
 const MED_SIGNAL = /\b(policy|regulat|legislat|data\s?cent(?:er|re)|hyperscale|grid|bill\b|framework|protest|rally|opposition)\b/gi;
 

@@ -5,76 +5,8 @@
   "region": "asia",
   "level": "federal",
   "stance": "concerning",
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning",
   "contextBlurb": "On the UAE mainland, retail payments are permitted only with CBUAE-approved Payment Tokens (fiat-referenced stablecoins), notably Dirham Payment Tokens (DPTs). Use of other crypto for general merchant checkout is prohibited. Foreign Payment Tokens (FPTs) are limited to narrow use-cases (e.g., paying for virtual assets). The Central Bank’s Payment Token Services Regulation (PTSR) is in force; Dubai’s VARA regulates virtual-asset activity in Dubai (ex-DIFC) and defers AED-referenced FRVAs to CBUAE. ADGM/FSRA has an FRT (fiat-referenced token) regime in consultation.",
-  "legislation": [
-    {
-      "id": "united-arab-emirates-leg-1",
-      "billCode": "2025-09-01",
-      "title": "ADGM FSRA consults on expanding fiat-referenced token rules (CP9/2025) to cover custody, intermediation and acceptance services.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-09-01"
-    },
-    {
-      "id": "united-arab-emirates-leg-2",
-      "billCode": "2025-07-06",
-      "title": "Merchant transition period ends – UAE retailers outside free zones must now accept only licensed dirham payment tokens.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-07-06"
-    },
-    {
-      "id": "united-arab-emirates-leg-3",
-      "billCode": "2025-04-28",
-      "title": "ADQ, FAB and IHC publicly launch the UAE’s first sovereign dirham-backed stablecoin on ADI blockchain, regulated by CBUAE.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-04-28"
-    }
-  ],
-  "keyFigures": [
-    {
-      "id": "united-arab-emirates-fig-1",
-      "name": "Central Bank of the UAE (CBUAE)",
-      "role": "Issues Payment Token Services Regulation; licenses dirham-backed stablecoins and supervises payment-token service provid",
-      "party": "N/A",
-      "stance": "review"
-    },
-    {
-      "id": "united-arab-emirates-fig-2",
-      "name": "Virtual Assets Regulatory Authority (VARA) – Dubai",
-      "role": "Regulates virtual-asset service providers in Dubai (excluding DIFC); oversees issuance and trading of fiat-referenced vi",
-      "party": "N/A",
-      "stance": "review"
-    }
-  ],
-  "news": [
-    {
-      "id": "united-arab-emirates-news-1",
-      "headline": "Payment Token Services Regulation",
-      "source": "Unlock Blockchain",
-      "date": "2025-11-11",
-      "url": "https://www.unlock-bc.com/125060/uae-central-bank-payment-token-stablecoin-regulation/"
-    },
-    {
-      "id": "united-arab-emirates-news-2",
-      "headline": "UAE Central Bank releases Payment Token Services Regulation",
-      "source": "Unlock Blockchain",
-      "date": "2025-11-11",
-      "url": "https://www.unlock-bc.com/en/uae-central-bank-payment-token-stablecoin-regulation"
-    }
-  ],
+  "legislation": [],
   "stablecoinMeta": {
     "code": "AE",
     "nameZh": "阿联酋",
@@ -116,5 +48,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }

@@ -7,32 +7,20 @@ import {
   type ProjectionFunction,
 } from "react-simple-maps";
 import { asiaProjection } from "@/lib/projections";
-import { getEntity } from "@/lib/placeholder-data";
+import { getEntity } from "@/lib/policy-entities";
 import { getEntityColorForDimension } from "@/lib/dimensions";
 import {
   NEUTRAL_FILL,
   NEUTRAL_STROKE,
   type SetTooltip,
 } from "@/lib/map-utils";
-import { ASIA_FACILITIES } from "@/lib/datacenters";
-import type { DataCenter, Dimension, DimensionLens } from "@/types";
-import DataCenterDots from "./DataCenterDots";
+import type { Dimension } from "@/types";
 
 interface AsiaMapProps {
   onSelectEntity: (geoId: string) => void;
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
   dimension?: Dimension;
-  lens?: DimensionLens;
-  showDataCenters?: boolean;
-  onHoverFacility?: (
-    dc: DataCenter,
-    x: number,
-    y: number,
-    clusterSize: number,
-  ) => void;
-  onLeaveFacility?: () => void;
-  onSelectFacility?: (dc: DataCenter) => void;
 }
 
 const asiaProj = asiaProjection as unknown as ProjectionFunction;
@@ -64,11 +52,6 @@ export default function AsiaMap({
   selectedGeoId,
   setTooltip,
   dimension = "overall",
-  lens = "datacenter",
-  showDataCenters = false,
-  onHoverFacility,
-  onLeaveFacility,
-  onSelectFacility,
 }: AsiaMapProps) {
   return (
     <div
@@ -125,14 +108,13 @@ export default function AsiaMap({
                   );
                 }
 
-                const fill = getEntityColorForDimension(ent, dimension, lens);
+                const fill = getEntityColorForDimension(ent, dimension);
                 const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
                 const strokeWidth = isSelected ? 4 : 1.5;
 
                 // Taiwan (ISO 158) is a sliver at Asia's scale — the
-                // visible path + hit target is too small to click
-                // without accidentally catching a data-center dot
-                // layered on top. Scale just this one country so both
+                // visible path + hit target is too small to click.
+                // Scale just this one country so both
                 // the fill and the click surface grow together.
                 const isTaiwan = id === "158";
                 const scaleBump = isTaiwan ? "scale(2.6)" : undefined;
@@ -182,14 +164,6 @@ export default function AsiaMap({
               })
           }
         </Geographies>
-        {showDataCenters && onHoverFacility && onLeaveFacility && (
-          <DataCenterDots projection={asiaProjection as unknown as (c: [number, number]) => [number, number] | null}
-            facilities={ASIA_FACILITIES}
-            onHoverFacility={onHoverFacility}
-            onLeaveFacility={onLeaveFacility}
-            onSelectFacility={onSelectFacility}
-          />
-        )}
       </ComposableMap>
     </div>
   );

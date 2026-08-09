@@ -5,105 +5,8 @@
   "region": "eu",
   "level": "federal",
   "stance": "concerning",
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning",
   "contextBlurb": "Italy applies the EU MiCA framework to stablecoins. Euro-pegged e-money tokens (EMTs) and asset-referenced tokens (ARTs) may be issued or offered to retail customers when authorised under MiCA and relevant national laws. Italy has designated the Bank of Italy (prudential and EMI oversight) and CONSOB (conduct and CASP oversight) as competent authorities. MiCA's stablecoin rules have applied since 30 June 2024 and CASP rules since 30 December 2024, with Italy providing a national transition (application deadline extended to 30 December 2025 and transitional activity possible until 30 June 2026 for eligible firms).",
-  "legislation": [
-    {
-      "id": "italy-leg-1",
-      "billCode": "REG-1",
-      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": ""
-    },
-    {
-      "id": "italy-leg-2",
-      "billCode": "2024-12-30",
-      "title": "MiCA CASP rules apply EU-wide (with national transitions)",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2024-12-30"
-    },
-    {
-      "id": "italy-leg-3",
-      "billCode": "2024-10-09",
-      "title": "EBA publishes Final Guidelines on redemption plans for ART/EMT issuers (orderly redemption and crisis-management expectations)",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2024-10-09"
-    },
-    {
-      "id": "italy-leg-4",
-      "billCode": "2024-06-30",
-      "title": "MiCA stablecoin rules apply EU-wide",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2024-06-30"
-    },
-    {
-      "id": "italy-leg-5",
-      "billCode": "2023-06-09",
-      "title": "MiCA published (Reg. (EU) 2023/1114)",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2023-06-09"
-    }
-  ],
-  "keyFigures": [
-    {
-      "id": "italy-fig-1",
-      "name": "Bank of Italy",
-      "role": "Primary supervisor for stablecoin issuers, focusing on financial stability, systemic risk, and cross-border issuance con",
-      "party": "N/A",
-      "stance": "review"
-    },
-    {
-      "id": "italy-fig-2",
-      "name": "CONSOB",
-      "role": "Oversees securities-related aspects of crypto-assets, ensuring investor protection and compliance with MiCAR disclosure ",
-      "party": "N/A",
-      "stance": "review"
-    }
-  ],
-  "news": [
-    {
-      "id": "italy-news-1",
-      "headline": "Regulation (EU) 2023/1114 — Markets in Crypto-Assets (MiCA) — Official Journal text",
-      "source": "eur-lex.europa.eu",
-      "date": "2026-04-01",
-      "url": "https://eur-lex.europa.eu/eli/reg/2023/1114/oj/eng"
-    },
-    {
-      "id": "italy-news-2",
-      "headline": "CONSOB — MiCAR: Markets in Crypto-Assets (overview & resources)",
-      "source": "consob.it",
-      "date": "2026-04-01",
-      "url": "https://www.consob.it/web/area-pubblica/micar"
-    },
-    {
-      "id": "italy-news-3",
-      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
-      "source": "dig.watch",
-      "date": "2026-04-01",
-      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
-    }
-  ],
+  "legislation": [],
   "stablecoinMeta": {
     "code": "IT",
     "nameZh": "意大利",
@@ -145,5 +48,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }

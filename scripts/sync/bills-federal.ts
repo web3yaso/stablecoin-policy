@@ -375,7 +375,6 @@ async function main() {
       summary: "",
       stage,
       stance,
-      impactTags: [],
       category: "stablecoin-regulation",
       updatedDate,
       sourceUrl: url,

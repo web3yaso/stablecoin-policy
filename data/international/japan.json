@@ -5,117 +5,8 @@
   "region": "asia",
   "level": "federal",
   "stance": "concerning",
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning",
-  "contextBlurb": "Japan operates a clear, conservative stablecoin regime. Fiat-pegged, par-redeemable stablecoins are regulated as electronic payment instruments (EPIs) under amendments to the Payment Services Act (PSA). Issuance and handling are limited to licensed entities under the FSA framework, with strong AML/CFT and consumer-protection rules. The core regime has applied since June 2023, and authorities refined it through 2024–2026. On 7 July 2026, the FSA finalized an amendment expanding the foreign jurisdictions covered by Japan's travel-rule requirements for cryptoasset and stablecoin transfers; the amendment takes effect on 3 August 2026.",
-  "legislation": [
-    {
-      "id": "japan-leg-2026-travel-rule",
-      "billCode": "2026-07-07",
-      "title": "FSA finalized an amendment expanding the jurisdictions covered by Japan's travel rule for cryptoasset and stablecoin transfers.",
-      "summary": "The amendment adds five jurisdictions to the scope of Japan's originator and beneficiary information requirements for transfers involving foreign virtual-asset service providers. It takes effect on August 3, 2026.",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2026-07-07",
-      "sourceUrl": "https://www.fsa.go.jp/en/news/2026/20260707/20260707.html"
-    },
-    {
-      "id": "japan-leg-1",
-      "billCode": "2026-01-27",
-      "title": "FSA published strict collateral requirements for stablecoin reserves, mandating top-grade credit ratings for foreign bonds held by issuers.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2026-01-27"
-    },
-    {
-      "id": "japan-leg-2",
-      "billCode": "2025-08-18",
-      "title": "JPYC announced registration as a funds-transfer registrant (Kanto Local Finance Bureau registration), enabling it to issue a yen-pegged EPI.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-08-18"
-    },
-    {
-      "id": "japan-leg-3",
-      "billCode": "2025-04-22",
-      "title": "FSA/Financial System Council working-group publications inform refinements to reserve and issuer rules and intermediary licensing.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-04-22"
-    },
-    {
-      "id": "japan-leg-4",
-      "billCode": "2025-03-07",
-      "title": "Diet work on updates to PSA/intermediary rules reported (clarifying reserves and cross-border handling).",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-03-07"
-    },
-    {
-      "id": "japan-leg-5",
-      "billCode": "2023-06-01",
-      "title": "PSA amendments establishing the EPI framework take effect (legal recognition; licensing perimeter).",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2023-06-01"
-    }
-  ],
-  "keyFigures": [
-    {
-      "id": "japan-fig-1",
-      "name": "Financial Services Agency (FSA)",
-      "role": "Primary regulator for EPIs and crypto-asset intermediaries (licensing, AML/CFT, consumer protection, ongoing supervision",
-      "party": "N/A",
-      "stance": "review"
-    },
-    {
-      "id": "japan-fig-2",
-      "name": "Bank of Japan (BOJ)",
-      "role": "Leads CBDC research; monitors monetary and financial stability; coordinates with FSA/MOF on systemic issues.",
-      "party": "N/A",
-      "stance": "review"
-    }
-  ],
-  "news": [
-    {
-      "id": "japan-news-1",
-      "headline": "FSA outline of stablecoin amendments under the Payment Services Act",
-      "source": "fsa.go.jp",
-      "date": "2022-12-07",
-      "url": "https://www.fsa.go.jp/en/news/2022/20221207/01.pdf"
-    },
-    {
-      "id": "japan-news-2",
-      "headline": "FSA outline of amendments (Dec 2022)",
-      "source": "fsa.go.jp",
-      "date": "2026-01-27",
-      "url": "https://www.fsa.go.jp/en/news/2022/20221207/01.pdf"
-    },
-    {
-      "id": "japan-news-3",
-      "headline": "SBI Holdings partners with Circle to pioneer USDC in Japan",
-      "source": "Circle",
-      "date": "2023-11-27",
-      "url": "https://www.circle.com/pressroom/sbi-holdings-partners-with-circle-to-pioneer-digital-currency-innovation-in-japan-with-usdc-banking-and-web3-services"
-    }
-  ],
+  "contextBlurb": "Japan regulates fiat-pegged, par-redeemable stablecoins as electronic payment instruments under the Payment Services Act. Issuance and handling are limited to licensed entities under the FSA framework, with strong reserve, AML/CFT and consumer-protection requirements. On 7 July 2026, the FSA finalized an amendment adding five foreign jurisdictions to the scope of Japan's travel-rule requirements for cryptoasset and stablecoin transfers. The amendment takes effect on 3 August 2026.",
+  "legislation": [],
   "stablecoinMeta": {
     "code": "JP",
     "nameZh": "日本",
@@ -155,5 +46,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }

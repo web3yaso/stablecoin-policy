@@ -21,7 +21,7 @@ async function main() {
       {
         role: "user",
         content:
-          "Search for the most recent AI data center legislation in Virginia (2026). In one sentence, say what's happening. Don't return JSON, just plain text.",
+          "Find the latest official U.S. federal payment-stablecoin rulemaking. In one sentence, identify the authority and source URL. Don't return JSON, just plain text.",
       },
     ],
   });

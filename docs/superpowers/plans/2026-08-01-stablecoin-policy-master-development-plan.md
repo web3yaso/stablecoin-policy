@@ -2,7 +2,7 @@
 
 Status: active execution plan  
 Product: Stablecoin Policy public subsite and Citely stablecoin domain backend  
-Last updated: 2026-08-01  
+Last updated: 2026-08-08
 Canonical product spec: `docs/superpowers/specs/2026-07-31-stablecoin-policy-domain-api-development-spec.md`
 
 ## 1. Purpose
@@ -555,7 +555,8 @@ customer delivery are not started.
 
 ## Phase 7 — legacy-domain extraction and repository focus
 
-Status: not started.
+Status: implementation and local verification complete on
+`codex/legacy-domain-cleanup`; pending pull-request review and deployment.
 
 Goal: leave this repository focused on Stablecoin Policy without breaking the
 public site or shared data needed by AI Policy.
@@ -587,6 +588,15 @@ public site or shared data needed by AI Policy.
   evidence where appropriate;
 - repository-data limits and build output materially improve;
 - redirects, analytics, tests, and rollback checks pass.
+
+Implementation record: `docs/phase7-legacy-domain-cleanup.md` is the approved
+disposition inventory, redirect plan, before/after measurement, verification
+record, and rollback handoff for GitHub Issue #46. The cleanup removes legacy
+AI/data-center, politician, donor, vote, energy/EIA product code and generated
+data while preserving Stablecoin APIs, shared regulatory storage, and the
+machine-assurance lane. Local build output fell from 65 to 23 generated app
+pages and tracked bytes fell by 79.7%. Production/preview smoke remains a
+deployment gate, not a reason to mutate current production before review.
 
 ## 8. Cross-phase engineering workstreams
 

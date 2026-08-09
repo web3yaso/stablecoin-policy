@@ -110,10 +110,10 @@ Rules (strict):
 - Preserve the underlying fact — don't editorialize or change meaning
 
 Examples of good shortened headlines:
-- "Sanders, AOC Introduce AI Data Center Moratorium"
+- "OCC Proposes Payment Stablecoin Rules"
 - "Trump WH Releases National AI Framework"
 - "Maine Passes First Statewide DC Moratorium"
-- "Texas SB 1308 Extends Data Center Tax Exemption"
+- "Hong Kong Opens Stablecoin Licensing Window"
 - "Virginia HB 1515 Moratorium Killed in Committee"
 
 Return ONLY a JSON array of ${originals.length} shortened headlines, in the same order, no prose, no markdown:

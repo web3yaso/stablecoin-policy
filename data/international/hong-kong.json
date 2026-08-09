@@ -5,127 +5,8 @@
   "region": "asia",
   "level": "federal",
   "stance": "concerning",
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning",
-  "contextBlurb": "Hong Kong now operates one of the clearest dedicated stablecoin licensing regimes in Asia. The Stablecoins Ordinance (Cap. 656) took effect on 1 August 2025, with HKMA supervision and AML/CFT guidelines finalised on 29 July 2025. Issuers of in-scope fiat-referenced stablecoins need an HKMA licence and must meet reserve, stabilisation and par-redemption standards. On 10 April 2026, the HKMA granted the first two licences under the Ordinance to Anchorpoint Financial Limited and The Hongkong and Shanghai Banking Corporation Limited (HSBC).",
-  "legislation": [
-    {
-      "id": "hong-kong-leg-1",
-      "billCode": "2026-04-10",
-      "title": "HKMA granted first stablecoin issuer licences under Cap. 656 to Anchorpoint Financial Limited and HSBC.",
-      "summary": "The HKMA granted the first two licences under the Stablecoins Ordinance, moving the regime from rulemaking into live supervision of licensed issuers.",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2026-04-10"
-    },
-    {
-      "id": "hong-kong-leg-2",
-      "billCode": "2025-08-14",
-      "title": "HKMA & SFC joint market-caution statement on stablecoin licensing and hype.",
-      "summary": "The HKMA and SFC warned the market against premature marketing claims and reminded firms that no one could hold themselves out as licensed or applying for a licence unless that was true under the Ordinance.",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-08-14"
-    },
-    {
-      "id": "hong-kong-leg-3",
-      "billCode": "2025-08-01",
-      "title": "Ordinance came into effect; HKMA guidelines gazetted.",
-      "summary": "Cap. 656 and the associated HKMA supervision and AML/CFT guidelines entered into force, making licensing mandatory for in-scope fiat-referenced stablecoin issuance activities.",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-08-01"
-    },
-    {
-      "id": "hong-kong-leg-4",
-      "billCode": "2025-06-03",
-      "title": "Commencement Notice (L.N. 125 of 2025) appointed 1 Aug 2025.",
-      "summary": "The commencement notice fixed 1 August 2025 as the date the new licensing regime would begin operating.",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-06-03"
-    },
-    {
-      "id": "hong-kong-leg-5",
-      "billCode": "2025-05-30",
-      "title": "Ordinance gazetted.",
-      "summary": "Following passage by LegCo, the Stablecoins Ordinance was gazetted as Cap. 656, formally creating the statutory licensing framework.",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-05-30"
-    },
-    {
-      "id": "hong-kong-leg-6",
-      "billCode": "2025-05-26",
-      "title": "HKMA published draft Guidelines (supervision and AML/CFT).",
-      "summary": "The HKMA published draft supervisory and AML/CFT guidance to explain how stablecoin issuers would need to meet reserve, redemption, governance and financial-crime controls under the new law.",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-05-26"
-    },
-    {
-      "id": "hong-kong-leg-7",
-      "billCode": "2025-05-21",
-      "title": "LegCo passed the Stablecoins Bill (now Cap. 656).",
-      "summary": "Legislative passage created a dedicated Hong Kong licensing regime for fiat-referenced stablecoin issuers, including reserve segregation and redemption-at-par requirements.",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-05-21"
-    }
-  ],
-  "keyFigures": [
-    {
-      "id": "hong-kong-fig-1",
-      "name": "Hong Kong Monetary Authority (HKMA)",
-      "role": "Primary licensing and supervision of FRS issuers (prudential rules, reserves, AML/CFT).",
-      "party": "N/A",
-      "stance": "review"
-    },
-    {
-      "id": "hong-kong-fig-2",
-      "name": "Securities and Futures Commission (SFC)",
-      "role": "Regulates VATPs, custody, and the securities-law perimeter; coordinates with HKMA.",
-      "party": "N/A",
-      "stance": "review"
-    }
-  ],
-  "news": [
-    {
-      "id": "hong-kong-news-1",
-      "headline": "HKMA – Granting of stablecoin issuer licences (April 10, 2026)",
-      "source": "hkma.gov.hk",
-      "date": "2026-04-10",
-      "url": "https://www.hkma.gov.hk/eng/news-and-media/press-releases/2026/04/20260410-4/"
-    },
-    {
-      "id": "hong-kong-news-2",
-      "headline": "HKMA – Implementation of regulatory regime for stablecoin issuers",
-      "source": "hkma.gov.hk",
-      "date": "2025-07-29",
-      "url": "https://www.hkma.gov.hk/eng/news-and-media/press-releases/2025/07/20250729-4/"
-    },
-    {
-      "id": "hong-kong-news-3",
-      "headline": "HKMA – Register of Licensees under the Stablecoins Ordinance (Cap. 656)",
-      "source": "hkma.gov.hk",
-      "date": "2026-04-23",
-      "url": "https://www.hkma.gov.hk/eng/regulatory-resources/registers/register-of-licensed-stablecoin-issuers/"
-    }
-  ],
+  "contextBlurb": "Hong Kong has a dedicated stablecoin licensing framework under the Stablecoins Ordinance (Cap. 656), in force since 1 August 2025. The HKMA finalised supervision and AML/CFT guidance on 29 July 2025 and requires licensed issuers to meet reserve, stabilisation and redemption standards. On 10 April 2026, the HKMA granted the first two stablecoin issuer licences, and the official register showed Anchorpoint Financial Limited and HSBC as licensees effective that date.",
+  "legislation": [],
   "stablecoinMeta": {
     "code": "HK",
     "nameZh": "香港",
@@ -167,5 +48,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }

@@ -5,87 +5,8 @@
   "region": "asia",
   "level": "federal",
   "stance": "concerning",
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning",
   "contextBlurb": "India does not have a dedicated stablecoin law. Stablecoins fall within the country’s Virtual Digital Asset (VDA) perimeter for tax (30% on gains; 1% TDS on transfers) and AML/CFT after the government brought VDA activities under the PMLA and FIU-IND oversight. They are not legal tender and not an RBI-authorised payment instrument, and the RBI has recently reiterated concerns that stablecoins can threaten policy sovereignty, favouring the e-rupee (CBDC) instead. Policy work is ongoing, but any sovereign-backed or “twin-rupee” stablecoin concepts have no official regulatory status at this time.",
-  "legislation": [
-    {
-      "id": "india-leg-1",
-      "billCode": "2025-10-31",
-      "title": "RBI Deputy Governor: stablecoins risk “policy sovereignty”",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-10-31"
-    },
-    {
-      "id": "india-leg-2",
-      "billCode": "2025-10-25",
-      "title": "Madras High Court: cryptocurrency recognized as property; WazirX dispute",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-10-25"
-    },
-    {
-      "id": "india-leg-3",
-      "billCode": "2025-01-28",
-      "title": "RBI expands retail e-rupee pilot to fintechs (CBDC context)",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-01-28"
-    },
-    {
-      "id": "india-leg-4",
-      "billCode": "2023-12-28",
-      "title": "FIU-IND issues show-cause notices to offshore VDA providers",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2023-12-28"
-    }
-  ],
-  "keyFigures": [
-    {
-      "id": "india-fig-1",
-      "name": "Reserve Bank of India (RBI)",
-      "role": "The RBI maintains a cautious stance toward privately issued stablecoins and digital currencies. The central bank has con",
-      "party": "N/A",
-      "stance": "review"
-    },
-    {
-      "id": "india-fig-2",
-      "name": "Ministry of Finance",
-      "role": "The Ministry of Finance holds responsibility for the overall policy framework governing crypto assets and stablecoins in",
-      "party": "N/A",
-      "stance": "review"
-    }
-  ],
-  "news": [
-    {
-      "id": "india-news-1",
-      "headline": "PMLA coverage of VDAs",
-      "source": "egazette.gov.in",
-      "date": "2025-11-15",
-      "url": "https://egazette.gov.in/WriteReadData/2023/244184.pdf"
-    },
-    {
-      "id": "india-news-2",
-      "headline": "FIU compliance action vs offshore VDA",
-      "source": "pib.gov.in",
-      "date": "2025-11-15",
-      "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1991372"
-    }
-  ],
+  "legislation": [],
   "stablecoinMeta": {
     "code": "IN",
     "nameZh": "印度",
@@ -122,5 +43,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }
