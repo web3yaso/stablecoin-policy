@@ -5,76 +5,8 @@
   "region": "asia",
   "level": "federal",
   "stance": "favorable",
-  "stanceDatacenter": "favorable",
-  "stanceAI": "favorable",
   "contextBlurb": "Singapore's stablecoin regulatory framework for 2025, led by the Monetary Authority of Singapore (MAS), focuses on ensuring safety, value stability, and consumer protection for stablecoins pegged to the Singapore Dollar (SGD) or G10 currencies. The framework, finalized in 2023, is not yet fully in force as of October 2025, with MAS expected to release further legislation and implementation details later in the year. Only stablecoins that are fully backed by high-quality liquid assets and issued in Singapore can be designated as 'MAS-regulated stablecoins,' a label intended to signal trust and compliance. Retail users benefit from strong consumer protections, including the statutory trust of customer assets and redemption rights at par value within five business days. However, they are prohibited from engaging in high-risk activities like lending and stabling stablecoins. The broader crypto regulatory environment is stringent, with a mandatory licensing regime for Digital Token Service Providers (DTSPs) that came into effect on June 30, 2025, with no grace period. This regime, combined with the stablecoin framework, positions Singapore as a leader in Asia for balanced, innovation-friendly yet safety-focused digital asset regulation.",
-  "legislation": [
-    {
-      "id": "singapore-leg-1",
-      "billCode": "2025-07-01",
-      "title": "Paxos Digital Singapore Receives Full MAS Approval",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "favorable",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-07-01"
-    },
-    {
-      "id": "singapore-leg-2",
-      "billCode": "2025-06-30",
-      "title": "Deadline for DTSP Licensing Passed",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "favorable",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-06-30"
-    },
-    {
-      "id": "singapore-leg-3",
-      "billCode": "2023-08-01",
-      "title": "MAS Finalises Stablecoin Regulatory Framework",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "favorable",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2023-08-01"
-    }
-  ],
-  "keyFigures": [
-    {
-      "id": "singapore-fig-1",
-      "name": "Monetary Authority of Singapore (MAS)",
-      "role": "The primary regulator for stablecoins and digital payment tokens. MAS is responsible for issuing licenses, setting regul",
-      "party": "N/A",
-      "stance": "review"
-    },
-    {
-      "id": "singapore-fig-2",
-      "name": "Ministry of Law",
-      "role": "Provides the overarching legal framework and legislation for financial regulations. It oversees anti-money laundering (A",
-      "party": "N/A",
-      "stance": "review"
-    }
-  ],
-  "news": [
-    {
-      "id": "singapore-news-1",
-      "headline": "The Global Stablecoin Regulatory Framework in Singapore",
-      "source": "fintechlawblog.com",
-      "date": "2025-10-17",
-      "url": "https://www.fintechlawblog.com/2025/09/03/the-global-stablecoin-stablecoin-regulatory-framework-in-singapore/"
-    },
-    {
-      "id": "singapore-news-2",
-      "headline": "Chambers Global Practice Guides: Singapore Blockchain 2025",
-      "source": "drewnapier.com",
-      "date": "2025-10-17",
-      "url": "https://www.drewnapier.com/DrewNapier/media/DrewNapier/Chambers-Global-Practice-Guides-Singapore-Blockchain-2025.pdf"
-    }
-  ],
+  "legislation": [],
   "stablecoinMeta": {
     "code": "SG",
     "nameZh": "新加坡",
@@ -115,5 +47,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }

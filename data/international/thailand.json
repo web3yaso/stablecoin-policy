@@ -5,12 +5,8 @@
   "region": "asia",
   "level": "federal",
   "stance": "concerning",
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning",
   "contextBlurb": "Thailand's SEC classifies most stablecoins as digital assets regulated under the 2018 Digital Asset Business Act. They may be traded on licensed exchanges but cannot be used as payment instruments. The Bank of Thailand (BOT) is developing a retail CBDC and has been cautious about private stablecoin issuance.",
   "legislation": [],
-  "keyFigures": [],
-  "news": [],
   "stablecoinMeta": {
     "code": "TH",
     "nameZh": "泰国",
@@ -47,5 +43,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }

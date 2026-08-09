@@ -5,12 +5,8 @@
   "region": "latam",
   "level": "federal",
   "stance": "concerning",
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning",
-  "contextBlurb": "Mexico's Fintech Law (2018) created a framework for financial technology institutions including crypto exchanges, but Banco de México has explicitly restricted the use of virtual assets — including stablecoins — as means of payment within the regulated financial system. Private stablecoin issuance for domestic payments is not permitted, though crypto assets can be held as investments.",
+  "contextBlurb": "Mexico's Fintech Law (2018) created a framework for financial technology institutions. However, Banco de México restricts virtual assets including stablecoins as payment instruments within the regulated financial system. Crypto can be held as investment assets.",
   "legislation": [],
-  "keyFigures": [],
-  "news": [],
   "stablecoinMeta": {
     "code": "MX",
     "nameZh": "墨西哥",
@@ -47,5 +43,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }

@@ -122,7 +122,7 @@ test that will become tracked when this branch is committed.
 | Metric | Before | After | Change |
 | --- | ---: | ---: | ---: |
 | Git-tracked files | 552 | 412 | -25.4% |
-| Git-tracked bytes | 17,756,419 | 3,606,441 | -79.7% |
+| Git-tracked bytes | 17,756,419 | 3,606,439 | -79.7% |
 | `data/` working-tree size | 14,844 KiB | 1,772 KiB | -88.1% |
 | Production dependencies | 19 | 14 | -26.3% |
 | Development dependencies | 16 | 15 | -6.3% |

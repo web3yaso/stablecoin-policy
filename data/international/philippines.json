@@ -5,12 +5,8 @@
   "region": "asia",
   "level": "federal",
   "stance": "concerning",
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning",
-  "contextBlurb": "The Bangko Sentral ng Pilipinas (BSP) regulates virtual asset service providers (VASPs) under Circular No. 1108. The Philippines has a relatively open stance toward crypto, with several peso-backed stablecoins in circulation. Stablecoin issuers must register as VASPs and comply with AML/CFT requirements. A comprehensive licensing framework for stablecoin issuance is still in development.",
+  "contextBlurb": "The Bangko Sentral ng Pilipinas (BSP) regulates virtual asset service providers (VASPs) under Circular No. 1108. The Philippines has a relatively open stance toward crypto, with several peso-backed stablecoins in circulation. Stablecoin issuers must register as VASPs and comply with AML/CFT requirements.",
   "legislation": [],
-  "keyFigures": [],
-  "news": [],
   "stablecoinMeta": {
     "code": "PH",
     "nameZh": "菲律宾",
@@ -39,5 +35,6 @@
         "isPrimary": true
       }
     ]
-  }
+  },
+  "news": []
 }

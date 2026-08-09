@@ -5,94 +5,8 @@
   "region": "eu",
   "level": "federal",
   "stance": "concerning",
-  "stanceDatacenter": "concerning",
-  "stanceAI": "concerning",
   "contextBlurb": "Spain applies the EU MiCA framework. The CNMV (conduct and markets) and Banco de España (prudential for EMIs) supervise the parts relevant to stablecoins. Licensed firms can offer e-money tokens (EMTs) and asset-referenced tokens (ARTs) to retail users. Many non-MiCA-compliant stablecoins were removed from EU platforms around March 2025 as exchanges reacted to MiCA's application and supervisory expectations. BBVA publicly announced crypto services in Spain.",
-  "legislation": [
-    {
-      "id": "spain-leg-1",
-      "billCode": "REG-1",
-      "title": "Apr 2026 ESMA confirmed that the MiCA transitional period ends mid-2026; crypto firms must hold a full MiCA/CASP licence by that deadline. As of April 2026, 199 CASPs are licensed across the EU; no Asset-Referenced Token (ART) issuer has yet been approved.",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": ""
-    },
-    {
-      "id": "spain-leg-2",
-      "billCode": "2025-05-13",
-      "title": "CNMV adopts five ESMA MiCA Guidelines",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-05-13"
-    },
-    {
-      "id": "spain-leg-3",
-      "billCode": "2025-03-01",
-      "title": "Major EU exchanges delisted non-MiCA-compliant stablecoins (for example, Binance announcements).",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-03-01"
-    },
-    {
-      "id": "spain-leg-4",
-      "billCode": "2025-01-22",
-      "title": "Spain aligned crypto advertising with MiCA (easing earlier national rules).",
-      "summary": "",
-      "stage": "Enacted",
-      "stance": "concerning",
-      "impactTags": [],
-      "category": "stablecoin-regulation",
-      "updatedDate": "2025-01-22"
-    }
-  ],
-  "keyFigures": [
-    {
-      "id": "spain-fig-1",
-      "name": "CNMV (Comisión Nacional del Mercado de Valores)",
-      "role": "Conduct supervisor for CASPs, white papers, and advertising/consumer protection.",
-      "party": "N/A",
-      "stance": "review"
-    },
-    {
-      "id": "spain-fig-2",
-      "name": "Banco de España",
-      "role": "Prudential supervisor for EMIs and credit institutions (EMT issuers). Operated the VASP AML register pre-MiCA.",
-      "party": "N/A",
-      "stance": "review"
-    }
-  ],
-  "news": [
-    {
-      "id": "spain-news-1",
-      "headline": "ESMA MiCA investor and provider information",
-      "source": "esma.europa.eu",
-      "date": "2026-04-01",
-      "url": "https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica"
-    },
-    {
-      "id": "spain-news-2",
-      "headline": "MiCA Regulation (EU) 2023/1114 (EUR-Lex)",
-      "source": "eur-lex.europa.eu",
-      "date": "2026-04-01",
-      "url": "https://eur-lex.europa.eu/eli/reg/2023/1114/oj"
-    },
-    {
-      "id": "spain-news-3",
-      "headline": "Digital Watch – ESMA confirms end of MiCA transition period (April 2026)",
-      "source": "dig.watch",
-      "date": "2026-04-01",
-      "url": "https://dig.watch/updates/esma-confirms-end-of-mica-transition-period-2026"
-    }
-  ],
+  "legislation": [],
   "stablecoinMeta": {
     "code": "ES",
     "nameZh": "西班牙",
@@ -134,5 +48,6 @@
         "isPrimary": false
       }
     ]
-  }
+  },
+  "news": []
 }
