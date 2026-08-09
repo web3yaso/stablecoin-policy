@@ -1,0 +1,9 @@
+{"caseId":"eligible","mutation":"NONE","expected":"PASS"}
+{"caseId":"storage-rights-unknown","mutation":"STORAGE_RIGHTS_UNKNOWN","expected":"BLOCK"}
+{"caseId":"rights-review-missing","mutation":"RIGHTS_REVIEW_MISSING","expected":"BLOCK"}
+{"caseId":"excerpt-permission-unknown","mutation":"EXCERPT_PERMISSION_UNKNOWN","expected":"BLOCK"}
+{"caseId":"provision-text-missing","mutation":"PROVISION_TEXT_MISSING","expected":"BLOCK"}
+{"caseId":"claim-without-citation","mutation":"CLAIM_WITHOUT_CITATION","expected":"BLOCK"}
+{"caseId":"cross-release-claim","mutation":"CROSS_RELEASE_CLAIM","expected":"BLOCK"}
+{"caseId":"assurance-tier-mismatch","mutation":"ASSURANCE_TIER_MISMATCH","expected":"BLOCK"}
+{"caseId":"jurisdiction-mismatch","mutation":"JURISDICTION_MISMATCH","expected":"BLOCK"}
