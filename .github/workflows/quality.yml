@@ -28,7 +28,9 @@ jobs:
       - run: npm run eval:phase0
       - run: npm run eval:phase1
       - run: npm run eval:phase2
+      - run: npm run eval:phase3
       - run: npm run spec:phase2
+      - run: npm run spec:rag
       - name: Check repository data limits (pull request)
         if: github.event_name == 'pull_request'
         env:

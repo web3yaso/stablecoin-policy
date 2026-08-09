@@ -328,7 +328,17 @@ subsite-owned `playbookId`.
 
 ## Phase 3 — Evidence RAG
 
-Status: not started.
+Status: foundation in progress on `codex/phase3-evidence-rag` (2026-08-09).
+The executable index/retrieval model, strict API contracts, provider-neutral
+hybrid retrieval core, authenticated endpoint, pgvector-backed storage and
+atomic index lifecycle migrations `0024`-`0025`, retrieval audit, sanitized
+eval harness, and database tests are implemented locally. Migration `0026`
+adds the default-dry-run EEA builder: service-only corpus input, deterministic
+provision-aligned chunks, one-transaction/idempotent DRAFT import, immutable
+chunk reuse, exact server-manifest inspection, and separately confirmed
+activation. Migrations are not applied to the linked Supabase project and no
+production EEA index is built or active. See
+`docs/phase3-evidence-rag-operations.md`.
 
 Goal: retrieve and explain exact regulatory evidence without allowing model
 output to change deterministic decisions.

@@ -1,0 +1,10 @@
+{"caseId":"authorization","query":"issuer authorization for an electronic money token","expectedProvisionId":"provision:rag-eval:authorization"}
+{"caseId":"redemption","query":"redemption at par value for token holders","expectedProvisionId":"provision:rag-eval:redemption"}
+{"caseId":"reserve","query":"safeguarding and composition of reserve assets","expectedProvisionId":"provision:rag-eval:reserve"}
+{"caseId":"white-paper","query":"notification and publication of a crypto asset white paper","expectedProvisionId":"provision:rag-eval:white-paper"}
+{"caseId":"custody","query":"custody client asset segregation requirements","expectedProvisionId":"provision:rag-eval:custody"}
+{"caseId":"trading","query":"admission to trading platform operator duties","expectedProvisionId":"provision:rag-eval:trading"}
+{"caseId":"transfer","query":"transfer service execution requirements","expectedProvisionId":"provision:rag-eval:transfer"}
+{"caseId":"complaints","query":"complaints handling procedure for clients","expectedProvisionId":"provision:rag-eval:complaints"}
+{"caseId":"marketing","query":"fair clear marketing communications requirements","expectedProvisionId":"provision:rag-eval:marketing"}
+{"caseId":"reporting","query":"reporting obligations for significant tokens","expectedProvisionId":"provision:rag-eval:reporting"}

@@ -1,0 +1,498 @@
+begin;
+
+create extension if not exists pgtap with schema extensions;
+set search_path = public, extensions, policy, regulatory, retrieval;
+
+select plan(39);
+
+-- Sanitized provisional corpus fixture. It represents workflow shape only,
+-- not a legal conclusion or production review.
+insert into policy.storage_objects (
+  object_id, provider, bucket, object_key, checksum_sha256, byte_size,
+  content_type, encryption_state
+) values (
+  'object:rag-test:1', 'supabase', 'policy-sources',
+  'tests/rag/source.bin', repeat('1', 64), 128,
+  'application/octet-stream', 'PROVIDER_ENCRYPTED'
+);
+
+insert into regulatory.source_authorities (
+  authority_id, name, jurisdiction_code, authority_type, official_domains
+) values (
+  'authority:rag-test', 'Sanitized RAG Test Authority', 'EEA',
+  'REGULATOR', array['official.rag.test']
+);
+
+insert into regulatory.source_documents (
+  document_id, authority_id, official_document_id, document_type, title,
+  canonical_url, language_codes, redistribution_rights, licence_identifier
+) values (
+  'document:rag-test', 'authority:rag-test', 'RAG-TEST-1',
+  'REGULATION', 'Sanitized RAG Test Instrument',
+  'https://official.rag.test/instrument', array['en'], 'EXCERPT',
+  'SANITIZED-TEST-LICENCE'
+);
+
+insert into regulatory.source_versions (
+  version_id, document_id, version_label, raw_object_id, checksum_sha256,
+  official_url, published_at, effective_from, observed_at, retrieved_at,
+  lifecycle_state, storage_rights, rights_reviewed_at, rights_basis
+) values (
+  'version:rag-test:1', 'document:rag-test', 'test-v1',
+  'object:rag-test:1', repeat('2', 64),
+  'https://official.rag.test/instrument/v1', now() - interval '10 days',
+  now() - interval '9 days', now() - interval '2 days',
+  now() - interval '2 days', 'OBSERVED', 'ALLOWED',
+  now() - interval '3 days', 'Sanitized internal-search rights basis'
+);
+
+insert into regulatory.provisions (
+  provision_id, version_id, locator, heading, language_code, provision_text,
+  text_checksum_sha256, ordinal, excerpt_permission
+) values (
+  'provision:rag-test:1', 'version:rag-test:1', 'Article 1',
+  'Sanitized provision', 'en', 'Sanitized retrieval fixture text.',
+  repeat('3', 64), 1, 'ALLOWED'
+);
+
+insert into policy.legal_claims (
+  claim_id, jurisdiction_code, topic, proposition, legal_status,
+  review_state, effective_from, knowledge_cutoff
+) values (
+  'claim:rag-test:1', 'EEA', 'sanitized-topic',
+  'Sanitized retrieval fixture proposition.', 'UNDETERMINED',
+  'DRAFT', now() - interval '9 days', now() - interval '1 day'
+);
+
+insert into policy.citations (
+  citation_id, claim_id, provision_id, support_relation, exact_locator,
+  allowed_excerpt
+) values (
+  'citation:rag-test:1', 'claim:rag-test:1', 'provision:rag-test:1',
+  'DIRECT_SUPPORT', 'Article 1', 'Sanitized retrieval fixture text.'
+);
+
+insert into policy.machine_assurance_records (
+  record_id, subject_type, subject_id, assurance_level,
+  source_version_fingerprint, claim_fingerprint,
+  model, prompt_template_id, prompt_template_version, parameters_version,
+  confidence, checks, input_checksum_sha256, output_checksum_sha256,
+  blockers, limitations, outcome
+) values (
+  'record:rag-test:crosscheck', 'CLAIM_DRAFT', 'claim:rag-test:1',
+  'AI_CROSS_CHECKED', repeat('4', 64), repeat('5', 64),
+  'sanitized-test-model', 'rag-test', '1', '1', 0.99,
+  '{"contradiction":"PASS","freshness":"PASS","rights":"PASS","jurisdiction":"PASS","effectiveDates":"PASS","citationLocator":"PASS"}'::jsonb,
+  repeat('6', 64), repeat('7', 64), '{}'::text[], '{}'::text[], 'ADVANCED'
+);
+
+insert into policy.provisional_corpus_releases (
+  release_id, jurisdiction_code, as_of, knowledge_cutoff, manifest_sha256,
+  published_at
+) values (
+  'provisional:rag-test:eea:1', 'EEA', now() - interval '1 day',
+  now(), repeat('8', 64), now()
+);
+
+insert into policy.provisional_release_claims (
+  release_id, claim_id, claim_fingerprint, assurance_record_id
+) values (
+  'provisional:rag-test:eea:1', 'claim:rag-test:1', repeat('5', 64),
+  'record:rag-test:crosscheck'
+);
+
+set local role service_role;
+
+select ok(
+  not has_schema_privilege('anon', 'retrieval', 'USAGE'),
+  'anonymous callers cannot use the retrieval schema'
+);
+select ok(
+  has_schema_privilege('service_role', 'retrieval', 'USAGE'),
+  'service role can use the private retrieval schema'
+);
+select ok(
+  not has_table_privilege('service_role', 'retrieval.index_releases', 'INSERT'),
+  'service role cannot directly insert index releases'
+);
+select ok(
+  not has_table_privilege('service_role', 'retrieval.evidence_chunks', 'INSERT'),
+  'service role cannot directly insert evidence chunks'
+);
+select ok(
+  not has_table_privilege('service_role', 'retrieval.rag_retrieval_runs', 'INSERT'),
+  'service role cannot directly forge retrieval audit rows'
+);
+
+select lives_ok(
+  $sql$
+    select policy.create_retrieval_index_release(
+      'index:rag-test:1', 'stablecoin', 'provisional:rag-test:eea:1',
+      'PROVISIONAL', now() + interval '30 days',
+      '{"language":"english","version":"1"}'::jsonb,
+      '{"distance":"cosine","fusion":"rrf","version":"1"}'::jsonb,
+      'sanitized-embedding', '1', 3
+    )
+  $sql$,
+  'service RPC creates a draft index pinned to a provisional corpus'
+);
+
+select throws_ok(
+  $sql$
+    select policy.create_retrieval_index_release(
+      'index:rag-test:bad-tier', 'stablecoin',
+      'provisional:rag-test:eea:1', 'HUMAN_REVIEWED',
+      now() + interval '30 days', '{}'::jsonb, '{}'::jsonb,
+      'sanitized-embedding', '1', 3
+    )
+  $sql$,
+  'eligible corpus release does not exist',
+  'a provisional corpus cannot be promoted into a human-reviewed index'
+);
+
+select lives_ok(
+  $sql$
+    select policy.add_retrieval_index_chunk(
+      'index:rag-test:1', 'chunk:rag-test:1', 'claim:rag-test:1',
+      'citation:rag-test:1', 'provision:rag-test:1',
+      'version:rag-test:1', 'en', 'Sanitized retrieval fixture text.',
+      encode(digest(convert_to('Sanitized retrieval fixture text.', 'UTF8'), 'sha256'), 'hex'),
+      'ALLOWED', 'embedding:rag-test:1', 'sanitized-embedding', '1',
+      3, '[1,0,0]', repeat('9', 64), 0
+    )
+  $sql$,
+  'service RPC atomically adds a rights-checked chunk, embedding, and membership'
+);
+
+select throws_ok(
+  $sql$
+    select policy.activate_retrieval_index_release(
+      'index:rag-test:1', repeat('0', 64), now() + interval '1 second'
+    )
+  $sql$,
+  'retrieval index manifest fingerprint is stale',
+  'activation fails closed on a stale manifest fingerprint'
+);
+
+select lives_ok(
+  $sql$
+    select policy.activate_retrieval_index_release(
+      'index:rag-test:1',
+      encode(digest(convert_to(retrieval.build_index_manifest('index:rag-test:1')::text, 'UTF8'), 'sha256'), 'hex'),
+      now() + interval '1 second'
+    )
+  $sql$,
+  'exact manifest activates the retrieval index atomically'
+);
+
+select is(
+  (select release_state from retrieval.index_releases where index_release_id = 'index:rag-test:1'),
+  'ACTIVE',
+  'activated index is ACTIVE'
+);
+select is(
+  (select active_index_release_id from retrieval.active_index_pointers
+   where policy_domain = 'stablecoin' and assurance_tier = 'PROVISIONAL'),
+  'index:rag-test:1',
+  'activation updates the domain and assurance pointer'
+);
+select matches(
+  (select manifest_sha256 from retrieval.index_releases where index_release_id = 'index:rag-test:1'),
+  '^[0-9a-f]{64}$',
+  'active index stores its immutable manifest fingerprint'
+);
+
+reset role;
+select throws_ok(
+  $sql$update retrieval.evidence_chunks
+       set chunk_text = 'mutated'
+       where chunk_id = 'chunk:rag-test:1'$sql$,
+  'evidence_chunks rows are immutable; create a new version',
+  'owner writes are still blocked by the immutable-row trigger'
+);
+set local role service_role;
+
+select throws_ok(
+  $sql$
+    select policy.add_retrieval_index_chunk(
+      'index:rag-test:1', 'chunk:rag-test:late', 'claim:rag-test:1',
+      'citation:rag-test:1', 'provision:rag-test:1',
+      'version:rag-test:1', 'en', 'Late membership.',
+      encode(digest(convert_to('Late membership.', 'UTF8'), 'sha256'), 'hex'),
+      'ALLOWED', 'embedding:rag-test:late', 'sanitized-embedding', '1',
+      3, '[0,1,0]', repeat('a', 64), 1
+    )
+  $sql$,
+  'retrieval index membership is frozen after activation',
+  'active index membership cannot be changed'
+);
+
+select throws_ok(
+  $sql$
+    select policy.create_retrieval_index_release(
+      'index:rag-test:missing-corpus', 'stablecoin',
+      'provisional:rag-test:missing', 'PROVISIONAL',
+      now() + interval '30 days', '{}'::jsonb, '{}'::jsonb,
+      'sanitized-embedding', '1', 3
+    )
+  $sql$,
+  'eligible corpus release does not exist',
+  'index creation requires a real eligible corpus release'
+);
+
+select throws_ok(
+  $sql$insert into retrieval.rag_retrieval_runs (
+    run_id, policy_domain, query_sha256, filters,
+    requested_assurance_tier, outcome, ranked_hits, result_sha256
+  ) values (
+    'rag-run:0000000000000000:0000000000000000', 'stablecoin',
+    repeat('b', 64), '{}'::jsonb, 'PROVISIONAL',
+    'SUCCESS', '[]'::jsonb, repeat('c', 64)
+  )$sql$,
+  'permission denied for table rag_retrieval_runs',
+  'service role cannot bypass the retrieval-run write boundary'
+);
+
+select is(
+  (select count(*)::integer from retrieval.index_release_chunks
+   where index_release_id = 'index:rag-test:1'),
+  1,
+  'activated index has exactly the committed sanitized member'
+);
+
+select ok(
+  not has_function_privilege(
+    'anon',
+    'policy.resolve_retrieval_index_release(text,text,text,text)',
+    'EXECUTE'
+  ),
+  'anonymous callers cannot resolve private retrieval indexes'
+);
+select ok(
+  not has_function_privilege(
+    'anon',
+    'policy.list_retrieval_index_chunks(text)',
+    'EXECUTE'
+  ),
+  'anonymous callers cannot list private retrieval chunks'
+);
+select is(
+  policy.resolve_retrieval_index_release(
+    'stablecoin', 'PROVISIONAL', null, null
+  )->>'indexReleaseId',
+  'index:rag-test:1',
+  'query boundary resolves the active domain and assurance index'
+);
+select is(
+  jsonb_array_length(policy.list_retrieval_index_chunks('index:rag-test:1')),
+  1,
+  'query boundary returns the pinned index membership'
+);
+select is(
+  policy.list_retrieval_index_chunks('index:rag-test:1')->0->>'embedding',
+  '[1,0,0]',
+  'query boundary returns the pinned pgvector value for hybrid ranking'
+);
+select lives_ok(
+  $sql$
+    select policy.record_rag_retrieval_run(
+      'rag-run:0000000000000000:1111111111111111',
+      'stablecoin', repeat('b', 64),
+      '{"assuranceTier":"PROVISIONAL"}'::jsonb, 'PROVISIONAL',
+      'index:rag-test:1', 'provisional:rag-test:eea:1', 'SUCCESS',
+      array['chunk:rag-test:1'], repeat('c', 64), null, null
+    )
+  $sql$,
+  'service RPC appends a valid pinned retrieval audit'
+);
+select throws_ok(
+  $sql$
+    select policy.record_rag_retrieval_run(
+      'rag-run:0000000000000000:2222222222222222',
+      'stablecoin', repeat('d', 64), '{}'::jsonb, 'PROVISIONAL',
+      'index:rag-test:1', 'provisional:rag-test:eea:1', 'SUCCESS',
+      array['chunk:rag-test:not-member'], repeat('e', 64), null, null
+    )
+  $sql$,
+  'retrieval run contains a chunk outside the pinned index',
+  'retrieval audit rejects cross-index or fabricated hits'
+);
+select is(
+  (select count(*)::integer from retrieval.rag_retrieval_runs),
+  1,
+  'only the valid retrieval audit was committed'
+);
+
+select ok(
+  not has_function_privilege(
+    'anon',
+    'policy.get_retrieval_index_build_input(text,text,text)',
+    'EXECUTE'
+  ),
+  'anonymous callers cannot read retrieval index build input'
+);
+select is(
+  policy.get_retrieval_index_build_input(
+    'stablecoin', 'provisional:rag-test:eea:1', 'PROVISIONAL'
+  )->>'corpusReleaseId',
+  'provisional:rag-test:eea:1',
+  'builder input pins the selected provisional corpus release'
+);
+select is(
+  jsonb_array_length(policy.get_retrieval_index_build_input(
+    'stablecoin', 'provisional:rag-test:eea:1', 'PROVISIONAL'
+  )->'sources'),
+  1,
+  'builder input exposes exactly one provision-aligned citation source'
+);
+select is(
+  policy.get_retrieval_index_build_input(
+    'stablecoin', 'provisional:rag-test:eea:1', 'PROVISIONAL'
+  )->'sources'->0->>'provisionText',
+  'Sanitized retrieval fixture text.',
+  'rights-authorized builder input includes the provision text'
+);
+
+select lives_ok(
+  $sql$
+    select policy.build_retrieval_index_release(jsonb_build_object(
+      'schemaVersion', '1.0.0',
+      'indexReleaseId', 'index:rag-test:builder',
+      'policyDomain', 'stablecoin',
+      'corpusReleaseId', 'provisional:rag-test:eea:1',
+      'corpusReleaseKind', 'PROVISIONAL',
+      'freshThrough', now() + interval '30 days',
+      'lexicalConfig', '{"language":"english","version":"1"}'::jsonb,
+      'vectorConfig', '{"distance":"cosine","fusion":"rrf","version":"1"}'::jsonb,
+      'embeddingModel', 'sanitized-embedding',
+      'embeddingModelVersion', '1',
+      'embeddingDimensions', 3,
+      'chunks', jsonb_build_array(jsonb_build_object(
+        'ordinal', 0,
+        'chunkId', 'chunk:rag-test:1',
+        'claimId', 'claim:rag-test:1',
+        'citationId', 'citation:rag-test:1',
+        'provisionId', 'provision:rag-test:1',
+        'sourceVersionId', 'version:rag-test:1',
+        'languageCode', 'en',
+        'chunkText', 'Sanitized retrieval fixture text.',
+        'chunkChecksumSha256', encode(digest(convert_to(
+          'Sanitized retrieval fixture text.', 'UTF8'
+        ), 'sha256'), 'hex'),
+        'excerptPermission', 'ALLOWED',
+        'embeddingId', 'embedding:rag-test:builder',
+        'embeddingModel', 'sanitized-embedding',
+        'embeddingModelVersion', '1',
+        'embeddingDimensions', 3,
+        'embedding', jsonb_build_array(0, 1, 0),
+        'embeddingChecksumSha256', repeat('f', 64)
+      ))
+    ))
+  $sql$,
+  'single builder RPC atomically creates a complete draft index'
+);
+select is(
+  (select release_state from retrieval.index_releases
+   where index_release_id = 'index:rag-test:builder'),
+  'DRAFT',
+  'builder never activates the newly created index'
+);
+select is(
+  (select count(*)::integer from retrieval.index_release_chunks
+   where index_release_id = 'index:rag-test:builder'),
+  1,
+  'builder commits the exact plan membership'
+);
+select is(
+  (select count(*)::integer from retrieval.index_build_records
+   where index_release_id = 'index:rag-test:builder'),
+  1,
+  'builder records one immutable idempotency fingerprint'
+);
+select lives_ok(
+  $sql$
+    select policy.build_retrieval_index_release(
+      (select jsonb_build_object(
+        'schemaVersion', '1.0.0',
+        'indexReleaseId', release.index_release_id,
+        'policyDomain', release.policy_domain,
+        'corpusReleaseId', release.corpus_release_id,
+        'corpusReleaseKind', release.corpus_release_kind,
+        'freshThrough', release.fresh_through,
+        'lexicalConfig', release.lexical_config,
+        'vectorConfig', release.vector_config,
+        'embeddingModel', release.embedding_model,
+        'embeddingModelVersion', release.embedding_model_version,
+        'embeddingDimensions', release.embedding_dimensions,
+        'chunks', jsonb_build_array(jsonb_build_object(
+          'ordinal', member.ordinal,
+          'chunkId', chunk.chunk_id,
+          'claimId', chunk.claim_id,
+          'citationId', chunk.citation_id,
+          'provisionId', chunk.provision_id,
+          'sourceVersionId', chunk.source_version_id,
+          'languageCode', chunk.language_code,
+          'chunkText', chunk.chunk_text,
+          'chunkChecksumSha256', chunk.chunk_checksum_sha256,
+          'excerptPermission', chunk.excerpt_permission,
+          'embeddingId', embedding.embedding_id,
+          'embeddingModel', embedding.model_identifier,
+          'embeddingModelVersion', embedding.model_version,
+          'embeddingDimensions', embedding.dimensions,
+          'embedding', embedding.embedding::text::jsonb,
+          'embeddingChecksumSha256', embedding.embedding_checksum_sha256
+        ))
+      )
+      from retrieval.index_releases release
+      join retrieval.index_release_chunks member
+        on member.index_release_id = release.index_release_id
+      join retrieval.evidence_chunks chunk on chunk.chunk_id = member.chunk_id
+      join retrieval.embedding_records embedding
+        on embedding.embedding_id = member.embedding_id
+      where release.index_release_id = 'index:rag-test:builder')
+    )
+  $sql$,
+  'an identical builder plan replay is idempotent'
+);
+select is(
+  (select count(*)::integer from retrieval.index_release_chunks
+   where index_release_id = 'index:rag-test:builder'),
+  1,
+  'idempotent replay creates no duplicate membership'
+);
+select matches(
+  policy.get_retrieval_index_manifest('index:rag-test:builder')->>'manifestSha256',
+  '^[0-9a-f]{64}$',
+  'draft builder manifest has an exact server-side fingerprint'
+);
+select is(
+  (select active_index_release_id from retrieval.active_index_pointers
+   where policy_domain = 'stablecoin' and assurance_tier = 'PROVISIONAL'),
+  'index:rag-test:1',
+  'building a draft cannot move the active index pointer'
+);
+select throws_ok(
+  $sql$
+    select policy.build_retrieval_index_release(jsonb_build_object(
+      'schemaVersion', '1.0.0',
+      'indexReleaseId', 'index:rag-test:builder',
+      'policyDomain', 'stablecoin',
+      'corpusReleaseId', 'provisional:rag-test:eea:1',
+      'corpusReleaseKind', 'PROVISIONAL',
+      'freshThrough', now() + interval '31 days',
+      'lexicalConfig', '{}'::jsonb,
+      'vectorConfig', '{}'::jsonb,
+      'embeddingModel', 'sanitized-embedding',
+      'embeddingModelVersion', '1',
+      'embeddingDimensions', 3,
+      'chunks', jsonb_build_array(jsonb_build_object(
+        'ordinal', 0, 'citationId', 'citation:rag-test:1'
+      ))
+    ))
+  $sql$,
+  'retrieval index identifier was already used for a different plan',
+  'changed plan replay fails closed before mutating the draft'
+);
+
+select * from finish();
+rollback;

@@ -21,3 +21,10 @@ confidence, asOf, source version + citations, limitations, counselTriggers);
 `reviewStatus` upgrades to `HUMAN_REVIEWED` only through a named-human review
 record, and provisional coverage deliberately has no completeness percentage.
 The reviewed-only coverage/source/change contracts remain unchanged.
+
+Phase 3 adds `evidence-search-response.schema.json` for authenticated
+`POST /v1/evidence/search`. The response pins the corpus and retrieval-index
+release, returns ranked exact citations and assurance metadata, and uses typed
+insufficient/conflicting/unauthorized/stale/unavailable outcomes. Version 1
+does not include generated explanation text; `explanation` is intentionally
+`null` until sentence-level faithfulness and prompt-injection evals pass.

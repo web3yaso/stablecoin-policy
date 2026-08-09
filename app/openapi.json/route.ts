@@ -124,6 +124,11 @@ function createOpenApiDocument(
         description:
           "Deterministic capability-level playbook evaluations over provisional machine-assured evidence. Visibly provisional; never legal advice.",
       },
+      {
+        name: "evidence",
+        description:
+          "Authenticated, version-pinned retrieval of exact regulatory evidence. Retrieval never changes deterministic decisions.",
+      },
     ],
     paths: {
       "/v1/coverage": {
@@ -248,6 +253,38 @@ function createOpenApiDocument(
               description: "Playbook catalog",
               content: { "application/json": { schema: { type: "object" } } },
             },
+          },
+        },
+      },
+      "/v1/evidence/search": {
+        post: {
+          operationId: "searchRegulatoryEvidence",
+          tags: ["evidence"],
+          summary: "Search pinned regulatory evidence",
+          description:
+            "Hybrid lexical/vector retrieval over an immutable corpus and index release. Returns exact citations and explicit insufficient, conflicting, unauthorized, stale, or unavailable states. Version 1 returns no generated narrative and cannot assign or change a deterministic decision status.",
+          security: [{ playbookServiceKey: [] }],
+          requestBody: {
+            required: true,
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  description:
+                    "Strict contract: contracts/v1/evidence-search-request.schema.json",
+                },
+              },
+            },
+          },
+          responses: {
+            "200": {
+              description:
+                "Typed retrieval result: contracts/v1/evidence-search-response.schema.json",
+              content: { "application/json": { schema: { type: "object" } } },
+            },
+            "400": { description: "Invalid request" },
+            "401": { description: "Missing or invalid service key" },
+            "503": { description: "Retrieval unconfigured or unavailable" },
           },
         },
       },
@@ -677,6 +714,14 @@ function createOpenApiDocument(
       },
     },
     components: {
+      securitySchemes: {
+        playbookServiceKey: {
+          type: "http",
+          scheme: "bearer",
+          description:
+            "Citely server-to-server domain API key (EVIDENCE_API_KEY or the interim PLAYBOOK_API_KEY).",
+        },
+      },
       schemas: {
         CoverageResponse: {
           type: "object",

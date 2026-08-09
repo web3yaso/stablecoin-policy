@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/evidence-search-response.schema.json",
+  "title": "EvidenceSearchResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runId",
+    "status",
+    "querySha256",
+    "indexRelease",
+    "hits",
+    "limitations",
+    "explanation"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "runId": { "type": "string", "pattern": "^rag-run:[0-9a-f]{16}:[0-9a-f]{16}$" },
+    "status": {
+      "enum": [
+        "SUCCESS",
+        "INSUFFICIENT_EVIDENCE",
+        "CONFLICTING_EVIDENCE",
+        "UNAUTHORIZED_EVIDENCE",
+        "STALE_INDEX",
+        "RETRIEVAL_UNAVAILABLE"
+      ]
+    },
+    "querySha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "indexRelease": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/indexRelease" }
+      ]
+    },
+    "hits": {
+      "type": "array",
+      "maxItems": 10,
+      "items": { "$ref": "#/$defs/hit" }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "explanation": { "type": "null" }
+  },
+  "$defs": {
+    "assuranceTier": { "enum": ["PROVISIONAL", "HUMAN_REVIEWED"] },
+    "indexRelease": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "indexReleaseId",
+        "corpusReleaseId",
+        "assuranceTier",
+        "asOf",
+        "knowledgeCutoff",
+        "generatedAt",
+        "freshThrough",
+        "embeddingModel",
+        "embeddingModelVersion",
+        "embeddingDimensions",
+        "lexicalConfigVersion",
+        "vectorConfigVersion"
+      ],
+      "properties": {
+        "indexReleaseId": { "type": "string", "minLength": 3 },
+        "corpusReleaseId": { "type": "string", "minLength": 3 },
+        "assuranceTier": { "$ref": "#/$defs/assuranceTier" },
+        "asOf": { "type": "string", "format": "date-time" },
+        "knowledgeCutoff": { "type": "string", "format": "date-time" },
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "freshThrough": { "type": "string", "format": "date-time" },
+        "embeddingModel": { "type": "string", "minLength": 1 },
+        "embeddingModelVersion": { "type": "string", "minLength": 1 },
+        "embeddingDimensions": { "type": "integer", "minimum": 1 },
+        "lexicalConfigVersion": { "type": "string", "minLength": 1 },
+        "vectorConfigVersion": { "type": "string", "minLength": 1 }
+      }
+    },
+    "hit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rank",
+        "score",
+        "lexicalRank",
+        "vectorRank",
+        "chunkId",
+        "claim",
+        "citation",
+        "jurisdictionCode",
+        "effectiveFrom",
+        "effectiveTo",
+        "assuranceTier",
+        "reviewStatus"
+      ],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "score": { "type": "number", "minimum": 0 },
+        "lexicalRank": { "type": ["integer", "null"], "minimum": 1 },
+        "vectorRank": { "type": ["integer", "null"], "minimum": 1 },
+        "chunkId": { "type": "string", "minLength": 3 },
+        "claim": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["claimId", "topic", "legalStatus", "proposition", "supportRelation"],
+          "properties": {
+            "claimId": { "type": "string", "minLength": 3 },
+            "topic": { "type": "string", "minLength": 1 },
+            "legalStatus": { "type": "string", "minLength": 1 },
+            "proposition": { "type": "string", "minLength": 1 },
+            "supportRelation": {
+              "enum": ["DIRECT_SUPPORT", "INDIRECT_SUPPORT", "CONTRADICTS"]
+            }
+          }
+        },
+        "citation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "citationId",
+            "provisionId",
+            "sourceVersionId",
+            "sourceVersionChecksumSha256",
+            "sourceDocumentId",
+            "documentTitle",
+            "sourceType",
+            "authorityId",
+            "authorityName",
+            "locator",
+            "canonicalUrl",
+            "excerpt",
+            "excerptPermission",
+            "sourcePublishedAt",
+            "sourceRetrievedAt"
+          ],
+          "properties": {
+            "citationId": { "type": "string", "minLength": 3 },
+            "provisionId": { "type": "string", "minLength": 3 },
+            "sourceVersionId": { "type": "string", "minLength": 3 },
+            "sourceVersionChecksumSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+            "sourceDocumentId": { "type": "string", "minLength": 3 },
+            "documentTitle": { "type": "string", "minLength": 1 },
+            "sourceType": { "type": "string", "minLength": 1 },
+            "authorityId": { "type": "string", "minLength": 3 },
+            "authorityName": { "type": "string", "minLength": 1 },
+            "locator": { "type": "string", "minLength": 1 },
+            "canonicalUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+            "excerpt": { "type": ["string", "null"] },
+            "excerptPermission": { "enum": ["ALLOWED", "LINK_ONLY"] },
+            "sourcePublishedAt": { "type": ["string", "null"], "format": "date-time" },
+            "sourceRetrievedAt": { "type": "string", "format": "date-time" }
+          }
+        },
+        "jurisdictionCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9-]{1,15}$" },
+        "effectiveFrom": { "type": "string", "format": "date-time" },
+        "effectiveTo": { "type": ["string", "null"], "format": "date-time" },
+        "assuranceTier": { "$ref": "#/$defs/assuranceTier" },
+        "reviewStatus": { "enum": ["PROVISIONAL", "HUMAN_REVIEWED"] }
+      }
+    }
+  }
+}
