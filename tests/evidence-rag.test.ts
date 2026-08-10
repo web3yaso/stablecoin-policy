@@ -350,6 +350,36 @@ test("index builder fails closed on rights, release, and citation coverage gaps"
   assert.equal(errors.includes("CLAIM_WITHOUT_CITATION"), true);
 });
 
+test("index builder preserves provisional cutoff gaps but rejects reviewed gaps", () => {
+  const provisional = buildInput();
+  provisional.asOf = "2026-08-02T00:00:00.000Z";
+  provisional.knowledgeCutoff = "2026-08-01T00:00:00.000Z";
+  assert.deepEqual(retrievalIndexBuildInputErrors(provisional, BUILD_CONFIG), []);
+
+  const reviewed = {
+    ...provisional,
+    corpusReleaseKind: "HUMAN_REVIEWED" as const,
+    assuranceTier: "HUMAN_REVIEWED" as const,
+  };
+  assert.equal(
+    retrievalIndexBuildInputErrors(reviewed, BUILD_CONFIG).includes(
+      "KNOWLEDGE_CUTOFF_INVALID",
+    ),
+    true,
+  );
+});
+
+test("index builder freshness covers both as-of and knowledge cutoff", () => {
+  const input = buildInput();
+  input.knowledgeCutoff = "2026-09-02T00:00:00.000Z";
+  assert.equal(
+    retrievalIndexBuildInputErrors(input, BUILD_CONFIG).includes(
+      "FRESH_THROUGH_INVALID",
+    ),
+    true,
+  );
+});
+
 test("index admin uses fixed build/manifest/activate RPCs and never hides activation", async () => {
   const calls: Array<{ path: string; body: Record<string, unknown> }> = [];
   const input = buildInput();

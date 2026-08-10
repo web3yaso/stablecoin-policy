@@ -7,3 +7,6 @@
 {"caseId":"cross-release-claim","mutation":"CROSS_RELEASE_CLAIM","expected":"BLOCK"}
 {"caseId":"assurance-tier-mismatch","mutation":"ASSURANCE_TIER_MISMATCH","expected":"BLOCK"}
 {"caseId":"jurisdiction-mismatch","mutation":"JURISDICTION_MISMATCH","expected":"BLOCK"}
+{"caseId":"provisional-cutoff-before-as-of","mutation":"PROVISIONAL_CUTOFF_BEFORE_AS_OF","expected":"PASS"}
+{"caseId":"reviewed-cutoff-before-as-of","mutation":"REVIEWED_CUTOFF_BEFORE_AS_OF","expected":"BLOCK"}
+{"caseId":"fresh-before-knowledge-cutoff","mutation":"FRESH_BEFORE_KNOWLEDGE_CUTOFF","expected":"BLOCK"}

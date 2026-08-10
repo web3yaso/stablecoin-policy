@@ -3,7 +3,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set search_path = public, extensions, policy, regulatory, retrieval;
 
-select plan(39);
+select plan(40);
 
 -- Sanitized provisional corpus fixture. It represents workflow shape only,
 -- not a legal conclusion or production review.
@@ -91,7 +91,7 @@ insert into policy.provisional_corpus_releases (
   published_at
 ) values (
   'provisional:rag-test:eea:1', 'EEA', now() - interval '1 day',
-  now(), repeat('8', 64), now()
+  now() - interval '2 days', repeat('8', 64), now()
 );
 
 insert into policy.provisional_release_claims (
@@ -203,6 +203,24 @@ select matches(
 );
 
 reset role;
+select throws_ok(
+  $sql$
+    insert into retrieval.index_releases (
+      index_release_id, policy_domain, corpus_release_id,
+      corpus_release_kind, assurance_tier, as_of, knowledge_cutoff,
+      fresh_through, lexical_config, vector_config, embedding_model,
+      embedding_model_version, embedding_dimensions
+    ) values (
+      'index:rag-test:bad-freshness', 'stablecoin',
+      'provisional:rag-test:eea:1', 'PROVISIONAL', 'PROVISIONAL',
+      now() - interval '2 days', now() + interval '2 days',
+      now() + interval '1 day', '{}'::jsonb, '{}'::jsonb,
+      'sanitized-embedding', '1', 3
+    )
+  $sql$,
+  '23514', null,
+  'retrieval freshness cannot predate either corpus timestamp'
+);
 select throws_ok(
   $sql$update retrieval.evidence_chunks
        set chunk_text = 'mutated'

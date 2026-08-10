@@ -124,8 +124,12 @@ export function retrievalIndexBuildInputErrors(
   if (![asOf, cutoff, freshThrough].every(Number.isFinite)) {
     errors.push("TIMESTAMP_INVALID");
   } else {
-    if (cutoff < asOf) errors.push("KNOWLEDGE_CUTOFF_INVALID");
-    if (freshThrough < asOf) errors.push("FRESH_THROUGH_INVALID");
+    if (input.assuranceTier === "HUMAN_REVIEWED" && cutoff < asOf) {
+      errors.push("KNOWLEDGE_CUTOFF_INVALID");
+    }
+    if (freshThrough < Math.max(asOf, cutoff)) {
+      errors.push("FRESH_THROUGH_INVALID");
+    }
   }
   if (!SHA256.test(input.releaseManifestSha256)) {
     errors.push("CORPUS_MANIFEST_INVALID");
