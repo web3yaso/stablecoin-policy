@@ -128,6 +128,15 @@ paid packages, or private reviewer records.
 
 Evidence RAG is an evidence retrieval and explanation layer, not a decision authority:
 
+- an immutable `RetrievalCorpusSnapshot` may aggregate multiple same-tier,
+  same-jurisdiction source releases; the database computes and pins exact source
+  manifests plus deduplicated claim membership;
+- embeddings are generated once into a private checksum-pinned build artifact
+  outside the repository, and the DRAFT build replays that exact artifact;
+- activation requires a passing eval bound to the exact current index manifest;
+  provisional indexes accept machine-assured or human-reviewed evals, while
+  human-reviewed indexes accept only named human-reviewed evals;
+
 - it searches only versioned provisions and claims permitted for the caller's
   requested assurance tier; provisional and human-reviewed evidence remain
   distinguishable;

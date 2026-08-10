@@ -3,14 +3,15 @@
 ## Current checkpoint
 
 Phase 3 foundation was merged as PR #48 (`433ca8a`) on 2026-08-09. Migrations
-`0024` through `0026` are applied to the linked Supabase project after a
-verified private metadata backup and byte-identical normalized pre/post
-snapshots. No production retrieval index is built or active yet.
+`0024` through `0027` are applied to the linked Supabase project. A production
+37-chunk EEA index exists as DRAFT only. It has no production eval record and
+must remain inactive. Migration `0028` and its application tooling are in the
+activation-gates development PR; they are not applied by merging code alone.
 
 Implemented:
 
-- executable Quint model `specs/evidenceRag.qnt` with 14 deterministic
-  scenarios, eight safety invariants, and nine reachability witnesses;
+- executable Quint model `specs/evidenceRag.qnt` with 19 deterministic
+  scenarios, 11 safety invariants, and 13 reachability witnesses;
 - migrations `0024` through `0026` for the private cross-domain `retrieval`
   schema, pgvector, immutable evidence chunks and embeddings, versioned index
   releases, atomic activation/rollback, active pointers, and retrieval audit;
@@ -27,13 +28,20 @@ Implemented:
 - migration `0027` and matching application gates preserve an explicit
   provisional release-to-knowledge-cutoff gap while retaining the stronger
   human-reviewed cutoff rule and requiring freshness through both timestamps.
+- migration `0028` defines immutable aggregate corpus snapshots, exact source
+  release and deduplicated claim membership, immutable eval records, and an
+  activation gate bound to the current server manifest;
+- one-shot plan tooling writes embeddings once to a mode-`0600` file outside
+  the repository; the build command only replays that exact artifact;
+- a service-only DRAFT eval input and production runner support
+  `MACHINE_ASSURED` bootstrap evals without mislabeling them as human review.
 
 Deliberately incomplete:
 
-- no production EEA MiCA index has been built or activated; the builder has
-  passed sanitized fixtures only;
-- migration `0027` must pass its linked dry-run and be applied before the first
-  production index build;
+- no production EEA MiCA index is active; the old 37-chunk DRAFT is not an
+  activation candidate after `0028` because it has no exact-manifest eval;
+- the aggregate 47-claim snapshot, exact private build artifact, replacement
+  DRAFT, and real production eval dataset remain operational rollout work;
 - no sentence-level generated explanation exists in v1 (`explanation` is
   always `null`);
 - no PlaybookPackage has been changed to consume retrieval output;
@@ -101,19 +109,40 @@ reused across index releases. Rights-blocked text, claims outside the pinned
 release, missing citations, mixed jurisdictions, and assurance mismatches stop
 the entire build.
 
-Default dry-run reads the release and calls the configured embedding provider,
-but writes no PostgreSQL state:
+First prepare the aggregate snapshot without writing:
 
 ```bash
-npm run rag:index:build -- \
+npm run rag:snapshot -- \
+  --snapshot snapshot:stablecoin:eea:mica:2026-08-10 \
   --release provisional:eea:mica:2026-08-02 \
-  --index-release index:stablecoin:eea:mica:2026-08-09 \
-  --fresh-through 2026-12-31T00:00:00Z
+  --release <supplement-release-id>
 ```
 
-After inspecting the plan checksum and manifest preview, repeat with
-`--execute`. The single RPC either commits the complete DRAFT index or rolls
-the entire build back. It never activates the index.
+Repeat with `--execute --expected-manifest-sha256 <sha>`. Then call the
+embedding provider exactly once and store the full private plan outside Git:
+
+```bash
+npm run rag:index:plan -- \
+  --snapshot snapshot:stablecoin:eea:mica:2026-08-10 \
+  --index-release index:stablecoin:eea:mica:2026-08-10 \
+  --fresh-through 2026-12-31T00:00:00Z \
+  --output /private/path/eea-index-plan.json
+```
+
+Inspect the safe preview, then dry-run and execute the exact same artifact:
+
+```bash
+npm run rag:index:build -- --plan /private/path/eea-index-plan.json
+npm run rag:index:build -- --plan /private/path/eea-index-plan.json \
+  --execute --expected-plan-sha256 <plan-sha>
+```
+
+Run `npm run eval:phase3:production` against the DRAFT with a
+provenance-bearing dataset and an external `--output` path. `--record`
+additionally requires the inspected manifest SHA and an immutable eval-record
+ID. A failed eval may be recorded but can never authorize activation. Machine
+assurance can authorize only a provisional index; a human-reviewed index
+requires named human review.
 
 Activation is a separate two-pass operation. The first command prints the
 exact manifest and server-computed hash without writing:
@@ -146,8 +175,8 @@ npm run test:db:phase2
 npm run db:phase2:stop
 ```
 
-On 2026-08-09, migrations `0001` through `0027` applied from zero and all 196
-pgTAP assertions passed. The Phase 3 sanitized retrieval eval reported
+On 2026-08-10, migrations `0001` through `0028` applied locally from zero and
+all 209 pgTAP assertions passed. The Phase 3 sanitized retrieval eval reported
 Recall@10 `1.00`, MRR@10 `1.00`, citation precision `1.00`, version isolation
 `1.00`, twelve of twelve index-builder safety classifications correct, and zero
 assurance, rights, prompt-instruction, or unsafe-build leakage. These are
@@ -155,15 +184,13 @@ development fixtures, not the final production-quality EEA gold set.
 
 ## Rollout order
 
-1. Merge this foundation only after CI passes.
+1. Merge the activation-gates PR only after CI passes.
 2. Take and verify a private metadata backup.
-3. Confirm migrations `0024` through `0026` remain applied, dry-run and apply
-   `0027`, and confirm existing `policy` and `regulatory` snapshots do not
-   change.
-4. Run the default-dry-run EEA index builder against the selected provisional
-   release, inspect its exact membership and embedding cost, then explicitly
-   create the DRAFT index without activation.
-5. Run the production EEA gold eval against that DRAFT membership,
+3. Dry-run and apply `0028`, and confirm existing `policy` and `regulatory`
+   snapshots do not change. Confirm the old 37-chunk DRAFT is still inactive.
+4. Create the aggregate 47-claim snapshot, generate one private plan artifact,
+   inspect its membership and cost, then replay it into the replacement DRAFT.
+5. Run and record the production EEA eval against that exact DRAFT membership,
    inspect rights/version/assurance isolation, then explicitly activate the
    accepted manifest.
 6. Configure Vercel embedding and service-auth variables, deploy, and smoke

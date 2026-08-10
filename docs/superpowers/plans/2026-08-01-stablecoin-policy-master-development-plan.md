@@ -328,8 +328,8 @@ subsite-owned `playbookId`.
 
 ## Phase 3 — Evidence RAG
 
-Status: foundation merged as PR #48 (`433ca8a`) and database rollout in
-progress (2026-08-09).
+Status: foundation merged as PR #48 (`433ca8a`); activation-gates follow-up in
+development (2026-08-10).
 The executable index/retrieval model, strict API contracts, provider-neutral
 hybrid retrieval core, authenticated endpoint, pgvector-backed storage and
 atomic index lifecycle migrations `0024`-`0025`, retrieval audit, sanitized
@@ -340,8 +340,12 @@ chunk reuse, exact server-manifest inspection, and separately confirmed
 activation. Migrations `0024`-`0026` are applied to the linked Supabase project.
 The pre-build hotfix `0027` preserves an explicit provisional cutoff gap while
 keeping human-reviewed time ordering strict and freshness bounded by both
-timestamps; it passes the 196-assertion from-zero database suite. No production
-EEA index is built or active. See
+timestamps. The activation-gates follow-up adds migration `0028`, an immutable
+aggregate `RetrievalCorpusSnapshot`, exact private build-plan replay, production
+DRAFT eval artifacts, and assurance-aware activation. A legacy 37-chunk
+production DRAFT exists but remains inactive and is not grandfathered. The
+intended replacement combines the two provisional source releases into a
+deduplicated 47-claim snapshot. See
 `docs/phase3-evidence-rag-operations.md`.
 
 Goal: retrieve and explain exact regulatory evidence without allowing model
@@ -356,6 +360,10 @@ output to change deterministic decisions.
 - chunk by legal structure and preserve provision, source version, locator,
   jurisdiction, topic, effective interval, rights, and assurance metadata;
 - build immutable index manifests pinned to corpus releases;
+- aggregate multiple immutable source releases through a snapshot whose exact
+  source manifests and deduplicated claim membership are server-computed;
+- call the embedding provider once, store the full plan outside Git with mode
+  `0600`, and build only by replaying that exact checksum-pinned artifact;
 - maintain separate filters or index visibility for provisional and
   human-reviewed evidence;
 - never combine text from different source versions in one chunk.
@@ -384,10 +392,15 @@ output to change deterministic decisions.
 - material unsupported explanations: zero;
 - RAG outage changes deterministic decisions: zero;
 - historical retrieval replay passes against pinned index releases.
+- activation requires a passing eval for the current exact manifest;
+- provisional indexes may use a documented independently cross-checked
+  `MACHINE_ASSURED` eval, while human-reviewed indexes require a named
+  `HUMAN_REVIEWED` eval.
 
 ### Phase 3 exit
 
-- production-like indexes can be created, activated, rolled back, and replayed;
+- aggregate snapshots and production-like indexes can be created, evaluated,
+  activated, rolled back, and replayed;
 - search returns exact citations and assurance metadata;
 - Citely and playbook services can consume retrieval results through a stable
   contract;

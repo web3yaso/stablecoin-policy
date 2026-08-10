@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stablecoinpolicy.com/contracts/v1/retrieval-production-eval-dataset.schema.json",
+  "title": "Retrieval production eval dataset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evalAssurance",
+    "generatedBy",
+    "independentlyCheckedBy",
+    "reviewerRef",
+    "requiredChecklistTopics",
+    "cases"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "evalAssurance": {
+      "enum": ["MACHINE_ASSURED", "HUMAN_REVIEWED"]
+    },
+    "generatedBy": { "type": "string", "minLength": 1 },
+    "independentlyCheckedBy": { "type": "string", "minLength": 1 },
+    "reviewerRef": { "type": ["string", "null"], "minLength": 1 },
+    "requiredChecklistTopics": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "caseId",
+          "checklistTopic",
+          "query",
+          "expectedProvisionIds"
+        ],
+        "properties": {
+          "caseId": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._:-]{2,200}$"
+          },
+          "checklistTopic": { "type": "string", "minLength": 1 },
+          "query": { "type": "string", "minLength": 1 },
+          "expectedProvisionIds": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9._:-]{2,200}$"
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "evalAssurance": { "const": "HUMAN_REVIEWED" } },
+        "required": ["evalAssurance"]
+      },
+      "then": { "properties": { "reviewerRef": { "type": "string", "minLength": 1 } } }
+    }
+  ]
+}
