@@ -3,7 +3,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set search_path = public, extensions, policy, regulatory, retrieval;
 
-select plan(40);
+select plan(53);
 
 -- Sanitized provisional corpus fixture. It represents workflow shape only,
 -- not a legal conclusion or production review.
@@ -101,6 +101,21 @@ insert into policy.provisional_release_claims (
   'record:rag-test:crosscheck'
 );
 
+insert into policy.provisional_corpus_releases (
+  release_id, jurisdiction_code, as_of, knowledge_cutoff, manifest_sha256,
+  published_at
+) values (
+  'provisional:rag-test:eea:2', 'EEA', now(),
+  now() - interval '1 day', repeat('a', 64), now()
+);
+
+insert into policy.provisional_release_claims (
+  release_id, claim_id, claim_fingerprint, assurance_record_id
+) values (
+  'provisional:rag-test:eea:2', 'claim:rag-test:1', repeat('5', 64),
+  'record:rag-test:crosscheck'
+);
+
 set local role service_role;
 
 select ok(
@@ -122,6 +137,77 @@ select ok(
 select ok(
   not has_table_privilege('service_role', 'retrieval.rag_retrieval_runs', 'INSERT'),
   'service role cannot directly forge retrieval audit rows'
+);
+select ok(
+  not has_function_privilege(
+    'anon',
+    'policy.prepare_retrieval_corpus_snapshot(text,text,text,text[])',
+    'EXECUTE'
+  ),
+  'anonymous callers cannot prepare private corpus snapshots'
+);
+select is(
+  (policy.prepare_retrieval_corpus_snapshot(
+    'snapshot:rag-test:aggregate', 'stablecoin', 'PROVISIONAL',
+    array['provisional:rag-test:eea:1', 'provisional:rag-test:eea:2']
+  )->>'sourceReleaseCount')::integer,
+  2,
+  'snapshot preparation pins both source releases'
+);
+select is(
+  (policy.prepare_retrieval_corpus_snapshot(
+    'snapshot:rag-test:aggregate', 'stablecoin', 'PROVISIONAL',
+    array['provisional:rag-test:eea:1', 'provisional:rag-test:eea:2']
+  )->>'claimCount')::integer,
+  1,
+  'snapshot preparation deduplicates overlapping claims'
+);
+select throws_ok(
+  $sql$
+    select policy.create_retrieval_corpus_snapshot(
+      'snapshot:rag-test:aggregate', 'stablecoin', 'PROVISIONAL',
+      array['provisional:rag-test:eea:1', 'provisional:rag-test:eea:2'],
+      repeat('0', 64)
+    )
+  $sql$,
+  'retrieval corpus snapshot fingerprint is stale',
+  'snapshot creation fails closed on a stale prepared fingerprint'
+);
+select lives_ok(
+  $sql$
+    select policy.create_retrieval_corpus_snapshot(
+      'snapshot:rag-test:aggregate', 'stablecoin', 'PROVISIONAL',
+      array['provisional:rag-test:eea:1', 'provisional:rag-test:eea:2'],
+      policy.prepare_retrieval_corpus_snapshot(
+        'snapshot:rag-test:aggregate', 'stablecoin', 'PROVISIONAL',
+        array['provisional:rag-test:eea:1', 'provisional:rag-test:eea:2']
+      )->>'manifestSha256'
+    )
+  $sql$,
+  'exact prepared fingerprint creates the immutable aggregate snapshot'
+);
+select is(
+  (select count(*)::integer from retrieval.corpus_snapshot_releases
+   where snapshot_id = 'snapshot:rag-test:aggregate'),
+  2,
+  'aggregate snapshot stores exact source release membership'
+);
+select is(
+  (select count(*)::integer from retrieval.corpus_snapshot_claims
+   where snapshot_id = 'snapshot:rag-test:aggregate'),
+  1,
+  'aggregate snapshot stores deduplicated claim membership'
+);
+select is(
+  jsonb_array_length(policy.get_retrieval_snapshot_build_input(
+    'snapshot:rag-test:aggregate'
+  )->'sources'),
+  1,
+  'snapshot build input exposes exact deduplicated citation membership'
+);
+select ok(
+  not has_table_privilege('service_role', 'retrieval.corpus_snapshots', 'INSERT'),
+  'service role cannot bypass the snapshot creation boundary'
 );
 
 select lives_ok(
@@ -164,6 +250,51 @@ select lives_ok(
   'service RPC atomically adds a rights-checked chunk, embedding, and membership'
 );
 
+select lives_ok(
+  $sql$
+    select policy.build_retrieval_index_release(jsonb_build_object(
+      'schemaVersion', '1.0.0',
+      'indexReleaseId', 'index:rag-test:snapshot',
+      'policyDomain', 'stablecoin',
+      'corpusReleaseId', 'snapshot:rag-test:aggregate',
+      'corpusReleaseKind', 'PROVISIONAL',
+      'freshThrough', now() + interval '30 days',
+      'lexicalConfig', '{"language":"english","version":"1"}'::jsonb,
+      'vectorConfig', '{"distance":"cosine","fusion":"rrf","version":"1"}'::jsonb,
+      'embeddingModel', 'sanitized-embedding',
+      'embeddingModelVersion', '1',
+      'embeddingDimensions', 3,
+      'chunks', jsonb_build_array(jsonb_build_object(
+        'ordinal', 0,
+        'chunkId', 'chunk:rag-test:1',
+        'claimId', 'claim:rag-test:1',
+        'citationId', 'citation:rag-test:1',
+        'provisionId', 'provision:rag-test:1',
+        'sourceVersionId', 'version:rag-test:1',
+        'languageCode', 'en',
+        'chunkText', 'Sanitized retrieval fixture text.',
+        'chunkChecksumSha256', encode(digest(convert_to(
+          'Sanitized retrieval fixture text.', 'UTF8'
+        ), 'sha256'), 'hex'),
+        'excerptPermission', 'ALLOWED',
+        'embeddingId', 'embedding:rag-test:1',
+        'embeddingModel', 'sanitized-embedding',
+        'embeddingModelVersion', '1',
+        'embeddingDimensions', 3,
+        'embedding', jsonb_build_array(1, 0, 0),
+        'embeddingChecksumSha256', repeat('9', 64)
+      ))
+    ))
+  $sql$,
+  'builder consumes a complete immutable aggregate snapshot'
+);
+select is(
+  (select count(*)::integer from retrieval.index_build_records
+   where index_release_id = 'index:rag-test:snapshot'),
+  1,
+  'snapshot build records one exact consumed plan'
+);
+
 select throws_ok(
   $sql$
     select policy.activate_retrieval_index_release(
@@ -172,6 +303,31 @@ select throws_ok(
   $sql$,
   'retrieval index manifest fingerprint is stale',
   'activation fails closed on a stale manifest fingerprint'
+);
+
+select throws_ok(
+  $sql$
+    select policy.activate_retrieval_index_release(
+      'index:rag-test:1',
+      encode(digest(convert_to(retrieval.build_index_manifest('index:rag-test:1')::text, 'UTF8'), 'sha256'), 'hex'),
+      now() + interval '1 second'
+    )
+  $sql$,
+  'retrieval index lacks a passing exact-manifest eval',
+  'an exact manifest remains blocked without a passing eval'
+);
+
+select lives_ok(
+  $sql$
+    select policy.record_retrieval_index_eval(
+      'eval:rag-test:1', 'index:rag-test:1',
+      encode(digest(convert_to(retrieval.build_index_manifest('index:rag-test:1')::text, 'UTF8'), 'sha256'), 'hex'),
+      'MACHINE_ASSURED', 'PASSED', repeat('b', 64),
+      '{"recallAt10":1,"mrrAt10":1,"citationPrecision":1,"versionIsolation":1,"checklistTopicCoverage":1,"rightsLeaks":0,"assuranceLeaks":0,"promptInstructionLeaks":0,"unsafeBuildsAccepted":0}'::jsonb,
+      now()
+    )
+  $sql$,
+  'a passing machine-assured eval is recorded for the exact provisional manifest'
 );
 
 select lives_ok(

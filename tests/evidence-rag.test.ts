@@ -1,5 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { chmod, mkdtemp, readFile, rm } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 import type {
   EvidenceRetrievalRepository,
   EvidenceSearchRequest,
@@ -22,6 +25,11 @@ import {
   type RetrievalIndexBuildInput,
 } from "../lib/retrieval/index-builder";
 import { RetrievalIndexAdminClient } from "../lib/retrieval/index-admin";
+import {
+  readRetrievalPlanArtifact,
+  writeRetrievalPlanArtifact,
+} from "../lib/retrieval/plan-artifact";
+import { runProductionDraftEval } from "../lib/retrieval/production-eval";
 import {
   RAG_EVAL_CHUNKS,
   RAG_EVAL_INDEX,
@@ -380,6 +388,97 @@ test("index builder freshness covers both as-of and knowledge cutoff", () => {
   );
 });
 
+test("private build artifact preserves one exact plan and rejects unsafe storage", async () => {
+  const temporaryDirectory = await mkdtemp(path.join(os.tmpdir(), "stablecoin-rag-plan-"));
+  try {
+    const plan = await buildRetrievalIndexPlan(
+      buildInput(), BUILD_CONFIG, new DeterministicTokenEmbedding(8),
+    );
+    const artifactPath = path.join(temporaryDirectory, "plan.json");
+    const written = await writeRetrievalPlanArtifact(
+      artifactPath, buildInput().releaseManifestSha256, plan,
+      "2026-08-10T00:00:00.000Z",
+    );
+    const loaded = await readRetrievalPlanArtifact(artifactPath);
+    assert.deepEqual(loaded, written);
+    assert.equal(loaded.planSha256, retrievalIndexPlanSha256(plan));
+    await assert.rejects(
+      writeRetrievalPlanArtifact(artifactPath, buildInput().releaseManifestSha256, plan),
+      /exist/i,
+    );
+    await chmod(artifactPath, 0o644);
+    await assert.rejects(readRetrievalPlanArtifact(artifactPath), /mode 0600/);
+    await assert.rejects(
+      writeRetrievalPlanArtifact(
+        path.join(process.cwd(), "private-plan.json"),
+        buildInput().releaseManifestSha256,
+        plan,
+      ),
+      /outside the repository/,
+    );
+    assert.equal((await readFile(artifactPath, "utf8")).includes("First sanitized provision"), true);
+  } finally {
+    await rm(temporaryDirectory, { recursive: true, force: true });
+  }
+});
+
+test("production DRAFT eval applies assurance provenance and activation metrics", async () => {
+  const report = await runProductionDraftEval(
+    {
+      schemaVersion: "1.0.0",
+      evalAssurance: "MACHINE_ASSURED",
+      generatedBy: "sanitized-generator-v1",
+      independentlyCheckedBy: "sanitized-checker-v1",
+      reviewerRef: null,
+      requiredChecklistTopics: ["authorization", "redemption"],
+      cases: [
+        {
+          caseId: "eval:authorization",
+          checklistTopic: "authorization",
+          query: "issuer authorization electronic money token",
+          expectedProvisionIds: ["provision:rag-eval:authorization"],
+        },
+        {
+          caseId: "eval:redemption",
+          checklistTopic: "redemption",
+          query: "redemption at par value token holder",
+          expectedProvisionIds: ["provision:rag-eval:redemption"],
+        },
+      ],
+    },
+    RAG_EVAL_INDEX,
+    RAG_EVAL_CHUNKS,
+    new DeterministicTokenEmbedding(64),
+  );
+  assert.equal(report.passed, true);
+  assert.equal(report.metrics.recallAt10, 1);
+  assert.equal(report.metrics.checklistTopicCoverage, 1);
+  assert.equal(report.metrics.rightsLeaks, 0);
+
+  await assert.rejects(
+    runProductionDraftEval(
+      {
+        schemaVersion: "1.0.0",
+        evalAssurance: "MACHINE_ASSURED",
+        generatedBy: "same-agent",
+        independentlyCheckedBy: "same-agent",
+        reviewerRef: null,
+        requiredChecklistTopics: ["authorization"],
+        cases: [{
+          caseId: "eval:bad-provenance",
+          checklistTopic: "authorization",
+          query: "authorization",
+          expectedProvisionIds: ["provision:rag-eval:authorization"],
+        }],
+      },
+      { ...RAG_EVAL_INDEX, assuranceTier: "HUMAN_REVIEWED" },
+      RAG_EVAL_CHUNKS,
+      new DeterministicTokenEmbedding(64),
+    ),
+    /generator and checker provenance|human-reviewed/,
+  );
+});
+
 test("index admin uses fixed build/manifest/activate RPCs and never hides activation", async () => {
   const calls: Array<{ path: string; body: Record<string, unknown> }> = [];
   const input = buildInput();
@@ -426,6 +525,70 @@ test("index admin uses fixed build/manifest/activate RPCs and never hides activa
   assert.equal(calls[1].body.p_plan !== undefined, true);
   assert.equal(calls[1].path.includes("activate"), false);
   assert.equal(calls[3].body.p_expected_manifest_sha256, "a".repeat(64));
+});
+
+test("index admin exposes fixed snapshot, DRAFT eval, and eval-record RPCs", async () => {
+  const calls: Array<{ path: string; body: Record<string, unknown> }> = [];
+  const snapshot = {
+    snapshotId: "snapshot:rag-test:1",
+    manifest: { schemaVersion: "1.0.0" },
+    manifestSha256: "c".repeat(64),
+    sourceReleaseCount: 2,
+    claimCount: 47,
+  };
+  const fetchImpl = async (request: string | URL | Request, init?: RequestInit) => {
+    const pathName = new URL(String(request)).pathname;
+    const body = JSON.parse(String(init?.body ?? "{}"));
+    calls.push({ path: pathName, body });
+    if (pathName.endsWith("/get_retrieval_snapshot_build_input")) {
+      return Response.json(buildInput());
+    }
+    if (pathName.endsWith("/get_retrieval_draft_eval_input")) {
+      return Response.json({ indexRelease: RAG_EVAL_INDEX, chunks: [] });
+    }
+    if (pathName.endsWith("/record_retrieval_index_eval")) {
+      return Response.json({ outcome: "PASSED" });
+    }
+    return Response.json(snapshot);
+  };
+  const admin = new RetrievalIndexAdminClient(new SupabaseHttpClient({
+    url: "https://example.supabase.co",
+    serviceRoleKey: "test-service-key",
+    reportsBucket: "policy-reports",
+    datasetsBucket: "policy-datasets",
+    sourcesBucket: "policy-sources",
+    requestTimeoutMs: 1000,
+  }, fetchImpl));
+  const releases = ["provisional:rag-test:1", "provisional:rag-test:2"];
+  await admin.prepareSnapshot("snapshot:rag-test:1", "stablecoin", "PROVISIONAL", releases);
+  await admin.createSnapshot(
+    "snapshot:rag-test:1", "stablecoin", "PROVISIONAL", releases, "c".repeat(64),
+  );
+  await admin.snapshotBuildInput("snapshot:rag-test:1");
+  await admin.draftEvalInput(RAG_EVAL_INDEX.indexReleaseId);
+  await admin.recordEval({
+    evalRecordId: "eval:rag-test:admin",
+    indexReleaseId: RAG_EVAL_INDEX.indexReleaseId,
+    expectedManifestSha256: "d".repeat(64),
+    evalAssurance: "MACHINE_ASSURED",
+    outcome: "PASSED",
+    artifactSha256: "e".repeat(64),
+    metrics: {
+      recallAt10: 1, mrrAt10: 1, citationPrecision: 1,
+      versionIsolation: 1, checklistTopicCoverage: 1, rightsLeaks: 0,
+      assuranceLeaks: 0, promptInstructionLeaks: 0, unsafeBuildsAccepted: 0,
+    },
+    evaluatedAt: "2026-08-10T00:00:00Z",
+  });
+  assert.deepEqual(calls.map((call) => call.path), [
+    "/rest/v1/rpc/prepare_retrieval_corpus_snapshot",
+    "/rest/v1/rpc/create_retrieval_corpus_snapshot",
+    "/rest/v1/rpc/get_retrieval_snapshot_build_input",
+    "/rest/v1/rpc/get_retrieval_draft_eval_input",
+    "/rest/v1/rpc/record_retrieval_index_eval",
+  ]);
+  assert.deepEqual(calls[0].body.p_source_release_ids, releases);
+  assert.equal(calls[4].body.p_eval_assurance, "MACHINE_ASSURED");
 });
 
 test("evidence search output validates against the strict v1 schema", async () => {

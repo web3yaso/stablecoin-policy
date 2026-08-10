@@ -11,7 +11,9 @@
  */
 module evidenceRag {
   type AssuranceTier = Provisional | HumanReviewed
-  type IndexPhase = Missing | Draft | Active | Retired
+  type IndexPhase = Missing | Planned | Draft | Active | Retired
+  type EvalAssurance = NoEvalAssurance | MachineEval | HumanEval
+  type EvalOutcome = EvalMissing | EvalPassed | EvalFailed
 
   type RetrievalOutcome =
     | NoRetrieval
@@ -28,12 +30,21 @@ module evidenceRag {
     assuranceTier: AssuranceTier,
     corpusTier: AssuranceTier,
     corpusReleasePinned: bool,
+    corpusSnapshotPinned: bool,
+    sourceReleasesPinned: bool,
+    membershipComplete: bool,
+    membershipDeduplicated: bool,
+    multipleSourceReleasesPinned: bool,
+    buildArtifactPinned: bool,
+    buildArtifactConsumed: bool,
     manifestComplete: bool,
     chunksPresent: bool,
     rightsAuthorized: bool,
     versionsIsolated: bool,
     lexicalConfigPinned: bool,
     vectorConfigPinned: bool,
+    evalAssurance: EvalAssurance,
+    evalOutcome: EvalOutcome,
     stale: bool,
   }
 
@@ -72,12 +83,21 @@ module evidenceRag {
     assuranceTier: Provisional,
     corpusTier: Provisional,
     corpusReleasePinned: false,
+    corpusSnapshotPinned: false,
+    sourceReleasesPinned: false,
+    membershipComplete: false,
+    membershipDeduplicated: false,
+    multipleSourceReleasesPinned: false,
+    buildArtifactPinned: false,
+    buildArtifactConsumed: false,
     manifestComplete: false,
     chunksPresent: false,
     rightsAuthorized: false,
     versionsIsolated: false,
     lexicalConfigPinned: false,
     vectorConfigPinned: false,
+    evalAssurance: NoEvalAssurance,
+    evalOutcome: EvalMissing,
     stale: false,
   }
 
@@ -108,6 +128,12 @@ module evidenceRag {
 
   pure def structurallySafe(index: IndexRelease): bool = and {
     index.corpusReleasePinned,
+    index.corpusSnapshotPinned,
+    index.sourceReleasesPinned,
+    index.membershipComplete,
+    index.membershipDeduplicated,
+    index.buildArtifactPinned,
+    index.buildArtifactConsumed,
     index.manifestComplete,
     index.chunksPresent,
     index.rightsAuthorized,
@@ -117,21 +143,47 @@ module evidenceRag {
     index.assuranceTier == index.corpusTier,
   }
 
+  pure def evalAuthorizes(index: IndexRelease): bool = and {
+    index.evalOutcome == EvalPassed,
+    index.evalAssurance != NoEvalAssurance,
+    index.assuranceTier == Provisional or index.evalAssurance == HumanEval,
+  }
+
   pure def activationEligible(index: IndexRelease): bool = and {
     index.phase == Draft,
     structurallySafe(index),
+    evalAuthorizes(index),
     not(index.stale),
   }
 
   pure def tierAuthorized(indexTier: AssuranceTier, requestedTier: AssuranceTier): bool =
     requestedTier == Provisional or indexTier == HumanReviewed
 
-  pure def buildReady(index: IndexRelease, tier: AssuranceTier): IndexRelease = {
+  pure def prepareBuildArtifact(
+    index: IndexRelease,
+    tier: AssuranceTier,
+    multipleSourceReleases: bool
+  ): IndexRelease = {
     ...index,
-    phase: Draft,
+    phase: Planned,
     assuranceTier: tier,
     corpusTier: tier,
     corpusReleasePinned: true,
+    corpusSnapshotPinned: true,
+    sourceReleasesPinned: true,
+    membershipComplete: true,
+    membershipDeduplicated: true,
+    multipleSourceReleasesPinned: multipleSourceReleases,
+    buildArtifactPinned: true,
+    buildArtifactConsumed: false,
+    evalAssurance: NoEvalAssurance,
+    evalOutcome: EvalMissing,
+  }
+
+  pure def buildReady(index: IndexRelease): IndexRelease = {
+    ...index,
+    phase: Draft,
+    buildArtifactConsumed: true,
     manifestComplete: true,
     chunksPresent: true,
     rightsAuthorized: true,
@@ -141,30 +193,62 @@ module evidenceRag {
     stale: false,
   }
 
-  pure def buildWithoutRights(index: IndexRelease, tier: AssuranceTier): IndexRelease = {
-    ...buildReady(index, tier),
+  pure def buildWithoutRights(index: IndexRelease): IndexRelease = {
+    ...buildReady(index),
     rightsAuthorized: false,
   }
 
-  pure def canBuild(s: EvidenceRagState, indexId: int): bool = and {
+  pure def canPrepare(s: EvidenceRagState, indexId: int): bool = and {
     INDEX_IDS.contains(indexId),
     s.indexes.get(indexId).phase == Missing,
   }
 
-  pure def applyBuildReady(
+  pure def canBuild(s: EvidenceRagState, indexId: int): bool = and {
+    INDEX_IDS.contains(indexId),
+    s.indexes.get(indexId).phase == Planned,
+    s.indexes.get(indexId).corpusSnapshotPinned,
+    s.indexes.get(indexId).sourceReleasesPinned,
+    s.indexes.get(indexId).membershipComplete,
+    s.indexes.get(indexId).membershipDeduplicated,
+    s.indexes.get(indexId).buildArtifactPinned,
+    not(s.indexes.get(indexId).buildArtifactConsumed),
+  }
+
+  pure def applyPrepareBuildArtifact(
     s: EvidenceRagState,
     indexId: int,
-    tier: AssuranceTier
+    tier: AssuranceTier,
+    multipleSourceReleases: bool
   ): EvidenceRagState =
-    { ...s, indexes: s.indexes.put(indexId, buildReady(s.indexes.get(indexId), tier)) }
+    { ...s, indexes: s.indexes.put(
+      indexId,
+      prepareBuildArtifact(s.indexes.get(indexId), tier, multipleSourceReleases)
+    ) }
+
+  pure def applyBuildReady(
+    s: EvidenceRagState,
+    indexId: int
+  ): EvidenceRagState =
+    { ...s, indexes: s.indexes.put(indexId, buildReady(s.indexes.get(indexId))) }
 
   pure def applyBuildWithoutRights(
     s: EvidenceRagState,
-    indexId: int,
-    tier: AssuranceTier
+    indexId: int
   ): EvidenceRagState =
     { ...s,
-      indexes: s.indexes.put(indexId, buildWithoutRights(s.indexes.get(indexId), tier)) }
+      indexes: s.indexes.put(indexId, buildWithoutRights(s.indexes.get(indexId))) }
+
+  pure def applyEval(
+    s: EvidenceRagState,
+    indexId: int,
+    assurance: EvalAssurance,
+    outcome: EvalOutcome
+  ): EvidenceRagState =
+    { ...s, indexes: s.indexes.put(indexId, {
+      ...s.indexes.get(indexId),
+      evalAssurance: assurance,
+      evalOutcome: outcome,
+    }) }
 
   pure def canActivate(s: EvidenceRagState, indexId: int): bool = and {
     INDEX_IDS.contains(indexId),
@@ -258,26 +342,69 @@ module evidenceRag {
 
   action initFrom(s: EvidenceRagState): bool = all { state' = s }
 
-  action buildReadyIndexWith(indexId: int, tier: AssuranceTier): bool = all {
+  action prepareBuildArtifactWith(
+    indexId: int,
+    tier: AssuranceTier,
+    multipleSourceReleases: bool
+  ): bool = all {
+    canPrepare(state, indexId),
+    state' = applyPrepareBuildArtifact(
+      state, indexId, tier, multipleSourceReleases
+    ),
+  }
+
+  action prepareBuildArtifactAction = {
+    nondet indexId = INDEX_IDS.oneOf()
+    nondet tier = Set(Provisional, HumanReviewed).oneOf()
+    nondet multipleSourceReleases = Set(true, false).oneOf()
+    prepareBuildArtifactWith(indexId, tier, multipleSourceReleases)
+  }
+
+  action buildReadyIndexWith(indexId: int): bool = all {
     canBuild(state, indexId),
-    state' = applyBuildReady(state, indexId, tier),
+    state' = applyBuildReady(state, indexId),
   }
 
   action buildReadyIndex = {
     nondet indexId = INDEX_IDS.oneOf()
-    nondet tier = Set(Provisional, HumanReviewed).oneOf()
-    buildReadyIndexWith(indexId, tier)
+    buildReadyIndexWith(indexId)
   }
 
-  action buildIndexWithoutRightsWith(indexId: int, tier: AssuranceTier): bool = all {
+  action buildIndexWithoutRightsWith(indexId: int): bool = all {
     canBuild(state, indexId),
-    state' = applyBuildWithoutRights(state, indexId, tier),
+    state' = applyBuildWithoutRights(state, indexId),
   }
 
   action buildIndexWithoutRights = {
     nondet indexId = INDEX_IDS.oneOf()
-    nondet tier = Set(Provisional, HumanReviewed).oneOf()
-    buildIndexWithoutRightsWith(indexId, tier)
+    buildIndexWithoutRightsWith(indexId)
+  }
+
+  action recordEvalPassWith(indexId: int, assurance: EvalAssurance): bool = all {
+    INDEX_IDS.contains(indexId),
+    state.indexes.get(indexId).phase == Draft,
+    structurallySafe(state.indexes.get(indexId)),
+    assurance != NoEvalAssurance,
+    state' = applyEval(state, indexId, assurance, EvalPassed),
+  }
+
+  action recordEvalPass = {
+    nondet indexId = INDEX_IDS.oneOf()
+    nondet assurance = Set(MachineEval, HumanEval).oneOf()
+    recordEvalPassWith(indexId, assurance)
+  }
+
+  action recordEvalFailureWith(indexId: int, assurance: EvalAssurance): bool = all {
+    INDEX_IDS.contains(indexId),
+    state.indexes.get(indexId).phase == Draft,
+    assurance != NoEvalAssurance,
+    state' = applyEval(state, indexId, assurance, EvalFailed),
+  }
+
+  action recordEvalFailure = {
+    nondet indexId = INDEX_IDS.oneOf()
+    nondet assurance = Set(MachineEval, HumanEval).oneOf()
+    recordEvalFailureWith(indexId, assurance)
   }
 
   action activateIndexWith(indexId: int): bool = all {
@@ -426,8 +553,11 @@ module evidenceRag {
   }
 
   action step = any {
+    prepareBuildArtifactAction,
     buildReadyIndex,
     buildIndexWithoutRights,
+    recordEvalPass,
+    recordEvalFailure,
     activateIndex,
     rollbackIndex,
     markActiveIndexStale,
@@ -454,6 +584,30 @@ module evidenceRag {
     INDEX_IDS.forall(id => {
       val index = state.indexes.get(id)
       (index.phase == Active or index.phase == Retired) implies structurallySafe(index)
+    })
+
+  val builtIndexesConsumeOnePinnedArtifact: bool =
+    INDEX_IDS.forall(id => {
+      val index = state.indexes.get(id)
+      (index.phase == Draft or index.phase == Active or index.phase == Retired)
+        implies and { index.buildArtifactPinned, index.buildArtifactConsumed }
+    })
+
+  val activeIndexesPinCompleteSnapshots: bool =
+    INDEX_IDS.forall(id => {
+      val index = state.indexes.get(id)
+      index.phase == Active implies and {
+        index.corpusSnapshotPinned,
+        index.sourceReleasesPinned,
+        index.membershipComplete,
+        index.membershipDeduplicated,
+      }
+    })
+
+  val activeIndexesHaveTierAppropriateEval: bool =
+    INDEX_IDS.forall(id => {
+      val index = state.indexes.get(id)
+      index.phase == Active implies evalAuthorizes(index)
     })
 
   val successfulRetrievalPinsAuthorizedEvidence: bool =
@@ -505,6 +659,15 @@ module evidenceRag {
   // === witnesses ===
 
   val activeIndexWitness: bool = state.activeIndexId != NO_INDEX
+  val plannedArtifactWitness: bool =
+    INDEX_IDS.exists(id => state.indexes.get(id).phase == Planned)
+  val aggregateSnapshotWitness: bool =
+    INDEX_IDS.exists(id => state.indexes.get(id).multipleSourceReleasesPinned)
+  val machineEvalWitness: bool =
+    INDEX_IDS.exists(id => state.indexes.get(id).evalAssurance == MachineEval
+      and state.indexes.get(id).evalOutcome == EvalPassed)
+  val failedEvalWitness: bool =
+    INDEX_IDS.exists(id => state.indexes.get(id).evalOutcome == EvalFailed)
   val rollbackWitness: bool = and {
     state.activeIndexId != NO_INDEX,
     state.previousIndexId != NO_INDEX,

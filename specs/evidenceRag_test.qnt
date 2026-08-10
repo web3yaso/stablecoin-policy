@@ -2,25 +2,70 @@
 module evidenceRag_test {
   import evidenceRag.* from "./evidenceRag"
 
-  run readyIndexActivatesTest =
+  run aggregateProvisionalIndexActivatesAfterMachineEvalTest =
     init
-      .then(buildReadyIndexWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1))
       .expect(and {
         state.activeIndexId == 1,
         state.indexes.get(1).phase == Active,
+        state.indexes.get(1).multipleSourceReleasesPinned,
       })
+
+  run indexCannotBuildWithoutPreparedArtifactTest =
+    init.then(buildReadyIndexWith(1).fail())
+
+  run plannedIndexCannotActivateBeforeBuildTest =
+    init
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(activateIndexWith(1).fail())
+
+  run indexCannotActivateWithoutEvalTest =
+    init
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(activateIndexWith(1).fail())
+
+  run failedEvalCannotActivateTest =
+    init
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalFailureWith(1, MachineEval))
+      .then(activateIndexWith(1).fail())
 
   run indexWithoutRightsCannotActivateTest =
     init
-      .then(buildIndexWithoutRightsWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildIndexWithoutRightsWith(1))
+      .then(recordEvalPassWith(1, MachineEval).fail())
+
+  run humanReviewedIndexRejectsMachineEvalTest =
+    init
+      .then(prepareBuildArtifactWith(1, HumanReviewed, false))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1).fail())
+
+  run humanReviewedIndexUsesHumanEvalTest =
+    init
+      .then(prepareBuildArtifactWith(1, HumanReviewed, false))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, HumanEval))
+      .then(activateIndexWith(1))
+      .then(searchSuccessWith(HumanReviewed))
+      .expect(state.retrieval.outcome == SearchSucceeded)
 
   run activationRetiresPriorIndexTest =
     init
-      .then(buildReadyIndexWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1))
-      .then(buildReadyIndexWith(2, Provisional))
+      .then(prepareBuildArtifactWith(2, Provisional, true))
+      .then(buildReadyIndexWith(2))
+      .then(recordEvalPassWith(2, MachineEval))
       .then(activateIndexWith(2))
       .expect(and {
         state.activeIndexId == 2,
@@ -30,9 +75,13 @@ module evidenceRag_test {
 
   run rollbackRestoresPriorIndexTest =
     init
-      .then(buildReadyIndexWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1))
-      .then(buildReadyIndexWith(2, Provisional))
+      .then(prepareBuildArtifactWith(2, Provisional, true))
+      .then(buildReadyIndexWith(2))
+      .then(recordEvalPassWith(2, MachineEval))
       .then(activateIndexWith(2))
       .then(rollbackIndex)
       .expect(and {
@@ -43,7 +92,9 @@ module evidenceRag_test {
 
   run successfulSearchPinsEvidenceTest =
     init
-      .then(buildReadyIndexWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1))
       .then(searchSuccessWith(Provisional))
       .expect(and {
@@ -55,7 +106,9 @@ module evidenceRag_test {
 
   run humanReviewedQueryRejectsProvisionalIndexTest =
     init
-      .then(buildReadyIndexWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1))
       .then(rejectUnauthorizedWith(HumanReviewed))
       .expect(and {
@@ -65,20 +118,17 @@ module evidenceRag_test {
 
   run humanReviewedQueryCannotSearchProvisionalIndexTest =
     init
-      .then(buildReadyIndexWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1))
       .then(searchSuccessWith(HumanReviewed).fail())
 
-  run humanReviewedQueryUsesReviewedIndexTest =
-    init
-      .then(buildReadyIndexWith(1, HumanReviewed))
-      .then(activateIndexWith(1))
-      .then(searchSuccessWith(HumanReviewed))
-      .expect(state.retrieval.outcome == SearchSucceeded)
-
   run insufficientEvidenceHasNoNarrativeTest =
     init
-      .then(buildReadyIndexWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1))
       .then(returnInsufficientWith(Provisional))
       .expect(and {
@@ -89,7 +139,9 @@ module evidenceRag_test {
 
   run conflictingEvidenceHasNoNarrativeTest =
     init
-      .then(buildReadyIndexWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1))
       .then(returnConflictWith(Provisional))
       .expect(and {
@@ -99,7 +151,9 @@ module evidenceRag_test {
 
   run staleIndexCannotSearchTest =
     init
-      .then(buildReadyIndexWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1))
       .then(markActiveIndexStale)
       .then(rejectStaleIndexWith(Provisional))
@@ -107,7 +161,9 @@ module evidenceRag_test {
 
   run staleIndexBlocksSuccessfulSearchTest =
     init
-      .then(buildReadyIndexWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1))
       .then(markActiveIndexStale)
       .then(searchSuccessWith(Provisional).fail())
@@ -123,10 +179,14 @@ module evidenceRag_test {
 
   run historicalReplayPinsRetiredIndexTest =
     init
-      .then(buildReadyIndexWith(1, Provisional))
+      .then(prepareBuildArtifactWith(1, Provisional, true))
+      .then(buildReadyIndexWith(1))
+      .then(recordEvalPassWith(1, MachineEval))
       .then(activateIndexWith(1))
       .then(searchSuccessWith(Provisional))
-      .then(buildReadyIndexWith(2, Provisional))
+      .then(prepareBuildArtifactWith(2, Provisional, true))
+      .then(buildReadyIndexWith(2))
+      .then(recordEvalPassWith(2, MachineEval))
       .then(activateIndexWith(2))
       .then(replayPinnedRun)
       .expect(and {
