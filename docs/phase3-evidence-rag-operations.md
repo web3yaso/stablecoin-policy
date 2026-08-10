@@ -2,9 +2,10 @@
 
 ## Current checkpoint
 
-Phase 3 foundation is implemented locally on branch
-`codex/phase3-evidence-rag`. It is not yet merged, deployed, migrated in the
-linked Supabase project, or populated with a production retrieval index.
+Phase 3 foundation was merged as PR #48 (`433ca8a`) on 2026-08-09. Migrations
+`0024` through `0026` are applied to the linked Supabase project after a
+verified private metadata backup and byte-identical normalized pre/post
+snapshots. No production retrieval index is built or active yet.
 
 Implemented:
 
@@ -23,12 +24,16 @@ Implemented:
 - strict request and response JSON Schema contracts;
 - authenticated `POST /v1/evidence/search` and OpenAPI coverage;
 - sanitized Phase 3 gold evals and unit/database regression tests.
+- migration `0027` and matching application gates preserve an explicit
+  provisional release-to-knowledge-cutoff gap while retaining the stronger
+  human-reviewed cutoff rule and requiring freshness through both timestamps.
 
 Deliberately incomplete:
 
 - no production EEA MiCA index has been built or activated; the builder has
   passed sanitized fixtures only;
-- no migrations after `0023` have been applied to the linked Supabase project;
+- migration `0027` must pass its linked dry-run and be applied before the first
+  production index build;
 - no sentence-level generated explanation exists in v1 (`explanation` is
   always `null`);
 - no PlaybookPackage has been changed to consume retrieval output;
@@ -38,6 +43,11 @@ Deliberately incomplete:
   initial small-corpus adapter performs deterministic RRF in the application.
   Database-side candidate retrieval and vector indexes are required before
   corpus size makes bounded in-memory ranking unsuitable.
+
+Time-envelope rule: human-reviewed indexes require `knowledgeCutoff >= asOf`.
+Provisional indexes preserve and expose a release whose evidence cutoff predates
+its product snapshot date; this gap is an assurance limitation, not a timestamp
+to rewrite. In every tier, `freshThrough` must cover both timestamps.
 
 ## Safety boundary
 
@@ -136,10 +146,10 @@ npm run test:db:phase2
 npm run db:phase2:stop
 ```
 
-On 2026-08-09, migrations `0001` through `0026` applied from zero and all 195
+On 2026-08-09, migrations `0001` through `0027` applied from zero and all 196
 pgTAP assertions passed. The Phase 3 sanitized retrieval eval reported
 Recall@10 `1.00`, MRR@10 `1.00`, citation precision `1.00`, version isolation
-`1.00`, nine of nine index-builder safety classifications correct, and zero
+`1.00`, twelve of twelve index-builder safety classifications correct, and zero
 assurance, rights, prompt-instruction, or unsafe-build leakage. These are
 development fixtures, not the final production-quality EEA gold set.
 
@@ -147,9 +157,9 @@ development fixtures, not the final production-quality EEA gold set.
 
 1. Merge this foundation only after CI passes.
 2. Take and verify a private metadata backup.
-3. Dry-run migrations `0024` through `0026` against the linked Supabase project,
-   then apply them; confirm existing `policy` and `regulatory` snapshots did
-   not change.
+3. Confirm migrations `0024` through `0026` remain applied, dry-run and apply
+   `0027`, and confirm existing `policy` and `regulatory` snapshots do not
+   change.
 4. Run the default-dry-run EEA index builder against the selected provisional
    release, inspect its exact membership and embedding cost, then explicitly
    create the DRAFT index without activation.

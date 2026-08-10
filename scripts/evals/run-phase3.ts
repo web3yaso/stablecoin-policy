@@ -33,7 +33,10 @@ type BuilderCase = {
     | "CLAIM_WITHOUT_CITATION"
     | "CROSS_RELEASE_CLAIM"
     | "ASSURANCE_TIER_MISMATCH"
-    | "JURISDICTION_MISMATCH";
+    | "JURISDICTION_MISMATCH"
+    | "PROVISIONAL_CUTOFF_BEFORE_AS_OF"
+    | "REVIEWED_CUTOFF_BEFORE_AS_OF"
+    | "FRESH_BEFORE_KNOWLEDGE_CUTOFF";
   expected: "PASS" | "BLOCK";
 };
 
@@ -224,6 +227,19 @@ function builderInput(mutation: BuilderCase["mutation"]): RetrievalIndexBuildInp
       break;
     case "JURISDICTION_MISMATCH":
       source.jurisdictionCode = "SG";
+      break;
+    case "PROVISIONAL_CUTOFF_BEFORE_AS_OF":
+      input.asOf = "2026-08-02T00:00:00.000Z";
+      input.knowledgeCutoff = "2026-08-01T00:00:00.000Z";
+      break;
+    case "REVIEWED_CUTOFF_BEFORE_AS_OF":
+      input.corpusReleaseKind = "HUMAN_REVIEWED";
+      input.assuranceTier = "HUMAN_REVIEWED";
+      input.asOf = "2026-08-02T00:00:00.000Z";
+      input.knowledgeCutoff = "2026-08-01T00:00:00.000Z";
+      break;
+    case "FRESH_BEFORE_KNOWLEDGE_CUTOFF":
+      input.knowledgeCutoff = "2027-01-01T00:00:00.000Z";
       break;
     case "NONE":
       break;
