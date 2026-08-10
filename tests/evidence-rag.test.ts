@@ -25,6 +25,12 @@ import {
   type RetrievalIndexBuildInput,
 } from "../lib/retrieval/index-builder";
 import { RetrievalIndexAdminClient } from "../lib/retrieval/index-admin";
+import { replayChecksum } from "../lib/legal-corpus/machine-pipeline";
+import {
+  assembleProductionEvalDataset,
+  type ProductionEvalIndependentCheck,
+  type ProductionEvalProposal,
+} from "../lib/retrieval/eval-dataset-assembly";
 import {
   readRetrievalPlanArtifact,
   writeRetrievalPlanArtifact,
@@ -126,6 +132,62 @@ const BUILD_CONFIG = {
   lexicalConfig: { language: "english", version: "1" },
   vectorConfig: { distance: "cosine", fusion: "rrf", version: "1" },
 };
+
+function productionEvalProposal(): ProductionEvalProposal {
+  return {
+    schemaVersion: "1.0.0",
+    proposalId: "eval-proposal:rag-test:1",
+    snapshotId: RAG_EVAL_INDEX.corpusReleaseId,
+    snapshotManifestSha256: "c".repeat(64),
+    generator: {
+      agentId: "agent:rag-generator:1",
+      model: "sanitized-generator-model",
+      promptTemplateId: "rag-eval-generator",
+      promptTemplateVersion: "1",
+      parametersVersion: "1",
+    },
+    requiredChecklistTopics: ["authorization", "redemption"],
+    cases: [
+      {
+        caseId: "eval:authorization",
+        checklistTopic: "authorization",
+        query: "issuer authorization electronic money token",
+        expectedProvisionIds: ["provision:rag-eval:authorization"],
+      },
+      {
+        caseId: "eval:redemption",
+        checklistTopic: "redemption",
+        query: "redemption at par value token holder",
+        expectedProvisionIds: ["provision:rag-eval:redemption"],
+      },
+    ],
+  };
+}
+
+function productionEvalCheck(
+  proposal: ProductionEvalProposal,
+): ProductionEvalIndependentCheck {
+  return {
+    schemaVersion: "1.0.0",
+    checkId: "eval-check:rag-test:1",
+    proposalSha256: replayChecksum(proposal),
+    snapshotId: proposal.snapshotId,
+    snapshotManifestSha256: proposal.snapshotManifestSha256,
+    checker: {
+      agentId: "agent:rag-checker:1",
+      model: "sanitized-checker-model",
+      promptTemplateId: "rag-eval-checker",
+      promptTemplateVersion: "1",
+      parametersVersion: "1",
+    },
+    cases: proposal.cases.map((item) => ({
+      caseId: item.caseId,
+      outcome: "AGREE" as const,
+      independentlyDerivedProvisionIds: [...item.expectedProvisionIds],
+      blockers: [],
+    })),
+  };
+}
 
 test("hybrid search returns a pinned exact citation and records the run", async () => {
   const fixture = service();
@@ -423,32 +485,16 @@ test("private build artifact preserves one exact plan and rejects unsafe storage
 });
 
 test("production DRAFT eval applies assurance provenance and activation metrics", async () => {
+  const proposal = productionEvalProposal();
+  const assembly = assembleProductionEvalDataset(
+    proposal, productionEvalCheck(proposal),
+  );
   const report = await runProductionDraftEval(
-    {
-      schemaVersion: "1.0.0",
-      evalAssurance: "MACHINE_ASSURED",
-      generatedBy: "sanitized-generator-v1",
-      independentlyCheckedBy: "sanitized-checker-v1",
-      reviewerRef: null,
-      requiredChecklistTopics: ["authorization", "redemption"],
-      cases: [
-        {
-          caseId: "eval:authorization",
-          checklistTopic: "authorization",
-          query: "issuer authorization electronic money token",
-          expectedProvisionIds: ["provision:rag-eval:authorization"],
-        },
-        {
-          caseId: "eval:redemption",
-          checklistTopic: "redemption",
-          query: "redemption at par value token holder",
-          expectedProvisionIds: ["provision:rag-eval:redemption"],
-        },
-      ],
-    },
+    assembly.dataset,
     RAG_EVAL_INDEX,
     RAG_EVAL_CHUNKS,
     new DeterministicTokenEmbedding(64),
+    proposal.snapshotManifestSha256,
   );
   assert.equal(report.passed, true);
   assert.equal(report.metrics.recallAt10, 1);
@@ -457,26 +503,97 @@ test("production DRAFT eval applies assurance provenance and activation metrics"
 
   await assert.rejects(
     runProductionDraftEval(
+      assembly.dataset,
+      RAG_EVAL_INDEX,
+      RAG_EVAL_CHUNKS,
+      new DeterministicTokenEmbedding(64),
+      "d".repeat(64),
+    ),
+    /not pinned to the DRAFT corpus manifest/,
+  );
+
+  await assert.rejects(
+    runProductionDraftEval(
       {
-        schemaVersion: "1.0.0",
+        ...assembly.dataset,
         evalAssurance: "MACHINE_ASSURED",
-        generatedBy: "same-agent",
-        independentlyCheckedBy: "same-agent",
-        reviewerRef: null,
-        requiredChecklistTopics: ["authorization"],
-        cases: [{
-          caseId: "eval:bad-provenance",
-          checklistTopic: "authorization",
-          query: "authorization",
-          expectedProvisionIds: ["provision:rag-eval:authorization"],
-        }],
+        generation: { ...assembly.dataset.generation, agentId: "agent:same:1" },
+        independentCheck: {
+          ...assembly.dataset.independentCheck,
+          agentId: "agent:same:1",
+        },
       },
       { ...RAG_EVAL_INDEX, assuranceTier: "HUMAN_REVIEWED" },
       RAG_EVAL_CHUNKS,
       new DeterministicTokenEmbedding(64),
+      proposal.snapshotManifestSha256,
     ),
     /generator and checker provenance|human-reviewed/,
   );
+});
+
+test("production eval assembly rejects stale, self-checked, and divergent cases", () => {
+  const proposal = productionEvalProposal();
+  const validCheck = productionEvalCheck(proposal);
+  const assembly = assembleProductionEvalDataset(proposal, validCheck);
+  assert.equal(assembly.dataset.schemaVersion, "1.1.0");
+  assert.equal(assembly.dataset.sourceSnapshot.snapshotId, proposal.snapshotId);
+  assert.equal(assembly.acceptedCaseCount, 2);
+  assert.match(assembly.dataset.datasetId, /^eval-dataset:[0-9a-f]{40}$/);
+
+  assert.throws(
+    () => assembleProductionEvalDataset(proposal, {
+      ...validCheck,
+      proposalSha256: "0".repeat(64),
+    }),
+    /not pinned to the exact proposal/,
+  );
+  assert.throws(
+    () => assembleProductionEvalDataset(proposal, {
+      ...validCheck,
+      checker: { ...validCheck.checker, agentId: proposal.generator.agentId },
+    }),
+    /must be different agents/,
+  );
+  assert.throws(
+    () => assembleProductionEvalDataset(proposal, {
+      ...validCheck,
+      cases: validCheck.cases.map((item) => item.caseId === "eval:redemption"
+        ? { ...item, independentlyDerivedProvisionIds: ["provision:rag-eval:other"] }
+        : item),
+    }),
+    /does not match independent derivation/,
+  );
+  assert.throws(
+    () => assembleProductionEvalDataset(proposal, {
+      ...validCheck,
+      cases: validCheck.cases.map((item) => item.caseId === "eval:redemption"
+        ? { ...item, outcome: "BLOCK" as const, blockers: ["citation-divergence"] }
+        : item),
+    }),
+    /do not cover checklist topics: redemption/,
+  );
+});
+
+test("production eval proposal, check, and assembled dataset satisfy strict contracts", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const Ajv2020 = (await import("ajv/dist/2020")).default;
+  const proposal = productionEvalProposal();
+  const check = productionEvalCheck(proposal);
+  const dataset = assembleProductionEvalDataset(proposal, check).dataset;
+  const ajv = new Ajv2020({ strict: true });
+  for (const [fileName, value] of [
+    ["retrieval-production-eval-proposal.schema.json", proposal],
+    ["retrieval-production-eval-check.schema.json", check],
+    ["retrieval-production-eval-dataset.schema.json", dataset],
+  ] as const) {
+    const schema = JSON.parse(await readFile(
+      path.join(process.cwd(), "contracts", "v1", fileName), "utf8",
+    ));
+    const validate = ajv.compile(schema);
+    assert.equal(validate(value), true, JSON.stringify(validate.errors));
+    assert.equal(validate({ ...value, unexpected: true }), false);
+  }
 });
 
 test("index admin uses fixed build/manifest/activate RPCs and never hides activation", async () => {
@@ -546,6 +663,14 @@ test("index admin exposes fixed snapshot, DRAFT eval, and eval-record RPCs", asy
     if (pathName.endsWith("/get_retrieval_draft_eval_input")) {
       return Response.json({ indexRelease: RAG_EVAL_INDEX, chunks: [] });
     }
+    if (pathName.endsWith("/get_retrieval_draft_corpus_pin")) {
+      return Response.json({
+        indexReleaseId: RAG_EVAL_INDEX.indexReleaseId,
+        corpusReleaseId: RAG_EVAL_INDEX.corpusReleaseId,
+        corpusReleaseKind: "PROVISIONAL",
+        manifestSha256: "f".repeat(64),
+      });
+    }
     if (pathName.endsWith("/record_retrieval_index_eval")) {
       return Response.json({ outcome: "PASSED" });
     }
@@ -566,6 +691,7 @@ test("index admin exposes fixed snapshot, DRAFT eval, and eval-record RPCs", asy
   );
   await admin.snapshotBuildInput("snapshot:rag-test:1");
   await admin.draftEvalInput(RAG_EVAL_INDEX.indexReleaseId);
+  await admin.draftCorpusPin(RAG_EVAL_INDEX.indexReleaseId);
   await admin.recordEval({
     evalRecordId: "eval:rag-test:admin",
     indexReleaseId: RAG_EVAL_INDEX.indexReleaseId,
@@ -585,10 +711,11 @@ test("index admin exposes fixed snapshot, DRAFT eval, and eval-record RPCs", asy
     "/rest/v1/rpc/create_retrieval_corpus_snapshot",
     "/rest/v1/rpc/get_retrieval_snapshot_build_input",
     "/rest/v1/rpc/get_retrieval_draft_eval_input",
+    "/rest/v1/rpc/get_retrieval_draft_corpus_pin",
     "/rest/v1/rpc/record_retrieval_index_eval",
   ]);
   assert.deepEqual(calls[0].body.p_source_release_ids, releases);
-  assert.equal(calls[4].body.p_eval_assurance, "MACHINE_ASSURED");
+  assert.equal(calls[5].body.p_eval_assurance, "MACHINE_ASSURED");
 });
 
 test("evidence search output validates against the strict v1 schema", async () => {

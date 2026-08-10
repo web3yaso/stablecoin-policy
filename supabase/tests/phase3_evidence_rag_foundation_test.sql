@@ -3,7 +3,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set search_path = public, extensions, policy, regulatory, retrieval;
 
-select plan(53);
+select plan(55);
 
 -- Sanitized provisional corpus fixture. It represents workflow shape only,
 -- not a legal conclusion or production review.
@@ -293,6 +293,18 @@ select is(
    where index_release_id = 'index:rag-test:snapshot'),
   1,
   'snapshot build records one exact consumed plan'
+);
+select ok(
+  not has_function_privilege(
+    'anon', 'policy.get_retrieval_draft_corpus_pin(text)', 'EXECUTE'
+  ),
+  'anonymous callers cannot read the private DRAFT corpus pin'
+);
+select is(
+  policy.get_retrieval_draft_corpus_pin('index:rag-test:snapshot')->>'manifestSha256',
+  (select manifest_sha256 from retrieval.corpus_snapshots
+   where snapshot_id = 'snapshot:rag-test:aggregate'),
+  'DRAFT eval corpus pin returns the exact aggregate snapshot manifest'
 );
 
 select throws_ok(

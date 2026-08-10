@@ -14,11 +14,16 @@ import type {
 } from "./index-admin";
 
 export type ProductionEvalDataset = {
-  schemaVersion: "1.0.0";
+  schemaVersion: "1.1.0";
+  datasetId: string;
   evalAssurance: RetrievalEvalAssurance;
-  generatedBy: string;
-  independentlyCheckedBy: string;
   reviewerRef: string | null;
+  sourceSnapshot: {
+    snapshotId: string;
+    manifestSha256: string;
+  };
+  generation: EvalDatasetAgentProvenance;
+  independentCheck: EvalDatasetAgentProvenance;
   requiredChecklistTopics: string[];
   cases: Array<{
     caseId: string;
@@ -27,6 +32,19 @@ export type ProductionEvalDataset = {
     expectedProvisionIds: string[];
   }>;
 };
+
+type EvalDatasetAgentProvenance = {
+  agentId: string;
+  model: string;
+  promptTemplateId: string;
+  promptTemplateVersion: string;
+  parametersVersion: string;
+  artifactSha256: string;
+};
+
+const DATASET_ID = /^eval-dataset:[0-9a-f]{40}$/;
+const IDENTIFIER = /^[a-z0-9][a-z0-9._:-]{2,200}$/;
+const SHA256 = /^[0-9a-f]{64}$/;
 
 export type ProductionEvalReport = {
   schemaVersion: "1.0.0";
@@ -49,8 +67,13 @@ export async function runProductionDraftEval(
   index: RetrievalIndexRelease,
   chunks: IndexedEvidenceChunk[],
   embeddingProvider: QueryEmbeddingProvider,
+  corpusManifestSha256: string,
 ): Promise<ProductionEvalReport> {
   validateProductionEvalDataset(dataset, index.assuranceTier);
+  if (dataset.sourceSnapshot.snapshotId !== index.corpusReleaseId
+    || dataset.sourceSnapshot.manifestSha256 !== corpusManifestSha256) {
+    throw new Error("production eval dataset is not pinned to the DRAFT corpus manifest");
+  }
   if (
     embeddingProvider.model !== index.embeddingModel ||
     embeddingProvider.version !== index.embeddingModelVersion ||
@@ -144,19 +167,26 @@ export function validateProductionEvalDataset(
   dataset: ProductionEvalDataset,
   indexAssuranceTier: RetrievalIndexRelease["assuranceTier"],
 ): void {
-  if (dataset.schemaVersion !== "1.0.0" || dataset.cases.length === 0
+  if (dataset.schemaVersion !== "1.1.0" || dataset.cases.length === 0
     || dataset.requiredChecklistTopics.length === 0) {
     throw new Error("production eval dataset is empty or has an unsupported schema");
   }
   if (new Set(dataset.cases.map((item) => item.caseId)).size !== dataset.cases.length
     || new Set(dataset.requiredChecklistTopics).size !== dataset.requiredChecklistTopics.length
-    || dataset.cases.some((item) => !item.query.trim()
+    || dataset.requiredChecklistTopics.some((topic) => !topic.trim())
+    || dataset.cases.some((item) => !IDENTIFIER.test(item.caseId) || !item.query.trim()
       || item.expectedProvisionIds.length === 0
+      || new Set(item.expectedProvisionIds).size !== item.expectedProvisionIds.length
+      || item.expectedProvisionIds.some((id) => !IDENTIFIER.test(id))
       || !dataset.requiredChecklistTopics.includes(item.checklistTopic))) {
     throw new Error("production eval dataset membership is invalid");
   }
-  if (!dataset.generatedBy.trim() || !dataset.independentlyCheckedBy.trim()
-    || dataset.generatedBy === dataset.independentlyCheckedBy) {
+  if (!DATASET_ID.test(dataset.datasetId)
+    || !IDENTIFIER.test(dataset.sourceSnapshot.snapshotId)
+    || !SHA256.test(dataset.sourceSnapshot.manifestSha256)
+    || !validDatasetAgent(dataset.generation)
+    || !validDatasetAgent(dataset.independentCheck)
+    || dataset.generation.agentId === dataset.independentCheck.agentId) {
     throw new Error("production eval requires distinct generator and checker provenance");
   }
   if (indexAssuranceTier === "HUMAN_REVIEWED"
@@ -166,4 +196,10 @@ export function validateProductionEvalDataset(
   if (dataset.evalAssurance === "HUMAN_REVIEWED" && !dataset.reviewerRef?.trim()) {
     throw new Error("human-reviewed eval assurance requires reviewer provenance");
   }
+}
+
+function validDatasetAgent(agent: EvalDatasetAgentProvenance): boolean {
+  return IDENTIFIER.test(agent.agentId) && SHA256.test(agent.artifactSha256)
+    && [agent.model, agent.promptTemplateId, agent.promptTemplateVersion,
+      agent.parametersVersion].every((item) => item.trim().length > 0);
 }

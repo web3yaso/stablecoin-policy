@@ -40,6 +40,13 @@ export type RetrievalDraftEvalInput = {
   chunks: Array<Omit<IndexedEvidenceChunk, "embedding"> & { embedding: string }>;
 };
 
+export type RetrievalDraftCorpusPin = {
+  indexReleaseId: string;
+  corpusReleaseId: string;
+  corpusReleaseKind: RetrievalCorpusKind;
+  manifestSha256: string;
+};
+
 export class RetrievalIndexAdminClient {
   constructor(private readonly client: SupabaseHttpClient) {}
 
@@ -187,6 +194,17 @@ export class RetrievalIndexAdminClient {
     );
     if (input === null) throw new Error("DRAFT retrieval index not found");
     return input;
+  }
+
+  async draftCorpusPin(indexReleaseId: string): Promise<RetrievalDraftCorpusPin> {
+    assertIdentifier(indexReleaseId);
+    const pin = await this.client.rpc<RetrievalDraftCorpusPin | null>(
+      "get_retrieval_draft_corpus_pin",
+      { p_index_release_id: indexReleaseId },
+    );
+    if (pin === null) throw new Error("DRAFT retrieval corpus pin not found");
+    assertSha256(pin.manifestSha256, "DRAFT corpus manifest");
+    return pin;
   }
 }
 
