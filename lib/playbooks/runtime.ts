@@ -1,5 +1,6 @@
 import { replayChecksum } from "../legal-corpus/machine-pipeline";
 import type { StablecoinDossier } from "../dossiers";
+import type { EvidenceSearchResponse } from "../retrieval/contracts";
 import type {
   BusinessProfile,
   CapabilityConclusion,
@@ -265,6 +266,7 @@ export function sealPlaybookPackage(
   profile: BusinessProfile,
   conclusions: CapabilityResult[],
   evidence: EvaluationEvidence,
+  retrieval: EvidenceSearchResponse | null = null,
 ): PlaybookPackage {
   const referenced = new Set(
     conclusions.flatMap((result) => result.evidenceClaimIds),
@@ -276,7 +278,7 @@ export function sealPlaybookPackage(
   const provisional = true; // MVP evidence is always machine-assured
 
   const sealable = {
-    schemaVersion: "1.0.0" as const,
+    schemaVersion: "1.1.0" as const,
     playbookId: definition.playbookId,
     playbookName: definition.name,
     profileFingerprint: replayChecksum(profile),
@@ -303,9 +305,13 @@ export function sealPlaybookPackage(
       knowledgeCutoff: referencedClaims[0]?.knowledgeCutoff ?? null,
       dossierId: evidence.dossier?.dossierId ?? null,
       dossierCuratedAt: evidence.dossier?.curatedAt ?? null,
+      retrievalIndexReleaseId: retrieval?.indexRelease?.indexReleaseId ?? null,
+      retrievalCorpusReleaseId: retrieval?.indexRelease?.corpusReleaseId ?? null,
+      retrievalAsOf: retrieval?.indexRelease?.asOf ?? null,
+      retrievalKnowledgeCutoff: retrieval?.indexRelease?.knowledgeCutoff ?? null,
       rulesVersion: definition.version,
       templateVersion: definition.templateVersion,
-      schemaVersion: "1.0.0" as const,
+      schemaVersion: "1.1.0" as const,
     },
   };
   const integritySha256 = replayChecksum(sealable);
@@ -320,14 +326,84 @@ export function sealPlaybookPackage(
 export function assembleEvidenceBundle(
   pkg: PlaybookPackage,
   evidence: EvaluationEvidence,
+  retrieval: EvidenceSearchResponse | null = null,
 ): EvidenceBundle {
   const referenced = new Set(
     pkg.conclusions.flatMap((result) => result.evidenceClaimIds),
   );
   return {
-    schemaVersion: "1.0.0",
+    schemaVersion: "1.1.0",
     packageId: pkg.packageId,
     claims: evidence.claims.filter((claim) => referenced.has(claim.claimId)),
     dossierFacts: [...new Set(pkg.conclusions.flatMap((result) => result.dossierFacts))],
+    retrieval: assemblePlaybookRetrievalEvidence(pkg, retrieval),
+  };
+}
+
+function assemblePlaybookRetrievalEvidence(
+  pkg: PlaybookPackage,
+  retrieval: EvidenceSearchResponse | null,
+): EvidenceBundle["retrieval"] {
+  const index = retrieval?.indexRelease ?? null;
+  if (
+    pkg.versions.retrievalIndexReleaseId !== (index?.indexReleaseId ?? null)
+    || pkg.versions.retrievalCorpusReleaseId !== (index?.corpusReleaseId ?? null)
+    || pkg.versions.retrievalAsOf !== (index?.asOf ?? null)
+    || pkg.versions.retrievalKnowledgeCutoff !== (index?.knowledgeCutoff ?? null)
+  ) {
+    throw new Error("retrieval evidence does not match the sealed package versions");
+  }
+  if (retrieval === null) {
+    return {
+      status: "RETRIEVAL_UNAVAILABLE",
+      runId: null,
+      querySha256: null,
+      indexReleaseId: null,
+      corpusReleaseId: null,
+      asOf: null,
+      knowledgeCutoff: null,
+      items: [],
+      limitations: [
+        "Evidence retrieval was not run; deterministic conclusions remain unchanged.",
+      ],
+    };
+  }
+  if (retrieval.status === "SUCCESS" && index === null) {
+    throw new Error("successful retrieval must pin an index release");
+  }
+  return {
+    status: retrieval.status,
+    runId: retrieval.runId,
+    querySha256: retrieval.querySha256,
+    indexReleaseId: index?.indexReleaseId ?? null,
+    corpusReleaseId: index?.corpusReleaseId ?? null,
+    asOf: index?.asOf ?? null,
+    knowledgeCutoff: index?.knowledgeCutoff ?? null,
+    items: (retrieval.status === "SUCCESS" ? retrieval.hits : []).map((hit) => ({
+      rank: hit.rank,
+      score: hit.score,
+      chunkId: hit.chunkId,
+      claimId: hit.claim.claimId,
+      topic: hit.claim.topic,
+      legalStatus: hit.claim.legalStatus,
+      supportRelation: hit.claim.supportRelation,
+      citationId: hit.citation.citationId,
+      provisionId: hit.citation.provisionId,
+      sourceVersionId: hit.citation.sourceVersionId,
+      sourceVersionChecksumSha256: hit.citation.sourceVersionChecksumSha256,
+      documentTitle: hit.citation.documentTitle,
+      sourceType: hit.citation.sourceType,
+      authorityName: hit.citation.authorityName,
+      locator: hit.citation.locator,
+      canonicalUrl: hit.citation.canonicalUrl,
+      excerpt: hit.citation.excerpt,
+      excerptPermission: hit.citation.excerptPermission,
+      jurisdictionCode: hit.jurisdictionCode,
+      effectiveFrom: hit.effectiveFrom,
+      effectiveTo: hit.effectiveTo,
+      assuranceTier: hit.assuranceTier,
+      reviewStatus: hit.reviewStatus,
+    })),
+    limitations: [...retrieval.limitations],
   };
 }

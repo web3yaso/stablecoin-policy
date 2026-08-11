@@ -328,8 +328,10 @@ subsite-owned `playbookId`.
 
 ## Phase 3 — Evidence RAG
 
-Status: foundation merged as PR #48 (`433ca8a`); activation-gates follow-up in
-development (2026-08-10).
+Status: foundation merged as PR #48 (`433ca8a`), activation gates as PR #50
+(`ca5a21f`), and production eval assembly as PR #51 (`4ab895d`).
+Playbook EvidenceBundle integration is in development on
+`codex/phase3-playbook-evidence-bundle` (2026-08-11).
 The executable index/retrieval model, strict API contracts, provider-neutral
 hybrid retrieval core, authenticated endpoint, pgvector-backed storage and
 atomic index lifecycle migrations `0024`-`0025`, retrieval audit, sanitized
@@ -411,7 +413,8 @@ output to change deterministic decisions.
 
 ## Phase 4 — stablecoin, issuer, and deployment dossiers
 
-Status: not started.
+Status: provisional USDC × EEA mini-dossier implemented; normalized persistent
+dossier expansion and broader asset coverage remain.
 
 Goal: add the asset-specific evidence required for Pre-listing decisions.
 
@@ -460,7 +463,8 @@ Goal: add the asset-specific evidence required for Pre-listing decisions.
 
 ## Phase 5 — deterministic Playbook Runtime and Citely package API
 
-Status: not started.
+Status: provisional vertical slice implemented; retrieval integration rollout,
+artifact persistence, idempotency, and entitlement hardening remain.
 
 Goal: deliver the first paid evidence-backed workflow while keeping Citely
 domain agnostic.

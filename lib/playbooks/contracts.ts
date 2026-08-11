@@ -68,7 +68,7 @@ export type CapabilityResult = {
 };
 
 export type PlaybookPackage = {
-  schemaVersion: "1.0.0";
+  schemaVersion: "1.1.0";
   packageId: string;
   playbookId: string;
   playbookName: string;
@@ -86,17 +86,68 @@ export type PlaybookPackage = {
     knowledgeCutoff: string | null;
     dossierId: string | null;
     dossierCuratedAt: string | null;
+    retrievalIndexReleaseId: string | null;
+    retrievalCorpusReleaseId: string | null;
+    retrievalAsOf: string | null;
+    retrievalKnowledgeCutoff: string | null;
     rulesVersion: string;
     templateVersion: string;
-    schemaVersion: "1.0.0";
+    schemaVersion: "1.1.0";
   };
   evaluatedAt: string;
   integritySha256: string;
 };
 
 export type EvidenceBundle = {
-  schemaVersion: "1.0.0";
+  schemaVersion: "1.1.0";
   packageId: string;
   claims: EvidenceClaim[];
   dossierFacts: string[];
+  retrieval: PlaybookRetrievalEvidence;
+};
+
+export type PlaybookRetrievalStatus =
+  | "SUCCESS"
+  | "INSUFFICIENT_EVIDENCE"
+  | "CONFLICTING_EVIDENCE"
+  | "UNAUTHORIZED_EVIDENCE"
+  | "STALE_INDEX"
+  | "RETRIEVAL_UNAVAILABLE";
+
+export type PlaybookRetrievedEvidence = {
+  rank: number;
+  score: number;
+  chunkId: string;
+  claimId: string;
+  topic: string;
+  legalStatus: string;
+  supportRelation: "DIRECT_SUPPORT" | "INDIRECT_SUPPORT" | "CONTRADICTS";
+  citationId: string;
+  provisionId: string;
+  sourceVersionId: string;
+  sourceVersionChecksumSha256: string;
+  documentTitle: string;
+  sourceType: string;
+  authorityName: string;
+  locator: string;
+  canonicalUrl: string;
+  excerpt: string | null;
+  excerptPermission: "ALLOWED" | "LINK_ONLY";
+  jurisdictionCode: string;
+  effectiveFrom: string;
+  effectiveTo: string | null;
+  assuranceTier: "PROVISIONAL" | "HUMAN_REVIEWED";
+  reviewStatus: "PROVISIONAL" | "HUMAN_REVIEWED";
+};
+
+export type PlaybookRetrievalEvidence = {
+  status: PlaybookRetrievalStatus;
+  runId: string | null;
+  querySha256: string | null;
+  indexReleaseId: string | null;
+  corpusReleaseId: string | null;
+  asOf: string | null;
+  knowledgeCutoff: string | null;
+  items: PlaybookRetrievedEvidence[];
+  limitations: string[];
 };

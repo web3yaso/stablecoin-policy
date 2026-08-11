@@ -15,7 +15,7 @@
         "evaluatedAt", "integritySha256"
       ],
       "properties": {
-        "schemaVersion": { "const": "1.0.0" },
+        "schemaVersion": { "const": "1.1.0" },
         "packageId": { "type": "string", "pattern": "^package:[a-z0-9-]+:[0-9a-f]{16}$" },
         "playbookId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
         "playbookName": { "type": "string", "minLength": 1 },
@@ -60,7 +60,9 @@
           "additionalProperties": false,
           "required": [
             "corpusReleaseId", "corpusAsOf", "knowledgeCutoff", "dossierId",
-            "dossierCuratedAt", "rulesVersion", "templateVersion", "schemaVersion"
+            "dossierCuratedAt", "retrievalIndexReleaseId", "retrievalCorpusReleaseId",
+            "retrievalAsOf", "retrievalKnowledgeCutoff", "rulesVersion",
+            "templateVersion", "schemaVersion"
           ],
           "properties": {
             "corpusReleaseId": { "type": ["string", "null"] },
@@ -68,9 +70,13 @@
             "knowledgeCutoff": { "type": ["string", "null"], "format": "date-time" },
             "dossierId": { "type": ["string", "null"] },
             "dossierCuratedAt": { "type": ["string", "null"], "format": "date-time" },
+            "retrievalIndexReleaseId": { "type": ["string", "null"] },
+            "retrievalCorpusReleaseId": { "type": ["string", "null"] },
+            "retrievalAsOf": { "type": ["string", "null"], "format": "date-time" },
+            "retrievalKnowledgeCutoff": { "type": ["string", "null"], "format": "date-time" },
             "rulesVersion": { "type": "string", "minLength": 1 },
             "templateVersion": { "type": "string", "minLength": 1 },
-            "schemaVersion": { "const": "1.0.0" }
+            "schemaVersion": { "const": "1.1.0" }
           }
         },
         "evaluatedAt": { "type": "string", "format": "date-time" },
@@ -80,9 +86,9 @@
     "evidenceBundle": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["schemaVersion", "packageId", "claims", "dossierFacts"],
+      "required": ["schemaVersion", "packageId", "claims", "dossierFacts", "retrieval"],
       "properties": {
-        "schemaVersion": { "const": "1.0.0" },
+        "schemaVersion": { "const": "1.1.0" },
         "packageId": { "type": "string" },
         "claims": {
           "type": "array",
@@ -119,7 +125,81 @@
             }
           }
         },
-        "dossierFacts": { "type": "array", "items": { "type": "string" } }
+        "dossierFacts": { "type": "array", "items": { "type": "string" } },
+        "retrieval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status", "runId", "querySha256", "indexReleaseId",
+            "corpusReleaseId", "asOf", "knowledgeCutoff", "items", "limitations"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "SUCCESS", "INSUFFICIENT_EVIDENCE", "CONFLICTING_EVIDENCE",
+                "UNAUTHORIZED_EVIDENCE", "STALE_INDEX", "RETRIEVAL_UNAVAILABLE"
+              ]
+            },
+            "runId": {
+              "type": ["string", "null"],
+              "pattern": "^rag-run:[a-zA-Z0-9._:-]+$"
+            },
+            "querySha256": {
+              "type": ["string", "null"],
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "indexReleaseId": { "type": ["string", "null"] },
+            "corpusReleaseId": { "type": ["string", "null"] },
+            "asOf": { "type": ["string", "null"], "format": "date-time" },
+            "knowledgeCutoff": { "type": ["string", "null"], "format": "date-time" },
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "rank", "score", "chunkId", "claimId", "topic", "legalStatus",
+                  "supportRelation", "citationId", "provisionId", "sourceVersionId",
+                  "sourceVersionChecksumSha256", "documentTitle", "sourceType",
+                  "authorityName", "locator", "canonicalUrl", "excerpt",
+                  "excerptPermission", "jurisdictionCode", "effectiveFrom",
+                  "effectiveTo", "assuranceTier", "reviewStatus"
+                ],
+                "properties": {
+                  "rank": { "type": "integer", "minimum": 1 },
+                  "score": { "type": "number" },
+                  "chunkId": { "type": "string", "minLength": 1 },
+                  "claimId": { "type": "string", "minLength": 1 },
+                  "topic": { "type": "string", "minLength": 1 },
+                  "legalStatus": { "type": "string", "minLength": 1 },
+                  "supportRelation": {
+                    "enum": ["DIRECT_SUPPORT", "INDIRECT_SUPPORT", "CONTRADICTS"]
+                  },
+                  "citationId": { "type": "string", "minLength": 1 },
+                  "provisionId": { "type": "string", "minLength": 1 },
+                  "sourceVersionId": { "type": "string", "minLength": 1 },
+                  "sourceVersionChecksumSha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  },
+                  "documentTitle": { "type": "string", "minLength": 1 },
+                  "sourceType": { "type": "string", "minLength": 1 },
+                  "authorityName": { "type": "string", "minLength": 1 },
+                  "locator": { "type": "string", "minLength": 1 },
+                  "canonicalUrl": { "type": "string", "format": "uri" },
+                  "excerpt": { "type": ["string", "null"] },
+                  "excerptPermission": { "enum": ["ALLOWED", "LINK_ONLY"] },
+                  "jurisdictionCode": { "type": "string", "minLength": 1 },
+                  "effectiveFrom": { "type": "string", "format": "date-time" },
+                  "effectiveTo": { "type": ["string", "null"], "format": "date-time" },
+                  "assuranceTier": { "enum": ["PROVISIONAL", "HUMAN_REVIEWED"] },
+                  "reviewStatus": { "enum": ["PROVISIONAL", "HUMAN_REVIEWED"] }
+                }
+              }
+            },
+            "limitations": { "type": "array", "items": { "type": "string" } }
+          }
+        }
       }
     }
   }

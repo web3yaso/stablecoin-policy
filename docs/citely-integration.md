@@ -74,14 +74,22 @@ const response = await fetch(
     }),
   },
 );
-// 201 -> { package, evidenceBundle }
+// 201 -> { package, evidenceBundle } (schemaVersion 1.1.0)
 ```
 
 Validate the whole `201` body against
 `contracts/v1/playbook-package-response.schema.json`; reject on mismatch.
 Statuses: `400` invalid profile/JSON, `401` bad key, `404` unknown playbook,
-`503` runtime unconfigured or evidence unavailable. Responses are
+`503` core deterministic runtime unconfigured or claim evidence unavailable. Responses are
 `Cache-Control: no-store`.
+
+`evidenceBundle.retrieval` always exists. `SUCCESS` includes only
+presentation-safe ranked citations and exact index/corpus pins. Typed degraded
+states (`INSUFFICIENT_EVIDENCE`, `CONFLICTING_EVIDENCE`,
+`UNAUTHORIZED_EVIDENCE`, `STALE_INDEX`, or `RETRIEVAL_UNAVAILABLE`) may have
+no items and must be rendered with their `limitations`. A retrieval outage does
+not turn package creation into `503` and cannot change deterministic
+conclusions, reason codes, actions, or claim IDs.
 
 Determinism: identical `playbookId` + `profile` against the same pinned
 versions produce the same `packageId` and `integritySha256`. Citely may
@@ -112,9 +120,10 @@ launch blocker.
    inline. Singapore claims include an SSO unofficial-consolidation
    limitation — display it.
 4. **Version pins are shown.** `versions` identifies the exact corpus
-   release, dossier, rules, template, and schema the package was built from;
-   show at least `corpusReleaseId` and `evaluatedAt` so a customer can see
-   what the answer was based on and when.
+   release, retrieval index/corpus, dossier, rules, template, and schema the
+   package was built from; show at least `corpusReleaseId`,
+   `retrievalIndexReleaseId` when non-null, and `evaluatedAt` so a customer can
+   see what the answer was based on and when.
 5. **No inference.** `playbookId` tags in the policy feed, reason codes,
    and conclusions come only from this API. Unknown enum values mean the
    contract moved: reject the response, do not guess.
