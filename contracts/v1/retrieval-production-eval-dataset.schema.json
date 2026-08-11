@@ -7,19 +7,26 @@
   "required": [
     "schemaVersion",
     "evalAssurance",
-    "generatedBy",
-    "independentlyCheckedBy",
+    "datasetId",
+    "sourceSnapshot",
+    "generation",
+    "independentCheck",
     "reviewerRef",
     "requiredChecklistTopics",
     "cases"
   ],
   "properties": {
-    "schemaVersion": { "const": "1.0.0" },
+    "schemaVersion": { "const": "1.1.0" },
+    "datasetId": {
+      "type": "string",
+      "pattern": "^eval-dataset:[0-9a-f]{40}$"
+    },
     "evalAssurance": {
       "enum": ["MACHINE_ASSURED", "HUMAN_REVIEWED"]
     },
-    "generatedBy": { "type": "string", "minLength": 1 },
-    "independentlyCheckedBy": { "type": "string", "minLength": 1 },
+    "sourceSnapshot": { "$ref": "#/$defs/sourceSnapshot" },
+    "generation": { "$ref": "#/$defs/agentProvenance" },
+    "independentCheck": { "$ref": "#/$defs/agentProvenance" },
     "reviewerRef": { "type": ["string", "null"], "minLength": 1 },
     "requiredChecklistTopics": {
       "type": "array",
@@ -55,6 +62,49 @@
               "pattern": "^[a-z0-9][a-z0-9._:-]{2,200}$"
             }
           }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sourceSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snapshotId", "manifestSha256"],
+      "properties": {
+        "snapshotId": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._:-]{2,200}$"
+        },
+        "manifestSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "agentProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "agentId",
+        "model",
+        "promptTemplateId",
+        "promptTemplateVersion",
+        "parametersVersion",
+        "artifactSha256"
+      ],
+      "properties": {
+        "agentId": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._:-]{2,200}$"
+        },
+        "model": { "type": "string", "minLength": 1 },
+        "promptTemplateId": { "type": "string", "minLength": 1 },
+        "promptTemplateVersion": { "type": "string", "minLength": 1 },
+        "parametersVersion": { "type": "string", "minLength": 1 },
+        "artifactSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
         }
       }
     }

@@ -567,6 +567,10 @@ Small reviewed gold fixtures live in Git. Production-scale eval corpora live in 
 - Machine validation records identify the models, templates, parameters, input
   and output fingerprints, evidence versions, confidence, blockers, and time.
 - Machine outputs can never approve or impersonate `HUMAN_REVIEWED` evidence.
+- A machine-assured retrieval gold set requires separate generator and checker
+  identities. The checker pins the exact proposal and corpus snapshot manifest;
+  only case-level agreement on expected provisions is accepted, and any lost
+  required checklist-topic coverage blocks the whole assembled dataset.
 - When human review is used, records identify reviewer role, evidence version,
   outcome, time, and severity.
 - Critical human-reviewed golden cases may receive dual-review sampling with

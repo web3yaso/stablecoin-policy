@@ -396,6 +396,9 @@ output to change deterministic decisions.
 - provisional indexes may use a documented independently cross-checked
   `MACHINE_ASSURED` eval, while human-reviewed indexes require a named
   `HUMAN_REVIEWED` eval.
+- machine-assured gold datasets require different generator/checker identities,
+  exact proposal and snapshot-manifest pins, case-level provision agreement,
+  and full accepted checklist-topic coverage;
 
 ### Phase 3 exit
 

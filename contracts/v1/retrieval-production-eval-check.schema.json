@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stablecoinpolicy.com/contracts/v1/retrieval-production-eval-check.schema.json",
+  "title": "Retrieval production eval independent check",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "checkId", "proposalSha256", "snapshotId",
+    "snapshotManifestSha256", "checker", "cases"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "checkId": { "$ref": "#/$defs/identifier" },
+    "proposalSha256": { "$ref": "#/$defs/sha256" },
+    "snapshotId": { "$ref": "#/$defs/identifier" },
+    "snapshotManifestSha256": { "$ref": "#/$defs/sha256" },
+    "checker": { "$ref": "#/$defs/agent" },
+    "cases": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["caseId", "outcome", "independentlyDerivedProvisionIds", "blockers"],
+        "properties": {
+          "caseId": { "$ref": "#/$defs/identifier" },
+          "outcome": { "enum": ["AGREE", "BLOCK"] },
+          "independentlyDerivedProvisionIds": {
+            "type": "array", "uniqueItems": true,
+            "items": { "$ref": "#/$defs/identifier" }
+          },
+          "blockers": {
+            "type": "array", "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identifier": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,200}$" },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "agent": {
+      "type": "object", "additionalProperties": false,
+      "required": ["agentId", "model", "promptTemplateId", "promptTemplateVersion", "parametersVersion"],
+      "properties": {
+        "agentId": { "$ref": "#/$defs/identifier" },
+        "model": { "type": "string", "minLength": 1 },
+        "promptTemplateId": { "type": "string", "minLength": 1 },
+        "promptTemplateVersion": { "type": "string", "minLength": 1 },
+        "parametersVersion": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -35,6 +35,11 @@ Implemented:
   the repository; the build command only replays that exact artifact;
 - a service-only DRAFT eval input and production runner support
   `MACHINE_ASSURED` bootstrap evals without mislabeling them as human review.
+- migration `0029` exposes a service-only exact DRAFT corpus pin; production
+  eval rejects a dataset unless both its corpus ID and manifest SHA match;
+- the eval dataset assembler accepts separate generator and independent-checker
+  artifacts, excludes blocked cases, and fails the entire assembly when an
+  accepted case diverges or any required checklist topic loses coverage.
 
 Deliberately incomplete:
 
@@ -137,8 +142,24 @@ npm run rag:index:build -- --plan /private/path/eea-index-plan.json \
   --execute --expected-plan-sha256 <plan-sha>
 ```
 
-Run `npm run eval:phase3:production` against the DRAFT with a
-provenance-bearing dataset and an external `--output` path. `--record`
+First assemble the private dataset from two exact, separately produced inputs:
+
+```bash
+npm run eval:phase3:assemble -- \
+  --proposal /private/path/generator-proposal.json \
+  --independent-check /private/path/checker-verdict.json
+```
+
+Both input paths must be absolute, outside the repository, and mode `0600`.
+
+Inspect the deterministic dataset SHA, then repeat with `--execute`,
+`--expected-dataset-sha256`, and an external `--output` path. The assembler
+requires different agent identities, pins both artifacts to the same corpus
+snapshot manifest, and accepts only cases with matching independently derived
+provision IDs.
+
+Run `npm run eval:phase3:production` against the DRAFT with the assembled
+dataset and an external `--output` path. `--record`
 additionally requires the inspected manifest SHA and an immutable eval-record
 ID. A failed eval may be recorded but can never authorize activation. Machine
 assurance can authorize only a provisional index; a human-reviewed index
@@ -175,8 +196,8 @@ npm run test:db:phase2
 npm run db:phase2:stop
 ```
 
-On 2026-08-10, migrations `0001` through `0028` applied locally from zero and
-all 209 pgTAP assertions passed. The Phase 3 sanitized retrieval eval reported
+On 2026-08-10, migrations `0001` through `0029` applied locally from zero and
+all 211 pgTAP assertions passed. The Phase 3 sanitized retrieval eval reported
 Recall@10 `1.00`, MRR@10 `1.00`, citation precision `1.00`, version isolation
 `1.00`, twelve of twelve index-builder safety classifications correct, and zero
 assurance, rights, prompt-instruction, or unsafe-build leakage. These are
@@ -186,7 +207,7 @@ development fixtures, not the final production-quality EEA gold set.
 
 1. Merge the activation-gates PR only after CI passes.
 2. Take and verify a private metadata backup.
-3. Dry-run and apply `0028`, and confirm existing `policy` and `regulatory`
+3. Dry-run and apply `0028`-`0029`, and confirm existing `policy` and `regulatory`
    snapshots do not change. Confirm the old 37-chunk DRAFT is still inactive.
 4. Create the aggregate 47-claim snapshot, generate one private plan artifact,
    inspect its membership and cost, then replay it into the replacement DRAFT.

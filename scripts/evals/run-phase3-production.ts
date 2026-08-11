@@ -26,6 +26,7 @@ async function main() {
   const manifest = await admin.manifest(indexReleaseId);
   if (manifest.releaseState !== "DRAFT") throw new Error("production eval requires a DRAFT index");
   const input = await admin.draftEvalInput(indexReleaseId);
+  const corpusPin = await admin.draftCorpusPin(indexReleaseId);
   const chunks: IndexedEvidenceChunk[] = input.chunks.map((chunk) => ({
     ...chunk,
     embedding: parseVector(chunk.embedding),
@@ -35,12 +36,17 @@ async function main() {
     input.indexRelease,
     chunks,
     new OpenAIQueryEmbeddingProvider(readOpenAIEmbeddingConfig()),
+    corpusPin.manifestSha256,
   );
   const artifact = {
     ...report,
     evaluatedAt: new Date().toISOString(),
     manifestSha256: manifest.manifestSha256,
     datasetSha256: replayChecksum(dataset),
+    datasetId: dataset.datasetId,
+    sourceSnapshot: dataset.sourceSnapshot,
+    generation: dataset.generation,
+    independentCheck: dataset.independentCheck,
   };
   await writeFile(outputPath, `${JSON.stringify(artifact)}\n`, {
     encoding: "utf8", flag: "wx", mode: 0o600,
