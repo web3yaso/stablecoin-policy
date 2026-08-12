@@ -31,6 +31,32 @@ test("package creation rejects a missing idempotency key before external IO", as
   });
 });
 
+test("package creation rejects fields outside the committed request contract", async () => {
+  await withApiKey(async () => {
+    const response = await POST(new NextRequest("https://example.test/v1/playbook-packages", {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${API_KEY}`,
+        "content-type": "application/json",
+        "idempotency-key": "route-contract-test-0001",
+      },
+      body: JSON.stringify({
+        playbookId: "business-model-regulatory-boundary",
+        profile: {
+          operatorJurisdiction: "SG",
+          targetJurisdiction: "EEA",
+          activities: ["issue-emt"],
+          asset: null,
+          customerEmail: "must-not-cross-boundary@example.test",
+        },
+      }),
+    }));
+
+    assert.equal(response.status, 400);
+    assert.deepEqual(await response.json(), { error: "invalid-profile" });
+  });
+});
+
 test("package replay rejects malformed identifiers before external IO", async () => {
   await withApiKey(async () => {
     const response = await GET(

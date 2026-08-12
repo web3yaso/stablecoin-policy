@@ -1,0 +1,214 @@
+{
+  "package": {
+    "schemaVersion": "1.1.0",
+    "playbookId": "stablecoin-pre-listing",
+    "playbookName": "Stablecoin Pre-listing & Product Launch",
+    "profileFingerprint": "354a189039a84b5605a3e0e184d53b6e194c7aaa4e23e823e3984ea6850ea8b4",
+    "conclusions": [
+      {
+        "capabilityId": "list-for-trading",
+        "title": "Admit the stablecoin to trading on your platform",
+        "conclusion": "CONDITIONAL",
+        "reasonCodes": [
+          "AUTHORIZATION_REQUIRED"
+        ],
+        "actions": [
+          "Confirm CASP platform authorization scope covers admission to trading.",
+          "Verify the exact contract address for each listed network against the issuer's official documentation."
+        ],
+        "evidenceClaimIds": [
+          "claim:eea:mica:crypto-asset-service-provider-authorisation:59",
+          "claim:eea:mica:trading-platform-proprietary-trading:76"
+        ],
+        "dossierFacts": [
+          "asset USDC classified E_MONEY_TOKEN (basis ISSUER_CLAIM)",
+          "issuer Circle Internet Financial Europe SAS holds: ELECTRONIC_MONEY_INSTITUTION, MICA_CASP_LICENCE",
+          "verified native deployments: base=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, ethereum=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        ],
+        "limitations": [
+          "Machine-assured fixture evidence; not human-reviewed legal advice.",
+          "Issuer authorization facts are provisional; confirm the official register entries before reliance."
+        ]
+      },
+      {
+        "capabilityId": "custody-for-clients",
+        "title": "Hold the stablecoin in custody for clients",
+        "conclusion": "CONDITIONAL",
+        "reasonCodes": [
+          "AUTHORIZATION_REQUIRED"
+        ],
+        "actions": [
+          "Confirm CASP custody authorization and client-asset segregation controls."
+        ],
+        "evidenceClaimIds": [
+          "claim:eea:mica:crypto-asset-service-provider-authorisation:59",
+          "claim:eea:mica:custody-client-assets:75",
+          "claim:eea:mica:casp-client-asset-safeguarding:70"
+        ],
+        "dossierFacts": [
+          "asset USDC classified E_MONEY_TOKEN (basis ISSUER_CLAIM)",
+          "verified native deployments: base=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, ethereum=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        ],
+        "limitations": [
+          "Machine-assured fixture evidence; not human-reviewed legal advice."
+        ]
+      }
+    ],
+    "assurance": {
+      "reviewStatus": "PROVISIONAL",
+      "humanReviewed": false,
+      "limitations": [
+        "Provisional machine-assured evidence; not human-reviewed legal advice.",
+        "Capability conclusions are research and operational preparation, not compliance clearance.",
+        "Machine-assured fixture evidence; not human-reviewed legal advice.",
+        "Issuer authorization facts are provisional; confirm the official register entries before reliance."
+      ],
+      "counselTriggers": [
+        "PROVISIONAL_EVIDENCE_REVIEW_RECOMMENDED"
+      ]
+    },
+    "versions": {
+      "corpusReleaseId": "provisional:eea:mica:2026-08-02",
+      "corpusAsOf": "2026-08-02T00:00:00.000Z",
+      "knowledgeCutoff": "2026-08-01T00:00:00.000Z",
+      "dossierId": "usdc-eea",
+      "dossierCuratedAt": "2026-08-02T20:30:00.000Z",
+      "retrievalIndexReleaseId": "rag-index:eea:provisional:consumer-fixture",
+      "retrievalCorpusReleaseId": "provisional:eea:mica:2026-08-02",
+      "retrievalAsOf": "2026-08-02T00:00:00.000Z",
+      "retrievalKnowledgeCutoff": "2026-08-01T00:00:00.000Z",
+      "rulesVersion": "1.0.0",
+      "templateVersion": "1.0.0",
+      "schemaVersion": "1.1.0"
+    },
+    "evaluatedAt": "2026-08-12T12:00:00.000Z",
+    "packageId": "package:stablecoin-pre-listing:c3d325796135f130",
+    "integritySha256": "c3d325796135f130d7dde0b01d518f6afb1491764f81e8b3da5c6df97de95abb"
+  },
+  "evidenceBundle": {
+    "schemaVersion": "1.1.0",
+    "packageId": "package:stablecoin-pre-listing:c3d325796135f130",
+    "claims": [
+      {
+        "claimId": "claim:eea:mica:crypto-asset-service-provider-authorisation:59",
+        "topic": "crypto-asset-service-provider-authorisation",
+        "legalStatus": "REQUIREMENT",
+        "proposition": "Sanitized fixture proposition for crypto-asset-service-provider-authorisation.",
+        "citations": [
+          {
+            "provisionId": "provision:eea:mica:crypto-asset-service-provider-authorisation",
+            "locator": "Article 59"
+          }
+        ],
+        "releaseId": "provisional:eea:mica:2026-08-02",
+        "asOf": "2026-08-02T00:00:00.000Z",
+        "knowledgeCutoff": "2026-08-01T00:00:00.000Z",
+        "confidence": 0.94,
+        "limitations": [
+          "Machine-assured fixture evidence; not human-reviewed legal advice."
+        ]
+      },
+      {
+        "claimId": "claim:eea:mica:custody-client-assets:75",
+        "topic": "custody-client-assets",
+        "legalStatus": "REQUIREMENT",
+        "proposition": "Sanitized fixture proposition for custody-client-assets.",
+        "citations": [
+          {
+            "provisionId": "provision:eea:mica:custody-client-assets",
+            "locator": "Article 59"
+          }
+        ],
+        "releaseId": "provisional:eea:mica:2026-08-02",
+        "asOf": "2026-08-02T00:00:00.000Z",
+        "knowledgeCutoff": "2026-08-01T00:00:00.000Z",
+        "confidence": 0.94,
+        "limitations": [
+          "Machine-assured fixture evidence; not human-reviewed legal advice."
+        ]
+      },
+      {
+        "claimId": "claim:eea:mica:casp-client-asset-safeguarding:70",
+        "topic": "casp-client-asset-safeguarding",
+        "legalStatus": "REQUIREMENT",
+        "proposition": "Sanitized fixture proposition for casp-client-asset-safeguarding.",
+        "citations": [
+          {
+            "provisionId": "provision:eea:mica:casp-client-asset-safeguarding",
+            "locator": "Article 59"
+          }
+        ],
+        "releaseId": "provisional:eea:mica:2026-08-02",
+        "asOf": "2026-08-02T00:00:00.000Z",
+        "knowledgeCutoff": "2026-08-01T00:00:00.000Z",
+        "confidence": 0.94,
+        "limitations": [
+          "Machine-assured fixture evidence; not human-reviewed legal advice."
+        ]
+      },
+      {
+        "claimId": "claim:eea:mica:trading-platform-proprietary-trading:76",
+        "topic": "trading-platform-proprietary-trading",
+        "legalStatus": "REQUIREMENT",
+        "proposition": "Sanitized fixture proposition for trading-platform-proprietary-trading.",
+        "citations": [
+          {
+            "provisionId": "provision:eea:mica:trading-platform-proprietary-trading",
+            "locator": "Article 59"
+          }
+        ],
+        "releaseId": "provisional:eea:mica:2026-08-02",
+        "asOf": "2026-08-02T00:00:00.000Z",
+        "knowledgeCutoff": "2026-08-01T00:00:00.000Z",
+        "confidence": 0.94,
+        "limitations": [
+          "Machine-assured fixture evidence; not human-reviewed legal advice."
+        ]
+      }
+    ],
+    "dossierFacts": [
+      "asset USDC classified E_MONEY_TOKEN (basis ISSUER_CLAIM)",
+      "issuer Circle Internet Financial Europe SAS holds: ELECTRONIC_MONEY_INSTITUTION, MICA_CASP_LICENCE",
+      "verified native deployments: base=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, ethereum=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    ],
+    "retrieval": {
+      "status": "SUCCESS",
+      "runId": "rag-run:citely-consumer-fixture:success",
+      "querySha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "indexReleaseId": "rag-index:eea:provisional:consumer-fixture",
+      "corpusReleaseId": "provisional:eea:mica:2026-08-02",
+      "asOf": "2026-08-02T00:00:00.000Z",
+      "knowledgeCutoff": "2026-08-01T00:00:00.000Z",
+      "items": [
+        {
+          "rank": 1,
+          "score": 0.98,
+          "chunkId": "chunk:eea:mica:article-59:consumer-fixture",
+          "claimId": "claim:eea:mica:crypto-asset-service-provider-authorisation:59",
+          "topic": "crypto-asset-service-provider-authorisation",
+          "legalStatus": "REQUIREMENT",
+          "supportRelation": "DIRECT_SUPPORT",
+          "citationId": "citation:eea:mica:article-59:consumer-fixture",
+          "provisionId": "provision:eea:mica:article-59",
+          "sourceVersionId": "source-version:eea:mica:2026-08-01",
+          "sourceVersionChecksumSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+          "documentTitle": "Markets in Crypto-Assets Regulation",
+          "sourceType": "REGULATION",
+          "authorityName": "European Union",
+          "locator": "Article 59",
+          "canonicalUrl": "https://eur-lex.europa.eu/eli/reg/2023/1114/oj",
+          "excerpt": "Sanitized excerpt permitted for consumer-fixture rendering.",
+          "excerptPermission": "ALLOWED",
+          "jurisdictionCode": "EEA",
+          "effectiveFrom": "2024-12-30T00:00:00.000Z",
+          "effectiveTo": null,
+          "assuranceTier": "PROVISIONAL",
+          "reviewStatus": "PROVISIONAL"
+        }
+      ],
+      "limitations": [
+        "Machine-assured retrieval fixture; not human-reviewed legal advice."
+      ]
+    }
+  }
+}

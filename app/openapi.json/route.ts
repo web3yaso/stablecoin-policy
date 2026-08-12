@@ -266,6 +266,8 @@ function createOpenApiDocument(
           security: [{ playbookServiceKey: [] }],
           requestBody: {
             required: true,
+            description:
+              "Strict wire contract: contracts/v1/playbook-package-create-request.schema.json. Unknown properties are rejected.",
             content: {
               "application/json": {
                 schema: {
@@ -332,20 +334,25 @@ function createOpenApiDocument(
                       ],
                       additionalProperties: false,
                       properties: {
-                        operatorJurisdiction: { type: "string" },
+                        operatorJurisdiction: { type: "string", minLength: 1 },
                         targetJurisdiction: { const: "EEA" },
                         activities: {
                           type: "array",
                           minItems: 1,
-                          items: { type: "string" },
+                          uniqueItems: true,
+                          items: { type: "string", minLength: 1 },
                         },
                         asset: {
                           type: ["object", "null"],
                           required: ["symbol", "networks"],
                           additionalProperties: false,
                           properties: {
-                            symbol: { type: "string" },
-                            networks: { type: "array", items: { type: "string" } },
+                            symbol: { type: "string", minLength: 1 },
+                            networks: {
+                              type: "array",
+                              uniqueItems: true,
+                              items: { type: "string", minLength: 1 },
+                            },
                           },
                         },
                       },

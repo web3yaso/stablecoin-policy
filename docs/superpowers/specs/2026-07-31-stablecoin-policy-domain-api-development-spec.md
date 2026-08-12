@@ -897,6 +897,14 @@ rotatable public keys and requires a maximum five-minute token with exact
 issuer, audience, subject, scope, and playbook/package entitlement target.
 Legacy shared keys exist only behind an explicit cutover flag.
 
+Consumer-contract checkpoint (2026-08-12): a versioned strict create-request
+JSON Schema now complements the response schema. Checked-in sanitized fixtures
+cover both launch playbooks, successful retrieval, and typed retrieval outage.
+The CI consumer test rejects unknown request/response fields, validates package
+integrity and evidence references, and proves a domain-agnostic projection can
+retain every mandatory legal-posture and freshness field. These fixtures do
+not replace the production signed package create/retrieve/render replay.
+
 - implement versioned templates and private rules;
 - implement capability results, reason codes, actions, evidence assembly, and package storage;
 - compose deterministic results and Evidence RAG output in the shared Playbook Runtime without allowing retrieval output to override results;

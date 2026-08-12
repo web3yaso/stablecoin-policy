@@ -1,0 +1,12 @@
+{
+  "playbookId": "business-model-regulatory-boundary",
+  "profile": {
+    "operatorJurisdiction": "SG",
+    "targetJurisdiction": "EEA",
+    "activities": [
+      "issue-emt",
+      "pay-emt-interest"
+    ],
+    "asset": null
+  }
+}

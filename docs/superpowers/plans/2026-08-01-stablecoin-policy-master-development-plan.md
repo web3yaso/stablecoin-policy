@@ -465,10 +465,11 @@ Goal: add the asset-specific evidence required for Pre-listing decisions.
 
 Status: provisional vertical slice and retrieval integration are merged.
 Immutable artifact persistence, idempotent creation, and authenticated replay
-are implemented and locally verified on
-`codex/phase5-playbook-package-persistence` and merged as PR #53. Signed
-service authentication and target-bound entitlement hardening are in
-development on `codex/phase5-citely-service-auth`; production rollout remains.
+are merged as PR #53. Signed service authentication and target-bound
+entitlement hardening are merged as PR #54. Strict create-request schema plus
+deterministic Citely consumer fixtures for both launch playbooks are in
+development on `codex/phase5-citely-consumer-fixtures`; production rollout
+remains.
 
 Goal: deliver the first paid evidence-backed workflow while keeping Citely
 domain agnostic.
@@ -547,6 +548,17 @@ creating a bespoke application path.
 - RAG enabled/disabled/outage equality for deterministic results;
 - at least one production-like Pre-listing package can be created, retrieved,
   rendered by a generic client, and replayed from pinned versions.
+
+Consumer-fixture checkpoint (2026-08-12): the strict
+`playbook-package-create-request` schema rejects unknown customer fields,
+duplicates, and empty identifiers. Sanitized deterministic request/response
+pairs cover both launch playbooks, successful RAG, and typed RAG outage. CI
+regenerates them in memory, validates request/response schemas and package
+integrity, resolves every referenced claim, and proves a generic projection
+retains assurance, limitations, counsel triggers, capability-level results,
+citations, retrieval state, and version pins without branching on stablecoin
+domain values. This closes the local consumer-fixture criterion; a deployed
+signed create/retrieve/render replay remains the production-like exit gate.
 
 ## Phase 6 — monitoring, subscriptions, and controlled self-service
 

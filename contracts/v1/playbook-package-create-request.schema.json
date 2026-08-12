@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/playbook-package-create-request.schema.json",
+  "title": "PlaybookPackageCreateRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["playbookId", "profile"],
+  "properties": {
+    "playbookId": {
+      "enum": [
+        "stablecoin-pre-listing",
+        "business-model-regulatory-boundary"
+      ]
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operatorJurisdiction",
+        "targetJurisdiction",
+        "activities"
+      ],
+      "properties": {
+        "operatorJurisdiction": { "type": "string", "minLength": 1 },
+        "targetJurisdiction": { "const": "EEA" },
+        "activities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "asset": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["symbol", "networks"],
+              "properties": {
+                "symbol": { "type": "string", "minLength": 1 },
+                "networks": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": { "type": "string", "minLength": 1 }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

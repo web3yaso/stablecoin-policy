@@ -1,0 +1,133 @@
+{
+  "package": {
+    "schemaVersion": "1.1.0",
+    "playbookId": "business-model-regulatory-boundary",
+    "playbookName": "Stablecoin Business Model Regulatory Boundary",
+    "profileFingerprint": "30be78eb5e74b6fe0bdaa964792708bfb65421853c7ca1294756e48e35c14256",
+    "conclusions": [
+      {
+        "capabilityId": "issue-emt",
+        "title": "Issue an e-money token in the EEA",
+        "conclusion": "CONDITIONAL",
+        "reasonCodes": [
+          "AUTHORIZATION_REQUIRED"
+        ],
+        "actions": [
+          "Obtain credit-institution or e-money-institution authorization before issuing."
+        ],
+        "evidenceClaimIds": [
+          "claim:eea:mica:e-money-token-authorisation:18"
+        ],
+        "dossierFacts": [],
+        "limitations": [
+          "Machine-assured fixture evidence; not human-reviewed legal advice."
+        ]
+      },
+      {
+        "capabilityId": "pay-emt-interest",
+        "title": "Pay interest on e-money token holdings",
+        "conclusion": "PROHIBITED",
+        "reasonCodes": [
+          "PROHIBITION_APPLIES"
+        ],
+        "actions": [
+          "Remove interest-bearing features from the EMT product design; escalate alternatives to counsel."
+        ],
+        "evidenceClaimIds": [
+          "claim:eea:mica:e-money-token-interest:50"
+        ],
+        "dossierFacts": [],
+        "limitations": [
+          "Machine-assured fixture evidence; not human-reviewed legal advice."
+        ]
+      }
+    ],
+    "assurance": {
+      "reviewStatus": "PROVISIONAL",
+      "humanReviewed": false,
+      "limitations": [
+        "Provisional machine-assured evidence; not human-reviewed legal advice.",
+        "Capability conclusions are research and operational preparation, not compliance clearance.",
+        "Machine-assured fixture evidence; not human-reviewed legal advice."
+      ],
+      "counselTriggers": [
+        "PROVISIONAL_EVIDENCE_REVIEW_RECOMMENDED"
+      ]
+    },
+    "versions": {
+      "corpusReleaseId": "provisional:eea:mica:2026-08-02",
+      "corpusAsOf": "2026-08-02T00:00:00.000Z",
+      "knowledgeCutoff": "2026-08-01T00:00:00.000Z",
+      "dossierId": null,
+      "dossierCuratedAt": null,
+      "retrievalIndexReleaseId": null,
+      "retrievalCorpusReleaseId": null,
+      "retrievalAsOf": null,
+      "retrievalKnowledgeCutoff": null,
+      "rulesVersion": "1.0.0",
+      "templateVersion": "1.0.0",
+      "schemaVersion": "1.1.0"
+    },
+    "evaluatedAt": "2026-08-12T12:00:00.000Z",
+    "packageId": "package:business-model-regulatory-boundary:7d5894bd087fd9ef",
+    "integritySha256": "7d5894bd087fd9ef0a38c81b1a289d34950e4d33910c03c13bdb7e41c1d04097"
+  },
+  "evidenceBundle": {
+    "schemaVersion": "1.1.0",
+    "packageId": "package:business-model-regulatory-boundary:7d5894bd087fd9ef",
+    "claims": [
+      {
+        "claimId": "claim:eea:mica:e-money-token-authorisation:18",
+        "topic": "e-money-token-authorisation",
+        "legalStatus": "REQUIREMENT",
+        "proposition": "Sanitized fixture proposition for e-money-token-authorisation.",
+        "citations": [
+          {
+            "provisionId": "provision:eea:mica:e-money-token-authorisation",
+            "locator": "Article 59"
+          }
+        ],
+        "releaseId": "provisional:eea:mica:2026-08-02",
+        "asOf": "2026-08-02T00:00:00.000Z",
+        "knowledgeCutoff": "2026-08-01T00:00:00.000Z",
+        "confidence": 0.94,
+        "limitations": [
+          "Machine-assured fixture evidence; not human-reviewed legal advice."
+        ]
+      },
+      {
+        "claimId": "claim:eea:mica:e-money-token-interest:50",
+        "topic": "e-money-token-interest",
+        "legalStatus": "PROHIBITION",
+        "proposition": "Sanitized fixture proposition for e-money-token-interest.",
+        "citations": [
+          {
+            "provisionId": "provision:eea:mica:e-money-token-interest",
+            "locator": "Article 50"
+          }
+        ],
+        "releaseId": "provisional:eea:mica:2026-08-02",
+        "asOf": "2026-08-02T00:00:00.000Z",
+        "knowledgeCutoff": "2026-08-01T00:00:00.000Z",
+        "confidence": 0.94,
+        "limitations": [
+          "Machine-assured fixture evidence; not human-reviewed legal advice."
+        ]
+      }
+    ],
+    "dossierFacts": [],
+    "retrieval": {
+      "status": "RETRIEVAL_UNAVAILABLE",
+      "runId": "rag-run:citely-consumer-fixture:unavailable",
+      "querySha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "indexReleaseId": null,
+      "corpusReleaseId": null,
+      "asOf": null,
+      "knowledgeCutoff": null,
+      "items": [],
+      "limitations": [
+        "Retrieval is unavailable; deterministic conclusions remain unchanged."
+      ]
+    }
+  }
+}
