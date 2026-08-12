@@ -2,11 +2,11 @@
 
 ## Current checkpoint
 
-Branch `codex/phase5-citely-service-auth` is locally verified but not deployed.
-It passes 202 Node tests, all Phase 0–3 evals, the Phase 2/RAG/Playbook Quint
-gates, dependency audit with zero known vulnerabilities, and the Next.js
-production build. Production configuration and signed-token smoke remain
-explicit post-merge rollout work.
+Signed service authentication is merged as PR #54 and Citely consumer fixtures
+as PR #55, but neither is cut over in production. Branch
+`codex/phase5-package-replay-smoke` adds a credential-safe, fail-closed package
+smoke runner. Production migration/configuration and signed-token smoke remain
+explicit rollout work.
 
 ## Boundary
 
@@ -56,6 +56,14 @@ JWT for that retry.
 4. Set `CITELY_REQUIRE_SIGNED_SERVICE_TOKEN=1` and redeploy.
 5. Repeat signed smoke and confirm legacy keys return `401`.
 6. Remove `PLAYBOOK_API_KEY` and `EVIDENCE_API_KEY` after the rollback window.
+
+`npm run smoke:citely-playbook` automates all package POST/GET, entitlement,
+schema, integrity, and replay checks in step 3. Run it only through the Citely
+secret boundary: the private key is read from the process environment and is
+never written or printed. Evidence-search and legacy-key compatibility smokes
+remain separate because this runner neither widens its token scope nor reads a
+legacy secret. The command creates a real immutable package and therefore runs
+only after migration `0030` and the private bucket have been verified.
 
 ## Rotation
 

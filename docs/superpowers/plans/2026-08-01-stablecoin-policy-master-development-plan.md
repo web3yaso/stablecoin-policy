@@ -560,6 +560,17 @@ citations, retrieval state, and version pins without branching on stablecoin
 domain values. This closes the local consumer-fixture criterion; a deployed
 signed create/retrieve/render replay remains the production-like exit gate.
 
+Replay-smoke checkpoint (2026-08-12): branch
+`codex/phase5-package-replay-smoke` adds a Citely-secret-bound runner for the
+remaining production-like package gate. It mints exact five-minute Ed25519
+entitlements in memory and checks create, exact retry, changed-request
+conflict, target denial, audience rejection, expiry rejection, authenticated
+replay, response schema, package integrity, artifact equality, and generic
+render readiness without printing credentials or the artifact. It creates a
+real immutable package only when explicitly invoked; CI uses mocked transport
+and no production key or endpoint. Applying migration `0030`, configuring
+public keys, deploying, and invoking the smoke remain rollout actions.
+
 ## Phase 6 — monitoring, subscriptions, and controlled self-service
 
 Status: event/impact candidate infrastructure exists; package integration and

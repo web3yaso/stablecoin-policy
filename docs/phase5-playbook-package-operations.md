@@ -8,9 +8,9 @@ boundary: a package is returned only after the complete presentation-safe
 response is stored as a checksum-pinned private artifact and its queryable
 metadata is committed atomically.
 
-Migration `0030` is development-only until its PR is merged and the linked
-Supabase rollout is explicitly performed. Merging code does not apply the
-migration or deploy Vercel.
+Migration `0030` is merged but remains unapplied until the linked Supabase
+rollout is explicitly performed. Merging code does not apply the migration or
+deploy Vercel.
 
 ## Storage boundary
 
@@ -73,6 +73,17 @@ as `503`. All paid responses use `Cache-Control: no-store`.
    POST and GET bodies are byte-equivalent after canonical JSON serialization.
 7. Confirm no raw profile or raw idempotency key appears in PostgreSQL metadata,
    logs, or the object path.
+
+After the migration, public-key configuration, and deployment are ready, run
+`npm run smoke:citely-playbook` from a Citely-controlled secret environment.
+It requires `CITELY_SMOKE_BASE_URL`, `CITELY_SERVICE_SIGNING_KEY_ID`, and
+`CITELY_SERVICE_PRIVATE_KEY_PEM` in the process environment. Do not put the
+private key in this repository, `.env.local`, Vercel subsite configuration,
+shell history, or command arguments. The smoke creates one real immutable
+Pre-listing package, then verifies create `201`, exact retry `200`, changed
+request `409`, wrong target `403`, wrong audience `401`, expired token `401`,
+signed GET `200`, strict response schema, integrity, exact replay, and generic
+render readiness. Its stdout is a credential-free summary, not the artifact.
 
 ## Rollback
 

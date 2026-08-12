@@ -905,6 +905,16 @@ integrity and evidence references, and proves a domain-agnostic projection can
 retain every mandatory legal-posture and freshness field. These fixtures do
 not replace the production signed package create/retrieve/render replay.
 
+Replay-smoke checkpoint (2026-08-12): the repository includes an operator-run
+signed package smoke that accepts its Ed25519 private key only through a
+Citely-controlled process environment and never emits the token, key, profile,
+or artifact body. The runner fail-closes on any deviation from `201` create,
+`200` exact retry, `409` changed request, `403` wrong target, `401` wrong
+audience/expiry, `200` authenticated GET, strict schema, integrity, immutable
+replay equality, or generic-render legal-posture fields. Tests exercise the
+complete sequence with mocked transport; production invocation remains a
+separate rollout action after migration and configuration.
+
 - implement versioned templates and private rules;
 - implement capability results, reason codes, actions, evidence assembly, and package storage;
 - compose deterministic results and Evidence RAG output in the shared Playbook Runtime without allowing retrieval output to override results;
