@@ -262,7 +262,7 @@ function createOpenApiDocument(
           tags: ["evidence"],
           summary: "Search pinned regulatory evidence",
           description:
-            "Hybrid lexical/vector retrieval over an immutable corpus and index release. Returns exact citations and explicit insufficient, conflicting, unauthorized, stale, or unavailable states. Version 1 returns no generated narrative and cannot assign or change a deterministic decision status.",
+            "Hybrid lexical/vector retrieval over an immutable corpus and index release. Requires a short-lived Citely service JWT with an evidence:search entitlement. Returns exact citations and explicit insufficient, conflicting, unauthorized, stale, or unavailable states. Version 1 returns no generated narrative and cannot assign or change a deterministic decision status.",
           security: [{ playbookServiceKey: [] }],
           requestBody: {
             required: true,
@@ -283,7 +283,8 @@ function createOpenApiDocument(
               content: { "application/json": { schema: { type: "object" } } },
             },
             "400": { description: "Invalid request" },
-            "401": { description: "Missing or invalid service key" },
+            "401": { description: "Missing or invalid service token" },
+            "403": { description: "Valid token without evidence:search entitlement" },
             "503": { description: "Retrieval unconfigured or unavailable" },
           },
         },
@@ -294,7 +295,7 @@ function createOpenApiDocument(
           tags: ["playbooks"],
           summary: "Create a PlaybookPackage and EvidenceBundle",
           description:
-            "Claims a hashed idempotency key, evaluates a business profile against deterministic rules, optionally retrieves presentation-safe evidence, and persists the complete response as an immutable private artifact before returning it. The database stores queryable metadata and fingerprints, never the raw customer profile or raw idempotency key. Retrieval can enrich only the EvidenceBundle and retrieval version pins; failure cannot change conclusions. Requires service bearer authentication (Citely backend); the response is visibly provisional and is never legal advice.",
+            "Requires a short-lived Citely service JWT with a playbook:execute entitlement targeting the requested playbook. It then claims a hashed idempotency key, evaluates deterministic rules, optionally retrieves presentation-safe evidence, and persists the complete response as an immutable private artifact before returning it. The database stores queryable metadata and fingerprints, never the raw customer profile, entitlement token, or raw idempotency key. Retrieval can enrich only the EvidenceBundle and retrieval version pins; failure cannot change conclusions. The response is visibly provisional and is never legal advice.",
           security: [{ playbookServiceKey: [] }],
           parameters: [{
             name: "Idempotency-Key",
@@ -371,7 +372,8 @@ function createOpenApiDocument(
               content: { "application/json": { schema: { type: "object" } } },
             },
             "400": { description: "Invalid profile or JSON" },
-            "401": { description: "Missing or invalid service key" },
+            "401": { description: "Missing or invalid service token" },
+            "403": { description: "Valid token without entitlement for this playbook" },
             "404": { description: "Unknown playbook" },
             "409": {
               description:
@@ -390,7 +392,7 @@ function createOpenApiDocument(
           tags: ["playbooks"],
           summary: "Replay an immutable PlaybookPackage artifact",
           description:
-            "Returns the exact checksum-verified PlaybookPackage + EvidenceBundle artifact stored by package creation. The endpoint is authenticated and never publicly cached.",
+            "Requires a short-lived Citely service JWT with a playbook:read entitlement targeting this exact package ID. Returns the exact checksum-verified PlaybookPackage + EvidenceBundle artifact stored by package creation and is never publicly cached.",
           security: [{ playbookServiceKey: [] }],
           parameters: [{
             name: "id",
@@ -407,7 +409,8 @@ function createOpenApiDocument(
                 "Checksum-verified package schema 1.1.0 (contracts/v1/playbook-package-response.schema.json)",
               content: { "application/json": { schema: { type: "object" } } },
             },
-            "401": { description: "Missing or invalid service key" },
+            "401": { description: "Missing or invalid service token" },
+            "403": { description: "Valid token without entitlement for this package" },
             "404": { description: "Unknown package" },
             "503": { description: "Artifact metadata or Storage unavailable" },
           },
@@ -775,8 +778,9 @@ function createOpenApiDocument(
         playbookServiceKey: {
           type: "http",
           scheme: "bearer",
+          bearerFormat: "JWT",
           description:
-            "Citely server-to-server domain API key (EVIDENCE_API_KEY or the interim PLAYBOOK_API_KEY).",
+            "Ed25519-signed Citely server-to-server JWT (maximum 5-minute TTL). The entitlement claim must carry the exact operation scope and playbook/package target. Legacy shared keys exist only during explicit cutover.",
         },
       },
       schemas: {

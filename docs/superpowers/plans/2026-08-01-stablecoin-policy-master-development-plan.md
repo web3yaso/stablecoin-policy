@@ -466,8 +466,9 @@ Goal: add the asset-specific evidence required for Pre-listing decisions.
 Status: provisional vertical slice and retrieval integration are merged.
 Immutable artifact persistence, idempotent creation, and authenticated replay
 are implemented and locally verified on
-`codex/phase5-playbook-package-persistence`; PR review, production rollout, and
-entitlement hardening remain.
+`codex/phase5-playbook-package-persistence` and merged as PR #53. Signed
+service authentication and target-bound entitlement hardening are in
+development on `codex/phase5-citely-service-auth`; production rollout remains.
 
 Goal: deliver the first paid evidence-backed workflow while keeping Citely
 domain agnostic.
