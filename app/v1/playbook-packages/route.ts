@@ -1,4 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
+import {
+  authenticateCitelyService,
+  CitelyServiceAuthConfigurationError,
+  isCitelyEntitled,
+} from "@/lib/auth/citely-service";
 import { readSupabaseConfig, SupabaseHttpClient } from "@/lib/data/supabase-client";
 import { loadDossierFile } from "@/lib/dossiers";
 import type { ProvisionalClaimRow } from "@/lib/legal-corpus/provisional-public";
@@ -35,20 +40,23 @@ export async function OPTIONS() {
 
 /**
  * Creates a PlaybookPackage + EvidenceBundle from the live provisional
- * corpus and the committed mini-dossier. Authentication is a shared service
- * key (PLAYBOOK_API_KEY) as an explicit MVP interim until the Citely
- * service-auth format is finalized. Packages are deterministic, persisted as
- * immutable private artifacts, and retry-safe through a hashed idempotency
- * key. Raw customer profiles and raw idempotency keys are not stored.
+ * corpus and the committed mini-dossier. Citely authenticates server to server
+ * with a short-lived signed token whose entitlement must target the requested
+ * playbook. A legacy key remains available only for controlled cutover.
+ * Packages are persisted as immutable private artifacts and retry-safe through
+ * a hashed idempotency key. Raw profiles and raw idempotency keys are not stored.
  */
 export async function POST(request: NextRequest) {
-  const expectedKey = process.env.PLAYBOOK_API_KEY?.trim();
-  if (!expectedKey) {
-    return problem(503, "playbook-runtime-unconfigured");
-  }
-  const authorization = request.headers.get("authorization") ?? "";
-  if (authorization !== `Bearer ${expectedKey}`) {
-    return problem(401, "unauthorized");
+  let principal;
+  try {
+    principal = await authenticateCitelyService({
+      authorization: request.headers.get("authorization"),
+      legacySecret: process.env.PLAYBOOK_API_KEY,
+    });
+  } catch (error: unknown) {
+    return error instanceof CitelyServiceAuthConfigurationError
+      ? problem(503, "playbook-service-auth-unconfigured")
+      : problem(401, "unauthorized");
   }
   const idempotencyKey = parseIdempotencyKey(
     request.headers.get("idempotency-key"),
@@ -67,6 +75,12 @@ export async function POST(request: NextRequest) {
     (playbook) => playbook.playbookId === body.playbookId,
   );
   if (!definition) return problem(404, "playbook-not-found");
+  if (!isCitelyEntitled(principal, {
+    scope: "playbook:execute",
+    playbookId: definition.playbookId,
+  })) {
+    return problem(403, "entitlement-denied");
+  }
   const profile = parseProfile(body.profile);
   if (profile === null) return problem(400, "invalid-profile");
 

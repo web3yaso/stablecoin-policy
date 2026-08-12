@@ -18,7 +18,7 @@ including every assurance label.
 | Provisional coverage | `GET /v1/provisional/coverage` | none | EEA 47 claims, SG 98 claims |
 | Claim lookup | `GET /v1/claims/{id}` | none | full assurance envelope per claim |
 | Reviewed coverage | `GET /v1/coverage` | none | named-human lane; currently `IN_PROGRESS`/0% everywhere |
-| **Package creation** | `POST /v1/playbook-packages` | `Authorization: Bearer <PLAYBOOK_API_KEY>` | PlaybookPackage + EvidenceBundle |
+| **Package creation** | `POST /v1/playbook-packages` | short-lived signed Citely service JWT | PlaybookPackage + EvidenceBundle |
 
 The two launch playbooks (launched together by product decision):
 
@@ -47,12 +47,34 @@ documented in `contracts/policy-feed.md`; validate the whole response against
 falling back to the last known-good snapshot while showing that snapshot's
 `generatedAt`.
 
-## 3. Package creation (server-side only)
+## 3. Signed service authentication (server-side only)
 
-The bearer key is a service credential for the Citely backend. Never expose
-it to browsers; never accept it from end users. Flow: user passes Citely's
-entitlement check → Citely backend calls this API → Citely renders the
-result for that user.
+Citely signs a compact JWT with an Ed25519 private key that never leaves the
+main-site backend. Stablecoin Policy stores only the corresponding public keys,
+selected by JWT `kid`, so rotation can overlap without sharing a signing
+secret. Never expose the token or private key to browsers; never accept either
+from end users.
+
+The strict payload contract is
+`contracts/v1/citely-service-token-payload.schema.json`. Required identity is
+`iss=https://www.citely.info`, `aud=stablecoin-policy`, and
+`sub=citely:playbook-service`; `iat`, `nbf`, `exp`, and an opaque unique `jti`
+are mandatory. TTL must be at most 300 seconds. The protected header contains
+only `alg=EdDSA`, `typ=JWT`, and the configured `kid`.
+
+The token also carries exactly one entitlement:
+
+- package creation: `scope=playbook:execute` plus exact `playbookId`;
+- package replay: `scope=playbook:read` plus exact `packageId`;
+- direct RAG search: `scope=evidence:search` with no package/playbook target.
+
+An invalid signature or service identity returns `401`; a valid token with the
+wrong scope/target returns `403`. Stablecoin Policy does not receive account,
+email, plan, payment, or team data. Flow: user passes Citely's commercial
+entitlement check → Citely signs the minimal domain entitlement → subsite
+verifies identity and target → Citely renders the result.
+
+## 4. Package creation
 
 ```ts
 const response = await fetch(
@@ -61,7 +83,7 @@ const response = await fetch(
     method: "POST",
     headers: {
       "content-type": "application/json",
-      authorization: `Bearer ${process.env.PLAYBOOK_API_KEY}`,
+      authorization: `Bearer ${signedServiceToken}`,
       "idempotency-key": crypto.randomUUID(),
     },
     body: JSON.stringify({
@@ -108,12 +130,12 @@ even with the same `playbookId`, profile, and version pins, may produce a new
 identity because `evaluatedAt` is integrity-bound. Citely may cache a package
 keyed by `packageId` on its side (it owns customer-data retention policy).
 
-Historical replay is server-side and authenticated:
+Historical replay uses a separately signed package-targeted token:
 
 ```ts
 const artifact = await fetch(
   `https://policy.citely.info/v1/playbook-packages/${encodeURIComponent(packageId)}`,
-  { headers: { authorization: `Bearer ${process.env.PLAYBOOK_API_KEY}` } },
+  { headers: { authorization: `Bearer ${packageReadToken}` } },
 ).then((response) => response.json());
 ```
 
@@ -122,7 +144,7 @@ same strict response schema. A `404` means the package is unknown; a `503`
 means its metadata or private Storage artifact cannot be verified. Never fall
 back to reconstructing a paid package client-side.
 
-## 4. Rendering requirements (non-negotiable)
+## 5. Rendering requirements (non-negotiable)
 
 These come from the product's legal posture; a renderer that drops them is a
 launch blocker.
@@ -154,7 +176,7 @@ launch blocker.
    and conclusions come only from this API. Unknown enum values mean the
    contract moved: reject the response, do not guess.
 
-## 5. Operational notes
+## 6. Operational notes
 
 - Public endpoints are CDN-cached up to 300 s (`stale-while-revalidate`);
   data freshness is visible via each payload's own timestamps, never the
@@ -163,9 +185,9 @@ launch blocker.
   distinct claims per jurisdiction. EEA and SG are live; Hong Kong
   deliberately reports blocked/incomplete until its source-identity issue is
   resolved.
-- The bearer-key scheme is an explicit MVP interim. The planned upgrade is
-  signed short-lived service tokens with entitlement assertions; the
-  request/response bodies will not change.
+- During rollout only, `CITELY_REQUIRE_SIGNED_SERVICE_TOKEN=0` accepts both
+  signed tokens and the legacy shared key. After signed POST/GET/search smoke,
+  set it to `1`; the legacy key is then rejected and may be removed.
 - Incidents: a `503` from package creation means evidence, runtime, or immutable
   persistence is unavailable — surface a retry-later state; never render a
   partial package.
@@ -173,9 +195,10 @@ launch blocker.
   PostgreSQL contains only fingerprints, version/query metadata, checksum, and
   object reference. Neither location is a public browser API.
 
-## 6. Contract files
+## 7. Contract files
 
 - `contracts/v1/playbook-package-response.schema.json` — POST response
+- `contracts/v1/citely-service-token-payload.schema.json` — signed service JWT
 - `contracts/v1/policy-feed.schema.json` + `contracts/policy-feed.md`
 - `contracts/v1/provisional-claim.schema.json` — claim lookup
 - `contracts/v1/provisional-coverage-response.schema.json`

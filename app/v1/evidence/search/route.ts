@@ -1,4 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
+import {
+  authenticateCitelyService,
+  CitelyServiceAuthConfigurationError,
+  isCitelyEntitled,
+} from "@/lib/auth/citely-service";
 import { readSupabaseConfig, SupabaseHttpClient } from "@/lib/data/supabase-client";
 import {
   OpenAIQueryEmbeddingProvider,
@@ -17,12 +22,19 @@ export async function OPTIONS() {
 }
 
 export async function POST(request: NextRequest) {
-  const expectedKey = (
-    process.env.EVIDENCE_API_KEY || process.env.PLAYBOOK_API_KEY
-  )?.trim();
-  if (!expectedKey) return problem(503, "evidence-search-unconfigured");
-  if ((request.headers.get("authorization") ?? "") !== `Bearer ${expectedKey}`) {
-    return problem(401, "unauthorized");
+  let principal;
+  try {
+    principal = await authenticateCitelyService({
+      authorization: request.headers.get("authorization"),
+      legacySecret: process.env.EVIDENCE_API_KEY || process.env.PLAYBOOK_API_KEY,
+    });
+  } catch (error: unknown) {
+    return error instanceof CitelyServiceAuthConfigurationError
+      ? problem(503, "evidence-service-auth-unconfigured")
+      : problem(401, "unauthorized");
+  }
+  if (!isCitelyEntitled(principal, { scope: "evidence:search" })) {
+    return problem(403, "entitlement-denied");
   }
 
   let raw: unknown;

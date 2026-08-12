@@ -891,6 +891,11 @@ metadata registration, fail-closed creation, and authenticated checksum-
 verified replay. PostgreSQL stores only query metadata and object references;
 raw Business Profiles and complete package JSON are excluded. Production
 migration, deployment, and authenticated smoke remain explicit rollout steps.
+The next checkpoint replaces the shared-key interim with Ed25519-signed Citely
+service JWTs. The main site owns the private signer; each subsite stores only
+rotatable public keys and requires a maximum five-minute token with exact
+issuer, audience, subject, scope, and playbook/package entitlement target.
+Legacy shared keys exist only behind an explicit cutover flag.
 
 - implement versioned templates and private rules;
 - implement capability results, reason codes, actions, evidence assembly, and package storage;
