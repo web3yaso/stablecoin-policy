@@ -5,6 +5,12 @@ import type { ProvisionalClaimRow } from "@/lib/legal-corpus/provisional-public"
 import type { BusinessProfile, EvidenceClaim } from "@/lib/playbooks/contracts";
 import { MVP_PLAYBOOKS } from "@/lib/playbooks/definitions";
 import {
+  parseIdempotencyKey,
+  PlaybookIdempotencyConflictError,
+  PlaybookPackageArtifactStore,
+  playbookRequestFingerprint,
+} from "@/lib/playbooks/artifacts";
+import {
   assembleEvidenceBundle,
   evaluatePlaybook,
   sealPlaybookPackage,
@@ -31,9 +37,9 @@ export async function OPTIONS() {
  * Creates a PlaybookPackage + EvidenceBundle from the live provisional
  * corpus and the committed mini-dossier. Authentication is a shared service
  * key (PLAYBOOK_API_KEY) as an explicit MVP interim until the Citely
- * service-auth format is finalized. Packages are deterministic and
- * reproducible (integritySha256 over pinned versions); persistence to
- * Storage arrives with full Phase 5.
+ * service-auth format is finalized. Packages are deterministic, persisted as
+ * immutable private artifacts, and retry-safe through a hashed idempotency
+ * key. Raw customer profiles and raw idempotency keys are not stored.
  */
 export async function POST(request: NextRequest) {
   const expectedKey = process.env.PLAYBOOK_API_KEY?.trim();
@@ -43,6 +49,12 @@ export async function POST(request: NextRequest) {
   const authorization = request.headers.get("authorization") ?? "";
   if (authorization !== `Bearer ${expectedKey}`) {
     return problem(401, "unauthorized");
+  }
+  const idempotencyKey = parseIdempotencyKey(
+    request.headers.get("idempotency-key"),
+  );
+  if (idempotencyKey === null) {
+    return problem(400, "invalid-idempotency-key");
   }
 
   let body: { playbookId?: unknown; profile?: unknown };
@@ -58,10 +70,58 @@ export async function POST(request: NextRequest) {
   const profile = parseProfile(body.profile);
   if (profile === null) return problem(400, "invalid-profile");
 
-  let evidence: EvaluationEvidence;
   let client: SupabaseHttpClient;
+  let artifacts: PlaybookPackageArtifactStore;
   try {
     client = new SupabaseHttpClient(readSupabaseConfig());
+    artifacts = new PlaybookPackageArtifactStore(client);
+  } catch (error: unknown) {
+    console.error(
+      `playbook persistence unavailable: ${error instanceof Error ? error.message : "unknown error"}`,
+    );
+    return problem(503, "playbook-persistence-unavailable");
+  }
+
+  const requestFingerprint = playbookRequestFingerprint({
+    playbookId: definition.playbookId,
+    profile,
+  });
+  try {
+    const claim = await artifacts.claimIdempotencyKey(
+      idempotencyKey,
+      requestFingerprint,
+    );
+    if (claim.status === "COMPLETED") {
+      return NextResponse.json(claim.artifact, {
+        status: 200,
+        headers: {
+          ...corsHeaders(),
+          "Cache-Control": "no-store",
+          "Idempotency-Replayed": "true",
+        },
+      });
+    }
+    if (claim.status === "PENDING") {
+      const retryAfter = Math.max(
+        1,
+        Math.ceil((Date.parse(claim.retryAfter) - Date.now()) / 1_000),
+      );
+      return problem(409, "idempotency-request-in-progress", {
+        "Retry-After": String(retryAfter),
+      });
+    }
+  } catch (error: unknown) {
+    if (error instanceof PlaybookIdempotencyConflictError) {
+      return problem(409, "idempotency-key-conflict");
+    }
+    console.error(
+      `playbook idempotency unavailable: ${error instanceof Error ? error.message : "unknown error"}`,
+    );
+    return problem(503, "playbook-persistence-unavailable");
+  }
+
+  let evidence: EvaluationEvidence;
+  try {
     const rows = await client.rest<ProvisionalClaimRow[]>(
       "public_provisional_claims?jurisdiction_code=eq.EEA&order=claim_id.asc",
     );
@@ -111,8 +171,21 @@ export async function POST(request: NextRequest) {
     retrieval,
   );
 
+  const artifact = { package: playbookPackage, evidenceBundle };
+  try {
+    await artifacts.persist(artifact, idempotencyKey, requestFingerprint);
+  } catch (error: unknown) {
+    if (error instanceof PlaybookIdempotencyConflictError) {
+      return problem(409, "idempotency-key-conflict");
+    }
+    console.error(
+      `playbook package persistence failed: ${error instanceof Error ? error.message : "unknown error"}`,
+    );
+    return problem(503, "playbook-persistence-unavailable");
+  }
+
   return NextResponse.json(
-    { package: playbookPackage, evidenceBundle },
+    artifact,
     { status: 201, headers: { ...corsHeaders(), "Cache-Control": "no-store" } },
   );
 }
@@ -164,10 +237,17 @@ function parseProfile(input: unknown): BusinessProfile | null {
   };
 }
 
-function problem(status: number, error: string) {
+function problem(
+  status: number,
+  error: string,
+  headers: Record<string, string> = {},
+) {
   return NextResponse.json(
     { error },
-    { status, headers: { ...corsHeaders(), "Cache-Control": "no-store" } },
+    {
+      status,
+      headers: { ...corsHeaders(), "Cache-Control": "no-store", ...headers },
+    },
   );
 }
 
@@ -175,6 +255,7 @@ function corsHeaders(): Record<string, string> {
   return {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Accept, Content-Type, Authorization",
+    "Access-Control-Allow-Headers": "Accept, Content-Type, Authorization, Idempotency-Key",
+    "Access-Control-Expose-Headers": "Idempotency-Replayed, Retry-After",
   };
 }

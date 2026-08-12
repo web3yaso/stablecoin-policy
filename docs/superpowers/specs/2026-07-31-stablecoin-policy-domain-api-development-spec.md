@@ -883,6 +883,15 @@ missing facts; human review remains an optional higher-assurance path.
 
 ### Phase 5 — concierge PlaybookPackage API
 
+Implementation checkpoint (2026-08-12): the provisional deterministic runtime
+and Evidence RAG composition are merged. Branch
+`codex/phase5-playbook-package-persistence` adds migration `0030`, the private
+`policy-playbooks` artifact bucket, hashed idempotency leases, atomic immutable
+metadata registration, fail-closed creation, and authenticated checksum-
+verified replay. PostgreSQL stores only query metadata and object references;
+raw Business Profiles and complete package JSON are excluded. Production
+migration, deployment, and authenticated smoke remain explicit rollout steps.
+
 - implement versioned templates and private rules;
 - implement capability results, reason codes, actions, evidence assembly, and package storage;
 - compose deterministic results and Evidence RAG output in the shared Playbook Runtime without allowing retrieval output to override results;

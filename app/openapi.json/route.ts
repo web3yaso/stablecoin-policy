@@ -294,8 +294,21 @@ function createOpenApiDocument(
           tags: ["playbooks"],
           summary: "Create a PlaybookPackage and EvidenceBundle",
           description:
-            "Evaluates a business profile against a playbook's deterministic rules over the provisional corpus and asset dossier, then optionally retrieves presentation-safe supporting evidence. Returns a reproducible, version-pinned package with capability-level conclusions (PERMITTED | CONDITIONAL | UNDETERMINED | COUNSEL_REVIEW | PROHIBITED), reason codes, actions, exact citations, a typed retrieval status, and the provisional assurance envelope. Retrieval can enrich only the EvidenceBundle and retrieval version pins; failure cannot change conclusions or fail package creation. Requires service bearer authentication (Citely backend); the response is visibly provisional and is never legal advice.",
+            "Claims a hashed idempotency key, evaluates a business profile against deterministic rules, optionally retrieves presentation-safe evidence, and persists the complete response as an immutable private artifact before returning it. The database stores queryable metadata and fingerprints, never the raw customer profile or raw idempotency key. Retrieval can enrich only the EvidenceBundle and retrieval version pins; failure cannot change conclusions. Requires service bearer authentication (Citely backend); the response is visibly provisional and is never legal advice.",
           security: [{ playbookServiceKey: [] }],
+          parameters: [{
+            name: "Idempotency-Key",
+            in: "header",
+            required: true,
+            description:
+              "Opaque 8-128 character retry key. The raw value is hashed before persistence; reuse with a different request returns 409.",
+            schema: {
+              type: "string",
+              minLength: 8,
+              maxLength: 128,
+              pattern: "^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$",
+            },
+          }],
           requestBody: {
             required: true,
             content: {
@@ -342,6 +355,16 @@ function createOpenApiDocument(
             },
           },
           responses: {
+            "200": {
+              description:
+                "Exact immutable artifact replay for a completed Idempotency-Key",
+              headers: {
+                "Idempotency-Replayed": {
+                  schema: { type: "string", const: "true" },
+                },
+              },
+              content: { "application/json": { schema: { type: "object" } } },
+            },
             "201": {
               description:
                 "Package and evidence bundle schema 1.1.0 (contracts/v1/playbook-package-response.schema.json)",
@@ -350,9 +373,43 @@ function createOpenApiDocument(
             "400": { description: "Invalid profile or JSON" },
             "401": { description: "Missing or invalid service key" },
             "404": { description: "Unknown playbook" },
-            "503": {
-              description: "Core deterministic runtime unconfigured or claim evidence unavailable",
+            "409": {
+              description:
+                "Idempotency-Key conflict or an identical request is still in progress",
             },
+            "503": {
+              description:
+                "Core runtime, claim evidence, or immutable artifact persistence unavailable",
+            },
+          },
+        },
+      },
+      "/v1/playbook-packages/{id}": {
+        get: {
+          operationId: "getPlaybookPackage",
+          tags: ["playbooks"],
+          summary: "Replay an immutable PlaybookPackage artifact",
+          description:
+            "Returns the exact checksum-verified PlaybookPackage + EvidenceBundle artifact stored by package creation. The endpoint is authenticated and never publicly cached.",
+          security: [{ playbookServiceKey: [] }],
+          parameters: [{
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+              pattern: "^package:[a-z0-9-]+:[0-9a-f]{16}$",
+            },
+          }],
+          responses: {
+            "200": {
+              description:
+                "Checksum-verified package schema 1.1.0 (contracts/v1/playbook-package-response.schema.json)",
+              content: { "application/json": { schema: { type: "object" } } },
+            },
+            "401": { description: "Missing or invalid service key" },
+            "404": { description: "Unknown package" },
+            "503": { description: "Artifact metadata or Storage unavailable" },
           },
         },
       },

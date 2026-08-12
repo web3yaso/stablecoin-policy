@@ -62,6 +62,7 @@ const response = await fetch(
     headers: {
       "content-type": "application/json",
       authorization: `Bearer ${process.env.PLAYBOOK_API_KEY}`,
+      "idempotency-key": crypto.randomUUID(),
     },
     body: JSON.stringify({
       playbookId: "stablecoin-pre-listing",
@@ -74,13 +75,23 @@ const response = await fetch(
     }),
   },
 );
-// 201 -> { package, evidenceBundle } (schemaVersion 1.1.0)
+// 201 first completion; 200 exact retry replay
+// -> { package, evidenceBundle } (schemaVersion 1.1.0)
 ```
 
-Validate the whole `201` body against
+Validate every successful `200` or `201` body against
 `contracts/v1/playbook-package-response.schema.json`; reject on mismatch.
-Statuses: `400` invalid profile/JSON, `401` bad key, `404` unknown playbook,
-`503` core deterministic runtime unconfigured or claim evidence unavailable. Responses are
+`Idempotency-Key` is mandatory and must be an opaque 8–128 character token.
+Reuse the same key only for the byte-equivalent logical request. Stablecoin
+Policy stores only its SHA-256. The first completed call returns `201`; an
+exact retry returns the original immutable artifact with `200` and
+`Idempotency-Replayed: true`. Same key plus a different request, or a duplicate
+still holding its short execution lease, returns `409` (the latter includes
+`Retry-After`). Do not charge or create a second Citely run on any replay.
+
+Statuses: `400` invalid profile/JSON/idempotency key, `401` bad key, `404`
+unknown playbook, `409` idempotency conflict/in-progress, `503` core runtime,
+claim evidence, or immutable persistence unavailable. Responses are always
 `Cache-Control: no-store`.
 
 `evidenceBundle.retrieval` always exists. `SUCCESS` includes only
@@ -91,10 +102,25 @@ no items and must be rendered with their `limitations`. A retrieval outage does
 not turn package creation into `503` and cannot change deterministic
 conclusions, reason codes, actions, or claim IDs.
 
-Determinism: identical `playbookId` + `profile` against the same pinned
-versions produce the same `packageId` and `integritySha256`. Citely may
-therefore retry safely and may cache a package keyed by `packageId` on its
-side (it owns customer-data retention policy).
+Replay determinism is scoped to the idempotency key: an exact retry returns the
+same stored `packageId`, `evaluatedAt`, and `integritySha256`. A new evaluation,
+even with the same `playbookId`, profile, and version pins, may produce a new
+identity because `evaluatedAt` is integrity-bound. Citely may cache a package
+keyed by `packageId` on its side (it owns customer-data retention policy).
+
+Historical replay is server-side and authenticated:
+
+```ts
+const artifact = await fetch(
+  `https://policy.citely.info/v1/playbook-packages/${encodeURIComponent(packageId)}`,
+  { headers: { authorization: `Bearer ${process.env.PLAYBOOK_API_KEY}` } },
+).then((response) => response.json());
+```
+
+The GET response is the exact checksum-verified stored artifact and uses the
+same strict response schema. A `404` means the package is unknown; a `503`
+means its metadata or private Storage artifact cannot be verified. Never fall
+back to reconstructing a paid package client-side.
 
 ## 4. Rendering requirements (non-negotiable)
 
@@ -140,8 +166,12 @@ launch blocker.
 - The bearer-key scheme is an explicit MVP interim. The planned upgrade is
   signed short-lived service tokens with entitlement assertions; the
   request/response bodies will not change.
-- Incidents: a `503` from package creation means evidence or runtime is
-  unavailable — surface a retry-later state; never render a partial package.
+- Incidents: a `503` from package creation means evidence, runtime, or immutable
+  persistence is unavailable — surface a retry-later state; never render a
+  partial package.
+- Complete package JSON lives in the private `policy-playbooks` Storage bucket;
+  PostgreSQL contains only fingerprints, version/query metadata, checksum, and
+  object reference. Neither location is a public browser API.
 
 ## 6. Contract files
 
