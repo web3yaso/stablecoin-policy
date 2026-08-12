@@ -2,6 +2,14 @@
 
 Versioned JSON Schemas live under `contracts/v{major}` and are the wire-contract source for REST, MCP adapters, and Citely consumer fixtures.
 
+Citely package fixtures live under `contracts/fixtures/citely/v1/`. Each
+scenario has a strict create request and the corresponding immutable
+`PlaybookPackage` + `EvidenceBundle` response. The checked-in pair covers both
+launch playbooks, successful retrieval, and typed retrieval degradation. Run
+`npm run contracts:citely:fixtures` to verify that the files still match the
+deterministic runtime; use `npm run contracts:citely:fixtures:write` only when
+an intentional contract or fixture-version change has been approved.
+
 `v1/citely-service-token-payload.schema.json` defines the strict, presentation-
 independent server-to-server JWT claims shared with Citely. JWT headers are
 restricted to `alg=EdDSA`, `typ=JWT`, and a configured rotation `kid`; token TTL

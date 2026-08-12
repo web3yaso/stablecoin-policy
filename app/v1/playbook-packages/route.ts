@@ -65,9 +65,13 @@ export async function POST(request: NextRequest) {
     return problem(400, "invalid-idempotency-key");
   }
 
-  let body: { playbookId?: unknown; profile?: unknown };
+  let body: Record<string, unknown>;
   try {
-    body = await request.json();
+    const parsed: unknown = await request.json();
+    if (!isRecord(parsed) || !hasExactKeys(parsed, ["playbookId", "profile"])) {
+      return problem(400, "invalid-profile");
+    }
+    body = parsed;
   } catch {
     return problem(400, "invalid-json");
   }
@@ -220,24 +224,38 @@ function toEvidenceClaim(row: ProvisionalClaimRow): EvidenceClaim {
 }
 
 function parseProfile(input: unknown): BusinessProfile | null {
-  if (typeof input !== "object" || input === null) return null;
-  const candidate = input as Record<string, unknown>;
+  if (!isRecord(input)) return null;
+  const candidate = input;
+  const allowedKeys = candidate.asset === undefined
+    ? ["operatorJurisdiction", "targetJurisdiction", "activities"]
+    : ["operatorJurisdiction", "targetJurisdiction", "activities", "asset"];
   if (
+    !hasExactKeys(candidate, allowedKeys) ||
     typeof candidate.operatorJurisdiction !== "string" ||
+    candidate.operatorJurisdiction.length === 0 ||
     candidate.targetJurisdiction !== "EEA" ||
     !Array.isArray(candidate.activities) ||
     candidate.activities.length === 0 ||
-    !candidate.activities.every((activity) => typeof activity === "string")
+    !candidate.activities.every(
+      (activity) => typeof activity === "string" && activity.length > 0,
+    ) ||
+    new Set(candidate.activities).size !== candidate.activities.length
   ) {
     return null;
   }
   let asset: BusinessProfile["asset"] = null;
   if (candidate.asset !== null && candidate.asset !== undefined) {
-    const rawAsset = candidate.asset as Record<string, unknown>;
+    if (!isRecord(candidate.asset)) return null;
+    const rawAsset = candidate.asset;
     if (
+      !hasExactKeys(rawAsset, ["symbol", "networks"]) ||
       typeof rawAsset.symbol !== "string" ||
+      rawAsset.symbol.length === 0 ||
       !Array.isArray(rawAsset.networks) ||
-      !rawAsset.networks.every((network) => typeof network === "string")
+      !rawAsset.networks.every(
+        (network) => typeof network === "string" && network.length > 0,
+      ) ||
+      new Set(rawAsset.networks).size !== rawAsset.networks.length
     ) {
       return null;
     }
@@ -249,6 +267,20 @@ function parseProfile(input: unknown): BusinessProfile | null {
     activities: candidate.activities as string[],
     asset,
   };
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function hasExactKeys(
+  value: Record<string, unknown>,
+  expected: string[],
+): boolean {
+  const actual = Object.keys(value).sort();
+  const expectedSorted = [...expected].sort();
+  return actual.length === expectedSorted.length
+    && actual.every((key, index) => key === expectedSorted[index]);
 }
 
 function problem(

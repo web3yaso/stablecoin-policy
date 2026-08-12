@@ -103,6 +103,10 @@ const response = await fetch(
 
 Validate every successful `200` or `201` body against
 `contracts/v1/playbook-package-response.schema.json`; reject on mismatch.
+Validate the request locally against
+`contracts/v1/playbook-package-create-request.schema.json` before signing the
+entitlement token. Unknown request properties, duplicate activities/networks,
+and empty identifiers are invalid rather than silently ignored.
 `Idempotency-Key` is mandatory and must be an opaque 8–128 character token.
 Reuse the same key only for the byte-equivalent logical request. Stablecoin
 Policy stores only its SHA-256. The first completed call returns `201`; an
@@ -197,9 +201,17 @@ launch blocker.
 
 ## 7. Contract files
 
+- `contracts/v1/playbook-package-create-request.schema.json` — POST request
 - `contracts/v1/playbook-package-response.schema.json` — POST response
 - `contracts/v1/citely-service-token-payload.schema.json` — signed service JWT
 - `contracts/v1/policy-feed.schema.json` + `contracts/policy-feed.md`
 - `contracts/v1/provisional-claim.schema.json` — claim lookup
 - `contracts/v1/provisional-coverage-response.schema.json`
 - `/openapi.json` — full API document (playbooks tag)
+
+Executable consumer examples are in `contracts/fixtures/citely/v1/`. They
+cover both launch playbooks and demonstrate both successful retrieval and a
+typed retrieval outage. Subsite CI regenerates the same artifacts in memory,
+validates both schemas and package integrity, resolves every conclusion claim,
+and projects them through a reference consumer that never branches on a
+stablecoin playbook, capability, or reason-code value.
