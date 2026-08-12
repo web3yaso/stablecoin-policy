@@ -2,8 +2,10 @@
 
 ## Current checkpoint
 
-Phase 3 foundation was merged as PR #48 (`433ca8a`) on 2026-08-09. Migrations
-`0024` through `0027` are applied to the linked Supabase project. A production
+Phase 3 foundation was merged as PR #48 (`433ca8a`) on 2026-08-09. Activation
+gates were merged as PR #50 (`ca5a21f`) and production eval dataset assembly
+as PR #51 (`4ab895d`). Migrations `0024` through `0027` are applied to the
+linked Supabase project. A production
 37-chunk EEA index exists as DRAFT only. It has no production eval record and
 must remain inactive. Migration `0028` and its application tooling are in the
 activation-gates development PR; they are not applied by merging code alone.
@@ -40,6 +42,11 @@ Implemented:
 - the eval dataset assembler accepts separate generator and independent-checker
   artifacts, excludes blocked cases, and fails the entire assembly when an
   accepted case diverges or any required checklist topic loses coverage.
+- branch `codex/phase3-playbook-evidence-bundle` composes retrieval only after
+  deterministic evaluation, pins the exact retrieval index/corpus in package
+  schema `1.1.0`, and returns presentation-safe hits or a typed degradation in
+  `EvidenceBundle`; raw queries, rules, prompts, search text, and embeddings do
+  not cross the package API boundary.
 
 Deliberately incomplete:
 
@@ -49,7 +56,9 @@ Deliberately incomplete:
   DRAFT, and real production eval dataset remain operational rollout work;
 - no sentence-level generated explanation exists in v1 (`explanation` is
   always `null`);
-- no PlaybookPackage has been changed to consume retrieval output;
+- PlaybookPackage retrieval integration is implemented on the development
+  branch above but is not part of production until its PR is merged and
+  deployed;
 - the sanitized eval establishes the harness and safety baseline; production
   exit still requires an independently reviewed EEA gold query set;
 - PostgreSQL stores full-text documents and pgvector embeddings, while the
@@ -216,8 +225,10 @@ development fixtures, not the final production-quality EEA gold set.
    accepted manifest.
 6. Configure Vercel embedding and service-auth variables, deploy, and smoke
    authenticated success, stale, unauthorized, and outage behavior.
-7. Integrate retrieval output into `EvidenceBundle` while proving Playbook
-   conclusions and reason codes are byte-identical with RAG enabled/disabled.
+7. Merge and deploy the PlaybookPackage integration after its unit, schema,
+   privacy, Quint, and full-build gates prove conclusions, reason codes,
+   actions, and evidence claim IDs are byte-identical with RAG enabled or
+   disabled.
 
 Rollback is the atomic `policy.rollback_retrieval_index_release` RPC for an
 eligible prior index. Database rollback before production data exists is the

@@ -294,7 +294,7 @@ function createOpenApiDocument(
           tags: ["playbooks"],
           summary: "Create a PlaybookPackage and EvidenceBundle",
           description:
-            "Evaluates a business profile against a playbook's deterministic rules over the provisional corpus and asset dossier. Returns a reproducible, version-pinned package with capability-level conclusions (PERMITTED | CONDITIONAL | UNDETERMINED | COUNSEL_REVIEW | PROHIBITED), reason codes, actions, exact citations, and the provisional assurance envelope. Requires service bearer authentication (Citely backend); the response is visibly provisional and is never legal advice.",
+            "Evaluates a business profile against a playbook's deterministic rules over the provisional corpus and asset dossier, then optionally retrieves presentation-safe supporting evidence. Returns a reproducible, version-pinned package with capability-level conclusions (PERMITTED | CONDITIONAL | UNDETERMINED | COUNSEL_REVIEW | PROHIBITED), reason codes, actions, exact citations, a typed retrieval status, and the provisional assurance envelope. Retrieval can enrich only the EvidenceBundle and retrieval version pins; failure cannot change conclusions or fail package creation. Requires service bearer authentication (Citely backend); the response is visibly provisional and is never legal advice.",
           security: [{ playbookServiceKey: [] }],
           requestBody: {
             required: true,
@@ -344,14 +344,14 @@ function createOpenApiDocument(
           responses: {
             "201": {
               description:
-                "Package and evidence bundle (contracts/v1/playbook-package-response.schema.json)",
+                "Package and evidence bundle schema 1.1.0 (contracts/v1/playbook-package-response.schema.json)",
               content: { "application/json": { schema: { type: "object" } } },
             },
             "400": { description: "Invalid profile or JSON" },
             "401": { description: "Missing or invalid service key" },
             "404": { description: "Unknown playbook" },
             "503": {
-              description: "Runtime unconfigured or evidence unavailable",
+              description: "Core deterministic runtime unconfigured or claim evidence unavailable",
             },
           },
         },

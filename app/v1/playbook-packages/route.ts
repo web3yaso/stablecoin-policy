@@ -10,6 +10,13 @@ import {
   sealPlaybookPackage,
   type EvaluationEvidence,
 } from "@/lib/playbooks/runtime";
+import { retrievePlaybookEvidence } from "@/lib/playbooks/retrieval";
+import {
+  OpenAIQueryEmbeddingProvider,
+  readOpenAIEmbeddingConfig,
+} from "@/lib/retrieval/openai-embedding";
+import { EvidenceSearchService } from "@/lib/retrieval/search";
+import { SupabaseEvidenceRetrievalRepository } from "@/lib/retrieval/supabase-repository";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -52,8 +59,9 @@ export async function POST(request: NextRequest) {
   if (profile === null) return problem(400, "invalid-profile");
 
   let evidence: EvaluationEvidence;
+  let client: SupabaseHttpClient;
   try {
-    const client = new SupabaseHttpClient(readSupabaseConfig());
+    client = new SupabaseHttpClient(readSupabaseConfig());
     const rows = await client.rest<ProvisionalClaimRow[]>(
       "public_provisional_claims?jurisdiction_code=eq.EEA&order=claim_id.asc",
     );
@@ -74,13 +82,34 @@ export async function POST(request: NextRequest) {
   }
 
   const conclusions = evaluatePlaybook(definition, profile, evidence);
+  let retrievalService: EvidenceSearchService | null = null;
+  try {
+    retrievalService = new EvidenceSearchService(
+      new SupabaseEvidenceRetrievalRepository(client),
+      new OpenAIQueryEmbeddingProvider(readOpenAIEmbeddingConfig()),
+    );
+  } catch {
+    // Retrieval is an optional evidence layer. Configuration failure is
+    // represented inside EvidenceBundle and cannot fail or alter decisions.
+  }
+  const retrieval = await retrievePlaybookEvidence(
+    retrievalService,
+    definition,
+    conclusions,
+    evidence,
+  );
   const playbookPackage = sealPlaybookPackage(
     definition,
     profile,
     conclusions,
     evidence,
+    retrieval,
   );
-  const evidenceBundle = assembleEvidenceBundle(playbookPackage, evidence);
+  const evidenceBundle = assembleEvidenceBundle(
+    playbookPackage,
+    evidence,
+    retrieval,
+  );
 
   return NextResponse.json(
     { package: playbookPackage, evidenceBundle },
