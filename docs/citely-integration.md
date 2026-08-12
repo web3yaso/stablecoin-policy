@@ -215,3 +215,10 @@ typed retrieval outage. Subsite CI regenerates the same artifacts in memory,
 validates both schemas and package integrity, resolves every conclusion claim,
 and projects them through a reference consumer that never branches on a
 stablecoin playbook, capability, or reason-code value.
+
+Once the subsite migration and public-key configuration are deployed, the
+Citely operator can run `npm run smoke:citely-playbook` from its secret
+environment to exercise the signed create/retry/conflict/auth/replay path. The
+runner reads the signing private key only from the process environment, emits
+no tokens or artifact body, and creates one real immutable package. See
+`docs/phase5-playbook-package-operations.md` before running it.
