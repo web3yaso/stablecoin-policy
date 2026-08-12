@@ -9,6 +9,7 @@ import {
   assembleEvidenceBundle,
   evaluatePlaybook,
   sealPlaybookPackage,
+  verifyPlaybookPackageIntegrity,
   type EvaluationEvidence,
 } from "../lib/playbooks/runtime";
 import {
@@ -296,6 +297,14 @@ test("sealed packages pin every version, propagate provisional, and are reproduc
   assert.ok(pkg.versions.rulesVersion.length > 0);
   assert.ok(pkg.versions.templateVersion.length > 0);
   assert.match(pkg.integritySha256, /^[0-9a-f]{64}$/);
+  assert.equal(verifyPlaybookPackageIntegrity(pkg), true);
+  assert.equal(
+    verifyPlaybookPackageIntegrity({
+      ...pkg,
+      evaluatedAt: "2026-08-03T00:00:00.001Z",
+    }),
+    false,
+  );
 
   const again = sealPlaybookPackage(
     preListingPlaybook,

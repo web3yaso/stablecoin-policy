@@ -106,6 +106,11 @@ export type EvidenceBundle = {
   retrieval: PlaybookRetrievalEvidence;
 };
 
+export type PlaybookPackageArtifact = {
+  package: PlaybookPackage;
+  evidenceBundle: EvidenceBundle;
+};
+
 export type PlaybookRetrievalStatus =
   | "SUCCESS"
   | "INSUFFICIENT_EVIDENCE"

@@ -313,14 +313,20 @@ export function sealPlaybookPackage(
       templateVersion: definition.templateVersion,
       schemaVersion: "1.1.0" as const,
     },
+    evaluatedAt: evidence.now,
   };
   const integritySha256 = replayChecksum(sealable);
   return {
     ...sealable,
     packageId: `package:${definition.playbookId}:${integritySha256.slice(0, 16)}`,
-    evaluatedAt: evidence.now,
     integritySha256,
   };
+}
+
+export function verifyPlaybookPackageIntegrity(pkg: PlaybookPackage): boolean {
+  const { packageId, integritySha256, ...sealable } = pkg;
+  return replayChecksum(sealable) === integritySha256
+    && packageId === `package:${pkg.playbookId}:${integritySha256.slice(0, 16)}`;
 }
 
 export function assembleEvidenceBundle(

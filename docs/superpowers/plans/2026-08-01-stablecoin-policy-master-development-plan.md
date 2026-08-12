@@ -463,8 +463,11 @@ Goal: add the asset-specific evidence required for Pre-listing decisions.
 
 ## Phase 5 — deterministic Playbook Runtime and Citely package API
 
-Status: provisional vertical slice implemented; retrieval integration rollout,
-artifact persistence, idempotency, and entitlement hardening remain.
+Status: provisional vertical slice and retrieval integration are merged.
+Immutable artifact persistence, idempotent creation, and authenticated replay
+are implemented and locally verified on
+`codex/phase5-playbook-package-persistence`; PR review, production rollout, and
+entitlement hardening remain.
 
 Goal: deliver the first paid evidence-backed workflow while keeping Citely
 domain agnostic.
