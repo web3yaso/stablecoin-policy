@@ -2,7 +2,7 @@
 
 Status: active execution plan  
 Product: Stablecoin Policy public subsite and Citely stablecoin domain backend  
-Last updated: 2026-08-08
+Last updated: 2026-08-12
 Canonical product spec: `docs/superpowers/specs/2026-07-31-stablecoin-policy-domain-api-development-spec.md`
 
 ## 1. Purpose
@@ -129,31 +129,44 @@ Dependency rules:
 
 ### Current production data state
 
-- four source versions are stored and remain `OBSERVED`;
-- MiCA contains 149 provisions;
-- Hong Kong Cap. 656A contains four reference-only provisions;
-- Singapore Payment Services Act contains 148 sections;
-- Singapore Payment Services Regulations contain 47 regulations;
+- the original reviewed-only lane remains empty and continues to report
+  `IN_PROGRESS`; no machine output has been mislabeled as human reviewed;
+- the separate provisional lane publishes 47 EEA MiCA claims and 98 Singapore
+  Payment Services Act/Regulations claims through versioned releases;
+- EEA and Singapore provisional coverage is live at
+  `/v1/provisional/coverage`, with explicit `PROVISIONAL` review status,
+  `asOf`, knowledge cutoff, release identity, and limitations;
 - Hong Kong core Cap. 656 remains blocked by an official archive identity
   mismatch and cannot support a complete Hong Kong baseline;
-- no production claims, citations, corpus releases, regulatory events, or
-  impacts are published;
-- EEA, Hong Kong, and Singapore remain `IN_PROGRESS`, `0%`, and `UNKNOWN`;
-- the Vercel production `/v1/coverage` and `/v1/changes` routes work;
-- the separately configured canonical hostname still returns `404` for `/v1/*`
-  and needs a domain-mapping review.
+- the Vercel production `/v1/coverage`, `/v1/provisional/coverage`,
+  `/v1/changes`, `/v1/policy-feed`, playbook catalog, and OpenAPI routes work;
+- `https://policy.citely.info` is the documented production domain API base
+  URL and serves the domain API, but its OpenAPI response does not yet expose
+  the strict request-contract description added in PR #55; confirm that the
+  custom domain is pinned to the latest `main` deployment before cutover;
+- a legacy 37-chunk EEA retrieval index exists only as an inactive `DRAFT`;
+  no Evidence RAG index is active in production;
+- migration `0030` package persistence, the private `policy-playbooks` bucket,
+  signed-auth configuration/cutover, and the first real immutable package
+  smoke are not yet recorded as completed production rollout steps.
 
 ### Current repository quality baseline
 
-At the last completed checkpoint:
+At the latest merged checkpoint (`main` `839fd7d`, 2026-08-12):
 
-- 85 unit tests passed;
+- 209 Node tests passed;
 - Phase 0 evals passed 4/4;
 - Phase 1 evals passed 11/11;
-- Phase 2 evals passed 77/77;
-- pgTAP passed 120/120;
-- Quint covered 20 scenarios, nine invariants, and six witnesses;
-- lint, typecheck, build, and repository data checks passed.
+- Phase 2 evals passed 89/89;
+- all Phase 3 retrieval eval metrics passed: Recall@10, MRR@10, citation
+  precision, version isolation, and index-build gate accuracy were `1.0`, with
+  zero unauthorized-evidence, rights, or prompt-injection leaks;
+- the isolated Supabase job applies the full repository migration chain and
+  passes 238 pgTAP assertions, including package persistence;
+- Phase 2, Evidence RAG, and PlaybookPackage Quint typechecks, scenarios,
+  invariants, and witnesses passed;
+- lint, typecheck, build, repository data checks, dependency audit, GitHub
+  `quality`, isolated database CI, and Vercel deployment passed.
 
 Treat these counts as a regression floor, not a permanent target. New behavior
 must add tests and may increase the totals.
@@ -164,7 +177,7 @@ Initial launch will not depend on assembling a human legal-review team. Human
 review remains available as a higher-assurance path, but it is not the only way
 to publish useful policy research or operate the first playbook experience.
 
-The intended assurance ladder is:
+The implemented assurance ladder is:
 
 | Assurance level | Meaning | Bootstrap availability |
 |---|---|---:|
@@ -174,11 +187,10 @@ The intended assurance ladder is:
 | `AI_CROSS_CHECKED` | independently checked by models and deterministic validation | yes, provisional |
 | `HUMAN_REVIEWED` | qualified person approved the exact version | later/optional |
 
-These names are the accepted product language but are not authorization to
-silently reuse existing database states. Before implementation, model and
-approve the exact state-machine delta. Existing `VERIFIED` and reviewed release
-semantics must retain their named-human meaning unless the formal spec and
-Quint model explicitly create separate machine-assurance states.
+The approved `machineAssurance.qnt` model and migrations `0020`–`0022` implement
+these as a physically separate lane. Existing `VERIFIED`, reviewed-release,
+and reviewed-coverage semantics retain their named-human meaning; provisional
+publication cannot satisfy or overwrite those gates.
 
 Bootstrap outputs must include:
 
@@ -219,7 +231,10 @@ Exit evidence:
 
 ## Phase 2B — provisional assurance and launch-market baseline
 
-Status: next core milestone.
+Status: bootstrap scope complete and deployed. The machine-assurance ladder,
+EEA and Singapore provisional baselines, public claim lookup, and provisional
+coverage are live. Hong Kong remains truthfully blocked; optional
+`HUMAN_REVIEWED` upgrades are not a bootstrap dependency.
 
 Goal: make high-quality, explicitly provisional regulatory intelligence usable
 without weakening or impersonating the existing human-reviewed lane.
@@ -292,11 +307,16 @@ without weakening or impersonating the existing human-reviewed lane.
 
 ## Phase 2C — Citely public integration and API operations
 
-Status: policy-feed plan written; implementation pending.
+Status: the minimum Citely policy-feed contract is implemented and deployed as
+PR #36. `https://policy.citely.info/v1/policy-feed` serves schema `1.0.0` with
+release-derived `generatedAt`, 77 official items at the rollout checkpoint,
+ETag/304 behavior, OpenAPI, contract tests, and last-known-good semantics.
+Cross-endpoint operational standardization, uptime/freshness alerting, and
+ingestion-staleness monitoring remain.
 
 ### Simple policy feed
 
-Implement the separate plan:
+Implemented from the separate plan:
 
 - `docs/superpowers/plans/2026-08-01-citely-policy-feed.md`
 
@@ -308,9 +328,8 @@ subsite-owned `playbookId`.
 ### API operational work
 
 - add the policy feed to OpenAPI and contract CI;
-- fix or deliberately replace the canonical-domain mapping that currently
-  returns `404` for `/v1/*`;
-- publish a domain API base URL that Citely can configure once per subsite;
+- keep the canonical domain mapping and documented API base URL
+  `https://policy.citely.info` aligned with Vercel production;
 - standardize CORS, caching, ETag, stale headers, problem responses, request
   IDs, and schema-version headers across public APIs;
 - add uptime and generated-time freshness monitoring;
@@ -330,12 +349,11 @@ subsite-owned `playbookId`.
 
 Status: foundation merged as PR #48 (`433ca8a`), activation gates as PR #50
 (`ca5a21f`), and production eval assembly as PR #51 (`4ab895d`).
-Playbook EvidenceBundle integration is in development on
-`codex/phase3-playbook-evidence-bundle` (2026-08-11).
+Playbook `EvidenceBundle` integration is merged as PR #52 (`2cc9ce5`).
 The executable index/retrieval model, strict API contracts, provider-neutral
 hybrid retrieval core, authenticated endpoint, pgvector-backed storage and
 atomic index lifecycle migrations `0024`-`0025`, retrieval audit, sanitized
-eval harness, and database tests are implemented locally. Migration `0026`
+eval harness, and database tests are implemented. Migration `0026`
 adds the default-dry-run EEA builder: service-only corpus input, deterministic
 provision-aligned chunks, one-transaction/idempotent DRAFT import, immutable
 chunk reuse, exact server-manifest inspection, and separately confirmed
@@ -347,7 +365,9 @@ aggregate `RetrievalCorpusSnapshot`, exact private build-plan replay, production
 DRAFT eval artifacts, and assurance-aware activation. A legacy 37-chunk
 production DRAFT exists but remains inactive and is not grandfathered. The
 intended replacement combines the two provisional source releases into a
-deduplicated 47-claim snapshot. See
+deduplicated 47-claim snapshot. Production completion still requires applying
+unapplied migrations `0028`–`0029`, building and evaluating the exact
+replacement snapshot, then explicitly activating and replay-testing it. See
 `docs/phase3-evidence-rag-operations.md`.
 
 Goal: retrieve and explain exact regulatory evidence without allowing model
@@ -463,13 +483,17 @@ Goal: add the asset-specific evidence required for Pre-listing decisions.
 
 ## Phase 5 — deterministic Playbook Runtime and Citely package API
 
-Status: provisional vertical slice and retrieval integration are merged.
-Immutable artifact persistence, idempotent creation, and authenticated replay
-are merged as PR #53. Signed service authentication and target-bound
-entitlement hardening are merged as PR #54. Strict create-request schema plus
-deterministic Citely consumer fixtures for both launch playbooks are in
-development on `codex/phase5-citely-consumer-fixtures`; production rollout
-remains.
+Status: code-complete for the first sellable vertical slice; production
+rollout remains. The deterministic runtime and two launch playbooks are merged
+as PR #41, retrieval composition as PR #52, immutable artifact persistence and
+replay as PR #53, Ed25519 target-bound Citely service authentication as PR #54,
+strict consumer contracts/fixtures as PR #55, and the credential-safe signed
+production replay smoke runner as PR #56. Vercel records a successful
+Production deployment for `main` `839fd7d`, but the canonical custom-domain
+alias still needs latest-contract alignment verification. Migration `0030`,
+the private package bucket, production public-key configuration, signed-auth
+cutover, and a real create/retrieve/render replay are not yet recorded as
+complete.
 
 Goal: deliver the first paid evidence-backed workflow while keeping Citely
 domain agnostic.
@@ -524,15 +548,16 @@ to be legal advice or definitive compliance clearance.
 
 ### Remaining playbooks
 
-After Pre-listing proves the runtime, add:
+The Business Model Regulatory Boundary playbook launches with Pre-listing and
+is already implemented. After the first production package proves the runtime,
+add:
 
-1. Stablecoin Business Model Regulatory Boundary;
-2. First-Jurisdiction Selection;
-3. Entity and Licence Landing Path;
-4. Issue vs White-label vs Integrate;
-5. Funding and Regulatory Due-Diligence Room;
-6. Multi-jurisdiction Expansion;
-7. Stablecoin Listing Lifecycle Monitor.
+1. First-Jurisdiction Selection;
+2. Entity and Licence Landing Path;
+3. Issue vs White-label vs Integrate;
+4. Funding and Regulatory Due-Diligence Room;
+5. Multi-jurisdiction Expansion;
+6. Stablecoin Listing Lifecycle Monitor.
 
 Each playbook must reuse the common runtime and evidence contract rather than
 creating a bespoke application path.
@@ -560,8 +585,8 @@ citations, retrieval state, and version pins without branching on stablecoin
 domain values. This closes the local consumer-fixture criterion; a deployed
 signed create/retrieve/render replay remains the production-like exit gate.
 
-Replay-smoke checkpoint (2026-08-12): branch
-`codex/phase5-package-replay-smoke` adds a Citely-secret-bound runner for the
+Replay-smoke checkpoint (2026-08-12): PR #56 (`839fd7d`) adds a
+Citely-secret-bound runner for the
 remaining production-like package gate. It mints exact five-minute Ed25519
 entitlements in memory and checks create, exact retry, changed-request
 conflict, target denial, audience rejection, expiry rejection, authenticated
@@ -616,8 +641,8 @@ customer delivery are not started.
 
 ## Phase 7 — legacy-domain extraction and repository focus
 
-Status: implementation and local verification complete on
-`codex/legacy-domain-cleanup`; pending pull-request review and deployment.
+Status: complete and deployed. PR #47 (`ba52afd`) passed Preview and production
+smoke on 2026-08-08, and GitHub Issue #46 is closed.
 
 Goal: leave this repository focused on Stablecoin Policy without breaking the
 public site or shared data needed by AI Policy.
@@ -655,9 +680,8 @@ disposition inventory, redirect plan, before/after measurement, verification
 record, and rollback handoff for GitHub Issue #46. The cleanup removes legacy
 AI/data-center, politician, donor, vote, energy/EIA product code and generated
 data while preserving Stablecoin APIs, shared regulatory storage, and the
-machine-assurance lane. Local build output fell from 65 to 23 generated app
-pages and tracked bytes fell by 79.7%. Production/preview smoke remains a
-deployment gate, not a reason to mutate current production before review.
+machine-assurance lane. Build output fell from 65 to 23 generated app pages and
+tracked bytes fell by 79.7%. Preview and post-merge production smoke passed.
 
 ## 8. Cross-phase engineering workstreams
 
@@ -794,48 +818,57 @@ intermediate sellable milestone, not a replacement for them.
    as PR #36 and deployed 2026-08-02; production smoke passed: schemaVersion
    `1.0.0`, `generatedAt` equals the active `news-summaries` release
    (`2026-08-01T06:14:09.810Z`), 77 official items, ETag/304 verified;
-3. ~~write the Phase 2B provisional-assurance spec delta and Quint model~~ —
-   `specs/machineAssurance.qnt` and spec §8.4 revision awaiting approval;
-4. implement machine-validation records and provisional publication paths
-   (migrations `0020`–`0022`);
-5. build and publish the reproducible **EEA MiCA** provisional baseline (first
-   and only baseline before the MVP);
-6. keep Hong Kong truthfully blocked; defer the Cap. 656 resolution;
-7. **Phase 4 Mini:** only the USDC issuer/deployment dossier fields the EEA
-   Pre-listing decision actually consumes — no USDT, no full dossier catalog;
-8. **Phase 5 MVP:** the Stablecoin Pre-listing & Product Launch playbook plus
-   the Stablecoin Business Model Regulatory Boundary playbook (decision
-   2026-08-02: they share the EEA baseline and the common runtime, and the
-   boundary playbook needs no asset dossier, so both are prepared together).
-   The EEA checklist must cover both playbooks' topics: MiCA scope and
-   definitions (Articles 2-3), ART/EMT issuance boundaries (Titles III-IV),
-   and CASP activity perimeter (Title V) in addition to the Pre-listing
-   topics. Deterministic evaluation runs over the EEA baseline (plus the USDC
-   mini-dossier for Pre-listing only), producing immutable `PlaybookPackage`
-   + `EvidenceBundle` payloads for Citely, visibly provisional, without RAG.
-   Release decision (2026-08-02): both playbooks launch together in the same
-   release — the MVP ships when Pre-listing AND Business Boundary packages
-   both pass their acceptance fixtures;
-9. fix the canonical API hostname or select and document the permanent base
-   URL (required before Citely integration goes live);
-10. **widen after first sale:** Singapore baseline, USDT dossier, Phase 3
-    Evidence RAG, remaining playbooks;
-11. connect packages to Phase 6 monitoring and delivery;
-12. extract unrelated legacy modules in Phase 7.
+3. ~~write and approve the Phase 2B provisional-assurance spec delta and Quint
+   model~~ — implemented in `specs/machineAssurance.qnt` and migrations
+   `0020`–`0022`;
+4. ~~build and publish the reproducible EEA MiCA provisional baseline~~ — 47
+   claims live; Singapore also has 98 provisional claims;
+5. keep Hong Kong truthfully blocked and defer Cap. 656 until authoritative
+   identity is resolved;
+6. ~~complete Phase 4 Mini with only the USDC issuer/deployment dossier fields
+   consumed by the EEA Pre-listing decision~~ — merged as PR #40;
+7. ~~complete the Phase 5 MVP code for the Pre-listing and Business Model
+   Regulatory Boundary launch playbooks~~ — runtime, persistence, signed auth,
+   consumer fixtures, and smoke tooling are merged through PR #56;
+8. keep `https://policy.citely.info` as the canonical domain API base URL and
+   verify its alias serves the latest `main` contract before cutover;
+9. **current production gate:** back up metadata, dry-run/apply migration
+   `0030`, verify the private `policy-playbooks` bucket, configure the Citely
+   public-key map, deploy in dual-auth mode, and run
+   `npm run smoke:citely-playbook` from the Citely secret boundary;
+10. after signed POST/GET smoke passes, require signed tokens, verify legacy
+    rejection, and remove shared keys after the rollback window;
+11. integrate Citely entitlement and generic rendering, then complete one real
+    production create/retrieve/render replay before the first sale;
+12. build/evaluate/activate the replacement 47-claim Evidence RAG snapshot;
+13. **widen after first sale:** USDT and normalized dossiers, remaining
+    playbooks, and broader market coverage;
+14. connect packages to Phase 6 monitoring, watchlists, and delivery;
+15. ~~extract unrelated legacy modules in Phase 7~~ — PR #47 deployed and
+    Issue #46 closed.
 
 Parallel work is allowed only when contracts and database ownership do not
 overlap. RAG must not begin production implementation before the MVP package
 contract is stable; the MVP explicitly does not depend on RAG — evidence
 assembly uses direct claim/citation lookups from the provisional corpus.
 
-## 12. Decisions required before their dependent phase
+## 12. Resolved and remaining product decisions
 
-These are not blockers for the policy-feed quick win.
+Resolved:
 
-- Phase 2B: approve exact machine-assurance state names and publication gates.
+- Phase 2B machine-assurance state names, transitions, and publication gates
+  are fixed by the approved Quint model and migrations `0020`–`0022`;
+- Phase 5 Citely service authentication uses five-minute Ed25519 JWTs with one
+  exact scope and playbook/package entitlement target;
+- the two launch playbooks are Pre-listing and Business Model Regulatory
+  Boundary, sharing the EEA provisional baseline and common runtime;
+- bootstrap packages may be sold as visibly provisional regulatory research
+  without implying human review or legal advice.
+
+Still required before their dependent rollout:
+
 - Phase 2B/4: confirm whether EEA, Singapore, Hong Kong, USDC, and USDT remain
-  the launch scope.
-- Phase 5: finalize Citely service authentication and entitlement assertion.
+  the post-MVP widening scope;
 - Phase 5: set package pricing, retention, and customer-facing limitation text.
 - Phase 6: select webhook, email, or both for the first notification channel.
 - Phase 6: define product thresholds for `CONDITIONAL`, `UNDETERMINED`, and
