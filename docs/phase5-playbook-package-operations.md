@@ -2,15 +2,16 @@
 
 ## Current checkpoint
 
-PR #52 (`2cc9ce5`) integrated Evidence RAG after deterministic evaluation.
-Branch `codex/phase5-playbook-package-persistence` adds the next Phase 5
-boundary: a package is returned only after the complete presentation-safe
-response is stored as a checksum-pinned private artifact and its queryable
-metadata is committed atomically.
+PR #52 (`2cc9ce5`) integrated Evidence RAG after deterministic evaluation, and
+PR #53 (`8542a84`) added the Phase 5 persistence boundary: a package is
+returned only after the complete presentation-safe response is stored as a
+checksum-pinned private artifact and its queryable metadata is committed
+atomically.
 
-Migration `0030` is merged but remains unapplied until the linked Supabase
-rollout is explicitly performed. Merging code does not apply the migration or
-deploy Vercel.
+Migration `0030` was applied to the linked production Supabase project on
+2026-08-12 together with pending retrieval migrations `0028`-`0029`. The
+database and private bucket are ready; Citely public-key configuration,
+custom-domain deployment alignment, and the first signed package smoke remain.
 
 ## Storage boundary
 
@@ -73,6 +74,22 @@ as `503`. All paid responses use `Cache-Control: no-store`.
    POST and GET bodies are byte-equivalent after canonical JSON serialization.
 7. Confirm no raw profile or raw idempotency key appears in PostgreSQL metadata,
    logs, or the object path.
+
+Database rollout checkpoint (2026-08-12):
+
+- a mode-`0600` data-only dump and application metadata snapshot were written
+  outside the repository before migration; the dump SHA-256 is
+  `6ea54694c1fe69fb2d8243a5f0b803ea39e4d6974f3bdf5b59e2170d09901f3d`;
+- the linked dry-run listed only `0028`, `0029`, and `0030`, and all three were
+  applied successfully;
+- `policy-playbooks` exists with `public=false`; package and idempotency tables
+  are empty, and a direct service-role insert is denied with HTTP `403`;
+- the normalized pre/post business snapshot SHA-256 is identical at
+  `2d6d4a65c0df8485ca5fa23f83f7fd0fd04900c30234a704077a3432814b8ed7`;
+- the legacy EEA retrieval index remains `DRAFT` and there is no active index;
+- linked database lint reports only the earlier `0020` unused local variable
+  warning in `policy.record_machine_assurance`; no `0028`-`0030` warning was
+  reported.
 
 After the migration, public-key configuration, and deployment are ready, run
 `npm run smoke:citely-playbook` from a Citely-controlled secret environment.

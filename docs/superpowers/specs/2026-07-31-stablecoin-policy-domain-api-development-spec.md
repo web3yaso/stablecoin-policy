@@ -884,13 +884,16 @@ missing facts; human review remains an optional higher-assurance path.
 ### Phase 5 — concierge PlaybookPackage API
 
 Implementation checkpoint (2026-08-12): the provisional deterministic runtime
-and Evidence RAG composition are merged. Branch
-`codex/phase5-playbook-package-persistence` adds migration `0030`, the private
+and Evidence RAG composition are merged. PR #53 (`8542a84`) adds migration
+`0030`, the private
 `policy-playbooks` artifact bucket, hashed idempotency leases, atomic immutable
 metadata registration, fail-closed creation, and authenticated checksum-
 verified replay. PostgreSQL stores only query metadata and object references;
-raw Business Profiles and complete package JSON are excluded. Production
-migration, deployment, and authenticated smoke remain explicit rollout steps.
+raw Business Profiles and complete package JSON are excluded. Migration `0030`
+and the private `policy-playbooks` bucket were applied and verified in
+production on 2026-08-12 without changing the normalized existing business
+snapshot. Custom-domain deployment alignment, public-key configuration, and
+authenticated smoke remain explicit rollout steps.
 The next checkpoint replaces the shared-key interim with Ed25519-signed Citely
 service JWTs. The main site owns the private signer; each subsite stores only
 rotatable public keys and requires a maximum five-minute token with exact
@@ -913,7 +916,7 @@ or artifact body. The runner fail-closes on any deviation from `201` create,
 audience/expiry, `200` authenticated GET, strict schema, integrity, immutable
 replay equality, or generic-render legal-posture fields. Tests exercise the
 complete sequence with mocked transport; production invocation remains a
-separate rollout action after migration and configuration.
+separate rollout action after public-key and deployment configuration.
 
 - implement versioned templates and private rules;
 - implement capability results, reason codes, actions, evidence assembly, and package storage;

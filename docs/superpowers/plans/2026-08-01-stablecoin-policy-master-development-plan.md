@@ -146,9 +146,10 @@ Dependency rules:
   custom domain is pinned to the latest `main` deployment before cutover;
 - a legacy 37-chunk EEA retrieval index exists only as an inactive `DRAFT`;
   no Evidence RAG index is active in production;
-- migration `0030` package persistence, the private `policy-playbooks` bucket,
-  signed-auth configuration/cutover, and the first real immutable package
-  smoke are not yet recorded as completed production rollout steps.
+- migrations `0028`-`0030` and the private `policy-playbooks` bucket are live;
+  signed-auth configuration/cutover, custom-domain contract alignment, and the
+  first real immutable package smoke are not yet recorded as completed
+  production rollout steps.
 
 ### Current repository quality baseline
 
@@ -365,9 +366,10 @@ aggregate `RetrievalCorpusSnapshot`, exact private build-plan replay, production
 DRAFT eval artifacts, and assurance-aware activation. A legacy 37-chunk
 production DRAFT exists but remains inactive and is not grandfathered. The
 intended replacement combines the two provisional source releases into a
-deduplicated 47-claim snapshot. Production completion still requires applying
-unapplied migrations `0028`–`0029`, building and evaluating the exact
-replacement snapshot, then explicitly activating and replay-testing it. See
+deduplicated 47-claim snapshot. Migrations `0028`-`0029` were applied on
+2026-08-12 without activating the legacy DRAFT. Production completion still
+requires building and evaluating the exact replacement snapshot, then
+explicitly activating and replay-testing it. See
 `docs/phase3-evidence-rag-operations.md`.
 
 Goal: retrieve and explain exact regulatory evidence without allowing model
@@ -490,10 +492,10 @@ replay as PR #53, Ed25519 target-bound Citely service authentication as PR #54,
 strict consumer contracts/fixtures as PR #55, and the credential-safe signed
 production replay smoke runner as PR #56. Vercel records a successful
 Production deployment for `main` `839fd7d`, but the canonical custom-domain
-alias still needs latest-contract alignment verification. Migration `0030`,
-the private package bucket, production public-key configuration, signed-auth
-cutover, and a real create/retrieve/render replay are not yet recorded as
-complete.
+alias still needs latest-contract alignment verification. Migration `0030` and
+the private package bucket were rolled out and verified on 2026-08-12;
+production public-key configuration, signed-auth cutover, and a real
+create/retrieve/render replay are not yet recorded as complete.
 
 Goal: deliver the first paid evidence-backed workflow while keeping Citely
 domain agnostic.
@@ -593,8 +595,9 @@ conflict, target denial, audience rejection, expiry rejection, authenticated
 replay, response schema, package integrity, artifact equality, and generic
 render readiness without printing credentials or the artifact. It creates a
 real immutable package only when explicitly invoked; CI uses mocked transport
-and no production key or endpoint. Applying migration `0030`, configuring
-public keys, deploying, and invoking the smoke remain rollout actions.
+and no production key or endpoint. Migration `0030` and its private bucket were
+rolled out on 2026-08-12; configuring public keys, aligning the custom-domain
+deployment, and invoking the smoke remain rollout actions.
 
 ## Phase 6 — monitoring, subscriptions, and controlled self-service
 
@@ -832,19 +835,22 @@ intermediate sellable milestone, not a replacement for them.
    consumer fixtures, and smoke tooling are merged through PR #56;
 8. keep `https://policy.citely.info` as the canonical domain API base URL and
    verify its alias serves the latest `main` contract before cutover;
-9. **current production gate:** back up metadata, dry-run/apply migration
-   `0030`, verify the private `policy-playbooks` bucket, configure the Citely
-   public-key map, deploy in dual-auth mode, and run
-   `npm run smoke:citely-playbook` from the Citely secret boundary;
-10. after signed POST/GET smoke passes, require signed tokens, verify legacy
+9. ~~Back up metadata, dry-run/apply migrations `0028`-`0030`, and verify the
+   private `policy-playbooks` bucket and unchanged business snapshot.~~ Done
+   2026-08-12; the old retrieval DRAFT remained inactive and direct package
+   table writes remained denied;
+10. **current production gate:** configure the Citely public-key map, verify
+    the custom domain serves the latest contract, deploy in dual-auth mode,
+    and run `npm run smoke:citely-playbook` from the Citely secret boundary;
+11. after signed POST/GET smoke passes, require signed tokens, verify legacy
     rejection, and remove shared keys after the rollback window;
-11. integrate Citely entitlement and generic rendering, then complete one real
+12. integrate Citely entitlement and generic rendering, then complete one real
     production create/retrieve/render replay before the first sale;
-12. build/evaluate/activate the replacement 47-claim Evidence RAG snapshot;
-13. **widen after first sale:** USDT and normalized dossiers, remaining
+13. build/evaluate/activate the replacement 47-claim Evidence RAG snapshot;
+14. **widen after first sale:** USDT and normalized dossiers, remaining
     playbooks, and broader market coverage;
-14. connect packages to Phase 6 monitoring, watchlists, and delivery;
-15. ~~extract unrelated legacy modules in Phase 7~~ — PR #47 deployed and
+15. connect packages to Phase 6 monitoring, watchlists, and delivery;
+16. ~~extract unrelated legacy modules in Phase 7~~ — PR #47 deployed and
     Issue #46 closed.
 
 Parallel work is allowed only when contracts and database ownership do not
