@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "kind": "STATIC_DEMO_SNAPSHOT",
+  "generatedAt": "2026-08-13T04:10:00.000Z",
+  "sourceBaseUrl": "https://policy.citely.info",
+  "productionClaimUrls": [
+    "https://policy.citely.info/v1/claims/claim:eea:mica:crypto-asset-service-provider-authorisation:21",
+    "https://policy.citely.info/v1/claims/claim:eea:mica:custody-client-assets:28",
+    "https://policy.citely.info/v1/claims/claim:eea:mica:casp-client-asset-safeguarding:25",
+    "https://policy.citely.info/v1/claims/claim:eea:mica:trading-platform-proprietary-trading:29"
+  ],
+  "retrievalMode": "RETRIEVAL_UNAVAILABLE",
+  "limitations": [
+    "This is a fixed demonstration snapshot and does not refresh automatically.",
+    "Evidence is provisional and machine-assured; this is regulatory research, not legal advice.",
+    "Evidence RAG was not run; deterministic conclusions and direct legal claims remain available.",
+    "The demonstration does not persist customer input or create a production package record."
+  ]
+}
