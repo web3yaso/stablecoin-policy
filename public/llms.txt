@@ -1,19 +1,22 @@
-# Web3Law Stablecoin Policy Reports
+# Stablecoin Policy
 
-Machine-readable regulatory analysis reports on global stablecoin policy.
+Official-source-backed stablecoin regulatory intelligence and machine-readable
+paid reports. Canonical origin: https://policy.citely.info
 
-## API
+## Agent entry points
 
-- List reports (free): https://stablecoin-policy.vercel.app/api/reports
-- Full content (paid via x402): https://stablecoin-policy.vercel.app/api/reports/[slug]
+- Agent purchase guide: https://policy.citely.info/.well-known/x402-skill.md
+- x402 discovery: https://policy.citely.info/.well-known/x402
+- OpenAPI: https://policy.citely.info/openapi.json
+- Report catalog (free): https://policy.citely.info/api/reports
+- Full report content (paid): https://policy.citely.info/api/reports/{slug}
+- Latest paid report: https://policy.citely.info/api/reports/latest
 
-## Payment
+## Payment rule
 
-- Protocol: x402
-- Network: Base Sepolia (eip155:84532) [testnet]
-- Currency: USDC
-- Pricing: $0.01 per report (testnet validation pricing - production pricing TBD)
+Paid report endpoints return an x402 v2 HTTP 402 challenge in
+`PAYMENT-REQUIRED`. Decode the current challenge, create its exact payment, and
+retry the same URL with `PAYMENT-SIGNATURE`. Read payment network, asset,
+amount, and recipient from the challenge; do not hardcode them.
 
-## Skill
-
-See: https://stablecoin-policy.vercel.app/.well-known/x402-skill.md
+Free metadata endpoints never return paid report content.

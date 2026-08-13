@@ -6,12 +6,13 @@
 
 - 名称：Web3Law 稳定币政策付费报告
 - 类型：A2MCP
-- Endpoint：`https://stablecoin-policy.vercel.app/api/reports/latest`
+- Endpoint：`https://policy.citely.info/api/reports/latest`
 - 方法：`GET`
 - 返回格式：`text/markdown`
 - 计费：x402 按次付费
-- OpenAPI：`https://stablecoin-policy.vercel.app/openapi.json`
-- Discovery：`https://stablecoin-policy.vercel.app/.well-known/x402`
+- OpenAPI：`https://policy.citely.info/openapi.json`
+- Discovery：`https://policy.citely.info/.well-known/x402`
+- Agent 购买指南：`https://policy.citely.info/.well-known/x402-skill.md`
 
 `/api/reports/latest` 是稳定 URL。后台发布新日报后，调用方不需要更换 endpoint。未携带有效支付凭证时必须返回 HTTP 402；报告正文只在支付验证及结算成功后返回。
 
@@ -30,7 +31,9 @@ KV_REST_API_URL=<付款日志存储 URL>
 KV_REST_API_TOKEN=<付款日志存储 Token>
 ```
 
-当前代码默认使用 X Layer Testnet (`eip155:1952`)，仅用于测试，不能直接提交生产审核。上架时切换到 X Layer Mainnet (`eip155:196`)。报告价格、OpenAPI 声明、实际 402 challenge 必须保持一致。
+生产当前使用 X Layer Mainnet (`eip155:196`)。调用方必须以每次 402
+challenge 中的 network、asset、amount 与 payTo 为准，不得硬编码。报告价格、
+OpenAPI 声明、discovery 与实际 402 challenge 必须保持一致。
 
 ## 自检
 
@@ -48,5 +51,5 @@ npm run asp:check
 
 ```text
 帮我使用 Onchain OS 的 OKX Agent Identity 在 OKX.AI 注册一个 A2MCP 类型的 ASP。
-只注册付费报告服务，endpoint 是 https://stablecoin-policy.vercel.app/api/reports/latest，方法为 GET，使用 x402 按次收费，不注册免费服务或 A2A 服务。
+只注册付费报告服务，endpoint 是 https://policy.citely.info/api/reports/latest，方法为 GET，使用 x402 按次收费，不注册免费服务或 A2A 服务。
 ```
