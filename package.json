@@ -67,7 +67,9 @@
     "spec:rag:simulate": "npx --yes @informalsystems/quint@0.32.0 run specs/evidenceRag.qnt --main evidenceRag --invariants oneActiveIndexAndPointerAgree activeAndRetiredIndexesAreStructurallySafe builtIndexesConsumeOnePinnedArtifact activeIndexesPinCompleteSnapshots activeIndexesHaveTierAppropriateEval successfulRetrievalPinsAuthorizedEvidence humanReviewedQueryCannotUseProvisionalIndex narrativeOnlyFromGroundedSuccessfulRetrieval unsafeOutcomesProduceNoNarrative historicalReplayIsStable ragCannotChangeDeterministicDecision --witnesses activeIndexWitness plannedArtifactWitness aggregateSnapshotWitness machineEvalWitness failedEvalWitness rollbackWitness successfulSearchWitness insufficientEvidenceWitness conflictWitness unauthorizedWitness staleIndexWitness outageWitness replayWitness --max-steps 40 --max-samples 5000",
     "spec:rag": "npm run spec:rag:typecheck && npm run spec:rag:test && npm run spec:rag:simulate",
     "contracts:citely:fixtures": "node --import tsx scripts/contracts/citely-consumer-fixtures.ts",
-    "contracts:citely:fixtures:write": "node --import tsx scripts/contracts/citely-consumer-fixtures.ts --write"
+    "contracts:citely:fixtures:write": "node --import tsx scripts/contracts/citely-consumer-fixtures.ts --write",
+    "contracts:citely:demo": "node --import tsx scripts/contracts/citely-demo-snapshot.ts",
+    "contracts:citely:demo:write": "node --import tsx scripts/contracts/citely-demo-snapshot.ts --write"
   },
   "dependencies": {
     "@okxweb3/x402-core": "^0.1.0",

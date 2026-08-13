@@ -1,0 +1,18 @@
+{
+  "playbookId": "stablecoin-pre-listing",
+  "profile": {
+    "operatorJurisdiction": "SG",
+    "targetJurisdiction": "EEA",
+    "activities": [
+      "list-for-trading",
+      "custody-for-clients"
+    ],
+    "asset": {
+      "symbol": "USDC",
+      "networks": [
+        "base",
+        "ethereum"
+      ]
+    }
+  }
+}

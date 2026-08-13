@@ -216,6 +216,17 @@ validates both schemas and package integrity, resolves every conclusion claim,
 and projects them through a reference consumer that never branches on a
 stablecoin playbook, capability, or reason-code value.
 
+For a public static Citely demonstration, do not render those sanitized test
+fixtures as regulatory evidence. Use
+`contracts/demos/citely/v1/stablecoin-pre-listing.demo.response.json` with its
+request and manifest instead. The demo snapshot is generated through the same
+deterministic runtime from production public provisional claims and the
+committed USDC dossier. It pins the real claim IDs and Article 59, 70, 75, and
+76 locators, truthfully reports `RETRIEVAL_UNAVAILABLE`, and creates no
+production package row. Citely must display the manifest limitations and label
+the result as a fixed provisional sample. Refresh it explicitly with
+`npm run contracts:citely:demo:write`; it never updates at page-render time.
+
 Once the subsite migration and public-key configuration are deployed, the
 Citely operator can run `npm run smoke:citely-playbook` from its secret
 environment to exercise the signed create/retry/conflict/auth/replay path. The
