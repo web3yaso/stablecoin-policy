@@ -126,6 +126,7 @@ const translations = {
     "footer.about": "About",
     "footer.methodology": "Methodology",
     "footer.contact": "Contact",
+    "footer.agent_purchase": "Agent purchase guide",
     "footer.built_by": "Built by",
   },
 
@@ -254,6 +255,7 @@ const translations = {
     "footer.about": "关于",
     "footer.methodology": "方法论",
     "footer.contact": "联系我们",
+    "footer.agent_purchase": "Agent 购买指南",
     "footer.built_by": "作者",
   },
 } as const;

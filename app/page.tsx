@@ -143,6 +143,14 @@ export default function Page() {
             <Link href="/contact" className="hover:text-ink transition-colors">
               {tr(locale, "footer.contact")}
             </Link>
+            <a
+              href="/.well-known/x402-skill.md"
+              rel="help"
+              type="text/markdown"
+              className="hover:text-ink transition-colors"
+            >
+              {tr(locale, "footer.agent_purchase")}
+            </a>
           </div>
           <span>
             {tr(locale, "footer.built_by")}{" "}
