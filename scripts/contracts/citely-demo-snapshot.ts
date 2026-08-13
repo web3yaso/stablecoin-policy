@@ -4,6 +4,7 @@ import { loadDossierFile } from "../../lib/dossiers";
 import type {
   BusinessProfile,
   EvidenceClaim,
+  PlaybookDefinition,
   PlaybookPackageArtifact,
 } from "../../lib/playbooks/contracts";
 import { preListingPlaybook } from "../../lib/playbooks/definitions";
@@ -54,6 +55,53 @@ const request = {
     activities: ["list-for-trading", "custody-for-clients"],
     asset: { symbol: "USDC", networks: ["base", "ethereum"] },
   } satisfies BusinessProfile,
+};
+
+const merchantPaymentProfile = {
+  operatorJurisdiction: "SG",
+  targetJurisdiction: "EEA",
+  activities: ["merchant-payment"],
+  asset: { symbol: "USDC", networks: ["base", "ethereum"] },
+} satisfies BusinessProfile;
+
+/**
+ * Fixture-only scenario definition. It deliberately does not enter the live
+ * MVP registry or API: the fixture demonstrates the existing package envelope
+ * while the merchant-payment input contract and complete legal baseline remain
+ * future product work.
+ */
+const merchantPaymentFixtureDefinition: PlaybookDefinition = {
+  playbookId: "stablecoin-pre-listing",
+  name: "Stablecoin Pre-listing & Product Launch",
+  version: "0.0.0-merchant-payment-fixture.1",
+  templateVersion: "0.0.0-merchant-payment-fixture.1",
+  description:
+    "Fixed Citely demonstration of an operator-controlled USDC merchant-payment flow in the EEA.",
+  capabilities: [
+    {
+      capabilityId: "merchant-payment",
+      title: "Process USDC payments and settle stablecoins to EEA merchants",
+      requiredInputs: ["networks"],
+      requirementTopics: [
+        "crypto-asset-service-provider-authorisation",
+        "custody-client-assets",
+        "casp-client-asset-safeguarding",
+      ],
+      prohibitionTopics: [],
+      dossierChecks: [
+        "EMT_CLASSIFICATION",
+        "ISSUER_AUTHORIZATION",
+        "NETWORK_DEPLOYMENT",
+      ],
+      actions: [
+        "Confirm the fixture assumption that the operator controls USDC on behalf of EEA merchants before relying on this scenario.",
+        "Confirm that the operator's authorization scope covers each custody and transfer function in the merchant funds flow.",
+        "Implement client-asset segregation and document when control of payer and merchant funds begins and ends.",
+        "Verify the exact USDC contract on every enabled network against the issuer's official documentation.",
+        "Complete separate review of AML/CFT, sanctions, merchant KYB, tax, consumer, refund, freeze, and failed-settlement obligations before launch.",
+      ],
+    },
+  ],
 };
 
 async function fetchClaim(claimId: string): Promise<EvidenceClaim> {
@@ -109,25 +157,34 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-async function buildArtifact(): Promise<PlaybookPackageArtifact> {
+async function loadEvidence(): Promise<EvaluationEvidence> {
   const [claims, dossier] = await Promise.all([
     Promise.all(CLAIM_IDS.map(fetchClaim)),
     loadDossierFile("data/dossiers/usdc-eea.json"),
   ]);
-  const evidence: EvaluationEvidence = {
+  return {
     claims,
     dossier,
     now: GENERATED_AT,
     maxEvidenceAgeDays: 90,
   };
-  const conclusions = evaluatePlaybook(
-    preListingPlaybook,
-    request.profile,
-    evidence,
+}
+
+function buildArtifact(
+  definition: PlaybookDefinition,
+  profile: BusinessProfile,
+  evidence: EvaluationEvidence,
+  fixtureLimitations: string[] = [],
+): PlaybookPackageArtifact {
+  const conclusions = evaluatePlaybook(definition, profile, evidence).map(
+    (conclusion) => ({
+      ...conclusion,
+      limitations: [...conclusion.limitations, ...fixtureLimitations],
+    }),
   );
   const pkg = sealPlaybookPackage(
-    preListingPlaybook,
-    request.profile,
+    definition,
+    profile,
     conclusions,
     evidence,
     null,
@@ -144,7 +201,17 @@ function serialize(value: unknown): string {
 
 async function run(): Promise<void> {
   const write = process.argv.includes("--write");
-  const response = await buildArtifact();
+  const evidence = await loadEvidence();
+  const response = buildArtifact(preListingPlaybook, request.profile, evidence);
+  const merchantPaymentFixture = buildArtifact(
+    merchantPaymentFixtureDefinition,
+    merchantPaymentProfile,
+    evidence,
+    [
+      "Fixture-only scenario: the operator is assumed to control USDC on behalf of EEA merchants and settle those merchants in USDC.",
+      "The own-account merchant boundary, AML/CFT, sanctions, KYB, tax, consumer, refund, freeze, and failed-settlement obligations are outside this fixture's assessed legal scope.",
+    ],
+  );
   const manifest = {
     schemaVersion: "1.0.0",
     kind: "STATIC_DEMO_SNAPSHOT",
@@ -165,6 +232,7 @@ async function run(): Promise<void> {
     ["stablecoin-pre-listing.demo.request.json", request],
     ["stablecoin-pre-listing.demo.response.json", response],
     ["stablecoin-pre-listing.demo.manifest.json", manifest],
+    ["stablecoin-merchant-payment.fixture.json", merchantPaymentFixture],
   ] as const;
   if (write) await mkdir(DEMO_DIRECTORY, { recursive: true });
   const stale: string[] = [];
