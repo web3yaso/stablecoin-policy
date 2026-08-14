@@ -11,6 +11,7 @@ paid reports. Canonical origin: https://policy.citely.info
 - Report catalog (free): https://policy.citely.info/api/reports
 - Full report content (paid): https://policy.citely.info/api/reports/{slug}
 - Latest paid report: https://policy.citely.info/api/reports/latest
+- Stablecoin merchant-payment demo (free, fixed): https://policy.citely.info/demos/stablecoin-merchant-payment.json
 
 ## Payment rule
 

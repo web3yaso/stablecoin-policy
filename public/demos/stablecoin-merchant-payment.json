@@ -1,0 +1,154 @@
+{
+  "package": {
+    "schemaVersion": "1.1.0",
+    "playbookId": "stablecoin-pre-listing",
+    "playbookName": "Stablecoin Pre-listing & Product Launch",
+    "profileFingerprint": "11127ceaaee259024f91a78273205e31605241d9fdeb4fbb1e15a5e74cf7528d",
+    "conclusions": [
+      {
+        "capabilityId": "merchant-payment",
+        "title": "Process USDC payments and settle stablecoins to EEA merchants",
+        "conclusion": "CONDITIONAL",
+        "reasonCodes": [
+          "AUTHORIZATION_REQUIRED"
+        ],
+        "actions": [
+          "Confirm the fixture assumption that the operator controls USDC on behalf of EEA merchants before relying on this scenario.",
+          "Confirm that the operator's authorization scope covers each custody and transfer function in the merchant funds flow.",
+          "Implement client-asset segregation and document when control of payer and merchant funds begins and ends.",
+          "Verify the exact USDC contract on every enabled network against the issuer's official documentation.",
+          "Complete separate review of AML/CFT, sanctions, merchant KYB, tax, consumer, refund, freeze, and failed-settlement obligations before launch."
+        ],
+        "evidenceClaimIds": [
+          "claim:eea:mica:crypto-asset-service-provider-authorisation:21",
+          "claim:eea:mica:custody-client-assets:28",
+          "claim:eea:mica:casp-client-asset-safeguarding:25"
+        ],
+        "dossierFacts": [
+          "asset USDC classified E_MONEY_TOKEN (basis ISSUER_CLAIM)",
+          "issuer Circle Internet Financial Europe SAS holds: ELECTRONIC_MONEY_INSTITUTION, MICA_CASP_LICENCE",
+          "verified native deployments: base=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, ethereum=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        ],
+        "limitations": [
+          "Machine-generated draft; not human-reviewed legal advice.",
+          "Issuer authorization facts are provisional; confirm the official register entries before reliance.",
+          "Fixture-only scenario: the operator is assumed to control USDC on behalf of EEA merchants and settle those merchants in USDC.",
+          "The own-account merchant boundary, AML/CFT, sanctions, KYB, tax, consumer, refund, freeze, and failed-settlement obligations are outside this fixture's assessed legal scope."
+        ]
+      }
+    ],
+    "assurance": {
+      "reviewStatus": "PROVISIONAL",
+      "humanReviewed": false,
+      "limitations": [
+        "Provisional machine-assured evidence; not human-reviewed legal advice.",
+        "Capability conclusions are research and operational preparation, not compliance clearance.",
+        "Machine-generated draft; not human-reviewed legal advice.",
+        "Issuer authorization facts are provisional; confirm the official register entries before reliance.",
+        "Fixture-only scenario: the operator is assumed to control USDC on behalf of EEA merchants and settle those merchants in USDC.",
+        "The own-account merchant boundary, AML/CFT, sanctions, KYB, tax, consumer, refund, freeze, and failed-settlement obligations are outside this fixture's assessed legal scope."
+      ],
+      "counselTriggers": [
+        "PROVISIONAL_EVIDENCE_REVIEW_RECOMMENDED"
+      ]
+    },
+    "versions": {
+      "corpusReleaseId": "provisional:eea:mica:2026-08-02",
+      "corpusAsOf": "2026-08-02T00:00:00+00:00",
+      "knowledgeCutoff": "2026-08-01T03:50:30.338+00:00",
+      "dossierId": "usdc-eea",
+      "dossierCuratedAt": "2026-08-02T20:30:00.000Z",
+      "retrievalIndexReleaseId": null,
+      "retrievalCorpusReleaseId": null,
+      "retrievalAsOf": null,
+      "retrievalKnowledgeCutoff": null,
+      "rulesVersion": "0.0.0-merchant-payment-fixture.1",
+      "templateVersion": "0.0.0-merchant-payment-fixture.1",
+      "schemaVersion": "1.1.0"
+    },
+    "evaluatedAt": "2026-08-13T04:10:00.000Z",
+    "packageId": "package:stablecoin-pre-listing:3cb23cbc64ac85c0",
+    "integritySha256": "3cb23cbc64ac85c037a6082b955075a572faff24fe46db75d25b547fd6d34f9b"
+  },
+  "evidenceBundle": {
+    "schemaVersion": "1.1.0",
+    "packageId": "package:stablecoin-pre-listing:3cb23cbc64ac85c0",
+    "claims": [
+      {
+        "claimId": "claim:eea:mica:crypto-asset-service-provider-authorisation:21",
+        "topic": "crypto-asset-service-provider-authorisation",
+        "legalStatus": "PROHIBITION",
+        "proposition": "A person must not provide crypto-asset services in the Union unless it is authorised as a crypto-asset service provider or is a specified financial entity permitted to provide those services under Article 60.",
+        "citations": [
+          {
+            "locator": "Article 59",
+            "provisionId": "document:eu:celex:32023r1114:en:c694819af2efbd715735cacf:article:59"
+          }
+        ],
+        "releaseId": "provisional:eea:mica:2026-08-02",
+        "asOf": "2026-08-02T00:00:00+00:00",
+        "knowledgeCutoff": "2026-08-01T03:50:30.338+00:00",
+        "confidence": 1,
+        "limitations": [
+          "Machine-generated draft; not human-reviewed legal advice."
+        ]
+      },
+      {
+        "claimId": "claim:eea:mica:custody-client-assets:28",
+        "topic": "custody-client-assets",
+        "legalStatus": "REQUIREMENT",
+        "proposition": "Crypto-asset service providers providing custody and administration of crypto-assets on behalf of clients must conclude client agreements, maintain client position registers, establish custody policies, segregate client holdings from proprietary holdings, arrange prompt return of client crypto-assets or access means, and are liable for attributable losses subject to the stated liability cap and exceptions.",
+        "citations": [
+          {
+            "locator": "Article 75",
+            "provisionId": "document:eu:celex:32023r1114:en:c694819af2efbd715735cacf:article:75"
+          }
+        ],
+        "releaseId": "provisional:eea:mica:2026-08-02",
+        "asOf": "2026-08-02T00:00:00+00:00",
+        "knowledgeCutoff": "2026-08-01T03:50:30.338+00:00",
+        "confidence": 1,
+        "limitations": [
+          "Machine-generated draft; not human-reviewed legal advice."
+        ]
+      },
+      {
+        "claimId": "claim:eea:mica:casp-client-asset-safeguarding:25",
+        "topic": "casp-client-asset-safeguarding",
+        "legalStatus": "REQUIREMENT",
+        "proposition": "Crypto-asset service providers holding clients' crypto-assets or access means must safeguard clients' ownership rights, particularly in insolvency, and prevent use of clients' crypto-assets for the provider's own account; providers holding clients' non-e-money-token funds must safeguard those funds under the specified arrangements.",
+        "citations": [
+          {
+            "locator": "Article 70",
+            "provisionId": "document:eu:celex:32023r1114:en:c694819af2efbd715735cacf:article:70"
+          }
+        ],
+        "releaseId": "provisional:eea:mica:2026-08-02",
+        "asOf": "2026-08-02T00:00:00+00:00",
+        "knowledgeCutoff": "2026-08-01T03:50:30.338+00:00",
+        "confidence": 1,
+        "limitations": [
+          "Machine-generated draft; not human-reviewed legal advice."
+        ]
+      }
+    ],
+    "dossierFacts": [
+      "asset USDC classified E_MONEY_TOKEN (basis ISSUER_CLAIM)",
+      "issuer Circle Internet Financial Europe SAS holds: ELECTRONIC_MONEY_INSTITUTION, MICA_CASP_LICENCE",
+      "verified native deployments: base=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, ethereum=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    ],
+    "retrieval": {
+      "status": "RETRIEVAL_UNAVAILABLE",
+      "runId": null,
+      "querySha256": null,
+      "indexReleaseId": null,
+      "corpusReleaseId": null,
+      "asOf": null,
+      "knowledgeCutoff": null,
+      "items": [],
+      "limitations": [
+        "Evidence retrieval was not run; deterministic conclusions remain unchanged."
+      ]
+    }
+  }
+}
