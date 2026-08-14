@@ -15,6 +15,7 @@ including every assurance label.
 |---|---|---|---|
 | Policy feed | `GET /v1/policy-feed` | none | 77+ official policy updates, optional `playbookId` tags |
 | Playbook catalog | `GET /v1/playbooks` | none | 2 launch playbooks with capability titles |
+| Playbook detail | `GET /v1/playbooks/{id}` | none | presentation-safe metadata + renderable intake JSON Schema |
 | Provisional coverage | `GET /v1/provisional/coverage` | none | EEA 47 claims, SG 98 claims |
 | Claim lookup | `GET /v1/claims/{id}` | none | full assurance envelope per claim |
 | Reviewed coverage | `GET /v1/coverage` | none | named-human lane; currently `IN_PROGRESS`/0% everywhere |
@@ -38,7 +39,21 @@ Render the catalog directly:
 const catalog = await fetch("https://policy.citely.info/v1/playbooks")
   .then((response) => response.json());
 // catalog.playbooks[].{playbookId,name,version,description,capabilities[],assuranceNote}
+
+const detail = await fetch(
+  `https://policy.citely.info/v1/playbooks/${catalog.playbooks[0].playbookId}`,
+).then((response) => response.json());
+// Validate and render detail.playbook.intakeSchema as JSON Schema 2020-12.
+// Submit the resulting profile unchanged when requesting a paid package.
 ```
+
+Validate the full detail response against
+`contracts/v1/playbook-detail-response.schema.json`, then use
+`playbook.intakeSchema` as the form and client-side validation contract. Do not
+hardcode stablecoin capability IDs or profile fields in Citely. The detail
+endpoint deliberately excludes raw decision rules, dossier checks, generated
+actions, prompts, private graphs, and evidence topics; those remain inside the
+subsite runtime and appear only as evaluated package output where appropriate.
 
 Free-tier evidence pages can link `GET /v1/claims/{id}` and
 `GET /v1/provisional/coverage` for acquisition. The policy feed contract is
@@ -203,6 +218,7 @@ launch blocker.
 
 - `contracts/v1/playbook-package-create-request.schema.json` — POST request
 - `contracts/v1/playbook-package-response.schema.json` — POST response
+- `contracts/v1/playbook-detail-response.schema.json` — public detail and intake contract
 - `contracts/v1/citely-service-token-payload.schema.json` — signed service JWT
 - `contracts/v1/policy-feed.schema.json` + `contracts/policy-feed.md`
 - `contracts/v1/provisional-claim.schema.json` — claim lookup

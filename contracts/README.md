@@ -15,6 +15,12 @@ independent server-to-server JWT claims shared with Citely. JWT headers are
 restricted to `alg=EdDSA`, `typ=JWT`, and a configured rotation `kid`; token TTL
 is additionally enforced by runtime code at five minutes.
 
+`v1/playbook-detail-response.schema.json` defines the public, presentation-safe
+playbook detail returned by `GET /v1/playbooks/{id}`. It includes a directly
+renderable JSON Schema 2020-12 intake contract while excluding raw rules,
+dossier checks, generated actions, prompts, private graphs, and evidence
+topics.
+
 Phase 0 starts with the existing report compatibility surface. New domain schemas must use JSON Schema 2020-12, reject unknown properties by default, define explicit null behavior, and remain immutable after publication. Breaking changes require a new major directory.
 
 Phase 2 adds reviewed legal-claim contracts. Discovery records from news or

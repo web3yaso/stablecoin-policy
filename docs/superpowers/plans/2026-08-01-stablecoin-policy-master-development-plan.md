@@ -585,6 +585,14 @@ citations, retrieval state, and version pins without branching on stablecoin
 domain values. This closes the local consumer-fixture criterion; a deployed
 signed create/retrieve/render replay remains the production-like exit gate.
 
+Public-detail checkpoint (2026-08-14): `GET /v1/playbooks/{id}` now returns
+presentation-safe catalog metadata and a directly renderable JSON Schema
+2020-12 intake contract. The committed response schema, route tests, and
+OpenAPI discovery prove that Citely can build a generic intake without
+hardcoding stablecoin fields, while privacy tests keep raw rules, dossier
+checks, generated actions, prompts, private graphs, and evidence topics behind
+the paid runtime boundary.
+
 Replay-smoke checkpoint (2026-08-12): PR #56 (`839fd7d`) adds a
 Citely-secret-bound runner for the
 remaining production-like package gate. It mints exact five-minute Ed25519

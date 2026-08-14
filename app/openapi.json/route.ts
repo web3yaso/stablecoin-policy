@@ -256,6 +256,40 @@ function createOpenApiDocument(
           },
         },
       },
+      "/v1/playbooks/{id}": {
+        get: {
+          operationId: "getPlaybook",
+          tags: ["playbooks"],
+          summary: "Get presentation-safe playbook details",
+          description:
+            "Returns public catalog metadata plus a strict JSON Schema 2020-12 intake contract that a domain-agnostic client can render and validate. The response never exposes raw decision rules, dossier checks, actions, prompts, private graphs, or evidence topics.",
+          parameters: [{
+            name: "id",
+            in: "path",
+            required: true,
+            schema: { type: "string", pattern: "^[a-z0-9-]+$" },
+          }],
+          responses: {
+            "200": {
+              description:
+                "Presentation-safe playbook detail (contracts/v1/playbook-detail-response.schema.json)",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/PlaybookDetailResponse" },
+                },
+              },
+            },
+            "404": {
+              description: "Unknown or malformed playbook ID",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/ErrorResponse" },
+                },
+              },
+            },
+          },
+        },
+      },
       "/v1/evidence/search": {
         post: {
           operationId: "searchRegulatoryEvidence",
@@ -791,6 +825,58 @@ function createOpenApiDocument(
         },
       },
       schemas: {
+        PlaybookDetailResponse: {
+          type: "object",
+          required: ["schemaVersion", "playbook"],
+          additionalProperties: false,
+          properties: {
+            schemaVersion: { type: "string", const: "1.0.0" },
+            playbook: {
+              type: "object",
+              required: [
+                "playbookId", "name", "version", "templateVersion",
+                "description", "capabilities", "intakeSchema", "assuranceNote",
+              ],
+              additionalProperties: false,
+              properties: {
+                playbookId: {
+                  type: "string",
+                  pattern: "^[a-z0-9-]+$",
+                },
+                name: { type: "string", minLength: 1 },
+                version: { type: "string", minLength: 1 },
+                templateVersion: { type: "string", minLength: 1 },
+                description: { type: "string", minLength: 1 },
+                capabilities: {
+                  type: "array",
+                  minItems: 1,
+                  items: {
+                    type: "object",
+                    required: ["capabilityId", "title"],
+                    additionalProperties: false,
+                    properties: {
+                      capabilityId: {
+                        type: "string",
+                        pattern: "^[a-z0-9-]+$",
+                      },
+                      title: { type: "string", minLength: 1 },
+                    },
+                  },
+                },
+                intakeSchema: {
+                  type: "object",
+                  description:
+                    "Executable JSON Schema 2020-12 for the selected playbook profile. The exact strict wire contract is contracts/v1/playbook-detail-response.schema.json.",
+                },
+                assuranceNote: {
+                  type: "string",
+                  const:
+                    "Evaluations run on provisional machine-assured evidence and are research, not legal advice.",
+                },
+              },
+            },
+          },
+        },
         CoverageResponse: {
           type: "object",
           required: ["schemaVersion", "dataAsOf", "markets"],
