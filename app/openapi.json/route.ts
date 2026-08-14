@@ -457,6 +457,54 @@ function createOpenApiDocument(
           },
         },
       },
+      "/v1/playbook-packages/{id}/watchlist": {
+        post: {
+          operationId: "createPlaybookPackageWatchlist",
+          tags: ["playbooks"],
+          summary: "Create or replay a package-derived watchlist",
+          description:
+            "Requires a short-lived Citely service JWT with a playbook:read entitlement targeting this exact package ID. Creates one immutable ACTIVE watchlist only when the completed package has non-empty exact decision-evidence claim dependencies. A retry returns the same watchlist. Citely retains customer, subscription, entitlement, and delivery data; this endpoint accepts no request body and stores none of those fields.",
+          security: [{ playbookServiceKey: [] }],
+          parameters: [{
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+              pattern: "^package:[a-z0-9-]+:[0-9a-f]{16}$",
+            },
+          }],
+          responses: {
+            "200": {
+              description: "Exact idempotent replay of the existing watchlist",
+              headers: {
+                "Idempotency-Replayed": {
+                  schema: { type: "string", const: "true" },
+                },
+              },
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/PlaybookWatchlistResponse" },
+                },
+              },
+            },
+            "201": {
+              description: "Immutable ACTIVE package watchlist created",
+              content: {
+                "application/json": {
+                  schema: { $ref: "#/components/schemas/PlaybookWatchlistResponse" },
+                },
+              },
+            },
+            "400": { description: "Unexpected request body" },
+            "401": { description: "Missing or invalid service token" },
+            "403": { description: "Valid token targeting a different package" },
+            "404": { description: "Unknown package" },
+            "409": { description: "Package has no decision-evidence dependencies" },
+            "503": { description: "Watchlist persistence unavailable" },
+          },
+        },
+      },
       "/v1/claims/{id}": {
         get: {
           operationId: "getProvisionalClaim",
@@ -825,6 +873,24 @@ function createOpenApiDocument(
         },
       },
       schemas: {
+        PlaybookWatchlistResponse: {
+          type: "object",
+          required: ["schemaVersion", "watchlistId", "packageId", "state", "createdAt"],
+          additionalProperties: false,
+          properties: {
+            schemaVersion: { type: "string", const: "1.0.0" },
+            watchlistId: {
+              type: "string",
+              pattern: "^watchlist:[0-9a-f]{32}$",
+            },
+            packageId: {
+              type: "string",
+              pattern: "^package:[a-z0-9-]+:[0-9a-f]{16}$",
+            },
+            state: { type: "string", const: "ACTIVE" },
+            createdAt: { type: "string", format: "date-time" },
+          },
+        },
         PlaybookDetailResponse: {
           type: "object",
           required: ["schemaVersion", "playbook"],

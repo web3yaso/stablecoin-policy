@@ -4,6 +4,7 @@ import { exportSPKI, generateKeyPair, SignJWT } from "jose";
 import { NextRequest } from "next/server";
 import { POST as searchEvidence } from "../app/v1/evidence/search/route";
 import { GET as getPackage } from "../app/v1/playbook-packages/[id]/route";
+import { POST as createWatchlist } from "../app/v1/playbook-packages/[id]/watchlist/route";
 import { POST as createPackage } from "../app/v1/playbook-packages/route";
 import type { CitelyServiceScope } from "../lib/auth/citely-service";
 
@@ -51,6 +52,16 @@ test("package routes reject signed entitlements for a different target", async (
     );
     assert.equal(response.status, 403);
     assert.deepEqual(await response.json(), { error: "entitlement-denied" });
+
+    const watchlistResponse = await createWatchlist(
+      new NextRequest(
+        `https://example.test/v1/playbook-packages/${requested}/watchlist`,
+        { method: "POST", headers: { authorization: `Bearer ${read.token}` } },
+      ),
+      { params: Promise.resolve({ id: requested }) },
+    );
+    assert.equal(watchlistResponse.status, 403);
+    assert.deepEqual(await watchlistResponse.json(), { error: "entitlement-denied" });
   });
 });
 

@@ -607,12 +607,12 @@ public keys, deploying, and invoking the smoke remain rollout actions.
 ## Phase 6 — monitoring, subscriptions, and controlled self-service
 
 Status: event/impact candidate infrastructure exists. The first package
-integration slice is implemented locally on `codex/package-impact-index`:
-migration `0031`, a Quint model, and TypeScript/pgTAP tests index exact
-decision-evidence claim dependencies and resolve only published, reviewed
-claim impacts to immutable packages. Migration `0031` is not yet applied to
-production. Watchlists, superseding evaluations, and customer delivery are not
-started.
+integration slice was merged as PR #63: migration `0031`, a Quint model, and
+TypeScript/pgTAP tests index exact decision-evidence claim dependencies and
+resolve only published, reviewed claim impacts to immutable packages.
+Migration `0031` is not yet applied to production. The next bounded slice is
+one immutable package-derived watchlist; superseding evaluations and customer
+delivery are not started.
 
 ### Monitoring graph
 
@@ -632,6 +632,24 @@ pending/dismissed impacts, unrelated claims, non-corpus claims, duplicate
 dependencies, and public/browser access all fail closed. The implementation
 does not index retrieval-only hits because RAG cannot alter deterministic
 decisions.
+
+Package-watchlist contract approved (2026-08-14): one completed package with a
+non-empty immutable decision-evidence dependency set may create one immutable
+`ACTIVE` watchlist. Creation is idempotent by package and uses the existing
+exact-package `playbook:read` Citely entitlement. The subsite stores no
+customer, subscription, entitlement, profile, or delivery destination. A
+private impact lookup may identify the watchlist only for a `PUBLISHED` event
+and a matching `REVIEWED` claim impact. Lifecycle transitions, deltas,
+superseding evaluations, and webhook delivery remain separate later slices.
+
+Package-watchlist implementation checkpoint (2026-08-14): branch
+`codex/package-watchlists` adds migration `0032`, an executable Quint model,
+strict TypeScript parsing, authenticated bodyless creation API, JSON Schema,
+OpenAPI discovery, and pgTAP/route/entitlement tests. Local migration-from-zero
+through `0032`, all nine Quint scenarios, five invariants, nine witnesses, and
+29 watchlist pgTAP assertions pass. Production migrations `0031`/`0032`, signed
+endpoint smoke, change-to-action deltas, lifecycle transitions, and delivery
+remain separate rollout or development work.
 
 ### Customer delivery
 
