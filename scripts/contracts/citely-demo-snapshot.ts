@@ -24,6 +24,7 @@ const DEMO_DIRECTORY = path.join(
   "citely",
   "v1",
 );
+const PUBLIC_DEMO_DIRECTORY = path.join(process.cwd(), "public", "demos");
 const CLAIM_IDS = [
   "claim:eea:mica:crypto-asset-service-provider-authorisation:21",
   "claim:eea:mica:custody-client-assets:28",
@@ -229,24 +230,33 @@ async function run(): Promise<void> {
     ],
   };
   const outputs = [
-    ["stablecoin-pre-listing.demo.request.json", request],
-    ["stablecoin-pre-listing.demo.response.json", response],
-    ["stablecoin-pre-listing.demo.manifest.json", manifest],
-    ["stablecoin-merchant-payment.fixture.json", merchantPaymentFixture],
+    [path.join(DEMO_DIRECTORY, "stablecoin-pre-listing.demo.request.json"), request],
+    [path.join(DEMO_DIRECTORY, "stablecoin-pre-listing.demo.response.json"), response],
+    [path.join(DEMO_DIRECTORY, "stablecoin-pre-listing.demo.manifest.json"), manifest],
+    [
+      path.join(PUBLIC_DEMO_DIRECTORY, "stablecoin-merchant-payment.json"),
+      merchantPaymentFixture,
+    ],
   ] as const;
-  if (write) await mkdir(DEMO_DIRECTORY, { recursive: true });
+  if (write) {
+    await Promise.all([
+      mkdir(DEMO_DIRECTORY, { recursive: true }),
+      mkdir(PUBLIC_DEMO_DIRECTORY, { recursive: true }),
+    ]);
+  }
   const stale: string[] = [];
-  for (const [file, value] of outputs) {
-    const outputPath = path.join(DEMO_DIRECTORY, file);
+  for (const [outputPath, value] of outputs) {
     const expected = serialize(value);
     if (write) {
       await writeFile(outputPath, expected, "utf8");
       continue;
     }
     try {
-      if (await readFile(outputPath, "utf8") !== expected) stale.push(file);
+      if (await readFile(outputPath, "utf8") !== expected) {
+        stale.push(path.relative(process.cwd(), outputPath));
+      }
     } catch {
-      stale.push(file);
+      stale.push(path.relative(process.cwd(), outputPath));
     }
   }
   if (stale.length > 0) {

@@ -24,6 +24,23 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [...RETIRED_ROUTES];
   },
+
+  async headers() {
+    return [
+      {
+        source: "/demos/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Access-Control-Allow-Methods", value: "GET, HEAD, OPTIONS" },
+          { key: "Access-Control-Allow-Headers", value: "Accept" },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=300, stale-while-revalidate=86400",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -4,6 +4,7 @@ import path from "node:path";
 import test from "node:test";
 import Ajv2020 from "ajv/dist/2020";
 import addFormats from "ajv-formats";
+import nextConfig from "../next.config";
 import type { PlaybookPackageArtifact } from "../lib/playbooks/contracts";
 import { verifyPlaybookPackageIntegrity } from "../lib/playbooks/runtime";
 
@@ -14,6 +15,7 @@ const DEMO_DIRECTORY = path.join(
   "citely",
   "v1",
 );
+const PUBLIC_DEMO_DIRECTORY = path.join(process.cwd(), "public", "demos");
 
 type DemoManifest = {
   schemaVersion: "1.0.0";
@@ -35,6 +37,12 @@ async function readSchema(file: string): Promise<Record<string, unknown>> {
   return JSON.parse(
     await readFile(path.join(process.cwd(), "contracts", "v1", file), "utf8"),
   ) as Record<string, unknown>;
+}
+
+async function readPublicDemo<T>(file: string): Promise<T> {
+  return JSON.parse(
+    await readFile(path.join(PUBLIC_DEMO_DIRECTORY, file), "utf8"),
+  ) as T;
 }
 
 test("Citely Stablecoin demo snapshot is production-shaped and factual", async () => {
@@ -85,8 +93,8 @@ test("Citely Stablecoin demo snapshot is production-shaped and factual", async (
 });
 
 test("fixed merchant-payment fixture is contract-valid, evidence-backed, and explicit about scope", async () => {
-  const fixture = await readJson<PlaybookPackageArtifact>(
-    "stablecoin-merchant-payment.fixture.json",
+  const fixture = await readPublicDemo<PlaybookPackageArtifact>(
+    "stablecoin-merchant-payment.json",
   );
   const ajv = new Ajv2020({ strict: true, allErrors: true });
   addFormats(ajv);
@@ -139,4 +147,17 @@ test("fixed merchant-payment fixture is contract-valid, evidence-backed, and exp
   }
   assert.equal(fixture.evidenceBundle.retrieval.status, "RETRIEVAL_UNAVAILABLE");
   assert.deepEqual(fixture.evidenceBundle.retrieval.items, []);
+});
+
+test("merchant-payment fixture has a stable cross-origin public delivery path", async () => {
+  assert.ok(nextConfig.headers);
+  const rules = await nextConfig.headers();
+  const demos = rules.find((rule) => rule.source === "/demos/:path*");
+  assert.ok(demos);
+  const headers = new Map(demos.headers.map((header) => [header.key, header.value]));
+
+  assert.equal(headers.get("Access-Control-Allow-Origin"), "*");
+  assert.equal(headers.get("Access-Control-Allow-Methods"), "GET, HEAD, OPTIONS");
+  assert.equal(headers.get("Access-Control-Allow-Headers"), "Accept");
+  assert.match(headers.get("Cache-Control") ?? "", /max-age=300/);
 });
