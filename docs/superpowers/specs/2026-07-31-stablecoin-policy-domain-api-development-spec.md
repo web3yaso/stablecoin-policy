@@ -936,6 +936,19 @@ Exit: Citely can submit confirmed facts and render a complete package without st
   cases to satisfy the per-scope quality gates;
 - enable self-service only for combinations passing all quality gates.
 
+Implementation checkpoint (2026-08-14): the first package-impact slice is
+implemented locally on `codex/package-impact-index`. Quint fixes the boundary
+that only a completed package with an exact immutable decision-evidence claim
+dependency may match a `PUBLISHED` event whose corresponding claim impact is
+`REVIEWED`. Migration `0031` atomically registers package metadata,
+idempotency completion, and dependency edges; revokes the older registration
+RPC from `service_role`; and adds a service-only affected-package lookup. It
+stores no customer profile, artifact body, rule, prompt, or action. The
+migration deliberately fails if packages already exist without an explicit
+dependency backfill. Watchlists, delivery, reruns, and dossier/rule dependency
+edges remain outside this checkpoint, and migration `0031` is not yet applied
+to production.
+
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
 
 ### Phase 7 — legacy-domain extraction
