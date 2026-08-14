@@ -8,6 +8,8 @@ paid reports. Canonical origin: https://policy.citely.info
 - Agent purchase guide: https://policy.citely.info/.well-known/x402-skill.md
 - x402 discovery: https://policy.citely.info/.well-known/x402
 - OpenAPI: https://policy.citely.info/openapi.json
+- Playbook catalog (free): https://policy.citely.info/v1/playbooks
+- Playbook detail and intake schema (free): https://policy.citely.info/v1/playbooks/{id}
 - Report catalog (free): https://policy.citely.info/api/reports
 - Full report content (paid): https://policy.citely.info/api/reports/{slug}
 - Latest paid report: https://policy.citely.info/api/reports/latest

@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
 import { MVP_PLAYBOOKS } from "@/lib/playbooks/definitions";
+import {
+  PLAYBOOK_CATALOG_SCHEMA_VERSION,
+  toPublicPlaybookSummary,
+} from "@/lib/playbooks/catalog";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -16,19 +20,8 @@ export async function OPTIONS() {
 export async function GET() {
   return NextResponse.json(
     {
-      schemaVersion: "1.0.0",
-      playbooks: MVP_PLAYBOOKS.map((playbook) => ({
-        playbookId: playbook.playbookId,
-        name: playbook.name,
-        version: playbook.version,
-        description: playbook.description,
-        capabilities: playbook.capabilities.map((capability) => ({
-          capabilityId: capability.capabilityId,
-          title: capability.title,
-        })),
-        assuranceNote:
-          "Evaluations run on provisional machine-assured evidence and are research, not legal advice.",
-      })),
+      schemaVersion: PLAYBOOK_CATALOG_SCHEMA_VERSION,
+      playbooks: MVP_PLAYBOOKS.map(toPublicPlaybookSummary),
     },
     {
       headers: {
