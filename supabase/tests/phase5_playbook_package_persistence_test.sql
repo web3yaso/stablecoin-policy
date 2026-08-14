@@ -49,7 +49,7 @@ select ok(
 select ok(
   not has_function_privilege(
     'anon',
-    'policy.register_playbook_package(text,text,text,text,text,bigint,text,text,text,text,text,text,timestamptz,text,text,text,text,text,text,text,text)',
+    'policy.register_playbook_package_with_dependencies(text,text,text,text,text,bigint,text,text,text,text,text,text,timestamptz,text,text,text,text,text,text,text,text,text[])',
     'EXECUTE'
   ),
   'anonymous callers cannot register paid package artifacts'
@@ -90,7 +90,7 @@ select throws_ok(
 );
 select lives_ok(
   $sql$
-    select policy.register_playbook_package(
+    select policy.register_playbook_package_with_dependencies(
       'object:playbook-package:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
       'supabase-storage', 'policy-playbooks',
       'packages/stablecoin-pre-listing/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json',
@@ -100,7 +100,7 @@ select lives_ok(
       'stablecoin-pre-listing', repeat('5', 64), repeat('a', 64),
       '1.1.0', '2026-08-12T00:00:00Z', 'PROVISIONAL',
       'provisional:eea:mica:2026-08-02', null, 'usdc-eea',
-      '1.0.0', '1.0.0', repeat('1', 64), repeat('2', 64)
+      '1.0.0', '1.0.0', repeat('1', 64), repeat('2', 64), '{}'::text[]
     )
   $sql$,
   'one RPC atomically registers storage metadata, package metadata, and idempotency completion'
@@ -137,7 +137,7 @@ select is(
 );
 select lives_ok(
   $sql$
-    select policy.register_playbook_package(
+    select policy.register_playbook_package_with_dependencies(
       'object:playbook-package:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
       'supabase-storage', 'policy-playbooks',
       'packages/stablecoin-pre-listing/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json',
@@ -147,7 +147,7 @@ select lives_ok(
       'stablecoin-pre-listing', repeat('5', 64), repeat('a', 64),
       '1.1.0', '2026-08-12T00:00:00Z', 'PROVISIONAL',
       'provisional:eea:mica:2026-08-02', null, 'usdc-eea',
-      '1.0.0', '1.0.0', repeat('1', 64), repeat('2', 64)
+      '1.0.0', '1.0.0', repeat('1', 64), repeat('2', 64), '{}'::text[]
     )
   $sql$,
   'replaying the exact registration is idempotent'
@@ -164,7 +164,7 @@ select is(
 );
 select throws_ok(
   $sql$
-    select policy.register_playbook_package(
+    select policy.register_playbook_package_with_dependencies(
       'object:playbook-package:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
       'supabase-storage', 'policy-playbooks',
       'packages/stablecoin-pre-listing/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json',
@@ -174,7 +174,7 @@ select throws_ok(
       'stablecoin-pre-listing', repeat('5', 64), repeat('a', 64),
       '1.1.0', '2026-08-12T00:00:00Z', 'PROVISIONAL',
       'provisional:eea:mica:2026-08-02', null, 'usdc-eea',
-      '1.0.0', '1.0.0', repeat('1', 64), repeat('2', 64)
+      '1.0.0', '1.0.0', repeat('1', 64), repeat('2', 64), '{}'::text[]
     )
   $sql$,
   'immutable playbook artifact checksum conflict for packages/stablecoin-pre-listing/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json',
@@ -182,7 +182,7 @@ select throws_ok(
 );
 select throws_ok(
   $sql$
-    select policy.register_playbook_package(
+    select policy.register_playbook_package_with_dependencies(
       'object:playbook-package:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
       'supabase-storage', 'policy-playbooks',
       'packages/stablecoin-pre-listing/wrong.json', repeat('4', 64),
@@ -191,7 +191,7 @@ select throws_ok(
       'stablecoin-pre-listing', repeat('5', 64), repeat('a', 64),
       '1.1.0', '2026-08-12T00:00:00Z', 'PROVISIONAL',
       'provisional:eea:mica:2026-08-02', null, 'usdc-eea',
-      '1.0.0', '1.0.0', repeat('1', 64), repeat('2', 64)
+      '1.0.0', '1.0.0', repeat('1', 64), repeat('2', 64), '{}'::text[]
     )
   $sql$,
   'invalid playbook artifact identity',

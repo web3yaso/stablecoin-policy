@@ -65,6 +65,10 @@ test("playbook artifacts persist privately and replay through a completed idempo
       JSON.stringify(body).includes(hashIdempotencyKey(IDEMPOTENCY_KEY))),
     true,
   );
+  const registration = backend.rpcBodies.find(
+    (body) => Array.isArray(body.p_evidence_claim_ids),
+  );
+  assert.deepEqual(registration?.p_evidence_claim_ids, [claimFixture().claimId]);
 });
 
 test("the same idempotency key cannot be reused for a different request", async () => {
@@ -119,6 +123,24 @@ test("artifact persistence exposes storage outages instead of returning an unper
     () => store.persist(artifact, IDEMPOTENCY_KEY, fingerprint),
     ExternalStorageError,
   );
+  assert.equal(backend.metadata.size, 0);
+});
+
+test("artifact persistence rejects a dependency set that differs from conclusions", async () => {
+  const backend = fakeBackend();
+  const store = new PlaybookPackageArtifactStore(client(backend.fetch));
+  const artifact = createArtifact();
+  artifact.evidenceBundle.claims = [];
+  const fingerprint = playbookRequestFingerprint({
+    playbookId: artifact.package.playbookId,
+    profile: profileFixture(),
+  });
+
+  await assert.rejects(
+    () => store.persist(artifact, IDEMPOTENCY_KEY, fingerprint),
+    /does not match conclusion claim dependencies/,
+  );
+  assert.equal(backend.objects.size, 0);
   assert.equal(backend.metadata.size, 0);
 });
 
@@ -250,7 +272,7 @@ function fakeBackend(options: { storageOutage?: boolean } = {}) {
       });
       return Response.json({ status: "CLAIMED", leaseExpiresAt: retryAfter });
     }
-    if (functionName === "register_playbook_package") {
+    if (functionName === "register_playbook_package_with_dependencies") {
       const packageId = String(body.p_package_id);
       const storedMetadata = {
         packageId,

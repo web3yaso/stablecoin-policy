@@ -598,8 +598,13 @@ public keys, deploying, and invoking the smoke remain rollout actions.
 
 ## Phase 6 — monitoring, subscriptions, and controlled self-service
 
-Status: event/impact candidate infrastructure exists; package integration and
-customer delivery are not started.
+Status: event/impact candidate infrastructure exists. The first package
+integration slice is implemented locally on `codex/package-impact-index`:
+migration `0031`, a Quint model, and TypeScript/pgTAP tests index exact
+decision-evidence claim dependencies and resolve only published, reviewed
+claim impacts to immutable packages. Migration `0031` is not yet applied to
+production. Watchlists, superseding evaluations, and customer delivery are not
+started.
 
 ### Monitoring graph
 
@@ -610,6 +615,15 @@ customer delivery are not started.
 - distinguish machine-suggested, provisional, and reviewed impact states;
 - reopen affected packages or create immutable superseding evaluations;
 - never mutate historical package conclusions in place.
+
+Package-impact checkpoint (2026-08-14): package persistence now validates that
+the `EvidenceBundle.claims` set exactly equals the claim IDs referenced by
+capability conclusions, then registers those edges in the same PostgreSQL
+transaction as package metadata and idempotency completion. Candidate events,
+pending/dismissed impacts, unrelated claims, non-corpus claims, duplicate
+dependencies, and public/browser access all fail closed. The implementation
+does not index retrieval-only hits because RAG cannot alter deterministic
+decisions.
 
 ### Customer delivery
 

@@ -131,6 +131,7 @@ export class PlaybookPackageArtifactStore {
     const body = Buffer.from(stableJson(artifact), "utf8");
     const checksumSha256 = sha256(body);
     const pkg = artifact.package;
+    const evidenceClaimIds = readDecisionEvidenceClaimIds(artifact);
     const objectKey = `packages/${pkg.playbookId}/${pkg.integritySha256}.json`;
     const stored = await this.objects.putObject({
       key: objectKey,
@@ -139,7 +140,7 @@ export class PlaybookPackageArtifactStore {
       expectedChecksumSha256: checksumSha256,
     });
 
-    await this.client.rpc<string>("register_playbook_package", {
+    await this.client.rpc<string>("register_playbook_package_with_dependencies", {
       p_object_id: `object:playbook-package:${pkg.integritySha256.slice(0, 32)}`,
       p_provider: "supabase-storage",
       p_bucket: this.bucket,
@@ -161,6 +162,7 @@ export class PlaybookPackageArtifactStore {
       p_template_version: pkg.versions.templateVersion,
       p_idempotency_key_sha256: hashIdempotencyKey(idempotencyKey),
       p_request_fingerprint_sha256: requestFingerprintSha256,
+      p_evidence_claim_ids: evidenceClaimIds,
     });
 
     return artifact;
@@ -275,6 +277,48 @@ function assertArtifact(value: unknown): asserts value is PlaybookPackageArtifac
   ) {
     throw new DataIntegrityError("playbook package artifact integrity check failed");
   }
+  readDecisionEvidenceClaimIds(value as unknown as PlaybookPackageArtifact);
+}
+
+function readDecisionEvidenceClaimIds(
+  artifact: PlaybookPackageArtifact,
+): string[] {
+  const conclusions: unknown = artifact.package.conclusions;
+  const claims: unknown = artifact.evidenceBundle.claims;
+  if (!Array.isArray(conclusions) || !Array.isArray(claims)) {
+    throw new DataIntegrityError("invalid playbook decision evidence shape");
+  }
+
+  const referenced: string[] = [];
+  for (const conclusion of conclusions) {
+    if (!isRecord(conclusion) || !Array.isArray(conclusion.evidenceClaimIds)) {
+      throw new DataIntegrityError("invalid playbook conclusion evidence claims");
+    }
+    for (const claimId of conclusion.evidenceClaimIds) {
+      if (typeof claimId !== "string" || claimId.length === 0) {
+        throw new DataIntegrityError("invalid playbook conclusion evidence claim ID");
+      }
+      referenced.push(claimId);
+    }
+  }
+
+  const bundled: string[] = [];
+  for (const claim of claims) {
+    if (!isRecord(claim) || typeof claim.claimId !== "string" || claim.claimId.length === 0) {
+      throw new DataIntegrityError("invalid playbook evidence bundle claim ID");
+    }
+    bundled.push(claim.claimId);
+  }
+
+  const expected = [...new Set(referenced)].sort();
+  const actual = [...new Set(bundled)].sort();
+  if (actual.length !== bundled.length || actual.length !== expected.length
+      || actual.some((claimId, index) => claimId !== expected[index])) {
+    throw new DataIntegrityError(
+      "playbook evidence bundle does not match conclusion claim dependencies",
+    );
+  }
+  return actual;
 }
 
 function assertSha256(value: string, label: string): void {
