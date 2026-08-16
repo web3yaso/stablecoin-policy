@@ -949,6 +949,29 @@ dependency backfill. Watchlists, delivery, reruns, and dossier/rule dependency
 edges remain outside this checkpoint, and migration `0031` is not yet applied
 to production.
 
+Accepted Package Watchlist contract (2026-08-14): the next Phase 6 slice may
+create one immutable `ACTIVE` watchlist from one completed immutable package.
+Creation requires a non-empty exact decision-evidence dependency set and is
+idempotent by package: a retry returns the same watchlist rather than creating
+another subscription object. The watchlist stores only its opaque identity,
+package relationship, state, and timestamps. Customer, account, subscription,
+entitlement, profile, delivery destination, webhook secret, raw rule, prompt,
+and action data remain outside the watchlist table; Citely continues to own the
+commercial identity and subscription relationship.
+
+The initial authenticated operation is
+`POST /v1/playbook-packages/{id}/watchlist`. It reuses a short-lived
+`playbook:read` entitlement targeting the exact package, so the first slice
+does not expand the Citely token contract. It returns `201` on first creation
+and `200` with the same representation on retry. A watchlist may be returned
+by the private impact lookup only for a `PUBLISHED` regulatory event with a
+`REVIEWED` impact on one of that package's exact immutable decision-evidence
+claim dependencies. Candidate events, pending or dismissed impacts, empty
+dependency packages, public callers, and cross-package entitlements fail
+closed. Pause/close/reactivate transitions, change-to-action deltas,
+superseding evaluations, notification delivery, and webhook registration are
+separate later contracts.
+
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
 
 ### Phase 7 — legacy-domain extraction

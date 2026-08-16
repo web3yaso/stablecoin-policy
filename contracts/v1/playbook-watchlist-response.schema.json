@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/playbook-watchlist-response.schema.json",
+  "title": "Playbook Package Watchlist Response v1",
+  "type": "object",
+  "required": ["schemaVersion", "watchlistId", "packageId", "state", "createdAt"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "watchlistId": {
+      "type": "string",
+      "pattern": "^watchlist:[0-9a-f]{32}$"
+    },
+    "packageId": {
+      "type": "string",
+      "pattern": "^package:[a-z0-9-]+:[0-9a-f]{16}$"
+    },
+    "state": { "const": "ACTIVE" },
+    "createdAt": { "type": "string", "format": "date-time" }
+  }
+}
