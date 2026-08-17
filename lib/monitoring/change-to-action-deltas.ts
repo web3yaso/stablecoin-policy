@@ -59,7 +59,7 @@ type DecodedCursor = {
   sequence: number;
 };
 
-type ParsedRawDelta = Omit<ChangeToActionDelta, "cursor"> & {
+export type RawChangeToActionDelta = Omit<ChangeToActionDelta, "cursor"> & {
   deltaSequence: number;
 };
 
@@ -190,7 +190,7 @@ export function parseDeltaListResult(
   ) {
     throw new DataIntegrityError("invalid change delta page metadata");
   }
-  const rawItems = value.items.map((item) => parseRawDelta(
+  const rawItems = value.items.map((item) => parseRawChangeToActionDelta(
     item,
     requestedPackageId,
     value.watchlistId as string,
@@ -232,11 +232,14 @@ export function parseDeltaListResult(
   };
 }
 
-function parseRawDelta(
+export function parseRawChangeToActionDelta(
   value: unknown,
   packageId: string,
   watchlistId: string,
-): ParsedRawDelta {
+): RawChangeToActionDelta {
+  if (!PACKAGE_ID.test(packageId) || !WATCHLIST_ID.test(watchlistId)) {
+    throw new DataIntegrityError("invalid change delta binding");
+  }
   if (!isExactRecord(value, [
     "deltaId", "deltaSequence", "watchlistId", "packageId", "event",
     "evidenceChanges", "status", "packageAssuranceReviewStatus", "actions",

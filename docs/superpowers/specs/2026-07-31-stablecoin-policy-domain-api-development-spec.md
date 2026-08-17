@@ -990,6 +990,21 @@ identity, and counsel-threshold decisions remain out of scope. Migration
 `0033`, deployment, and signed production smoke are not part of this local
 checkpoint.
 
+Implementation checkpoint (2026-08-17): the first webhook delivery slice is
+implemented locally on `codex/change-delta-webhooks`. Migration `0034` creates
+one transactional outbox row per immutable delta, uses bounded leases and
+three-attempt retry cycles, recovers expired worker leases, and preserves
+immutable attempt/replay audit behind service-only RPCs. The deployment-level
+Citely receiver URL, HMAC signing secret, and cron secret remain server
+environment values; PostgreSQL stores none of them and stores no customer or
+subscription data. A protected uncached GET cron route sends strict schema
+`1.0.0` payloads, signs the exact body with HMAC-SHA256, never reads a receiver
+response body, and classifies retryable versus permanent outcomes. `deltaId`
+is stable across retries and replay so Citely can deduplicate durably. Customer
+webhook registration, email, customer fan-out, automatic reruns, superseding
+evaluations, and production scheduling remain separate contracts or rollout
+work.
+
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
 
 ### Phase 7 — legacy-domain extraction
@@ -1153,4 +1168,6 @@ Before implementation, read the relevant Next.js 16 documentation in `node_modul
   an approved Quint spec delta.
 - Define reviewer roles and approval SLAs only when the `HUMAN_REVIEWED` tier or
   Issue #35 activation criteria are introduced.
-- Select the first notification channel after monitoring is operational.
+- Webhook is the selected first notification channel. Before production
+  rollout, choose the scheduler cadence/hosting plan and decide separately
+  whether email should be added later as a Citely-owned customer channel.
