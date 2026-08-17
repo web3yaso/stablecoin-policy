@@ -505,6 +505,59 @@ function createOpenApiDocument(
           },
         },
       },
+      "/v1/playbook-packages/{id}/watchlist/changes": {
+        get: {
+          operationId: "getPlaybookPackageWatchlistChanges",
+          tags: ["playbooks"],
+          summary: "Poll evidence-backed Change-to-Action Deltas",
+          description:
+            "Requires a short-lived Citely service JWT with a playbook:read entitlement targeting this exact package ID. Returns immutable REVIEW_REQUIRED deltas created only from PUBLISHED events with REVIEWED exact decision-evidence impacts. Cursors are opaque, package/watchlist-bound, replayable, and advance only to the last returned item. This endpoint never mutates the historical package or infers a new legal conclusion.",
+          security: [{ playbookServiceKey: [] }],
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              required: true,
+              schema: {
+                type: "string",
+                pattern: "^package:[a-z0-9-]+:[0-9a-f]{16}$",
+              },
+            },
+            {
+              name: "after_cursor",
+              in: "query",
+              required: false,
+              description:
+                "Opaque nextCursor from a prior response. Reusing the same cursor replays the same page.",
+              schema: { type: "string", minLength: 1, maxLength: 1024 },
+            },
+            {
+              name: "limit",
+              in: "query",
+              required: false,
+              schema: { type: "integer", minimum: 1, maximum: 100, default: 50 },
+            },
+          ],
+          responses: {
+            "200": {
+              description:
+                "Strict schema 1.0.0 delta page (contracts/v1/playbook-watchlist-changes-response.schema.json)",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/PlaybookWatchlistChangesResponse",
+                  },
+                },
+              },
+            },
+            "400": { description: "Malformed query or invalid/foreign cursor" },
+            "401": { description: "Missing or invalid service token" },
+            "403": { description: "Valid token targeting a different package" },
+            "404": { description: "Unknown package watchlist" },
+            "503": { description: "Watchlist delta persistence unavailable" },
+          },
+        },
+      },
       "/v1/claims/{id}": {
         get: {
           operationId: "getProvisionalClaim",
@@ -889,6 +942,111 @@ function createOpenApiDocument(
             },
             state: { type: "string", const: "ACTIVE" },
             createdAt: { type: "string", format: "date-time" },
+          },
+        },
+        PlaybookWatchlistChangesResponse: {
+          type: "object",
+          required: [
+            "schemaVersion", "watchlistId", "packageId", "items",
+            "nextCursor", "hasMore",
+          ],
+          additionalProperties: false,
+          properties: {
+            schemaVersion: { type: "string", const: "1.0.0" },
+            watchlistId: {
+              type: "string",
+              pattern: "^watchlist:[0-9a-f]{32}$",
+            },
+            packageId: {
+              type: "string",
+              pattern: "^package:[a-z0-9-]+:[0-9a-f]{16}$",
+            },
+            items: {
+              type: "array",
+              maxItems: 100,
+              items: {
+                type: "object",
+                required: [
+                  "deltaId", "cursor", "watchlistId", "packageId", "event",
+                  "evidenceChanges", "status", "packageAssuranceReviewStatus",
+                  "actions", "requiredCustomerResponse", "createdAt",
+                ],
+                additionalProperties: false,
+                properties: {
+                  deltaId: {
+                    type: "string",
+                    pattern: "^delta:[0-9a-f]{32}$",
+                  },
+                  cursor: { type: "string", minLength: 1, maxLength: 1024 },
+                  watchlistId: {
+                    type: "string",
+                    pattern: "^watchlist:[0-9a-f]{32}$",
+                  },
+                  packageId: {
+                    type: "string",
+                    pattern: "^package:[a-z0-9-]+:[0-9a-f]{16}$",
+                  },
+                  event: {
+                    type: "object",
+                    required: [
+                      "eventId", "eventType", "title", "publishedAt",
+                      "effectiveAt", "beforeVersionId", "afterVersionId",
+                    ],
+                    additionalProperties: false,
+                    properties: {
+                      eventId: { type: "string", minLength: 1 },
+                      eventType: { type: "string", minLength: 1 },
+                      title: { type: "string", minLength: 1 },
+                      publishedAt: { type: "string", format: "date-time" },
+                      effectiveAt: { type: ["string", "null"], format: "date-time" },
+                      beforeVersionId: { type: ["string", "null"] },
+                      afterVersionId: { type: ["string", "null"] },
+                    },
+                  },
+                  evidenceChanges: {
+                    type: "array",
+                    minItems: 1,
+                    items: {
+                      type: "object",
+                      required: ["claimId", "impactType"],
+                      additionalProperties: false,
+                      properties: {
+                        claimId: { type: "string", minLength: 1 },
+                        impactType: {
+                          type: "string",
+                          enum: [
+                            "MAY_AFFECT", "INVALIDATES", "SUPERSEDES", "DEADLINE",
+                          ],
+                        },
+                      },
+                    },
+                  },
+                  status: { type: "string", const: "REVIEW_REQUIRED" },
+                  packageAssuranceReviewStatus: {
+                    type: "string",
+                    enum: ["PROVISIONAL", "HUMAN_REVIEWED"],
+                  },
+                  actions: {
+                    type: "array",
+                    minItems: 2,
+                    maxItems: 2,
+                    items: {
+                      type: "string",
+                      enum: [
+                        "REVIEW_EVIDENCE_CHANGE", "REQUEST_PLAYBOOK_RERUN",
+                      ],
+                    },
+                  },
+                  requiredCustomerResponse: {
+                    type: "string",
+                    const: "ACKNOWLEDGE_AND_RERUN",
+                  },
+                  createdAt: { type: "string", format: "date-time" },
+                },
+              },
+            },
+            nextCursor: { type: "string", minLength: 1, maxLength: 1024 },
+            hasMore: { type: "boolean" },
           },
         },
         PlaybookDetailResponse: {

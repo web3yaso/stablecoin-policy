@@ -5,6 +5,7 @@ import { NextRequest } from "next/server";
 import { POST as searchEvidence } from "../app/v1/evidence/search/route";
 import { GET as getPackage } from "../app/v1/playbook-packages/[id]/route";
 import { POST as createWatchlist } from "../app/v1/playbook-packages/[id]/watchlist/route";
+import { GET as getWatchlistChanges } from "../app/v1/playbook-packages/[id]/watchlist/changes/route";
 import { POST as createPackage } from "../app/v1/playbook-packages/route";
 import type { CitelyServiceScope } from "../lib/auth/citely-service";
 
@@ -62,6 +63,34 @@ test("package routes reject signed entitlements for a different target", async (
     );
     assert.equal(watchlistResponse.status, 403);
     assert.deepEqual(await watchlistResponse.json(), { error: "entitlement-denied" });
+
+    const changesResponse = await getWatchlistChanges(
+      new NextRequest(
+        `https://example.test/v1/playbook-packages/${requested}/watchlist/changes`,
+        { headers: { authorization: `Bearer ${read.token}` } },
+      ),
+      { params: Promise.resolve({ id: requested }) },
+    );
+    assert.equal(changesResponse.status, 403);
+    assert.deepEqual(await changesResponse.json(), { error: "entitlement-denied" });
+  });
+});
+
+test("watchlist changes reject unsupported or duplicate query parameters", async () => {
+  const packageId = "package:stablecoin-pre-listing:aaaaaaaaaaaaaaaa";
+  const read = await tokenFixture({ scope: "playbook:read", packageId });
+  await withPublicKey(read.publicKey, async () => {
+    for (const query of ["unknown=1", "limit=1&limit=2", "after_cursor="]) {
+      const response = await getWatchlistChanges(
+        new NextRequest(
+          `https://example.test/v1/playbook-packages/${packageId}/watchlist/changes?${query}`,
+          { headers: { authorization: `Bearer ${read.token}` } },
+        ),
+        { params: Promise.resolve({ id: packageId }) },
+      );
+      assert.equal(response.status, 400);
+      assert.deepEqual(await response.json(), { error: "invalid-change-delta-query" });
+    }
   });
 });
 
