@@ -22,6 +22,22 @@ jobs:
           cache: npm
 
       - run: npm ci --no-audit --no-fund
+      - name: Install pinned Quint evaluator
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          evaluator_download_dir="${RUNNER_TEMP}/quint-evaluator-v0.6.0"
+          quint_evaluator_dir="${HOME}/.quint/rust-evaluator-v0.6.0"
+          mkdir -p "${evaluator_download_dir}" "${quint_evaluator_dir}"
+          gh release download "evaluator/v0.6.0" \
+            --repo informalsystems/quint \
+            --pattern quint_evaluator-x86_64-unknown-linux-gnu.tar.gz \
+            --dir "${evaluator_download_dir}"
+          tar -xzf \
+            "${evaluator_download_dir}/quint_evaluator-x86_64-unknown-linux-gnu.tar.gz" \
+            -C "${quint_evaluator_dir}"
+          chmod +x "${quint_evaluator_dir}/quint_evaluator"
+          test -x "${quint_evaluator_dir}/quint_evaluator"
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
