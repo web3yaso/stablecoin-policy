@@ -669,7 +669,7 @@ materialization, immutable delta and reviewed-impact snapshots, a bounded
 service-only cursor RPC, executable Quint model, strict TypeScript cursor and
 response parsing, authenticated `GET
 /v1/playbook-packages/{id}/watchlist/changes`, JSON Schema, OpenAPI, and
-pgTAP/route/entitlement tests. Local migration-through-`0033`, 10 Quint
+pgTAP/route/entitlement tests. Local migration-through-`0033`, 11 Quint
 scenarios, seven invariants, nine witnesses, and 36 delta pgTAP assertions
 pass. Full repository verification/PR and production migration/deployment/
 signed smoke remain separate checkpoints.

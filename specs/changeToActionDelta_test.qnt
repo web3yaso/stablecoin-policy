@@ -92,6 +92,9 @@ module changeToActionDelta_test {
   run crossWatchlistCursorCannotPollTest =
     init
       .then(poll(false, 0).fail())
+
+  run crossWatchlistCursorRejectionIsRecordedTest =
+    init
       .then(rejectCrossWatchlistCursor(false))
       .expect(state.crossWatchlistCursorRejected)
 

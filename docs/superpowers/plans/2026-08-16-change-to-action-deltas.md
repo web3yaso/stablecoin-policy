@@ -123,7 +123,7 @@ tests, pgTAP, build verification, and rollout operations.
 ## Implementation status
 
 - accepted type sketch and scope: complete;
-- Quint model, 10 scenarios, 7 invariants, and 9 witnesses: complete;
+- Quint model, 11 scenarios, 7 invariants, and 9 witnesses: complete;
 - migration `0033`, atomic trigger, immutable snapshots, controlled RPC, and
   36 pgTAP assertions: complete;
 - strict TypeScript parser/cursor codec, authenticated route, JSON Schema,

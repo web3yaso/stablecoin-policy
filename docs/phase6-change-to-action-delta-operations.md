@@ -70,7 +70,7 @@ customer facts during rollout or smoke tests.
 
 Local development checkpoint on 2026-08-16:
 
-- Quint: 10 scenarios, 7 sampled invariants, and 9 witnesses passed;
+- Quint: 11 scenarios, 7 sampled invariants, and 9 witnesses passed;
 - migration chain through `0033` and 36/36 delta pgTAP assertions passed;
 - strict cursor/parser/schema, route, entitlement, and OpenAPI tests passed;
 - full repository quality gate is recorded in the pull request;
