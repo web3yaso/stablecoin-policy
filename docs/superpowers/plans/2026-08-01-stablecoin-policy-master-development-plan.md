@@ -609,9 +609,9 @@ public keys, deploying, and invoking the smoke remain rollout actions.
 Status: event/impact candidate infrastructure exists. Package dependency
 indexing was merged as PR #63 and immutable package-derived watchlists were
 merged as PR #64. Migrations `0031`/`0032` are not yet applied to production.
-The first pull-based Change-to-Action Delta slice is implemented locally on
-`codex/change-to-action-deltas`; webhook/email delivery and superseding
-evaluations are not started.
+The pull-based Change-to-Action Delta slice was merged as PR #65. The first
+webhook delivery slice is implemented locally on `codex/change-delta-webhooks`;
+email delivery and superseding evaluations are not started.
 
 ### Monitoring graph
 
@@ -671,19 +671,34 @@ response parsing, authenticated `GET
 /v1/playbook-packages/{id}/watchlist/changes`, JSON Schema, OpenAPI, and
 pgTAP/route/entitlement tests. Local migration-through-`0033`, 11 Quint
 scenarios, seven invariants, nine witnesses, and 36 delta pgTAP assertions
-pass. Full repository verification/PR and production migration/deployment/
-signed smoke remain separate checkpoints.
+pass. PR #65 merged the slice on 2026-08-17. Production migrations `0031`–
+`0033`, deployment, and signed smoke remain separate checkpoints.
+
+Webhook delivery checkpoint (2026-08-17): branch
+`codex/change-delta-webhooks` adds migration `0034` with a transactional outbox,
+bounded leases/retries, immutable attempt and replay audit, service-only
+claim/complete/audit/replay RPCs, and recovery for expired worker leases. One
+deployment-level Citely URL and HMAC secret remain server environment values,
+so the domain database stores no customer, destination, or secret. A protected
+uncached Vercel cron route sends the strict versioned delta envelope with
+`deltaId` as its stable at-least-once deduplication identity. The executable
+Quint model has 13 scenarios, nine invariants, and nine witnesses; migration
+tests add 44 pgTAP assertions. Production receiver setup, migration, secrets,
+schedule selection, deployment, and signed smoke remain rollout work.
 
 ### Customer delivery
 
 - implement watchlist creation from completed packages; implemented in PR #64;
-- expose change-to-action deltas to Citely; implemented locally as a
-  cursor-based pull API, pending PR and production rollout;
-- add webhook first unless a product decision selects email;
-- sign webhook payloads, retry safely, and provide delivery audit;
+- expose change-to-action deltas to Citely; merged in PR #65 as a cursor-based
+  pull API, pending production rollout;
+- use webhook as the first notification channel; implemented locally for one
+  deployment-level Citely receiver;
+- sign webhook payloads, retry safely, and provide delivery audit; implemented
+  locally with migration `0034` and the protected cron dispatcher;
 - include affected package, evidence change, status, actions, assurance, and
   required customer response;
-- add notification throttling, deduplication, and replay.
+- add notification throttling, deduplication, and replay; bounded batch claims,
+  stable `deltaId`, and service-authorized replay are implemented locally.
 
 ### Controlled self-service
 

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/playbook-change-webhook.schema.json",
+  "title": "PlaybookChangeWebhook",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "type", "id", "createdAt", "data"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "type": { "const": "playbook.watchlist.change" },
+    "id": {
+      "type": "string",
+      "pattern": "^delta:[0-9a-f]{32}$"
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "data": {
+      "$ref": "https://policy.citely.info/contracts/v1/playbook-watchlist-changes-response.schema.json#/$defs/changeDelta"
+    }
+  }
+}
