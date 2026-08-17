@@ -606,13 +606,12 @@ public keys, deploying, and invoking the smoke remain rollout actions.
 
 ## Phase 6 — monitoring, subscriptions, and controlled self-service
 
-Status: event/impact candidate infrastructure exists. The first package
-integration slice was merged as PR #63: migration `0031`, a Quint model, and
-TypeScript/pgTAP tests index exact decision-evidence claim dependencies and
-resolve only published, reviewed claim impacts to immutable packages.
-Migration `0031` is not yet applied to production. The next bounded slice is
-one immutable package-derived watchlist; superseding evaluations and customer
-delivery are not started.
+Status: event/impact candidate infrastructure exists. Package dependency
+indexing was merged as PR #63 and immutable package-derived watchlists were
+merged as PR #64. Migrations `0031`/`0032` are not yet applied to production.
+The first pull-based Change-to-Action Delta slice is implemented locally on
+`codex/change-to-action-deltas`; webhook/email delivery and superseding
+evaluations are not started.
 
 ### Monitoring graph
 
@@ -651,10 +650,35 @@ through `0032`, all nine Quint scenarios, five invariants, nine witnesses, and
 endpoint smoke, change-to-action deltas, lifecycle transitions, and delivery
 remain separate rollout or development work.
 
+Change-to-Action Delta contract approved (2026-08-16): a newly `PUBLISHED`
+event with a `REVIEWED` impact on an active watchlist package's exact immutable
+decision-evidence claim dependency creates one immutable
+`REVIEW_REQUIRED` delta per `(watchlist,event)`. The delta freezes the event,
+package assurance, and canonical claim impacts; it never mutates the old
+package or infers a new legal conclusion. The first fixed operational actions
+are `REVIEW_EVIDENCE_CHANGE` and `REQUEST_PLAYBOOK_RERUN`, with required
+customer response `ACKNOWLEDGE_AND_RERUN`. Citely polls with the existing exact
+package `playbook:read` entitlement and advances an opaque package/watchlist-
+bound cursor only after durable processing. Webhook/email delivery, automatic
+reruns, superseding evaluations, and counsel thresholds remain later product
+contracts.
+
+Change-to-Action Delta implementation checkpoint (2026-08-16): branch
+`codex/change-to-action-deltas` adds migration `0033`, atomic publication-time
+materialization, immutable delta and reviewed-impact snapshots, a bounded
+service-only cursor RPC, executable Quint model, strict TypeScript cursor and
+response parsing, authenticated `GET
+/v1/playbook-packages/{id}/watchlist/changes`, JSON Schema, OpenAPI, and
+pgTAP/route/entitlement tests. Local migration-through-`0033`, 10 Quint
+scenarios, seven invariants, nine witnesses, and 36 delta pgTAP assertions
+pass. Full repository verification/PR and production migration/deployment/
+signed smoke remain separate checkpoints.
+
 ### Customer delivery
 
-- implement watchlist creation from completed packages;
-- expose change-to-action deltas to Citely;
+- implement watchlist creation from completed packages; implemented in PR #64;
+- expose change-to-action deltas to Citely; implemented locally as a
+  cursor-based pull API, pending PR and production rollout;
 - add webhook first unless a product decision selects email;
 - sign webhook payloads, retry safely, and provide delivery audit;
 - include affected package, evidence change, status, actions, assurance, and

@@ -972,6 +972,24 @@ closed. Pause/close/reactivate transitions, change-to-action deltas,
 superseding evaluations, notification delivery, and webhook registration are
 separate later contracts.
 
+Implementation checkpoint (2026-08-16): the immutable package watchlist slice
+was merged as PR #64. The next local branch,
+`codex/change-to-action-deltas`, implements the approved pull-based
+Change-to-Action Delta contract. Migration `0033` atomically materializes one
+immutable delta when a regulatory event first becomes `PUBLISHED` and has a
+`REVIEWED` exact dependency impact on an active watchlist. It freezes the event
+snapshot, package assurance, and canonical claim impacts, deduplicates by
+`(watchlist,event)`, and assigns a monotonic cursor sequence. A controlled RPC
+validates package/watchlist-bound cursors and exposes bounded pages through
+authenticated `GET /v1/playbook-packages/{id}/watchlist/changes` using the
+existing exact-package `playbook:read` entitlement. Every first-slice delta is
+`REVIEW_REQUIRED`, returns fixed operational actions to review evidence and
+request a fresh playbook run, and leaves the historical package untouched.
+Webhook/email delivery, automatic reruns, superseding evaluations, customer
+identity, and counsel-threshold decisions remain out of scope. Migration
+`0033`, deployment, and signed production smoke are not part of this local
+checkpoint.
+
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
 
 ### Phase 7 — legacy-domain extraction

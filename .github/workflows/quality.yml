@@ -34,6 +34,7 @@ jobs:
       - run: npm run spec:playbook
       - run: npm run spec:package-impact
       - run: npm run spec:package-watchlist
+      - run: npm run spec:change-delta
       - run: npm run contracts:citely:fixtures
       - name: Check repository data limits (pull request)
         if: github.event_name == 'pull_request'
