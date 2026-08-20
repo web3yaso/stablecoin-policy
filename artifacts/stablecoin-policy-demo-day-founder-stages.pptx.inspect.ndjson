@@ -1,0 +1,106 @@
+{"kind":"deck","id":"pr/zcos28","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"CITELY  ×  STABLECOIN POLICY","textShapes":5}
+{"kind":"textbox","id":"sh/3qxwn2x8","slide":1,"name":"brand-1","text":"CITELY  ×  STABLECOIN POLICY","textPreview":"CITELY  ×  STABLECOIN POLICY","textChars":28,"textLines":1,"bbox":[48,20,292,34]}
+{"kind":"textbox","id":"sh/547294r6","slide":1,"name":"section-1","text":"THE PROBLEM","textPreview":"THE PROBLEM","textChars":11,"textLines":1,"bbox":[860,28,280,28]}
+{"kind":"textbox","id":"sh/k3yl0zql","slide":1,"name":"page-1","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[1188,28,40,28]}
+{"kind":"textbox","id":"sh/65g3298r","slide":1,"name":"problem-title","text":"Stablecoins make revenue\nday-one global.","textPreview":"Stablecoins make revenue | day-one global.","textChars":40,"textLines":2,"bbox":[48,178,1120,208]}
+{"kind":"textbox","id":"sh/ts7md4r2","slide":1,"name":"problem-contrast","text":"Regulation does not.","textPreview":"Regulation does not.","textChars":20,"textLines":1,"bbox":[48,410,1120,90]}
+{"kind":"notes","id":"nt/y90nupkv","slide":1,"text":"开场不要先讲功能。先说：AI 产品从第一天就是全球的，stablecoin 让收款也变成 day-one global；但监管边界并不会自动变简单。一个小团队在没有 compliance team 时，也必须决定能不能收、能不能托管、能不能上架、要不要牌照。Stablecoin Policy 的价值，是把动态监管信息变成带来源、版本和行动项的 playbook。\n\n[Sources]\n- docs/PROJECT_CONTEXT.md\n- docs/citely-product-family-boundary.md\n- docs/superpowers/specs/2026-07-30-stablecoin-pre-listing-check-design.md"}
+{"kind":"slide","id":"sl/hwbqtkby","slide":2,"title":"The startup moves.","textShapes":18}
+{"kind":"textbox","id":"sh/id0vylkf","slide":2,"name":"architecture-title","text":"The startup moves.\nThe regulatory question changes.","textPreview":"The startup moves. | The regulatory question changes.","textChars":51,"textLines":2,"bbox":[48,112,730,94]}
+{"kind":"shape","id":"sh/b29kza94","slide":2,"bbox":[326,364,20,14]}
+{"kind":"shape","id":"sh/a10jqpsj","slide":2,"bbox":[628,364,20,14]}
+{"kind":"shape","id":"sh/x4r21kru","slide":2,"bbox":[930,364,20,14]}
+{"kind":"shape","id":"sh/r65knqtk","slide":2,"name":"citely-surface","bbox":[48,548,1180,86]}
+{"kind":"textbox","id":"sh/ove9o7yd","slide":2,"text":"ONE STARTUP · FOUR STAGES","textPreview":"ONE STARTUP · FOUR STAGES","textChars":25,"textLines":1,"bbox":[48,74,340,34]}
+{"kind":"textbox","id":"sh/nu58f2hs","slide":2,"text":"FIRST-MARKET SHORTLIST","textPreview":"FIRST-MARKET SHORTLIST","textChars":22,"textLines":1,"bbox":[68,456,234,28]}
+{"kind":"textbox","id":"sh/ahwrqhgj","slide":2,"text":"PRE-LISTING CHECK","textPreview":"PRE-LISTING CHECK","textChars":17,"textLines":1,"bbox":[370,456,234,28]}
+{"kind":"textbox","id":"sh/bip8jmho","slide":2,"text":"The same team faces a different regulatory decision at every stage.","textPreview":"The same team faces a different regulatory decision at every stage.","textChars":67,"textLines":1,"bbox":[826,124,402,58]}
+{"kind":"textbox","id":"sh/cnupgny5","slide":2,"text":"DILIGENCE ROOM","textPreview":"DILIGENCE ROOM","textChars":14,"textLines":1,"bbox":[672,456,234,28]}
+{"kind":"textbox","id":"sh/do3q9szq","slide":2,"text":"MONITORING TRIGGERS","textPreview":"MONITORING TRIGGERS","textChars":19,"textLines":1,"bbox":[974,456,234,28]}
+{"kind":"textbox","id":"sh/t8byxkn2","slide":2,"text":"Stablecoin Policy turns each question into a versioned decision, evidence pack and next action.","textPreview":"Stablecoin Policy turns each question into a versioned decision, evidence pack and next action.","textChars":95,"textLines":1,"bbox":[72,574,1110,34]}
+{"kind":"shape","id":"sh/s72xofmh","slide":2,"bbox":[48,232,274,276]}
+{"kind":"textbox","id":"sh/76twva5c","slide":2,"text":"01 · IDEA","textPreview":"01 · IDEA","textChars":9,"textLines":1,"bbox":[68,254,210,24]}
+{"kind":"textbox","id":"sh/65kfmpor","slide":2,"text":"Can we accept\nstablecoins —\nand where?","textPreview":"Can we accept | stablecoins — | and where?","textChars":38,"textLines":3,"bbox":[68,308,234,116]}
+{"kind":"shape","id":"sh/hcvy14ne","slide":2,"bbox":[350,232,274,276]}
+{"kind":"textbox","id":"sh/gbmxszmt","slide":2,"text":"02 · BUILD","textPreview":"02 · BUILD","textChars":10,"textLines":1,"bbox":[370,254,210,24]}
+{"kind":"textbox","id":"sh/fadgzu58","slide":2,"text":"Which entity and\nlicence path can\nactually launch?","textPreview":"Which entity and | licence path can | actually launch?","textChars":50,"textLines":3,"bbox":[370,308,234,116]}
+{"kind":"shape","id":"sh/u94fqp4n","slide":2,"bbox":[652,232,274,276]}
+{"kind":"textbox","id":"sh/p0vy54na","slide":2,"text":"03 · RAISE","textPreview":"03 · RAISE","textChars":10,"textLines":1,"bbox":[672,254,210,24]}
+{"kind":"textbox","id":"sh/4zmxwzmp","slide":2,"text":"Can investors verify\nour permissions,\ncontrols and evidence?","textPreview":"Can investors verify | our permissions, | controls and evidence?","textChars":60,"textLines":3,"bbox":[672,308,234,116]}
+{"kind":"shape","id":"sh/9o7ulg3y","slide":2,"bbox":[954,232,274,276]}
+{"kind":"textbox","id":"sh/a9gvulkj","slide":2,"text":"04 · SCALE","textPreview":"04 · SCALE","textChars":10,"textLines":1,"bbox":[974,254,210,24]}
+{"kind":"textbox","id":"sh/ba9cn6l4","slide":2,"text":"What changes when\nwe enter the\nnext market?","textPreview":"What changes when | we enter the | next market?","textChars":43,"textLines":3,"bbox":[974,308,234,116]}
+{"kind":"textbox","id":"sh/wbidwb29","slide":2,"name":"section-2","text":"FOUNDER JOURNEY","textPreview":"FOUNDER JOURNEY","textChars":15,"textLines":1,"bbox":[860,28,280,28]}
+{"kind":"textbox","id":"sh/xcrupg3u","slide":2,"name":"page-2","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1188,28,40,28]}
+{"kind":"notes","id":"nt/hwbqtkby","slide":2,"text":"这一页把技术架构换成 Founder Journey：同一个团队在 Idea、Build、Raise、Scale 四个阶段，会遇到不同的稳定币监管决策。Stablecoin Policy 不只告诉你问题是什么，还把它转成下一步的决策、证据包和负责人。\n\n[Sources]\n- file:///Users/kidinamoto/Downloads/8.9%20%E5%AF%B9%E5%A4%96%E6%BC%94%E8%AE%B2%E5%88%86%E4%BA%AB%E5%8F%82%E8%80%83%E7%BD%91%E9%A1%B5-Founder%E7%89%88/index.html\n- docs/superpowers/specs/2026-07-30-stablecoin-pre-listing-check-design.md\n- docs/PROJECT_CONTEXT.md"}
+{"kind":"slide","id":"sl/ofy9wn61","slide":3,"title":"One question in. A versioned decision out.","textShapes":29}
+{"kind":"textbox","id":"sh/4nuhs7uh","slide":3,"name":"demo-title","text":"One question in. A versioned decision out.","textPreview":"One question in. A versioned decision out.","textChars":42,"textLines":1,"bbox":[48,82,1000,68]}
+{"kind":"shape","id":"sh/cza94vmx","slide":3,"name":"demo-viewport","bbox":[48,174,1180,484]}
+{"kind":"shape","id":"sh/d0jax03i","slide":3,"bbox":[48,174,1180,48]}
+{"kind":"textbox","id":"sh/298ryl4v","slide":3,"text":"citely.info/playbook","textPreview":"citely.info/playbook","textChars":20,"textLines":1,"bbox":[106,187,260,24]}
+{"kind":"textbox","id":"sh/3ah8rqlg","slide":3,"text":"DEMO · STABLECOIN PRE-LISTING","textPreview":"DEMO · STABLECOIN PRE-LISTING","textChars":29,"textLines":1,"bbox":[842,184,362,28]}
+{"kind":"shape","id":"sh/obq90bml","slide":3,"bbox":[66,191,10,10]}
+{"kind":"shape","id":"sh/pcjqtg36","slide":3,"bbox":[84,191,10,10]}
+{"kind":"shape","id":"sh/m5cra54z","slide":3,"bbox":[102,191,10,10]}
+{"kind":"shape","id":"sh/n6ls3alk","slide":3,"bbox":[72,246,390,380]}
+{"kind":"textbox","id":"sh/n2l4fq98","slide":3,"text":"Your launch","textPreview":"Your launch","textChars":11,"textLines":1,"bbox":[96,270,300,34]}
+{"kind":"textbox","id":"sh/m1c3mlsn","slide":3,"text":"OPERATOR","textPreview":"OPERATOR","textChars":8,"textLines":1,"bbox":[96,322,240,22]}
+{"kind":"textbox","id":"sh/943mhgre","slide":3,"text":"Singapore","textPreview":"Singapore","textChars":9,"textLines":1,"bbox":[96,346,320,28]}
+{"kind":"textbox","id":"sh/83ulovat","slide":3,"text":"TARGET MARKET","textPreview":"TARGET MARKET","textChars":13,"textLines":1,"bbox":[96,388,240,22]}
+{"kind":"textbox","id":"sh/v6l4jq94","slide":3,"text":"EEA","textPreview":"EEA","textChars":3,"textLines":1,"bbox":[96,412,320,28]}
+{"kind":"textbox","id":"sh/a5c3ql8z","slide":3,"text":"ASSET","textPreview":"ASSET","textChars":5,"textLines":1,"bbox":[96,454,240,22]}
+{"kind":"textbox","id":"sh/x8nml0ra","slide":3,"text":"USDC · Base + Ethereum","textPreview":"USDC · Base + Ethereum","textChars":22,"textLines":1,"bbox":[96,478,320,28]}
+{"kind":"textbox","id":"sh/w7ulsvqp","slide":3,"text":"ACTIVITIES","textPreview":"ACTIVITIES","textChars":10,"textLines":1,"bbox":[96,520,240,22]}
+{"kind":"textbox","id":"sh/ja54na9g","slide":3,"text":"List for trading · Custody","textPreview":"List for trading · Custody","textChars":26,"textLines":1,"bbox":[96,544,320,28]}
+{"kind":"textbox","id":"sh/i9w3u58v","slide":3,"text":"RUN PLAYBOOK  →","textPreview":"RUN PLAYBOOK  →","textChars":15,"textLines":1,"bbox":[96,576,210,38]}
+{"kind":"textbox","id":"sh/e10f2twf","slide":3,"text":"Stablecoin Pre-listing & Product Launch","textPreview":"Stablecoin Pre-listing & Product Launch","textChars":39,"textLines":1,"bbox":[506,252,510,34]}
+{"kind":"textbox","id":"sh/f29gbyx0","slide":3,"text":"PROVISIONAL","textPreview":"PROVISIONAL","textChars":11,"textLines":1,"bbox":[1036,250,168,34]}
+{"kind":"textbox","id":"sh/03ix43e5","slide":3,"text":"Capability","textPreview":"Capability","textChars":10,"textLines":1,"bbox":[506,314,230,24]}
+{"kind":"textbox","id":"sh/14ryd8fq","slide":3,"text":"Decision","textPreview":"Decision","textChars":8,"textLines":1,"bbox":[790,314,160,24]}
+{"kind":"textbox","id":"sh/6d0fytg3","slide":3,"text":"Next action","textPreview":"Next action","textChars":11,"textLines":1,"bbox":[966,314,200,24]}
+{"kind":"shape","id":"sh/re9g7yxo","slide":3,"bbox":[506,346,698,0]}
+{"kind":"textbox","id":"sh/sfix03y9","slide":3,"text":"Admit USDC to trading","textPreview":"Admit USDC to trading","textChars":21,"textLines":1,"bbox":[506,366,250,50]}
+{"kind":"textbox","id":"sh/tgry9ofu","slide":3,"text":"CONDITIONAL","textPreview":"CONDITIONAL","textChars":11,"textLines":1,"bbox":[790,366,144,34]}
+{"kind":"textbox","id":"sh/a9kfadwn","slide":3,"text":"Confirm CASP authorization scope","textPreview":"Confirm CASP authorization scope","textChars":32,"textLines":1,"bbox":[966,366,228,54]}
+{"kind":"shape","id":"sh/batgjixs","slide":3,"bbox":[506,434,698,0]}
+{"kind":"textbox","id":"sh/l4fi9cza","slide":3,"text":"Custody USDC for clients","textPreview":"Custody USDC for clients","textChars":24,"textLines":1,"bbox":[506,454,250,50]}
+{"kind":"textbox","id":"sh/k3m1g7yp","slide":3,"text":"CONDITIONAL","textPreview":"CONDITIONAL","textChars":11,"textLines":1,"bbox":[790,454,144,34]}
+{"kind":"textbox","id":"sh/z2d07mh4","slide":3,"text":"Confirm custody + segregation controls","textPreview":"Confirm custody + segregation controls","textChars":38,"textLines":1,"bbox":[966,454,228,54]}
+{"kind":"shape","id":"sh/y14jehgj","slide":3,"bbox":[506,522,698,0]}
+{"kind":"shape","id":"sh/x0vi5czy","slide":3,"bbox":[506,552,698,58]}
+{"kind":"textbox","id":"sh/czmhc7id","slide":3,"text":"EVIDENCE","textPreview":"EVIDENCE","textChars":8,"textLines":1,"bbox":[524,570,126,22]}
+{"kind":"textbox","id":"sh/byd032h8","slide":3,"text":"MiCA Article 59 · USDC EEA dossier · corpus / rules / template versions pinned","textPreview":"MiCA Article 59 · USDC EEA dossier · corpus / rules / template versions pinned","textChars":78,"textLines":1,"bbox":[658,568,524,42]}
+{"kind":"textbox","id":"sh/ax4zax0n","slide":3,"text":"Machine-assured research for operational preparation — not human-reviewed legal advice.","textPreview":"Machine-assured research for operational preparation — not human-reviewed legal advice.","textChars":87,"textLines":1,"bbox":[506,620,698,24]}
+{"kind":"textbox","id":"sh/hwzihwzi","slide":3,"name":"section-3","text":"PRODUCT DEMO","textPreview":"PRODUCT DEMO","textChars":12,"textLines":1,"bbox":[860,28,280,28]}
+{"kind":"textbox","id":"sh/wv61obyx","slide":3,"name":"page-3","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1188,28,40,28]}
+{"kind":"notes","id":"nt/ofy9wn61","slide":3,"text":"这一页播放录屏时，按这条路径走：选择 Stablecoin Pre-listing；输入 Singapore、EEA、USDC、Base/Ethereum、listing 和 custody；运行后先展示 capability-level 的两个 CONDITIONAL 结论，再点开 action 和 evidence。最后指出 Article 59、dossier、corpus/rules/template 版本和 PROVISIONAL 标签。核心句：RAG 帮助解释证据，但不能改变 deterministic decision。若要嵌入视频，可把整块浏览器视窗替换为 MP4，保留标题和右上角标签。\n\n[Sources]\n- contracts/fixtures/citely/v1/stablecoin-pre-listing-success.request.json\n- contracts/fixtures/citely/v1/stablecoin-pre-listing-success.response.json\n- docs/citely-integration.md"}
+{"kind":"slide","id":"sl/jyx0ra1s","slide":4,"title":"Stablecoin is the wedge. Citely is the marketplace.","textShapes":16}
+{"kind":"textbox","id":"sh/fu9sn2p0","slide":4,"name":"roadmap-title","text":"Stablecoin is the wedge. Citely is the marketplace.","textPreview":"Stablecoin is the wedge. Citely is the marketplace.","textChars":51,"textLines":1,"bbox":[48,82,1120,74]}
+{"kind":"textbox","id":"sh/1cj2d8b6","slide":4,"text":"Expand by policy domain — without duplicating the evidence, identity or delivery infrastructure.","textPreview":"Expand by policy domain — without duplicating the evidence, identity or delivery infrastructure.","textChars":96,"textLines":1,"bbox":[48,150,1040,36]}
+{"kind":"shape","id":"sh/0ba143al","slide":4,"bbox":[128,390,1016,0]}
+{"kind":"shape","id":"sh/rm1k7yt4","slide":4,"bbox":[1136,381,46,18]}
+{"kind":"shape","id":"sh/ql8jytsj","slide":4,"bbox":[48,226,324,140]}
+{"kind":"textbox","id":"sh/doj29oba","slide":4,"text":"NOW","textPreview":"NOW","textChars":3,"textLines":1,"bbox":[70,246,100,22]}
+{"kind":"textbox","id":"sh/sna103ap","slide":4,"text":"Stablecoin Policy","textPreview":"Stablecoin Policy","textChars":17,"textLines":1,"bbox":[70,278,280,34]}
+{"kind":"textbox","id":"sh/3ihk3et8","slide":4,"text":"Payments, listings, custody and launch playbooks","textPreview":"Payments, listings, custody and launch playbooks","textChars":48,"textLines":1,"bbox":[70,312,280,50]}
+{"kind":"shape","id":"sh/ih8ju9sn","slide":4,"bbox":[194,381,18,18]}
+{"kind":"shape","id":"sh/kbm987y5","slide":4,"bbox":[452,226,324,140]}
+{"kind":"textbox","id":"sh/5cva1cfq","slide":4,"text":"NEXT","textPreview":"NEXT","textChars":4,"textLines":1,"bbox":[474,246,100,22]}
+{"kind":"textbox","id":"sh/i94r6xgz","slide":4,"text":"AI Policy","textPreview":"AI Policy","textChars":9,"textLines":1,"bbox":[474,278,280,34]}
+{"kind":"textbox","id":"sh/jadsz2xk","slide":4,"text":"Models, data, deployment and market-entry playbooks","textPreview":"Models, data, deployment and market-entry playbooks","textChars":51,"textLines":1,"bbox":[474,312,280,50]}
+{"kind":"shape","id":"sh/w72947yt","slide":4,"bbox":[598,381,18,18]}
+{"kind":"shape","id":"sh/x8vaxsfe","slide":4,"bbox":[856,226,324,140]}
+{"kind":"textbox","id":"sh/a5kr2xg3","slide":4,"text":"EXPAND","textPreview":"EXPAND","textChars":6,"textLines":1,"bbox":[878,246,100,22]}
+{"kind":"textbox","id":"sh/v6tsv2xo","slide":4,"text":"Web3 Policy","textPreview":"Web3 Policy","textChars":11,"textLines":1,"bbox":[878,278,280,34]}
+{"kind":"textbox","id":"sh/g36tgryd","slide":4,"text":"Protocols, tokens and onchain business-model playbooks","textPreview":"Protocols, tokens and onchain business-model playbooks","textChars":54,"textLines":1,"bbox":[878,312,280,50]}
+{"kind":"shape","id":"sh/h4fa9wfy","slide":4,"bbox":[1002,381,18,18]}
+{"kind":"textbox","id":"sh/p0batw72","slide":4,"text":"ONE SHARED FOUNDATION","textPreview":"ONE SHARED FOUNDATION","textChars":21,"textLines":1,"bbox":[48,440,360,28]}
+{"kind":"shape","id":"sh/oz29krqh","slide":4,"bbox":[48,482,1132,92]}
+{"kind":"textbox","id":"sh/3ytsrmpw","slide":4,"text":"Official sources  +  versioned claims  +  review gates  +  evidence RAG  +  monitoring","textPreview":"Official sources  +  versioned claims  +  review gates  +  evidence RAG  +  monitoring","textChars":86,"textLines":1,"bbox":[78,508,1072,40]}
+{"kind":"textbox","id":"sh/2xkrih8b","slide":4,"text":"One founder profile  →  multiple policy agents  →  one action workspace","textPreview":"One founder profile  →  multiple policy agents  →  one action workspace","textChars":71,"textLines":1,"bbox":[48,612,1132,40]}
+{"kind":"textbox","id":"sh/1wbapc7q","slide":4,"name":"section-4","text":"ROADMAP","textPreview":"ROADMAP","textChars":7,"textLines":1,"bbox":[860,28,280,28]}
+{"kind":"textbox","id":"sh/gv29g7q5","slide":4,"name":"page-4","text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1188,28,40,28]}
+{"kind":"notes","id":"nt/jyx0ra1s","slide":4,"text":"最后不要用功能清单收尾，而是把 Stablecoin Policy 解释成切入口。先证明同一套 source-backed、versioned、reviewed 的基础设施能解决稳定币这个高频而复杂的场景；下一步复制的是 domain contract，不是复制一套新后端。AI Policy 和 Web3 Policy 都可以成为独立的 policy agent，最后在 Citely 里形成同一个 playbook marketplace：一个创业者画像，多个领域判断，一个行动空间。\n\n[Sources]\n- docs/citely-product-family-boundary.md\n- docs/PROJECT_CONTEXT.md"}
