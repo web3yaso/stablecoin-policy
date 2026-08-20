@@ -1033,8 +1033,12 @@ base `packageId`, rejects the legacy unscoped key, reuses the current
 `PlaybookPackageArtifact` response, and persists no raw Business Profile. Local
 migration-through-`0035`, 34 new/409 total pgTAP assertions, 14 Quint scenarios,
 strict schemas, and route/store/auth/privacy/replay/stale tests pass. Production
-rollout remains a separate ordered checkpoint after the existing receiver and
-`0031`–`0034` blockers.
+database migrations `0031`–`0035` were subsequently applied in order on
+2026-08-20 after private backups and a linked dry-run. Remote history and lint
+pass, the normalized business snapshot is unchanged, and all new monitoring
+collections are empty. Receiver configuration, scheduler activation, PR #67
+deployment, and signed end-to-end smoke remain separate rollout blockers; no
+production change event may be published before they are complete.
 
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
 

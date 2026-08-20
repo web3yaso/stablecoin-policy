@@ -608,14 +608,13 @@ public keys, deploying, and invoking the smoke remain rollout actions.
 
 Status: event/impact candidate infrastructure exists. Package dependency
 indexing was merged as PR #63 and immutable package-derived watchlists were
-merged as PR #64. Migrations `0031`/`0032` are not yet applied to production.
-The pull-based Change-to-Action Delta slice was merged as PR #65. The first
-webhook delivery slice was merged as PR #66. The superseding-evaluation
-executable spec is complete on `codex/superseding-playbook-evaluations`;
-migration `0035`, the exact-package rerun API, and local verification are now
-complete on that branch. Production
-migrations `0031`–`0034`, receiver configuration, deployment, and signed smoke
-remain rollout work.
+merged as PR #64. The pull-based Change-to-Action Delta slice was merged as PR
+#65 and the first webhook delivery slice as PR #66. The superseding-evaluation
+implementation is in PR #67. Production migrations `0031`–`0035` were applied
+in order on 2026-08-20 against an empty package/event monitoring state after
+private backups and a linked dry-run. Receiver configuration, scheduler
+activation, PR #67 application deployment, and signed end-to-end smoke remain
+rollout work; no production change event may be published before those gates.
 
 ### Monitoring graph
 
@@ -711,8 +710,11 @@ targeting both the exact playbook and base package; the legacy unscoped key is
 rejected. It reuses the deterministic runtime and unchanged artifact response,
 stores no raw profile, and returns typed stale/idempotency conflicts. Local
 migrations through `0035`, 34 new and 409 total pgTAP assertions, request/token
-contracts, route/store/auth tests, and the Quint gate pass. Production rollout
-remains ordered behind receiver configuration and migrations `0031`–`0034`.
+contracts, route/store/auth tests, and the Quint gate pass. Later on 2026-08-20,
+production migrations `0031`–`0035` were applied after private backups and a
+linked dry-run; migration history and database lint pass, normalized business
+data is unchanged, and every new monitoring table is empty. Receiver secrets,
+scheduler activation, application deployment, and signed smoke remain open.
 
 ### Customer delivery
 
