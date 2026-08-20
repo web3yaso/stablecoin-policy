@@ -33,7 +33,7 @@ export type CitelyServicePrincipal = {
 };
 
 export type CitelyEntitlementRequirement =
-  | { scope: "playbook:execute"; playbookId: string }
+  | { scope: "playbook:execute"; playbookId: string; packageId?: string }
   | { scope: "playbook:read"; packageId: string }
   | { scope: "evidence:search" };
 
@@ -102,7 +102,7 @@ export function isCitelyEntitled(
   if (principal.scope !== requirement.scope) return false;
   if (requirement.scope === "playbook:execute") {
     return principal.playbookId === requirement.playbookId
-      && principal.packageId === null;
+      && principal.packageId === (requirement.packageId ?? null);
   }
   if (requirement.scope === "playbook:read") {
     return principal.packageId === requirement.packageId;
@@ -193,7 +193,7 @@ function parseSignedPrincipal(
     throw new CitelyServiceAuthenticationError();
   }
   if (
-    (scope === "playbook:execute" && (playbookId === null || packageId !== null))
+    (scope === "playbook:execute" && playbookId === null)
     || (scope === "playbook:read" && (packageId === null || playbookId !== null))
     || (scope === "evidence:search" && (playbookId !== null || packageId !== null))
   ) {

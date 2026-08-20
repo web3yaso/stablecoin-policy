@@ -293,14 +293,14 @@ select throws_ok(
   $sql$
     update policy.playbook_package_watchlists set watchlist_state = 'ACTIVE'
   $sql$,
-  'playbook_package_watchlists rows are immutable; create a new version',
-  'watchlist identity and state are immutable'
+  'playbook package watchlist transition is not allowed',
+  'direct watchlist state writes remain forbidden'
 );
 select throws_ok(
   $sql$
     delete from policy.playbook_package_watchlists
   $sql$,
-  'playbook_package_watchlists rows are immutable; create a new version',
+  'playbook package watchlists cannot be deleted',
   'watchlist rows cannot be deleted in place'
 );
 select ok(

@@ -37,6 +37,35 @@ test("signed service token authenticates and authorizes only its exact playbook"
   }), false);
 });
 
+test("superseding execution requires both the exact playbook and base package", async () => {
+  const packageId = "package:stablecoin-pre-listing:aaaaaaaaaaaaaaaa";
+  const fixture = await signedFixture({
+    scope: "playbook:execute",
+    playbookId: "stablecoin-pre-listing",
+    packageId,
+  });
+  const principal = await authenticateCitelyService({
+    authorization: `Bearer ${fixture.token}`,
+    env: fixture.env,
+    now: new Date(NOW_SECONDS * 1_000),
+  });
+
+  assert.equal(isCitelyEntitled(principal, {
+    scope: "playbook:execute",
+    playbookId: "stablecoin-pre-listing",
+    packageId,
+  }), true);
+  assert.equal(isCitelyEntitled(principal, {
+    scope: "playbook:execute",
+    playbookId: "stablecoin-pre-listing",
+  }), false);
+  assert.equal(isCitelyEntitled(principal, {
+    scope: "playbook:execute",
+    playbookId: "stablecoin-pre-listing",
+    packageId: "package:stablecoin-pre-listing:bbbbbbbbbbbbbbbb",
+  }), false);
+});
+
 test("rotated public keys select only the signed kid", async () => {
   const current = await signedFixture({ scope: "evidence:search" });
   const retired = await signedFixture(
@@ -180,7 +209,7 @@ test("malformed key configuration fails closed as an operator error", async () =
   );
 });
 
-test("all three signed entitlement shapes satisfy the strict v1 contract", async () => {
+test("all four signed entitlement shapes satisfy the strict v1 contract", async () => {
   const schema = JSON.parse(await readFile(
     "contracts/v1/citely-service-token-payload.schema.json",
     "utf8",
@@ -190,6 +219,11 @@ test("all three signed entitlement shapes satisfy the strict v1 contract", async
     signedFixture({
       scope: "playbook:execute",
       playbookId: "stablecoin-pre-listing",
+    }),
+    signedFixture({
+      scope: "playbook:execute",
+      playbookId: "stablecoin-pre-listing",
+      packageId: "package:stablecoin-pre-listing:aaaaaaaaaaaaaaaa",
     }),
     signedFixture({
       scope: "playbook:read",

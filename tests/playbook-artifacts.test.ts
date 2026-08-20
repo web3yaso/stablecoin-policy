@@ -6,8 +6,11 @@ import {
   hashIdempotencyKey,
   parseIdempotencyKey,
   PlaybookIdempotencyConflictError,
+  playbookProfileFingerprint,
   PlaybookPackageArtifactStore,
   playbookRequestFingerprint,
+  playbookSupersedingRequestFingerprint,
+  SupersedingEvaluationStaleError,
 } from "../lib/playbooks/artifacts";
 import type { BusinessProfile, EvidenceClaim } from "../lib/playbooks/contracts";
 import { businessModelBoundaryPlaybook } from "../lib/playbooks/definitions";
@@ -161,6 +164,90 @@ test("idempotency keys are bounded opaque tokens and request fingerprints are ca
   );
 });
 
+test("superseding evaluations claim exact deltas, persist a successor, and replay it", async () => {
+  const backend = fakeBackend();
+  const store = new PlaybookPackageArtifactStore(client(backend.fetch));
+  const artifact = createArtifact();
+  const profile = profileFixture();
+  const deltaIds = [
+    "delta:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "delta:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  ];
+  const requestFingerprint = playbookSupersedingRequestFingerprint({
+    basePackageId: "package:business-model-regulatory-boundary:cccccccccccccccc",
+    playbookId: artifact.package.playbookId,
+    profile,
+    deltaIds,
+  });
+  const claimInput = {
+    basePackageId: "package:business-model-regulatory-boundary:cccccccccccccccc",
+    playbookId: artifact.package.playbookId,
+    profileFingerprint: playbookProfileFingerprint(profile),
+    deltaIds,
+    idempotencyKey: "superseding-request-0001",
+    requestFingerprintSha256: requestFingerprint,
+  };
+
+  const claim = await store.claimSupersedingEvaluation(claimInput);
+  assert.equal(claim.status, "CLAIMED");
+  if (claim.status !== "CLAIMED") return;
+  await store.persistSupersedingEvaluation({
+    artifact,
+    rerunId: claim.rerunId,
+    idempotencyKey: claimInput.idempotencyKey,
+    requestFingerprintSha256: requestFingerprint,
+  });
+  const replay = await store.claimSupersedingEvaluation(claimInput);
+  assert.equal(replay.status, "COMPLETED");
+  if (replay.status === "COMPLETED") assert.deepEqual(replay.artifact, artifact);
+
+  const claimBody = backend.rpcBodies.find(
+    (body) => body.p_base_package_id === claimInput.basePackageId,
+  );
+  assert.deepEqual(claimBody?.p_delta_ids, [...deltaIds].sort());
+  assert.equal("profile" in (claimBody ?? {}), false);
+});
+
+test("superseding completion exposes a stale delta snapshot as a typed failure", async () => {
+  const backend = fakeBackend({ staleSupersedingCompletion: true });
+  const store = new PlaybookPackageArtifactStore(client(backend.fetch));
+  const artifact = createArtifact();
+
+  await assert.rejects(
+    () => store.persistSupersedingEvaluation({
+      artifact,
+      rerunId: "rerun:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      idempotencyKey: "superseding-request-0002",
+      requestFingerprintSha256: repeatHash("d"),
+    }),
+    SupersedingEvaluationStaleError,
+  );
+});
+
+test("superseding request fingerprints are canonical over delta order", () => {
+  const input = {
+    basePackageId: "package:stablecoin-pre-listing:aaaaaaaaaaaaaaaa",
+    playbookId: "stablecoin-pre-listing",
+    profile: profileFixture(),
+  };
+  assert.equal(
+    playbookSupersedingRequestFingerprint({
+      ...input,
+      deltaIds: [
+        "delta:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "delta:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      ],
+    }),
+    playbookSupersedingRequestFingerprint({
+      ...input,
+      deltaIds: [
+        "delta:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "delta:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      ],
+    }),
+  );
+});
+
 function profileFixture(): BusinessProfile {
   return {
     operatorJurisdiction: "SG",
@@ -218,7 +305,10 @@ function client(fetchImpl: FetchLike): SupabaseHttpClient {
   }, fetchImpl);
 }
 
-function fakeBackend(options: { storageOutage?: boolean } = {}) {
+function fakeBackend(options: {
+  storageOutage?: boolean;
+  staleSupersedingCompletion?: boolean;
+} = {}) {
   const objects = new Map<string, Uint8Array>();
   const metadata = new Map<string, Record<string, unknown>>();
   const idempotency = new Map<string, {
@@ -228,6 +318,11 @@ function fakeBackend(options: { storageOutage?: boolean } = {}) {
     retryAfter: string;
   }>();
   const rpcBodies: Record<string, unknown>[] = [];
+  const reruns = new Map<string, {
+    requestFingerprint: string;
+    rerunId: string;
+    packageId: string | null;
+  }>();
   const fetch: FetchLike = async (input, init) => {
     const url = new URL(String(input));
     if (url.pathname.startsWith("/storage/v1/object/")) {
@@ -301,6 +396,59 @@ function fakeBackend(options: { storageOutage?: boolean } = {}) {
       record.state = "COMPLETED";
       return Response.json(packageId);
     }
+    if (functionName === "claim_superseding_playbook_evaluation") {
+      const keyHash = String(body.p_idempotency_key_sha256);
+      const fingerprint = String(body.p_request_fingerprint_sha256);
+      const existing = reruns.get(keyHash);
+      if (existing && existing.requestFingerprint !== fingerprint) {
+        return new Response("playbook idempotency key conflict", { status: 409 });
+      }
+      if (existing?.packageId) {
+        return Response.json({ status: "COMPLETED", packageId: existing.packageId });
+      }
+      if (existing) {
+        return Response.json({
+          status: "PENDING",
+          rerunId: existing.rerunId,
+          retryAfter: "2026-08-12T00:02:00.000Z",
+        });
+      }
+      const rerunId = "rerun:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+      reruns.set(keyHash, { requestFingerprint: fingerprint, rerunId, packageId: null });
+      return Response.json({
+        status: "CLAIMED",
+        rerunId,
+        leaseExpiresAt: "2026-08-12T00:02:00.000Z",
+      });
+    }
+    if (functionName === "complete_superseding_playbook_evaluation") {
+      if (options.staleSupersedingCompletion) {
+        return Response.json({ status: "STALE" });
+      }
+      const packageId = String(body.p_package_id);
+      metadata.set(packageId, {
+        packageId,
+        playbookId: body.p_playbook_id,
+        profileFingerprint: body.p_profile_fingerprint,
+        artifactObjectId: body.p_object_id,
+        objectKey: body.p_object_key,
+        checksumSha256: body.p_artifact_checksum_sha256,
+        byteSize: body.p_byte_size,
+        contentType: body.p_content_type,
+        integritySha256: body.p_integrity_sha256,
+        schemaVersion: body.p_schema_version,
+        evaluatedAt: body.p_evaluated_at,
+        assuranceReviewStatus: body.p_assurance_review_status,
+        corpusReleaseId: body.p_corpus_release_id,
+        retrievalIndexReleaseId: body.p_retrieval_index_release_id,
+        dossierId: body.p_dossier_id,
+        rulesVersion: body.p_rules_version,
+        templateVersion: body.p_template_version,
+      });
+      const rerun = reruns.get(String(body.p_idempotency_key_sha256));
+      if (rerun) rerun.packageId = packageId;
+      return Response.json({ status: "COMPLETED", packageId });
+    }
     if (functionName === "get_playbook_package_artifact") {
       return Response.json(metadata.get(String(body.p_package_id)) ?? null);
     }
@@ -314,4 +462,8 @@ function fakeBackend(options: { storageOutage?: boolean } = {}) {
     return new Response("unknown rpc", { status: 404 });
   };
   return { fetch, objects, metadata, rpcBodies };
+}
+
+function repeatHash(character: string): string {
+  return character.repeat(64);
 }

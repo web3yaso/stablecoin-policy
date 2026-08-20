@@ -13,7 +13,15 @@ an intentional contract or fixture-version change has been approved.
 `v1/citely-service-token-payload.schema.json` defines the strict, presentation-
 independent server-to-server JWT claims shared with Citely. JWT headers are
 restricted to `alg=EdDSA`, `typ=JWT`, and a configured rotation `kid`; token TTL
-is additionally enforced by runtime code at five minutes.
+is additionally enforced by runtime code at five minutes. Initial execution
+targets one `playbookId`; a superseding execution targets both that
+`playbookId` and the exact immutable base `packageId`.
+
+`v1/playbook-package-rerun-request.schema.json` defines the explicit
+superseding-evaluation request: Citely resubmits the original Business Profile
+and the complete current pending `deltaIds`. The response deliberately reuses
+`playbook-package-response.schema.json` so the main-site renderer remains
+domain-agnostic.
 
 `v1/playbook-detail-response.schema.json` defines the public, presentation-safe
 playbook detail returned by `GET /v1/playbooks/{id}`. It includes a directly
