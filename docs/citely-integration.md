@@ -80,6 +80,8 @@ only `alg=EdDSA`, `typ=JWT`, and the configured `kid`.
 The token also carries exactly one entitlement:
 
 - package creation: `scope=playbook:execute` plus exact `playbookId`;
+- superseding evaluation: `scope=playbook:execute` plus exact `playbookId` and
+  exact base `packageId`; this operation never accepts the legacy unscoped key;
 - package replay: `scope=playbook:read` plus exact `packageId`;
 - direct RAG search: `scope=evidence:search` with no package/playbook target.
 
@@ -113,6 +115,25 @@ const response = await fetch(
   },
 );
 // 201 first completion; 200 exact retry replay
+
+// After Citely receives ACKNOWLEDGE_AND_RERUN deltas, mint a new token whose
+// entitlement binds both playbookId and the exact base packageId:
+const successorResponse = await fetch(
+  `https://policy.citely.info/v1/playbook-packages/${basePackageId}/rerun`,
+  {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${exactPackageExecuteToken}`,
+      "idempotency-key": crypto.randomUUID(),
+    },
+    body: JSON.stringify({
+      profile: originalConfirmedProfile,
+      deltaIds: completeCurrentPendingDeltaIds,
+    }),
+  },
+);
+// 201 one immutable successor; 200 exact replay; 409 stale/incomplete snapshot
 // -> { package, evidenceBundle } (schemaVersion 1.1.0)
 ```
 
@@ -217,6 +238,8 @@ launch blocker.
 ## 7. Contract files
 
 - `contracts/v1/playbook-package-create-request.schema.json` — POST request
+- `contracts/v1/playbook-package-rerun-request.schema.json` — explicit
+  superseding-evaluation request
 - `contracts/v1/playbook-package-response.schema.json` — POST response
 - `contracts/v1/playbook-detail-response.schema.json` — public detail and intake contract
 - `contracts/v1/citely-service-token-payload.schema.json` — signed service JWT

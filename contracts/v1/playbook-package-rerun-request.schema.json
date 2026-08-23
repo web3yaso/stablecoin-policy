@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/playbook-package-rerun-request.schema.json",
+  "title": "Superseding Playbook Evaluation Request v1",
+  "type": "object",
+  "required": ["profile", "deltaIds"],
+  "additionalProperties": false,
+  "properties": {
+    "profile": {
+      "type": "object",
+      "required": ["operatorJurisdiction", "targetJurisdiction", "activities"],
+      "additionalProperties": false,
+      "properties": {
+        "operatorJurisdiction": { "type": "string", "minLength": 1 },
+        "targetJurisdiction": { "const": "EEA" },
+        "activities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "asset": {
+          "type": ["object", "null"],
+          "required": ["symbol", "networks"],
+          "additionalProperties": false,
+          "properties": {
+            "symbol": { "type": "string", "minLength": 1 },
+            "networks": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "deltaIds": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^delta:[0-9a-f]{32}$"
+      }
+    }
+  }
+}

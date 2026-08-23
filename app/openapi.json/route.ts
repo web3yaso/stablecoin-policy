@@ -457,6 +457,73 @@ function createOpenApiDocument(
           },
         },
       },
+      "/v1/playbook-packages/{id}/rerun": {
+        post: {
+          operationId: "rerunPlaybookPackage",
+          tags: ["playbooks"],
+          summary: "Create one immutable successor PlaybookPackage",
+          description:
+            "Requires a short-lived Citely playbook:execute entitlement targeting both the exact playbook and base package. Citely resubmits the original Business Profile and the complete current pending Change-to-Action Delta set. The canonical profile fingerprint must match the base package. Completion atomically records package lineage and delta coverage, supersedes the old watchlist, and activates the successor watchlist. A stale snapshot returns 409 and never mutates the historical package.",
+          security: [{ playbookServiceKey: [] }],
+          parameters: [
+            {
+              name: "id",
+              in: "path",
+              required: true,
+              schema: {
+                type: "string",
+                pattern: "^package:[a-z0-9-]+:[0-9a-f]{16}$",
+              },
+            },
+            {
+              name: "Idempotency-Key",
+              in: "header",
+              required: true,
+              description:
+                "Opaque 8-128 character retry key. Exact replay returns the same successor; changed request reuse returns 409.",
+              schema: {
+                type: "string",
+                minLength: 8,
+                maxLength: 128,
+                pattern: "^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$",
+              },
+            },
+          ],
+          requestBody: {
+            required: true,
+            description:
+              "Strict contract: contracts/v1/playbook-package-rerun-request.schema.json. Raw profiles are evaluated in memory and are not persisted.",
+            content: {
+              "application/json": { schema: { type: "object" } },
+            },
+          },
+          responses: {
+            "200": {
+              description: "Exact immutable successor artifact replay",
+              headers: {
+                "Idempotency-Replayed": {
+                  schema: { type: "string", const: "true" },
+                },
+              },
+              content: { "application/json": { schema: { type: "object" } } },
+            },
+            "201": {
+              description:
+                "Successor package using the unchanged PlaybookPackageArtifact 1.1.0 response contract",
+              content: { "application/json": { schema: { type: "object" } } },
+            },
+            "400": { description: "Invalid JSON, profile, delta set, or Idempotency-Key" },
+            "401": { description: "Missing or invalid service token" },
+            "403": { description: "Token does not target this exact playbook and base package" },
+            "404": { description: "Unknown base package" },
+            "409": {
+              description:
+                "Profile mismatch, incomplete/stale delta snapshot, already superseded package, active request, or idempotency conflict",
+            },
+            "503": { description: "Evidence, database, or immutable artifact persistence unavailable" },
+          },
+        },
+      },
       "/v1/playbook-packages/{id}/watchlist": {
         post: {
           operationId: "createPlaybookPackageWatchlist",

@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Citely Stablecoin Policy — Demo Day presentation">
+  <title>Citely × Stablecoin Policy — Demo Day</title>
+
+  <!-- Typography: change this link and the two font variables to retheme the deck. -->
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&amp;f[]=clash-display@500,600&amp;display=swap" rel="stylesheet">
+
+  <style>
+    /* ===========================================
+       THEME TOKENS
+       Change these variables to retheme every slide.
+       =========================================== */
+    :root {
+      --stage-bg: #e9ebee;
+      --slide-bg: #ffffff;
+      --ink: #08090a;
+      --muted: #737c8d;
+      --line: #c5cad2;
+      --surface: #f5f6f7;
+      --blue: #3d8dff;
+      --blue-dark: #075cc6;
+      --blue-soft: #eaf5fb;
+      --amber: #d99600;
+      --amber-soft: #fff4d6;
+      --font-display: "Clash Display", "Avenir Next", sans-serif;
+      --font-body: "Satoshi", "Avenir Next", sans-serif;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration: 520ms;
+    }
+
+    /* ===========================================
+       RESET
+       =========================================== */
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+    button, input { font: inherit; }
+
+    /* ===========================================
+       FIXED 16:9 STAGE: MANDATORY BASE STYLES
+       Included in full from viewport-base.css.
+       Slides are authored at 1920×1080 and scaled as a whole.
+       =========================================== */
+
+    /* 1. Lock the browser viewport */
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: var(--stage-bg, #000);
+    }
+
+    /* 2. Full-window deck viewport */
+    .deck-viewport {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        background: var(--stage-bg, #000);
+    }
+
+    /* 3. Fixed 16:9 design canvas.
+       JavaScript sets transform: translate(...) scale(...). */
+    .deck-stage {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        transform-origin: 0 0;
+        background: var(--slide-bg, #fff);
+    }
+
+    /* 4. Slides stack inside the fixed stage.
+       Content must be laid out at 1920×1080, not reflowed per device. */
+    .slide {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        background: var(--slide-bg, #fff);
+    }
+
+    .slide.active,
+    .slide.visible {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 1;
+    }
+
+    /* 5. Keep media inside authored slide bounds */
+    img,
+    video,
+    canvas,
+    svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /* 6. Presentation chrome stays outside the slide design system */
+    .deck-controls {
+        position: fixed;
+        left: 50%;
+        bottom: 22px;
+        transform: translateX(-50%);
+        z-index: 1000;
+    }
+
+    /* 7. Print one fixed-size slide per page */
+    @media print {
+        html,
+        body {
+            width: 1920px;
+            height: auto;
+            overflow: visible;
+            background: #fff;
+        }
+
+        .deck-viewport {
+            position: static;
+            overflow: visible;
+            background: #fff;
+        }
+
+        .deck-stage {
+            position: static;
+            width: auto;
+            height: auto;
+            transform: none !important;
+            background: none;
+        }
+
+        .slide {
+            position: relative;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            width: 1920px;
+            height: 1080px;
+            break-after: page;
+            page-break-after: always;
+        }
+
+        .slide:last-child {
+            break-after: auto;
+            page-break-after: auto;
+        }
+
+        .deck-controls {
+            display: none !important;
+        }
+    }
+
+    /* 8. Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.2s !important;
+        }
+    }
+
+    /* ===========================================
+       SHARED SLIDE CHROME
+       =========================================== */
+    .slide-shell {
+      position: absolute;
+      inset: 0;
+      padding: 42px 72px 60px;
+      color: var(--ink);
+      font-family: var(--font-body);
+    }
+
+    .chrome {
+      position: absolute;
+      top: 42px;
+      right: 76px;
+      display: flex;
+      align-items: center;
+      gap: 72px;
+      color: var(--muted);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+
+    .page-number {
+      min-width: 42px;
+      text-align: right;
+      font-weight: 500;
+    }
+
+    .brand-pill,
+    .eyebrow-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      border-radius: 8px;
+      padding: 0 28px;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    .brand-pill {
+      color: #fff;
+      background: var(--ink);
+    }
+
+    /* Citely logo appears in the same top-left position on every slide. */
+    .citely-logo {
+      position: absolute;
+      top: 20px;
+      left: 72px;
+      width: 88px;
+      height: 88px;
+      object-fit: contain;
+      z-index: 3;
+    }
+
+    .eyebrow-pill {
+      height: 46px;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      color: #515967;
+      background: #fff;
+    }
+
+    h1, h2, h3 { font-family: var(--font-display); }
+
+    /* ===========================================
+       REVEAL MOTION
+       The active slide receives .visible from the controller.
+       =========================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity var(--duration) var(--ease-out-expo),
+        transform var(--duration) var(--ease-out-expo);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .slide.visible .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-28px);
+      transition:
+        opacity var(--duration) var(--ease-out-expo),
+        transform var(--duration) var(--ease-out-expo);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    .slide.visible .reveal-left {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ===========================================
+       SLIDE 1 — OPENING THESIS
+       =========================================== */
+    .opening-title {
+      position: absolute;
+      left: 72px;
+      top: 258px;
+      width: 1300px;
+      font-size: 92px;
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      font-weight: 600;
+    }
+
+    .opening-contrast {
+      position: absolute;
+      left: 72px;
+      top: 642px;
+      width: 1200px;
+      color: var(--blue);
+      font-family: var(--font-display);
+      font-size: 88px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 600;
+    }
+
+    /* ===========================================
+       SLIDE 2 — FOUNDER JOURNEY
+       =========================================== */
+    .journey-kicker { position: absolute; left: 72px; top: 112px; }
+
+    .journey-title {
+      position: absolute;
+      left: 72px;
+      top: 186px;
+      width: 1120px;
+      font-size: 58px;
+      line-height: 1.13;
+      letter-spacing: -0.035em;
+      font-weight: 600;
+    }
+
+    .journey-subtitle {
+      position: absolute;
+      top: 200px;
+      right: 78px;
+      width: 590px;
+      color: #566071;
+      font-size: 24px;
+      line-height: 1.35;
+    }
+
+    .journey-grid {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 350px;
+      height: 414px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 42px;
+    }
+
+    .journey-card {
+      position: relative;
+      border: 1.5px solid var(--line);
+      border-radius: 32px;
+      padding: 38px 44px;
+      background: #fff;
+    }
+
+    .journey-card:last-child { border-color: var(--blue); }
+
+    .journey-card:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 203px;
+      right: -32px;
+      width: 22px;
+      height: 14px;
+      background: #b7bcc5;
+      clip-path: polygon(0 22%, 64% 22%, 64% 0, 100% 50%, 64% 100%, 64% 78%, 0 78%);
+    }
+
+    .journey-meta {
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .journey-card:last-child .journey-meta { color: var(--blue-dark); }
+
+    .journey-question {
+      margin-top: 58px;
+      width: 305px;
+      font-size: 31px;
+      line-height: 1.15;
+      letter-spacing: -0.022em;
+      font-weight: 700;
+    }
+
+    .journey-output {
+      position: absolute;
+      left: 44px;
+      right: 26px;
+      bottom: 32px;
+      color: var(--blue-dark);
+      font-size: 22px;
+      line-height: 1.08;
+      font-weight: 700;
+    }
+
+    .journey-close {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 824px;
+      height: 130px;
+      display: flex;
+      align-items: center;
+      padding: 0 50px;
+      border: 2px solid var(--ink);
+      border-radius: 4px;
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    /* ===========================================
+       SLIDE 3 — PRODUCT PLAYBOOK DEMO
+       =========================================== */
+    .demo-title {
+      position: absolute;
+      left: 72px;
+      top: 122px;
+      font-size: 52px;
+      line-height: 1;
+      letter-spacing: -0.035em;
+      font-weight: 600;
+    }
+
+    .browser {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 252px;
+      height: 726px;
+      overflow: hidden;
+      border: 1.5px solid var(--line);
+      border-radius: 22px;
+      background: #fff;
+    }
+
+    .browser-bar {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 26px;
+      border-bottom: 1px solid #e2e5e9;
+      background: #f8f9fa;
+    }
+
+    .browser-dot { width: 14px; height: 14px; border-radius: 50%; background: #c5cad2; }
+    .browser-dot:nth-child(1) { background: #ff6b69; }
+    .browser-dot:nth-child(2) { background: #ffc043; }
+    .browser-dot:nth-child(3) { background: #38c779; }
+
+    .browser-url {
+      margin-left: 14px;
+      color: #778092;
+      font-size: 18px;
+    }
+
+    .demo-pill {
+      margin-left: auto;
+      min-width: 360px;
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      padding: 7px 22px;
+      color: var(--blue-dark);
+      text-align: center;
+      font-size: 17px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .demo-body {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      height: calc(100% - 72px);
+      gap: 52px;
+      padding: 36px;
+    }
+
+    .launch-panel {
+      position: relative;
+      border-radius: 12px;
+      padding: 30px 36px;
+      background: var(--surface);
+    }
+
+    .launch-panel h3 {
+      margin-bottom: 28px;
+      font-size: 27px;
+      letter-spacing: -0.02em;
+    }
+
+    .field { margin-bottom: 21px; }
+    .field-label {
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.055em;
+    }
+    .field-value { font-size: 21px; font-weight: 500; }
+
+    .run-button {
+      position: absolute;
+      left: 36px;
+      bottom: 26px;
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 24px;
+      color: #fff;
+      background: var(--ink);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+
+    .run-button:hover { transform: translateY(-2px); background: var(--blue-dark); }
+
+    .results-panel { padding: 4px 0 0; }
+
+    .results-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .results-head h3 { font-size: 27px; line-height: 1.1; }
+
+    .status-provisional {
+      border: 1px solid #e6c15b;
+      border-radius: 999px;
+      padding: 8px 20px;
+      color: #976800;
+      background: var(--amber-soft);
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.78fr 1.15fr;
+      column-gap: 28px;
+      align-items: center;
+    }
+
+    .decision-header {
+      padding: 0 0 16px;
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .decision-row { display: contents; }
+
+    .decision-cell {
+      min-height: 94px;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #d6dae0;
+      font-size: 19px;
+      line-height: 1.3;
+    }
+
+    .decision-name { font-weight: 700; }
+
+    .status-conditional {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 136px;
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      padding: 7px 14px;
+      color: var(--blue-dark);
+      background: #f4f9ff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .next-action { color: #566071; }
+
+    .evidence-strip {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      min-height: 66px;
+      border-radius: 10px;
+      padding: 12px 22px;
+      background: var(--blue-soft);
+      font-size: 16px;
+    }
+
+    .evidence-label { color: var(--blue-dark); font-weight: 700; }
+    .legal-note { margin-top: 12px; color: #9aa0ab; text-align: right; font-size: 13px; }
+
+    /* Playbook rows animate once the demo button is pressed. */
+    .browser.running .decision-cell,
+    .browser.running .evidence-strip {
+      animation: pulse-row 700ms var(--ease-out-expo) both;
+    }
+    .browser.running .decision-row:nth-of-type(2) .decision-cell { animation-delay: 100ms; }
+    .browser.running .evidence-strip { animation-delay: 230ms; }
+
+    @keyframes pulse-row {
+      0% { opacity: 0.2; transform: translateX(14px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ===========================================
+       SLIDE 4 — ROADMAP
+       =========================================== */
+    .roadmap-title {
+      position: absolute;
+      left: 72px;
+      top: 122px;
+      font-size: 54px;
+      line-height: 1;
+      letter-spacing: -0.035em;
+      font-weight: 600;
+    }
+
+    .roadmap-subtitle {
+      position: absolute;
+      left: 72px;
+      top: 220px;
+      color: #5e6675;
+      font-size: 22px;
+    }
+
+    .roadmap-cards {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 338px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 120px;
+    }
+
+    .roadmap-card {
+      position: relative;
+      height: 210px;
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      padding: 30px 34px;
+      background: var(--surface);
+    }
+
+    .roadmap-card:first-child { border-color: var(--blue); background: var(--blue-soft); }
+    .roadmap-step { color: var(--muted); font-size: 16px; font-weight: 700; }
+    .roadmap-card:first-child .roadmap-step { color: var(--blue-dark); }
+    .roadmap-card h3 { margin-top: 24px; font-size: 29px; letter-spacing: -0.02em; }
+    .roadmap-card p { margin-top: 12px; color: #596171; font-size: 19px; line-height: 1.28; }
+
+    .roadmap-line {
+      position: absolute;
+      left: 192px;
+      right: 190px;
+      top: 600px;
+      height: 3px;
+      background: var(--ink);
+    }
+
+    .roadmap-line::after {
+      content: "";
+      position: absolute;
+      right: -2px;
+      top: -8px;
+      border-left: 20px solid var(--ink);
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+    }
+
+    .roadmap-dot {
+      position: absolute;
+      top: 589px;
+      width: 24px;
+      height: 24px;
+      border: 7px solid #fff;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+    .roadmap-dot.blue { left: 300px; background: var(--blue); }
+    .roadmap-dot.mid { left: 915px; }
+    .roadmap-dot.end { left: 1530px; }
+
+    .foundation-label {
+      position: absolute;
+      left: 72px;
+      top: 670px;
+      color: var(--muted);
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .foundation-band {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 720px;
+      height: 138px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: #fff;
+      background: var(--ink);
+      font-size: 22px;
+      font-weight: 700;
+      word-spacing: 9px;
+    }
+
+    .roadmap-close {
+      position: absolute;
+      left: 72px;
+      right: 72px;
+      top: 916px;
+      color: var(--blue-dark);
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* ===========================================
+       OUTSIDE-STAGE NAVIGATION
+       =========================================== */
+    .deck-controls {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      white-space: nowrap;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      padding: 7px 14px;
+      color: #fff;
+      background: rgba(8, 9, 10, 0.78);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(12px);
+      font-family: var(--font-body);
+      font-size: 13px;
+      opacity: 0.26;
+      transition: opacity 180ms ease;
+    }
+
+    .deck-controls:hover { opacity: 1; }
+    .control-button { border: 0; color: #fff; background: transparent; cursor: pointer; padding: 2px 5px; }
+    #slideCounter { min-width: 34px; text-align: center; }
+    .progress-track { width: 80px; height: 3px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.24); }
+    .progress-bar { height: 100%; width: 25%; background: var(--blue); transition: width 280ms var(--ease-out-expo); }
+
+    /* ===========================================
+       INLINE EDITING CONTROLS
+       Hover top-left or press E to edit text.
+       =========================================== */
+    .edit-hotzone {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 80px;
+      height: 80px;
+      z-index: 10000;
+      cursor: pointer;
+    }
+
+    .edit-toggle {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      z-index: 10001;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: #fff;
+      background: rgba(8,9,10,.82);
+      opacity: 0;
+      pointer-events: none;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    .edit-toggle.show,
+    .edit-toggle.active { opacity: 1; pointer-events: auto; }
+
+    .editing [data-editable] {
+      outline: 2px dashed rgba(61,141,255,.7);
+      outline-offset: 5px;
+      cursor: text;
+    }
+
+    .edit-toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      z-index: 10002;
+      transform: translateX(-50%) translateY(-12px);
+      border-radius: 999px;
+      padding: 10px 18px;
+      color: #fff;
+      background: rgba(8,9,10,.88);
+      font: 600 13px var(--font-body);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .edit-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+
+<body>
+  <!-- ===========================================
+       PRESENTATION STAGE
+       =========================================== -->
+  <div class="deck-viewport">
+    <main class="deck-stage" id="deckStage" aria-live="polite">
+
+      <!-- SLIDE 1: Opening thesis -->
+      <section class="slide active" aria-label="The problem">
+        <div class="slide-shell">
+          <img class="citely-logo reveal" style="--delay: 40ms" src="stablecoin-policy-demo-day-assets/citely-logo.png" alt="Citely logo">
+          <div class="chrome"><span data-editable>THE PROBLEM</span><span class="page-number">01</span></div>
+          <h1 class="opening-title reveal-left" style="--delay: 110ms" data-editable>Stablecoins make revenue<br>day-one global.</h1>
+          <div class="opening-contrast reveal-left" style="--delay: 210ms" data-editable>Regulation does not.</div>
+        </div>
+        <!-- Speaker notes:
+        开场不要先讲功能。先说：AI 产品从第一天就是全球的，stablecoin 让收款也变成 day-one global；但监管边界并不会自动变简单。一个小团队在没有 compliance team 时，也必须决定能不能收、能不能托管、能不能上架、要不要牌照。Stablecoin Policy 的价值，是把动态监管信息变成带来源、版本和行动项的 playbook。
+        [Sources] docs/PROJECT_CONTEXT.md; docs/citely-product-family-boundary.md; docs/superpowers/specs/2026-07-30-stablecoin-pre-listing-check-design.md
+        -->
+      </section>
+
+      <!-- SLIDE 2: Founder journey -->
+      <section class="slide" aria-label="Founder journey">
+        <div class="slide-shell">
+          <img class="citely-logo reveal" src="stablecoin-policy-demo-day-assets/citely-logo.png" alt="Citely logo">
+          <div class="chrome"><span data-editable>FOUNDER JOURNEY</span><span class="page-number">02</span></div>
+          <div class="eyebrow-pill journey-kicker reveal" data-editable>ONE STARTUP · FOUR STAGES</div>
+          <h2 class="journey-title reveal-left" style="--delay: 70ms" data-editable>The startup moves.<br>The regulatory question changes.</h2>
+          <p class="journey-subtitle reveal" style="--delay: 120ms" data-editable>The same team faces a different regulatory decision at every stage.</p>
+
+          <div class="journey-grid">
+            <article class="journey-card reveal" style="--delay: 120ms">
+              <div class="journey-meta" data-editable>01 · IDEA</div>
+              <div class="journey-question" data-editable>Can we accept<br>stablecoins —<br>and where?</div>
+              <div class="journey-output" data-editable>FIRST-MARKET<br>SHORTLIST</div>
+            </article>
+            <article class="journey-card reveal" style="--delay: 190ms">
+              <div class="journey-meta" data-editable>02 · BUILD</div>
+              <div class="journey-question" data-editable>Which entity and<br>licence path can<br>actually launch?</div>
+              <div class="journey-output" data-editable>PRE-LISTING CHECK</div>
+            </article>
+            <article class="journey-card reveal" style="--delay: 260ms">
+              <div class="journey-meta" data-editable>03 · RAISE</div>
+              <div class="journey-question" data-editable>Can investors verify<br>our permissions,<br>controls and evidence?</div>
+              <div class="journey-output" data-editable>DILIGENCE ROOM</div>
+            </article>
+            <article class="journey-card reveal" style="--delay: 330ms">
+              <div class="journey-meta" data-editable>04 · SCALE</div>
+              <div class="journey-question" data-editable>What changes when<br>we enter the<br>next market?</div>
+              <div class="journey-output" data-editable>MONITORING TRIGGERS</div>
+            </article>
+          </div>
+
+          <div class="journey-close reveal" style="--delay: 400ms" data-editable>Stablecoin Policy turns each question into a versioned decision, evidence pack and next action.</div>
+        </div>
+        <!-- Speaker notes:
+        这一页把技术架构换成 Founder Journey：同一个团队在 Idea、Build、Raise、Scale 四个阶段，会遇到不同的稳定币监管决策。Stablecoin Policy 不只告诉你问题是什么，还把它转成下一步的决策、证据包和负责人。
+        [Sources] Local Founder reference index.html; docs/superpowers/specs/2026-07-30-stablecoin-pre-listing-check-design.md; docs/PROJECT_CONTEXT.md
+        -->
+      </section>
+
+      <!-- SLIDE 3: Product playbook demo -->
+      <section class="slide" aria-label="Product demo">
+        <div class="slide-shell">
+          <img class="citely-logo reveal" src="stablecoin-policy-demo-day-assets/citely-logo.png" alt="Citely logo">
+          <div class="chrome"><span data-editable>PRODUCT DEMO</span><span class="page-number">03</span></div>
+          <h2 class="demo-title reveal-left" data-editable>One question in. A versioned decision out.</h2>
+
+          <div class="browser reveal" style="--delay: 100ms" id="demoBrowser">
+            <div class="browser-bar">
+              <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+              <span class="browser-url" data-editable>citely.info/playbook</span>
+              <span class="demo-pill" data-editable>DEMO · STABLECOIN PRE-LISTING</span>
+            </div>
+
+            <div class="demo-body">
+              <aside class="launch-panel">
+                <h3 data-editable>Your launch</h3>
+                <div class="field"><div class="field-label" data-editable>OPERATOR</div><div class="field-value" data-editable>Singapore</div></div>
+                <div class="field"><div class="field-label" data-editable>TARGET MARKET</div><div class="field-value" data-editable>EEA</div></div>
+                <div class="field"><div class="field-label" data-editable>ASSET</div><div class="field-value" data-editable>USDC · Base + Ethereum</div></div>
+                <div class="field"><div class="field-label" data-editable>ACTIVITIES</div><div class="field-value" data-editable>List for trading · Custody</div></div>
+                <button class="run-button" id="runPlaybook" type="button">RUN PLAYBOOK&nbsp; →</button>
+              </aside>
+
+              <section class="results-panel" aria-label="Playbook results">
+                <div class="results-head">
+                  <h3 data-editable>Stablecoin Pre-listing &amp; Product Launch</h3>
+                  <span class="status-provisional" data-editable>PROVISIONAL</span>
+                </div>
+
+                <div class="decision-grid">
+                  <div class="decision-header" data-editable>Capability</div>
+                  <div class="decision-header" data-editable>Decision</div>
+                  <div class="decision-header" data-editable>Next action</div>
+
+                  <div class="decision-row">
+                    <div class="decision-cell decision-name" data-editable>Admit USDC to trading</div>
+                    <div class="decision-cell"><span class="status-conditional" data-editable>CONDITIONAL</span></div>
+                    <div class="decision-cell next-action" data-editable>Confirm CASP authorization scope</div>
+                  </div>
+
+                  <div class="decision-row">
+                    <div class="decision-cell decision-name" data-editable>Custody USDC for clients</div>
+                    <div class="decision-cell"><span class="status-conditional" data-editable>CONDITIONAL</span></div>
+                    <div class="decision-cell next-action" data-editable>Confirm custody + segregation controls</div>
+                  </div>
+                </div>
+
+                <div class="evidence-strip">
+                  <span class="evidence-label" data-editable>EVIDENCE</span>
+                  <span data-editable>MiCA Article 59 · USDC EEA dossier · corpus / rules / template versions pinned</span>
+                </div>
+                <p class="legal-note" data-editable>Machine-assured research for operational preparation — not human-reviewed legal advice.</p>
+              </section>
+            </div>
+          </div>
+        </div>
+        <!-- Speaker notes:
+        这一页播放录屏时，按这条路径走：选择 Stablecoin Pre-listing；输入 Singapore、EEA、USDC、Base/Ethereum、listing 和 custody；运行后先展示 capability-level 的两个 CONDITIONAL 结论，再点开 action 和 evidence。核心句：RAG 帮助解释证据，但不能改变 deterministic decision。
+        [Sources] contracts/fixtures/citely/v1/stablecoin-pre-listing-success.request.json; contracts/fixtures/citely/v1/stablecoin-pre-listing-success.response.json; docs/citely-integration.md
+        -->
+      </section>
+
+      <!-- SLIDE 4: Product roadmap -->
+      <section class="slide" aria-label="Roadmap">
+        <div class="slide-shell">
+          <img class="citely-logo reveal" src="stablecoin-policy-demo-day-assets/citely-logo.png" alt="Citely logo">
+          <div class="chrome"><span data-editable>ROADMAP</span><span class="page-number">04</span></div>
+          <h2 class="roadmap-title reveal-left" data-editable>Stablecoin is the wedge. Citely is the marketplace.</h2>
+          <p class="roadmap-subtitle reveal" style="--delay: 80ms" data-editable>Expand by policy domain — without duplicating the evidence, identity or delivery infrastructure.</p>
+
+          <div class="roadmap-cards">
+            <article class="roadmap-card reveal" style="--delay: 120ms">
+              <div class="roadmap-step" data-editable>NOW</div>
+              <h3 data-editable>Stablecoin Policy</h3>
+              <p data-editable>Payments, listings, custody and launch playbooks</p>
+            </article>
+            <article class="roadmap-card reveal" style="--delay: 210ms">
+              <div class="roadmap-step" data-editable>NEXT</div>
+              <h3 data-editable>AI Policy</h3>
+              <p data-editable>Models, data, deployment and market-entry playbooks</p>
+            </article>
+            <article class="roadmap-card reveal" style="--delay: 300ms">
+              <div class="roadmap-step" data-editable>EXPAND</div>
+              <h3 data-editable>Web3 Policy</h3>
+              <p data-editable>Protocols, tokens and onchain business-model playbooks</p>
+            </article>
+          </div>
+
+          <div class="roadmap-line reveal" style="--delay: 340ms"></div>
+          <span class="roadmap-dot blue reveal" style="--delay: 360ms"></span>
+          <span class="roadmap-dot mid reveal" style="--delay: 390ms"></span>
+          <span class="roadmap-dot end reveal" style="--delay: 420ms"></span>
+          <div class="foundation-label reveal" style="--delay: 440ms" data-editable>ONE SHARED FOUNDATION</div>
+          <div class="foundation-band reveal" style="--delay: 480ms" data-editable>Official sources&nbsp; + &nbsp;versioned claims&nbsp; + &nbsp;review gates&nbsp; + &nbsp;evidence RAG&nbsp; + &nbsp;monitoring</div>
+          <div class="roadmap-close reveal" style="--delay: 540ms" data-editable>One founder profile&nbsp; → &nbsp;multiple policy agents&nbsp; → &nbsp;one action workspace</div>
+        </div>
+        <!-- Speaker notes:
+        最后不要用功能清单收尾，而是把 Stablecoin Policy 解释成切入口。先证明同一套 source-backed、versioned、reviewed 的基础设施能解决稳定币这个高频而复杂的场景；下一步复制的是 domain contract，不是复制一套新后端。AI Policy 和 Web3 Policy 最后在 Citely 里形成同一个 playbook marketplace。
+        [Sources] docs/citely-product-family-boundary.md; docs/PROJECT_CONTEXT.md
+        -->
+      </section>
+    </main>
+  </div>
+
+  <!-- ===========================================
+       NAVIGATION + EDIT UI
+       =========================================== -->
+  <nav class="deck-controls" aria-label="Slide navigation">
+    <button class="control-button" id="prevSlide" type="button" aria-label="Previous slide">←</button>
+    <span id="slideCounter">1 / 4</span>
+    <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+    <button class="control-button" id="nextSlide" type="button" aria-label="Next slide">→</button>
+  </nav>
+  <div class="edit-hotzone" aria-hidden="true"></div>
+  <button class="edit-toggle" id="editToggle" type="button" title="Edit mode (E)" aria-label="Toggle edit mode">✎</button>
+  <div class="edit-toast" id="editToast" role="status">Edit mode on · Ctrl+S downloads a copy</div>
+
+  <script>
+    /* ===========================================
+       SLIDE PRESENTATION CONTROLLER
+       Keyboard, wheel, click and swipe navigation.
+       =========================================== */
+    class SlidePresentation {
+      constructor() {
+        this.slides = [...document.querySelectorAll('.slide')];
+        this.stage = document.getElementById('deckStage');
+        this.counter = document.getElementById('slideCounter');
+        this.progress = document.getElementById('progressBar');
+        this.currentSlide = this.indexFromHash();
+        this.wheelLocked = false;
+        this.touchStartX = 0;
+        this.touchStartY = 0;
+        this.setupStageScale();
+        this.setupNavigation();
+        this.showSlide(this.currentSlide, false);
+      }
+
+      indexFromHash() {
+        const match = location.hash.match(/slide-(\d+)/);
+        return match ? Math.max(0, Math.min(Number(match[1]) - 1, 3)) : 0;
+      }
+
+      setupStageScale() {
+        const scale = () => {
+          const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+          const x = (window.innerWidth - 1920 * factor) / 2;
+          const y = (window.innerHeight - 1080 * factor) / 2;
+          this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+        };
+        scale();
+        window.addEventListener('resize', scale);
+      }
+
+      setupNavigation() {
+        document.getElementById('prevSlide').addEventListener('click', () => this.previous());
+        document.getElementById('nextSlide').addEventListener('click', () => this.next());
+
+        document.addEventListener('keydown', (event) => {
+          if (event.target.closest('[contenteditable="true"]')) return;
+          if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) {
+            event.preventDefault();
+            this.next();
+          }
+          if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) {
+            event.preventDefault();
+            this.previous();
+          }
+          if (event.key === 'Home') this.showSlide(0);
+          if (event.key === 'End') this.showSlide(this.slides.length - 1);
+        });
+
+        window.addEventListener('wheel', (event) => {
+          if (this.wheelLocked || Math.abs(event.deltaY) < 12) return;
+          this.wheelLocked = true;
+          event.deltaY > 0 ? this.next() : this.previous();
+          window.setTimeout(() => { this.wheelLocked = false; }, 650);
+        }, { passive: true });
+
+        window.addEventListener('touchstart', (event) => {
+          this.touchStartX = event.changedTouches[0].screenX;
+          this.touchStartY = event.changedTouches[0].screenY;
+        }, { passive: true });
+
+        window.addEventListener('touchend', (event) => {
+          const dx = event.changedTouches[0].screenX - this.touchStartX;
+          const dy = event.changedTouches[0].screenY - this.touchStartY;
+          if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) dx < 0 ? this.next() : this.previous();
+        }, { passive: true });
+
+        window.addEventListener('hashchange', () => this.showSlide(this.indexFromHash(), false));
+      }
+
+      showSlide(index, updateHash = true) {
+        this.currentSlide = Math.max(0, Math.min(index, this.slides.length - 1));
+        this.slides.forEach((slide, slideIndex) => {
+          const active = slideIndex === this.currentSlide;
+          slide.classList.toggle('active', active);
+          slide.classList.toggle('visible', active);
+          slide.setAttribute('aria-hidden', String(!active));
+        });
+        this.counter.textContent = `${this.currentSlide + 1} / ${this.slides.length}`;
+        this.progress.style.width = `${((this.currentSlide + 1) / this.slides.length) * 100}%`;
+        if (updateHash) history.replaceState(null, '', `#slide-${this.currentSlide + 1}`);
+      }
+
+      next() { this.showSlide(this.currentSlide + 1); }
+      previous() { this.showSlide(this.currentSlide - 1); }
+    }
+
+    /* ===========================================
+       INLINE EDITOR
+       Stores edits locally and downloads the edited HTML with Ctrl+S.
+       =========================================== */
+    class InlineEditor {
+      constructor() {
+        this.isActive = false;
+        this.storageKey = 'citely-stablecoin-demo-day-edits-v1';
+        this.editables = [...document.querySelectorAll('[data-editable]')];
+        this.toast = document.getElementById('editToast');
+        this.assignIds();
+        this.restore();
+        this.bindAutosave();
+      }
+
+      assignIds() {
+        this.editables.forEach((element, index) => {
+          if (!element.dataset.editId) element.dataset.editId = `copy-${index + 1}`;
+        });
+      }
+
+      toggleEditMode() {
+        this.isActive = !this.isActive;
+        document.body.classList.toggle('editing', this.isActive);
+        document.getElementById('editToggle').classList.toggle('active', this.isActive);
+        this.editables.forEach((element) => element.setAttribute('contenteditable', String(this.isActive)));
+        this.showToast(this.isActive ? 'Edit mode on · Ctrl+S downloads a copy' : 'Edit mode off');
+      }
+
+      bindAutosave() {
+        this.editables.forEach((element) => element.addEventListener('input', () => this.save()));
+      }
+
+      save() {
+        const edits = {};
+        this.editables.forEach((element) => { edits[element.dataset.editId] = element.innerHTML; });
+        localStorage.setItem(this.storageKey, JSON.stringify(edits));
+      }
+
+      restore() {
+        const edits = JSON.parse(localStorage.getItem(this.storageKey) || '{}');
+        this.editables.forEach((element) => {
+          if (Object.prototype.hasOwnProperty.call(edits, element.dataset.editId)) element.innerHTML = edits[element.dataset.editId];
+        });
+      }
+
+      download() {
+        this.save();
+        const clone = document.documentElement.cloneNode(true);
+        clone.querySelectorAll('[contenteditable]').forEach((element) => element.removeAttribute('contenteditable'));
+        clone.querySelector('body').classList.remove('editing');
+        const blob = new Blob(['<!DOCTYPE html>\n' + clone.outerHTML], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = 'stablecoin-policy-demo-day-edited.html';
+        anchor.click();
+        URL.revokeObjectURL(url);
+        this.showToast('HTML copy downloaded');
+      }
+
+      showToast(message) {
+        this.toast.textContent = message;
+        this.toast.classList.add('show');
+        clearTimeout(this.toastTimer);
+        this.toastTimer = setTimeout(() => this.toast.classList.remove('show'), 1700);
+      }
+    }
+
+    /* ===========================================
+       EDIT CONTROL INTERACTIONS
+       Uses a 400ms grace period so the button remains clickable.
+       =========================================== */
+    const deck = new SlidePresentation();
+    const editor = new InlineEditor();
+    const hotzone = document.querySelector('.edit-hotzone');
+    const editToggle = document.getElementById('editToggle');
+    let hideTimeout = null;
+
+    editToggle.addEventListener('click', () => editor.toggleEditMode());
+    hotzone.addEventListener('click', () => editor.toggleEditMode());
+    hotzone.addEventListener('mouseenter', () => {
+      clearTimeout(hideTimeout);
+      editToggle.classList.add('show');
+    });
+    hotzone.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => {
+        if (!editor.isActive) editToggle.classList.remove('show');
+      }, 400);
+    });
+    editToggle.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+    editToggle.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => {
+        if (!editor.isActive) editToggle.classList.remove('show');
+      }, 400);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      const editingText = Boolean(event.target.closest('[contenteditable="true"]'));
+      if ((event.key === 'e' || event.key === 'E') && !editingText) editor.toggleEditMode();
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
+        event.preventDefault();
+        editor.download();
+      }
+    });
+
+    /* ===========================================
+       PRODUCT DEMO MICRO-INTERACTION
+       Replays the decision-row entrance animation.
+       =========================================== */
+    document.getElementById('runPlaybook').addEventListener('click', () => {
+      const browser = document.getElementById('demoBrowser');
+      browser.classList.remove('running');
+      void browser.offsetWidth;
+      browser.classList.add('running');
+    });
+
+    // Expose the controller for speaker-console or automated export helpers.
+    window.presentation = deck;
+  </script>
+</body>
+</html>

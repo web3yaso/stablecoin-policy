@@ -80,13 +80,39 @@ async function main() {
     if (!migrationPending) throw error;
   }
 
+  let playbookMonitoring: Record<string, unknown> = {
+    playbookPackages: [],
+    playbookPackageIdempotency: [],
+    playbookPackageClaimDependencies: [],
+    playbookPackageWatchlists: [],
+    playbookWatchlistChangeDeltas: [],
+    playbookWatchlistDeltaClaimImpacts: [],
+    playbookWebhookDeliveries: [],
+    playbookWebhookDeliveryAttempts: [],
+    playbookWebhookDeliveryReplays: [],
+    playbookPackageRerunAttempts: [],
+    playbookPackageLineage: [],
+    playbookPackageDeltaCoverage: [],
+  };
+  try {
+    playbookMonitoring = await client.rpc<Record<string, unknown>>(
+      "get_playbook_monitoring_backup_metadata",
+      {},
+    );
+  } catch (error: unknown) {
+    const migrationPending = error instanceof Error
+      && /PGRST202|could not find|does not exist/i.test(error.message);
+    if (!migrationPending) throw error;
+  }
+
   const backup = {
-    formatVersion: "1.5.0",
+    formatVersion: "1.6.0",
     exportedAt: new Date().toISOString(),
     projectHost: new URL(config.url).hostname,
     tables,
     sourceVersions,
     regulatoryChange,
+    playbookMonitoring,
   };
   const body = `${JSON.stringify(backup, null, 2)}\n`;
   await writeFile(outputPath, body, { encoding: "utf8", mode: 0o600 });

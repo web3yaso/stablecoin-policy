@@ -991,7 +991,7 @@ identity, and counsel-threshold decisions remain out of scope. Migration
 checkpoint.
 
 Implementation checkpoint (2026-08-17): the first webhook delivery slice is
-implemented locally on `codex/change-delta-webhooks`. Migration `0034` creates
+merged as PR #66. Migration `0034` creates
 one transactional outbox row per immutable delta, uses bounded leases and
 three-attempt retry cycles, recovers expired worker leases, and preserves
 immutable attempt/replay audit behind service-only RPCs. The deployment-level
@@ -1004,6 +1004,41 @@ is stable across retries and replay so Citely can deduplicate durably. Customer
 webhook registration, email, customer fan-out, automatic reruns, superseding
 evaluations, and production scheduling remain separate contracts or rollout
 work.
+
+Accepted superseding-evaluation contract (2026-08-19): a rerun is an explicit
+Citely-authorized operation against one exact immutable base package, never an
+automatic webhook effect. Citely resubmits the original Business Profile
+because the domain stores only its fingerprint; the canonical fingerprint must
+match the base package, while a changed profile starts a normal new package.
+The request must name the complete current pending-delta snapshot. Completion
+fails if a new delta appeared after claim and succeeds only through one atomic
+transaction that creates one immutable successor package, records lineage and
+exact delta coverage, changes the old watchlist from `ACTIVE` to `SUPERSEDED`,
+and activates the successor watchlist. Exact request replay returns the same
+successor and changed-key reuse conflicts. The response remains the existing
+`PlaybookPackageArtifact` contract. The executable Quint model, 14 scenario
+tests, and implementation plan are in
+`docs/superpowers/plans/2026-08-19-superseding-playbook-evaluations.md`;
+database and API implementation were subsequently approved and are recorded
+below.
+
+Implementation checkpoint (2026-08-20): the approved contract is implemented
+on `codex/superseding-playbook-evaluations`. Migration `0035` adds private
+rerun-attempt, immutable lineage, and exact delta-coverage records; controlled
+claim/completion RPCs lock the package/watchlist/delta snapshot and atomically
+register the successor, cover all deltas, supersede the base watchlist, and
+activate the successor watchlist. The new authenticated rerun endpoint requires
+a signed `playbook:execute` entitlement bound to both exact `playbookId` and
+base `packageId`, rejects the legacy unscoped key, reuses the current
+`PlaybookPackageArtifact` response, and persists no raw Business Profile. Local
+migration-through-`0035`, 34 new/409 total pgTAP assertions, 14 Quint scenarios,
+strict schemas, and route/store/auth/privacy/replay/stale tests pass. Production
+database migrations `0031`–`0035` were subsequently applied in order on
+2026-08-20 after private backups and a linked dry-run. Remote history and lint
+pass, the normalized business snapshot is unchanged, and all new monitoring
+collections are empty. Receiver configuration, scheduler activation, PR #67
+deployment, and signed end-to-end smoke remain separate rollout blockers; no
+production change event may be published before they are complete.
 
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
 

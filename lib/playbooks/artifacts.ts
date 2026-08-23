@@ -37,10 +37,40 @@ export type PlaybookIdempotencyClaim =
   | { status: "PENDING"; retryAfter: string }
   | { status: "COMPLETED"; artifact: PlaybookPackageArtifact };
 
+export type SupersedingEvaluationClaim =
+  | { status: "CLAIMED"; rerunId: string; leaseExpiresAt: string }
+  | { status: "PENDING"; rerunId: string | null; retryAfter: string }
+  | { status: "COMPLETED"; artifact: PlaybookPackageArtifact }
+  | { status: "NOT_FOUND" }
+  | { status: "PLAYBOOK_MISMATCH" }
+  | { status: "PROFILE_MISMATCH" }
+  | { status: "INVALID_DELTA_SET" }
+  | { status: "DELTA_SNAPSHOT_MISMATCH" }
+  | { status: "WATCHLIST_NOT_ACTIVE" }
+  | { status: "ALREADY_SUPERSEDED" }
+  | { status: "STALE" };
+
+type SupersedingEvaluationClaimFailure =
+  | "NOT_FOUND"
+  | "PLAYBOOK_MISMATCH"
+  | "PROFILE_MISMATCH"
+  | "INVALID_DELTA_SET"
+  | "DELTA_SNAPSHOT_MISMATCH"
+  | "WATCHLIST_NOT_ACTIVE"
+  | "ALREADY_SUPERSEDED"
+  | "STALE";
+
 export class PlaybookIdempotencyConflictError extends Error {
   constructor() {
     super("Idempotency-Key was already used for a different playbook request");
     this.name = "PlaybookIdempotencyConflictError";
+  }
+}
+
+export class SupersedingEvaluationStaleError extends Error {
+  constructor() {
+    super("the pending Change-to-Action Delta snapshot changed during evaluation");
+    this.name = "SupersedingEvaluationStaleError";
   }
 }
 
@@ -121,6 +151,63 @@ export class PlaybookPackageArtifactStore {
     return this.readArtifact(metadata);
   }
 
+  async claimSupersedingEvaluation(input: {
+    basePackageId: string;
+    playbookId: string;
+    profileFingerprint: string;
+    deltaIds: string[];
+    idempotencyKey: string;
+    requestFingerprintSha256: string;
+  }): Promise<SupersedingEvaluationClaim> {
+    assertSha256(input.profileFingerprint, "profile fingerprint");
+    assertSha256(input.requestFingerprintSha256, "request fingerprint");
+    let raw: unknown;
+    try {
+      raw = await this.client.rpc<unknown>(
+        "claim_superseding_playbook_evaluation",
+        {
+          p_base_package_id: input.basePackageId,
+          p_playbook_id: input.playbookId,
+          p_profile_fingerprint: input.profileFingerprint,
+          p_delta_ids: [...input.deltaIds].sort(),
+          p_idempotency_key_sha256: hashIdempotencyKey(input.idempotencyKey),
+          p_request_fingerprint_sha256: input.requestFingerprintSha256,
+        },
+      );
+    } catch (error: unknown) {
+      if (error instanceof Error && error.message.includes("idempotency key conflict")) {
+        throw new PlaybookIdempotencyConflictError();
+      }
+      throw error;
+    }
+    if (!isRecord(raw) || typeof raw.status !== "string") {
+      throw new DataIntegrityError("invalid superseding evaluation claim response");
+    }
+    if (raw.status === "CLAIMED") {
+      return {
+        status: "CLAIMED",
+        rerunId: readRerunId(raw),
+        leaseExpiresAt: readTimestamp(raw, "leaseExpiresAt"),
+      };
+    }
+    if (raw.status === "PENDING") {
+      return {
+        status: "PENDING",
+        rerunId: raw.rerunId === undefined ? null : readRerunId(raw),
+        retryAfter: readTimestamp(raw, "retryAfter"),
+      };
+    }
+    if (raw.status === "COMPLETED") {
+      const artifact = await this.findByPackageId(readString(raw, "packageId"));
+      if (artifact === null) {
+        throw new DataIntegrityError("completed superseding evaluation has no artifact");
+      }
+      return { status: "COMPLETED", artifact };
+    }
+    if (isSupersedingClaimFailure(raw.status)) return { status: raw.status };
+    throw new DataIntegrityError("unknown superseding evaluation claim status");
+  }
+
   async persist(
     artifact: PlaybookPackageArtifact,
     idempotencyKey: string,
@@ -168,6 +255,76 @@ export class PlaybookPackageArtifactStore {
     return artifact;
   }
 
+  async persistSupersedingEvaluation(input: {
+    artifact: PlaybookPackageArtifact;
+    rerunId: string;
+    idempotencyKey: string;
+    requestFingerprintSha256: string;
+  }): Promise<PlaybookPackageArtifact> {
+    const { artifact } = input;
+    assertArtifact(artifact);
+    if (!/^rerun:[0-9a-f]{32}$/.test(input.rerunId)) {
+      throw new DataIntegrityError("invalid superseding evaluation ID");
+    }
+    assertSha256(input.requestFingerprintSha256, "request fingerprint");
+    const body = Buffer.from(stableJson(artifact), "utf8");
+    const checksumSha256 = sha256(body);
+    const pkg = artifact.package;
+    const evidenceClaimIds = readDecisionEvidenceClaimIds(artifact);
+    const objectKey = `packages/${pkg.playbookId}/${pkg.integritySha256}.json`;
+    const stored = await this.objects.putObject({
+      key: objectKey,
+      body,
+      contentType: "application/json",
+      expectedChecksumSha256: checksumSha256,
+    });
+
+    let raw: unknown;
+    try {
+      raw = await this.client.rpc<unknown>(
+        "complete_superseding_playbook_evaluation",
+        {
+          p_rerun_id: input.rerunId,
+          p_object_id: `object:playbook-package:${pkg.integritySha256.slice(0, 32)}`,
+          p_provider: "supabase-storage",
+          p_bucket: this.bucket,
+          p_object_key: objectKey,
+          p_artifact_checksum_sha256: checksumSha256,
+          p_byte_size: stored.byteSize,
+          p_content_type: stored.contentType,
+          p_package_id: pkg.packageId,
+          p_playbook_id: pkg.playbookId,
+          p_profile_fingerprint: pkg.profileFingerprint,
+          p_integrity_sha256: pkg.integritySha256,
+          p_schema_version: pkg.schemaVersion,
+          p_evaluated_at: pkg.evaluatedAt,
+          p_assurance_review_status: pkg.assurance.reviewStatus,
+          p_corpus_release_id: pkg.versions.corpusReleaseId,
+          p_retrieval_index_release_id: pkg.versions.retrievalIndexReleaseId,
+          p_dossier_id: pkg.versions.dossierId,
+          p_rules_version: pkg.versions.rulesVersion,
+          p_template_version: pkg.versions.templateVersion,
+          p_idempotency_key_sha256: hashIdempotencyKey(input.idempotencyKey),
+          p_request_fingerprint_sha256: input.requestFingerprintSha256,
+          p_evidence_claim_ids: evidenceClaimIds,
+        },
+      );
+    } catch (error: unknown) {
+      if (error instanceof Error && error.message.includes("idempotency key conflict")) {
+        throw new PlaybookIdempotencyConflictError();
+      }
+      throw error;
+    }
+    if (!isRecord(raw) || typeof raw.status !== "string") {
+      throw new DataIntegrityError("invalid superseding evaluation completion response");
+    }
+    if (raw.status === "STALE") throw new SupersedingEvaluationStaleError();
+    if (raw.status !== "COMPLETED" || readString(raw, "packageId") !== pkg.packageId) {
+      throw new DataIntegrityError("superseding evaluation completion identity mismatch");
+    }
+    return artifact;
+  }
+
   private async readArtifact(
     metadata: PlaybookPackageArtifactMetadata,
   ): Promise<PlaybookPackageArtifact> {
@@ -211,6 +368,25 @@ export function playbookRequestFingerprint(input: {
   profile: unknown;
 }): string {
   return sha256(Buffer.from(stableJson(input), "utf8"));
+}
+
+export function playbookProfileFingerprint(profile: unknown): string {
+  return sha256(Buffer.from(stableJson(profile), "utf8"));
+}
+
+export function playbookSupersedingRequestFingerprint(input: {
+  basePackageId: string;
+  playbookId: string;
+  profile: unknown;
+  deltaIds: string[];
+}): string {
+  return sha256(Buffer.from(stableJson({
+    operation: "superseding-playbook-evaluation-v1",
+    basePackageId: input.basePackageId,
+    playbookId: input.playbookId,
+    profile: input.profile,
+    deltaIds: [...input.deltaIds].sort(),
+  }), "utf8"));
 }
 
 export function parseIdempotencyKey(value: string | null): string | null {
@@ -361,6 +537,29 @@ function readTimestamp(value: Record<string, unknown>, key: string): string {
     throw new DataIntegrityError(`invalid playbook package metadata ${key}`);
   }
   return new Date(item).toISOString();
+}
+
+function readRerunId(value: Record<string, unknown>): string {
+  const rerunId = readString(value, "rerunId");
+  if (!/^rerun:[0-9a-f]{32}$/.test(rerunId)) {
+    throw new DataIntegrityError("invalid superseding evaluation ID");
+  }
+  return rerunId;
+}
+
+function isSupersedingClaimFailure(
+  value: string,
+): value is SupersedingEvaluationClaimFailure {
+  return [
+    "NOT_FOUND",
+    "PLAYBOOK_MISMATCH",
+    "PROFILE_MISMATCH",
+    "INVALID_DELTA_SET",
+    "DELTA_SNAPSHOT_MISMATCH",
+    "WATCHLIST_NOT_ACTIVE",
+    "ALREADY_SUPERSEDED",
+    "STALE",
+  ].includes(value);
 }
 
 function readReviewStatus(

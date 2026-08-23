@@ -5,9 +5,6 @@ import {
   isCitelyEntitled,
 } from "@/lib/auth/citely-service";
 import { readSupabaseConfig, SupabaseHttpClient } from "@/lib/data/supabase-client";
-import { loadDossierFile } from "@/lib/dossiers";
-import type { ProvisionalClaimRow } from "@/lib/legal-corpus/provisional-public";
-import type { BusinessProfile, EvidenceClaim } from "@/lib/playbooks/contracts";
 import { MVP_PLAYBOOKS } from "@/lib/playbooks/definitions";
 import {
   parseIdempotencyKey,
@@ -15,24 +12,15 @@ import {
   PlaybookPackageArtifactStore,
   playbookRequestFingerprint,
 } from "@/lib/playbooks/artifacts";
+import { evaluatePlaybookArtifact } from "@/lib/playbooks/package-evaluation";
 import {
-  assembleEvidenceBundle,
-  evaluatePlaybook,
-  sealPlaybookPackage,
-  type EvaluationEvidence,
-} from "@/lib/playbooks/runtime";
-import { retrievePlaybookEvidence } from "@/lib/playbooks/retrieval";
-import {
-  OpenAIQueryEmbeddingProvider,
-  readOpenAIEmbeddingConfig,
-} from "@/lib/retrieval/openai-embedding";
-import { EvidenceSearchService } from "@/lib/retrieval/search";
-import { SupabaseEvidenceRetrievalRepository } from "@/lib/retrieval/supabase-repository";
+  hasExactKeys,
+  isRecord,
+  parseBusinessProfile,
+} from "@/lib/playbooks/requests";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-const MAX_EVIDENCE_AGE_DAYS = 90;
 
 export async function OPTIONS() {
   return new Response(null, { status: 204, headers: corsHeaders() });
@@ -85,7 +73,7 @@ export async function POST(request: NextRequest) {
   })) {
     return problem(403, "entitlement-denied");
   }
-  const profile = parseProfile(body.profile);
+  const profile = parseBusinessProfile(body.profile);
   if (profile === null) return problem(400, "invalid-profile");
 
   let client: SupabaseHttpClient;
@@ -138,20 +126,9 @@ export async function POST(request: NextRequest) {
     return problem(503, "playbook-persistence-unavailable");
   }
 
-  let evidence: EvaluationEvidence;
+  let artifact;
   try {
-    const rows = await client.rest<ProvisionalClaimRow[]>(
-      "public_provisional_claims?jurisdiction_code=eq.EEA&order=claim_id.asc",
-    );
-    evidence = {
-      claims: rows.map(toEvidenceClaim),
-      dossier:
-        profile.asset?.symbol === "USDC"
-          ? await loadDossierFile("data/dossiers/usdc-eea.json")
-          : null,
-      now: new Date().toISOString(),
-      maxEvidenceAgeDays: MAX_EVIDENCE_AGE_DAYS,
-    };
+    artifact = await evaluatePlaybookArtifact({ client, definition, profile });
   } catch (error: unknown) {
     console.error(
       `playbook evidence unavailable: ${error instanceof Error ? error.message : "unknown error"}`,
@@ -159,37 +136,6 @@ export async function POST(request: NextRequest) {
     return problem(503, "evidence-unavailable");
   }
 
-  const conclusions = evaluatePlaybook(definition, profile, evidence);
-  let retrievalService: EvidenceSearchService | null = null;
-  try {
-    retrievalService = new EvidenceSearchService(
-      new SupabaseEvidenceRetrievalRepository(client),
-      new OpenAIQueryEmbeddingProvider(readOpenAIEmbeddingConfig()),
-    );
-  } catch {
-    // Retrieval is an optional evidence layer. Configuration failure is
-    // represented inside EvidenceBundle and cannot fail or alter decisions.
-  }
-  const retrieval = await retrievePlaybookEvidence(
-    retrievalService,
-    definition,
-    conclusions,
-    evidence,
-  );
-  const playbookPackage = sealPlaybookPackage(
-    definition,
-    profile,
-    conclusions,
-    evidence,
-    retrieval,
-  );
-  const evidenceBundle = assembleEvidenceBundle(
-    playbookPackage,
-    evidence,
-    retrieval,
-  );
-
-  const artifact = { package: playbookPackage, evidenceBundle };
   try {
     await artifacts.persist(artifact, idempotencyKey, requestFingerprint);
   } catch (error: unknown) {
@@ -206,81 +152,6 @@ export async function POST(request: NextRequest) {
     artifact,
     { status: 201, headers: { ...corsHeaders(), "Cache-Control": "no-store" } },
   );
-}
-
-function toEvidenceClaim(row: ProvisionalClaimRow): EvidenceClaim {
-  return {
-    claimId: row.claim_id,
-    topic: row.topic,
-    legalStatus: row.legal_status,
-    proposition: row.proposition,
-    citations: row.citations,
-    releaseId: row.release_id,
-    asOf: row.as_of,
-    knowledgeCutoff: row.knowledge_cutoff,
-    confidence: row.confidence,
-    limitations: row.limitations,
-  };
-}
-
-function parseProfile(input: unknown): BusinessProfile | null {
-  if (!isRecord(input)) return null;
-  const candidate = input;
-  const allowedKeys = candidate.asset === undefined
-    ? ["operatorJurisdiction", "targetJurisdiction", "activities"]
-    : ["operatorJurisdiction", "targetJurisdiction", "activities", "asset"];
-  if (
-    !hasExactKeys(candidate, allowedKeys) ||
-    typeof candidate.operatorJurisdiction !== "string" ||
-    candidate.operatorJurisdiction.length === 0 ||
-    candidate.targetJurisdiction !== "EEA" ||
-    !Array.isArray(candidate.activities) ||
-    candidate.activities.length === 0 ||
-    !candidate.activities.every(
-      (activity) => typeof activity === "string" && activity.length > 0,
-    ) ||
-    new Set(candidate.activities).size !== candidate.activities.length
-  ) {
-    return null;
-  }
-  let asset: BusinessProfile["asset"] = null;
-  if (candidate.asset !== null && candidate.asset !== undefined) {
-    if (!isRecord(candidate.asset)) return null;
-    const rawAsset = candidate.asset;
-    if (
-      !hasExactKeys(rawAsset, ["symbol", "networks"]) ||
-      typeof rawAsset.symbol !== "string" ||
-      rawAsset.symbol.length === 0 ||
-      !Array.isArray(rawAsset.networks) ||
-      !rawAsset.networks.every(
-        (network) => typeof network === "string" && network.length > 0,
-      ) ||
-      new Set(rawAsset.networks).size !== rawAsset.networks.length
-    ) {
-      return null;
-    }
-    asset = { symbol: rawAsset.symbol, networks: rawAsset.networks as string[] };
-  }
-  return {
-    operatorJurisdiction: candidate.operatorJurisdiction,
-    targetJurisdiction: "EEA",
-    activities: candidate.activities as string[],
-    asset,
-  };
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
-
-function hasExactKeys(
-  value: Record<string, unknown>,
-  expected: string[],
-): boolean {
-  const actual = Object.keys(value).sort();
-  const expectedSorted = [...expected].sort();
-  return actual.length === expectedSorted.length
-    && actual.every((key, index) => key === expectedSorted[index]);
 }
 
 function problem(

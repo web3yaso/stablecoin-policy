@@ -608,10 +608,13 @@ public keys, deploying, and invoking the smoke remain rollout actions.
 
 Status: event/impact candidate infrastructure exists. Package dependency
 indexing was merged as PR #63 and immutable package-derived watchlists were
-merged as PR #64. Migrations `0031`/`0032` are not yet applied to production.
-The pull-based Change-to-Action Delta slice was merged as PR #65. The first
-webhook delivery slice is implemented locally on `codex/change-delta-webhooks`;
-email delivery and superseding evaluations are not started.
+merged as PR #64. The pull-based Change-to-Action Delta slice was merged as PR
+#65 and the first webhook delivery slice as PR #66. The superseding-evaluation
+implementation is in PR #67. Production migrations `0031`–`0035` were applied
+in order on 2026-08-20 against an empty package/event monitoring state after
+private backups and a linked dry-run. Receiver configuration, scheduler
+activation, PR #67 application deployment, and signed end-to-end smoke remain
+rollout work; no production change event may be published before those gates.
 
 ### Monitoring graph
 
@@ -686,15 +689,42 @@ Quint model has 13 scenarios, nine invariants, and nine witnesses; migration
 tests add 44 pgTAP assertions. Production receiver setup, migration, secrets,
 schedule selection, deployment, and signed smoke remain rollout work.
 
+Superseding-evaluation contract approved (2026-08-19): Citely explicitly
+resubmits the original Business Profile and exact current pending delta set for
+one base package. The profile fingerprint must match the immutable base package;
+a changed profile is a normal new package, not a rerun. A new delta appearing
+during evaluation makes completion stale and requires a refreshed request
+fingerprint over the full snapshot. Success atomically creates one immutable
+successor, records lineage and exact delta coverage, supersedes the old
+watchlist, and activates the successor watchlist. Exact replay returns the same
+successor; webhooks never trigger a rerun automatically. The executable Quint
+model and 14 scenarios are complete; see
+`docs/superpowers/plans/2026-08-19-superseding-playbook-evaluations.md`.
+
+Superseding-evaluation implementation checkpoint (2026-08-20): migration
+`0035` adds private rerun attempts, immutable package lineage and exact delta
+coverage, a controlled `ACTIVE` to `SUPERSEDED` transition, and claim/completion
+RPCs that serialize with delta materialization. Authenticated `POST
+/v1/playbook-packages/{id}/rerun` requires a signed `playbook:execute` token
+targeting both the exact playbook and base package; the legacy unscoped key is
+rejected. It reuses the deterministic runtime and unchanged artifact response,
+stores no raw profile, and returns typed stale/idempotency conflicts. Local
+migrations through `0035`, 34 new and 409 total pgTAP assertions, request/token
+contracts, route/store/auth tests, and the Quint gate pass. Later on 2026-08-20,
+production migrations `0031`–`0035` were applied after private backups and a
+linked dry-run; migration history and database lint pass, normalized business
+data is unchanged, and every new monitoring table is empty. Receiver secrets,
+scheduler activation, application deployment, and signed smoke remain open.
+
 ### Customer delivery
 
 - implement watchlist creation from completed packages; implemented in PR #64;
 - expose change-to-action deltas to Citely; merged in PR #65 as a cursor-based
   pull API, pending production rollout;
-- use webhook as the first notification channel; implemented locally for one
+- use webhook as the first notification channel; merged in PR #66 for one
   deployment-level Citely receiver;
-- sign webhook payloads, retry safely, and provide delivery audit; implemented
-  locally with migration `0034` and the protected cron dispatcher;
+- sign webhook payloads, retry safely, and provide delivery audit; merged with
+  migration `0034` and the protected cron dispatcher;
 - include affected package, evidence change, status, actions, assurance, and
   required customer response;
 - add notification throttling, deduplication, and replay; bounded batch claims,
