@@ -3,7 +3,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set search_path = public, extensions, policy, regulatory;
 
-select plan(34);
+select plan(48);
 
 insert into policy.storage_objects (
   object_id, provider, bucket, object_key, checksum_sha256, byte_size,
@@ -297,6 +297,29 @@ select is(
   0,
   'stale completion registers no successor package metadata'
 );
+select is(
+  (select count(*)::integer from policy.playbook_package_delta_coverage),
+  0,
+  'stale completion creates no delta coverage'
+);
+select is(
+  (select count(*)::integer from policy.playbook_package_claim_dependencies
+   where package_id = 'package:stablecoin-pre-listing:bbbbbbbbbbbbbbbb'),
+  0,
+  'stale completion creates no successor dependencies'
+);
+select is(
+  (select count(*)::integer from policy.playbook_package_watchlists
+   where package_id = 'package:stablecoin-pre-listing:bbbbbbbbbbbbbbbb'),
+  0,
+  'stale completion creates no successor watchlist'
+);
+select is(
+  (select count(*)::integer from policy.storage_objects
+   where object_id = 'object:playbook-package:' || left(repeat('b', 64), 32)),
+  0,
+  'stale completion creates no successor storage metadata'
+);
 
 create temporary table refreshed_snapshot as
 select array_agg(delta_id order by delta_id) as delta_ids
@@ -323,6 +346,125 @@ select rerun_id
 from policy.playbook_package_rerun_attempts
 where idempotency_key_sha256 = repeat('5', 64);
 grant select on refreshed_attempt to service_role;
+
+savepoint injected_completion_failure;
+
+insert into policy.storage_objects (
+  object_id, provider, bucket, object_key, checksum_sha256, byte_size,
+  content_type, encryption_state
+) values (
+  'object:superseding-test:blocker', 'supabase-storage', 'policy-playbooks',
+  'tests/superseding/blocker.json', repeat('d', 64), 100,
+  'application/json', 'PROVIDER_ENCRYPTED'
+);
+
+insert into policy.playbook_packages (
+  package_id, playbook_id, profile_fingerprint, artifact_object_id,
+  artifact_checksum_sha256, integrity_sha256, schema_version, evaluated_at,
+  assurance_review_status, corpus_release_id, retrieval_index_release_id,
+  dossier_id, rules_version, template_version
+) values (
+  'package:stablecoin-pre-listing:cccccccccccccccc',
+  'stablecoin-pre-listing', repeat('a', 64),
+  'object:superseding-test:blocker', repeat('d', 64), repeat('e', 64),
+  '1.1.0', now(), 'PROVISIONAL', 'provisional:superseding-test:eea:1', null,
+  'usdc-eea', '1.0.0', '1.0.0'
+);
+
+insert into policy.playbook_package_claim_dependencies (
+  package_id, claim_id, dependency_basis
+) values (
+  'package:stablecoin-pre-listing:cccccccccccccccc',
+  'claim:superseding-test:matching', 'DECISION_EVIDENCE'
+);
+
+insert into policy.playbook_package_watchlists (
+  watchlist_id, package_id, watchlist_state
+) values (
+  'watchlist:' || substr(encode(extensions.digest(convert_to(
+    'playbook-watchlist-v1:package:stablecoin-pre-listing:bbbbbbbbbbbbbbbb',
+    'UTF8'
+  ), 'sha256'), 'hex'), 1, 32),
+  'package:stablecoin-pre-listing:cccccccccccccccc', 'ACTIVE'
+);
+
+set local role service_role;
+
+select throws_ok(
+  $sql$
+    select policy.complete_superseding_playbook_evaluation(
+      (select rerun_id from refreshed_attempt),
+      'object:playbook-package:' || left(repeat('b', 64), 32),
+      'supabase-storage', 'policy-playbooks',
+      'packages/stablecoin-pre-listing/' || repeat('b', 64) || '.json',
+      repeat('c', 64), 200, 'application/json',
+      'package:stablecoin-pre-listing:bbbbbbbbbbbbbbbb',
+      'stablecoin-pre-listing', repeat('a', 64), repeat('b', 64), '1.1.0',
+      now(), 'PROVISIONAL', 'provisional:superseding-test:eea:1', null,
+      'usdc-eea', '1.0.0', '1.0.0', repeat('5', 64), repeat('6', 64),
+      array['claim:superseding-test:matching']
+    )
+  $sql$,
+  'query returned no rows',
+  'a late successor watchlist failure aborts completion'
+);
+
+reset role;
+
+select is(
+  (select count(*)::integer from policy.playbook_packages
+   where package_id = 'package:stablecoin-pre-listing:bbbbbbbbbbbbbbbb'),
+  0,
+  'failed completion rolls back successor package metadata'
+);
+select is(
+  (select count(*)::integer from policy.storage_objects
+   where object_id = 'object:playbook-package:' || left(repeat('b', 64), 32)),
+  0,
+  'failed completion rolls back successor storage metadata'
+);
+select is(
+  (select count(*)::integer from policy.playbook_package_lineage),
+  0,
+  'failed completion rolls back lineage'
+);
+select is(
+  (select count(*)::integer from policy.playbook_package_delta_coverage),
+  0,
+  'failed completion rolls back delta coverage'
+);
+select is(
+  (select watchlist_state from policy.playbook_package_watchlists
+   where package_id = 'package:stablecoin-pre-listing:aaaaaaaaaaaaaaaa'),
+  'ACTIVE',
+  'failed completion restores the base watchlist state'
+);
+select is(
+  (select state from policy.playbook_package_idempotency
+   where idempotency_key_sha256 = repeat('5', 64)),
+  'PENDING',
+  'failed completion leaves the idempotency record retryable'
+);
+select is(
+  (select rerun_state from policy.playbook_package_rerun_attempts
+   where idempotency_key_sha256 = repeat('5', 64)),
+  'CLAIMED',
+  'failed completion leaves the rerun claim retryable'
+);
+select is(
+  (select count(*)::integer from policy.playbook_package_watchlists
+   where package_id = 'package:stablecoin-pre-listing:bbbbbbbbbbbbbbbb'),
+  0,
+  'failed completion rolls back the successor watchlist'
+);
+select is(
+  (select count(*)::integer from policy.playbook_package_claim_dependencies
+   where package_id = 'package:stablecoin-pre-listing:bbbbbbbbbbbbbbbb'),
+  0,
+  'failed completion rolls back successor dependencies'
+);
+
+rollback to savepoint injected_completion_failure;
 
 set local role service_role;
 
