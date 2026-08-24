@@ -30,6 +30,7 @@
     "db:phase2:start": "npx --yes supabase@2.114.0 start -x realtime,imgproxy,studio,postgres-meta,edge-runtime,logflare,vector,supavisor",
     "db:phase2:stop": "npx --yes supabase@2.114.0 stop --no-backup",
     "test:db:phase2": "npx --yes supabase@2.114.0 test db --local supabase/tests",
+    "test:db:phase2:concurrency": "bash scripts/ci/test-superseding-evaluation-concurrency.sh",
     "storage:publish": "node --import tsx scripts/migrate/publish-phase1-data.ts",
     "storage:restore": "node --import tsx scripts/migrate/restore-release.ts",
     "storage:backup-metadata": "node --import tsx scripts/migrate/export-phase1-metadata.ts",

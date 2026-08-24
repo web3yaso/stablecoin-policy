@@ -83,6 +83,9 @@ jobs:
       - name: Run Phase 2 PostgreSQL transaction tests
         run: npm run test:db:phase2
 
+      - name: Run superseding evaluation concurrency test
+        run: npm run test:db:phase2:concurrency
+
       - name: Stop isolated Supabase services
         if: always()
         run: npm run db:phase2:stop

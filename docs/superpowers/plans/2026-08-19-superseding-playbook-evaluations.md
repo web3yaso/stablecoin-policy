@@ -92,8 +92,9 @@ base package before evaluation.
    OpenAPI operation, typed conflict responses, and consumer examples needed
    to call the endpoint.
 5. Add pgTAP coverage for locks, stale snapshots, exact delta sets, direct-write
-   denial, atomic rollback, one successor, and exact replay; add auth, parser,
-   route, artifact, privacy, OpenAPI, and regression tests.
+   denial, atomic rollback, one successor, and exact replay; add a true
+   two-session PostgreSQL claim race plus auth, parser, route, artifact,
+   privacy, OpenAPI, and regression tests.
 6. Update operations and canonical status documents. Production rollout stays
    ordered behind the Citely receiver and migrations `0031`–`0034`; apply
    `0035`, deploy, and run signed create/delta/rerun/replay smokes only after
@@ -105,10 +106,10 @@ base package before evaluation.
 |---|---|---|
 | explicit exact-package rerun | Citely entitlement + rerun route | auth/route denial tests |
 | matching Business Profile | canonical fingerprint comparison | mismatch and privacy tests |
-| complete current delta snapshot | claim/completion RPC locks | stale and concurrent pgTAP |
+| complete current delta snapshot | claim/completion RPC locks | stale pgTAP and two-session concurrency test |
 | immutable history | append-only package/artifact/lineage rows | trigger and artifact replay tests |
 | atomic successor handoff | one security-definer completion RPC | transaction rollback pgTAP |
-| one successor | unique base-package lineage and rerun key | concurrency pgTAP |
+| one successor | unique base-package lineage and rerun key | two-session claim race and pgTAP cardinality checks |
 | exact replay | request fingerprint + idempotency binding | route, store, and artifact equality tests |
 | unchanged Citely renderer | existing response schema | contract fixture validation |
 
@@ -122,8 +123,11 @@ base package before evaluation.
   service key.
 - The existing artifact store and deterministic runtime are reused; raw
   profiles are fingerprinted in memory and are not persisted.
-- Local migrations `0001`–`0035` apply from zero. The new pgTAP file passes
-  34/34 assertions and the full database suite passes 409/409 assertions.
+- Local migrations `0001`–`0035` apply from zero. The superseding-evaluation
+  pgTAP file passes 48/48 assertions, including late-failure transaction
+  rollback and zero-partial-write checks for stale snapshots. The separate
+  two-session PostgreSQL test produces exactly one `CLAIMED`, one `PENDING`,
+  and one durable rerun row; the complete database suite remains a CI gate.
 - Quint passes 14 scenarios, 11 invariants, 7 witnesses, and 5,000 sampled
   traces. TypeScript, contract, route, auth, privacy, stale, and replay tests
   are registered in the repository quality gates.
