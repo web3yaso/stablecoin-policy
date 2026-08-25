@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/monitoring-eval-case.schema.json",
+  "title": "MonitoringEvalCase v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "caseId", "scope", "severity", "event", "watchlists", "expectedAffectedPackageIds"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "caseId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,160}$" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["jurisdictionCode", "assetId", "playbookId"],
+      "properties": {
+        "jurisdictionCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9-]{1,15}$" },
+        "assetId": { "type": ["string", "null"], "minLength": 1 },
+        "playbookId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{2,80}$" }
+      }
+    },
+    "severity": { "enum": ["CONTROL", "MATERIAL", "CRITICAL"] },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "impacts"],
+      "properties": {
+        "state": { "enum": ["CANDIDATE", "REVIEWED", "PUBLISHED"] },
+        "impacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["claimId", "impactType", "reviewState"],
+            "properties": {
+              "claimId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,160}$" },
+              "impactType": { "enum": ["MAY_AFFECT", "INVALIDATES", "SUPERSEDES", "DEADLINE"] },
+              "reviewState": { "enum": ["PENDING", "REVIEWED", "DISMISSED"] }
+            }
+          }
+        }
+      }
+    },
+    "watchlists": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["packageId", "state", "dependencyClaimIds"],
+        "properties": {
+          "packageId": { "type": "string", "pattern": "^package:[a-z0-9-]+:[0-9a-f]{16}$" },
+          "state": { "enum": ["ACTIVE", "SUPERSEDED"] },
+          "dependencyClaimIds": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,160}$" }
+          }
+        }
+      }
+    },
+    "expectedAffectedPackageIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^package:[a-z0-9-]+:[0-9a-f]{16}$" }
+    }
+  }
+}

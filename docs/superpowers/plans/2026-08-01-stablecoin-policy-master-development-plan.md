@@ -716,6 +716,18 @@ linked dry-run; migration history and database lint pass, normalized business
 data is unchanged, and every new monitoring table is empty. Receiver secrets,
 scheduler activation, application deployment, and signed smoke remain open.
 
+Monitoring-eval checkpoint (2026-08-24): branch
+`codex/phase6-monitoring-eval` turns the formal known affected-package recall
+and critical-miss thresholds into an executable per-scope CI gate. The
+versioned sanitized dataset covers both MVP playbook scopes and the exact
+published-event, reviewed-impact, immutable claim-dependency, and active-
+watchlist boundary. The deterministic report includes recall, critical
+misses, false positives, exact-case accuracy, stable dataset identity, and
+explicit limitations. Passing this isolated monitoring gate does not activate
+broad self-service or replace source, retrieval, deterministic-rule, privacy,
+assurance, contract, or release gates. See
+`docs/superpowers/plans/2026-08-24-phase6-monitoring-eval.md`.
+
 ### Customer delivery
 
 - implement watchlist creation from completed packages; implemented in PR #64;

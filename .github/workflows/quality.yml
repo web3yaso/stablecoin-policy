@@ -45,6 +45,7 @@ jobs:
       - run: npm run eval:phase1
       - run: npm run eval:phase2
       - run: npm run eval:phase3
+      - run: npm run eval:phase6
       - run: npm run spec:phase2
       - run: npm run spec:rag
       - run: npm run spec:playbook
