@@ -19,6 +19,12 @@
       "purpose": "Reviewed-evidence publication gates and legal-authority separation cases",
       "split": "regression",
       "reviewState": "REVIEWED"
+    },
+    {
+      "path": "monitoring-events.jsonl",
+      "purpose": "Sanitized Phase 6 affected-package recall, critical-miss, false-positive, and monitoring-boundary cases",
+      "split": "regression",
+      "reviewState": "MACHINE_ASSURED"
     }
   ]
 }

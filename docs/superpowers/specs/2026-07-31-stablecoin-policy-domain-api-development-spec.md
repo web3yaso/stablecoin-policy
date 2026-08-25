@@ -1040,6 +1040,19 @@ collections are empty. Receiver configuration, scheduler activation, PR #67
 deployment, and signed end-to-end smoke remain separate rollout blockers; no
 production change event may be published before they are complete.
 
+Monitoring-eval checkpoint (2026-08-24): the formal monitoring quality gates
+are executable on `codex/phase6-monitoring-eval`. A strict versioned sanitized
+JSONL dataset covers both MVP playbook scopes and the existing SQL boundary:
+only a `PUBLISHED` event with a `REVIEWED` exact claim impact may affect an
+`ACTIVE` package-derived watchlist. The deterministic report calculates known
+affected-package recall, critical misses, false positives, and exact-case
+accuracy globally and per scope, with a stable dataset identity and explicit
+limitations. CI requires at least one known affected package, `0.95` recall,
+zero critical misses, and zero false-positive package matches for every
+included scope. This is one component
+of self-service readiness only; it cannot replace or bypass the other Section
+13 gates and does not activate a self-service scope registry.
+
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
 
 ### Phase 7 — legacy-domain extraction
