@@ -728,6 +728,17 @@ broad self-service or replace source, retrieval, deterministic-rule, privacy,
 assurance, contract, or release gates. See
 `docs/superpowers/plans/2026-08-24-phase6-monitoring-eval.md`.
 
+Scope-readiness composition checkpoint (2026-08-25): branch
+`codex/self-service-scope-readiness` implements a deterministic policy `1.0.0`
+report for an exact jurisdiction/asset/playbook combination. It composes eight
+grouped Section 13 gates and fails closed with stable codes for missing,
+failed, duplicate, future, expired, or cross-scope evidence. Evidence records
+pin report ID, schema, artifact checksum, assurance, and validity; the first
+typed adapter derives monitoring evidence from the exact per-scope monitoring
+metrics. Every result remains `NOT_ACTIVATED`, and the slice adds no route,
+database state, or activation mechanism. See
+`docs/superpowers/plans/2026-08-25-self-service-scope-readiness.md`.
+
 ### Customer delivery
 
 - implement watchlist creation from completed packages; implemented in PR #64;
@@ -747,6 +758,8 @@ assurance, contract, or release gates. See
 - collect production error and correction cases as regressions;
 - measure decision, action, retrieval, and monitoring quality by supported
   jurisdiction/asset/capability combination;
+- compose all current gates into a strict versioned per-scope readiness
+  report; implemented locally on `codex/self-service-scope-readiness`;
 - enable self-service only for combinations meeting all current gates;
 - keep unsupported combinations typed and blocked;
 - introduce optional human-reviewed commercial tiers when reviewers exist;

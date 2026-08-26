@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/self-service-scope-readiness-input.schema.json",
+  "title": "SelfServiceScopeReadinessInput v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "policyVersion", "asOf", "scope", "gateEvidence"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "policyVersion": { "const": "1.0.0" },
+    "asOf": { "type": "string", "format": "date-time" },
+    "scope": { "$ref": "#/$defs/scope" },
+    "gateEvidence": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gateEvidence" }
+    }
+  },
+  "$defs": {
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["jurisdictionCode", "assetId", "playbookId"],
+      "properties": {
+        "jurisdictionCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9-]{1,15}$" },
+        "assetId": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{1,100}$" }
+          ]
+        },
+        "playbookId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{2,80}$" }
+      }
+    },
+    "gateId": {
+      "enum": [
+        "SOURCE_AND_GROUNDING",
+        "RETRIEVAL_AND_RAG",
+        "DETERMINISTIC_RULE_AND_ACTION",
+        "PRIVACY",
+        "ASSURANCE_LABEL",
+        "CONTRACT_AND_REPLAY",
+        "RELEASE",
+        "MONITORING"
+      ]
+    },
+    "gateEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gateId", "scopeId", "reportId", "reportSchemaVersion",
+        "artifactSha256", "outcome", "assuranceTier", "evaluatedAt", "validUntil"
+      ],
+      "properties": {
+        "gateId": { "$ref": "#/$defs/gateId" },
+        "scopeId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,200}$" },
+        "reportId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,200}$" },
+        "reportSchemaVersion": { "type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$" },
+        "artifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "outcome": { "enum": ["PASSED", "FAILED"] },
+        "assuranceTier": { "enum": ["MACHINE_ASSURED", "HUMAN_REVIEWED"] },
+        "evaluatedAt": { "type": "string", "format": "date-time" },
+        "validUntil": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}
