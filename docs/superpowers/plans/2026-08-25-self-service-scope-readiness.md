@@ -1,7 +1,7 @@
 # Phase 6 Self-Service Scope Readiness — Implementation Plan
 
-Status: implemented and verified locally on
-`codex/self-service-scope-readiness`; pull request pending.
+Status: implemented and verified on `codex/self-service-scope-readiness`;
+production activation is explicitly out of scope.
 
 ## Goal
 
