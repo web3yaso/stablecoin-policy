@@ -1053,6 +1053,19 @@ included scope. This is one component
 of self-service readiness only; it cannot replace or bypass the other Section
 13 gates and does not activate a self-service scope registry.
 
+Scope-readiness composition checkpoint (2026-08-25): branch
+`codex/self-service-scope-readiness` adds policy version `1.0.0` and strict
+input/report contracts for one exact jurisdiction, asset, and playbook scope.
+All source/grounding, retrieval/RAG, deterministic-rule/action, privacy,
+assurance-label, contract/replay, release, and monitoring evidence must be
+present exactly once, passing, scope-matched, and current at the report's
+`asOf`. Missing, duplicate, failed, cross-scope, future, and expired evidence
+produces stable blockers. The monitoring record is derived from the actual
+per-scope monitoring report rather than asserted manually. The pure report is
+deterministic, excludes customer and rule data, and always states
+`NOT_ACTIVATED`; no API, migration, registry, or production activation is part
+of this checkpoint.
+
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
 
 ### Phase 7 — legacy-domain extraction

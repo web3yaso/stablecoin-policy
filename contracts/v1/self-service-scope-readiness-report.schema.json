@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/self-service-scope-readiness-report.schema.json",
+  "title": "SelfServiceScopeReadinessReport v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "policyVersion", "readinessReportId", "asOf", "scopeId",
+    "scope", "requiredGateIds", "gateResults", "blockerCodes", "outcome",
+    "readinessAssuranceTier", "activationState", "limitations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "policyVersion": { "const": "1.0.0" },
+    "readinessReportId": { "type": "string", "pattern": "^scope-readiness:[0-9a-f]{64}$" },
+    "asOf": { "type": "string", "format": "date-time" },
+    "scopeId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,200}$" },
+    "scope": { "$ref": "self-service-scope-readiness-input.schema.json#/$defs/scope" },
+    "requiredGateIds": {
+      "const": [
+        "SOURCE_AND_GROUNDING",
+        "RETRIEVAL_AND_RAG",
+        "DETERMINISTIC_RULE_AND_ACTION",
+        "PRIVACY",
+        "ASSURANCE_LABEL",
+        "CONTRACT_AND_REPLAY",
+        "RELEASE",
+        "MONITORING"
+      ]
+    },
+    "gateResults": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/gateResult" }
+    },
+    "blockerCodes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^SCOPE_GATE_(MISSING|DUPLICATE|SCOPE_MISMATCH|NOT_YET_VALID|EXPIRED|FAILED):(SOURCE_AND_GROUNDING|RETRIEVAL_AND_RAG|DETERMINISTIC_RULE_AND_ACTION|PRIVACY|ASSURANCE_LABEL|CONTRACT_AND_REPLAY|RELEASE|MONITORING)$"
+      }
+    },
+    "outcome": { "enum": ["READY", "BLOCKED"] },
+    "readinessAssuranceTier": {
+      "enum": ["MACHINE_ASSURED", "HUMAN_REVIEWED", null]
+    },
+    "activationState": { "const": "NOT_ACTIVATED" },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "gateId": {
+      "enum": [
+        "SOURCE_AND_GROUNDING",
+        "RETRIEVAL_AND_RAG",
+        "DETERMINISTIC_RULE_AND_ACTION",
+        "PRIVACY",
+        "ASSURANCE_LABEL",
+        "CONTRACT_AND_REPLAY",
+        "RELEASE",
+        "MONITORING"
+      ]
+    },
+    "gateResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gateId", "status", "reportId", "reportSchemaVersion",
+        "artifactSha256", "assuranceTier", "evaluatedAt", "validUntil",
+        "blockerCode"
+      ],
+      "properties": {
+        "gateId": { "$ref": "#/$defs/gateId" },
+        "status": {
+          "enum": [
+            "PASSED", "FAILED", "MISSING", "DUPLICATE", "SCOPE_MISMATCH",
+            "NOT_YET_VALID", "EXPIRED"
+          ]
+        },
+        "reportId": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,200}$" }
+          ]
+        },
+        "reportSchemaVersion": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$" }
+          ]
+        },
+        "artifactSha256": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          ]
+        },
+        "assuranceTier": { "enum": ["MACHINE_ASSURED", "HUMAN_REVIEWED", null] },
+        "evaluatedAt": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "format": "date-time" }
+          ]
+        },
+        "validUntil": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "format": "date-time" }
+          ]
+        },
+        "blockerCode": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "string",
+              "pattern": "^SCOPE_GATE_(MISSING|DUPLICATE|SCOPE_MISMATCH|NOT_YET_VALID|EXPIRED|FAILED):(SOURCE_AND_GROUNDING|RETRIEVAL_AND_RAG|DETERMINISTIC_RULE_AND_ACTION|PRIVACY|ASSURANCE_LABEL|CONTRACT_AND_REPLAY|RELEASE|MONITORING)$"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

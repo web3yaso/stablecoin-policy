@@ -34,6 +34,14 @@ presentation-safe result of creating one immutable `ACTIVE` watchlist from an
 exact completed package. The payload contains no customer, subscription,
 entitlement, profile, or delivery configuration.
 
+`v1/self-service-scope-readiness-input.schema.json` and
+`v1/self-service-scope-readiness-report.schema.json` define the internal Phase
+6 composition artifact for one exact jurisdiction, asset, and playbook scope.
+The report fails closed on missing, failed, duplicate, stale, future, or
+cross-scope gate evidence and always returns `activationState=NOT_ACTIVATED`.
+It is not a public API or an authorization to create a self-service registry
+entry.
+
 Phase 0 starts with the existing report compatibility surface. New domain schemas must use JSON Schema 2020-12, reject unknown properties by default, define explicit null behavior, and remain immutable after publication. Breaking changes require a new major directory.
 
 Phase 2 adds reviewed legal-claim contracts. Discovery records from news or
