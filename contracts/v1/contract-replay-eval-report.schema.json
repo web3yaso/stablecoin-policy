@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/contract-replay-eval-report.schema.json",
+  "title": "ContractReplayEvalReport v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "datasetId", "thresholds", "caseCount", "scopes", "results", "outcome", "limitations"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "datasetId": { "type": "string", "pattern": "^contract-replay-eval:[0-9a-f]{32}$" },
+    "thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimumCasesPerScope", "requestContractPassRate", "responseContractPassRate", "replayExactMatchRate", "packageIntegrityPassRate", "referentialIntegrityPassRate"],
+      "properties": {
+        "minimumCasesPerScope": { "const": 1 },
+        "requestContractPassRate": { "const": 1 },
+        "responseContractPassRate": { "const": 1 },
+        "replayExactMatchRate": { "const": 1 },
+        "packageIntegrityPassRate": { "const": 1 },
+        "referentialIntegrityPassRate": { "const": 1 }
+      }
+    },
+    "caseCount": { "type": "integer", "minimum": 1 },
+    "scopes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scopeId", "jurisdictionCode", "assetId", "playbookId", "caseCount", "requestContractPassRate", "responseContractPassRate", "replayExactMatchRate", "packageIntegrityPassRate", "referentialIntegrityPassRate", "contractReplayGatePassed"],
+        "properties": {
+          "scopeId": { "type": "string", "minLength": 1 },
+          "jurisdictionCode": { "type": "string", "minLength": 1 },
+          "assetId": { "type": ["string", "null"] },
+          "playbookId": { "type": "string", "minLength": 1 },
+          "caseCount": { "type": "integer", "minimum": 1 },
+          "requestContractPassRate": { "type": "number", "minimum": 0, "maximum": 1 },
+          "responseContractPassRate": { "type": "number", "minimum": 0, "maximum": 1 },
+          "replayExactMatchRate": { "type": "number", "minimum": 0, "maximum": 1 },
+          "packageIntegrityPassRate": { "type": "number", "minimum": 0, "maximum": 1 },
+          "referentialIntegrityPassRate": { "type": "number", "minimum": 0, "maximum": 1 },
+          "contractReplayGatePassed": { "type": "boolean" }
+        }
+      }
+    },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["caseId", "scopeId", "requestArtifactSha256", "responseArtifactSha256", "requestContractValid", "responseContractValid", "replayExactMatch", "packageIntegrityValid", "referentialIntegrityValid", "exactMatch"],
+        "properties": {
+          "caseId": { "type": "string", "minLength": 1 },
+          "scopeId": { "type": "string", "minLength": 1 },
+          "requestArtifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "responseArtifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "requestContractValid": { "type": "boolean" },
+          "responseContractValid": { "type": "boolean" },
+          "replayExactMatch": { "type": "boolean" },
+          "packageIntegrityValid": { "type": "boolean" },
+          "referentialIntegrityValid": { "type": "boolean" },
+          "exactMatch": { "type": "boolean" }
+        }
+      }
+    },
+    "outcome": { "enum": ["PASSED", "FAILED"] },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  }
+}

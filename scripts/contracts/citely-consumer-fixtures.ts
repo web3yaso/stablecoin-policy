@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { loadDossierFile } from "../../lib/dossiers";
 import type {
   BusinessProfile,
@@ -28,14 +29,14 @@ const FIXTURE_DIRECTORY = path.join(
 const NOW = "2026-08-12T12:00:00.000Z";
 const RELEASE_ID = "provisional:eea:mica:2026-08-02";
 
-type CreateRequest = {
+export type CreateRequest = {
   playbookId:
     | "stablecoin-pre-listing"
     | "business-model-regulatory-boundary";
   profile: BusinessProfile;
 };
 
-type ConsumerFixture = {
+export type ConsumerFixture = {
   slug: string;
   request: CreateRequest;
   response: PlaybookPackageArtifact;
@@ -178,7 +179,7 @@ function unavailableRetrieval(): EvidenceSearchResponse {
   };
 }
 
-async function buildFixtures(): Promise<ConsumerFixture[]> {
+export async function buildCitelyConsumerFixtures(): Promise<ConsumerFixture[]> {
   const allClaims = claims();
   const dossier = await loadDossierFile("data/dossiers/usdc-eea.json");
   const preListingProfile: BusinessProfile = {
@@ -253,13 +254,13 @@ function buildFixture(
   };
 }
 
-function serialize(value: unknown): string {
+export function serializeCitelyConsumerFixture(value: unknown): string {
   return `${JSON.stringify(value, null, 2)}\n`;
 }
 
 async function run(): Promise<void> {
   const write = process.argv.includes("--write");
-  const fixtures = await buildFixtures();
+  const fixtures = await buildCitelyConsumerFixtures();
   if (write) await mkdir(FIXTURE_DIRECTORY, { recursive: true });
   const stale: string[] = [];
   for (const fixture of fixtures) {
@@ -271,7 +272,7 @@ async function run(): Promise<void> {
         FIXTURE_DIRECTORY,
         `${fixture.slug}.${suffix}.json`,
       );
-      const expected = serialize(value);
+      const expected = serializeCitelyConsumerFixture(value);
       if (write) {
         await writeFile(file, expected, "utf8");
         continue;
@@ -294,7 +295,10 @@ async function run(): Promise<void> {
   console.log(`Citely consumer fixtures verified: ${fixtures.length} scenarios`);
 }
 
-void run().catch((error: unknown) => {
-  console.error(error instanceof Error ? error.message : error);
-  process.exitCode = 1;
-});
+if (process.argv[1]
+  && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  void run().catch((error: unknown) => {
+    console.error(error instanceof Error ? error.message : error);
+    process.exitCode = 1;
+  });
+}

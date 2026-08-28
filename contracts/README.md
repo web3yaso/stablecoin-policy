@@ -42,6 +42,13 @@ cross-scope gate evidence and always returns `activationState=NOT_ACTIVATED`.
 It is not a public API or an authorization to create a self-service registry
 entry.
 
+`v1/contract-replay-eval-report.schema.json` defines the hash-only Phase 5/6
+report produced by regenerating the committed Citely consumer fixtures. Every
+scope must pass request and response schemas, byte-exact replay, package
+integrity, and request/package/bundle referential integrity. The report omits
+the Business Profiles and package bodies and feeds only the
+`CONTRACT_AND_REPLAY` readiness adapter.
+
 Phase 0 starts with the existing report compatibility surface. New domain schemas must use JSON Schema 2020-12, reject unknown properties by default, define explicit null behavior, and remain immutable after publication. Breaking changes require a new major directory.
 
 Phase 2 adds reviewed legal-claim contracts. Discovery records from news or

@@ -6,6 +6,7 @@ import Ajv2020 from "ajv/dist/2020";
 import addFormats from "ajv-formats";
 import {
   assessScopeReadiness,
+  contractReplayEvidenceForScope,
   monitoringEvidenceForScope,
   parseScopeReadinessInput,
   REQUIRED_SCOPE_GATES,
@@ -19,6 +20,7 @@ import {
   runMonitoringEval,
   type MonitoringEvalCase,
 } from "../lib/monitoring/eval";
+import { buildContractReplayEvalReport } from "../scripts/evals/run-phase5-contract-replay";
 
 const AS_OF = "2026-08-25T12:00:00.000Z";
 const SCOPE: SelfServiceScope = {
@@ -190,6 +192,31 @@ test("monitoring evidence is derived from the exact monitoring report scope", as
       validUntil: "2026-09-24T12:00:00.000Z",
     }).outcome,
     "PASSED",
+  );
+});
+
+test("contract and replay evidence is derived from the exact fixture report scope", async () => {
+  const contractReport = await buildContractReplayEvalReport();
+  const evidence = contractReplayEvidenceForScope(contractReport, SCOPE, {
+    evaluatedAt: "2026-08-28T12:00:00.000Z",
+    validUntil: "2026-09-28T12:00:00.000Z",
+  });
+
+  assert.equal(evidence.gateId, "CONTRACT_AND_REPLAY");
+  assert.equal(evidence.scopeId, "eea:usdc:stablecoin-pre-listing");
+  assert.equal(evidence.reportId, contractReport.datasetId);
+  assert.equal(evidence.outcome, "PASSED");
+  assert.match(evidence.artifactSha256, /^[0-9a-f]{64}$/);
+  assert.throws(
+    () => contractReplayEvidenceForScope(
+      contractReport,
+      { ...SCOPE, assetId: "usdt" },
+      {
+        evaluatedAt: "2026-08-28T12:00:00.000Z",
+        validUntil: "2026-09-28T12:00:00.000Z",
+      },
+    ),
+    /does not contain exactly one/,
   );
 });
 

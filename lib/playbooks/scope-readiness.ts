@@ -1,5 +1,6 @@
 import { sha256, stableJson } from "../data/integrity";
 import type { MonitoringEvalReport } from "../monitoring/eval";
+import type { ContractReplayEvalReport } from "./contract-replay-eval";
 
 export const SCOPE_READINESS_POLICY_VERSION = "1.0.0" as const;
 
@@ -204,6 +205,41 @@ export function monitoringEvidenceForScope(
     reportSchemaVersion: report.schemaVersion,
     artifactSha256: sha256(Buffer.from(stableJson(report), "utf8")),
     outcome: metric.monitoringGatePassed ? "PASSED" : "FAILED",
+    assuranceTier: "MACHINE_ASSURED",
+    evaluatedAt,
+    validUntil,
+  };
+}
+
+export function contractReplayEvidenceForScope(
+  report: ContractReplayEvalReport,
+  scope: SelfServiceScope,
+  validity: { evaluatedAt: string; validUntil: string },
+): ScopeGateEvidence {
+  if (report.schemaVersion !== "1.0.0") {
+    throw new Error("unsupported contract replay report version");
+  }
+  const expectedScopeId = selfServiceScopeId(parseScope(scope));
+  const matchingMetrics = report.scopes.filter((candidate) =>
+    candidate.scopeId === expectedScopeId
+    && candidate.jurisdictionCode.toLowerCase() === scope.jurisdictionCode.toLowerCase()
+    && (candidate.assetId?.toLowerCase() ?? null) === (scope.assetId?.toLowerCase() ?? null)
+    && candidate.playbookId === scope.playbookId);
+  if (matchingMetrics.length !== 1) {
+    throw new Error("contract replay report does not contain exactly one requested scope");
+  }
+  const evaluatedAt = parseTimestamp(validity.evaluatedAt, "contract replay evaluatedAt");
+  const validUntil = parseTimestamp(validity.validUntil, "contract replay validUntil");
+  if (Date.parse(validUntil) < Date.parse(evaluatedAt)) {
+    throw new Error("contract replay evidence validity ends before evaluation");
+  }
+  return {
+    gateId: "CONTRACT_AND_REPLAY",
+    scopeId: expectedScopeId,
+    reportId: report.datasetId,
+    reportSchemaVersion: report.schemaVersion,
+    artifactSha256: sha256(Buffer.from(stableJson(report), "utf8")),
+    outcome: matchingMetrics[0].contractReplayGatePassed ? "PASSED" : "FAILED",
     assuranceTier: "MACHINE_ASSURED",
     evaluatedAt,
     validUntil,
