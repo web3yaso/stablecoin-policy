@@ -47,8 +47,9 @@ or package body. Strict parsing rejects unknown fields.
 
 Typed adapters derive `MONITORING` evidence from the actual
 `MonitoringEvalReport` and `CONTRACT_AND_REPLAY` evidence from the committed
-Citely fixture replay report, always using the exact per-scope metric. The
-remaining six gates need equivalent typed adapters or trusted artifact
+Citely fixture replay report. `DETERMINISTIC_RULE_AND_ACTION` evidence comes
+from the strict deterministic runtime eval report. Every adapter uses the exact
+per-scope metric. The remaining five gates need equivalent typed adapters or trusted artifact
 verification before any future registry may consume them. A caller-provided
 normalized record is not itself a production authorization.
 

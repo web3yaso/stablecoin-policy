@@ -78,12 +78,12 @@ npm run data:check
 ## Remaining readiness work
 
 Typed trusted artifacts are now available for `MONITORING` and
-`CONTRACT_AND_REPLAY`. The following gates remain deliberately `MISSING` until
+`CONTRACT_AND_REPLAY`. The deterministic rule/action artifact was added in the
+subsequent 2026-08-31 slice. The following gates remain deliberately `MISSING` until
 their own scope-bound artifacts and adapters exist:
 
 - `SOURCE_AND_GROUNDING`;
 - `RETRIEVAL_AND_RAG`;
-- `DETERMINISTIC_RULE_AND_ACTION`;
 - `PRIVACY`;
 - `ASSURANCE_LABEL`;
 - `RELEASE`.

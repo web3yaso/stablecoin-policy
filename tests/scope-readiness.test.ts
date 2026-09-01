@@ -7,6 +7,7 @@ import addFormats from "ajv-formats";
 import {
   assessScopeReadiness,
   contractReplayEvidenceForScope,
+  deterministicRuleActionEvidenceForScope,
   monitoringEvidenceForScope,
   parseScopeReadinessInput,
   REQUIRED_SCOPE_GATES,
@@ -21,6 +22,7 @@ import {
   type MonitoringEvalCase,
 } from "../lib/monitoring/eval";
 import { buildContractReplayEvalReport } from "../scripts/evals/run-phase5-contract-replay";
+import { buildDeterministicRuleActionEvalReport } from "../scripts/evals/run-phase5-deterministic";
 
 const AS_OF = "2026-08-25T12:00:00.000Z";
 const SCOPE: SelfServiceScope = {
@@ -217,6 +219,44 @@ test("contract and replay evidence is derived from the exact fixture report scop
       },
     ),
     /does not contain exactly one/,
+  );
+});
+
+test("deterministic rule/action evidence is derived from the exact eval scope", async () => {
+  const evalReport = await buildDeterministicRuleActionEvalReport();
+  const evidence = deterministicRuleActionEvidenceForScope(evalReport, SCOPE, {
+    evaluatedAt: "2026-08-31T12:00:00.000Z",
+    validUntil: "2026-09-30T12:00:00.000Z",
+  });
+
+  assert.equal(evidence.gateId, "DETERMINISTIC_RULE_AND_ACTION");
+  assert.equal(evidence.scopeId, "eea:usdc:stablecoin-pre-listing");
+  assert.equal(evidence.reportId, evalReport.datasetId);
+  assert.equal(evidence.outcome, "PASSED");
+  assert.match(evidence.artifactSha256, /^[0-9a-f]{64}$/);
+  assert.throws(
+    () => deterministicRuleActionEvidenceForScope(
+      evalReport,
+      { ...SCOPE, assetId: "usdt" },
+      {
+        evaluatedAt: "2026-08-31T12:00:00.000Z",
+        validUntil: "2026-09-30T12:00:00.000Z",
+      },
+    ),
+    /does not contain exactly one/,
+  );
+
+  const failedScope = structuredClone(evalReport);
+  const scope = failedScope.scopes.find((candidate) =>
+    candidate.scopeId === "eea:usdc:stablecoin-pre-listing");
+  assert.ok(scope);
+  scope.deterministicRuleActionGatePassed = false;
+  assert.equal(
+    deterministicRuleActionEvidenceForScope(failedScope, SCOPE, {
+      evaluatedAt: "2026-08-31T12:00:00.000Z",
+      validUntil: "2026-09-30T12:00:00.000Z",
+    }).outcome,
+    "FAILED",
   );
 });
 

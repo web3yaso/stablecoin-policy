@@ -37,6 +37,9 @@ type CapabilitySignals = {
   evidenceProhibits: boolean;
 };
 
+export const UNDETERMINED_OPERATIONAL_ACTION =
+  "Do not rely on this result or execute a rule action until the missing scope, inputs, or direct evidence are resolved.";
+
 // 1:1 port of specs/playbookPackage.qnt decide()
 function decide(signals: CapabilitySignals): CapabilityConclusion {
   if (!signals.inputProvided) return "UNDETERMINED";
@@ -64,9 +67,7 @@ export function evaluatePlaybook(
         title: activityId,
         conclusion: "UNDETERMINED",
         reasonCodes: ["UNSUPPORTED_ACTIVITY"],
-        actions: [
-          "This activity is outside the current rule set; request scope extension or counsel review.",
-        ],
+        actions: [UNDETERMINED_OPERATIONAL_ACTION],
         evidenceClaimIds: [],
         dossierFacts: [],
         limitations: ["No rules exist for this activity; nothing was assessed."],
@@ -100,31 +101,47 @@ function evaluateCapability(
   const nowMs = Date.parse(evidence.now);
   let allTopicsCovered = rule.requirementTopics.length > 0 || rule.prohibitionTopics.length > 0;
   let evidenceFresh = true;
+  let evidenceConflicting = false;
   for (const topic of rule.requirementTopics) {
-    const match = evidence.claims.find((claim) => claim.topic === topic);
-    if (match === undefined) {
+    const matches = evidence.claims
+      .filter((claim) => claim.topic === topic)
+      .sort((left, right) => left.claimId.localeCompare(right.claimId));
+    if (matches.length === 0) {
       allTopicsCovered = false;
       continue;
     }
-    evidenceClaimIds.push(match.claimId);
-    match.limitations.forEach((limitation) => limitations.add(limitation));
-    if (nowMs - Date.parse(match.asOf) > maxAgeMs) evidenceFresh = false;
+    if (new Set(matches.map((claim) => claim.legalStatus)).size > 1) {
+      evidenceConflicting = true;
+    }
+    for (const match of matches) {
+      evidenceClaimIds.push(match.claimId);
+      match.limitations.forEach((limitation) => limitations.add(limitation));
+      if (nowMs - Date.parse(match.asOf) > maxAgeMs) evidenceFresh = false;
+    }
   }
 
   // prohibitions
   let evidenceProhibits = false;
   for (const topic of rule.prohibitionTopics) {
-    const match = evidence.claims.find(
-      (claim) => claim.topic === topic && claim.legalStatus === "PROHIBITION",
+    const topicMatches = evidence.claims
+      .filter((claim) => claim.topic === topic)
+      .sort((left, right) => left.claimId.localeCompare(right.claimId));
+    const prohibitionMatches = topicMatches.filter(
+      (claim) => claim.legalStatus === "PROHIBITION",
     );
-    if (match === undefined) {
+    if (prohibitionMatches.length === 0) {
       allTopicsCovered = false;
       continue;
     }
+    if (new Set(topicMatches.map((claim) => claim.legalStatus)).size > 1) {
+      evidenceConflicting = true;
+    }
     evidenceProhibits = true;
-    evidenceClaimIds.push(match.claimId);
-    match.limitations.forEach((limitation) => limitations.add(limitation));
-    if (nowMs - Date.parse(match.asOf) > maxAgeMs) evidenceFresh = false;
+    for (const match of topicMatches) {
+      evidenceClaimIds.push(match.claimId);
+      match.limitations.forEach((limitation) => limitations.add(limitation));
+      if (nowMs - Date.parse(match.asOf) > maxAgeMs) evidenceFresh = false;
+    }
   }
 
   // dossier checks
@@ -143,6 +160,7 @@ function evaluateCapability(
   if (!hasDirectEvidence && !reasonCodes.includes("DEPLOYMENT_NOT_VERIFIED")) {
     reasonCodes.push("NO_DIRECT_EVIDENCE");
   }
+  if (evidenceConflicting) reasonCodes.push("EVIDENCE_CONFLICT");
   if (!evidenceFresh) reasonCodes.push("EVIDENCE_STALE");
   if (evidenceProhibits) reasonCodes.push("PROHIBITION_APPLIES");
 
@@ -150,7 +168,7 @@ function evaluateCapability(
     inputProvided,
     hasDirectEvidence,
     evidenceFresh,
-    evidenceConflicting: false,
+    evidenceConflicting,
     evidenceProhibits,
   });
   if (
@@ -180,7 +198,9 @@ function evaluateCapability(
     title: rule.title,
     conclusion: finalConclusion,
     reasonCodes: [...new Set(reasonCodes)],
-    actions: rule.actions,
+    actions: finalConclusion === "UNDETERMINED"
+      ? [UNDETERMINED_OPERATIONAL_ACTION]
+      : rule.actions,
     evidenceClaimIds: [...new Set(evidenceClaimIds)],
     dossierFacts,
     limitations: [...limitations],
