@@ -25,6 +25,12 @@
       "purpose": "Sanitized Phase 6 affected-package recall, critical-miss, false-positive, and monitoring-boundary cases",
       "split": "regression",
       "reviewState": "MACHINE_ASSURED"
+    },
+    {
+      "path": "playbook-actions.jsonl",
+      "purpose": "Sanitized deterministic conclusion, reason-code, safe-degradation, RAG-isolation, and action-grounding cases",
+      "split": "regression",
+      "reviewState": "MACHINE_ASSURED"
     }
   ]
 }

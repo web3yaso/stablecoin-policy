@@ -1076,6 +1076,18 @@ schema failure, fixture drift, package tampering, or scope mismatch fails
 closed. The typed adapter supplies only `CONTRACT_AND_REPLAY` readiness
 evidence. Signed production smoke and scope activation remain separate.
 
+Deterministic rule/action gate checkpoint (2026-08-31): branch
+`codex/deterministic-rule-action-gate` turns the existing Quint-backed runtime
+contract into an executable, strict, per-scope CI artifact. Eleven sanitized
+cases cover supported, prohibited, missing-input, missing-evidence, stale,
+conflicting, and unverified-deployment paths. Each scope passes only when exact
+conclusions/reason codes, repeated-run equality, RAG isolation, safe
+degradation, and material-action grounding all equal `1.0`. Reports contain
+hashes and aggregate booleans rather than profiles, rules, actions, claims, or
+dossiers. Conflicting evidence yields `COUNSEL_REVIEW`; `UNDETERMINED` cannot
+expose an executable rule action. The typed adapter supplies only
+`DETERMINISTIC_RULE_AND_ACTION` evidence and never activates self-service.
+
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
 
 ### Phase 7 — legacy-domain extraction

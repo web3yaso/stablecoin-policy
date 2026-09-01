@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/deterministic-rule-action-eval-case.schema.json",
+  "title": "DeterministicRuleActionEvalCase v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "caseId", "scope", "capabilityId", "profileVariant", "evidenceVariant", "expected", "degradationKind"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "caseId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,160}$" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["jurisdictionCode", "assetId", "playbookId"],
+      "properties": {
+        "jurisdictionCode": { "const": "EEA" },
+        "assetId": { "type": ["string", "null"] },
+        "playbookId": { "enum": ["business-model-regulatory-boundary", "stablecoin-pre-listing"] }
+      }
+    },
+    "capabilityId": { "type": "string", "minLength": 3 },
+    "profileVariant": { "enum": ["BOUNDARY", "PRELIST_BASE", "PRELIST_NO_NETWORK", "PRELIST_UNVERIFIED_NETWORK"] },
+    "evidenceVariant": { "enum": ["FRESH", "MISSING", "STALE", "CONFLICTING"] },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["conclusion", "reasonCodes"],
+      "properties": {
+        "conclusion": { "enum": ["PERMITTED", "CONDITIONAL", "UNDETERMINED", "COUNSEL_REVIEW", "PROHIBITED"] },
+        "reasonCodes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "degradationKind": { "enum": ["NONE", "MISSING_INPUT", "MISSING_EVIDENCE", "STALE_REQUIREMENT", "STALE_PROHIBITION", "CONFLICTING_EVIDENCE", "UNVERIFIED_DEPLOYMENT", "UNSUPPORTED_ACTIVITY"] }
+  }
+}

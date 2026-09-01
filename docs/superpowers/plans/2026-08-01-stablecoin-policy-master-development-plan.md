@@ -749,6 +749,17 @@ including profiles or package bodies. Production signed smoke and registry
 activation remain separate. See
 `docs/superpowers/plans/2026-08-28-contract-replay-readiness-gate.md`.
 
+Deterministic rule/action readiness checkpoint (2026-08-31): branch
+`codex/deterministic-rule-action-gate` adds a strict 11-case dataset across
+both MVP scopes and a hash-only per-scope report. Every scope requires exact
+conclusions and ordered reason codes, repeat equality, zero deterministic
+change across RAG disabled/success/outage, safe typed degradation, and evidence
+for every material action, all at `1.0`. Conflicting claim statuses now produce
+`COUNSEL_REVIEW`; `UNDETERMINED` emits only a non-executable operational safety
+action. The adapter supplies `DETERMINISTIC_RULE_AND_ACTION` evidence without
+adding a route, migration, registry, or activation path. See
+`docs/superpowers/plans/2026-08-31-deterministic-rule-action-readiness-gate.md`.
+
 ### Customer delivery
 
 - implement watchlist creation from completed packages; implemented in PR #64;

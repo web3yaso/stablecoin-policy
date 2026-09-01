@@ -45,6 +45,7 @@ jobs:
       - run: npm run eval:phase1
       - run: npm run eval:phase2
       - run: npm run eval:phase3
+      - run: npm run eval:phase5:deterministic
       - run: npm run eval:phase5:contract-replay
       - run: npm run eval:phase6
       - run: npm run spec:phase2

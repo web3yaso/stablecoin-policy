@@ -9,6 +9,7 @@ import {
   assembleEvidenceBundle,
   evaluatePlaybook,
   sealPlaybookPackage,
+  UNDETERMINED_OPERATIONAL_ACTION,
   verifyPlaybookPackageIntegrity,
   type EvaluationEvidence,
 } from "../lib/playbooks/runtime";
@@ -224,6 +225,27 @@ test("missing claim evidence yields UNDETERMINED", async () => {
   );
   assert.equal(results[0].conclusion, "UNDETERMINED");
   assert.ok(results[0].reasonCodes.includes("NO_DIRECT_EVIDENCE"));
+  assert.deepEqual(results[0].actions, [UNDETERMINED_OPERATIONAL_ACTION]);
+});
+
+test("conflicting direct evidence yields COUNSEL_REVIEW with both claims pinned", async () => {
+  const conflicting = claim({
+    claimId: "claim:eea:mica:e-money-token-authorisation:conflict",
+    topic: "e-money-token-authorisation",
+    legalStatus: "PROHIBITION",
+  });
+  const results = evaluatePlaybook(
+    businessModelBoundaryPlaybook,
+    boundaryProfile(["issue-emt"]),
+    await evidence({ claims: [...eeaClaims(), conflicting] }),
+  );
+
+  assert.equal(results[0].conclusion, "COUNSEL_REVIEW");
+  assert.ok(results[0].reasonCodes.includes("EVIDENCE_CONFLICT"));
+  assert.deepEqual(results[0].evidenceClaimIds, [
+    "claim:eea:mica:e-money-token-authorisation:18",
+    "claim:eea:mica:e-money-token-authorisation:conflict",
+  ]);
 });
 
 test("stale corpus evidence degrades to CONDITIONAL with EVIDENCE_STALE", async () => {
@@ -264,6 +286,7 @@ test("an unverified network deployment yields UNDETERMINED", async () => {
   const listing = results.find((r) => r.capabilityId === "list-for-trading");
   assert.equal(listing?.conclusion, "UNDETERMINED");
   assert.ok(listing?.reasonCodes.includes("DEPLOYMENT_NOT_VERIFIED"));
+  assert.deepEqual(listing?.actions, [UNDETERMINED_OPERATIONAL_ACTION]);
 });
 
 test("a profile without networks is UNDETERMINED with MISSING_INPUT", async () => {
