@@ -739,6 +739,16 @@ metrics. Every result remains `NOT_ACTIVATED`, and the slice adds no route,
 database state, or activation mechanism. See
 `docs/superpowers/plans/2026-08-25-self-service-scope-readiness.md`.
 
+Contract/replay readiness checkpoint (2026-08-28): branch
+`codex/contract-replay-readiness-gate` converts the two existing Citely
+consumer fixture pairs into a strict hash-only per-scope eval report. CI
+regenerates each pair and requires request/response schema validity,
+byte-exact replay, package integrity, and exact request/package/bundle
+relationships. The report feeds the `CONTRACT_AND_REPLAY` adapter without
+including profiles or package bodies. Production signed smoke and registry
+activation remain separate. See
+`docs/superpowers/plans/2026-08-28-contract-replay-readiness-gate.md`.
+
 ### Customer delivery
 
 - implement watchlist creation from completed packages; implemented in PR #64;

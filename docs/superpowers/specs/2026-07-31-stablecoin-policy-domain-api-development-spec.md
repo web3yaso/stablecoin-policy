@@ -1066,6 +1066,16 @@ deterministic, excludes customer and rule data, and always states
 `NOT_ACTIVATED`; no API, migration, registry, or production activation is part
 of this checkpoint.
 
+Contract/replay gate checkpoint (2026-08-28): branch
+`codex/contract-replay-readiness-gate` regenerates both committed Citely
+consumer fixture pairs from the deterministic runtime and emits a strict
+hash-only report per exact scope. A scope passes only when request and response
+schema validation, byte-exact replay, package integrity, and
+request/package/bundle referential integrity all equal `1.0`. Malformed JSON,
+schema failure, fixture drift, package tampering, or scope mismatch fails
+closed. The typed adapter supplies only `CONTRACT_AND_REPLAY` readiness
+evidence. Signed production smoke and scope activation remain separate.
+
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
 
 ### Phase 7 — legacy-domain extraction
