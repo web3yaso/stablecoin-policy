@@ -4,11 +4,11 @@
 
 Phase 3 foundation was merged as PR #48 (`433ca8a`) on 2026-08-09. Activation
 gates were merged as PR #50 (`ca5a21f`) and production eval dataset assembly
-as PR #51 (`4ab895d`). Migrations `0024` through `0027` are applied to the
+as PR #51 (`4ab895d`). Migrations `0024` through `0029` are applied to the
 linked Supabase project. A production
 37-chunk EEA index exists as DRAFT only. It has no production eval record and
-must remain inactive. Migration `0028` and its application tooling are in the
-activation-gates development PR; they are not applied by merging code alone.
+must remain inactive. The 2026-08-12 production rollout applied the activation
+gates without creating a snapshot, eval record, or active-index pointer.
 
 Implemented:
 
@@ -205,8 +205,8 @@ npm run test:db:phase2
 npm run db:phase2:stop
 ```
 
-On 2026-08-10, migrations `0001` through `0029` applied locally from zero and
-all 211 pgTAP assertions passed. The Phase 3 sanitized retrieval eval reported
+On 2026-08-12, migrations `0001` through `0030` applied locally from zero and
+all 238 pgTAP assertions passed. The Phase 3 sanitized retrieval eval reported
 Recall@10 `1.00`, MRR@10 `1.00`, citation precision `1.00`, version isolation
 `1.00`, twelve of twelve index-builder safety classifications correct, and zero
 assurance, rights, prompt-instruction, or unsafe-build leakage. These are
@@ -216,8 +216,12 @@ development fixtures, not the final production-quality EEA gold set.
 
 1. Merge the activation-gates PR only after CI passes.
 2. Take and verify a private metadata backup.
-3. Dry-run and apply `0028`-`0029`, and confirm existing `policy` and `regulatory`
-   snapshots do not change. Confirm the old 37-chunk DRAFT is still inactive.
+3. ~~Dry-run and apply `0028`-`0029`, and confirm existing `policy` and
+   `regulatory` snapshots do not change. Confirm the old 37-chunk DRAFT is
+   still inactive.~~ Completed 2026-08-12: the normalized pre/post business
+   snapshot SHA-256 remained
+   `2d6d4a65c0df8485ca5fa23f83f7fd0fd04900c30234a704077a3432814b8ed7`;
+   the legacy index remained `DRAFT` and the active pointer remained empty.
 4. Create the aggregate 47-claim snapshot, generate one private plan artifact,
    inspect its membership and cost, then replay it into the replacement DRAFT.
 5. Run and record the production EEA eval against that exact DRAFT membership,
