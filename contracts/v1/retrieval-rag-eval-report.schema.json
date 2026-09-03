@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/retrieval-rag-eval-report.schema.json",
+  "title": "RetrievalRagEvalReport v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "datasetId", "thresholds", "caseCount", "scopes", "results", "outcome", "limitations"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "datasetId": { "type": "string", "pattern": "^retrieval-rag-eval:[0-9a-f]{32}$" },
+    "thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimumCasesPerScope", "minimumSuccessCasesPerScope", "recallAt10", "mrrAt10", "citationPrecision", "structuredFilterAccuracy", "versionIsolationRate", "repeatedRunExactMatchRate", "safeDegradationRate", "nonNarrativeSafetyRate", "unauthorizedAuthorityUseCount"],
+      "properties": {
+        "minimumCasesPerScope": { "const": 8 },
+        "minimumSuccessCasesPerScope": { "const": 4 },
+        "recallAt10": { "const": 0.95 },
+        "mrrAt10": { "const": 0.9 },
+        "citationPrecision": { "const": 1 },
+        "structuredFilterAccuracy": { "const": 1 },
+        "versionIsolationRate": { "const": 1 },
+        "repeatedRunExactMatchRate": { "const": 1 },
+        "safeDegradationRate": { "const": 1 },
+        "nonNarrativeSafetyRate": { "const": 1 },
+        "unauthorizedAuthorityUseCount": { "const": 0 }
+      }
+    },
+    "caseCount": { "type": "integer", "minimum": 1 },
+    "scopes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scopeId", "jurisdictionCode", "assetId", "playbookId", "caseCount", "successCaseCount", "recallAt10", "mrrAt10", "citationPrecision", "structuredFilterAccuracy", "versionIsolationRate", "repeatedRunExactMatchRate", "safeDegradationRate", "nonNarrativeSafetyRate", "unauthorizedAuthorityUseCount", "retrievalRagGatePassed"],
+        "properties": {
+          "scopeId": { "type": "string", "minLength": 1 },
+          "jurisdictionCode": { "type": "string", "minLength": 1 },
+          "assetId": { "type": ["string", "null"] },
+          "playbookId": { "type": "string", "minLength": 1 },
+          "caseCount": { "type": "integer", "minimum": 1 },
+          "successCaseCount": { "type": "integer", "minimum": 0 },
+          "recallAt10": { "$ref": "#/$defs/rate" },
+          "mrrAt10": { "$ref": "#/$defs/rate" },
+          "citationPrecision": { "$ref": "#/$defs/rate" },
+          "structuredFilterAccuracy": { "$ref": "#/$defs/rate" },
+          "versionIsolationRate": { "$ref": "#/$defs/rate" },
+          "repeatedRunExactMatchRate": { "$ref": "#/$defs/rate" },
+          "safeDegradationRate": { "$ref": "#/$defs/rate" },
+          "nonNarrativeSafetyRate": { "$ref": "#/$defs/rate" },
+          "unauthorizedAuthorityUseCount": { "type": "integer", "minimum": 0 },
+          "retrievalRagGatePassed": { "type": "boolean" }
+        }
+      }
+    },
+    "results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["caseId", "scopeId", "inputArtifactSha256", "actualStatus", "expectedStatusMatch", "firstExpectedRank", "citationIntegrityValid", "structuredFiltersValid", "versionIsolationValid", "repeatedRunExactMatch", "safeDegradationValid", "nonNarrativeSafe", "unauthorizedAuthorityUseCount", "exactMatch"],
+        "properties": {
+          "caseId": { "type": "string", "minLength": 1 },
+          "scopeId": { "type": "string", "minLength": 1 },
+          "inputArtifactSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "actualStatus": { "enum": ["SUCCESS", "INSUFFICIENT_EVIDENCE", "CONFLICTING_EVIDENCE", "UNAUTHORIZED_EVIDENCE", "STALE_INDEX", "RETRIEVAL_UNAVAILABLE"] },
+          "expectedStatusMatch": { "type": "boolean" },
+          "firstExpectedRank": { "type": ["integer", "null"], "minimum": 1, "maximum": 10 },
+          "citationIntegrityValid": { "type": "boolean" },
+          "structuredFiltersValid": { "type": "boolean" },
+          "versionIsolationValid": { "type": "boolean" },
+          "repeatedRunExactMatch": { "type": "boolean" },
+          "safeDegradationValid": { "type": "boolean" },
+          "nonNarrativeSafe": { "type": "boolean" },
+          "unauthorizedAuthorityUseCount": { "type": "integer", "minimum": 0 },
+          "exactMatch": { "type": "boolean" }
+        }
+      }
+    },
+    "outcome": { "enum": ["PASSED", "FAILED"] },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "rate": { "type": "number", "minimum": 0, "maximum": 1 }
+  }
+}

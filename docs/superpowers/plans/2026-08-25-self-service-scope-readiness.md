@@ -48,10 +48,12 @@ or package body. Strict parsing rejects unknown fields.
 Typed adapters derive `MONITORING` evidence from the actual
 `MonitoringEvalReport` and `CONTRACT_AND_REPLAY` evidence from the committed
 Citely fixture replay report. `DETERMINISTIC_RULE_AND_ACTION` evidence comes
-from the strict deterministic runtime eval report. Every adapter uses the exact
-per-scope metric. The remaining five gates need equivalent typed adapters or trusted artifact
-verification before any future registry may consume them. A caller-provided
-normalized record is not itself a production authorization.
+from the strict deterministic runtime eval report, and `RETRIEVAL_AND_RAG`
+evidence comes from the scope-bound hybrid-search and safe-degradation eval.
+Every adapter uses the exact per-scope metric. The remaining four gates need
+equivalent typed adapters or trusted artifact verification before any future
+registry may consume them. A caller-provided normalized record is not itself
+a production authorization.
 
 ## Decision semantics
 
@@ -106,7 +108,7 @@ npm run data:check
 ## Follow-up before activation
 
 1. Produce trusted, scope-bound artifacts and typed adapters for the remaining
-   six grouped gates.
+   four grouped gates: source/grounding, privacy, assurance-label, and release.
 2. Complete receiver configuration, scheduler activation, deployment, and
    signed package/watchlist/delta/rerun production smoke.
 3. Add an explicit, versioned, reversible scope registry as a separately
