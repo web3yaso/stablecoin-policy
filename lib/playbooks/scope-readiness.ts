@@ -2,6 +2,7 @@ import { sha256, stableJson } from "../data/integrity";
 import type { MonitoringEvalReport } from "../monitoring/eval";
 import type { ContractReplayEvalReport } from "./contract-replay-eval";
 import type { DeterministicRuleActionEvalReport } from "./deterministic-rule-action-eval";
+import type { RetrievalRagEvalReport } from "./retrieval-rag-eval";
 
 export const SCOPE_READINESS_POLICY_VERSION = "1.0.0" as const;
 
@@ -276,6 +277,41 @@ export function deterministicRuleActionEvidenceForScope(
     reportSchemaVersion: report.schemaVersion,
     artifactSha256: sha256(Buffer.from(stableJson(report), "utf8")),
     outcome: matchingMetrics[0].deterministicRuleActionGatePassed ? "PASSED" : "FAILED",
+    assuranceTier: "MACHINE_ASSURED",
+    evaluatedAt,
+    validUntil,
+  };
+}
+
+export function retrievalRagEvidenceForScope(
+  report: RetrievalRagEvalReport,
+  scope: SelfServiceScope,
+  validity: { evaluatedAt: string; validUntil: string },
+): ScopeGateEvidence {
+  if (report.schemaVersion !== "1.0.0") {
+    throw new Error("unsupported retrieval/RAG report version");
+  }
+  const expectedScopeId = selfServiceScopeId(parseScope(scope));
+  const matchingMetrics = report.scopes.filter((candidate) =>
+    candidate.scopeId === expectedScopeId
+    && candidate.jurisdictionCode.toLowerCase() === scope.jurisdictionCode.toLowerCase()
+    && (candidate.assetId?.toLowerCase() ?? null) === (scope.assetId?.toLowerCase() ?? null)
+    && candidate.playbookId === scope.playbookId);
+  if (matchingMetrics.length !== 1) {
+    throw new Error("retrieval/RAG report does not contain exactly one requested scope");
+  }
+  const evaluatedAt = parseTimestamp(validity.evaluatedAt, "retrieval/RAG evaluatedAt");
+  const validUntil = parseTimestamp(validity.validUntil, "retrieval/RAG validUntil");
+  if (Date.parse(validUntil) < Date.parse(evaluatedAt)) {
+    throw new Error("retrieval/RAG evidence validity ends before evaluation");
+  }
+  return {
+    gateId: "RETRIEVAL_AND_RAG",
+    scopeId: expectedScopeId,
+    reportId: report.datasetId,
+    reportSchemaVersion: report.schemaVersion,
+    artifactSha256: sha256(Buffer.from(stableJson(report), "utf8")),
+    outcome: matchingMetrics[0].retrievalRagGatePassed ? "PASSED" : "FAILED",
     assuranceTier: "MACHINE_ASSURED",
     evaluatedAt,
     validUntil,

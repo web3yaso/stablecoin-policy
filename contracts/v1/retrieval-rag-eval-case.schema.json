@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://policy.citely.info/contracts/v1/retrieval-rag-eval-case.schema.json",
+  "title": "RetrievalRagEvalCase v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "caseId", "scope", "scenario", "query", "topic", "expectedStatus", "expectedProvisionId"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "caseId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]{2,160}$" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["jurisdictionCode", "assetId", "playbookId"],
+      "properties": {
+        "jurisdictionCode": { "const": "EEA" },
+        "assetId": { "type": ["string", "null"] },
+        "playbookId": { "enum": ["business-model-regulatory-boundary", "stablecoin-pre-listing"] }
+      }
+    },
+    "scenario": { "enum": ["SUCCESS", "UNAUTHORIZED_EVIDENCE", "STALE_INDEX", "CONFLICTING_EVIDENCE", "RETRIEVAL_UNAVAILABLE"] },
+    "query": { "type": "string", "minLength": 1, "maxLength": 2000 },
+    "topic": { "type": "string", "minLength": 1 },
+    "expectedStatus": { "enum": ["SUCCESS", "UNAUTHORIZED_EVIDENCE", "STALE_INDEX", "CONFLICTING_EVIDENCE", "RETRIEVAL_UNAVAILABLE"] },
+    "expectedProvisionId": { "type": ["string", "null"] }
+  }
+}

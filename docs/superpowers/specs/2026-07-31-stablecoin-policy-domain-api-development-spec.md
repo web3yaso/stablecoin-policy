@@ -1088,6 +1088,21 @@ dossiers. Conflicting evidence yields `COUNSEL_REVIEW`; `UNDETERMINED` cannot
 expose an executable rule action. The typed adapter supplies only
 `DETERMINISTIC_RULE_AND_ACTION` evidence and never activates self-service.
 
+Retrieval/RAG gate checkpoint (2026-09-03): branch
+`codex/retrieval-rag-readiness-gate` executes the existing hybrid retrieval
+service against a strict scope-bound dataset instead of accepting a caller's
+quality assertion. Sixteen sanitized cases split evenly across the two MVP
+scopes cover successful topic-filtered retrieval and typed unauthorized,
+stale, conflicting, and outage behavior. A scope requires at least four
+successful cases, Recall@10 >= `0.95`, MRR@10 >= `0.90`, exact citation,
+filter, release-isolation, repeated pinned-run, degradation, and no-narrative
+rates, and zero unauthorized or prompt-injected authority use. The report
+contains hashes,
+statuses, booleans, and aggregate metrics but no queries or evidence content.
+The typed adapter supplies only `RETRIEVAL_AND_RAG` evidence; production
+activation, human-review upgrade, database state, and signed smoke remain
+separate.
+
 Exit: a material source change can identify affected packages and produce a reviewed change-to-action delta.
 
 ### Phase 7 — legacy-domain extraction

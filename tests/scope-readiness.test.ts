@@ -11,6 +11,7 @@ import {
   monitoringEvidenceForScope,
   parseScopeReadinessInput,
   REQUIRED_SCOPE_GATES,
+  retrievalRagEvidenceForScope,
   selfServiceScopeId,
   type ScopeGateEvidence,
   type ScopeReadinessInput,
@@ -23,6 +24,7 @@ import {
 } from "../lib/monitoring/eval";
 import { buildContractReplayEvalReport } from "../scripts/evals/run-phase5-contract-replay";
 import { buildDeterministicRuleActionEvalReport } from "../scripts/evals/run-phase5-deterministic";
+import { buildRetrievalRagEvalReport } from "../scripts/evals/run-phase5-retrieval-rag";
 
 const AS_OF = "2026-08-25T12:00:00.000Z";
 const SCOPE: SelfServiceScope = {
@@ -255,6 +257,44 @@ test("deterministic rule/action evidence is derived from the exact eval scope", 
     deterministicRuleActionEvidenceForScope(failedScope, SCOPE, {
       evaluatedAt: "2026-08-31T12:00:00.000Z",
       validUntil: "2026-09-30T12:00:00.000Z",
+    }).outcome,
+    "FAILED",
+  );
+});
+
+test("retrieval/RAG evidence is derived from the exact eval scope", async () => {
+  const evalReport = await buildRetrievalRagEvalReport();
+  const evidence = retrievalRagEvidenceForScope(evalReport, SCOPE, {
+    evaluatedAt: "2026-09-03T12:00:00.000Z",
+    validUntil: "2026-10-03T12:00:00.000Z",
+  });
+
+  assert.equal(evidence.gateId, "RETRIEVAL_AND_RAG");
+  assert.equal(evidence.scopeId, "eea:usdc:stablecoin-pre-listing");
+  assert.equal(evidence.reportId, evalReport.datasetId);
+  assert.equal(evidence.outcome, "PASSED");
+  assert.match(evidence.artifactSha256, /^[0-9a-f]{64}$/);
+  assert.throws(
+    () => retrievalRagEvidenceForScope(
+      evalReport,
+      { ...SCOPE, assetId: "usdt" },
+      {
+        evaluatedAt: "2026-09-03T12:00:00.000Z",
+        validUntil: "2026-10-03T12:00:00.000Z",
+      },
+    ),
+    /does not contain exactly one/,
+  );
+
+  const failedScope = structuredClone(evalReport);
+  const scope = failedScope.scopes.find((candidate) =>
+    candidate.scopeId === "eea:usdc:stablecoin-pre-listing");
+  assert.ok(scope);
+  scope.retrievalRagGatePassed = false;
+  assert.equal(
+    retrievalRagEvidenceForScope(failedScope, SCOPE, {
+      evaluatedAt: "2026-09-03T12:00:00.000Z",
+      validUntil: "2026-10-03T12:00:00.000Z",
     }).outcome,
     "FAILED",
   );

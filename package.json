@@ -14,6 +14,7 @@
     "eval:phase2": "node --import tsx scripts/evals/run-phase2.ts",
     "eval:phase3": "node --import tsx scripts/evals/run-phase3.ts",
     "eval:phase5:deterministic": "node --import tsx scripts/evals/run-phase5-deterministic.ts",
+    "eval:phase5:retrieval-rag": "node --import tsx scripts/evals/run-phase5-retrieval-rag.ts",
     "eval:phase5:contract-replay": "node --import tsx scripts/evals/run-phase5-contract-replay.ts",
     "eval:phase6": "node --import tsx scripts/evals/run-phase6-monitoring.ts",
     "eval:phase3:assemble": "node --import tsx scripts/evals/assemble-phase3-production-dataset.ts",

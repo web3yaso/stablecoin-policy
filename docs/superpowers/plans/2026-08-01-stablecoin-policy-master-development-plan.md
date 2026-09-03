@@ -760,6 +760,19 @@ action. The adapter supplies `DETERMINISTIC_RULE_AND_ACTION` evidence without
 adding a route, migration, registry, or activation path. See
 `docs/superpowers/plans/2026-08-31-deterministic-rule-action-readiness-gate.md`.
 
+Retrieval/RAG readiness checkpoint (2026-09-03): branch
+`codex/retrieval-rag-readiness-gate` converts the real deterministic Phase 3
+hybrid-search fixture into a strict 16-case, hash-only per-scope report. Each
+MVP scope independently covers four successful searches plus unauthorized,
+stale, conflicting, and outage degradation. Recall@10 and MRR@10 exceed the
+formal thresholds; citation precision, structured filtering, release
+isolation, repeated pinned replay, safe degradation, and non-narrative safety
+must pass exactly, with zero unauthorized or prompt-injected authority use.
+The adapter supplies only
+`RETRIEVAL_AND_RAG` evidence and adds no route, migration, registry, or
+activation path. See
+`docs/superpowers/plans/2026-09-03-retrieval-rag-readiness-gate.md`.
+
 ### Customer delivery
 
 - implement watchlist creation from completed packages; implemented in PR #64;
@@ -781,6 +794,9 @@ adding a route, migration, registry, or activation path. See
   jurisdiction/asset/capability combination;
 - compose all current gates into a strict versioned per-scope readiness
   report; implemented locally on `codex/self-service-scope-readiness`;
+- derive trusted per-scope artifacts for monitoring, contract/replay,
+  deterministic rule/action, and retrieval/RAG; four of eight grouped gates
+  are implemented;
 - enable self-service only for combinations meeting all current gates;
 - keep unsupported combinations typed and blocked;
 - introduce optional human-reviewed commercial tiers when reviewers exist;
