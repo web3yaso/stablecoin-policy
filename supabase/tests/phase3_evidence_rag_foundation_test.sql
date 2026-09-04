@@ -3,7 +3,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set search_path = public, extensions, policy, regulatory, retrieval;
 
-select plan(55);
+select no_plan();
 
 -- Sanitized provisional corpus fixture. It represents workflow shape only,
 -- not a legal conclusion or production review.
@@ -310,7 +310,7 @@ select is(
 select throws_ok(
   $sql$
     select policy.activate_retrieval_index_release(
-      'index:rag-test:1', repeat('0', 64), now() + interval '1 second'
+      'index:rag-test:1', repeat('0', 64), clock_timestamp()
     )
   $sql$,
   'retrieval index manifest fingerprint is stale',
@@ -322,7 +322,7 @@ select throws_ok(
     select policy.activate_retrieval_index_release(
       'index:rag-test:1',
       encode(digest(convert_to(retrieval.build_index_manifest('index:rag-test:1')::text, 'UTF8'), 'sha256'), 'hex'),
-      now() + interval '1 second'
+      clock_timestamp()
     )
   $sql$,
   'retrieval index lacks a passing exact-manifest eval',
@@ -347,7 +347,7 @@ select lives_ok(
     select policy.activate_retrieval_index_release(
       'index:rag-test:1',
       encode(digest(convert_to(retrieval.build_index_manifest('index:rag-test:1')::text, 'UTF8'), 'sha256'), 'hex'),
-      now() + interval '1 second'
+      clock_timestamp()
     )
   $sql$,
   'exact manifest activates the retrieval index atomically'
@@ -679,6 +679,120 @@ select throws_ok(
   'retrieval index identifier was already used for a different plan',
   'changed plan replay fails closed before mutating the draft'
 );
+
+-- Suspension regression: extend the same fully built/evaluated real fixture.
+reset role;
+create function pg_temp.suspend_test(op text default 'suspend:rag:test', rev bigint default 1,
+  hash text default null, domain text default 'stablecoin', tier text default 'PROVISIONAL',
+  target text default 'index:rag-test:1', reason text default 'sanitized drill') returns jsonb
+language sql as $$
+  select policy.suspend_retrieval_index_release(op, domain, tier, target,
+    coalesce(hash, policy.get_retrieval_index_manifest(target)->>'manifestSha256'), rev, reason)
+$$;
+create function pg_temp.evidence_fingerprint() returns text language sql as $$
+  select md5(jsonb_build_array(
+    (select jsonb_agg(to_jsonb(x) order by chunk_id) from retrieval.evidence_chunks x),
+    (select jsonb_agg(to_jsonb(x) order by embedding_id) from retrieval.embedding_records x),
+    (select jsonb_agg(to_jsonb(x) order by claim_id) from policy.legal_claims x),
+    (select jsonb_agg(to_jsonb(x) order by citation_id) from policy.citations x),
+    (select jsonb_agg(to_jsonb(x) order by run_id) from retrieval.rag_retrieval_runs x),
+    (select jsonb_agg(to_jsonb(x) order by index_release_id, ordinal) from retrieval.index_release_chunks x)
+  )::text)
+$$;
+create temp table suspension_before as select pg_temp.evidence_fingerprint() as fingerprint;
+grant select on suspension_before to service_role;
+set local role service_role;
+select ok(not has_function_privilege('anon',
+  'policy.suspend_retrieval_index_release(text,text,text,text,text,bigint,text)', 'EXECUTE'), 'anon cannot suspend');
+select ok(not has_function_privilege('authenticated',
+  'policy.suspend_retrieval_index_release(text,text,text,text,text,bigint,text)', 'EXECUTE'), 'authenticated cannot suspend');
+select ok(not has_function_privilege('anon',
+  'policy.inspect_retrieval_index_pointer(text,text)', 'EXECUTE'), 'anon cannot inspect pointer');
+select ok(not has_function_privilege('service_role',
+  'retrieval.activate_index_under_scope_lock(text,text,timestamptz)', 'EXECUTE'), 'cannot bypass activation scope lock');
+select ok(not has_function_privilege('service_role',
+  'retrieval.rollback_index_under_scope_lock(text,text,timestamptz)', 'EXECUTE'), 'cannot bypass rollback scope lock');
+select ok(not has_table_privilege('service_role', 'retrieval.index_suspension_operations', 'INSERT'), 'audit is RPC-only');
+select is(policy.inspect_retrieval_index_pointer('stablecoin','PROVISIONAL')->>'revision', '1', 'first activation revision');
+select is(policy.inspect_retrieval_index_pointer('absent-domain','PROVISIONAL'), null::jsonb, 'absent scope inspection does not create row');
+select throws_ok($$select pg_temp.suspend_test(null)$$, 'invalid retrieval suspension request', 'null operation rejected');
+select throws_ok($$select pg_temp.suspend_test(rev => null)$$, 'invalid retrieval suspension request', 'null revision rejected');
+select throws_ok($$select pg_temp.suspend_test(rev => 0)$$, 'invalid retrieval suspension request', 'zero revision rejected');
+select throws_ok($$select pg_temp.suspend_test(domain => null)$$, 'invalid retrieval scope', 'null scope rejected');
+select throws_ok($$select pg_temp.suspend_test(tier => null)$$, 'invalid retrieval scope', 'null tier rejected');
+select throws_ok($$select pg_temp.suspend_test(reason => ' ')$$, 'invalid retrieval suspension request', 'blank reason rejected');
+select throws_ok($$select pg_temp.suspend_test(reason => repeat('x',501))$$, 'invalid retrieval suspension request', 'long reason rejected');
+select throws_ok($$select pg_temp.suspend_test(hash => repeat('0',64))$$, 'retrieval suspension target is stale', 'wrong manifest rejected');
+select throws_ok($$select pg_temp.suspend_test(rev => 2)$$, 'retrieval suspension pointer is stale', 'wrong revision rejected');
+select throws_ok($$select pg_temp.suspend_test(domain => 'other-domain')$$, 'retrieval suspension pointer is stale', 'cross domain rejected');
+select throws_ok($$select pg_temp.suspend_test(tier => 'HUMAN_REVIEWED')$$, 'retrieval suspension pointer is stale', 'cross assurance rejected');
+select throws_ok($$select pg_temp.suspend_test(target => 'index:rag-test:builder')$$, 'retrieval suspension pointer is stale', 'wrong index rejected');
+select is((select count(*)::int from retrieval.index_suspension_operations), 0, 'invalid requests wrote no audit');
+
+-- Fail after pointer and release updates; the entire statement must roll back.
+reset role;
+create function pg_temp.reject_suspension_audit() returns trigger language plpgsql as $$
+begin raise exception 'injected late suspension failure'; end $$;
+create trigger injected_suspension_failure before insert on retrieval.index_suspension_operations
+for each row execute function pg_temp.reject_suspension_audit();
+set local role service_role;
+select throws_ok($$select pg_temp.suspend_test()$$, 'injected late suspension failure', 'late audit failure rolls back');
+select is(policy.get_retrieval_index_manifest('index:rag-test:1')->>'releaseState', 'ACTIVE', 'failure preserves ACTIVE');
+select is(policy.inspect_retrieval_index_pointer('stablecoin','PROVISIONAL')->>'revision', '1', 'failure preserves revision');
+select is((select count(*)::int from retrieval.index_suspension_operations), 0, 'failure leaves zero audit rows');
+reset role;
+drop trigger injected_suspension_failure on retrieval.index_suspension_operations;
+set local role service_role;
+select lives_ok($$select pg_temp.suspend_test()$$, 'first active index can be suspended without previous index');
+select is(policy.get_retrieval_index_manifest('index:rag-test:1')->>'releaseState', 'SUSPENDED', 'explicit suspension phase');
+select is(policy.inspect_retrieval_index_pointer('stablecoin','PROVISIONAL')->>'revision', '2', 'retained pointer increments revision');
+select is(policy.inspect_retrieval_index_pointer('stablecoin','PROVISIONAL')->>'activeIndexReleaseId', null::text, 'empty active pointer');
+select is(policy.inspect_retrieval_index_pointer('stablecoin','PROVISIONAL')->>'previousIndexReleaseId', null::text, 'no automatic fallback');
+select is(policy.resolve_retrieval_index_release('stablecoin','PROVISIONAL'), null::jsonb, 'default resolution unavailable');
+select is(policy.resolve_retrieval_index_release('stablecoin','PROVISIONAL',null,'index:rag-test:1'), null::jsonb, 'pinned resolution unavailable');
+select is(policy.list_retrieval_index_chunks('index:rag-test:1'), '[]'::jsonb, 'pinned chunk listing denied');
+select is(pg_temp.evidence_fingerprint(), (select fingerprint from suspension_before), 'evidence and recorded historical results unchanged');
+select is(pg_temp.suspend_test(), (select result from retrieval.index_suspension_operations where operation_id='suspend:rag:test'), 'exact replay returns stored result');
+select is((select count(*)::int from retrieval.index_suspension_operations), 1, 'exact replay does not duplicate audit');
+select throws_ok($$select pg_temp.suspend_test(reason => 'changed')$$, 'retrieval suspension operation replay conflict', 'reason conflict rejected');
+select throws_ok($$select pg_temp.suspend_test(rev => 2)$$, 'retrieval suspension operation replay conflict', 'revision replay conflict rejected');
+select throws_ok($$select pg_temp.suspend_test(op => 'suspend:rag:new')$$, 'retrieval suspension pointer is stale', 'new stale request rejected');
+select throws_ok($$select policy.activate_retrieval_index_release('index:rag-test:1',
+  policy.get_retrieval_index_manifest('index:rag-test:1')->>'manifestSha256',clock_timestamp())$$,
+  'only a DRAFT retrieval index can be activated', 'suspended index cannot reactivate');
+select throws_ok($$select policy.rollback_retrieval_index_release('stablecoin','PROVISIONAL',clock_timestamp())$$,
+  'no eligible previous retrieval index is available for rollback', 'suspension cannot rollback');
+reset role;
+select throws_ok($$update retrieval.index_releases set release_state='ACTIVE', suspended_at=null
+  where index_release_id='index:rag-test:1'$$,
+  'suspended retrieval index is immutable; build a new DRAFT', 'even owner cannot unsuspend');
+select throws_ok($$delete from retrieval.active_index_pointers where policy_domain='stablecoin'$$,
+  'retrieval scope pointer cannot be deleted', 'revision cannot reset through deletion');
+select throws_ok($$delete from retrieval.index_suspension_operations$$,
+  'index_suspension_operations rows are immutable; create a new version', 'audit immutable');
+set local role service_role;
+
+-- Recover through evaluated DRAFTs, then prove ABA rejection.
+select policy.record_retrieval_index_eval('eval:rag-test:builder', 'index:rag-test:builder',
+  policy.get_retrieval_index_manifest('index:rag-test:builder')->>'manifestSha256',
+  'MACHINE_ASSURED','PASSED',repeat('a',64),
+  '{"recallAt10":1,"mrrAt10":1,"citationPrecision":1,"versionIsolation":1,"checklistTopicCoverage":1,"rightsLeaks":0,"assuranceLeaks":0,"promptInstructionLeaks":0,"unsafeBuildsAccepted":0}',clock_timestamp());
+select lives_ok($$select policy.activate_retrieval_index_release('index:rag-test:builder',
+  policy.get_retrieval_index_manifest('index:rag-test:builder')->>'manifestSha256',clock_timestamp())$$, 'new evaluated DRAFT recovers');
+select is(policy.inspect_retrieval_index_pointer('stablecoin','PROVISIONAL')->>'revision','3','recovery preserves monotonic revision');
+select lives_ok($$select pg_temp.suspend_test()$$,'old exact retry still succeeds after recovery');
+select is(policy.inspect_retrieval_index_pointer('stablecoin','PROVISIONAL')->>'activeIndexReleaseId','index:rag-test:builder','old retry does not suspend replacement');
+select policy.record_retrieval_index_eval('eval:rag-test:snapshot', 'index:rag-test:snapshot',
+  policy.get_retrieval_index_manifest('index:rag-test:snapshot')->>'manifestSha256',
+  'MACHINE_ASSURED','PASSED',repeat('b',64),
+  '{"recallAt10":1,"mrrAt10":1,"citationPrecision":1,"versionIsolation":1,"checklistTopicCoverage":1,"rightsLeaks":0,"assuranceLeaks":0,"promptInstructionLeaks":0,"unsafeBuildsAccepted":0}',clock_timestamp());
+select policy.activate_retrieval_index_release('index:rag-test:snapshot',
+  policy.get_retrieval_index_manifest('index:rag-test:snapshot')->>'manifestSha256',clock_timestamp());
+select lives_ok($$select policy.rollback_retrieval_index_release('stablecoin','PROVISIONAL',clock_timestamp())$$, 'eligible retired rollback preserved');
+select is(policy.inspect_retrieval_index_pointer('stablecoin','PROVISIONAL')->>'revision','5','rollback increments revision');
+select throws_ok($$select pg_temp.suspend_test(op=>'suspend:rag:aba',rev=>3,target=>'index:rag-test:builder')$$,
+  'retrieval suspension pointer is stale','same index and hash after ABA cannot accept old revision');
+select is((select count(*)::int from retrieval.index_suspension_operations),1,'ABA rejection writes nothing');
 
 select * from finish();
 rollback;

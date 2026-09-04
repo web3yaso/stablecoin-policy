@@ -51,6 +51,7 @@ jobs:
       - run: npm run eval:phase6
       - run: npm run spec:phase2
       - run: npm run spec:rag
+      - run: npm run spec:rag-suspension
       - run: npm run spec:playbook
       - run: npm run spec:package-impact
       - run: npm run spec:package-watchlist
@@ -89,6 +90,9 @@ jobs:
 
       - name: Run superseding evaluation concurrency test
         run: npm run test:db:phase2:concurrency
+
+      - name: Run retrieval lifecycle concurrency tests
+        run: npm run test:db:rag-concurrency
 
       - name: Stop isolated Supabase services
         if: always()

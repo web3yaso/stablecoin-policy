@@ -44,7 +44,7 @@ export class EvidenceSearchService {
           request.filters,
           querySha256,
           null,
-          "INSUFFICIENT_EVIDENCE",
+          "RETRIEVAL_UNAVAILABLE",
           [],
           ["No retrieval index matches the requested release and assurance tier."],
         );
