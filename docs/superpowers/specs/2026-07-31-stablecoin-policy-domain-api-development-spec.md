@@ -1177,6 +1177,11 @@ atomicity/concurrency regressions. It blocks fresh suspended-index retrieval
 without changing completed packages. Production application of `0036` remains
 a separate approved rollout step; see
 `docs/superpowers/plans/2026-09-04-rag-first-activation-suspension.md`.
+The follow-up signed evidence smoke tool is implemented with a no-network
+preview and explicit ACTIVE/UNAVAILABLE execution. Its 40 local regressions
+verify exact metadata/citation binding, authentication, and safe degradation;
+they do not replace live production acceptance. See
+`docs/superpowers/plans/2026-09-04-rag-signed-smoke.md`.
 The operational checkpoint is
 `docs/superpowers/plans/2026-09-04-rag-production-rollout.md`.
 

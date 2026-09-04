@@ -306,3 +306,69 @@ sanitized evals, consumer replay, typecheck, lint, and build passed. The local
 Docker test-mount restriction required streaming the unchanged SQL files to
 PostgreSQL and validating their TAP plans. Production remains through `0035`;
 independent EEA gold evaluation and signed production smoke are still pending.
+
+## Signed Citely evidence smoke
+
+`npm run smoke:citely-evidence` prepares a no-network preview. The runner is
+implemented in `lib/retrieval/citely-smoke.ts`; the execution record is in
+[Signed RAG smoke plan](./superpowers/plans/2026-09-04-rag-signed-smoke.md).
+Run it in the **Citely secret boundary**, not by moving its signing key into
+the subsite. It deliberately does not load `.env.local`.
+
+Prepare one mode-0600 JSON case outside Git and configure:
+
+- `CITELY_SMOKE_BASE_URL`: the exact subsite origin (HTTPS, except localhost);
+- `CITELY_RAG_SMOKE_CASE_PATH`: absolute path to the private case;
+- only for execution, `CITELY_SERVICE_SIGNING_KEY_ID` and
+  `CITELY_SERVICE_PRIVATE_KEY_PEM`: Citely's existing Ed25519 signing identity.
+  The subsite must already trust its public key. No shared-key fallback is used.
+
+The case uses `schemaVersion: "1.0.0"` and these fields:
+
+| Field | Required operator input |
+| --- | --- |
+| `mode` | `ACTIVE` to require successful retrieval, or `UNAVAILABLE` to require both default and target-index denial |
+| `request` | Existing EvidenceSearchRequest contract; both index/corpus filters must be null, with an explicit tier and non-stale `asOf` |
+| `expectedIndex` | Exact presentation-safe index metadata from the independently inspected target release, matching the response contract's `indexRelease` definition |
+| `expectedCitations` | Allowed hit membership, each with `chunkId`, `claimId`, `citationId`, `provisionId`, `sourceVersionId`, and `sourceVersionChecksumSha256` |
+| `requiredProvisionIds` | At least one provision that must occur in ACTIVE results, at most `topK`, and present in the allowed membership; may be empty in UNAVAILABLE mode |
+
+Use server-resolved chunk IDs from the inspected manifest, not provisional
+local build-plan IDs. Prepare expectations independently of the response being
+tested. The public response does not include the private index manifest hash;
+the runner checks exact public metadata and citation pins, not the independent
+manifest/eval activation gate. Never use a smoke pass as a substitute for it.
+The case file may hold private queries and must not contain customer secrets.
+
+```bash
+npm run smoke:citely-evidence
+# Only after separately approving the live request cost and audit writes:
+npm run smoke:citely-evidence -- --execute
+```
+
+ACTIVE mode makes seven sequential requests: unsigned, wrong-scope,
+wrong-audience, expired-token, default search, pinned search, stale search.
+The four negative-auth checks must pass before any authorized request. The two
+successful searches can incur query-embedding charges; authorized requests can
+append retrieval audits. The tool does not activate, suspend, change secrets,
+create packages, or inject a production outage.
+
+UNAVAILABLE mode makes six requests, omitting stale search. Both authorized
+responses must be structured HTTP 503 `RETRIEVAL_UNAVAILABLE`, with null index,
+no hits, and null explanation. A generic 503 error is a failure, not a pass.
+This can test pre-activation or an already-suspended scope, but cannot alone
+prove which administrative state caused denial. Verify the pointer separately.
+After recovery, use ACTIVE mode with the new accepted index; this mode does not
+test historical access to the suspended target while another index is active.
+
+Every response must use `no-store`; redirects are refused, requests time out,
+and errors exclude response bodies and transport details. Successful evidence
+must match filters, rights, tier, exact index metadata, and citation versions.
+Default/pinned ranked hits must agree; stale responses must have no hits.
+All evidence responses must satisfy the strict existing schema, including
+`explanation: null`. The summary contains only origin, mode, time, case hash,
+hit count, and completed check names—no tokens, queries, or evidence text.
+
+Production execution remains pending independent EEA eval, approved migration
+`0036`, activation readiness, and Citely public-key configuration. Local
+ephemeral-key/deterministic-embedding tests are not a signed production smoke.

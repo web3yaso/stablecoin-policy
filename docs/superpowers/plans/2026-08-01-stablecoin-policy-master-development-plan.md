@@ -1019,6 +1019,10 @@ intermediate sellable milestone, not a replacement for them.
     `0036`, Quint, service-only dry-run CLI, atomic/replay/concurrency tests),
     but has not been applied to production. See
     `docs/superpowers/plans/2026-09-04-rag-production-rollout.md`;
+    PR #74 contains suspension and has passed CI/Preview. The next branch
+    `codex/rag-signed-smoke` adds default-dry-run signed evidence HTTP checks
+    (ACTIVE/UNAVAILABLE), with no production execution or lifecycle changes;
+    see `docs/superpowers/plans/2026-09-04-rag-signed-smoke.md`;
 13. **widen after first sale:** USDT and normalized dossiers, remaining
     playbooks, and broader market coverage;
 14. connect packages to Phase 6 monitoring, watchlists, and delivery;
