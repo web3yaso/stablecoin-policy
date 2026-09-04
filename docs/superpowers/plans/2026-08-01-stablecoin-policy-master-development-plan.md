@@ -1012,9 +1012,12 @@ intermediate sellable milestone, not a replacement for them.
 11. integrate Citely entitlement and generic rendering, then complete one real
     production create/retrieve/render replay before the first sale;
 12. build/evaluate/activate the replacement 47-claim Evidence RAG snapshot;
-    the snapshot was created on 2026-09-04 (48 citation inputs); embedding
-    transfer approval, independent production eval, first-activation rollback,
-    and authenticated smoke remain open. See
+    the snapshot and OpenAI-backed replacement DRAFT were created and verified
+    on 2026-09-04 (48 citation inputs); independent production eval, first-activation rollback,
+    and authenticated smoke remain open. The approved first-activation
+    suspension mechanism is implemented and locally verified (migration
+    `0036`, Quint, service-only dry-run CLI, atomic/replay/concurrency tests),
+    but has not been applied to production. See
     `docs/superpowers/plans/2026-09-04-rag-production-rollout.md`;
 13. **widen after first sale:** USDT and normalized dossiers, remaining
     playbooks, and broader market coverage;

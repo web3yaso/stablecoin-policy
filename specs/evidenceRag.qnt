@@ -11,7 +11,7 @@
  */
 module evidenceRag {
   type AssuranceTier = Provisional | HumanReviewed
-  type IndexPhase = Missing | Planned | Draft | Active | Retired
+  type IndexPhase = Missing | Planned | Draft | Active | Retired | Suspended
   type EvalAssurance = NoEvalAssurance | MachineEval | HumanEval
   type EvalOutcome = EvalMissing | EvalPassed | EvalFailed
 

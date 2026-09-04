@@ -1167,9 +1167,16 @@ Before implementation, read the relevant Next.js 16 documentation in `node_modul
 ## 19. Acceptance criteria
 
 Production RAG checkpoint (2026-09-04): the aggregate EEA snapshot now exists
-with 47 claims and 48 citation inputs. No active index exists. Embedding
-generation awaits explicit external-data transfer approval; production eval,
+with 47 claims and 48 citation inputs. After explicit operator confirmation,
+OpenAI embeddings were generated and the replacement DRAFT imported with
+verified membership and checksums. No active index exists. Production eval,
 first-activation rollback readiness, and authenticated smoke are still required.
+The approved first-activation suspension design is implemented and locally
+verified in migration `0036`, a service-only default-dry-run CLI, and Quint/
+atomicity/concurrency regressions. It blocks fresh suspended-index retrieval
+without changing completed packages. Production application of `0036` remains
+a separate approved rollout step; see
+`docs/superpowers/plans/2026-09-04-rag-first-activation-suspension.md`.
 The operational checkpoint is
 `docs/superpowers/plans/2026-09-04-rag-production-rollout.md`.
 

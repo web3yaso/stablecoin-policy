@@ -8,7 +8,7 @@ import type { IndexedEvidenceChunk, RetrievalIndexRelease } from "./contracts";
 
 export type RetrievalIndexManifestEnvelope = {
   indexReleaseId: string;
-  releaseState: "DRAFT" | "ACTIVE" | "RETIRED";
+  releaseState: "DRAFT" | "ACTIVE" | "RETIRED" | "SUSPENDED";
   manifest: Record<string, unknown>;
   manifestSha256: string;
 };
@@ -19,6 +19,37 @@ export type RetrievalCorpusSnapshotEnvelope = {
   manifestSha256: string;
   sourceReleaseCount: number;
   claimCount: number;
+};
+
+export type RetrievalPointer = {
+  policyDomain: string;
+  assuranceTier: RetrievalCorpusKind;
+  activeIndexReleaseId: string | null;
+  previousIndexReleaseId: string | null;
+  revision: string;
+  manifestSha256: string | null;
+};
+
+export type RetrievalSuspensionRequest = {
+  operationId: string;
+  policyDomain: string;
+  assuranceTier: RetrievalCorpusKind;
+  indexReleaseId: string;
+  expectedManifestSha256: string;
+  expectedRevision: string;
+  reason: string;
+};
+
+export type RetrievalSuspensionResult = {
+  operationId: string;
+  policyDomain: string;
+  assuranceTier: RetrievalCorpusKind;
+  indexReleaseId: string;
+  manifestSha256: string;
+  releaseState: "SUSPENDED";
+  activeIndexReleaseId: null;
+  revision: string;
+  suspendedAt: string;
 };
 
 export type RetrievalEvalAssurance = "MACHINE_ASSURED" | "HUMAN_REVIEWED";
@@ -49,6 +80,33 @@ export type RetrievalDraftCorpusPin = {
 
 export class RetrievalIndexAdminClient {
   constructor(private readonly client: SupabaseHttpClient) {}
+
+  async inspectPointer(policyDomain: string, assuranceTier: RetrievalCorpusKind): Promise<RetrievalPointer | null> {
+    assertScope(policyDomain, assuranceTier);
+    return this.client.rpc("inspect_retrieval_index_pointer", {
+      p_policy_domain: policyDomain, p_assurance_tier: assuranceTier,
+    });
+  }
+
+  async suspend(input: RetrievalSuspensionRequest): Promise<RetrievalSuspensionResult> {
+    assertScope(input.policyDomain, input.assuranceTier);
+    assertIdentifier(input.operationId);
+    assertIdentifier(input.indexReleaseId);
+    assertSha256(input.expectedManifestSha256, "expected manifest");
+    if (typeof input.expectedRevision !== "string" || !/^[1-9][0-9]{0,18}$/.test(input.expectedRevision)
+      || BigInt(input.expectedRevision) > BigInt("9223372036854775807")) {
+      throw new Error("expected pointer revision must be a positive bigint decimal string");
+    }
+    if (typeof input.reason !== "string" || !input.reason.trim() || input.reason.length > 500) {
+      throw new Error("suspension reason must contain 1 to 500 characters");
+    }
+    return this.client.rpc("suspend_retrieval_index_release", {
+      p_operation_id: input.operationId, p_policy_domain: input.policyDomain,
+      p_assurance_tier: input.assuranceTier, p_index_release_id: input.indexReleaseId,
+      p_expected_manifest_sha256: input.expectedManifestSha256,
+      p_expected_revision: input.expectedRevision, p_reason: input.reason,
+    });
+  }
 
   async buildInput(
     policyDomain: string,
@@ -209,7 +267,7 @@ export class RetrievalIndexAdminClient {
 }
 
 function assertIdentifier(value: string): void {
-  if (!/^[a-z0-9][a-z0-9._:-]{2,200}$/.test(value)) {
+  if (typeof value !== "string" || !/^[a-z0-9][a-z0-9._:-]{2,200}$/.test(value)) {
     throw new Error("retrieval index release identifier is invalid");
   }
 }
@@ -217,5 +275,12 @@ function assertIdentifier(value: string): void {
 function assertSha256(value: string, label: string): void {
   if (!/^[0-9a-f]{64}$/.test(value)) {
     throw new Error(`${label} SHA-256 is invalid`);
+  }
+}
+
+function assertScope(domain: string, tier: RetrievalCorpusKind): void {
+  if (typeof domain !== "string" || !/^[a-z][a-z0-9-]{2,40}$/.test(domain)
+    || !["PROVISIONAL", "HUMAN_REVIEWED"].includes(tier)) {
+    throw new Error("invalid retrieval scope");
   }
 }

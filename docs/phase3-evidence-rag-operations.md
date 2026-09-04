@@ -11,10 +11,11 @@ Production checkpoint (2026-09-04): a read-only lookup confirms no active
 provisional index. The old 37-chunk EEA index remains `DRAFT`. The new
 `snapshot:stablecoin:eea:mica:2026-09-04` was created with 47 distinct claims
 and 48 citation inputs from the two existing provisional releases. Its build
-preflight passes, but no embedding plan or replacement DRAFT has been created.
-The embedding command was rejected by the execution approval layer before
-launch because sending the source text to OpenAI needs explicit operator
-approval. No embedding request was sent by that command. See the exact
+preflight passes. After explicit operator confirmation to continue with OpenAI,
+48 embeddings were generated using `text-embedding-3-small` (1536 dimensions)
+and imported into the replacement DRAFT. Read-back verified exact membership,
+text and vector checksums; the old DRAFT remains unchanged and no index is
+active. The earlier rejected command sent nothing. See the exact
 checkpoint and continuation instructions in
 [Production RAG rollout](./superpowers/plans/2026-09-04-rag-production-rollout.md).
 
@@ -60,8 +61,9 @@ Deliberately incomplete:
 
 - no production EEA MiCA index is active; the old 37-chunk DRAFT is not an
   activation candidate after `0028` because it has no exact-manifest eval;
-- the aggregate 47-claim snapshot exists; the exact private build artifact,
-  replacement DRAFT, and real production eval dataset remain rollout work;
+- the aggregate 47-claim snapshot, exact private build artifact, and replacement
+  48-chunk DRAFT exist; independent production eval, first-activation rollback,
+  and authenticated smoke remain rollout work;
 - no sentence-level generated explanation exists in v1 (`explanation` is
   always `null`);
 - PlaybookPackage retrieval integration was merged as PR #52, but successful
@@ -198,6 +200,7 @@ calling the atomic activation RPC and fails if the fingerprint changed.
 
 ```bash
 npm run spec:rag
+npm run spec:rag-suspension
 npm run eval:phase3
 npm test
 npm run typecheck
@@ -210,6 +213,7 @@ The database suite applies every migration from zero and runs all pgTAP tests:
 ```bash
 npm run db:phase2:start
 npm run test:db:phase2
+npm run test:db:rag-concurrency
 npm run db:phase2:stop
 ```
 
@@ -243,9 +247,62 @@ eligible prior index. Database rollback before production data exists is the
 normal migration rollback procedure; after index creation, preserve immutable
 rows and move the active pointer rather than deleting history.
 
-First-activation caveat: the current rollback RPC rejects a pointer whose
-`previous_index_release_id` is null. The first-ever activation therefore has
-no rollback-to-empty path. Define and verify a reversible first-launch
-disable procedure before activating; do not assume the existing rollback RPC
-can undo the first activation, and do not activate the old unevaluated DRAFT
-as a synthetic rollback target.
+First-activation caveat: the rollback RPC rejects a pointer whose
+`previous_index_release_id` is null. Migration `0036` adds a separate suspension
+operation for this case; it is locally verified but not applied to production.
+Do not activate the old unevaluated DRAFT as a synthetic rollback target.
+
+## Emergency suspension (requires migration 0036)
+
+The approved [suspension design](./superpowers/plans/2026-09-04-rag-first-activation-suspension.md)
+records the model, implementation, and local verification. Review and merge the
+change, preserve a private database backup including the `retrieval` schema,
+and obtain explicit approval to apply `0036` before first production activation.
+The existing metadata exporter is not a full retrieval-state backup. Deploy the
+matching application change so an absent eligible index returns HTTP 503 with
+`RETRIEVAL_UNAVAILABLE` and `explanation: null`.
+
+Using server-only Supabase credentials for the intended environment, inspect
+the exact scope without writes:
+
+```bash
+npm run rag:index:suspend -- --domain stablecoin --assurance-tier PROVISIONAL
+```
+
+If `pointer` or `activeIndexReleaseId` is null, there is nothing to suspend.
+Otherwise record the active index ID, manifest hash, and revision string. Only
+when suspension is intended, supply those exact values and a unique operation
+ID; placeholders below must be replaced, not run literally:
+
+```bash
+npm run rag:index:suspend -- --domain stablecoin --assurance-tier PROVISIONAL \
+  --operation-id '<unique-operation-id>' --index-release '<inspected-index-id>' \
+  --expected-manifest-sha256 '<inspected-manifest-sha256>' \
+  --expected-revision '<inspected-revision>' --reason '<operator-reason>' --execute
+```
+
+The transaction marks the index permanently `SUSPENDED`, clears both pointers,
+increments the retained scope revision, and records an immutable result. Retry
+an uncertain request with the **same operation ID and all original arguments**;
+the stored result is returned even after a replacement activates. A stale
+target or conflicting retry makes no writes. Reinspect and make a new deliberate
+operation only if the intended target has changed; never automatically replace
+the original pins. Keep reasons free of secrets and customer data.
+
+After suspension, inspect the empty pointer and increased revision; verify
+authenticated default and explicitly suspended-index searches cannot retrieve
+evidence. Completed package GET/replay remains unchanged. This is not a
+cancellation fence: a search that already acquired evidence may finish.
+
+Recovery requires a new, separately evaluated DRAFT and explicit activation;
+there is no unsuspend or automatic fallback. Retained eligible historical
+RETIRED indexes remain available to historical pinned searches. Do not reverse
+the migration after suspension: preserve evidence and audit history and use a
+reviewed forward migration for database repairs.
+
+Local verification on 2026-09-04: migrations `0001`–`0036` from zero, 475 pgTAP
+assertions, 6 concurrent suspension schedules, 328 application tests, Quint,
+sanitized evals, consumer replay, typecheck, lint, and build passed. The local
+Docker test-mount restriction required streaming the unchanged SQL files to
+PostgreSQL and validating their TAP plans. Production remains through `0035`;
+independent EEA gold evaluation and signed production smoke are still pending.
