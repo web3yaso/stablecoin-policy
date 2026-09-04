@@ -79,6 +79,13 @@ generated explanations, expose raw rules, or activate self-service scopes.
    has no Citely signing private key; do not copy that key into the subsite or
    relax service authentication. A successful unsigned `401` only proves the
    route/auth boundary, not retrieval availability.
+   The signed evidence runner is implemented on `codex/rag-signed-smoke`,
+   stacked on suspension PR #74. `npm run smoke:citely-evidence` is a
+   no-network preview; `--execute` is a separately authorized live operation
+   that may incur query-embedding costs and append retrieval audits. Its
+   ACTIVE and UNAVAILABLE modes never change the index pointer. See
+   [Signed smoke plan](./2026-09-04-rag-signed-smoke.md) and the operations guide
+   for private case preparation and the Citely-only signing boundary.
 7. After eval and rollback readiness, activate the exact accepted manifest and
    verify authenticated success, pinned citations, stale/unauthorized
    degradation, and deterministic playbook isolation. Keep `explanation:null`.
