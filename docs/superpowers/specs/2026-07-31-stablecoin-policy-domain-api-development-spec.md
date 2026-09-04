@@ -1166,6 +1166,13 @@ Before implementation, read the relevant Next.js 16 documentation in `node_modul
 
 ## 19. Acceptance criteria
 
+Production RAG checkpoint (2026-09-04): the aggregate EEA snapshot now exists
+with 47 claims and 48 citation inputs. No active index exists. Embedding
+generation awaits explicit external-data transfer approval; production eval,
+first-activation rollback readiness, and authenticated smoke are still required.
+The operational checkpoint is
+`docs/superpowers/plans/2026-09-04-rag-production-rollout.md`.
+
 ### Storage
 
 1. No canonical production dataset is duplicated across `data/`, `public/`, and source code.

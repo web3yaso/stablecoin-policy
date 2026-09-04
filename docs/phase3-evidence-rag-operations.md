@@ -4,11 +4,19 @@
 
 Phase 3 foundation was merged as PR #48 (`433ca8a`) on 2026-08-09. Activation
 gates were merged as PR #50 (`ca5a21f`) and production eval dataset assembly
-as PR #51 (`4ab895d`). Migrations `0024` through `0027` are applied to the
-linked Supabase project. A production
-37-chunk EEA index exists as DRAFT only. It has no production eval record and
-must remain inactive. Migration `0028` and its application tooling are in the
-activation-gates development PR; they are not applied by merging code alone.
+as PR #51 (`4ab895d`). Production migrations through `0035` have been recorded
+as applied; snapshot and exact-manifest eval RPCs are available.
+
+Production checkpoint (2026-09-04): a read-only lookup confirms no active
+provisional index. The old 37-chunk EEA index remains `DRAFT`. The new
+`snapshot:stablecoin:eea:mica:2026-09-04` was created with 47 distinct claims
+and 48 citation inputs from the two existing provisional releases. Its build
+preflight passes, but no embedding plan or replacement DRAFT has been created.
+The embedding command was rejected by the execution approval layer before
+launch because sending the source text to OpenAI needs explicit operator
+approval. No embedding request was sent by that command. See the exact
+checkpoint and continuation instructions in
+[Production RAG rollout](./superpowers/plans/2026-09-04-rag-production-rollout.md).
 
 Implemented:
 
@@ -52,13 +60,12 @@ Deliberately incomplete:
 
 - no production EEA MiCA index is active; the old 37-chunk DRAFT is not an
   activation candidate after `0028` because it has no exact-manifest eval;
-- the aggregate 47-claim snapshot, exact private build artifact, replacement
-  DRAFT, and real production eval dataset remain operational rollout work;
+- the aggregate 47-claim snapshot exists; the exact private build artifact,
+  replacement DRAFT, and real production eval dataset remain rollout work;
 - no sentence-level generated explanation exists in v1 (`explanation` is
   always `null`);
-- PlaybookPackage retrieval integration is implemented on the development
-  branch above but is not part of production until its PR is merged and
-  deployed;
+- PlaybookPackage retrieval integration was merged as PR #52, but successful
+  production retrieval still requires an active, evaluated index;
 - the sanitized eval establishes the harness and safety baseline; production
   exit still requires an independently reviewed EEA gold query set;
 - PostgreSQL stores full-text documents and pgvector embeddings, while the
@@ -96,9 +103,10 @@ Assurance tiers are isolated:
 
 ## Runtime configuration
 
-The authenticated route accepts `EVIDENCE_API_KEY`, falling back to the
-interim `PLAYBOOK_API_KEY` so Citely can use the existing service credential
-during the MVP. Supabase uses the existing variables:
+The authenticated route supports five-minute Citely Ed25519 service JWTs with
+the exact `evidence:search` scope. The legacy `EVIDENCE_API_KEY`, falling back
+to `PLAYBOOK_API_KEY`, is accepted only while signed-only mode is disabled.
+Do not disable signed-only mode to make a smoke pass. Supabase uses:
 
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
@@ -234,3 +242,10 @@ Rollback is the atomic `policy.rollback_retrieval_index_release` RPC for an
 eligible prior index. Database rollback before production data exists is the
 normal migration rollback procedure; after index creation, preserve immutable
 rows and move the active pointer rather than deleting history.
+
+First-activation caveat: the current rollback RPC rejects a pointer whose
+`previous_index_release_id` is null. The first-ever activation therefore has
+no rollback-to-empty path. Define and verify a reversible first-launch
+disable procedure before activating; do not assume the existing rollback RPC
+can undo the first activation, and do not activate the old unevaluated DRAFT
+as a synthetic rollback target.
