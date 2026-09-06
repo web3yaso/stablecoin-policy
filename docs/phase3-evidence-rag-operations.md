@@ -4,7 +4,7 @@
 
 Phase 3 foundation was merged as PR #48 (`433ca8a`) on 2026-08-09. Activation
 gates were merged as PR #50 (`ca5a21f`) and production eval dataset assembly
-as PR #51 (`4ab895d`). Production migrations through `0035` have been recorded
+as PR #51 (`4ab895d`). Production migrations through `0036` have been recorded
 as applied; snapshot and exact-manifest eval RPCs are available.
 
 Production checkpoint (2026-09-04): a read-only lookup confirms no active
@@ -249,7 +249,8 @@ rows and move the active pointer rather than deleting history.
 
 First-activation caveat: the rollback RPC rejects a pointer whose
 `previous_index_release_id` is null. Migration `0036` adds a separate suspension
-operation for this case; it is locally verified but not applied to production.
+operation for this case; it was applied and verified in production on
+2026-09-05 without activating or suspending an index.
 Do not activate the old unevaluated DRAFT as a synthetic rollback target.
 
 ## Emergency suspension (requires migration 0036)
@@ -257,7 +258,8 @@ Do not activate the old unevaluated DRAFT as a synthetic rollback target.
 The approved [suspension design](./superpowers/plans/2026-09-04-rag-first-activation-suspension.md)
 records the model, implementation, and local verification. Review and merge the
 change, preserve a private database backup including the `retrieval` schema,
-and obtain explicit approval to apply `0036` before first production activation.
+and obtain explicit approval before first production activation. Migration
+`0036` itself is already applied; do not attempt to reapply it.
 The existing metadata exporter is not a full retrieval-state backup. Deploy the
 matching application change so an absent eligible index returns HTTP 503 with
 `RETRIEVAL_UNAVAILABLE` and `explanation: null`.
@@ -304,8 +306,35 @@ Local verification on 2026-09-04: migrations `0001`–`0036` from zero, 475 pgTA
 assertions, 6 concurrent suspension schedules, 328 application tests, Quint,
 sanitized evals, consumer replay, typecheck, lint, and build passed. The local
 Docker test-mount restriction required streaming the unchanged SQL files to
-PostgreSQL and validating their TAP plans. Production remains through `0035`;
-independent EEA gold evaluation and signed production smoke are still pending.
+PostgreSQL and validating their TAP plans. Production migration `0036` was
+applied on 2026-09-05; independent EEA gold evaluation and signed production
+smoke are still pending.
+
+Production `0036` record (2026-09-05): linked dry-run listed only `0036`, then
+remote history matched local `0001`–`0036`. Private mode-0600 schema and data
+dumps were created before migration; SHA-256 values were
+`71a74d8ec831eacaa96020b8084a60e4c90a054e4064d33c6380540e8243db2a`
+and `b18ce3962cc973b87e49bf075f83b8f6847b88e0cbe6b8bedf9c502250b8e494`.
+The data dump reports existing circular foreign keys, so restore requires
+trigger disabling or dependency-aware restore; preserve the matching schema
+dump. These temporary files are not durable disaster-recovery storage.
+
+Pre/post business metadata was byte-equivalent after removing only
+`exportedAt`; both normalized SHA-256 values were
+`c5a7673ee1acdc918392f08da9590d321037049620c4a561843342606d3693fc`.
+All unchanged retrieval-table counts and content fingerprints matched: 1
+snapshot / 2 source releases / 47 claims, 48 chunks / 61 embeddings, 85 index
+memberships / 2 build records, and zero eval and retrieval-run records. Both
+indexes remained DRAFT, the pointer and suspension audit stayed empty, and a
+real service-role inspection returned `null` in dry-run mode.
+
+Permission checks confirmed only service role can inspect/suspend and select
+suspension audit; it cannot directly insert/update/delete audit rows or invoke
+private lifecycle/lock functions. Anonymous/authenticated roles have none of
+those privileges. All new constraints and protection triggers exist. Linked
+database lint has only the pre-existing unused
+`policy.record_machine_assurance.v_version` warning. No activation, suspension,
+OpenAI call, package mutation, or production fault injection occurred.
 
 ## Signed Citely evidence smoke
 

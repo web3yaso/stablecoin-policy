@@ -1,7 +1,7 @@
 # Evidence RAG — Production Rollout Checkpoint
 
-Status: OpenAI embeddings generated and the replacement DRAFT imported and
-verified. Index activation has not occurred.
+Status: OpenAI embeddings generated, replacement DRAFT imported, and production
+migration `0036` applied and verified. Index activation has not occurred.
 
 ## Accepted scope
 
@@ -72,8 +72,12 @@ generated explanations, expose raw rules, or activate self-service scopes.
    [First-activation suspension](./2026-09-04-rag-first-activation-suspension.md);
    implementation and local verification are complete (328 application tests,
    475 pgTAP assertions, 6 race schedules, Quint, evals, and build passed).
-   Apply migration 0036 only after review and explicit production approval,
-   then inspect the production pointer before any activation.
+   Completed 2026-09-05: after backup and linked dry-run, migration `0036` was
+   applied. Remote history matches `0001`–`0036`; business metadata and all
+   unchanged retrieval fingerprints match pre-migration state. The two indexes
+   remain DRAFT, pointer/audit rows remain empty, service inspection returns
+   null, and role privilege checks pass. No activation or suspension occurred.
+   Restore caveat and hashes are recorded in the operations guide.
 6. Verify Vercel embedding configuration and use a short-lived Citely token
    with `evidence:search` for production smoke. The local subsite environment
    has no Citely signing private key; do not copy that key into the subsite or
