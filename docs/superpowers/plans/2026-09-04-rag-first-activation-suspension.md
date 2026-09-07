@@ -1,8 +1,8 @@
 # Evidence RAG — First-activation suspension proposal
 
 Status: operator approved the state/type sketch on 2026-09-04. Implemented
-locally; local verification passed. No production migration, activation,
-or suspension has been executed as part of this change.
+and locally verified. Migration `0036` was applied and verified in production
+on 2026-09-05. No activation or suspension has been executed.
 
 ## Why this is needed
 

@@ -1174,8 +1174,9 @@ first-activation rollback readiness, and authenticated smoke are still required.
 The approved first-activation suspension design is implemented and locally
 verified in migration `0036`, a service-only default-dry-run CLI, and Quint/
 atomicity/concurrency regressions. It blocks fresh suspended-index retrieval
-without changing completed packages. Production application of `0036` remains
-a separate approved rollout step; see
+without changing completed packages. Migration `0036` was applied and verified
+in production on 2026-09-05 with unchanged data fingerprints, empty pointer and
+audit state, and the intended role boundaries; no index was activated. See
 `docs/superpowers/plans/2026-09-04-rag-first-activation-suspension.md`.
 The follow-up signed evidence smoke tool is implemented with a no-network
 preview and explicit ACTIVE/UNAVAILABLE execution. Its 40 local regressions

@@ -1017,10 +1017,11 @@ intermediate sellable milestone, not a replacement for them.
     and authenticated smoke remain open. The approved first-activation
     suspension mechanism is implemented and locally verified (migration
     `0036`, Quint, service-only dry-run CLI, atomic/replay/concurrency tests),
-    but has not been applied to production. See
+    and was applied and verified in production on 2026-09-05 without moving an
+    index pointer; data and permissions remained at the pre-migration baseline. See
     `docs/superpowers/plans/2026-09-04-rag-production-rollout.md`;
-    PR #74 contains suspension and has passed CI/Preview. The next branch
-    `codex/rag-signed-smoke` adds default-dry-run signed evidence HTTP checks
+    PR #74 contains suspension and was merged after CI/Preview passed. PR #75
+    adds default-dry-run signed evidence HTTP checks
     (ACTIVE/UNAVAILABLE), with no production execution or lifecycle changes;
     see `docs/superpowers/plans/2026-09-04-rag-signed-smoke.md`;
 13. **widen after first sale:** USDT and normalized dossiers, remaining
