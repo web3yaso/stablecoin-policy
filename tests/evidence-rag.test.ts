@@ -6,6 +6,7 @@ import path from "node:path";
 import type {
   EvidenceRetrievalRepository,
   EvidenceSearchRequest,
+  IndexedEvidenceChunk,
   RetrievalRunAudit,
 } from "../lib/retrieval/contracts";
 import { SupabaseHttpClient } from "../lib/data/supabase-client";
@@ -13,7 +14,12 @@ import {
   DeterministicTokenEmbedding,
   InMemoryEvidenceRetrievalRepository,
 } from "../lib/retrieval/in-memory";
-import { EvidenceSearchService, validateSearchRequest } from "../lib/retrieval/search";
+import {
+  BM25_WEIGHTED_RRF_V2,
+  EvidenceSearchService,
+  hybridRank,
+  validateSearchRequest,
+} from "../lib/retrieval/search";
 import { parseEvidenceSearchRequest } from "../lib/retrieval/request";
 import { respondEvidenceSearch } from "../lib/retrieval/respond";
 import { SupabaseEvidenceRetrievalRepository } from "../lib/retrieval/supabase-repository";
@@ -32,10 +38,12 @@ import {
   type ProductionEvalProposal,
 } from "../lib/retrieval/eval-dataset-assembly";
 import {
+  deriveRetrievalRankingV2Plan,
   readRetrievalPlanArtifact,
   writeRetrievalPlanArtifact,
 } from "../lib/retrieval/plan-artifact";
 import { runProductionDraftEval } from "../lib/retrieval/production-eval";
+import { inspectProductionEvalArtifact } from "../lib/retrieval/eval-artifact";
 import {
   RAG_EVAL_CHUNKS,
   RAG_EVAL_INDEX,
@@ -204,6 +212,50 @@ test("hybrid search returns a pinned exact citation and records the run", async 
     fixture.repository.runs[0].rankedChunkIds,
     response.hits.map((hit) => hit.chunkId),
   );
+});
+
+test("BM25 weighted RRF bounds lexical noise while preserving semantic rank", () => {
+  const chunks: IndexedEvidenceChunk[] = Array.from({ length: 10 }, (_, index) => ({
+    ...RAG_EVAL_CHUNKS[0],
+    chunkId: `chunk:ranking-v2:${index + 1}`,
+    claimId: `claim:ranking-v2:${index + 1}`,
+    citationId: `citation:ranking-v2:${index + 1}`,
+    provisionId: `provision:ranking-v2:${index + 1}`,
+    searchText: index === 9
+      ? "rare transition phrase ".repeat(40)
+      : `sanitized semantic evidence ${index + 1}`,
+    embedding: [Math.cos(index * 0.12), Math.sin(index * 0.12)],
+  }));
+  const queryEmbedding = [1, 0];
+  const legacy = hybridRank("rare transition phrase", queryEmbedding, chunks);
+  const upgraded = hybridRank(
+    "rare transition phrase", queryEmbedding, chunks, BM25_WEIGHTED_RRF_V2,
+  );
+
+  assert.equal(legacy[0].chunk.chunkId, "chunk:ranking-v2:10");
+  assert.equal(upgraded[0].chunk.chunkId, "chunk:ranking-v2:1");
+  assert.equal(upgraded[0].vectorRank, 1);
+  assert.deepEqual(
+    hybridRank("rare transition phrase", queryEmbedding, chunks, BM25_WEIGHTED_RRF_V2),
+    upgraded,
+  );
+});
+
+test("unsupported ranking configuration fails closed without evidence", async () => {
+  const unsupported = {
+    ...RAG_EVAL_INDEX,
+    lexicalConfigVersion: "unknown-lexical-version",
+  };
+  const repository = new InMemoryEvidenceRetrievalRepository(
+    [unsupported], RAG_EVAL_CHUNKS,
+  );
+  const response = await new EvidenceSearchService(
+    repository, new DeterministicTokenEmbedding(64),
+  ).search(request());
+
+  assert.equal(response.status, "RETRIEVAL_UNAVAILABLE");
+  assert.deepEqual(response.hits, []);
+  assert.equal(response.explanation, null);
 });
 
 test("human-reviewed request cannot consume a provisional index", async () => {
@@ -464,6 +516,17 @@ test("private build artifact preserves one exact plan and rejects unsafe storage
     const loaded = await readRetrievalPlanArtifact(artifactPath);
     assert.deepEqual(loaded, written);
     assert.equal(loaded.planSha256, retrievalIndexPlanSha256(plan));
+    const upgraded = deriveRetrievalRankingV2Plan(
+      loaded, "index:eea:rag-test:ranking-v2",
+    );
+    assert.equal(upgraded.lexicalConfig.version, "bm25-en-v2");
+    assert.equal(upgraded.vectorConfig.version, "cosine-weighted-rrf-v2");
+    assert.deepEqual(upgraded.chunks, plan.chunks);
+    assert.deepEqual(loaded.plan, plan);
+    assert.throws(
+      () => deriveRetrievalRankingV2Plan(loaded, plan.indexReleaseId),
+      /invalid or unchanged/,
+    );
     await assert.rejects(
       writeRetrievalPlanArtifact(artifactPath, buildInput().releaseManifestSha256, plan),
       /exist/i,
@@ -529,6 +592,89 @@ test("production DRAFT eval applies assurance provenance and activation metrics"
       proposal.snapshotManifestSha256,
     ),
     /generator and checker provenance|human-reviewed/,
+  );
+});
+
+test("existing production eval artifact is recordable only with exact dataset and manifest pins", async () => {
+  const proposal = productionEvalProposal();
+  const dataset = assembleProductionEvalDataset(
+    proposal, productionEvalCheck(proposal),
+  ).dataset;
+  const report = await runProductionDraftEval(
+    dataset,
+    RAG_EVAL_INDEX,
+    RAG_EVAL_CHUNKS,
+    new DeterministicTokenEmbedding(64),
+    proposal.snapshotManifestSha256,
+  );
+  const indexManifestSha256 = "e".repeat(64);
+  const artifact = {
+    ...report,
+    evaluatedAt: "2026-09-06T12:00:00.000Z",
+    manifestSha256: indexManifestSha256,
+    datasetSha256: replayChecksum(dataset),
+    datasetId: dataset.datasetId,
+    sourceSnapshot: dataset.sourceSnapshot,
+    generation: dataset.generation,
+    independentCheck: dataset.independentCheck,
+  };
+  const inspected = inspectProductionEvalArtifact(
+    artifact, dataset, RAG_EVAL_INDEX, indexManifestSha256,
+  );
+  assert.equal(inspected.artifact.passed, true);
+  assert.equal(inspected.artifactSha256, replayChecksum(artifact));
+
+  assert.throws(
+    () => inspectProductionEvalArtifact(
+      { ...artifact, manifestSha256: "f".repeat(64) },
+      dataset,
+      RAG_EVAL_INDEX,
+      indexManifestSha256,
+    ),
+    /checksum or manifest pin/,
+  );
+  assert.throws(
+    () => inspectProductionEvalArtifact(
+      { ...artifact, metrics: { ...artifact.metrics, mrrAt10: 0.1 } },
+      dataset,
+      RAG_EVAL_INDEX,
+      indexManifestSha256,
+    ),
+    /aggregate metrics/,
+  );
+  assert.throws(
+    () => inspectProductionEvalArtifact(
+      { ...artifact, passed: false },
+      dataset,
+      RAG_EVAL_INDEX,
+      indexManifestSha256,
+    ),
+    /pass state/,
+  );
+  assert.throws(
+    () => inspectProductionEvalArtifact(
+      {
+        ...artifact,
+        queryResults: artifact.queryResults.map((item, index) => index === 0
+          ? { ...item, firstExpectedRank: 0 }
+          : item),
+      },
+      dataset,
+      RAG_EVAL_INDEX,
+      indexManifestSha256,
+    ),
+    /query result/,
+  );
+  assert.throws(
+    () => inspectProductionEvalArtifact(
+      artifact,
+      { ...dataset, cases: dataset.cases.map((item, index) => index === 0
+        ? { ...item, query: `${item.query} changed` }
+        : item) },
+      RAG_EVAL_INDEX,
+      indexManifestSha256,
+    ),
+    /checksum or manifest pin/,
   );
 });
 

@@ -362,12 +362,15 @@ The pre-build hotfix `0027` preserves an explicit provisional cutoff gap while
 keeping human-reviewed time ordering strict and freshness bounded by both
 timestamps. The activation-gates follow-up adds migration `0028`, an immutable
 aggregate `RetrievalCorpusSnapshot`, exact private build-plan replay, production
-DRAFT eval artifacts, and assurance-aware activation. A legacy 37-chunk
-production DRAFT exists but remains inactive and is not grandfathered. The
-intended replacement combines the two provisional source releases into a
-deduplicated 47-claim snapshot. Production completion still requires applying
-unapplied migrations `0028`–`0029`, building and evaluating the exact
-replacement snapshot, then explicitly activating and replay-testing it. See
+DRAFT eval artifacts, and assurance-aware activation. Production migrations
+through `0036` are applied. The aggregate snapshot contains 47 claims / 48
+citation inputs. Ranking v1 failed the private production gold retrieval gates;
+the version-pinned BM25 + weighted-RRF ranking v2 DRAFT reused all 48 embeddings
+and passed Recall@10 `1`, MRR@10 `0.9101190476`, every evidence-isolation gate,
+and all zero-leak safety gates on 2026-09-06. It remains inactive and the
+passing artifact has not yet been recorded. Production completion now requires
+recording that exact artifact, merging/deploying the ranking runtime, then an
+authenticated smoke and separately confirmed activation. See
 `docs/phase3-evidence-rag-operations.md`.
 
 Goal: retrieve and explain exact regulatory evidence without allowing model
@@ -1013,8 +1016,11 @@ intermediate sellable milestone, not a replacement for them.
     production create/retrieve/render replay before the first sale;
 12. build/evaluate/activate the replacement 47-claim Evidence RAG snapshot;
     the snapshot and OpenAI-backed replacement DRAFT were created and verified
-    on 2026-09-04 (48 citation inputs); independent production eval, first-activation rollback,
-    and authenticated smoke remain open. The approved first-activation
+    on 2026-09-04 (48 citation inputs). The independent 24-case production gold
+    dataset was assembled on 2026-09-06; ranking v1 failed quality gates and
+    ranking v2 passed them after reusing the same embeddings. Its exact passing
+    artifact still needs an immutable eval record; merge/deploy, authenticated
+    smoke, and activation remain separate gates. The approved first-activation
     suspension mechanism is implemented and locally verified (migration
     `0036`, Quint, service-only dry-run CLI, atomic/replay/concurrency tests),
     and was applied and verified in production on 2026-09-05 without moving an

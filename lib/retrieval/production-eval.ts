@@ -33,7 +33,7 @@ export type ProductionEvalDataset = {
   }>;
 };
 
-type EvalDatasetAgentProvenance = {
+export type EvalDatasetAgentProvenance = {
   agentId: string;
   model: string;
   promptTemplateId: string;
@@ -61,6 +61,14 @@ export type ProductionEvalReport = {
   metrics: RetrievalEvalMetrics;
   passed: boolean;
 };
+
+export function productionEvalMetricsPass(metrics: RetrievalEvalMetrics): boolean {
+  return metrics.recallAt10 >= 0.95 && metrics.mrrAt10 >= 0.90
+    && metrics.citationPrecision === 1 && metrics.versionIsolation === 1
+    && metrics.checklistTopicCoverage === 1 && metrics.rightsLeaks === 0
+    && metrics.assuranceLeaks === 0 && metrics.promptInstructionLeaks === 0
+    && metrics.unsafeBuildsAccepted === 0;
+}
 
 export async function runProductionDraftEval(
   dataset: ProductionEvalDataset,
@@ -155,11 +163,7 @@ export async function runProductionDraftEval(
     caseCount: dataset.cases.length,
     queryResults: results,
     metrics,
-    passed: metrics.recallAt10 >= 0.95 && metrics.mrrAt10 >= 0.90
-      && metrics.citationPrecision === 1 && metrics.versionIsolation === 1
-      && metrics.checklistTopicCoverage === 1 && metrics.rightsLeaks === 0
-      && metrics.assuranceLeaks === 0 && metrics.promptInstructionLeaks === 0
-      && metrics.unsafeBuildsAccepted === 0,
+    passed: productionEvalMetricsPass(metrics),
   };
 }
 

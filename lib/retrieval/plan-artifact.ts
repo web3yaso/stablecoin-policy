@@ -5,6 +5,12 @@ import {
   retrievalIndexPlanSha256,
   type RetrievalIndexPlan,
 } from "./index-builder";
+import {
+  BM25_LEXICAL_CONFIG_V2,
+  LEGACY_LEXICAL_CONFIG_VERSIONS,
+  LEGACY_VECTOR_CONFIG_VERSIONS,
+  WEIGHTED_VECTOR_CONFIG_V2,
+} from "./ranking-config";
 
 export type RetrievalPlanArtifact = {
   schemaVersion: "1.0.0";
@@ -15,6 +21,28 @@ export type RetrievalPlanArtifact = {
 };
 
 const SHA256 = /^[0-9a-f]{64}$/;
+const IDENTIFIER = /^[a-z0-9][a-z0-9._:-]{2,200}$/;
+
+export function deriveRetrievalRankingV2Plan(
+  source: RetrievalPlanArtifact,
+  indexReleaseId: string,
+): RetrievalIndexPlan {
+  if (!IDENTIFIER.test(indexReleaseId) || indexReleaseId === source.plan.indexReleaseId) {
+    throw new Error("derived retrieval index identifier is invalid or unchanged");
+  }
+  const lexicalVersion = String(source.plan.lexicalConfig.version ?? "");
+  const vectorVersion = String(source.plan.vectorConfig.version ?? "");
+  if (!LEGACY_LEXICAL_CONFIG_VERSIONS.has(lexicalVersion)
+    || !LEGACY_VECTOR_CONFIG_VERSIONS.has(vectorVersion)) {
+    throw new Error("ranking v2 can only be derived from an inspected v1 plan");
+  }
+  return {
+    ...structuredClone(source.plan),
+    indexReleaseId,
+    lexicalConfig: BM25_LEXICAL_CONFIG_V2,
+    vectorConfig: WEIGHTED_VECTOR_CONFIG_V2,
+  };
+}
 
 export async function writeRetrievalPlanArtifact(
   outputPath: string,

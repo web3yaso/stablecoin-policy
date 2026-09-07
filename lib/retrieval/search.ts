@@ -13,11 +13,32 @@ import type {
   RetrievalRunAudit,
 } from "./contracts";
 import { EVIDENCE_SEARCH_SCHEMA_VERSION } from "./contracts";
+import {
+  BM25_LEXICAL_CONFIG_V2,
+  LEGACY_LEXICAL_CONFIG_VERSIONS,
+  LEGACY_VECTOR_CONFIG_VERSIONS,
+  WEIGHTED_VECTOR_CONFIG_V2,
+} from "./ranking-config";
 
 const RRF_K = 60;
 const MIN_HYBRID_SCORE = 1 / (RRF_K + 25);
 const MAX_QUERY_LENGTH = 2_000;
 const MAX_TOP_K = 10;
+
+export const BM25_WEIGHTED_RRF_V2 = {
+  lexicalMethod: "BM25" as const,
+  lexicalWeight: BM25_LEXICAL_CONFIG_V2.weight,
+  vectorWeight: WEIGHTED_VECTOR_CONFIG_V2.weight,
+};
+
+const LEGACY_TERM_FREQUENCY_RRF_V1 = {
+  lexicalMethod: "TERM_FREQUENCY" as const,
+  lexicalWeight: 1,
+  vectorWeight: 1,
+};
+
+type HybridRankingConfig = typeof BM25_WEIGHTED_RRF_V2
+  | typeof LEGACY_TERM_FREQUENCY_RRF_V1;
 
 type Candidate = {
   chunk: IndexedEvidenceChunk;
@@ -84,6 +105,7 @@ export class EvidenceSearchService {
         );
       }
 
+      const rankingConfig = rankingConfigForIndex(index);
       const [chunks, queryEmbedding] = await Promise.all([
         this.repository.listChunks(index.indexReleaseId),
         this.embeddingProvider.embed(request.query),
@@ -91,7 +113,9 @@ export class EvidenceSearchService {
       const eligible = chunks.filter((chunk) =>
         chunkEligible(chunk, index!, request.filters),
       );
-      const candidates = hybridRank(request.query, queryEmbedding, eligible);
+      const candidates = hybridRank(
+        request.query, queryEmbedding, eligible, rankingConfig,
+      );
       const hits = candidates
         .filter((candidate) => candidate.score >= MIN_HYBRID_SCORE)
         .slice(0, request.topK)
@@ -194,9 +218,15 @@ export function hybridRank(
   query: string,
   queryEmbedding: number[],
   chunks: IndexedEvidenceChunk[],
+  config: HybridRankingConfig = LEGACY_TERM_FREQUENCY_RRF_V1,
 ): Candidate[] {
+  const lexicalScores = config.lexicalMethod === "BM25"
+    ? bm25Scores(query, chunks)
+    : new Map(chunks.map((chunk) => [chunk.chunkId, termFrequencyScore(
+      query, chunk.searchText,
+    )]));
   const lexical = chunks
-    .map((chunk) => ({ chunk, score: lexicalScore(query, chunk.searchText) }))
+    .map((chunk) => ({ chunk, score: lexicalScores.get(chunk.chunkId) ?? 0 }))
     .filter((candidate) => candidate.score > 0)
     .sort(compareRawScores);
   const vector = chunks
@@ -210,8 +240,8 @@ export function hybridRank(
     const vectorRank = vectorRanks.get(chunk.chunkId) ?? null;
     if (lexicalRank === null && vectorRank === null) continue;
     const score =
-      (lexicalRank === null ? 0 : 1 / (RRF_K + lexicalRank)) +
-      (vectorRank === null ? 0 : 1 / (RRF_K + vectorRank));
+      (lexicalRank === null ? 0 : config.lexicalWeight / (RRF_K + lexicalRank)) +
+      (vectorRank === null ? 0 : config.vectorWeight / (RRF_K + vectorRank));
     candidates.set(chunk.chunkId, { chunk, lexicalRank, vectorRank, score });
   }
   const deduped = new Map<string, Candidate>();
@@ -248,7 +278,7 @@ function chunkEligible(
   );
 }
 
-function lexicalScore(query: string, text: string): number {
+function termFrequencyScore(query: string, text: string): number {
   const queryTokens = tokenize(query);
   if (queryTokens.length === 0) return 0;
   const textTokens = tokenize(text);
@@ -256,6 +286,63 @@ function lexicalScore(query: string, text: string): number {
   textTokens.forEach((token) => frequencies.set(token, (frequencies.get(token) ?? 0) + 1));
   return queryTokens.reduce((score, token) => score + (frequencies.get(token) ?? 0), 0) /
     Math.sqrt(Math.max(textTokens.length, 1));
+}
+
+function bm25Scores(
+  query: string,
+  chunks: IndexedEvidenceChunk[],
+): Map<string, number> {
+  const documents = chunks.map((chunk) => ({
+    chunkId: chunk.chunkId,
+    tokens: tokenize(chunk.searchText),
+  }));
+  const averageLength = documents.length === 0
+    ? 0
+    : documents.reduce((sum, document) => sum + document.tokens.length, 0)
+      / documents.length;
+  const queryTerms = [...new Set(tokenize(query))];
+  const documentFrequency = new Map(queryTerms.map((term) => [
+    term,
+    documents.filter((document) => document.tokens.includes(term)).length,
+  ]));
+  const scores = new Map<string, number>();
+  for (const document of documents) {
+    const frequencies = new Map<string, number>();
+    for (const token of document.tokens) {
+      frequencies.set(token, (frequencies.get(token) ?? 0) + 1);
+    }
+    const score = queryTerms.reduce((sum, term) => {
+      const frequency = frequencies.get(term) ?? 0;
+      if (frequency === 0) return sum;
+      const frequencyInCorpus = documentFrequency.get(term) ?? 0;
+      const inverseDocumentFrequency = Math.log(
+        1 + (documents.length - frequencyInCorpus + 0.5)
+          / (frequencyInCorpus + 0.5),
+      );
+      const lengthNormalization = averageLength === 0
+        ? 1
+        : 1 - 0.75 + 0.75 * document.tokens.length / averageLength;
+      return sum + inverseDocumentFrequency * frequency * (1.2 + 1)
+        / (frequency + 1.2 * lengthNormalization);
+    }, 0);
+    scores.set(document.chunkId, score);
+  }
+  return scores;
+}
+
+function rankingConfigForIndex(index: RetrievalIndexRelease): HybridRankingConfig {
+  const legacyLexical = LEGACY_LEXICAL_CONFIG_VERSIONS.has(
+    index.lexicalConfigVersion,
+  );
+  const legacyVector = LEGACY_VECTOR_CONFIG_VERSIONS.has(
+    index.vectorConfigVersion,
+  );
+  if (legacyLexical && legacyVector) return LEGACY_TERM_FREQUENCY_RRF_V1;
+  if (index.lexicalConfigVersion === BM25_LEXICAL_CONFIG_V2.version
+    && index.vectorConfigVersion === WEIGHTED_VECTOR_CONFIG_V2.version) {
+    return BM25_WEIGHTED_RRF_V2;
+  }
+  throw new Error("retrieval ranking configuration is unsupported");
 }
 
 function tokenize(input: string): string[] {
