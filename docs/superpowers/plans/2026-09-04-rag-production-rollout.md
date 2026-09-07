@@ -1,7 +1,10 @@
 # Evidence RAG — Production Rollout Checkpoint
 
-Status: OpenAI embeddings generated, replacement DRAFT imported, and production
-migration `0036` applied and verified. Index activation has not occurred.
+Status: independent production gold dataset assembled; the ranking-v1 DRAFT
+failed retrieval quality gates; ranking v2 is implemented, imported by reusing
+the exact embeddings, and has passed the production private-gold evaluation.
+Production migration `0036` remains applied and verified. The passing result is
+not yet an immutable eval record, and index activation has not occurred.
 
 ## Accepted scope
 
@@ -55,15 +58,50 @@ generated explanations, expose raw rules, or activate self-service scopes.
    chunk/embedding IDs than the local preview; use the server manifest for
    eval and activation. The old DRAFT hash is unchanged and active lookup
    remains `null`. Reuse the private plan; do not regenerate embeddings.
-3. Produce genuinely separate generator and independent-checker artifacts for
-   the real EEA gold dataset. Pin the exact snapshot manifest, cover every
-   required checklist topic, and use the existing strict assembler. Do not
-   invent a second agent identity, relabel self-review, or substitute the
-   sanitized PR #73 regression fixtures for production evidence. Any further
-   source-text transfer to a model must be authorized too.
-4. Run and record the real production DRAFT eval against its exact manifest;
-   failure must leave the index inactive. Preserve the private dataset and
-   eval artifacts outside Git.
+3. Completed 2026-09-06: `gpt-5.6-terra` generated 24 cases against the exact
+   snapshot and `gpt-5.6-luna` independently re-derived each answer without
+   receiving the generator's expected provision IDs. The strict assembler
+   accepted 24/24 cases with zero answer divergence and 12/12 checklist-topic
+   coverage. Dataset ID is
+   `eval-dataset:63df58c8a8de46217fc2a7f7c784ea7f9a73dec7`; SHA-256 is
+   `770d6d6f4b45b8ae74dcc39310431fab10fdd0490e2a7a7034e94ff7dabde450`.
+   The proposal, check, model-run audit, and assembled dataset remain mode-0600
+   outside Git.
+4. In progress. The exact dataset was run once against ranking-v1 DRAFT
+   `index:stablecoin:eea:mica:2026-09-04`. It correctly failed closed:
+   Recall@10 `0.9166666667`, MRR@10 `0.4903769841`; every citation, version,
+   rights, assurance, prompt-injection, and topic-coverage gate passed. No eval
+   record was written and the index remained inactive. Private failure artifact
+   SHA-256 is
+   `da9814003e9af90f32a790d6811aacb14d99b35a718092fe0e064846e1ef2567`.
+   Diagnostics showed vector-only Recall@10 `1` / MRR@10 `0.8892857143`; the
+   equal-weight raw-term-frequency leg was the regression source.
+
+   Ranking v2 replaces the raw lexical score with BM25 (`k1=1.2`, `b=0.75`)
+   and uses weighted RRF (`lexical=0.1`, `vector=1`, `rrfK=60`). It is pinned
+   as `bm25-en-v2` + `cosine-weighted-rrf-v2`; unknown or mixed config versions
+   fail as `RETRIEVAL_UNAVAILABLE`. Sanitized regression tests, 370 application
+   tests, the Phase 3 eval, all 19 Quint scenarios / 11 invariants / 13
+   witnesses, typecheck, lint, and build pass. A checksum-pinned private tool
+   derived the v2 plan from the inspected v1 artifact and reused all 48
+   embedding records without calling the embedding provider. Derived plan
+   SHA-256 is
+   `dce45bf32ae3d6a09ee84b406e735a9a626b957137e189379ebf231d53937898`;
+   embedding-set SHA-256 is
+   `86201ce39d7c2ffc5e45e4fd4fe9c63c82cf0742595b60c18cd1c45b93eab20d`.
+   Production DRAFT `index:stablecoin:eea:mica:2026-09-06-ranking-v2` now has
+   server manifest
+   `97ec789cc0f8ed3d6e6d6d0ebfb1b1675f16467fefed799be8a8b2e6b526ea8d`.
+   The old DRAFT remains unchanged and no active pointer exists. After explicit
+   operator approval, the same 24 private gold queries were embedded and run
+   against ranking v2 on 2026-09-06. It passed Recall@10 `1`, MRR@10
+   `0.9101190476`, citation precision `1`, version isolation `1`, checklist
+   coverage `1`, and zero rights, assurance, prompt-instruction, or unsafe-build
+   leaks. Private eval artifact SHA-256 is
+   `2f60795cd3b97d6273fe702b0c65e6b39375976affd4863b84573f3643440c28`.
+   The run was intentionally eval-only: no eval record was written and the
+   index remains DRAFT. Record this already-inspected artifact against the exact
+   v2 manifest without recomputing embeddings before considering activation.
 5. Resolve first-activation rollback before moving the active pointer. The
    current rollback RPC requires an eligible prior index; none exists. Any new
    suspension/deactivation state-machine behavior requires a Quint spec delta

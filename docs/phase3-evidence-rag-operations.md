@@ -19,6 +19,25 @@ active. The earlier rejected command sent nothing. See the exact
 checkpoint and continuation instructions in
 [Production RAG rollout](./superpowers/plans/2026-09-04-rag-production-rollout.md).
 
+Production eval checkpoint (2026-09-06): two distinct OpenAI models produced
+and independently checked a private 24-case / 12-topic EEA gold dataset pinned
+to the aggregate snapshot; strict assembly found zero answer divergence. The
+ranking-v1 DRAFT failed Recall@10/MRR@10 while every safety metric passed.
+Diagnostics isolated the failure to equal-weight raw term frequency degrading a
+strong vector signal. Ranking v2 uses a version-pinned BM25 + weighted-RRF
+configuration and rejects unknown/mixed ranking versions. Its private plan was
+derived from the inspected v1 artifact and reuses all 48 embeddings without a
+provider call. The new production index
+`index:stablecoin:eea:mica:2026-09-06-ranking-v2` is DRAFT with manifest
+`97ec789cc0f8ed3d6e6d6d0ebfb1b1675f16467fefed799be8a8b2e6b526ea8d`.
+After explicit operator authorization, its private-gold run passed Recall@10
+`1`, MRR@10 `0.9101190476`, every citation/version/topic gate, and every
+zero-leak safety gate. Eval artifact SHA-256 is
+`2f60795cd3b97d6273fe702b0c65e6b39375976affd4863b84573f3643440c28`.
+It has not been recorded or activated. The next gate is to record this exact
+already-inspected artifact without a second embedding run. Exact hashes and
+continuation steps are in the rollout checkpoint.
+
 Implemented:
 
 - executable Quint model `specs/evidenceRag.qnt` with 19 deterministic
@@ -183,6 +202,41 @@ additionally requires the inspected manifest SHA and an immutable eval-record
 ID. A failed eval may be recorded but can never authorize activation. Machine
 assurance can authorize only a provisional index; a human-reviewed index
 requires named human review.
+
+After inspecting an eval-only artifact, record it without repeating query
+embeddings. The recorder requires both private inputs to be absolute mode-0600
+files outside Git. Its default mode is read-only and reports the current hashes:
+
+```bash
+npm run eval:phase3:record -- \
+  --index-release <draft-index-release-id> \
+  --artifact /private/path/eval-report.json \
+  --dataset /private/path/eval-dataset.json
+```
+
+Only after inspecting that preview, repeat with `--execute`, `--eval-record`,
+`--expected-artifact-sha256`, and `--expected-manifest-sha256`. The tool checks
+dataset/provenance/query/rank/metric integrity and the live DRAFT/corpus pins,
+then calls only the immutable eval-record RPC. It never invokes an embedding
+provider and never activates an index.
+
+When a ranking-only change is required, derive a new private DRAFT plan without
+regenerating embeddings. The source artifact SHA and derived plan SHA are both
+operator pins, and the output remains mode `0600` outside Git:
+
+```bash
+npm run rag:index:ranking-v2 -- \
+  --plan /private/path/v1-index-plan.json \
+  --expected-source-artifact-sha256 <source-artifact-sha256> \
+  --index-release <new-index-release-id> \
+  --output /private/path/v2-index-plan.json
+```
+
+Inspect the dry-run, then repeat with `--execute` and
+`--expected-plan-sha256`. The tool accepts only a known v1 source plan, changes
+only the index identity and pinned ranking configuration, and reports the exact
+reused embedding-set checksum. Build and evaluate the derived plan as a new
+DRAFT; never reinterpret an existing v1 manifest as v2.
 
 Activation is a separate two-pass operation. The first command prints the
 exact manifest and server-computed hash without writing:

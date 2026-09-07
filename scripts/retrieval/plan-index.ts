@@ -13,6 +13,10 @@ import {
   OpenAIQueryEmbeddingProvider,
   readOpenAIEmbeddingConfig,
 } from "../../lib/retrieval/openai-embedding.js";
+import {
+  BM25_LEXICAL_CONFIG_V2,
+  WEIGHTED_VECTOR_CONFIG_V2,
+} from "../../lib/retrieval/ranking-config.js";
 
 async function main() {
   const args = process.argv.slice(2);
@@ -32,8 +36,8 @@ async function main() {
       policyDomain: "stablecoin",
       expectedJurisdictionCode: jurisdictionCode,
       freshThrough,
-      lexicalConfig: { language: "english", version: "1" },
-      vectorConfig: { distance: "cosine", fusion: "rrf", rrfK: 60, version: "1" },
+      lexicalConfig: BM25_LEXICAL_CONFIG_V2,
+      vectorConfig: WEIGHTED_VECTOR_CONFIG_V2,
     },
     new OpenAIQueryEmbeddingProvider(readOpenAIEmbeddingConfig()),
   );
